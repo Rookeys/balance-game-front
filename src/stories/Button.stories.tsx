@@ -1,5 +1,5 @@
 import { Button } from "@/components/Button";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Decorator, Meta, StoryObj } from "@storybook/react";
 
 const meta: Meta<typeof Button> = {
   title: "Button",
@@ -7,6 +7,7 @@ const meta: Meta<typeof Button> = {
   args: {
     backgroundColor: "#ff0",
     children: "Button",
+    primary: false,
   },
   argTypes: {
     size: { control: "select" },
@@ -23,10 +24,20 @@ const meta: Meta<typeof Button> = {
 export default meta;
 type Story = StoryObj<typeof Button>;
 
+const withPinkDecorator: Decorator = Story => (
+  <div
+    style={{
+      backgroundColor: "pink",
+      padding: "1rem",
+      display: "inline-block",
+    }}
+  >
+    <Story />
+  </div>
+);
+
 export const Default: Story = {
-  args: {
-    primary: false
-  },
+  args: {},
 };
 
 export const Primary: Story = {
@@ -35,13 +46,13 @@ export const Primary: Story = {
     children: "Primary Button",
     primary: true,
   },
+  decorators: [withPinkDecorator],
 };
 
 export const Secondary: Story = {
   args: {
     ...Primary.args,
     children: "Secondary Button",
-    primary: false,
   },
 };
 
@@ -49,6 +60,5 @@ export const Tertiary: Story = {
   args: {
     backgroundColor: "#2d5d83",
     children: "Tertiary Button",
-    primary: false,
   },
 };
