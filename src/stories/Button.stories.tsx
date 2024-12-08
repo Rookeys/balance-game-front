@@ -6,10 +6,17 @@ const meta: Meta<typeof Button> = {
   component: Button,
   args: {
     backgroundColor: "#ff0",
-    label: "Button",
+    children: "Button",
   },
   argTypes: {
     size: { control: "select" },
+    backgroundColor: { control: "color" },
+    children: {
+      options: ["Italic", "Click me!", "More Click!"],
+      mapping: {
+        Italic: <em>This is Italic mapping!</em>,
+      },
+    },
   },
 };
 
@@ -17,13 +24,15 @@ export default meta;
 type Story = StoryObj<typeof Button>;
 
 export const Default: Story = {
-  args: {},
+  args: {
+    primary: false
+  },
 };
 
 export const Primary: Story = {
   args: {
     backgroundColor: "#ADAF08",
-    label: "Primary Button",
+    children: "Primary Button",
     primary: true,
   },
 };
@@ -31,7 +40,7 @@ export const Primary: Story = {
 export const Secondary: Story = {
   args: {
     ...Primary.args,
-    label: "Secondary Button",
+    children: "Secondary Button",
     primary: false,
   },
 };
@@ -39,7 +48,7 @@ export const Secondary: Story = {
 export const Tertiary: Story = {
   args: {
     backgroundColor: "#2d5d83",
-    label: "Tertiary Button",
+    children: "Tertiary Button",
     primary: false,
   },
 };

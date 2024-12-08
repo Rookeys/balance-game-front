@@ -1,5 +1,5 @@
 import { cn } from "@/utils/cn";
-import React from "react";
+import React, { ReactNode } from "react";
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /** Is this the principal call to action on the page? */
@@ -9,9 +9,9 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   /** How large should the button be? */
   size?: "small" | "medium" | "large";
   /** Button contents */
-  label: string;
   /** Optional click handler */
   onClick?: () => void;
+  children: ReactNode;
 }
 
 /** Primary UI component for user interaction */
@@ -19,7 +19,7 @@ export const Button = ({
   primary = false,
   size = "medium",
   backgroundColor,
-  label,
+  children,
   ...props
 }: ButtonProps) => {
   const mode = primary
@@ -43,7 +43,7 @@ export const Button = ({
       style={backgroundColor ? { backgroundColor } : undefined}
       {...props}
     >
-      {label}
+      {children}
     </button>
   );
 };
