@@ -37,6 +37,7 @@ const withPinkDecorator: Decorator = Story => (
 );
 
 export const Default: Story = {
+  // name: 'Default',
   args: {},
 };
 
