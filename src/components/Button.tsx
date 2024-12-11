@@ -2,19 +2,19 @@ import { cn } from "@/utils/cn";
 import React, { ReactNode } from "react";
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  /** Is this the principal call to action on the page? */
+  /** Primary 버튼이 맞나요? */
   primary?: boolean;
-  /** What background color to use */
+  /** background color 색상 */
   backgroundColor?: string;
-  /** How large should the button be? */
+  /** 버튼의 크기 설정 */
   size?: "small" | "medium" | "large";
-  /** Button contents */
-  /** Optional click handler */
+  /** 버튼 클릭 시 사용 될 함수 */
   onClick?: () => void;
+  /** Button 콘텐츠 내용 */
   children: ReactNode;
 }
 
-/** Primary UI component for user interaction */
+/** 기본적인 Button 컴포넌트 */
 export const Button = ({
   primary = false,
   size = "medium",

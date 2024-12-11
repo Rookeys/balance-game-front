@@ -4,6 +4,7 @@ import type { Decorator, Meta, StoryObj } from "@storybook/react";
 const meta: Meta<typeof Button> = {
   title: "Button",
   component: Button,
+  tags: ['autodocs'],
   args: {
     backgroundColor: "#ff0",
     children: "Button",
