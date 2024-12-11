@@ -1,4 +1,10 @@
 
 export default function Home() {
-  return <button className='bg-primary p-[40px] rounded-lg text-secondary-50'>test</button>;
+  return (
+    <>
+      <button className="bg-primary p-[40px] rounded-lg text-secondary-50 dark:bg-white">
+        test
+      </button>
+    </>
+  );
 }
