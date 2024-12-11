@@ -1,4 +1,4 @@
-export const BRAND_COLORS = {
+export const COLORS = {
   PRIMARY_10: "#FFB3A6",
   PRIMARY_20: "#FFA394",
   PRIMARY_30: "#FF9481",
