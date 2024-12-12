@@ -1,11 +1,11 @@
+import type { Config } from "tailwindcss";
 import { BORDER_RADIUS } from "./src/styles/theme/borderRadius";
 import { COLORS } from "./src/styles/theme/colors";
 import { FONT_SIZE } from "./src/styles/theme/fontSize";
 import { FONT_WEIGHT } from "./src/styles/theme/fontWeight";
-import type { Config } from "tailwindcss";
 
 const config: Config = {
-  darkMode: "class",
+  darkMode: ["selector", "[data-theme='dark']"],
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
