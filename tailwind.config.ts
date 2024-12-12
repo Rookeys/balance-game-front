@@ -25,6 +25,7 @@ const config: Config = {
       ["4xl"]: "2440px",
     },
     extend: {
+      // 기본 tailwindCss 색상 필요없으면 주석
       colors: {
         primary: {
           DEFAULT: COLORS.PRIMARY,
@@ -98,6 +99,10 @@ const config: Config = {
           80: COLORS.PINK_80,
           90: COLORS.PINK_90,
         },
+        white: COLORS.WHITE,
+        black: COLORS.BLACK,
+        night: COLORS.NIGHT,
+        "dark-night": COLORS.DARK_NIGHT,
       },
       borderRadius: BORDER_RADIUS,
       fontSize: FONT_SIZE,

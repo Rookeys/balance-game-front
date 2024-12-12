@@ -64,4 +64,11 @@ export const COLORS = {
   PINK_80: "#FF9FFF",
   PINK_90: "#FF94FF",
   PINK: "#FF8AFF",
+
+  LIGHT: "#F5F5F5",
+  WHITE: "#FFFFFF",
+  BLACK: "#000000",
+
+  NIGHT: "#202830",
+  DARK_NIGHT: "#151B23",
 };

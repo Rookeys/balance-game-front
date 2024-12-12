@@ -1,5 +1,5 @@
 import { colorGroups } from "@/storybook/colorGroup";
-import { BRAND_COLORS } from "@/styles/brandColor";
+import { COLORS } from "@/styles/theme/colors";
 import { ColorItem, ColorPalette, Meta } from "@storybook/addon-docs";
 
 <Meta title="System/Colors" />
@@ -15,15 +15,16 @@ import { ColorItem, ColorPalette, Meta } from "@storybook/addon-docs";
       colors={
         colorSteps && colorSteps.length > 0
           ? colorSteps.reduce((acc, step) => {
-              acc[step] =
-                BRAND_COLORS[`${key}_${step}`] !== undefined
-                  ? BRAND_COLORS[`${key}_${step}`]
+            {/* acc[`${step} `]에 공백 설정한 이유: https://github.com/storybookjs/storybook/issues/22067 */}
+              acc[`${step} `] =
+                COLORS[`${key}_${step}`] !== undefined
+                  ? COLORS[`${key}_${step}`]
                   : step === "DEFAULT"
-                  ? BRAND_COLORS[key]
+                  ? COLORS[key]
                   : null;
               return acc;
             }, {})
-          : { DEFAULT: BRAND_COLORS[key] } // colorSteps가 없을 경우 기본 색상만 사용
+          : { DEFAULT: COLORS[key] } // colorSteps가 없을 경우 기본 색상만 사용
       }
     />
   ))}
