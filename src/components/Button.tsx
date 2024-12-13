@@ -1,7 +1,8 @@
 import { cn } from "@/utils/cn";
 import React, { ReactNode } from "react";
 
-export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /** Primary 버튼이 맞나요? */
   primary?: boolean;
   /** background color 색상 */
@@ -19,6 +20,7 @@ export const Button = ({
   primary = false,
   size = "medium",
   backgroundColor,
+  className,
   children,
   ...props
 }: ButtonProps) => {
@@ -36,9 +38,10 @@ export const Button = ({
     <button
       type="button"
       className={cn(
-        "inline-block cursor-pointer font-bold rounded-full",
+        "inline-block cursor-pointer rounded-full",
         sizeClasses[size],
-        mode
+        mode,
+        className
       )}
       style={backgroundColor ? { backgroundColor } : undefined}
       {...props}
