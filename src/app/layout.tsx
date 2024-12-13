@@ -2,13 +2,7 @@ import "@/styles/globals.css";
 import "@/styles/reset.css";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
-import localFont from "next/font/local";
-
-const jalnan2 = localFont({
-  src: "./fonts/Jalnan2.woff",
-  variable: "--font-jalnan2",
-  weight: "300 400 500 600 700",
-});
+import { Jalnan2, Continuous } from "./fonts";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -22,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${jalnan2.variable} antialiased`}>
+      <body className={`${Jalnan2.variable} ${Continuous.variable} antialiased`}>
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>

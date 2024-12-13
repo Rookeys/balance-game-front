@@ -119,6 +119,10 @@ const config: Config = {
       borderRadius: BORDER_RADIUS,
       fontSize: FONT_SIZE,
       fontWeight: FONT_WEIGHT,
+      fontFamily: {
+        jalnan2: ["var(--font-jalnan2)"],
+        continuous: ["var(--font-continuous)"],
+      },
     },
   },
   plugins: [],

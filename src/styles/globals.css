@@ -15,7 +15,7 @@
 
 body {
   background: var(--background);
-  font-family: var(--font-jalnan2), sans-serif;
+  font-family: var(--font-jalnan2), var(--font-continuous), sans-serif;
 }
 
 @layer utilities {
