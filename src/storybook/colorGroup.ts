@@ -10,61 +10,67 @@ export const colorGroups: Array<ColorGroupType> = [
     title: "Primary Colors",
     subtitle: "대표 색상",
     key: "PRIMARY",
-    colorSteps: ['10','20','30','40','DEFAULT','60','70','80','90','50'],
+    colorSteps: ["10", "20", "30", "40", "DEFAULT", "60", "70", "80", "90"],
   },
   {
     title: "Secondary Colors",
     subtitle: "보조 색상",
     key: "SECONDARY",
-    colorSteps: ['10','20','30','40','50','60','70','80','90','DEFAULT'],
+    colorSteps: ["10", "20", "30", "40", "DEFAULT", "60", "70", "80", "90"],
   },
   {
     title: "Dark Colors",
     subtitle: "어두운 색상",
     key: "DARK",
-    colorSteps: ['10','20','30','40','50','60','70','80','90','DEFAULT'],
+    colorSteps: ["10", "20", "30", "40", "DEFAULT", "60", "70", "80", "90"],
   },
   {
     title: "Gray Colors",
     subtitle: "회색 색상",
     key: "GRAY",
-    colorSteps: ['10','20','30','40','50','60','70','80','90','DEFAULT'],
+    colorSteps: ["10", "20", "30", "40", "DEFAULT", "60", "70", "80", "90"],
   },
   {
     title: "Purple Color",
     subtitle: "보라색",
     key: "PURPLE",
-    colorSteps: ['10','20','30','40','50','60','70','80','90','DEFAULT'],
+    colorSteps: ["10", "20", "30", "40", "DEFAULT", "60", "70", "80", "90"],
   },
   {
     title: "Pink Color",
     subtitle: "분홍색",
     key: "PINK",
-    colorSteps: ['10','20','30','40','50','60','70','80','90','DEFAULT'],
+    colorSteps: ["10", "20", "30", "40", "DEFAULT", "60", "70", "80", "90"],
+  },
+  {
+    title: "Yellow Color",
+    subtitle: "노란색",
+    key: "YELLOW",
+    colorSteps: ["10", "20", "30", "40", "DEFAULT", "60", "70", "80", "90"],
   },
   {
     title: "Light Color",
     subtitle: "밝은 색상",
-    key: "LIGHT"
+    key: "LIGHT",
   },
   {
     title: "White Color",
     subtitle: "흰색",
-    key: "WHITE"
+    key: "WHITE",
   },
   {
     title: "Black Color",
     subtitle: "검은색",
-    key: "BLACK"
+    key: "BLACK",
   },
   {
     title: "Night Color",
     subtitle: "다크모드 배경 색",
-    key: "NIGHT"
+    key: "NIGHT",
   },
   {
     title: "Dark Night Color",
     subtitle: "다크모드 중 좀 더 어두운 배경 색",
-    key: "DARK_NIGHT"
+    key: "DARK_NIGHT",
   },
 ];

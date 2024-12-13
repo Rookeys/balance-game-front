@@ -26,7 +26,7 @@ export default function ThemeToggle() {
   return (
     <Toggle.Root
       onPressedChange={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="rounded-full p-2 transition-all duration-300 ease-in-out"
+      className="rounded-full p-2 transition-all duration-300 ease-in-out border border-gray-20 dark:border-none dark:bg-dark-50"
       aria-label="Theme Toggle"
     >
       <div
@@ -35,9 +35,9 @@ export default function ThemeToggle() {
         }`}
       >
         {theme === "dark" ? (
-          <SunIcon className="w-6 h-6 text-yellow-500 transition-opacity duration-300 ease-in-out" />
+          <SunIcon className="w-6 h-6 text-yellow-70 transition-opacity duration-300 ease-in-out" />
         ) : (
-          <MoonIcon className="w-6 h-6 text-red-800 transition-opacity duration-300 ease-in-out" />
+          <MoonIcon className="w-6 h-6 text-gray-30 transition-opacity duration-300 ease-in-out" />
         )}
       </div>
     </Toggle.Root>
