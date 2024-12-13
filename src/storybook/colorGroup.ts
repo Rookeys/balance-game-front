@@ -5,48 +5,50 @@ type ColorGroupType = {
   colorSteps?: Array<string>;
 };
 
+const allStep = ["10", "20", "30", "40", "DEFAULT", "60", "70", "80", "90"];
+
 export const colorGroups: Array<ColorGroupType> = [
   {
     title: "Primary Colors",
     subtitle: "대표 색상",
     key: "PRIMARY",
-    colorSteps: ["10", "20", "30", "40", "DEFAULT", "60", "70", "80", "90"],
+    colorSteps: allStep,
   },
   {
     title: "Secondary Colors",
     subtitle: "보조 색상",
     key: "SECONDARY",
-    colorSteps: ["10", "20", "30", "40", "DEFAULT", "60", "70", "80", "90"],
+    colorSteps: allStep,
   },
   {
     title: "Dark Colors",
     subtitle: "어두운 색상",
     key: "DARK",
-    colorSteps: ["10", "20", "30", "40", "DEFAULT", "60", "70", "80", "90"],
+    colorSteps: allStep,
   },
   {
     title: "Gray Colors",
     subtitle: "회색 색상",
     key: "GRAY",
-    colorSteps: ["10", "20", "30", "40", "DEFAULT", "60", "70", "80", "90"],
+    colorSteps: allStep,
   },
   {
     title: "Purple Color",
     subtitle: "보라색",
     key: "PURPLE",
-    colorSteps: ["10", "20", "30", "40", "DEFAULT", "60", "70", "80", "90"],
+    colorSteps: allStep,
   },
   {
     title: "Pink Color",
     subtitle: "분홍색",
     key: "PINK",
-    colorSteps: ["10", "20", "30", "40", "DEFAULT", "60", "70", "80", "90"],
+    colorSteps: allStep,
   },
   {
     title: "Yellow Color",
     subtitle: "노란색",
     key: "YELLOW",
-    colorSteps: ["10", "20", "30", "40", "DEFAULT", "60", "70", "80", "90"],
+    colorSteps: allStep,
   },
   {
     title: "Light Color",
