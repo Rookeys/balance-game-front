@@ -1,4 +1,4 @@
-import { Button } from '@/components/Button';
+import { Button } from "@/components/Button";
 import ThemeToggle from "@/components/ThemeToggle";
 
 export default function Home() {
@@ -7,9 +7,7 @@ export default function Home() {
       <button className="p-[40px] rounded-lg bg-primary text-white dark:bg-white dark:text-primary">
         test
       </button>
-      <Button>
-        버튼
-      </Button>
+      <Button>버튼</Button>
       <ThemeToggle />
     </>
   );
