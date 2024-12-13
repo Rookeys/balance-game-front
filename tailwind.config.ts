@@ -120,8 +120,7 @@ const config: Config = {
       fontSize: FONT_SIZE,
       fontWeight: FONT_WEIGHT,
       fontFamily: {
-        jalnan2: ["var(--font-jalnan2)"],
-        continuous: ["var(--font-continuous)"],
+        "moneygraphy-rounded": ["var(--font-moneygraphy-rounded)"],
       },
     },
   },

@@ -2,7 +2,7 @@ import "@/styles/globals.css";
 import "@/styles/reset.css";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
-import { Jalnan2, Continuous } from "./fonts";
+import { MoneygraphyRounded } from "./fonts";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,8 +15,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${Jalnan2.variable} ${Continuous.variable} antialiased`}>
+    <html lang="ko" suppressHydrationWarning>
+      <body
+        className={`${MoneygraphyRounded.variable} antialiased`}
+      >
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>

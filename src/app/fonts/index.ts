@@ -1,15 +1,10 @@
-import localFont from 'next/font/local';
+import localFont from "next/font/local";
 
-export const Jalnan2 = localFont({
-  src: "../../../public/fonts/Jalnan2.woff",
-  variable: "--font-jalnan2",
-  weight: "300 400 500 600 700",
-  display: "swap",
-});
-
-export const Continuous = localFont({
-  src: "../../../public/fonts/Continuous.woff",
-  variable: "--font-continuous",
-  weight: "400",
+// 토스 글꼴 지원이 default, bold 만 지원됨.
+// 추 후 여러 weight 가 필요하면 다른 글꼴 사용하기 (우선 400 ~ 700 으로 냅두기)
+export const MoneygraphyRounded = localFont({
+  src: "../../../public/fonts/Moneygraphy-Rounded.woff",
+  variable: "--font-moneygraphy-rounded",
+  weight: "400 500 600 700",
   display: "swap",
 });
