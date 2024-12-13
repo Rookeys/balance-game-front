@@ -3,7 +3,7 @@ import { MoonIcon, SunIcon } from "@heroicons/react/24/solid";
 import * as Toggle from "@radix-ui/react-toggle";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-import Skeleton from "./Skeleton";
+import SkeletonWrapper from "./SkeletonWrapper";
 
 export default function ThemeToggle() {
   const { theme, setTheme } = useTheme();
@@ -15,11 +15,11 @@ export default function ThemeToggle() {
 
   if (!mounted) {
     return (
-      <div className="inline-block rounded-full p-2">
-        <div className="rounded-full flex items-center justify-center">
-          <Skeleton className="w-6 h-6" />
+      <SkeletonWrapper className="inline-block p-2 rounded-full">
+        <div className="flex items-center justify-center">
+          <div className="w-6 h-6" />
         </div>
-      </div>
+      </SkeletonWrapper>
     );
   }
 
