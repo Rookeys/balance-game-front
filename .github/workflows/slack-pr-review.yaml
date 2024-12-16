@@ -19,6 +19,7 @@ jobs:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         with:
           webhook-type: incoming-webhook
+          channel: ${{ inputs.SLACK_CHANNEL }}
           payload: |
             {
               "blocks": [
@@ -47,7 +48,7 @@ jobs:
                         },
                         {
                           "type": "text",
-                          "text": "{{github.repository}}",
+                          "text": "${{github.repository}}",
                           "style": {
                             "bold": true
                           }
@@ -61,11 +62,11 @@ jobs:
                   "fields": [
                     {
                       "type": "mrkdwn",
-                      "text": "*Target branch*\n{{github.base_ref}}"
+                      "text": "*Target branch*\n${{github.base_ref}}"
                     },
                     {
                       "type": "mrkdwn",
-                      "text": "*작업자*\n{{github.actor}}"
+                      "text": "*작업자*\n${{github.actor}}"
                     }
                   ]
                 },
@@ -74,11 +75,11 @@ jobs:
                   "fields": [
                     {
                       "type": "mrkdwn",
-                      "text": "*Merge From*\n{{github.head_ref}}"
+                      "text": "*Merge From*\n${{github.head_ref}}"
                     },
                     {
                       "type": "mrkdwn",
-                      "text": "*PR URL*\n{{github.event_path}}"
+                      "text": "*PR URL*\n${{github.event_path}}"
                     }
                   ]
                 }
