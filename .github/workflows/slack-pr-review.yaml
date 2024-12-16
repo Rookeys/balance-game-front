@@ -1,12 +1,9 @@
 on:
   workflow_call:
     inputs:
-      SLACK_CHANNEL:
-        required: true
-        type: string
-    secrets:
       SLACK_WEBHOOK_URL:
-        required: true
+        required: false
+        default: ${{ secrets.SLACK_WEBHOOK_URL }}
 
 jobs:
   slack-notification:
@@ -15,10 +12,9 @@ jobs:
       - name: Slack Notification
         uses: slackapi/slack-github-action@v2.0.0
         env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_URL: ${{ inputs.SLACK_WEBHOOK_URL }}
         with:
           webhook-type: incoming-webhook
-          channel: ${{ inputs.SLACK_CHANNEL }}
           payload: |
             {
               "blocks": [

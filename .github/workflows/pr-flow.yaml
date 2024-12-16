@@ -1,4 +1,4 @@
-name: 'PR Flow'
+name: "PR Flow"
 
 on:
   pull_request:
@@ -8,5 +8,5 @@ jobs:
   slack-pr-review:
     uses: ./.github/workflows/slack-pr-review.yaml
     with:
-      SLACK_CHANNEL: "balance-game-notification"
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_BALANCE_GAME_NOTIFICATION_WEBHOOK_URL }}
     secrets: inherit
