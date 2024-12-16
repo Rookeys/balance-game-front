@@ -79,7 +79,7 @@ jobs:
                     },
                     {
                       "type": "mrkdwn",
-                      "text": "*PR URL*\n${{github.event_path}}"
+                      "text": "*PR URL*\n<${{ github.event.pull_request.html_url }}|Click here>"
                     }
                   ]
                 }
