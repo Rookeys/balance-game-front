@@ -1,0 +1,81 @@
+on:
+  workflow_call:
+    secrets:
+      SLACK_BALANCE_GAME_NOTIFICATION_WEBHOOK_URL:
+        required: true
+
+jobs:
+  slack-notification:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Slack Notification
+        uses: slackapi/slack-github-action@v2.0.0
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_BALANCE_GAME_NOTIFICATION_WEBHOOK_URL }}
+        with:
+          webhook-type: incoming-webhook
+          payload: |
+            {
+              "blocks": [
+                {
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "⭐ PR 리뷰요청 입니다."
+                  }
+                },
+                {
+                  "type": "divider"
+                },
+                {
+                  "type": "rich_text",
+                  "elements": [
+                    {
+                      "type": "rich_text_section",
+                      "elements": [
+                        {
+                          "type": "text",
+                          "text": "레포지토리 ",
+                          "style": {
+                            "bold": true
+                          }
+                        },
+                        {
+                          "type": "text",
+                          "text": "${{github.repository}}",
+                          "style": {
+                            "bold": true
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Target branch*\n`${{github.base_ref}}`"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*작업자*\n${{github.actor}}"
+                    }
+                  ]
+                },
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Merge From*\n`${{github.head_ref}}`"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*PR URL*\n<${{ github.event.pull_request.html_url }}|Click here>"
+                    }
+                  ]
+                }
+              ]
+            }
