@@ -2,8 +2,7 @@ on:
   workflow_call:
     inputs:
       SLACK_CHANNEL:
-        required: false
-        default: "notification"
+        required: true
         type: string
     secrets:
       SLACK_WEBHOOK_URL:
@@ -62,7 +61,7 @@ jobs:
                   "fields": [
                     {
                       "type": "mrkdwn",
-                      "text": "*Target branch*\n${{github.base_ref}}"
+                      "text": "*Target branch*\n`${{github.base_ref}}`"
                     },
                     {
                       "type": "mrkdwn",
@@ -75,7 +74,7 @@ jobs:
                   "fields": [
                     {
                       "type": "mrkdwn",
-                      "text": "*Merge From*\n${{github.head_ref}}"
+                      "text": "*Merge From*\n`${{github.head_ref}}`"
                     },
                     {
                       "type": "mrkdwn",
