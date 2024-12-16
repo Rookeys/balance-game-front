@@ -1,0 +1,11 @@
+name: 'PR Flow'
+
+on:
+  pull_request:
+    types: [opened, reopened] # [opened, reopened, synchronize]
+
+jobs:
+  slack-pr-review:
+    uses: ./.github/workflows/slack-pr-review.yaml
+    with:
+      SLACK_CHANNEL: balance-game-notification
