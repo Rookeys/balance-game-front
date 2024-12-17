@@ -1,7 +1,6 @@
 on:
   workflow_call:
     secrets:
-      secrets:
       SLACK_BALANCE_GAME_NOTIFICATION_WEBHOOK_URL:
         required: true
 
@@ -99,7 +98,3 @@ jobs:
                 }
               ]
             }
-
-
-
-

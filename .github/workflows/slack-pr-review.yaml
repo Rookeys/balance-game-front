@@ -8,7 +8,7 @@ jobs:
   slack-notification:
     runs-on: ubuntu-latest
     steps:
-      - name: Slack Notification
+      - name: Slack PR Notification
         uses: slackapi/slack-github-action@v2.0.0
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_BALANCE_GAME_NOTIFICATION_WEBHOOK_URL }}
