@@ -2,7 +2,7 @@ name: "PR Flow"
 
 on:
   pull_request:
-    types: [opened, reopened, synchronize] # [opened, reopened, synchronize]
+    types: [opened, reopened] # [opened, reopened, synchronize]
   workflow_dispatch:
 
 jobs:
