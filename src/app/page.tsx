@@ -1,14 +1,16 @@
-import { Button } from "@/components/Button";
+"use client";
 import ThemeToggle from "@/components/ThemeToggle";
+import { signIn } from 'next-auth/react';
 
 export default function Home() {
+  const handleKakaoSignIn = () => {
+    signIn("kakao");
+  };
+
   return (
     <>
-      <button className="p-[40px] rounded-lg bg-primary text-white dark:bg-white dark:text-primary">
-        test
-      </button>
-      <Button>버튼</Button>
       <ThemeToggle />
+      <button onClick={handleKakaoSignIn}>로그인</button>
     </>
   );
 }

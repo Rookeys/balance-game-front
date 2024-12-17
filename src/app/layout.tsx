@@ -1,3 +1,4 @@
+import AuthProvider from "@/lib/providers/AuthProvider";
 import "@/styles/globals.css";
 import "@/styles/reset.css";
 import type { Metadata } from "next";
@@ -19,7 +20,9 @@ export default function RootLayout({
       <body
         className={`${MoneygraphyRounded.variable} antialiased`}
       >
-        <ThemeProvider>{children}</ThemeProvider>
+        <AuthProvider>
+          <ThemeProvider>{children}</ThemeProvider>
+        </AuthProvider>
       </body>
     </html>
   );
