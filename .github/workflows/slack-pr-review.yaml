@@ -28,28 +28,11 @@ jobs:
                   "type": "divider"
                 },
                 {
-                  "type": "rich_text",
-                  "elements": [
-                    {
-                      "type": "rich_text_section",
-                      "elements": [
-                        {
-                          "type": "text",
-                          "text": "레포지토리 ",
-                          "style": {
-                            "bold": true
-                          }
-                        },
-                        {
-                          "type": "text",
-                          "text": "${{github.repository}}",
-                          "style": {
-                            "bold": true
-                          }
-                        }
-                      ]
-                    }
-                  ]
+                      "type": "section",
+                      "text": {
+                        "type": "mrkdwn",
+                        "text": "*레포지토리* `${{github.repository}}`\n\n*Workflow* `${{github.workflow}}`"
+                      }
                 },
                 {
                   "type": "section",
