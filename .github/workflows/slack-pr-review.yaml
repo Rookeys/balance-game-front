@@ -19,7 +19,6 @@ jobs:
               "attachments": [
                 {
                   "color": "#36a64f",
-                  "pretext": "PR 리뷰요청",
                   "blocks": [
                     {
                       "type": "header",
