@@ -19,8 +19,7 @@ jobs:
               "attachments": [
                 {
                   "color": "#36a64f",
-                  "title": "PR 리뷰요청"
-                  "pretext": "⭐ PR 리뷰요청",
+                  "title": "PR 리뷰요청",
                   "blocks": [
                     {
                       "type": "header",
