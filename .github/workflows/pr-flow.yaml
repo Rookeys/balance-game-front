@@ -13,5 +13,6 @@ jobs:
 
   slack-pr-review:
     needs: pr-test
+    if: ${{ always() }}
     uses: ./.github/workflows/slack-pr-review.yaml
     secrets: inherit
