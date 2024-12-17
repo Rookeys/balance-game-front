@@ -16,47 +16,52 @@ jobs:
           webhook-type: incoming-webhook
           payload: |
             {
-              "blocks": [
+              "attachments": [
                 {
-                  "type": "header",
-                  "text": {
-                    "type": "plain_text",
-                    "text": "⛔ Workflow 오류"
-                  }
-                },
-                {
-                  "type": "divider"
-                },
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "*레포지토리* `${{github.repository}}`\n\n*Workflow* `${{github.workflow}}`"
-                  }
-                },
-                {
-                  "type": "section",
-                  "fields": [
+                  "color": "#FF0000",
+                  "blocks": [
                     {
-                      "type": "mrkdwn",
-                      "text": "*Target branch*\n`${{github.base_ref}}`"
+                      "type": "header",
+                      "text": {
+                        "type": "plain_text",
+                        "text": "⛔ Workflow 오류"
+                      }
                     },
                     {
-                      "type": "mrkdwn",
-                      "text": "*작업자*\n${{github.actor}}"
-                    }
-                  ]
-                },
-                {
-                  "type": "section",
-                  "fields": [
-                    {
-                      "type": "mrkdwn",
-                      "text": "*Merge From*\n`${{github.head_ref}}`"
+                      "type": "divider"
                     },
                     {
-                      "type": "mrkdwn",
-                      "text": "*PR URL*\n<${{ github.event.pull_request.html_url }}|Click here>"
+                      "type": "section",
+                      "text": {
+                        "type": "mrkdwn",
+                        "text": "*레포지토리* `${{github.repository}}`\n\n*Workflow* `${{github.workflow}}`"
+                      }
+                    },
+                    {
+                      "type": "section",
+                      "fields": [
+                        {
+                          "type": "mrkdwn",
+                          "text": "*Target branch*\n`${{github.base_ref}}`"
+                        },
+                        {
+                          "type": "mrkdwn",
+                          "text": "*작업자*\n${{github.actor}}"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "section",
+                      "fields": [
+                        {
+                          "type": "mrkdwn",
+                          "text": "*Merge From*\n`${{github.head_ref}}`"
+                        },
+                        {
+                          "type": "mrkdwn",
+                          "text": "*PR URL*\n<${{ github.event.pull_request.html_url }}|Click here>"
+                        }
+                      ]
                     }
                   ]
                 }
