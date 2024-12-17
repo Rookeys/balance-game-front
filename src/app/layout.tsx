@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="ko" suppressHydrationWarning>
       <body
-        className={`${MoneygraphyRounded.variable} antialiased`}
+        className={`${MoneygraphyRounded.variable} antialiased text-dark dark:text-light`}
       >
         <AuthProvider>
           <ThemeProvider>{children}</ThemeProvider>
