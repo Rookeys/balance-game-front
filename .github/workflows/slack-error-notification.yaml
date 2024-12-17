@@ -19,6 +19,7 @@ jobs:
               "attachments": [
                 {
                   "color": "#FF0000",
+                  "fallback": "⛔ Workflow 오류",
                   "blocks": [
                     {
                       "type": "header",
