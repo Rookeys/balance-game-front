@@ -1,11 +1,17 @@
-name: 'PR Flow'
+name: "PR Flow"
 
 on:
   pull_request:
     types: [opened, reopened] # [opened, reopened, synchronize]
-  workflow_dispatch:
 
 jobs:
+  pr-test:
+    if: ${{ !contains(github.event.pull_request.labels.*.name, 'skip-pr-test') }}
+    uses: ./.github/workflows/pr-test.yaml
+    secrets: inherit
+
   slack-pr-review:
+    needs: pr-test
+    if: ${{ always() }}
     uses: ./.github/workflows/slack-pr-review.yaml
     secrets: inherit

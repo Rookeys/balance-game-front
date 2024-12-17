@@ -5,10 +5,10 @@ on:
         required: true
 
 jobs:
-  slack-notification:
+  slack-notification-failure:
     runs-on: ubuntu-latest
     steps:
-      - name: Slack PR Notification
+      - name: Slack Error Notification
         uses: slackapi/slack-github-action@v2.0.0
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_BALANCE_GAME_NOTIFICATION_WEBHOOK_URL }}
@@ -18,14 +18,14 @@ jobs:
             {
               "attachments": [
                 {
-                  "color": "#36a64f",
-                  "fallback": "⭐ PR 리뷰요청 입니다.",
+                  "color": "#FF0000",
+                  "fallback": "⛔ Workflow 오류",
                   "blocks": [
                     {
                       "type": "header",
                       "text": {
                         "type": "plain_text",
-                        "text": "⭐ PR 리뷰요청 입니다."
+                        "text": "⛔ Workflow 오류"
                       }
                     },
                     {
