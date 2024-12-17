@@ -19,6 +19,7 @@ jobs:
               "attachments": [
                 {
                   "color": "#36a64f",
+                  "fallback": "PR 리뷰요청 입니다.",
                   "blocks": [
                     {
                       "type": "header",
