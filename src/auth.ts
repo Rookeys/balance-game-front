@@ -1,4 +1,4 @@
-import { AuthOptions, getServerSession } from "next-auth";
+import { AuthOptions } from "next-auth";
 import KakaoProvider from "next-auth/providers/kakao";
 
 const authOptions: AuthOptions = {
@@ -10,6 +10,4 @@ const authOptions: AuthOptions = {
   ],
 };
 
-const getSession = () => getServerSession(authOptions);
-
-export { authOptions, getSession };
+export { authOptions };
