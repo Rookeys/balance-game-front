@@ -1,15 +1,14 @@
-import type { Config } from "tailwindcss";
-import { BORDER_RADIUS } from "./src/styles/theme/borderRadius";
-import { COLORS } from "./src/styles/theme/colors";
-import { FONT_SIZE } from "./src/styles/theme/fontSize";
-import { FONT_WEIGHT } from "./src/styles/theme/fontWeight";
+import { BORDER_RADIUS } from "./src/styles/theme/borderRadius"
+import { COLORS } from "./src/styles/theme/colors"
+import { FONT_SIZE } from "./src/styles/theme/fontSize"
+import { FONT_WEIGHT } from "./src/styles/theme/fontWeight"
 
-const config: Config = {
+const config = {
   darkMode: ["selector", "[data-theme='dark']"],
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}"
   ],
   theme: {
     screens: {
@@ -22,7 +21,7 @@ const config: Config = {
       xl: "1280px",
       ["2xl"]: "1536px",
       ["3xl"]: "1920px",
-      ["4xl"]: "2440px",
+      ["4xl"]: "2440px"
     },
     extend: {
       // 기본 tailwindCss 색상 필요없으면 주석
@@ -37,7 +36,7 @@ const config: Config = {
           60: COLORS.PRIMARY_60,
           70: COLORS.PRIMARY_70,
           80: COLORS.PRIMARY_80,
-          90: COLORS.PRIMARY_90,
+          90: COLORS.PRIMARY_90
         },
         secondary: {
           DEFAULT: COLORS.SECONDARY,
@@ -49,7 +48,7 @@ const config: Config = {
           60: COLORS.SECONDARY_60,
           70: COLORS.SECONDARY_70,
           80: COLORS.SECONDARY_80,
-          90: COLORS.SECONDARY_90,
+          90: COLORS.SECONDARY_90
         },
         dark: {
           DEFAULT: COLORS.DARK,
@@ -61,7 +60,7 @@ const config: Config = {
           60: COLORS.DARK_60,
           70: COLORS.DARK_70,
           80: COLORS.DARK_80,
-          90: COLORS.DARK_90,
+          90: COLORS.DARK_90
         },
         gray: {
           DEFAULT: COLORS.GRAY,
@@ -73,7 +72,7 @@ const config: Config = {
           60: COLORS.GRAY_60,
           70: COLORS.GRAY_70,
           80: COLORS.GRAY_80,
-          90: COLORS.GRAY_90,
+          90: COLORS.GRAY_90
         },
         purple: {
           DEFAULT: COLORS.PURPLE,
@@ -85,7 +84,7 @@ const config: Config = {
           60: COLORS.PURPLE_60,
           70: COLORS.PURPLE_70,
           80: COLORS.PURPLE_80,
-          90: COLORS.PURPLE_90,
+          90: COLORS.PURPLE_90
         },
         pink: {
           DEFAULT: COLORS.PINK,
@@ -97,7 +96,7 @@ const config: Config = {
           60: COLORS.PINK_60,
           70: COLORS.PINK_70,
           80: COLORS.PINK_80,
-          90: COLORS.PINK_90,
+          90: COLORS.PINK_90
         },
         yellow: {
           DEFAULT: COLORS.YELLOW,
@@ -109,23 +108,23 @@ const config: Config = {
           60: COLORS.YELLOW_60,
           70: COLORS.YELLOW_70,
           80: COLORS.YELLOW_80,
-          90: COLORS.YELLOW_90,
+          90: COLORS.YELLOW_90
         },
         light: COLORS.LIGHT,
         white: COLORS.WHITE,
         black: COLORS.BLACK,
         night: COLORS.NIGHT,
-        "dark-night": COLORS.DARK_NIGHT,
+        "dark-night": COLORS.DARK_NIGHT
       },
       borderRadius: BORDER_RADIUS,
       fontSize: FONT_SIZE,
       fontWeight: FONT_WEIGHT,
       fontFamily: {
-        "moneygraphy-rounded": ["var(--font-moneygraphy-rounded)"],
-      },
-    },
+        "moneygraphy-rounded": ["var(--font-moneygraphy-rounded)"]
+      }
+    }
   },
-  plugins: [],
-} satisfies Config;
+  plugins: ["prettier-plugin-tailwindcss"]
+}
 
-export default config;
+export default config
