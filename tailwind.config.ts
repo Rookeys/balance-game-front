@@ -111,6 +111,7 @@ const config: Config = {
           80: COLORS.YELLOW_80,
           90: COLORS.YELLOW_90,
         },
+        light: COLORS.LIGHT,
         white: COLORS.WHITE,
         black: COLORS.BLACK,
         night: COLORS.NIGHT,
