@@ -1,45 +1,39 @@
-"use client";
-import { MoonIcon, SunIcon } from "@heroicons/react/24/solid";
-import * as Toggle from "@radix-ui/react-toggle";
-import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
-import SkeletonWrapper from "./SkeletonWrapper";
+"use client"
+import * as Toggle from "@radix-ui/react-toggle"
+import { Moon, SunMedium } from "lucide-react"
+import { useTheme } from "next-themes"
+import { useEffect, useState } from "react"
+import Skeleton from "./Skeleton"
 
 export default function ThemeToggle() {
-  const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
+  const { theme, setTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
+    setMounted(true)
+  }, [])
 
   if (!mounted) {
-    return (
-      <SkeletonWrapper className="inline-block p-2 rounded-full">
-        <div className="flex items-center justify-center">
-          <div className="w-6 h-6" />
-        </div>
-      </SkeletonWrapper>
-    );
+    return <Skeleton className="rounded-full w-[40px] h-[40px]"></Skeleton>
   }
 
   return (
     <Toggle.Root
       onPressedChange={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="rounded-full p-2 transition-all duration-300 ease-in-out border border-gray-20 dark:border-none dark:bg-dark-50"
+      className=""
       aria-label="Theme Toggle"
     >
       <div
-        className={`rounded-full flex items-center justify-center transition-transform duration-500 ease-in-out ${
-          theme === "dark" ? "rotate-180" : "rotate-0"
-        }`}
+        className={`flex items-center justify-center w-[40px] h-[40px]
+          rounded-full transition-all duration-300 ease-in-out border border-gray-20 dark:border-none dark:bg-dark-50
+          ${theme === "dark" ? "rotate-180" : "rotate-0"}`}
       >
         {theme === "dark" ? (
-          <SunIcon className="w-6 h-6 text-yellow-70 transition-opacity duration-300 ease-in-out" />
+          <SunMedium className="text-yellow-70 transition-opacityduration-300 ease-in-out" size={20} />
         ) : (
-          <MoonIcon className="w-6 h-6 text-gray-30 transition-opacity duration-300 ease-in-out" />
+          <Moon className="text-gray-30 transition-opacity duration-300 ease-in-out" size={20} />
         )}
       </div>
     </Toggle.Root>
-  );
+  )
 }
