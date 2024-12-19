@@ -12,7 +12,7 @@ interface Params {
  * className 에 width, height 설정 필수
  */
 const Skeleton = ({ className, style }: Params) => {
-  return <div style={style} className={cn("bg-gray-30 dark:bg-gray animate-pulse rounded-md", className)} />
+  return <div style={style} className={cn("bg-gray-30 dark:bg-gray-70 animate-pulse rounded-md", className)} />
 }
 
 export default Skeleton

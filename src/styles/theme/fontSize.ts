@@ -1,11 +1,9 @@
 export const FONT_SIZE = {
-  h1: "40px",
-  h2: "32px",
-  h3: "24px",
-  h4: "20px",
-  h5: "18px",
-  h6: "16px",
-  paragraph: "14px",
-  small: "12px",
-  hint: "10px",
-};
+  "2xl": "32px",
+  xl: "28px",
+  lg: "24px",
+  md: "20px",
+  base: "16px",
+  sm: "12px",
+  xsm: "8px"
+}

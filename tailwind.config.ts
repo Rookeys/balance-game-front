@@ -23,8 +23,10 @@ const config = {
       ["3xl"]: "1920px",
       ["4xl"]: "2440px"
     },
-    extend: {
-      // 기본 tailwindCss 색상 필요없으면 주석
+    borderRadius: BORDER_RADIUS,
+    fontWeight: FONT_WEIGHT,
+    fontSize: FONT_SIZE,
+    extend: { // 기본 tailwindCss 색상 필요없으면 주석
       colors: {
         primary: {
           DEFAULT: COLORS.PRIMARY,
@@ -116,9 +118,6 @@ const config = {
         night: COLORS.NIGHT,
         "dark-night": COLORS.DARK_NIGHT
       },
-      borderRadius: BORDER_RADIUS,
-      fontSize: FONT_SIZE,
-      fontWeight: FONT_WEIGHT,
       fontFamily: {
         "moneygraphy-rounded": ["var(--font-moneygraphy-rounded)"]
       }

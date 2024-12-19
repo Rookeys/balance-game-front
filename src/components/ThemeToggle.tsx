@@ -25,7 +25,7 @@ export default function ThemeToggle() {
     >
       <div
         className={`flex items-center justify-center w-[40px] h-[40px]
-          rounded-full transition-all duration-300 ease-in-out border border-gray-20 dark:border-none dark:bg-dark-50
+          rounded-full transition-all duration-300 ease-in-out border border-gray-20 dark:border-none dark:bg-dark-40
           ${theme === "dark" ? "rotate-180" : "rotate-0"}`}
       >
         {theme === "dark" ? (

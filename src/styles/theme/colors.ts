@@ -32,16 +32,16 @@ export const COLORS = {
   DARK_80: "#09090A",
   DARK_90: "#070708",
 
-  GRAY: "#3A3A3A",
-  GRAY_10: "#D4D4D4",
-  GRAY_20: "#BABABA",
-  GRAY_30: "#A1A1A1",
-  GRAY_40: "#878787",
-  GRAY_50: "#3A3A3A",
-  GRAY_60: "#343434",
-  GRAY_70: "#2E2E2E",
-  GRAY_80: "#282828",
-  GRAY_90: "#222222",
+  GRAY: "#A1A1A1",
+  GRAY_10: "#E0E0E0",
+  GRAY_20: "#C8C8C8",
+  GRAY_30: "#B0B0B0",
+  GRAY_40: "#A8A8A8",
+  GRAY_50: "#A1A1A1",
+  GRAY_60: "#8A8A8A",
+  GRAY_70: "#747474",
+  GRAY_80: "#5E5E5E",
+  GRAY_90: "#484848",
 
   PURPLE: "#992DFA",
   PURPLE_10: "#D9B3FF",
@@ -81,5 +81,5 @@ export const COLORS = {
   BLACK: "#000000",
 
   NIGHT: "#202830",
-  DARK_NIGHT: "#151B23",
-};
+  DARK_NIGHT: "#151B23"
+}

@@ -8,7 +8,7 @@ import ThemeToggle from "./ThemeToggle"
 export default function Header() {
   const router = useRouter()
   return (
-    <header className="flex justify-between items-center px-[12px] py-[8px] bg-light dark:bg-dark-night border-b border-gray-20 dark:border-gray-50">
+    <header className="flex justify-between items-center px-[12px] py-[8px] bg-light dark:bg-dark-night border-b border-gray-20 dark:border-gray-70">
       <section className="flex gap-[8px]">
         <Logo onClick={() => router.push("/")} aria-label="홈으로 가기" />
         <button onClick={() => router.push("/game-create")} aria-label="game-create">
