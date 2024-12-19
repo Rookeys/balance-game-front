@@ -15,8 +15,7 @@ const meta: Meta<typeof Logo> = {
   parameters: {
     docs: {
       description: {
-        component:
-          "Logo 컴포넌트는 웹사이트를 대표하는 로고를 나타내는 컴포넌트 입니다."
+        component: "Logo 컴포넌트는 웹사이트를 대표하는 로고를 나타내는 컴포넌트 입니다."
       }
     }
   }

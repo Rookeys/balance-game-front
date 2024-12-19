@@ -25,18 +25,17 @@ export default meta
 type Story = StoryObj<typeof Skeleton>
 
 export const Default: Story = {
-  args: {
-  }
+  args: {}
 }
 
 export const RoundedNone: Story = {
   args: {
-    className: "rounded-none",
+    className: "rounded-none"
   }
 }
 
 export const RoundedFull: Story = {
   args: {
-    className: "rounded-full",
+    className: "rounded-full"
   }
 }

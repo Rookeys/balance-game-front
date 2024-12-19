@@ -1,14 +1,14 @@
-import { StorybookExampleButton } from "@/components/StorybookExampleButton";
-import type { Decorator, Meta, StoryObj } from "@storybook/react";
+import { StorybookExampleButton } from "@/components/StorybookExampleButton"
+import type { Decorator, Meta, StoryObj } from "@storybook/react"
 
 const meta: Meta<typeof StorybookExampleButton> = {
   title: "StorybookExampleButton",
   component: StorybookExampleButton,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   args: {
     backgroundColor: "#ff0",
     children: "StorybookExampleButton",
-    primary: false,
+    primary: false
   },
   argTypes: {
     size: { control: "select" },
@@ -16,51 +16,51 @@ const meta: Meta<typeof StorybookExampleButton> = {
     children: {
       options: ["Italic", "Click me!", "More Click!"],
       mapping: {
-        Italic: <em>This is Italic mapping!</em>,
-      },
-    },
-  },
-};
+        Italic: <em>This is Italic mapping!</em>
+      }
+    }
+  }
+}
 
-export default meta;
-type Story = StoryObj<typeof StorybookExampleButton>;
+export default meta
+type Story = StoryObj<typeof StorybookExampleButton>
 
-const withPinkDecorator: Decorator = Story => (
+const withPinkDecorator: Decorator = (Story) => (
   <div
     style={{
       backgroundColor: "pink",
       padding: "1rem",
-      display: "inline-block",
+      display: "inline-block"
     }}
   >
     <Story />
   </div>
-);
+)
 
 export const Default: Story = {
   // name: 'Default',
-  args: {},
-};
+  args: {}
+}
 
 export const Primary: Story = {
   args: {
     backgroundColor: "#ADAF08",
     children: "Primary Button",
-    primary: true,
+    primary: true
   },
-  decorators: [withPinkDecorator],
-};
+  decorators: [withPinkDecorator]
+}
 
 export const Secondary: Story = {
   args: {
     ...Primary.args,
-    children: "Secondary Button",
-  },
-};
+    children: "Secondary Button"
+  }
+}
 
 export const Tertiary: Story = {
   args: {
     backgroundColor: "#2d5d83",
-    children: "Tertiary Button",
-  },
-};
+    children: "Tertiary Button"
+  }
+}

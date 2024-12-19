@@ -4,5 +4,5 @@ export const BORDER_RADIUS = {
   md: "24px",
   lg: "36px",
   xl: "48px",
-  full: "9999px",
-};
+  full: "9999px"
+}

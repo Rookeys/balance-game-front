@@ -18,11 +18,7 @@ export default function ThemeToggle() {
   }
 
   return (
-    <Toggle.Root
-      onPressedChange={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className=""
-      aria-label="Theme Toggle"
-    >
+    <Toggle.Root onPressedChange={() => setTheme(theme === "dark" ? "light" : "dark")} aria-label="Theme Toggle">
       <div
         className={`flex items-center justify-center w-[40px] h-[40px]
           rounded-full transition-all duration-300 ease-in-out border border-gray-20 dark:border-none dark:bg-dark-40
