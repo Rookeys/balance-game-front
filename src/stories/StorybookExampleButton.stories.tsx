@@ -1,13 +1,13 @@
-import { Button } from "@/components/Button";
+import { StorybookExampleButton } from "@/components/StorybookExampleButton";
 import type { Decorator, Meta, StoryObj } from "@storybook/react";
 
-const meta: Meta<typeof Button> = {
-  title: "Button",
-  component: Button,
+const meta: Meta<typeof StorybookExampleButton> = {
+  title: "StorybookExampleButton",
+  component: StorybookExampleButton,
   tags: ['autodocs'],
   args: {
     backgroundColor: "#ff0",
-    children: "Button",
+    children: "StorybookExampleButton",
     primary: false,
   },
   argTypes: {
@@ -23,7 +23,7 @@ const meta: Meta<typeof Button> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof Button>;
+type Story = StoryObj<typeof StorybookExampleButton>;
 
 const withPinkDecorator: Decorator = Story => (
   <div

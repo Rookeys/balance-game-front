@@ -112,6 +112,18 @@ const config = {
           80: COLORS.YELLOW_80,
           90: COLORS.YELLOW_90
         },
+        blue: {
+          DEFAULT: COLORS.BLUE,
+          10: COLORS.BLUE_10,
+          20: COLORS.BLUE_20,
+          30: COLORS.BLUE_30,
+          40: COLORS.BLUE_40,
+          50: COLORS.BLUE_50,
+          60: COLORS.BLUE_60,
+          70: COLORS.BLUE_70,
+          80: COLORS.BLUE_80,
+          90: COLORS.BLUE_90
+        },
         light: COLORS.LIGHT,
         white: COLORS.WHITE,
         black: COLORS.BLACK,

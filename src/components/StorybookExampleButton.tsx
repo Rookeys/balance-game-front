@@ -16,7 +16,7 @@ export interface ButtonProps
 }
 
 /** 기본적인 Button 컴포넌트 */
-export const Button = ({
+export const StorybookExampleButton = ({
   primary = false,
   size = "medium",
   backgroundColor,
