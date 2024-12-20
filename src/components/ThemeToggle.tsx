@@ -25,7 +25,7 @@ export default function ThemeToggle() {
           ${theme === "dark" ? "rotate-180" : "rotate-0"}`}
       >
         {theme === "dark" ? (
-          <SunMedium className="text-yellow-70 transition-opacityduration-300 ease-in-out" size={20} />
+          <SunMedium className="text-yellow-70 transition-opacity duration-300 ease-in-out" size={20} />
         ) : (
           <Moon className="text-gray-30 transition-opacity duration-300 ease-in-out" size={20} />
         )}
