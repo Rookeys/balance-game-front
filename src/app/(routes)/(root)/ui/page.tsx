@@ -1,4 +1,4 @@
-import GameThumbnail from '@/components/gamethumbnail/GameThumbnail'
+import GameThumbnailCard from '@/components/gamethumbnail/GameThumbnailCard'
 
 export default function page() {
   const dummy = {
@@ -13,7 +13,7 @@ export default function page() {
   }
   return (
     <>
-      <GameThumbnail {...dummy} />
+      <GameThumbnailCard {...dummy} />
     </>
   )
 }
