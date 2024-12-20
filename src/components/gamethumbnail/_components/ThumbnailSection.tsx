@@ -5,7 +5,7 @@ interface Params {
   secondItemThumbnail: string
   secondItemTitle: string
 }
-export function ThumbnailImages({ firstItemThumbnail, firstItemTitle, secondItemThumbnail, secondItemTitle }: Params) {
+export function ThumbnailSection({ firstItemThumbnail, firstItemTitle, secondItemThumbnail, secondItemTitle }: Params) {
   return (
     <section className="flex justify-between items-center">
       <article className="flex flex-col items-center">
@@ -18,9 +18,11 @@ export function ThumbnailImages({ firstItemThumbnail, firstItemTitle, secondItem
             sizes="(max-width: 640px) 50vw, 150px"
           />
         </div>
-        <p className="text-sm font-medium py-2 bg-gray-10 dark:bg-dark-20 w-full flex items-center justify-center">
-          {firstItemTitle}
-        </p>
+        <div className="py-2 bg-gray-10 dark:bg-dark-20 w-full">
+          <p className="text-sm font-medium text-center h-[16px] line-clamp-1" title={firstItemTitle}>
+            {firstItemTitle}
+          </p>
+        </div>
       </article>
       <article className="flex flex-col items-center">
         <div className="relative w-[50vw] 2xsm:w-[150px] h-[150px]">
@@ -32,9 +34,11 @@ export function ThumbnailImages({ firstItemThumbnail, firstItemTitle, secondItem
             sizes="(max-width: 640px) 50vw, 150px"
           />
         </div>
-        <p className="text-sm font-medium py-2 bg-gray-10 dark:bg-dark-20 w-full flex items-center justify-center">
-          {secondItemTitle}
-        </p>
+        <div className="py-2 bg-gray-10 dark:bg-dark-20 w-full">
+          <p className="text-sm font-medium text-center h-[16px] line-clamp-1" title={secondItemTitle}>
+            {secondItemTitle}
+          </p>
+        </div>
       </article>
     </section>
   )

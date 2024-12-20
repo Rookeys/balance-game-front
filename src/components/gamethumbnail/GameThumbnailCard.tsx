@@ -1,4 +1,4 @@
-import { ActionButtons, Information, ThumbnailImages } from "./_components"
+import { ActionButtons, Information, ThumbnailSection } from "./_components"
 
 interface Params {
   id: string
@@ -24,7 +24,7 @@ export default function GameThumbnailCard(props: Params) {
 
   return (
     <section className="max-w-screen 2xsm:max-w-[300px] bg-white dark:bg-dark-30 border dark:border-gray rounded-sm shadow-md overflow-hidden">
-      <ThumbnailImages
+      <ThumbnailSection
         firstItemThumbnail={firstItemThumbnail}
         firstItemTitle={firstItemTitle}
         secondItemThumbnail={secondItemThumbnail}

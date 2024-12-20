@@ -12,7 +12,7 @@ export function Information({ gameTitle, gameDescription, creator }: Params) {
       <p className="text-base line-clamp-2" title={gameDescription}>
         {gameDescription}
       </p>
-      <p className="text-sm text-gray-60 dark:text-gray-30" title={creator}>
+      <p className="text-sm text-gray-60 dark:text-gray-30 truncate" title={creator}>
         제작자: {creator}
       </p>
     </article>
