@@ -51,6 +51,12 @@ export const colorGroups: Array<ColorGroupType> = [
     colorSteps: allStep
   },
   {
+    title: "Red Color",
+    subtitle: "빨간색",
+    key: "RED",
+    colorSteps: allStep
+  },
+  {
     title: "Blue Color",
     subtitle: "파란색",
     key: "BLUE",

@@ -26,7 +26,8 @@ const config = {
     borderRadius: BORDER_RADIUS,
     fontWeight: FONT_WEIGHT,
     fontSize: FONT_SIZE,
-    extend: { // 기본 tailwindCss 색상 필요없으면 주석
+    extend: {
+      // 기본 tailwindCss 색상 필요없으면 주석
       colors: {
         primary: {
           DEFAULT: COLORS.PRIMARY,
@@ -111,6 +112,18 @@ const config = {
           70: COLORS.YELLOW_70,
           80: COLORS.YELLOW_80,
           90: COLORS.YELLOW_90
+        },
+        red: {
+          DEFAULT: COLORS.RED,
+          10: COLORS.RED_10,
+          20: COLORS.RED_20,
+          30: COLORS.RED_30,
+          40: COLORS.RED_40,
+          50: COLORS.RED_50,
+          60: COLORS.RED_60,
+          70: COLORS.RED_70,
+          80: COLORS.RED_80,
+          90: COLORS.RED_90
         },
         blue: {
           DEFAULT: COLORS.BLUE,

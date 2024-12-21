@@ -76,6 +76,17 @@ export const COLORS = {
   YELLOW_80: "#FFC61A",
   YELLOW_90: "#FFBE00",
 
+  RED: "#FF0000",
+  RED_10: "#FFBABA",
+  RED_20: "#FF9B9B",
+  RED_30: "#FF7D7D",
+  RED_40: "#FF5E5E",
+  RED_50: "#FF0000",
+  RED_60: "#E60000",
+  RED_70: "#CC0000",
+  RED_80: "#B20000",
+  RED_90: "#A70000",
+
   BLUE: "#006BFF",
   BLUE_10: "#08C2FF",
   BLUE_20: "#4DBBFF",
