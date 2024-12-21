@@ -1,5 +1,5 @@
 import "@/styles/globals.css"
-import { withThemeByClassName, withThemeByDataAttribute } from "@storybook/addon-themes"
+import { withThemeByDataAttribute } from "@storybook/addon-themes"
 import type { Preview, ReactRenderer } from "@storybook/react"
 import { ThemeProvider } from "next-themes"
 import React from "react"

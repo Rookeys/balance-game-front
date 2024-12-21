@@ -1,7 +1,6 @@
 "use client"
 import { cn } from "@/utils/cn"
 import { Slot } from "@radix-ui/react-slot"
-import * as React from "react"
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   asChild?: boolean
