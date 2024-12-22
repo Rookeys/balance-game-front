@@ -1,14 +1,16 @@
 "use client"
 
 import Image from "next/image"
-import { useState } from "react"
 import { DropzoneOptions } from "react-dropzone"
 import { FileInput, FileUploaderInformation, FileUploaderItem } from "./_components"
 import { FileUploader } from "./_components/FileUploader"
 
-const FileUploadDropzone = () => {
-  const [files, setFiles] = useState<File[] | null>([])
+interface Params {
+  value: File[] | null
+  onValueChange: (files: File[] | null) => void
+}
 
+const FileUploadDropzone = ({ value, onValueChange }: Params) => {
   const dropzone = {
     accept: {
       "image/*": [".jpg", ".jpeg", ".png"]
@@ -19,14 +21,14 @@ const FileUploadDropzone = () => {
   } satisfies DropzoneOptions
 
   return (
-    <FileUploader value={files} onValueChange={setFiles} dropzoneOptions={dropzone}>
+    <FileUploader value={value} onValueChange={onValueChange} dropzoneOptions={dropzone}>
       <FileInput className="border-2 border-dashed border-blue">
         <div className="flex items-center justify-center flex-col py-4 w-full">
           <FileUploaderInformation />
         </div>
       </FileInput>
       <section className="flex items-center flex-row gap-[12px] flex-wrap">
-        {files?.map((file, i) => (
+        {value?.map((file, i) => (
           <FileUploaderItem key={i} index={i} className="p-2 rounded-sm overflow-hidden border">
             <Image
               src={URL.createObjectURL(file)}

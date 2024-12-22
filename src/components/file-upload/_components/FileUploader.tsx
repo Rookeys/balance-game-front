@@ -5,7 +5,7 @@ import { createContext, forwardRef, useCallback, useContext, useEffect, useState
 import { DropzoneOptions, DropzoneState, FileRejection, useDropzone } from "react-dropzone"
 import { toast } from "sonner"
 
-type Params = {
+interface Params {
   value: File[] | null
   onValueChange: (value: File[] | null) => void
   dropzoneOptions: DropzoneOptions
