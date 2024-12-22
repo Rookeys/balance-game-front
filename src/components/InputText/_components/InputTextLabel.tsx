@@ -7,7 +7,7 @@ interface Params {
 export default function InputTextLabel({ id, label, required }: Params) {
   return (
     <label htmlFor={id} className="flex gap-[4px]">
-      {label}
+      <p>{label}</p>
       {required && (
         <span aria-hidden="true" className="text-red">
           *

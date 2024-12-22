@@ -41,7 +41,7 @@ body {
 }
 
 /* 제목 요소와 상호작용하는 요소에 대해 line-height를 더 짧게 설정합니다. */
-h1,
+/* h1,
 h2,
 h3,
 h4,
@@ -49,7 +49,7 @@ button,
 input,
 label {
   line-height: 1.1;
-}
+} */
 
 /* 제목에 대한 text-wrap을 balance로 설정합니다. */
 h1,
