@@ -15,7 +15,7 @@ export const FileUploaderItem = forwardRef<HTMLDivElement, { index: number } & R
         <Button
           type="button"
           variant="custom"
-          className={cn("absolute bg-red-40 rounded-xsm top-1 right-1 p-1 ")}
+          className={cn("absolute bg-red-40 rounded-xsm top-1 right-1 p-1")}
           onClick={() => removeFileFromSet(index)}
         >
           <span className="sr-only">{index}번째 아이템 삭제</span>

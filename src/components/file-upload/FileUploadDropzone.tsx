@@ -21,7 +21,7 @@ const FileUploadDropzone = () => {
   return (
     <FileUploader value={files} onValueChange={setFiles} dropzoneOptions={dropzone}>
       <FileInput className="border-2 border-dashed border-blue">
-        <div className="flex items-center justify-center flex-col pt-3 pb-4 w-full ">
+        <div className="flex items-center justify-center flex-col py-4 w-full">
           <FileUploaderInformation />
         </div>
       </FileInput>
