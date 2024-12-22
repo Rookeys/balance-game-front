@@ -25,3 +25,5 @@ export const FileUploaderItem = forwardRef<HTMLDivElement, { index: number } & R
     )
   }
 )
+
+FileUploaderItem.displayName = "FileUploaderItem"

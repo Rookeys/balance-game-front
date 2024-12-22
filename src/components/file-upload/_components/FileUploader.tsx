@@ -124,3 +124,5 @@ export const useFileUpload = () => {
   }
   return context
 }
+
+FileUploader.displayName = "FileUploader"
