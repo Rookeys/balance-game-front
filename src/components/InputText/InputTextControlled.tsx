@@ -1,8 +1,7 @@
 "use client"
 
 import { ChangeEventHandler } from "react"
-import InputTextErrorMessage from "./_components/InputTextErrorMessage"
-import InputTextLabel from "./_components/InputTextLabel"
+import { InputTextErrorMessage, InputTextLabel } from './_components'
 
 interface Params {
   id: string

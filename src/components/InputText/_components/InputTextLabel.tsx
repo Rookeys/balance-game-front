@@ -4,7 +4,7 @@ interface Params {
   required?: boolean
 }
 
-export default function InputTextLabel({ id, label, required }: Params) {
+export function InputTextLabel({ id, label, required }: Params) {
   return (
     <label htmlFor={id} className="flex gap-[4px]">
       <p>{label}</p>
