@@ -23,5 +23,3 @@ const Radio = forwardRef<HTMLDivElement, Params>(({ name, value, items, onChange
 })
 
 Radio.displayName = "Radio"
-
-export default Radio
