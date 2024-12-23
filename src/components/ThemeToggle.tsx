@@ -14,7 +14,7 @@ export default function ThemeToggle() {
   }, [])
 
   if (!mounted) {
-    return <Skeleton className="rounded-full w-[40px] h-[40px]"></Skeleton>
+    return <Skeleton className="rounded-full w-[40px] h-[40px]" />
   }
 
   return (
