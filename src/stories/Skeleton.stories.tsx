@@ -6,10 +6,13 @@ const meta: Meta<typeof Skeleton> = {
   component: Skeleton,
   tags: ["autodocs"],
   args: {
-    style: { width: 200, height: 200 }
+    className: "w-[200px] h-[200px]"
   },
   argTypes: {
-    style: { control: "object" }
+    className: {
+      description: "추가 스타일링을 위한 클래스 이름 (width, height 입력 필수)",
+      control: "text"
+    }
   },
   parameters: {
     docs: {
@@ -30,12 +33,12 @@ export const Default: Story = {
 
 export const RoundedNone: Story = {
   args: {
-    className: "rounded-none"
+    className: `${meta.args?.className} rounded-none`
   }
 }
 
 export const RoundedFull: Story = {
   args: {
-    className: "rounded-full"
+    className: `${meta.args?.className} rounded-full`
   }
 }

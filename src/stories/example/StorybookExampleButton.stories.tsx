@@ -1,4 +1,4 @@
-import { StorybookExampleButton } from "@/components/StorybookExampleButton"
+import { StorybookExampleButton } from "@/stories/example/StorybookExampleButton"
 import type { Decorator, Meta, StoryObj } from "@storybook/react"
 
 const meta: Meta<typeof StorybookExampleButton> = {

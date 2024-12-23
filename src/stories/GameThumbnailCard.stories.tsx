@@ -6,7 +6,6 @@ const meta: Meta<typeof GameThumbnailCard> = {
   component: GameThumbnailCard,
   tags: ["autodocs"],
   args: {
-    id: "1",
     firstItemThumbnail: "https://avatars.githubusercontent.com/u/62785823?v=4",
     firstItemTitle: "고재민",
     secondItemThumbnail: "https://avatars.githubusercontent.com/u/84797433?v=4",

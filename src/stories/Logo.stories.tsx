@@ -10,7 +10,9 @@ const meta: Meta<typeof Logo> = {
     "aria-label": "logo"
   },
   argTypes: {
-    "aria-label": { control: "text" }
+    size: {
+      description: "로고 크기를 정하는 값"
+    }
   },
   parameters: {
     docs: {
