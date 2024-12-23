@@ -1,7 +1,7 @@
 "use client"
 
 import { ChangeEventHandler } from "react"
-import { InputTextErrorMessage, InputTextLabel } from './_components'
+import { InputTextErrorMessage, InputTextLabel } from "./_components"
 
 interface Params {
   id: string
@@ -19,14 +19,14 @@ const InputTextControlled: React.FC<Params> = ({
   value,
   onChange,
   required = false,
-  placeholder = "",
+  placeholder,
   id,
   errorMessage,
   ariaLabel
 }) => {
   return (
     <section className="inline-flex flex-col gap-[4px]">
-      {label && <InputTextLabel id={id} label={label} />}
+      {label && <InputTextLabel id={id} label={label} required={required} />}
       <input
         id={id}
         type="text"
