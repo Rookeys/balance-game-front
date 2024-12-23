@@ -3,12 +3,15 @@ import { COLORS } from "./src/styles/theme/colors"
 import { FONT_SIZE } from "./src/styles/theme/fontSize"
 import { FONT_WEIGHT } from "./src/styles/theme/fontWeight"
 
+const isStorybook = process.env.STORYBOOK === "true"
+
 const config = {
   darkMode: ["selector", "[data-theme='dark']"],
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}"
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    ...(isStorybook ? ["./src/stories/**/*.{js,ts,jsx,tsx,mdx}"] : [])
   ],
   theme: {
     screens: {

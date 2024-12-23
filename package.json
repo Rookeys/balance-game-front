@@ -7,9 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
-    "start-storybook": "http-server storybook-static"
+    "storybook": "STORYBOOK=true storybook dev -p 6006",
+    "build-storybook": "STORYBOOK=true storybook build",
+    "start-storybook": "STORYBOOK=true http-server storybook-static"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
