@@ -10,7 +10,7 @@ interface Params {
   onValueChange: (files: File[] | null) => void
 }
 
-const FileUploadDropzone = ({ value, onValueChange }: Params) => {
+const FileUploadDropZone = ({ value, onValueChange }: Params) => {
   const dropzone = {
     accept: {
       "image/*": [".jpg", ".jpeg", ".png"]
@@ -44,4 +44,4 @@ const FileUploadDropzone = ({ value, onValueChange }: Params) => {
   )
 }
 
-export default FileUploadDropzone
+export default FileUploadDropZone
