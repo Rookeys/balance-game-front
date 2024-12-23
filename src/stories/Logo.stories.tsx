@@ -6,12 +6,21 @@ const meta: Meta<typeof Logo> = {
   component: Logo,
   tags: ["autodocs"],
   args: {
-    size: 40,
-    "aria-label": "logo"
+    size: 40
   },
   argTypes: {
     size: {
       description: "로고 크기를 정하는 값"
+    },
+    onClick: {
+      table: {
+        disable: true
+      }
+    },
+    "aria-label": {
+      table: {
+        disable: true
+      }
     }
   },
   parameters: {

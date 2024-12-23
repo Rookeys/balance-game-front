@@ -28,6 +28,9 @@ const meta: Meta<typeof Button> = {
     className: {
       description: "추가 스타일링을 위한 클래스 이름",
       control: "text"
+    },
+    asChild: {
+      table: { disable: true }
     }
   },
   parameters: {

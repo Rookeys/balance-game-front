@@ -35,6 +35,9 @@ const meta: Meta<typeof GameThumbnailCard> = {
     },
     creator: {
       description: "게임 제작자 닉네임"
+    },
+    id: {
+      table: { disable: true }
     }
   },
   parameters: {

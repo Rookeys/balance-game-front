@@ -31,6 +31,7 @@ const meta: Meta<typeof InputText> = {
       description: "입력 필드가 필수 입력인지 여부를 나타냅니다.",
       control: { type: "boolean" },
       table: {
+        defaultValue: { summary: "false", detail: "값이 true 면 라벨에 * 표시가 생김" },
         type: { summary: "boolean" }
       }
     },
@@ -65,7 +66,7 @@ type Story = StoryObj<typeof InputText>
 export const Default: Story = {
   args: {
     label: "",
-    errorMessage: "",
+    errorMessage: ""
   }
 }
 
