@@ -54,7 +54,7 @@ const meta: Meta<typeof InputText> = {
     docs: {
       description: {
         component:
-          "InputText 컴포넌트는 사용자의 텍스트 입력을 처리하는 컨트롤러 컴포넌트입니다. 레이블과 오류 메시지를 지원합니다."
+          "InputText 컴포넌트는 사용자의 텍스트 입력을 처리하는 컨트롤러 컴포넌트 입니다. 레이블과 오류 메시지를 지원합니다."
       }
     }
   }
@@ -70,14 +70,14 @@ export const Default: Story = {
   }
 }
 
-export const withLabelAndErrorMessage: Story = {
+export const WithLabelAndErrorMessage: Story = {
   args: {
     label: "라벨",
     errorMessage: "에러메세지"
   }
 }
 
-export const required: Story = {
+export const Required: Story = {
   args: {
     required: true
   }
