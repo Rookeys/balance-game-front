@@ -1,3 +1,4 @@
+import ToasterWithTheme from "@/components/ToasterWithTheme"
 import type { Meta, StoryFn } from "@storybook/react"
 import { useState } from "react"
 import FileUploadDropZone from "../components/fileUpload/FileUploadDropZone"
@@ -33,14 +34,17 @@ export const Default: StoryFn<typeof FileUploadDropZone> = (args) => {
   const [value, setValue] = useState<File[] | null>(null)
 
   return (
-    <section className="w-screen max-w-[400px]">
-      <FileUploadDropZone
-        {...args}
-        value={value}
-        onValueChange={(newValue) => {
-          setValue(newValue)
-        }}
-      />
-    </section>
+    <>
+      <section className="w-screen max-w-[400px]">
+        <FileUploadDropZone
+          {...args}
+          value={value}
+          onValueChange={(newValue) => {
+            setValue(newValue)
+          }}
+        />
+      </section>
+      <ToasterWithTheme />
+    </>
   )
 }
