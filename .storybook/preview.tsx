@@ -1,6 +1,5 @@
 import "@/styles/globals.css"
-import { withThemeByDataAttribute } from "@storybook/addon-themes"
-import type { Preview, ReactRenderer } from "@storybook/react"
+import type { Preview } from "@storybook/react"
 import { ThemeProvider } from "next-themes"
 import React from "react"
 
@@ -27,15 +26,7 @@ const preview: Preview = {
       <ThemeProvider>
         <Story />
       </ThemeProvider>
-    ),
-    withThemeByDataAttribute<ReactRenderer>({
-      themes: {
-        light: "",
-        dark: "dark"
-      },
-      defaultTheme: "light",
-      attributeName: "data-theme"
-    })
+    )
   ]
 }
 
