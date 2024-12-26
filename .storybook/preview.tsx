@@ -5,6 +5,11 @@ import React from "react"
 
 const preview: Preview = {
   parameters: {
+    options: {
+      storySort: {
+        order: ["ThemeToggle"]
+      }
+    },
     backgrounds: {
       values: [
         { name: "black", value: "#000" },
