@@ -92,5 +92,20 @@ export const colorGroups: Array<ColorGroupType> = [
     title: "Dark Night Color",
     subtitle: "다크모드 중 좀 더 어두운 배경 색",
     key: "DARK_NIGHT"
+  },
+  {
+    title: "Kakao Container Color",
+    subtitle: "카카오 로그인버튼 디자인에 맞는 Container 배경 색",
+    key: "KAKAO_CONTAINER"
+  },
+  {
+    title: "Kakao Symbol Color",
+    subtitle: "카카오 로그인버튼 디자인에 맞는 Symbol 색",
+    key: "KAKAO_SYMBOL"
+  },
+  {
+    title: "Kakao Label Color",
+    subtitle: "카카오 로그인버튼 디자인에 맞는 Label 색",
+    key: "KAKAO_LABEL"
   }
 ]

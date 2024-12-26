@@ -156,7 +156,12 @@ const config = {
         white: COLORS.WHITE,
         black: COLORS.BLACK,
         night: COLORS.NIGHT,
-        "dark-night": COLORS.DARK_NIGHT
+        "dark-night": COLORS.DARK_NIGHT,
+        kakao: {
+          container: "#FEE500",
+          symbol: "#000000",
+          label: "#000000D9"
+        }
       },
       fontFamily: {
         "moneygraphy-rounded": ["var(--font-moneygraphy-rounded)"]
