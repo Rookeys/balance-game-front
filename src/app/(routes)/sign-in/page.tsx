@@ -1,5 +1,4 @@
 "use client"
-import { Button } from "@/components/Button"
 import KakaoLoginButton from "@/components/KakaoLoginButton"
 import { signOut } from "next-auth/react"
 

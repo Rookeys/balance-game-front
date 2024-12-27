@@ -11,7 +11,7 @@ interface Params {
 
 export default function KakaoLoginButton({ className }: Params) {
   const handleAuthAction = () => {
-    signIn("kakao", { callbackUrl: "/" })
+    signIn("kakao")
   }
 
   return (
