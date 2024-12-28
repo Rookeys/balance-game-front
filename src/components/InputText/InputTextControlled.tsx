@@ -7,7 +7,7 @@ interface Params {
   id: string
   label?: string
   value: string
-  onChange?: ChangeEventHandler<HTMLInputElement>
+  onChange: ChangeEventHandler<HTMLInputElement>
   required?: boolean
   placeholder?: string
   errorMessage?: string
