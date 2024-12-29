@@ -1,2 +1,2 @@
-export { InputTextErrorMessage } from './InputTextErrorMessage';
-export { InputTextLabel } from './InputTextLabel';
+export { InputErrorMessage } from "./InputErrorMessage"
+export { InputLabel } from "./InputLabel"

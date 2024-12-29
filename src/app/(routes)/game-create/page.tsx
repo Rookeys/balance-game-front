@@ -1,5 +1,6 @@
 "use client"
 import { Button } from "@/components/Button"
+import { InputLabel } from "@/components/InputText/_components"
 import InputTextUnControlled from "@/components/InputText/InputTextUnControlled"
 import RadioGroup from "@/components/radioGroup/RadioGroup"
 import Select from "@/components/select/Select"
@@ -40,25 +41,37 @@ export default function GameCreatePage() {
   }
 
   return (
-    <section>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <InputTextUnControlled id="title" label="제목" {...register("title")} />
-        <InputTextUnControlled id="description" label="설명" {...register("description")} />
-        <Controller
-          name="category"
-          control={control}
-          render={({ field }) => <Select {...field} items={categoryItems} />}
-        />
-        <Controller
-          name="isNamePublic"
-          control={control}
-          render={({ field }) => <RadioGroup {...field} items={isNamePublicItems} />}
-        />
-        <Controller
-          name="gameAccessType"
-          control={control}
-          render={({ field }) => <RadioGroup {...field} items={gameAccessTypeItems} />}
-        />
+    <section className="flex justify-center px-[16px] mt-[80px]">
+      <form
+        className="flex flex-col justify-center items-start w-full max-w-[500px] gap-[28px]"
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <InputTextUnControlled className="w-full" id="title" label="제목" {...register("title")} />
+        <InputTextUnControlled className="w-full" id="description" label="설명" {...register("description")} />
+        <article className="flex flex-col gap-[4px]">
+          <InputLabel label="카테고리 선택" />
+          <Controller
+            name="category"
+            control={control}
+            render={({ field }) => <Select {...field} items={categoryItems} />}
+          />
+        </article>
+        <article className="flex flex-col gap-[4px]">
+          <InputLabel label="제작자 표시 (익명으로 설정 시 팔로워들이 확인할 수 없습니다)" />
+          <Controller
+            name="isNamePublic"
+            control={control}
+            render={({ field }) => <RadioGroup {...field} items={isNamePublicItems} />}
+          />
+        </article>
+        <article className="flex flex-col gap-[4px]">
+          <InputLabel label="게임공개" />
+          <Controller
+            name="gameAccessType"
+            control={control}
+            render={({ field }) => <RadioGroup {...field} items={gameAccessTypeItems} />}
+          />
+        </article>
         <Button type="submit">제출하기</Button>
       </form>
     </section>

@@ -1,12 +1,15 @@
+import { cn } from "@/utils/cn"
+
 interface Params {
-  id: string
+  id?: string
   label: string
   required?: boolean
+  className?: string
 }
 
-export function InputTextLabel({ id, label, required }: Params) {
+export function InputLabel({ id, label, required, className }: Params) {
   return (
-    <label htmlFor={id} className="flex gap-[4px]">
+    <label htmlFor={id} className={cn("flex gap-[4px]", className)}>
       <p>{label}</p>
       {required && (
         <span aria-hidden="true" className="text-red">

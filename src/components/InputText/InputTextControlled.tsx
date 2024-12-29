@@ -1,7 +1,8 @@
 "use client"
 
+import { cn } from "@/utils/cn"
 import { ChangeEventHandler } from "react"
-import { InputTextErrorMessage, InputTextLabel } from "./_components"
+import { InputErrorMessage, InputLabel } from "./_components"
 
 interface Params {
   id: string
@@ -12,6 +13,8 @@ interface Params {
   placeholder?: string
   errorMessage?: string
   ariaLabel?: string
+  className?: string
+  labelClassName?: string
 }
 
 const InputTextControlled: React.FC<Params> = ({
@@ -22,11 +25,13 @@ const InputTextControlled: React.FC<Params> = ({
   placeholder,
   id,
   errorMessage,
-  ariaLabel
+  ariaLabel,
+  className,
+  labelClassName
 }) => {
   return (
-    <section className="inline-flex flex-col gap-[4px]">
-      {label && <InputTextLabel id={id} label={label} required={required} />}
+    <section className={cn("inline-flex flex-col gap-[4px]", className)}>
+      {label && <InputLabel id={id} label={label} required={required} className={labelClassName} />}
       <input
         id={id}
         type="text"
@@ -38,7 +43,7 @@ const InputTextControlled: React.FC<Params> = ({
         aria-invalid={!!errorMessage}
         aria-label={ariaLabel}
       />
-      {!!errorMessage && <InputTextErrorMessage id={id} errorMessage={errorMessage} />}
+      {!!errorMessage && <InputErrorMessage id={id} errorMessage={errorMessage} />}
     </section>
   )
 }

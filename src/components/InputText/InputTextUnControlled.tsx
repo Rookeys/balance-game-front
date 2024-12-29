@@ -1,7 +1,8 @@
 "use client"
 
+import { cn } from "@/utils/cn"
 import { forwardRef } from "react"
-import { InputTextErrorMessage, InputTextLabel } from "./_components"
+import { InputErrorMessage, InputLabel } from "./_components"
 
 interface Params {
   id: string
@@ -10,13 +11,18 @@ interface Params {
   placeholder?: string
   errorMessage?: string
   ariaLabel?: string
+  className?: string
+  labelClassName?: string
 }
 
 const InputTextUnControlled = forwardRef<HTMLInputElement, Params>(
-  ({ label, required = false, placeholder = "", id, errorMessage, ariaLabel, ...props }, ref) => {
+  (
+    { label, required = false, placeholder = "", id, errorMessage, ariaLabel, className, labelClassName, ...props },
+    ref
+  ) => {
     return (
-      <section className="inline-flex flex-col gap-[4px]">
-        {label && <InputTextLabel id={id} label={label} />}
+      <section className={cn("inline-flex flex-col gap-[4px]", className)}>
+        {label && <InputLabel id={id} label={label} className={labelClassName} />}
         <input
           ref={ref}
           id={id}
@@ -28,7 +34,7 @@ const InputTextUnControlled = forwardRef<HTMLInputElement, Params>(
           aria-label={ariaLabel}
           {...props}
         />
-        {!!errorMessage && <InputTextErrorMessage id={id} errorMessage={errorMessage} />}
+        {!!errorMessage && <InputErrorMessage id={id} errorMessage={errorMessage} />}
       </section>
     )
   }
