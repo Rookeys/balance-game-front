@@ -5,7 +5,7 @@ export const gameSchema = z
     title: z.string().max(20, "제목은 20자 이내로 작성해주세요.").nonempty("제목은 필수입니다."),
     description: z.string().max(50, "설명은 50자 이내로 작성해주세요.").nonempty("설명은 필수입니다."),
     category: z.string().nonempty("카테고리는 필수입니다."),
-    isNamePublic: z.boolean({
+    isNamePublic: z.string({
       required_error: "생성자 표시 여부는 필수입니다."
     }),
     gameAccessType: z.enum(["public", "partial", "private"], {

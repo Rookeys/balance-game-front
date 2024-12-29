@@ -1,9 +1,11 @@
 "use client"
 import { Button } from "@/components/Button"
-import { InputLabel } from '@/components/form/_components'
-import InputTextUnControlled from '@/components/form/inputText/InputTextUnControlled'
-import RadioGroup from '@/components/form/radioGroup/RadioGroup'
-import Select from '@/components/form/select/Select'
+import { InputLabel } from "@/components/form/_components"
+import InputTextUnControlled from "@/components/form/inputText/InputTextUnControlled"
+import RadioGroup from "@/components/form/radioGroup/RadioGroup"
+import Select from "@/components/form/select/Select"
+import { gameSchema } from "@/validations/gameSchema"
+import { zodResolver } from "@hookform/resolvers/zod"
 import type { FieldValues } from "react-hook-form"
 import { Controller, useForm } from "react-hook-form"
 
@@ -34,10 +36,20 @@ const gameAccessTypeItems: SelectOptionType[] = [
 ]
 
 export default function GameCreatePage() {
-  const { register, handleSubmit, control } = useForm<PostGameRequestType>()
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors }
+  } = useForm<PostGameRequestType>({
+    resolver: zodResolver(gameSchema)
+  })
+
+  console.log(errors)
 
   const onSubmit = async (data: FieldValues) => {
     console.log("data", data)
+    // Todo API 요청 시 isNamePublicItems 관련 데이터의 value 는 boolean 으로 관리할듯함.
   }
 
   return (
@@ -46,8 +58,20 @@ export default function GameCreatePage() {
         className="flex flex-col justify-center items-start w-full max-w-[500px] gap-[28px]"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <InputTextUnControlled className="w-full" id="title" label="제목" {...register("title")} />
-        <InputTextUnControlled className="w-full" id="description" label="설명" {...register("description")} />
+        <InputTextUnControlled
+          className="w-full"
+          id="title"
+          label="제목"
+          {...register("title")}
+          errorMessage={errors.title?.message}
+        />
+        <InputTextUnControlled
+          className="w-full"
+          id="description"
+          label="설명"
+          {...register("description")}
+          errorMessage={errors.description?.message}
+        />
         <article className="flex flex-col gap-[4px]">
           <InputLabel label="카테고리 선택" />
           <Controller
@@ -72,6 +96,16 @@ export default function GameCreatePage() {
             render={({ field }) => <RadioGroup {...field} items={gameAccessTypeItems} />}
           />
         </article>
+        <InputTextUnControlled
+          className="w-full"
+          id="inviteCode"
+          label="초대코드"
+          {...register("inviteCode")}
+          errorMessage={errors.inviteCode?.message}
+        />
+        <p className="text-sm text-gray">
+          ⭐️ 게임의 부적절함을 확인하기 위해 일부공개 게임은 개발자가 확인할 수 있습니다
+        </p>
         <Button type="submit">제출하기</Button>
       </form>
     </section>
