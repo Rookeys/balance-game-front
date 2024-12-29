@@ -1,9 +1,9 @@
 "use client"
 import { Button } from "@/components/Button"
-import { InputLabel } from "@/components/InputText/_components"
-import InputTextUnControlled from "@/components/InputText/InputTextUnControlled"
-import RadioGroup from "@/components/radioGroup/RadioGroup"
-import Select from "@/components/select/Select"
+import { InputLabel } from '@/components/form/_components'
+import InputTextUnControlled from '@/components/form/inputText/InputTextUnControlled'
+import RadioGroup from '@/components/form/radioGroup/RadioGroup'
+import Select from '@/components/form/select/Select'
 import type { FieldValues } from "react-hook-form"
 import { Controller, useForm } from "react-hook-form"
 

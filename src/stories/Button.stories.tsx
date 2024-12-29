@@ -8,7 +8,7 @@ const meta: Meta<typeof Button> = {
   args: {
     variant: "basic",
     children: "Button",
-    className: "bg-primary-10"
+    className: "bg-primary-10 dark:bg-primary-80"
   },
   argTypes: {
     variant: {
@@ -55,6 +55,6 @@ export const Custom: Story = {
   args: {
     variant: "custom",
     children: "커스텀 버튼",
-    className: "bg-blue-10 hover:bg-blue-20 active:scale-[0.95] px-2 py-2 rounded-xsm"
+    className: "bg-blue-10 dark:bg-blue-80 hover:bg-blue-20 hover:bg-blue-90 active:scale-[0.95] px-2 py-2 rounded-xsm"
   }
 }

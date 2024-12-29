@@ -1,4 +1,4 @@
-import InputText from "@/components/InputText/InputTextControlled"
+import InputText from "@/components/form/inputText/InputTextControlled"
 import type { Meta, StoryObj } from "@storybook/react"
 
 const meta: Meta<typeof InputText> = {

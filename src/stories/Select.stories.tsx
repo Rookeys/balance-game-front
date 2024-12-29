@@ -1,4 +1,4 @@
-import Select from "@/components/select/Select"; // Select 컴포넌트 경로
+import Select from "@/components/form/select/Select"
 import type { Meta, StoryFn } from "@storybook/react"
 import { useState } from "react"
 

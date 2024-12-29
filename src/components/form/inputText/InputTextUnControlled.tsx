@@ -1,8 +1,8 @@
 "use client"
 
+import { InputErrorMessage, InputLabel } from "@/components/form/_components"
 import { cn } from "@/utils/cn"
 import { forwardRef } from "react"
-import { InputErrorMessage, InputLabel } from "./_components"
 
 interface Params {
   id: string

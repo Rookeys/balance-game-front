@@ -1,8 +1,8 @@
 "use client"
 
+import { InputErrorMessage, InputLabel } from "@/components/form/_components"
 import { cn } from "@/utils/cn"
 import { ChangeEventHandler } from "react"
-import { InputErrorMessage, InputLabel } from "./_components"
 
 interface Params {
   id: string
@@ -35,7 +35,7 @@ const InputTextControlled: React.FC<Params> = ({
       <input
         id={id}
         type="text"
-        className="border-[2px] rounded-xsm px-2 py-1"
+        className="border-[2px] rounded-xsm px-2 py-1 dark:bg-dark-30 dark:border-gray"
         value={value}
         onChange={onChange}
         placeholder={placeholder}

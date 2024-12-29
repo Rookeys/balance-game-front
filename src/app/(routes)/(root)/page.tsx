@@ -1,4 +1,4 @@
-import GameThumbnailCard from "@/components/gameThumbnail/GameThumbnailCard"
+import GameThumbnailCard from "@/components/form/gameThumbnail/GameThumbnailCard"
 
 export default function Home() {
   const dummy = {
