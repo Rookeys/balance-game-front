@@ -12,7 +12,7 @@ export const gameSchema = z
       required_error: "공개 범위는 필수입니다.",
       invalid_type_error: "유효한 공개 범위를 선택해주세요."
     }),
-    inviteCode: z.string().nonempty("초대코드는 필수입니다.").optional()
+    inviteCode: z.string().optional()
   })
   .refine((data) => data.gameAccessType !== "partial" || (data.gameAccessType === "partial" && data.inviteCode), {
     message: "게임 공개여부가 일부공개일 경우 초대코드는 필수입니다.",
