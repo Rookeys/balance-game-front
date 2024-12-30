@@ -20,9 +20,9 @@ import { ColorItem, ColorPalette, Meta } from "@storybook/addon-docs";
                 COLORS[`${key}_${step}`] !== undefined
                   ? COLORS[`${key}_${step}`]
                   : step === "DEFAULT"
-                  ? COLORS[key]
-                  : null;
-              return acc;
+                    ? COLORS[key]
+                    : null
+              return acc
             }, {})
           : { DEFAULT: COLORS[key] } // colorSteps가 없을 경우 기본 색상만 사용
       }

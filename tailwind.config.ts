@@ -3,12 +3,15 @@ import { COLORS } from "./src/styles/theme/colors"
 import { FONT_SIZE } from "./src/styles/theme/fontSize"
 import { FONT_WEIGHT } from "./src/styles/theme/fontWeight"
 
+const isStorybook = process.env.STORYBOOK === "true"
+
 const config = {
   darkMode: ["selector", "[data-theme='dark']"],
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}"
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    ...(isStorybook ? ["./src/stories/**/*.{js,ts,jsx,tsx,mdx}"] : [])
   ],
   theme: {
     screens: {
@@ -23,6 +26,9 @@ const config = {
       ["3xl"]: "1920px",
       ["4xl"]: "2440px"
     },
+    borderRadius: BORDER_RADIUS,
+    fontWeight: FONT_WEIGHT,
+    fontSize: FONT_SIZE,
     extend: {
       // 기본 tailwindCss 색상 필요없으면 주석
       colors: {
@@ -110,15 +116,53 @@ const config = {
           80: COLORS.YELLOW_80,
           90: COLORS.YELLOW_90
         },
+        red: {
+          DEFAULT: COLORS.RED,
+          10: COLORS.RED_10,
+          20: COLORS.RED_20,
+          30: COLORS.RED_30,
+          40: COLORS.RED_40,
+          50: COLORS.RED_50,
+          60: COLORS.RED_60,
+          70: COLORS.RED_70,
+          80: COLORS.RED_80,
+          90: COLORS.RED_90
+        },
+        blue: {
+          DEFAULT: COLORS.BLUE,
+          10: COLORS.BLUE_10,
+          20: COLORS.BLUE_20,
+          30: COLORS.BLUE_30,
+          40: COLORS.BLUE_40,
+          50: COLORS.BLUE_50,
+          60: COLORS.BLUE_60,
+          70: COLORS.BLUE_70,
+          80: COLORS.BLUE_80,
+          90: COLORS.BLUE_90
+        },
+        green: {
+          DEFAULT: COLORS.GREEN,
+          10: COLORS.GREEN_10,
+          20: COLORS.GREEN_20,
+          30: COLORS.GREEN_30,
+          40: COLORS.GREEN_40,
+          50: COLORS.GREEN_50,
+          60: COLORS.GREEN_60,
+          70: COLORS.GREEN_70,
+          80: COLORS.GREEN_80,
+          90: COLORS.GREEN_90
+        },
         light: COLORS.LIGHT,
         white: COLORS.WHITE,
         black: COLORS.BLACK,
         night: COLORS.NIGHT,
-        "dark-night": COLORS.DARK_NIGHT
+        "dark-night": COLORS.DARK_NIGHT,
+        kakao: {
+          container: "#FEE500",
+          symbol: "#000000",
+          label: "#000000D9"
+        }
       },
-      borderRadius: BORDER_RADIUS,
-      fontSize: FONT_SIZE,
-      fontWeight: FONT_WEIGHT,
       fontFamily: {
         "moneygraphy-rounded": ["var(--font-moneygraphy-rounded)"]
       }

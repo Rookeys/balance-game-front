@@ -7,11 +7,14 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
-    "start-storybook": "http-server storybook-static"
+    "storybook": "STORYBOOK=true storybook dev -p 6006",
+    "build-storybook": "STORYBOOK=true storybook build",
+    "start-storybook": "STORYBOOK=true http-server storybook-static"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.9.1",
+    "@radix-ui/react-radio-group": "^1.2.2",
+    "@radix-ui/react-select": "^2.1.4",
     "@radix-ui/react-toggle": "^1.1.0",
     "clsx": "^2.1.1",
     "lucide-react": "^0.468.0",
@@ -20,14 +23,17 @@
     "next-themes": "^0.4.4",
     "react": "^18",
     "react-dom": "^18",
-    "tailwind-merge": "^2.5.5"
+    "react-dropzone": "^14.3.5",
+    "react-hook-form": "^7.54.2",
+    "sonner": "^1.7.1",
+    "tailwind-merge": "^2.5.5",
+    "zod": "^3.24.1"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.2",
     "@storybook/addon-essentials": "^8.4.7",
     "@storybook/addon-interactions": "^8.4.7",
     "@storybook/addon-onboarding": "^8.4.7",
-    "@storybook/addon-themes": "^8.4.7",
     "@storybook/blocks": "^8.4.7",
     "@storybook/nextjs": "^8.4.7",
     "@storybook/react": "^8.4.7",

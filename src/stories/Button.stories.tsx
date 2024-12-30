@@ -1,66 +1,60 @@
-import { Button } from "@/components/Button";
-import type { Decorator, Meta, StoryObj } from "@storybook/react";
+import { Button } from "@/components/Button"
+import type { Meta, StoryObj } from "@storybook/react"
 
 const meta: Meta<typeof Button> = {
   title: "Button",
   component: Button,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   args: {
-    backgroundColor: "#ff0",
+    variant: "basic",
     children: "Button",
-    primary: false,
+    className: "bg-primary-10 dark:bg-primary-80"
   },
   argTypes: {
-    size: { control: "select" },
-    backgroundColor: { control: "color" },
-    children: {
-      options: ["Italic", "Click me!", "More Click!"],
-      mapping: {
-        Italic: <em>This is Italic mapping!</em>,
+    variant: {
+      description: "기본 스타일링을 사용할지, 처음부터 커스텀할지에 대한 여부",
+      table: {
+        defaultValue: { summary: "basic", detail: "basic 인 경우에는 버튼의 기본스타일이 적용 됨" },
+        type: { summary: "basic | custom" }
       },
+      control: {
+        type: "select"
+      },
+      options: ["basic", "custom"]
     },
+    children: {
+      description: "버튼 안에 표시될 텍스트"
+    },
+    className: {
+      description: "추가 스타일링을 위한 클래스 이름",
+      control: "text"
+    },
+    asChild: {
+      table: { disable: true }
+    }
   },
-};
+  parameters: {
+    docs: {
+      description: {
+        component: `Button 컴포넌트는 기본적으로 버튼 스타일을 제공하며, 'asChild' prop을 사용하면 다른 컴포넌트로도 사용할 수 있습니다.`
+      }
+    }
+  }
+}
 
-export default meta;
-type Story = StoryObj<typeof Button>;
-
-const withPinkDecorator: Decorator = Story => (
-  <div
-    style={{
-      backgroundColor: "pink",
-      padding: "1rem",
-      display: "inline-block",
-    }}
-  >
-    <Story />
-  </div>
-);
+export default meta
+type Story = StoryObj<typeof Button>
 
 export const Default: Story = {
-  // name: 'Default',
-  args: {},
-};
-
-export const Primary: Story = {
   args: {
-    backgroundColor: "#ADAF08",
-    children: "Primary Button",
-    primary: true,
-  },
-  decorators: [withPinkDecorator],
-};
+    children: "기본 버튼"
+  }
+}
 
-export const Secondary: Story = {
+export const Custom: Story = {
   args: {
-    ...Primary.args,
-    children: "Secondary Button",
-  },
-};
-
-export const Tertiary: Story = {
-  args: {
-    backgroundColor: "#2d5d83",
-    children: "Tertiary Button",
-  },
-};
+    variant: "custom",
+    children: "커스텀 버튼",
+    className: "bg-blue-10 dark:bg-blue-80 hover:bg-blue-20 hover:bg-blue-90 active:scale-[0.95] px-2 py-2 rounded-xsm"
+  }
+}
