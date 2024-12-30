@@ -1,9 +1,11 @@
 "use client"
 import { Button } from "@/components/Button"
-import { InputLabel } from "@/components/form/_components"
+import { InputErrorMessage, InputLabel } from "@/components/form/_components"
 import InputTextUnControlled from "@/components/form/inputText/InputTextUnControlled"
 import RadioGroup from "@/components/form/radioGroup/RadioGroup"
 import Select from "@/components/form/select/Select"
+import { useAsyncRoutePush } from "@/hooks/useAsyncRoutePush"
+import { sleep } from "@/utils/sleep"
 import { gameSchema } from "@/validations/gameSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import type { FieldValues } from "react-hook-form"
@@ -40,20 +42,36 @@ export default function GameCreatePage() {
     register,
     handleSubmit,
     control,
-    formState: { errors }
+    formState: { errors, isSubmitting }
   } = useForm<PostGameRequestType>({
+    defaultValues: {
+      // Todo API 연동 후 values: { ...기존데이터 } 로 수정
+      title: "",
+      description: "",
+      category: "",
+      isNamePublic: "true",
+      gameAccessType: "public",
+      inviteCode: ""
+    },
     resolver: zodResolver(gameSchema)
   })
 
-  console.log(errors)
+  const asyncPush = useAsyncRoutePush()
 
   const onSubmit = async (data: FieldValues) => {
-    console.log("data", data)
-    // Todo API 요청 시 isNamePublicItems 관련 데이터의 value 는 boolean 으로 관리할듯함.
+    try {
+      console.log("data", data)
+      // Todo API 요청 시 isNamePublicItems 관련 데이터의 value 는 boolean 으로 관리할듯함.
+
+      // await ~~~
+      await sleep(1000)
+
+      await asyncPush("/game-create/1/medias")
+    } catch {}
   }
 
   return (
-    <section className="flex justify-center px-[16px] mt-[80px]">
+    <section className="flex justify-center px-[16px] my-[80px]">
       <form
         className="flex flex-col justify-center items-start w-full max-w-[500px] gap-[28px]"
         onSubmit={handleSubmit(onSubmit)}
@@ -79,6 +97,7 @@ export default function GameCreatePage() {
             control={control}
             render={({ field }) => <Select {...field} items={categoryItems} />}
           />
+          {!!errors.category?.message && <InputErrorMessage id={"category"} errorMessage={errors.category?.message} />}
         </article>
         <article className="flex flex-col gap-[4px]">
           <InputLabel label="제작자 표시 (익명으로 설정 시 팔로워들이 확인할 수 없습니다)" />
@@ -106,7 +125,13 @@ export default function GameCreatePage() {
         <p className="text-sm text-gray">
           ⭐️ 게임의 부적절함을 확인하기 위해 일부공개 게임은 개발자가 확인할 수 있습니다
         </p>
-        <Button type="submit">제출하기</Button>
+        <Button
+          type="submit"
+          disabled={isSubmitting}
+          className="bg-primary hover:bg-primary-60 text-light dark:bg-primary-70 dark:hover:bg-primary-80"
+        >
+          다음
+        </Button>
       </form>
     </section>
   )
