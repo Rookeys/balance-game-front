@@ -12,7 +12,7 @@ interface Params {
 
 export default function InformationModal({ title, description, onClick, onClose, overlayClose = false }: Params) {
   return (
-    <ModalWrapper>
+    <ModalWrapper onClose={onClose} overlayClose={overlayClose}>
       <section className="bg-light dark:bg-night rounded-sm w-full max-w-[400px] p-6 mx-[16px] z-[999] dark:border dark:border-gray-70">
         <h2 className="text-lg font-semibold">{title}</h2>
         <p className="mt-[12px]">{description}</p>
@@ -31,12 +31,6 @@ export default function InformationModal({ title, description, onClick, onClose,
           </Button>
         </article>
       </section>
-      <div
-        className="bg-dark/50 w-full h-full fixed"
-        onClick={() => {
-          if (overlayClose && !!onClose) onClose()
-        }}
-      />
     </ModalWrapper>
   )
 }
