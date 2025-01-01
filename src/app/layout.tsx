@@ -1,6 +1,7 @@
 import Header from "@/components/Header"
 import ToasterWithTheme from "@/components/ToasterWithTheme"
 import AuthProvider from "@/lib/providers/AuthProvider"
+import ReactQueryProvider from "@/lib/providers/ReactQueryProvider"
 import "@/styles/globals.css"
 import "@/styles/reset.css"
 import type { Metadata } from "next"
@@ -24,12 +25,14 @@ export default async function RootLayout({
     <html lang="ko" suppressHydrationWarning>
       <body className={`${MoneygraphyRounded.className} antialiased text-dark dark:text-light`}>
         <AuthProvider session={session}>
-          <ThemeProvider>
-            <div id="portal" />
-            <Header />
-            {children}
-            <ToasterWithTheme />
-          </ThemeProvider>
+          <ReactQueryProvider>
+            <ThemeProvider>
+              <div id="portal" />
+              <Header />
+              {children}
+              <ToasterWithTheme />
+            </ThemeProvider>
+          </ReactQueryProvider>
         </AuthProvider>
       </body>
     </html>
