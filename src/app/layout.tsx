@@ -25,6 +25,7 @@ export default async function RootLayout({
       <body className={`${MoneygraphyRounded.className} antialiased text-dark dark:text-light`}>
         <AuthProvider session={session}>
           <ThemeProvider>
+            <div id="portal" />
             <Header />
             {children}
             <ToasterWithTheme />
