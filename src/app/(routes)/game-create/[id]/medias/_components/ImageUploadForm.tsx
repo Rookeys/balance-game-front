@@ -5,7 +5,12 @@ import FileUploadDropZone from "@/components/form/fileUpload/FileUploadDropZone"
 import { FieldValues, useForm } from "react-hook-form"
 
 export function ImageUploadForm() {
-  const { watch, setValue, handleSubmit } = useForm({})
+  const {
+    watch,
+    setValue,
+    handleSubmit,
+    formState: { isSubmitting }
+  } = useForm({})
 
   const onSubmit = async (data: FieldValues) => {
     console.log("data", data)
@@ -20,6 +25,7 @@ export function ImageUploadForm() {
       />
       <Button
         type="submit"
+        disabled={isSubmitting}
         className="bg-primary hover:bg-primary-60 text-light dark:bg-primary-70 dark:hover:bg-primary-80 self-end"
       >
         저장

@@ -11,7 +11,12 @@ import { FieldValues, useForm } from "react-hook-form"
 const YoutubeModal = dynamic(() => import("./YoutubeModal"))
 
 export function VideoUploadForm() {
-  const { watch, setValue, handleSubmit } = useForm({
+  const {
+    watch,
+    setValue,
+    handleSubmit,
+    formState: { isSubmitting }
+  } = useForm({
     defaultValues: {
       youtubeURL: "",
       startTime: "",
@@ -68,6 +73,7 @@ export function VideoUploadForm() {
           </div>
           <Button
             type="submit"
+            disabled={isSubmitting}
             className="bg-primary hover:bg-primary-60 text-light dark:bg-primary-70 dark:hover:bg-primary-80"
           >
             저장
