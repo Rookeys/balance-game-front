@@ -9,7 +9,7 @@ interface Params {
 export const SelectOpenContent = ({ items }: Params) => {
   return (
     <SelectPrimitive.Portal>
-      <SelectPrimitive.Content className="z-10 bg-white dark:bg-dark-night border dark:border-black rounded-xsm shadow-md">
+      <SelectPrimitive.Content className="z-[50] bg-white dark:bg-dark-night border dark:border-black rounded-xsm shadow-md">
         <SelectPrimitive.ScrollUpButton className="flex items-center justify-center py-2">
           <ArrowUp />
         </SelectPrimitive.ScrollUpButton>

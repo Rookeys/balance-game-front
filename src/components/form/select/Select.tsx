@@ -13,7 +13,7 @@ const Select = forwardRef<HTMLButtonElement, Params>(({ name, value, items, onCh
   return (
     <SelectPrimitive.Root name={name} value={value} onValueChange={onChange}>
       <SelectTrigger ref={ref} />
-      <SelectOpenContent items={items} />
+      {items.length > 0 && <SelectOpenContent items={items} />}
     </SelectPrimitive.Root>
   )
 })
