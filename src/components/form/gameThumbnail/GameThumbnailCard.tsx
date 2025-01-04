@@ -13,6 +13,7 @@ interface Params {
 
 export default function GameThumbnailCard(props: Params) {
   const {
+    id,
     firstItemThumbnail,
     firstItemTitle,
     secondItemThumbnail,
@@ -32,7 +33,7 @@ export default function GameThumbnailCard(props: Params) {
       />
       <section className="flex flex-col gap-[12px] px-[4px] py-[8px]">
         <Information gameTitle={gameTitle} gameDescription={gameDescription} creator={creator} />
-        <ActionButtons />
+        <ActionButtons id={id} />
       </section>
     </section>
   )

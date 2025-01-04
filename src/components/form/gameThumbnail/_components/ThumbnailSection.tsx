@@ -17,6 +17,14 @@ export function ThumbnailSection({ firstItemThumbnail, firstItemTitle, secondIte
             fill
             sizes="(max-width: 640px) 50vw, 150px"
           />
+          {/* <ImageRatio
+            className="object-cover"
+            ratio={1}
+            src={firstItemThumbnail}
+            alt={`${firstItemTitle}-thumbnail`}
+            fill
+            sizes="(max-width: 640px) 50vw, 150px"
+          /> */}
         </div>
         <div className="py-2 bg-gray-10 dark:bg-dark-20 w-full">
           <p className="text-sm font-medium text-center h-[16px] line-clamp-1" title={firstItemTitle}>

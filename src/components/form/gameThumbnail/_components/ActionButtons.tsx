@@ -1,9 +1,17 @@
+"use client"
 import { Button } from "@/components/Button"
-
-export function ActionButtons() {
+import { useRouter } from "next/navigation"
+interface Params {
+  id: string
+}
+export function ActionButtons({ id }: Params) {
+  const router = useRouter()
   return (
     <article className="flex flex-wrap">
-      <Button className="bg-primary hover:bg-primary-60 text-light text-sm dark:bg-primary-70 dark:hover:bg-primary-80">
+      <Button
+        className="bg-primary hover:bg-primary-60 text-light text-sm dark:bg-primary-70 dark:hover:bg-primary-80"
+        onClick={() => router.push(`/game/${id}`)}
+      >
         게임시작
       </Button>
       <Button className="bg-gray-10 hover:bg-gray-20 text-dark-30 text-sm dark:bg-gray-70 dark:hover:bg-gray-80 dark:text-light">
