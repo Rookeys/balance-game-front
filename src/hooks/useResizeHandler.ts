@@ -18,6 +18,7 @@ const useResizeHandler = (interval = 200) => {
       isMounted = false
       window.removeEventListener("resize", resizeListener)
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return windowWidth
