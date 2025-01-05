@@ -33,7 +33,7 @@ export default function SelectItemBox({ id, url, type, title, selectedId, handle
       <motion.div
         className={cn("relative w-[50vw]", selected ? "z-[2]" : "z-[1]")}
         animate={{
-          scale: !!selectedId ? (selected ? [1, 1.25, 1, 1.25, 1] : 0) : 1,
+          scale: !!selectedId ? (selected ? [1, 1.25, 1, 1.25, 1] : 0.25) : 1,
           transition: {
             duration: 0.5
           }
@@ -60,7 +60,7 @@ export default function SelectItemBox({ id, url, type, title, selectedId, handle
     <motion.div
       className={cn("relative w-[50vw]", selected ? "z-[2]" : "z-[1]")}
       animate={{
-        scale: !!selectedId ? (selected ? [1, 1.25, 1, 1.25, 1] : 0) : 1,
+        scale: !!selectedId ? (selected ? [1, 1.25, 1, 1.25, 1] : 0.25) : 1,
         transition: {
           duration: 0.5
         }

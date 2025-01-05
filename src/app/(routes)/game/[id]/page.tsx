@@ -32,7 +32,7 @@ export default function Game() {
           selectedId={selectedId}
           handleSelectItem={handleSelectItem}
         />
-        <div className="absolute bg-white/50 z-[40] w-fit h-fit">
+        <div className="absolute bg-white/50 z-[40] w-fit h-fit pointer-events-none">
           <Image width={80} height={80} src={"/images/vs.png"} alt="vs icon" className="object-contain" />
         </div>
         <SelectItemBox
