@@ -2,7 +2,7 @@
 
 import { FieldValues, FormProvider, useForm } from "react-hook-form"
 import type { ResourceType } from "../../page"
-import ThumbnailBox from "../ThumbnailBox"
+import YoutubeThumbnailBox from "../YoutubeThumbnailBox"
 
 type GameResourceType = {
   name: string
@@ -11,7 +11,7 @@ type GameResourceType = {
   end?: number
 }
 
-export default function ResourceForm(props: ResourceType) {
+export default function YoutubeForm(props: ResourceType) {
   const formMethods = useForm<GameResourceType>({})
 
   const { handleSubmit } = formMethods
@@ -25,10 +25,10 @@ export default function ResourceForm(props: ResourceType) {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid grid-cols-[1fr_1fr_1fr_1fr_1fr] border-b border-dark">
           <div className="border-r border-dark">
-            <ThumbnailBox url={props.url} type={props.type} />
+            <YoutubeThumbnailBox url={props.url} />
           </div>
           <div className="border-r border-dark p-4">{props.name}</div>
-          <div className="border-r border-dark p-4">{props.type === "image" ? "이미지" : "동영상"}</div>
+          <div className="border-r border-dark p-4">동영상</div>
           <div className="border-r border-dark p-4">{props.winRate}</div>
           <div className="p-4">수정 및 삭제관련 로직</div>
         </div>

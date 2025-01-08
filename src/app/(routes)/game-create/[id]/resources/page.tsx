@@ -1,6 +1,9 @@
 "use client"
 
-import ResourceForm from "./_components/resourceForm"
+import dynamic from "next/dynamic"
+
+const ImageForm = dynamic(() => import("./_components/resourceForm/ImageForm"))
+const YoutubeForm = dynamic(() => import("./_components/resourceForm/YoutubeForm"))
 
 export interface ResourceType {
   id: number
@@ -33,7 +36,7 @@ const mockData: ResourceType[] = [
 export default function ResourcePage() {
   return (
     <section className="flex justify-center">
-      <div className="grid w-full max-w-[1080px] text-center border border-dark">
+      <div className="grid w-full max-w-[1080px] text-center border-t border-x border-dark">
         {/* Header */}
         <div className="grid grid-cols-[1fr_1fr_1fr_1fr_1fr] bg-gray-20 border-b border-dark">
           <div className="p-4 border-r border-dark">썸네일</div>
@@ -44,9 +47,9 @@ export default function ResourcePage() {
         </div>
 
         {/* Body */}
-        {mockData.map((data) => (
-          <ResourceForm key={data.id} {...data} />
-        ))}
+        {mockData.map((data) =>
+          data.type === "image" ? <ImageForm key={data.id} {...data} /> : <YoutubeForm key={data.id} {...data} />
+        )}
       </div>
     </section>
   )

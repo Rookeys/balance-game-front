@@ -1,27 +1,15 @@
-"use client"
-import ImageModal from "@/components/modal/ImageModal"
-import YoutubeModal from "@/components/modal/YoutubeModal"
 import { getYoutubeThumbnail } from "@/utils/getYoutubeThumbnail"
+import dynamic from "next/dynamic"
 import Image from "next/image"
 import { useState } from "react"
 
+const YoutubeModal = dynamic(() => import("@/components/modal/YoutubeModal"))
+
 interface Params {
   url: string
-  type: "image" | "youtube"
 }
-export default function ThumbnailBox({ url, type }: Params) {
+export default function YoutubeThumbnailBox({ url }: Params) {
   const [isOpen, setIsOpen] = useState<boolean>(false)
-
-  if (type === "image") {
-    return (
-      <>
-        <div className="w-full h-[100px] relative" onClick={() => setIsOpen(true)}>
-          <Image src={url} alt="Image thumbnail" className="cursor-pointer" fill sizes="100px" />
-        </div>
-        {isOpen && <ImageModal url={url} onClose={() => setIsOpen(false)} />}
-      </>
-    )
-  }
 
   return (
     <>
