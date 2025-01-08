@@ -81,7 +81,7 @@ export default function YoutubeForm(props: ResourceType) {
             <p>{props.winRate}</p>
           </article>
           <article className="p-4 w-[180px] flex-shrink-0">
-            <FormAction />
+            <FormAction id={props.id} name={props.name} />
           </article>
         </section>
       </form>

@@ -10,11 +10,11 @@ interface Params {
   overlayClose?: boolean
 }
 
-export default function InformationModal({ title, description, onClick, onClose, overlayClose = false }: Params) {
+export default function ConfirmModal({ title, description, onClick, onClose, overlayClose = false }: Params) {
   return (
     <ModalWrapper onClose={onClose} overlayClose={overlayClose}>
       <section className="bg-light dark:bg-night rounded-sm w-full max-w-[400px] p-6 mx-[16px] z-[999] dark:border dark:border-gray-70">
-        <h2 className="text-lg font-semibold">{title}</h2>
+        <h2 className="text-md font-semibold">{title}</h2>
         <p className="mt-[12px]">{description}</p>
         <article className="mt-[16px] flex justify-end gap-2">
           <Button
