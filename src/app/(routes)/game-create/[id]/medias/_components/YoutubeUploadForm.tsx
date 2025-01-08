@@ -13,7 +13,7 @@ import { FieldValues, useForm } from "react-hook-form"
 const YoutubeModal = dynamic(() => import("@/components/modal/YoutubeModal"))
 const InputErrorMessage = dynamic(() => import("@/components/form/_components").then((mod) => mod.InputErrorMessage))
 
-export function VideoUploadForm() {
+export function YoutubeUploadForm() {
   const {
     watch,
     setValue,
