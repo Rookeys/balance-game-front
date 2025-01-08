@@ -1,8 +1,8 @@
 "use client"
 
-import ThumbnailBox from './_components/ThumbnailBox'
+import ResourceForm from "./_components/form/ResourceForm"
 
-interface dataType {
+export interface ResourceType {
   id: number
   url: string
   type: "image" | "youtube"
@@ -11,7 +11,7 @@ interface dataType {
   winRate: string
 }
 
-const mockData: dataType[] = [
+const mockData: ResourceType[] = [
   {
     id: 1,
     url: "https://avatars.githubusercontent.com/u/62785823?v=4",
@@ -33,37 +33,21 @@ const mockData: dataType[] = [
 export default function ResourcePage() {
   return (
     <section className="flex justify-center">
-      <table className="table-auto border-collapse border border-dark w-full max-w-[1080px] text-center">
-        <thead className="bg-gray-20">
-          <tr>
-            <th className="p-4 border border-dark">썸네일</th>
-            <th className="p-4 border border-dark">이름</th>
-            <th className="p-4 border border-dark">이미지/동영상</th>
-            <th className="p-4 border border-dark">우승비율 (우승횟수 / 전체게임 수)</th>
-            <th className="p-4 border border-dark">수정 및 삭제</th>
-          </tr>
-        </thead>
-        <tbody>
-          {/* <tr className="">
-            <td className="p-4 border border-dark">썸네일 데이터</td>
-            <td className="p-4 border border-dark">이름 데이터</td>
-            <td className="p-4 border border-dark">이미지 데이터</td>
-            <td className="p-4 border border-dark">우승비율 데이터</td>
-            <td className="p-4 border border-dark">수정 및 삭제 관련 데이터</td>
-          </tr> */}
-          {mockData.map((data) => (
-            <tr key={data.id} className="">
-              <td className="p-4 border border-dark">
-                <ThumbnailBox url={data.url} type={data.type} />
-              </td>
-              <td className="p-4 border border-dark">{data.name}</td>
-              <td className="p-4 border border-dark">{data.type === 'image' ? '이미지' : '동영상'}</td>
-              <td className="p-4 border border-dark">{data.winRate}</td>
-              <td className="p-4 border border-dark">수정 및 삭제관련 로직</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <div className="grid w-full max-w-[1080px] text-center border border-dark">
+        {/* Header */}
+        <div className="grid grid-cols-[1fr_1fr_1fr_1fr_1fr] bg-gray-20 border-b border-dark">
+          <div className="p-4 border-r border-dark">썸네일</div>
+          <div className="p-4 border-r border-dark">이름</div>
+          <div className="p-4 border-r border-dark">이미지/동영상</div>
+          <div className="p-4 border-r border-dark">우승비율 (우승횟수 / 전체게임 수)</div>
+          <div className="p-4">수정 및 삭제</div>
+        </div>
+
+        {/* Body */}
+        {mockData.map((data) => (
+          <ResourceForm key={data.id} {...data} />
+        ))}
+      </div>
     </section>
   )
 }

@@ -8,7 +8,7 @@ import Image from "next/image"
 import { useState } from "react"
 import { FieldValues, useForm } from "react-hook-form"
 
-const YoutubeModal = dynamic(() => import("./YoutubeModal"))
+const YoutubeModal = dynamic(() => import("@/components/modal/YoutubeModal"))
 
 export function VideoUploadForm() {
   const {
