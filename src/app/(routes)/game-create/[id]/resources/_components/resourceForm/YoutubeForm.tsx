@@ -4,7 +4,7 @@ import { FieldValues, FormProvider, useForm } from "react-hook-form"
 import type { ResourceType } from "../../page"
 import YoutubeThumbnailBox from "../YoutubeThumbnailBox"
 
-type GameResourceType = {
+type YoutubeResourceType = {
   name: string
   url: string
   start?: number
@@ -12,7 +12,7 @@ type GameResourceType = {
 }
 
 export default function YoutubeForm(props: ResourceType) {
-  const formMethods = useForm<GameResourceType>({})
+  const formMethods = useForm<YoutubeResourceType>({})
 
   const { handleSubmit } = formMethods
 

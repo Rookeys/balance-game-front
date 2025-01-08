@@ -4,8 +4,12 @@ import { cn } from "@/utils/cn"
 import { forwardRef } from "react"
 import { useFileUpload } from "./FileUploader"
 
-export const FileInput = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
-  ({ className, children, ...props }, ref) => {
+interface Params extends React.HTMLAttributes<HTMLDivElement> {
+  rounded?: boolean
+}
+
+export const FileInput = forwardRef<HTMLDivElement, Params>(
+  ({ className, children, rounded = true, ...props }, ref) => {
     const { dropzoneState, isLimit } = useFileUpload()
     const rootProps = isLimit ? {} : dropzoneState.getRootProps()
 
@@ -15,10 +19,18 @@ export const FileInput = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDiv
         {...props}
         className={cn("relative w-full", isLimit ? "opacity-50 cursor-not-allowed" : "cursor-pointer")}
       >
-        <div className={cn("w-full rounded-lg transition-colors duration-300 ease-in-out", className)} {...rootProps}>
+        <div
+          className={cn("w-full transition-colors duration-300 ease-in-out", className, rounded && "rounded-lg")}
+          {...rootProps}
+        >
           {children}
           {dropzoneState.isDragActive && (
-            <div className="absolute inset-0 flex items-center justify-center backdrop-blur-sm rounded-lg">
+            <div
+              className={cn(
+                "absolute inset-0 flex items-center justify-center backdrop-blur-sm",
+                rounded && "rounded-lg"
+              )}
+            >
               <p className="text-blue font-medium">여기에 업로드 하세요 🚀</p>
             </div>
           )}

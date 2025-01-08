@@ -1,7 +1,8 @@
 import { z } from "zod"
 
-export const youtubeResourceSchema = z.object({
-  youtubeURL: z.string().nonempty({ message: "URL은 필수입니다." }).url({ message: "올바르지 않은 URL 형식입니다." })
+export const youtubeMediaSchema = z.object({
+  name: z.string().max(20, "제목은 20자 이내로 작성해주세요.").nonempty("제목은 필수입니다."),
+  url: z.string().nonempty({ message: "URL은 필수입니다." }).url({ message: "올바르지 않은 URL 형식입니다." })
 })
 
-export type PostGameType = z.output<typeof youtubeResourceSchema>
+export type PostGameType = z.output<typeof youtubeMediaSchema>
