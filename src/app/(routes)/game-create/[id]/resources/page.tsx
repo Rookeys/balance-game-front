@@ -35,15 +35,18 @@ const mockData: ResourceType[] = [
 
 export default function ResourcePage() {
   return (
-    <section className="flex justify-center overflow-x-auto">
-      <div className="flex flex-col overflow-x-auto text-center border-t border-x border-dark dark:border-gray">
+    <section className="flex justify-center">
+      <div className="flex flex-col text-center border-t border-x border-dark dark:border-gray overflow-x-auto">
         {/* Header */}
-        <div className="grid grid-cols-[1fr_1fr_2fr_1fr_1fr] bg-gray-20 dark:bg-gray-80 border-b border-dark dark:border-gray">
-          <div className="p-4 border-r border-dark dark:border-gray">썸네일</div>
-          <div className="p-4 border-r border-dark dark:border-gray">이름</div>
-          <div className="p-4 border-r border-dark dark:border-gray">미디어</div>
-          <div className="p-4 border-r border-dark dark:border-gray">우승비율</div>
-          <div className="p-4">수정 및 삭제</div>
+        <div
+          // "grid grid-cols-[1fr_1fr_2fr_1fr_1fr] bg-gray-20 dark:bg-gray-80 border-b border-dark dark:border-gray"
+          className="flex bg-gray-20 dark:bg-gray-80 border-b border-dark dark:border-gray w-fit"
+        >
+          <div className="w-[180px] flex-shrink-0 p-4 border-r border-dark dark:border-gray">썸네일</div>
+          <div className="w-[180px] flex-shrink-0 p-4 border-r border-dark dark:border-gray">이름</div>
+          <div className="w-[360px] flex-shrink-0 p-4 border-r border-dark dark:border-gray">미디어</div>
+          <div className="w-[180px] flex-shrink-0 p-4 border-r border-dark dark:border-gray">우승비율</div>
+          <div className="w-[180px] flex-shrink-0 p-4">수정 및 삭제</div>
         </div>
 
         {/* Body */}

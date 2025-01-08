@@ -30,18 +30,18 @@ export default function ImageForm(props: ResourceType) {
   return (
     <FormProvider {...formMethods}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <section className="grid grid-cols-[1fr_1fr_2fr_1fr_1fr] border-b border-dark dark:border-gray">
-          <article className="border-r border-dark dark:border-gray">
+        <section className="flex w-fit border-b border-dark dark:border-gray">
+          <article className="border-r border-dark dark:border-gray w-[180px] flex-shrink-0">
             <ImageThumbnailBox url={props.url} />
           </article>
-          <article className="border-r border-dark dark:border-gray p-4">
+          <article className="border-r border-dark dark:border-gray p-4 w-[180px] flex-shrink-0">
             <InputTextControlled
               id="name"
               value={watch("name")}
               onChange={(e) => setValue("name", e.target.value, { shouldValidate: true })}
             />
           </article>
-          <article className="border-r border-dark dark:border-gray">
+          <article className="border-r border-dark dark:border-gray w-[360px] flex-shrink-0">
             <FileUploadDropZone
               value={watch("files") ?? []}
               onValueChange={(files) => setValue("files", files, { shouldValidate: true })}
@@ -49,8 +49,8 @@ export default function ImageForm(props: ResourceType) {
               isThumbnail={false}
             />
           </article>
-          <article className="border-r border-dark dark:border-gray p-4">{props.winRate}</article>
-          <article className="p-4">
+          <article className="border-r border-dark dark:border-gray p-4 w-[180px] flex-shrink-0">{props.winRate}</article>
+          <article className="p-4 w-[180px] flex-shrink-0">
             <FormAction />
           </article>
         </section>
