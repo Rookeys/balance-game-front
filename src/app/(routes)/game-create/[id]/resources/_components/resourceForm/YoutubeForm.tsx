@@ -37,7 +37,7 @@ export default function YoutubeForm(props: ResourceType) {
       <form onSubmit={handleSubmit(onSubmit)}>
         <section className="flex w-fit border-b border-dark dark:border-gray">
           <article className="border-r border-dark dark:border-gray w-[180px] flex-shrink-0">
-            <YoutubeThumbnailBox url={watch("url")} />
+            <YoutubeThumbnailBox url={watch("url")} start={watch("start")} end={watch("end")} />
           </article>
           <article className="border-r border-dark dark:border-gray p-4 w-[180px] flex-shrink-0">
             <InputTextControlled

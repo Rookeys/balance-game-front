@@ -7,8 +7,10 @@ const YoutubeModal = dynamic(() => import("@/components/modal/YoutubeModal"))
 
 interface Params {
   url: string
+  start?: number
+  end?: number
 }
-export default function YoutubeThumbnailBox({ url }: Params) {
+export default function YoutubeThumbnailBox({ url, start, end }: Params) {
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
   return (
@@ -25,7 +27,7 @@ export default function YoutubeThumbnailBox({ url }: Params) {
           // loader={({ src }) => src}
         />
       </div>
-      {isOpen && <YoutubeModal url={url} onClose={() => setIsOpen(false)} overlayClose />}
+      {isOpen && <YoutubeModal url={url} onClose={() => setIsOpen(false)} overlayClose start={start} end={end} />}
     </>
   )
 }

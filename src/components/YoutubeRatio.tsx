@@ -15,6 +15,7 @@ const YoutubeRatio = ({ ratio, url, start, end }: Params) => (
       <YouTube
         videoId={getYouTubeId(url)}
         opts={{ playerVars: { start, end } }}
+        // opts={{ playerVars: { start, end, loop: 1, playlist: getYouTubeId(url) } }}
         className="w-full h-full"
         iframeClassName="w-full h-full"
       />
