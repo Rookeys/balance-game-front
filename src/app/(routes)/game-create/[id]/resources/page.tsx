@@ -21,7 +21,7 @@ const mockData: ResourceType[] = [
     type: "image",
     name: "고잼",
     media: "이미지 데이터 1",
-    winRate: "50% (5/10)"
+    winRate: "50%"
   },
   {
     id: 2,
@@ -29,20 +29,20 @@ const mockData: ResourceType[] = [
     type: "youtube",
     name: "유튜브 영상",
     media: "이미지 데이터 2",
-    winRate: "60% (6/10)"
+    winRate: "60%"
   }
 ]
 
 export default function ResourcePage() {
   return (
-    <section className="flex justify-center">
+    <section className="flex justify-center overflow-x-auto">
       <div className="grid w-full max-w-[1080px] text-center border-t border-x border-dark">
         {/* Header */}
         <div className="grid grid-cols-[1fr_1fr_1fr_1fr_1fr] bg-gray-20 border-b border-dark">
           <div className="p-4 border-r border-dark">썸네일</div>
           <div className="p-4 border-r border-dark">이름</div>
-          <div className="p-4 border-r border-dark">이미지/동영상</div>
-          <div className="p-4 border-r border-dark">우승비율 (우승횟수 / 전체게임 수)</div>
+          <div className="p-4 border-r border-dark">미디어</div>
+          <div className="p-4 border-r border-dark">우승비율</div>
           <div className="p-4">수정 및 삭제</div>
         </div>
 

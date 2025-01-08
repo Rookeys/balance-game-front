@@ -1,20 +1,27 @@
 "use client"
 
+import FileUploadDropZone from "@/components/form/fileUpload/FileUploadDropZone"
+import InputTextControlled from "@/components/form/inputText/InputTextControlled"
 import { FieldValues, FormProvider, useForm } from "react-hook-form"
 import type { ResourceType } from "../../page"
 import ImageThumbnailBox from "../ImageThumbnailBox"
+import FormAction from "./FormAction"
 
-type GameResourceType = {
+type ImageResourceType = {
   name: string
   url: string
-  start?: number
-  end?: number
+  files: File[] | null
 }
 
 export default function ImageForm(props: ResourceType) {
-  const formMethods = useForm<GameResourceType>({})
+  const formMethods = useForm<ImageResourceType>({
+    defaultValues: {
+      name: props.name,
+      url: props.url
+    }
+  })
 
-  const { handleSubmit } = formMethods
+  const { handleSubmit, setValue, watch } = formMethods
 
   const onSubmit = (data: FieldValues) => {
     console.log("data", data)
@@ -23,15 +30,30 @@ export default function ImageForm(props: ResourceType) {
   return (
     <FormProvider {...formMethods}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="grid grid-cols-[1fr_1fr_1fr_1fr_1fr] border-b border-dark">
-          <div className="border-r border-dark">
+        <section className="grid grid-cols-[1fr_1fr_1fr_1fr_1fr] border-b border-dark">
+          <article className="border-r border-dark">
             <ImageThumbnailBox url={props.url} />
-          </div>
-          <div className="border-r border-dark p-4">{props.name}</div>
-          <div className="border-r border-dark p-4">이미지</div>
-          <div className="border-r border-dark p-4">{props.winRate}</div>
-          <div className="p-4">수정 및 삭제관련 로직</div>
-        </div>
+          </article>
+          <article className="border-r border-dark p-4">
+            <InputTextControlled
+              id="name"
+              value={watch("name")}
+              onChange={(e) => setValue("name", e.target.value, { shouldValidate: true })}
+            />
+          </article>
+          <article className="border-r border-dark">
+            <FileUploadDropZone
+              value={watch("files") ?? []}
+              onValueChange={(files) => setValue("files", files, { shouldValidate: true })}
+              rounded={false}
+              isThumbnail={false}
+            />
+          </article>
+          <article className="border-r border-dark p-4">{props.winRate}</article>
+          <article className="p-4">
+            <FormAction />
+          </article>
+        </section>
       </form>
     </FormProvider>
   )
