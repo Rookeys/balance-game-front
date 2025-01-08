@@ -30,18 +30,18 @@ export default function ImageForm(props: ResourceType) {
   return (
     <FormProvider {...formMethods}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <section className="grid grid-cols-[1fr_1fr_1fr_1fr_1fr] border-b border-dark">
-          <article className="border-r border-dark">
+        <section className="grid grid-cols-[1fr_1fr_2fr_1fr_1fr] border-b border-dark dark:border-gray">
+          <article className="border-r border-dark dark:border-gray">
             <ImageThumbnailBox url={props.url} />
           </article>
-          <article className="border-r border-dark p-4">
+          <article className="border-r border-dark dark:border-gray p-4">
             <InputTextControlled
               id="name"
               value={watch("name")}
               onChange={(e) => setValue("name", e.target.value, { shouldValidate: true })}
             />
           </article>
-          <article className="border-r border-dark">
+          <article className="border-r border-dark dark:border-gray">
             <FileUploadDropZone
               value={watch("files") ?? []}
               onValueChange={(files) => setValue("files", files, { shouldValidate: true })}
@@ -49,7 +49,7 @@ export default function ImageForm(props: ResourceType) {
               isThumbnail={false}
             />
           </article>
-          <article className="border-r border-dark p-4">{props.winRate}</article>
+          <article className="border-r border-dark dark:border-gray p-4">{props.winRate}</article>
           <article className="p-4">
             <FormAction />
           </article>

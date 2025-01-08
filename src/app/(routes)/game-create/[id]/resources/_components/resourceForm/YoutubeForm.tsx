@@ -23,13 +23,13 @@ export default function YoutubeForm(props: ResourceType) {
   return (
     <FormProvider {...formMethods}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="grid grid-cols-[1fr_1fr_1fr_1fr_1fr] border-b border-dark">
-          <div className="border-r border-dark">
+        <div className="grid grid-cols-[1fr_1fr_2fr_1fr_1fr] border-b border-dark dark:border-gray">
+          <div className="border-r border-dark dark:border-gray">
             <YoutubeThumbnailBox url={props.url} />
           </div>
-          <div className="border-r border-dark p-4">{props.name}</div>
-          <div className="border-r border-dark p-4">동영상</div>
-          <div className="border-r border-dark p-4">{props.winRate}</div>
+          <div className="border-r border-dark dark:border-gray p-4">{props.name}</div>
+          <div className="border-r border-dark dark:border-gray p-4">동영상</div>
+          <div className="border-r border-dark dark:border-gray p-4">{props.winRate}</div>
           <div className="p-4">수정 및 삭제관련 로직</div>
         </div>
       </form>
