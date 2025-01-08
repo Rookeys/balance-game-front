@@ -21,15 +21,16 @@ export function VideoUploadForm() {
     formState: { isSubmitting, errors }
   } = useForm({
     defaultValues: {
-      youtubeURL: "",
-      startTime: "",
-      endTime: ""
+      url: "",
+      start: 0,
+      end: 0
     },
     resolver: zodResolver(youtubeMediaSchema)
   })
 
   const onSubmit = async (data: FieldValues) => {
     console.log("data", data)
+    // Todo start, end 가 0일때는 값 보내지않기
   }
 
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -39,13 +40,13 @@ export function VideoUploadForm() {
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col w-full max-w-[500px] gap-[28px]">
         <p>동영상 업로드</p>
         <InputTextControlled
-          id="youtubeURL"
-          value={watch("youtubeURL")}
-          onChange={(e) => setValue("youtubeURL", e.target.value, { shouldValidate: true })}
+          id="url"
+          value={watch("url")}
+          onChange={(e) => setValue("url", e.target.value, { shouldValidate: true })}
         />
-        {!!errors.youtubeURL?.message && <InputErrorMessage id={"round"} errorMessage={errors.youtubeURL?.message} />}
+        {!!errors.url?.message && <InputErrorMessage id={"round"} errorMessage={errors.url?.message} />}
         <Image
-          src={getYoutubeThumbnail(watch("youtubeURL"))}
+          src={getYoutubeThumbnail(watch("url"))}
           alt="Video Thumbnail"
           width={300}
           height={225}
@@ -58,22 +59,22 @@ export function VideoUploadForm() {
         <article className="flex justify-between flex-wrap gap-[20px]">
           <div className="flex gap-[20px]">
             <InputTextControlled
-              id="startTime"
+              id="start"
               className="max-w-[100px]"
               placeholder="시작(초)"
               type="number"
               min={0}
-              value={watch("startTime")}
-              onChange={(e) => setValue("startTime", e.target.value, { shouldValidate: true })}
+              value={watch("start")}
+              onChange={(e) => setValue("start", Number(e.target.value), { shouldValidate: true })}
             />
             <InputTextControlled
-              id="endTime"
+              id="end"
               className="max-w-[100px]"
               placeholder="종료(초)"
               type="number"
               min={0}
-              value={watch("endTime")}
-              onChange={(e) => setValue("endTime", e.target.value, { shouldValidate: true })}
+              value={watch("end")}
+              onChange={(e) => setValue("end", Number(e.target.value), { shouldValidate: true })}
             />
           </div>
           <Button
@@ -87,9 +88,9 @@ export function VideoUploadForm() {
       </form>
       {isOpen && (
         <YoutubeModal
-          url={watch("youtubeURL")}
-          start={parseInt(watch("startTime"))}
-          end={parseInt(watch("endTime"))}
+          url={watch("url")}
+          start={watch("start")}
+          end={watch("end")}
           onClose={() => setIsOpen(false)}
           overlayClose
         />

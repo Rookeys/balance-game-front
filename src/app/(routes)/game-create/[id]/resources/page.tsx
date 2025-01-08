@@ -12,6 +12,8 @@ export interface ResourceType {
   name: string
   media: string
   winRate: string
+  start?: number
+  end?: number
 }
 
 const mockData: ResourceType[] = [
@@ -29,7 +31,9 @@ const mockData: ResourceType[] = [
     type: "youtube",
     name: "유튜브 영상",
     media: "이미지 데이터 2",
-    winRate: "60%"
+    winRate: "60%",
+    start: 5,
+    end: 10,
   }
 ]
 
