@@ -27,12 +27,19 @@ export default function ImageForm(props: ResourceType) {
     console.log("data", data)
   }
 
+  const files = watch("files")
+
+  const url = files && Array.isArray(files) && files.length > 0 ? URL.createObjectURL(files[0]) : props.url
+
   return (
     <FormProvider {...formMethods}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <section className="flex w-fit border-b border-dark dark:border-gray">
           <article className="border-r border-dark dark:border-gray w-[180px] flex-shrink-0">
-            <ImageThumbnailBox url={props.url} />
+            <ImageThumbnailBox
+              // url={watch("files") && watch("files").length > 0 ? URL.createObjectURL(watch("files")[0]) : props.url}
+              url={url}
+            />
           </article>
           <article className="border-r border-dark dark:border-gray p-4 w-[180px] flex-shrink-0">
             <InputTextControlled
@@ -47,9 +54,14 @@ export default function ImageForm(props: ResourceType) {
               onValueChange={(files) => setValue("files", files, { shouldValidate: true })}
               rounded={false}
               isThumbnail={false}
+              isFileName={true}
+              multiple={false}
+              maxFiles={1}
             />
           </article>
-          <article className="border-r border-dark dark:border-gray p-4 w-[180px] flex-shrink-0">{props.winRate}</article>
+          <article className="border-r border-dark dark:border-gray p-4 w-[180px] flex-shrink-0 flex items-center justify-center">
+            <p>{props.winRate}</p>
+          </article>
           <article className="p-4 w-[180px] flex-shrink-0">
             <FormAction />
           </article>
