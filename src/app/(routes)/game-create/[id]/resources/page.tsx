@@ -1,6 +1,6 @@
 "use client"
 
-import ResourceForm from "./_components/form/ResourceForm"
+import ResourceForm from "./_components/resourceForm"
 
 export interface ResourceType {
   id: number

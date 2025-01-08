@@ -3,25 +3,29 @@
 import { Button } from "@/components/Button"
 import InputTextControlled from "@/components/form/inputText/InputTextControlled"
 import { getYoutubeThumbnail } from "@/utils/getYoutubeThumbnail"
+import { youtubeResourceSchema } from "@/validations/youtubeResourceSchema"
+import { zodResolver } from "@hookform/resolvers/zod"
 import dynamic from "next/dynamic"
 import Image from "next/image"
 import { useState } from "react"
 import { FieldValues, useForm } from "react-hook-form"
 
 const YoutubeModal = dynamic(() => import("@/components/modal/YoutubeModal"))
+const InputErrorMessage = dynamic(() => import("@/components/form/_components").then((mod) => mod.InputErrorMessage))
 
 export function VideoUploadForm() {
   const {
     watch,
     setValue,
     handleSubmit,
-    formState: { isSubmitting }
+    formState: { isSubmitting, errors }
   } = useForm({
     defaultValues: {
       youtubeURL: "",
       startTime: "",
       endTime: ""
-    }
+    },
+    resolver: zodResolver(youtubeResourceSchema)
   })
 
   const onSubmit = async (data: FieldValues) => {
@@ -39,6 +43,7 @@ export function VideoUploadForm() {
           value={watch("youtubeURL")}
           onChange={(e) => setValue("youtubeURL", e.target.value, { shouldValidate: true })}
         />
+        {!!errors.youtubeURL?.message && <InputErrorMessage id={"round"} errorMessage={errors.youtubeURL?.message} />}
         <Image
           src={getYoutubeThumbnail(watch("youtubeURL"))}
           alt="Video Thumbnail"

@@ -4,8 +4,15 @@ import { FieldValues, FormProvider, useForm } from "react-hook-form"
 import type { ResourceType } from "../../page"
 import ThumbnailBox from "../ThumbnailBox"
 
+type GameResourceType = {
+  name: string
+  url: string
+  start?: number
+  end?: number
+}
+
 export default function ResourceForm(props: ResourceType) {
-  const formMethods = useForm()
+  const formMethods = useForm<GameResourceType>({})
 
   const { handleSubmit } = formMethods
 
