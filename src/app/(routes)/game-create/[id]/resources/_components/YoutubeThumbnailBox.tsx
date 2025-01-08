@@ -13,12 +13,13 @@ export default function YoutubeThumbnailBox({ url }: Params) {
 
   return (
     <>
-      <div className="w-full h-[100px] relative" onClick={() => setIsOpen(true)}>
+      <div className="w-full h-full min-h-[120px] relative" onClick={() => setIsOpen(true)}>
         <Image
           src={getYoutubeThumbnail(url)}
           alt="Video Thumbnail"
+          className="cursor-pointer"
           fill
-          sizes="100px"
+          sizes="120px"
           // onClick={() => setIsOpen(true)}
           unoptimized
           // loader={({ src }) => src}
