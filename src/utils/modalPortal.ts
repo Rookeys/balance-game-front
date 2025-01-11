@@ -6,7 +6,7 @@ interface Params {
 }
 
 export const ModalPortal = ({ children }: Params) => {
-  const element = typeof window !== "undefined" && document.querySelector(`#portal`)
+  const element = typeof window !== "undefined" && document.getElementById(`portal`)
 
   return element && children ? ReactDOM.createPortal(children, element) : null
 }
