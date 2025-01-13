@@ -2,16 +2,13 @@
 
 import { InputErrorMessage, InputLabel } from "@/components/form/_components"
 import { cn } from "@/utils/cn"
-import { forwardRef } from "react"
+import { forwardRef, InputHTMLAttributes } from "react"
 
-interface Params {
+interface Params extends InputHTMLAttributes<HTMLInputElement> {
   id: string
   label?: string
-  required?: boolean
-  placeholder?: string
   errorMessage?: string
   ariaLabel?: string
-  className?: string
   labelClassName?: string
 }
 
@@ -27,7 +24,7 @@ const InputTextUnControlled = forwardRef<HTMLInputElement, Params>(
           ref={ref}
           id={id}
           type="text"
-          className="border-[2px] rounded-xsm px-2 py-1"
+          className="border-[2px] rounded-xsm px-2 py-1 w-full"
           placeholder={placeholder}
           required={required}
           aria-invalid={!!errorMessage}

@@ -12,7 +12,10 @@ export function Information({ gameTitle, gameDescription, creator }: Params) {
       >
         {gameTitle}
       </p>
-      <p className="text-base line-clamp-2 h-[48px] cursor-pointer hover:text-primary-20" title={gameDescription}>
+      <p
+        className="text-base line-clamp-2 break-all h-[48px] cursor-pointer hover:text-primary-20"
+        title={gameDescription}
+      >
         {gameDescription}
       </p>
       <p className="text-sm text-gray-60 dark:text-gray-30 truncate w-fit" title={creator}>

@@ -2,6 +2,7 @@ import { BORDER_RADIUS } from "./src/styles/theme/borderRadius"
 import { COLORS } from "./src/styles/theme/colors"
 import { FONT_SIZE } from "./src/styles/theme/fontSize"
 import { FONT_WEIGHT } from "./src/styles/theme/fontWeight"
+import { SCREEN_SIZE } from "./src/styles/theme/screenSize"
 
 const isStorybook = process.env.STORYBOOK === "true"
 
@@ -14,18 +15,7 @@ const config = {
     ...(isStorybook ? ["./src/stories/**/*.{js,ts,jsx,tsx,mdx}"] : [])
   ],
   theme: {
-    screens: {
-      ["3xsm"]: "280px",
-      ["2xsm"]: "320px",
-      xsm: "460px",
-      sm: "640px",
-      md: "768px",
-      lg: "1024px",
-      xl: "1280px",
-      ["2xl"]: "1536px",
-      ["3xl"]: "1920px",
-      ["4xl"]: "2440px"
-    },
+    screens: SCREEN_SIZE,
     borderRadius: BORDER_RADIUS,
     fontWeight: FONT_WEIGHT,
     fontSize: FONT_SIZE,
