@@ -1,5 +1,6 @@
 "use client"
 
+import { cn } from "@/utils/cn"
 import dynamic from "next/dynamic"
 import Image from "next/image"
 import { DropzoneOptions } from "react-dropzone"
@@ -12,6 +13,7 @@ interface Params {
   value: File[] | null
   onValueChange: (files: File[] | null) => void
   isThumbnail?: boolean
+  thumbnailCenter?: boolean
   isFileName?: boolean
   rounded?: boolean
   multiple?: boolean
@@ -22,6 +24,7 @@ const FileUploadDropZone = ({
   value,
   onValueChange,
   isThumbnail = true,
+  thumbnailCenter = false,
   isFileName = false,
   rounded = true,
   multiple = true,
@@ -44,7 +47,7 @@ const FileUploadDropZone = ({
         </div>
       </FileInput>
       {isThumbnail && value && value.length > 0 && (
-        <section className="flex items-center flex-row gap-[12px] flex-wrap">
+        <section className={cn("flex items-center flex-row gap-[12px] flex-wrap", thumbnailCenter && "self-center")}>
           {value?.map((file, i) => (
             <FileUploaderItem key={i} index={i} className="p-2 rounded-sm overflow-hidden border">
               <Image
