@@ -13,7 +13,7 @@ export const getUserProfile = async (): Promise<UserResponse> => {
 }
 
 export const putUserProfile = async (payload: UserProfileControllerApiUpdateProfileRequest): Promise<string> => {
-  return new UserProfileControllerApi()
+  return new UserProfileControllerApi(configuration, undefined, axiosInstance)
     .updateProfile(payload)
     .then((res) => res.data)
     .catch((error: any) => {
