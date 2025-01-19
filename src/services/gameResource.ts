@@ -7,7 +7,7 @@ import type {
 import { GameResourceControllerApi } from "balance-game-api/dist/api/game-resource-controller-api"
 import type { PageGameResourceResponse } from "balance-game-api/dist/models/page-game-resource-response"
 
-export const getGameResource = async (
+export const getGamesResource = async (
   payload: GameResourceControllerApiGetResourcesRequest
 ): Promise<PageGameResourceResponse> => {
   return new GameResourceControllerApi(configuration, undefined, axiosInstance)
@@ -18,7 +18,7 @@ export const getGameResource = async (
     })
 }
 
-export const putGameResource = async (payload: GameResourceControllerApiUpdateResourceRequest): Promise<string> => {
+export const putGamesResource = async (payload: GameResourceControllerApiUpdateResourceRequest): Promise<boolean> => {
   return new GameResourceControllerApi(configuration, undefined, axiosInstance)
     .updateResource(payload)
     .then((res) => res.data)
@@ -27,7 +27,7 @@ export const putGameResource = async (payload: GameResourceControllerApiUpdateRe
     })
 }
 
-export const deleteGameResource = async (payload: GameResourceControllerApiDeleteResourceRequest): Promise<string> => {
+export const deleteGamesResource = async (payload: GameResourceControllerApiDeleteResourceRequest): Promise<boolean> => {
   return new GameResourceControllerApi(configuration, undefined, axiosInstance)
     .deleteResource(payload)
     .then((res) => res.data)

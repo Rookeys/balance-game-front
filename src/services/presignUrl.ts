@@ -1,14 +1,14 @@
 import { axiosInstance, configuration } from "@/api/axios-instance"
 import type {
-  PresignedURLControllerApiGetPreSignedUrlForUserRequest,
-  PresignedURLControllerApiGetPreSignedUrlRequest
-} from "balance-game-api/dist/api/presigned-urlcontroller-api"
-import { PresignedURLControllerApi } from "balance-game-api/dist/api/presigned-urlcontroller-api"
+  PresignedUrlControllerApiGetPreSignedUrlForUserRequest,
+  PresignedUrlControllerApiGetPreSignedUrlRequest
+} from "balance-game-api/dist/api/presigned-url-controller-api"
+import { PresignedUrlControllerApi } from "balance-game-api/dist/api/presigned-url-controller-api"
 
 export const postMediaSingle = async (
-  payload: PresignedURLControllerApiGetPreSignedUrlForUserRequest
+  payload: PresignedUrlControllerApiGetPreSignedUrlForUserRequest
 ): Promise<string> => {
-  return new PresignedURLControllerApi(configuration, undefined, axiosInstance)
+  return new PresignedUrlControllerApi(configuration, undefined, axiosInstance)
     .getPreSignedUrlForUser(payload)
     .then((res) => res.data)
     .catch((error: any) => {
@@ -17,9 +17,9 @@ export const postMediaSingle = async (
 }
 
 export const postMediaMultiple = async (
-  payload: PresignedURLControllerApiGetPreSignedUrlRequest
+  payload: PresignedUrlControllerApiGetPreSignedUrlRequest
 ): Promise<Array<string>> => {
-  return new PresignedURLControllerApi(configuration, undefined, axiosInstance)
+  return new PresignedUrlControllerApi(configuration, undefined, axiosInstance)
     .getPreSignedUrl(payload)
     .then((res) => res.data)
     .catch((error: any) => {
