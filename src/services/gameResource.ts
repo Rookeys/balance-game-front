@@ -27,7 +27,9 @@ export const putGamesResource = async (payload: GameResourceControllerApiUpdateR
     })
 }
 
-export const deleteGamesResource = async (payload: GameResourceControllerApiDeleteResourceRequest): Promise<boolean> => {
+export const deleteGamesResource = async (
+  payload: GameResourceControllerApiDeleteResourceRequest
+): Promise<boolean> => {
   return new GameResourceControllerApi(configuration, undefined, axiosInstance)
     .deleteResource(payload)
     .then((res) => res.data)
