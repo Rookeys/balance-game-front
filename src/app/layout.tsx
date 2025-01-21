@@ -1,3 +1,4 @@
+import { authOptions } from "@/auth"
 import Header from "@/components/Header"
 import ToasterWithTheme from "@/components/ToasterWithTheme"
 import AuthProvider from "@/lib/providers/AuthProvider"
@@ -19,7 +20,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const session = await getServerSession()
+  const session = await getServerSession(authOptions)
 
   return (
     <html lang="ko" suppressHydrationWarning>

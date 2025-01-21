@@ -1,9 +1,6 @@
-import { authOptions } from "@/auth"
 import { isServer } from "@/utils/isServer"
 import axios from "axios"
 import { Configuration } from "balance-game-api/dist/configuration"
-import { getServerSession } from "next-auth"
-import { getSession } from "next-auth/react"
 
 export const configuration = new Configuration({
   basePath: process.env.NEXT_PUBLIC_API_ROOT
@@ -20,17 +17,18 @@ axiosInstance.interceptors.request.use(
   async function (config) {
     // 요청이 전달되기 전에 작업 수행
     if (isServer()) {
-      const serverSession = await getServerSession(authOptions)
-      // console.log("server axios instance Session", serverSession)
-      config.headers["Content-Type"] = "application/json"
-      if (serverSession?.access_token) {
-        config.headers["Authorization"] = `${serverSession?.access_token}`
-      }
+      // * 서버측에서 API 호출 시 유저의 정보가 필요한 경우가 있으면 사용
+      // const serverSession = await getServerSession(authOptions)
+      // // console.log("server axios instance Session", serverSession)
+      // config.headers["Content-Type"] = "application/json"
+      // if (serverSession?.access_token) {
+      //   config.headers["Authorization"] = `${serverSession?.access_token}`
+      // }
     } else {
-      const session = await getSession()
-      if (session?.access_token) {
-        config.headers["Authorization"] = `${session?.access_token}`
-      }
+      // const session = await getSession()
+      // if (session?.access_token) {
+      //   config.headers["Authorization"] = `${session?.access_token}`
+      // }
     }
     return config
   },
