@@ -5,8 +5,9 @@ import type {
   UserManagementControllerApiSignUpRequest
 } from "balance-game-api/dist/api/user-management-controller-api"
 import { UserManagementControllerApi } from "balance-game-api/dist/api/user-management-controller-api"
+import type { TokenResponse } from "balance-game-api/dist/models/token-response"
 
-export const postUsersSignUp = async (payload: UserManagementControllerApiSignUpRequest): Promise<boolean> => {
+export const postUsersSignUp = async (payload: UserManagementControllerApiSignUpRequest): Promise<TokenResponse> => {
   return new UserManagementControllerApi(configuration, undefined, axiosInstance)
     .signUp(payload)
     .then((res) => res.data)
