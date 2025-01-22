@@ -1,7 +1,7 @@
 "use client"
 import { COLORS } from "@/styles/theme/colors"
 import { cn } from "@/utils/cn"
-import { signIn } from "next-auth/react"
+// import { signIn } from "next-auth/react"
 import { Button } from "./Button"
 import { KakaoSymbol } from "./icons/KakaoSymbol"
 
@@ -11,7 +11,7 @@ interface Params {
 
 export default function KakaoLoginButton({ className }: Params) {
   const handleAuthAction = () => {
-    signIn("kakao")
+    // signIn("kakao")
   }
 
   return (

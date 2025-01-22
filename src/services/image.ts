@@ -1,6 +1,8 @@
 import { axiosInstance, configuration } from "@/api/axios-instance"
-import type { ImageControllerApiSaveImageForGameRequest } from "balance-game-api/dist/api/image-controller-api"
-import { ImageControllerApi } from "balance-game-api/dist/api/image-controller-api"
+import {
+  ImageControllerApi,
+  type ImageControllerApiSaveImageForGameRequest
+} from "balance-game-api/dist/api/image-controller-api"
 
 export const postImages = async (payload: ImageControllerApiSaveImageForGameRequest): Promise<boolean> => {
   return new ImageControllerApi(configuration, undefined, axiosInstance)

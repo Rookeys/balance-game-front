@@ -1,11 +1,11 @@
 import { axiosInstance, configuration } from "@/api/axios-instance"
-import type {
-  GameRoomControllerApiDeleteGameRequest,
-  GameRoomControllerApiGetGameStatusRequest,
-  GameRoomControllerApiSaveGameRequest,
-  GameRoomControllerApiUpdateGameStatusRequest
+import {
+  GameRoomControllerApi,
+  type GameRoomControllerApiDeleteGameRequest,
+  type GameRoomControllerApiGetGameStatusRequest,
+  type GameRoomControllerApiSaveGameRequest,
+  type GameRoomControllerApiUpdateGameStatusRequest
 } from "balance-game-api/dist/api/game-room-controller-api"
-import { GameRoomControllerApi } from "balance-game-api/dist/api/game-room-controller-api"
 import type { GameResponse } from "balance-game-api/dist/models/game-response"
 
 export const getGamesRoom = async (payload: GameRoomControllerApiGetGameStatusRequest): Promise<GameResponse> => {

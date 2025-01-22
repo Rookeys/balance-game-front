@@ -1,10 +1,10 @@
 import { axiosInstance, configuration } from "@/api/axios-instance"
-import type {
-  GameResourceControllerApiDeleteResourceRequest,
-  GameResourceControllerApiGetResourcesRequest,
-  GameResourceControllerApiUpdateResourceRequest
+import {
+  GameResourceControllerApi,
+  type GameResourceControllerApiDeleteResourceRequest,
+  type GameResourceControllerApiGetResourcesRequest,
+  type GameResourceControllerApiUpdateResourceRequest
 } from "balance-game-api/dist/api/game-resource-controller-api"
-import { GameResourceControllerApi } from "balance-game-api/dist/api/game-resource-controller-api"
 import type { PageGameResourceResponse } from "balance-game-api/dist/models/page-game-resource-response"
 
 export const getGamesResource = async (

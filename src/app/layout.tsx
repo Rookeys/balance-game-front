@@ -1,7 +1,5 @@
-import { auth } from "@/auth"
 import Header from "@/components/Header"
 import ToasterWithTheme from "@/components/ToasterWithTheme"
-import AuthProvider from "@/lib/providers/AuthProvider"
 import ReactQueryProvider from "@/lib/providers/ReactQueryProvider"
 import "@/styles/globals.css"
 import "@/styles/reset.css"
@@ -19,21 +17,17 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const session = await auth()
-
   return (
     <html lang="ko" suppressHydrationWarning>
       <body className={`${MoneygraphyRounded.className} antialiased text-dark dark:text-light`}>
-        <AuthProvider session={session}>
-          <ReactQueryProvider>
-            <ThemeProvider>
-              <div id="portal" />
-              <Header />
-              {children}
-              <ToasterWithTheme />
-            </ThemeProvider>
-          </ReactQueryProvider>
-        </AuthProvider>
+        <ReactQueryProvider>
+          <ThemeProvider>
+            <div id="portal" />
+            <Header />
+            {children}
+            <ToasterWithTheme />
+          </ThemeProvider>
+        </ReactQueryProvider>
       </body>
     </html>
   )

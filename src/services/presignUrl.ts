@@ -1,9 +1,9 @@
 import { axiosInstance, configuration } from "@/api/axios-instance"
-import type {
-  PresignedUrlControllerApiGetPreSignedUrlForUserRequest,
-  PresignedUrlControllerApiGetPreSignedUrlRequest
+import {
+  PresignedUrlControllerApi,
+  type PresignedUrlControllerApiGetPreSignedUrlForUserRequest,
+  type PresignedUrlControllerApiGetPreSignedUrlRequest
 } from "balance-game-api/dist/api/presigned-url-controller-api"
-import { PresignedUrlControllerApi } from "balance-game-api/dist/api/presigned-url-controller-api"
 
 export const postMediaSingle = async (
   payload: PresignedUrlControllerApiGetPreSignedUrlForUserRequest

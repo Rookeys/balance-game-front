@@ -1,9 +1,9 @@
 import { axiosInstance, configuration } from "@/api/axios-instance"
-import type {
-  UserProfileControllerApiGetMyGameListRequest,
-  UserProfileControllerApiUpdateProfileRequest
+import {
+  UserProfileControllerApi,
+  type UserProfileControllerApiGetMyGameListRequest,
+  type UserProfileControllerApiUpdateProfileRequest
 } from "balance-game-api/dist/api/user-profile-controller-api"
-import { UserProfileControllerApi } from "balance-game-api/dist/api/user-profile-controller-api"
 import type { PageGameListResponse } from "balance-game-api/dist/models/page-game-list-response"
 import type { UserResponse } from "balance-game-api/dist/models/user-response"
 

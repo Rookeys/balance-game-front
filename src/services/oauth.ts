@@ -1,12 +1,14 @@
 import { axiosInstance, configuration } from "@/api/axios-instance"
 import type { AxiosResponse } from "axios"
-import type { OAuthControllerApiLoginRequest } from "balance-game-api/dist/api/oauth-controller-api"
-import { OAuthControllerApi } from "balance-game-api/dist/api/oauth-controller-api"
+import {
+  OAuthControllerApi,
+  type OAuthControllerApiKakaoLoginRequest
+} from "balance-game-api/dist/api/oauth-controller-api"
 import type { TokenResponse } from "balance-game-api/dist/models/token-response"
 
-export const postUsersLogin = async (payload: OAuthControllerApiLoginRequest): Promise<TokenResponse> => {
+export const postUsersLogin = async (payload: OAuthControllerApiKakaoLoginRequest): Promise<TokenResponse> => {
   return new OAuthControllerApi(configuration, undefined, axiosInstance)
-    .login(payload)
+    .kakaoLogin(payload)
     .then((res) => res.data)
     .catch((error: any) => {
       throw error
@@ -14,10 +16,10 @@ export const postUsersLogin = async (payload: OAuthControllerApiLoginRequest): P
 }
 
 export const postUsersLoginResponseAllData = async (
-  payload: OAuthControllerApiLoginRequest
+  payload: OAuthControllerApiKakaoLoginRequest
 ): Promise<AxiosResponse<TokenResponse>> => {
   return new OAuthControllerApi(configuration, undefined, axiosInstance)
-    .login(payload)
+    .kakaoLogin(payload)
     .then((res) => res) // headers 값 조회를 위해 res.data
     .catch((error: any) => {
       throw error
