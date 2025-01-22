@@ -9,7 +9,11 @@ interface Props {
 }
 
 const AuthProvider = ({ session, children }: Props) => {
-  return <SessionProvider session={session}>{children}</SessionProvider>
+  return (
+    <SessionProvider session={session}>
+      {children}
+    </SessionProvider>
+  )
 }
 
 export default AuthProvider

@@ -1,3 +1,5 @@
-export { default } from "next-auth/middleware"
+export { auth as middleware } from "@/auth"
 
-export const config = { matcher: ["/my-page", "/game-create"] }
+export const config = {
+  matcher: ["/my-page/:path*", "/game-create/:path*"]
+}
