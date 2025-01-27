@@ -29,7 +29,7 @@ const InputTextControlled: React.FC<Params> = ({
       {label && <InputLabel id={id} label={label} required={required} className={labelClassName} />}
       <input
         id={id}
-        className="border-[2px] rounded-xsm px-2 py-1 dark:bg-dark-30 dark:border-gray w-full"
+        className="w-full rounded-xsm border-[2px] px-2 py-1 dark:border-gray dark:bg-dark-30"
         value={value}
         onChange={onChange}
         required={required}

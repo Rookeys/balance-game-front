@@ -11,15 +11,15 @@ export const FileUploaderItem = forwardRef<HTMLDivElement, { index: number } & R
     const { removeFileFromSet } = useFileUpload()
     return (
       <div ref={ref} className={cn("relative cursor-pointer", className)} {...props}>
-        <div className="font-medium flex flex-wrap items-center justify-center w-full h-full">{children}</div>
+        <div className="flex h-full w-full flex-wrap items-center justify-center font-medium">{children}</div>
         <Button
           type="button"
           variant="custom"
-          className={cn("absolute bg-red-40 rounded-xsm top-1 right-1 p-1")}
+          className={cn("absolute right-1 top-1 rounded-xsm bg-red-40 p-1")}
           onClick={() => removeFileFromSet(index)}
         >
           <span className="sr-only">{index}번째 아이템 삭제</span>
-          <RemoveIcon className="w-[16px] h-[16px]" />
+          <RemoveIcon className="h-[16px] w-[16px]" />
         </Button>
       </div>
     )

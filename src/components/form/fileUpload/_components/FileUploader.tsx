@@ -99,7 +99,7 @@ export const FileUploader = forwardRef<HTMLDivElement, Params & React.HTMLAttrib
       >
         <div
           ref={ref}
-          className={cn("flex flex-col gap-[12px] w-full focus:outline-none overflow-hidden", className)}
+          className={cn("flex w-full flex-col gap-[12px] overflow-hidden focus:outline-none", className)}
           {...props}
         >
           {children}

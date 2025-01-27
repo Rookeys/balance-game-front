@@ -1,5 +1,6 @@
 "use client"
 
+import { cn } from "@/utils/cn"
 import dynamic from "next/dynamic"
 import Image from "next/image"
 import { DropzoneOptions } from "react-dropzone"
@@ -12,6 +13,7 @@ interface Params {
   value: File[] | null
   onValueChange: (files: File[] | null) => void
   isThumbnail?: boolean
+  thumbnailCenter?: boolean
   isFileName?: boolean
   rounded?: boolean
   multiple?: boolean
@@ -22,6 +24,7 @@ const FileUploadDropZone = ({
   value,
   onValueChange,
   isThumbnail = true,
+  thumbnailCenter = false,
   isFileName = false,
   rounded = true,
   multiple = true,
@@ -39,14 +42,14 @@ const FileUploadDropZone = ({
   return (
     <FileUploader value={value} onValueChange={onValueChange} dropzoneOptions={dropzone}>
       <FileInput className="border-2 border-dashed border-blue" rounded={rounded}>
-        <div className="flex items-center justify-center flex-col py-4 w-full">
+        <div className="flex w-full flex-col items-center justify-center py-4">
           <FileUploaderInformation />
         </div>
       </FileInput>
       {isThumbnail && value && value.length > 0 && (
-        <section className="flex items-center flex-row gap-[12px] flex-wrap">
+        <section className={cn("flex flex-row flex-wrap items-center gap-[12px]", thumbnailCenter && "self-center")}>
           {value?.map((file, i) => (
-            <FileUploaderItem key={i} index={i} className="p-2 rounded-sm overflow-hidden border">
+            <FileUploaderItem key={i} index={i} className="overflow-hidden rounded-sm border p-2">
               <Image
                 src={URL.createObjectURL(file)}
                 alt={file.name}

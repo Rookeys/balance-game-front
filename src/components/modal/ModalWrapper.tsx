@@ -9,10 +9,10 @@ interface Params {
 export default function ModalWrapper({ onClose, overlayClose, children }: Params) {
   return (
     <ModalPortal>
-      <div className="fixed inset-0 flex items-center justify-center z-[50]">
+      <div className="fixed inset-0 z-[50] flex items-center justify-center">
         {children}
         <div
-          className="bg-dark/50 w-full h-full fixed"
+          className="fixed h-full w-full bg-dark/50"
           onClick={() => {
             if (overlayClose && !!onClose) onClose()
           }}

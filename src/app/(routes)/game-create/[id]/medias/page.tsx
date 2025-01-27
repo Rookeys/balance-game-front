@@ -9,7 +9,7 @@ export default function Medias() {
   const { id } = useParams()
 
   return (
-    <section className="flex flex-col items-center px-[16px] my-[80px] gap-[60px]">
+    <section className="my-[80px] flex flex-col items-center gap-[60px] px-[16px]">
       <ImageUploadForm />
       <YoutubeUploadForm />
       <Button className="bg-primary-10" onClick={() => router.push(`/game-create/${id}/resources`)}>

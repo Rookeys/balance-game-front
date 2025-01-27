@@ -37,7 +37,7 @@ export function YoutubeUploadForm() {
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col w-full max-w-[500px] gap-[28px]">
+      <form onSubmit={handleSubmit(onSubmit)} className="flex w-full max-w-[500px] flex-col gap-[28px]">
         <p>동영상 업로드</p>
         <InputTextControlled
           id="url"
@@ -56,7 +56,7 @@ export function YoutubeUploadForm() {
           // loader={({ src }) => src}
           className="mx-auto rounded-xsm"
         />
-        <article className="flex justify-between flex-wrap gap-[20px]">
+        <article className="flex flex-wrap justify-between gap-[20px]">
           <div className="flex gap-[20px]">
             <InputTextControlled
               id="start"
@@ -80,7 +80,7 @@ export function YoutubeUploadForm() {
           <Button
             type="submit"
             disabled={isSubmitting}
-            className="bg-primary hover:bg-primary-60 text-light dark:bg-primary-70 dark:hover:bg-primary-80"
+            className="bg-primary text-light hover:bg-primary-60 dark:bg-primary-70 dark:hover:bg-primary-80"
           >
             저장
           </Button>

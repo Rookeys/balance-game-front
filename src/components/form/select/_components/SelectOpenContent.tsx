@@ -9,7 +9,7 @@ interface Params {
 export const SelectOpenContent = ({ items }: Params) => {
   return (
     <SelectPrimitive.Portal>
-      <SelectPrimitive.Content className="z-[50] bg-white dark:bg-dark-night border dark:border-black rounded-xsm shadow-md">
+      <SelectPrimitive.Content className="z-[50] rounded-xsm border bg-white shadow-md dark:border-black dark:bg-dark-night">
         <SelectPrimitive.ScrollUpButton className="flex items-center justify-center py-2">
           <ArrowUp />
         </SelectPrimitive.ScrollUpButton>
@@ -20,14 +20,14 @@ export const SelectOpenContent = ({ items }: Params) => {
               key={item.id}
               value={item.value}
               className={cn(
-                "flex items-center px-4 py-2 text-sm rounded-xsm cursor-pointer",
+                "flex cursor-pointer items-center rounded-xsm px-4 py-2 text-sm",
                 "hover:bg-blue-10 dark:hover:bg-blue-70",
-                "focus:bg-blue-20 dark:focus:bg-blue-80 outline-none"
+                "outline-none focus:bg-blue-20 dark:focus:bg-blue-80"
               )}
             >
               <SelectPrimitive.ItemText>{item.label}</SelectPrimitive.ItemText>
               <SelectPrimitive.ItemIndicator className="ml-[4px]">
-                <Check className="w-[16px] h-[16px] text-green dark:text-green-70" />
+                <Check className="h-[16px] w-[16px] text-green dark:text-green-70" />
               </SelectPrimitive.ItemIndicator>
             </SelectPrimitive.Item>
           ))}

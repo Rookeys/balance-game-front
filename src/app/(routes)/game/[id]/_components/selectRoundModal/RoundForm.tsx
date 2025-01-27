@@ -40,7 +40,7 @@ export default function RoundForm({ totalItem, setIsOpen }: Params) {
         />
         {!!errors.round?.message && <InputErrorMessage id={"round"} errorMessage={errors.round?.message} />}
         <Button
-          className="px-4 py-2 text-sm text-white bg-blue-40 rounded hover:bg-blue-50 rounded-xsm self-end"
+          className="rounded self-end rounded-xsm bg-blue-40 px-4 py-2 text-sm text-white hover:bg-blue-50"
           disabled={isSubmitting}
           type="submit"
         >

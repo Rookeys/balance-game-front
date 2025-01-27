@@ -1,4 +1,4 @@
-import FileUploadDropZone from '@/components/form/fileUpload/FileUploadDropZone'
+import FileUploadDropZone from "@/components/form/fileUpload/FileUploadDropZone"
 import ToasterWithTheme from "@/components/ToasterWithTheme"
 import type { Meta, StoryFn } from "@storybook/react"
 import { useState } from "react"

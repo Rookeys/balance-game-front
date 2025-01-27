@@ -7,9 +7,9 @@ interface Params {
 }
 export function ThumbnailSection({ firstItemThumbnail, firstItemTitle, secondItemThumbnail, secondItemTitle }: Params) {
   return (
-    <section className="flex justify-between items-center">
+    <section className="flex items-center justify-between">
       <article className="flex flex-col items-center">
-        <div className="relative w-[50vw] 2xsm:w-[150px] h-[150px]">
+        <div className="relative h-[150px] w-[50vw] 2xsm:w-[150px]">
           <Image
             className="object-cover"
             src={firstItemThumbnail}
@@ -26,14 +26,14 @@ export function ThumbnailSection({ firstItemThumbnail, firstItemTitle, secondIte
             sizes="(max-width: 640px) 50vw, 150px"
           /> */}
         </div>
-        <div className="py-2 bg-gray-10 dark:bg-dark-20 w-full">
-          <p className="text-sm font-medium text-center h-[16px] line-clamp-1" title={firstItemTitle}>
+        <div className="w-full bg-gray-10 py-2 dark:bg-dark-20">
+          <p className="line-clamp-1 h-[16px] text-center text-sm font-medium" title={firstItemTitle}>
             {firstItemTitle}
           </p>
         </div>
       </article>
       <article className="flex flex-col items-center">
-        <div className="relative w-[50vw] 2xsm:w-[150px] h-[150px]">
+        <div className="relative h-[150px] w-[50vw] 2xsm:w-[150px]">
           <Image
             className="object-cover"
             src={secondItemThumbnail}
@@ -42,8 +42,8 @@ export function ThumbnailSection({ firstItemThumbnail, firstItemTitle, secondIte
             sizes="(max-width: 640px) 50vw, 150px"
           />
         </div>
-        <div className="py-2 bg-gray-10 dark:bg-dark-20 w-full">
-          <p className="text-sm font-medium text-center h-[16px] line-clamp-1" title={secondItemTitle}>
+        <div className="w-full bg-gray-10 py-2 dark:bg-dark-20">
+          <p className="line-clamp-1 h-[16px] text-center text-sm font-medium" title={secondItemTitle}>
             {secondItemTitle}
           </p>
         </div>

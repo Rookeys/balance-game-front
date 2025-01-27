@@ -14,15 +14,13 @@ export default function ThemeToggle() {
   }, [])
 
   if (!mounted) {
-    return <Skeleton className="rounded-full w-[40px] h-[40px]" />
+    return <Skeleton className="h-[40px] w-[40px] rounded-full" />
   }
 
   return (
     <Toggle.Root onPressedChange={() => setTheme(theme === "dark" ? "light" : "dark")} aria-label="Theme Toggle">
       <div
-        className={`flex items-center justify-center w-[40px] h-[40px]
-          rounded-full transition-all duration-300 ease-in-out border border-gray-20 dark:border-none dark:bg-dark-40
-          ${theme === "dark" ? "rotate-180" : "rotate-0"}`}
+        className={`flex h-[40px] w-[40px] items-center justify-center rounded-full border border-gray-20 transition-all duration-300 ease-in-out dark:border-none dark:bg-dark-40 ${theme === "dark" ? "rotate-180" : "rotate-0"}`}
       >
         {theme === "dark" ? (
           <SunMedium className="text-yellow-70 transition-opacity duration-300 ease-in-out" size={20} />
