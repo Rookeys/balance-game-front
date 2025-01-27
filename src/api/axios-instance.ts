@@ -1,6 +1,8 @@
 import { isServer } from "@/utils/isServer"
+import { log } from "@/utils/log"
 import axios from "axios"
 import { Configuration } from "balance-game-api/dist/configuration"
+import { getCookie } from "cookies-next"
 
 export const configuration = new Configuration({
   basePath: process.env.NEXT_PUBLIC_API_ROOT
@@ -16,19 +18,11 @@ export const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   async function (config) {
     // 요청이 전달되기 전에 작업 수행
-    if (isServer()) {
-      // * 서버측에서 API 호출 시 유저의 정보가 필요한 경우가 있으면 사용
-      // const serverSession = await getServerSession(authOptions)
-      // // console.log("server axios instance Session", serverSession)
-      // config.headers["Content-Type"] = "application/json"
-      // if (serverSession?.access_token) {
-      //   config.headers["Authorization"] = `${serverSession?.access_token}`
-      // }
+    if (!isServer()) {
+      const accessToken = getCookie("accessToken")
+      config.headers["Authorization"] = `Bearer ${accessToken}`
     } else {
-      // const session = await getSession()
-      // if (session?.access_token) {
-      //   config.headers["Authorization"] = `${session?.access_token}`
-      // }
+      // * 서버측에서 API 호출 시 유저의 정보가 필요한 경우가 있으면 사용
     }
     return config
   },
@@ -44,10 +38,21 @@ axiosInstance.interceptors.response.use(
     // 응답 데이터가 있는 작업 수행
     return response
   },
-  function (error) {
+  async function (error) {
     // 2xx 외의 범위에 있는 상태 코드는 이 함수를 트리거 합니다.
     // 응답 오류가 있는 작업 수행
-    // Todo 리프레쉬 로직 or next-auth 에서 처리
+    if (error.response?.status === 401) {
+      console.error("Unauthorized: 액세스 토큰이 만료되었거나 유효하지 않습니다.")
+
+      try {
+        await axios.post(`${process.env.NEXT_PUBLIC_AUTH_URL}/api/auth/kakao/refreshAccessToken`)
+      } catch (error) {
+        log("error", error)
+        if (!isServer()) {
+          window.location.href = "/sign-in"
+        }
+      }
+    }
     return Promise.reject(error)
   }
 )

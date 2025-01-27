@@ -1,26 +1,25 @@
 import { axiosInstance, configuration } from "@/api/axios-instance"
-import type { AxiosResponse } from "axios"
 import {
   OAuthControllerApi,
-  type OAuthControllerApiKakaoLoginRequest
+  type OAuthControllerApiKakaoLoginRequest,
+  type OAuthControllerApiLoginRequest
 } from "balance-game-api/dist/api/oauth-controller-api"
+import { LoginResponse } from "balance-game-api/dist/models/login-response"
 import type { TokenResponse } from "balance-game-api/dist/models/token-response"
 
-export const postUsersLogin = async (payload: OAuthControllerApiKakaoLoginRequest): Promise<TokenResponse> => {
+export const postUsersLogin = async (payload: OAuthControllerApiLoginRequest): Promise<LoginResponse> => {
   return new OAuthControllerApi(configuration, undefined, axiosInstance)
-    .kakaoLogin(payload)
+    .login(payload)
     .then((res) => res.data)
     .catch((error: any) => {
       throw error
     })
 }
 
-export const postUsersLoginResponseAllData = async (
-  payload: OAuthControllerApiKakaoLoginRequest
-): Promise<AxiosResponse<TokenResponse>> => {
+export const postUsersLoginKakao = async (payload: OAuthControllerApiKakaoLoginRequest): Promise<LoginResponse> => {
   return new OAuthControllerApi(configuration, undefined, axiosInstance)
     .kakaoLogin(payload)
-    .then((res) => res) // headers 값 조회를 위해 res.data
+    .then((res) => res.data)
     .catch((error: any) => {
       throw error
     })
