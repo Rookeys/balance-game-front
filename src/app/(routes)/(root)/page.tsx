@@ -1,6 +1,7 @@
 import GameThumbnailCard from "@/components/form/gameThumbnail/GameThumbnailCard"
 
 export default function Home() {
+  console.log("테스트")
   const dummy = {
     id: "1",
     firstItemThumbnail: "https://avatars.githubusercontent.com/u/62785823?v=4",
