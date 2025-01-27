@@ -7,18 +7,18 @@ export function Information({ gameTitle, gameDescription, creator }: Params) {
   return (
     <article className="flex flex-col gap-[4px]">
       <p
-        className="text-md font-semibold truncate w-fit h-[30px] cursor-pointer hover:text-primary-20"
+        className="h-[30px] w-fit cursor-pointer truncate text-md font-semibold hover:text-primary-20"
         title={gameTitle}
       >
         {gameTitle}
       </p>
       <p
-        className="text-base line-clamp-2 break-all h-[48px] cursor-pointer hover:text-primary-20"
+        className="line-clamp-2 h-[48px] cursor-pointer break-all text-base hover:text-primary-20"
         title={gameDescription}
       >
         {gameDescription}
       </p>
-      <p className="text-sm text-gray-60 dark:text-gray-30 truncate w-fit" title={creator}>
+      <p className="w-fit truncate text-sm text-gray-60 dark:text-gray-30" title={creator}>
         제작자:
         <span className="cursor-pointer hover:text-gray-30 dark:hover:text-gray-60"> {creator}</span>
       </p>

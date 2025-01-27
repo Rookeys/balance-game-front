@@ -17,7 +17,7 @@ export function ImageUploadForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col w-full max-w-[500px] gap-[28px]">
+    <form onSubmit={handleSubmit(onSubmit)} className="flex w-full max-w-[500px] flex-col gap-[28px]">
       <p>이미지 업로드</p>
       <FileUploadDropZone
         value={watch("files") ?? []}
@@ -26,7 +26,7 @@ export function ImageUploadForm() {
       <Button
         type="submit"
         disabled={isSubmitting}
-        className="bg-primary hover:bg-primary-60 text-light dark:bg-primary-70 dark:hover:bg-primary-80 self-end"
+        className="self-end bg-primary text-light hover:bg-primary-60 dark:bg-primary-70 dark:hover:bg-primary-80"
       >
         저장
       </Button>

@@ -15,7 +15,7 @@ export default function YoutubeThumbnailBox({ url, start, end }: Params) {
 
   return (
     <>
-      <div className="w-full h-full min-h-[120px] relative" onClick={() => setIsOpen(true)}>
+      <div className="relative h-full min-h-[120px] w-full" onClick={() => setIsOpen(true)}>
         <Image
           src={getYoutubeThumbnail(url)}
           alt="Video Thumbnail"

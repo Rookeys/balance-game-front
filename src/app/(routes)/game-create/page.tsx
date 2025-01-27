@@ -71,9 +71,9 @@ export default function GameCreatePage() {
   }
 
   return (
-    <section className="flex justify-center px-[16px] my-[80px]">
+    <section className="my-[80px] flex justify-center px-[16px]">
       <form
-        className="flex flex-col justify-center items-start w-full max-w-[500px] gap-[28px]"
+        className="flex w-full max-w-[500px] flex-col items-start justify-center gap-[28px]"
         onSubmit={handleSubmit(onSubmit)}
       >
         <InputTextUnControlled
@@ -128,7 +128,7 @@ export default function GameCreatePage() {
         <Button
           type="submit"
           disabled={isSubmitting}
-          className="bg-primary hover:bg-primary-60 text-light dark:bg-primary-70 dark:hover:bg-primary-80"
+          className="bg-primary text-light hover:bg-primary-60 dark:bg-primary-70 dark:hover:bg-primary-80"
         >
           다음
         </Button>

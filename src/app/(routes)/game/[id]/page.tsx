@@ -22,7 +22,7 @@ export default function Game() {
       <article className="flex items-center justify-center">
         <p className="my-[8px] text-lg font-semibold">게임 타이틀 n강 라운드/전체라운드</p>
       </article>
-      <section className="flex items-center justify-center min-h-[80vh]">
+      <section className="flex min-h-[80vh] items-center justify-center">
         {/* <SelectItemBox url="https://avatars.githubusercontent.com/u/62785823?v=4" title="github" type="image" /> */}
         <SelectItemBox
           id="image-id"
@@ -32,7 +32,7 @@ export default function Game() {
           selectedId={selectedId}
           handleSelectItem={handleSelectItem}
         />
-        <div className="absolute bg-white/50 z-[40] w-fit h-fit pointer-events-none">
+        <div className="pointer-events-none absolute z-[40] h-fit w-fit bg-white/50">
           <Image width={80} height={80} src={"/images/vs.png"} alt="vs icon" className="object-contain" />
         </div>
         <SelectItemBox

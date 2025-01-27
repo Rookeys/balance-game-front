@@ -16,7 +16,7 @@ const YoutubeRatio = ({ ratio, url, start, end }: Params) => (
         videoId={getYouTubeId(url)}
         opts={{ playerVars: { start, end } }}
         // opts={{ playerVars: { start, end, loop: 1, playlist: getYouTubeId(url) } }}
-        className="w-full h-full"
+        className="h-full w-full"
         iframeClassName="w-full h-full"
       />
     </AspectRatio.Root>

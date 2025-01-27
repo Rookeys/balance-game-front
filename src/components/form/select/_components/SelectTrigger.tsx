@@ -9,12 +9,12 @@ interface Params {
 export const SelectTrigger = forwardRef<HTMLButtonElement, Params>((props, ref) => {
   return (
     <SelectPrimitive.Trigger
-      className="inline-flex items-center justify-between px-4 py-2 text-sm font-medium border border-gray-20 dark:border-gray-70 rounded-xsm hover:bg-light dark:hover:bg-dark-night focus:outline-none"
+      className="inline-flex items-center justify-between rounded-xsm border border-gray-20 px-4 py-2 text-sm font-medium hover:bg-light focus:outline-none dark:border-gray-70 dark:hover:bg-dark-night"
       ref={ref}
     >
       <SelectPrimitive.Value placeholder="카테고리 선택" />
       <SelectPrimitive.Icon>
-        <ChevronDown className="w-[20px] h-[20px] text-gray" />
+        <ChevronDown className="h-[20px] w-[20px] text-gray" />
       </SelectPrimitive.Icon>
     </SelectPrimitive.Trigger>
   )

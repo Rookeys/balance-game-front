@@ -36,17 +36,17 @@ export default function YoutubeForm(props: ResourceType) {
     <FormProvider {...formMethods}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <section className="flex w-fit border-b border-dark dark:border-gray">
-          <article className="border-r border-dark dark:border-gray w-[180px] flex-shrink-0">
+          <article className="w-[180px] flex-shrink-0 border-r border-dark dark:border-gray">
             <YoutubeThumbnailBox url={watch("url")} start={watch("start")} end={watch("end")} />
           </article>
-          <article className="border-r border-dark dark:border-gray p-4 w-[180px] flex-shrink-0">
+          <article className="w-[180px] flex-shrink-0 border-r border-dark p-4 dark:border-gray">
             <InputTextControlled
               id="name"
               value={watch("name")}
               onChange={(e) => setValue("name", e.target.value, { shouldValidate: true })}
             />
           </article>
-          <article className="border-r border-dark dark:border-gray p-4 w-[360px] flex-shrink-0">
+          <article className="w-[360px] flex-shrink-0 border-r border-dark p-4 dark:border-gray">
             <div className="flex flex-col gap-[12px]">
               <InputTextControlled
                 id="url"
@@ -77,10 +77,10 @@ export default function YoutubeForm(props: ResourceType) {
               </div>
             </div>
           </article>
-          <article className="border-r border-dark dark:border-gray p-4 w-[180px] flex-shrink-0 flex items-center justify-center">
+          <article className="flex w-[180px] flex-shrink-0 items-center justify-center border-r border-dark p-4 dark:border-gray">
             <p>{props.winRate}</p>
           </article>
-          <article className="p-4 w-[180px] flex-shrink-0">
+          <article className="w-[180px] flex-shrink-0 p-4">
             <FormAction id={props.id} name={props.name} />
           </article>
         </section>

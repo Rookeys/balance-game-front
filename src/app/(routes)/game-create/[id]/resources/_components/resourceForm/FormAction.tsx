@@ -14,7 +14,7 @@ interface Params {
 export default function FormAction({ id, name = "" }: Params) {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   return (
-    <div className="flex justify-around gap-[4px] items-center h-full flex-wrap">
+    <div className="flex h-full flex-wrap items-center justify-around gap-[4px]">
       <Button type="submit" variant="custom">
         <FilePenLine />
       </Button>

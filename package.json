@@ -7,9 +7,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "prepare": "husky",
     "storybook": "STORYBOOK=true storybook dev -p 6006",
     "build-storybook": "STORYBOOK=true storybook build",
-    "start-storybook": "STORYBOOK=true http-server storybook-static"
+    "start-storybook": "STORYBOOK=true http-server storybook-static",
+    "all-format": "prettier --write ."
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
@@ -20,7 +22,7 @@
     "@tanstack/react-query": "^5.62.11",
     "@tanstack/react-virtual": "^3.11.2",
     "axios": "^1.7.9",
-    "balance-game-api": "^0.0.12",
+    "balance-game-api": "^0.0.14",
     "clsx": "^2.1.1",
     "lodash-es": "^4.17.21",
     "lucide-react": "^0.468.0",
@@ -39,6 +41,7 @@
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.2",
+    "@eslint/eslintrc": "^3.2.0",
     "@faker-js/faker": "^9.3.0",
     "@storybook/addon-essentials": "^8.4.7",
     "@storybook/addon-interactions": "^8.4.7",
@@ -55,12 +58,24 @@
     "@types/youtube-player": "^5.5.11",
     "eslint": "^8",
     "eslint-config-next": "14.2.18",
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-plugin-prettier": "^5.2.3",
     "eslint-plugin-storybook": "^0.11.1",
+    "husky": "^9.1.7",
     "postcss": "^8",
     "prettier": "^3.4.2",
     "prettier-plugin-tailwindcss": "^0.6.9",
     "storybook": "^8.4.7",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.7.2"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --cache --fix",
+      "prettier --cache --write"
+    ],
+    "*.{md,json}": [
+      "prettier --cache --write"
+    ]
   }
 }

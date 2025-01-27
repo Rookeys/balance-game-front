@@ -18,7 +18,7 @@ export default function KakaoLoginButton({ className }: Params) {
     <Button
       variant="custom"
       onClick={handleAuthAction}
-      className={cn("bg-kakao-container flex gap-[8px] px-[12px] py-[8px] rounded-[12px]", className)}
+      className={cn("flex gap-[8px] rounded-[12px] bg-kakao-container px-[12px] py-[8px]", className)}
     >
       <KakaoSymbol size={20} color={COLORS.KAKAO_SYMBOL} />
       <p className="text-kakao-label">카카오 로그인</p>
