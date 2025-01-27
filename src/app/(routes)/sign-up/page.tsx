@@ -38,9 +38,9 @@ export default function SignUp() {
   }
 
   return (
-    <section className="flex justify-center px-[16px] my-[80px]">
+    <section className="my-[80px] flex justify-center px-[16px]">
       <form
-        className="flex flex-col justify-center items-start w-full max-w-[500px] gap-[28px]"
+        className="flex w-full max-w-[500px] flex-col items-start justify-center gap-[28px]"
         onSubmit={handleSubmit(onSubmit)}
       >
         <InputTextUnControlled
@@ -50,7 +50,7 @@ export default function SignUp() {
           {...register("nickname")}
           errorMessage={errors.nickname?.message}
         />
-        <article className="flex flex-col gap-[12px] w-full">
+        <article className="flex w-full flex-col gap-[12px]">
           <p>프로필 이미지</p>
           <FileUploadDropZone
             value={watch("files") ?? []}
@@ -63,7 +63,7 @@ export default function SignUp() {
         <Button
           type="submit"
           disabled={isSubmitting}
-          className="bg-primary hover:bg-primary-60 text-light dark:bg-primary-70 dark:hover:bg-primary-80 self-end"
+          className="self-end bg-primary text-light hover:bg-primary-60 dark:bg-primary-70 dark:hover:bg-primary-80"
         >
           제출
         </Button>

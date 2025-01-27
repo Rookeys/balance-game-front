@@ -48,10 +48,10 @@ export default function SelectItemBox({ id, url, type, title, selectedId, handle
           className="cursor-pointer"
           onClick={() => handleSelectItem(id)}
         />
-        <article className="absolute top-[30%] sm:top-[50%] start-[50%] translate-x-[-50%] translate-y-[-50%] px-4 py-2 rounded-xsm pointer-events-none bg-dark/30 max-w-full">
-          <p className="text-white break-words">{title}</p>
+        <article className="pointer-events-none absolute start-[50%] top-[30%] max-w-full translate-x-[-50%] translate-y-[-50%] rounded-xsm bg-dark/30 px-4 py-2 sm:top-[50%]">
+          <p className="break-words text-white">{title}</p>
         </article>
-        <Button className="bg-primary-10 w-full text-md opacity-0 cursor-default">선택하는 버튼</Button>
+        <Button className="w-full cursor-default bg-primary-10 text-md opacity-0">선택하는 버튼</Button>
       </motion.div>
     )
   }
@@ -71,10 +71,10 @@ export default function SelectItemBox({ id, url, type, title, selectedId, handle
         url="https://www.youtube.com/watch?v=W3qIzaNndH4"
         ratio={windowWidth > parseInt(SCREEN_SIZE.sm) ? 4 / 3 : 1 / 2}
       />
-      <article className="absolute top-[30%] sm:top-[50%] start-[50%] translate-x-[-50%] translate-y-[-50%] px-4 py-2 rounded-xsm pointer-events-none bg-dark/30 max-w-full">
-        <p className="text-white break-words">{title}</p>
+      <article className="pointer-events-none absolute start-[50%] top-[30%] max-w-full translate-x-[-50%] translate-y-[-50%] rounded-xsm bg-dark/30 px-4 py-2 sm:top-[50%]">
+        <p className="break-words text-white">{title}</p>
       </article>
-      <Button className="bg-primary-10 w-full text-md" onClick={() => handleSelectItem(id)}>
+      <Button className="w-full bg-primary-10 text-md" onClick={() => handleSelectItem(id)}>
         선택하는 버튼
       </Button>
     </motion.div>

@@ -85,7 +85,7 @@ export const Default: Story = {
   render: (args) => {
     return (
       <>
-        <button onClick={() => showToast("message", args)} className="rounded-md bg-blue-500 text-white px-4 py-2">
+        <button onClick={() => showToast("message", args)} className="rounded-md bg-blue-500 px-4 py-2 text-white">
           테스트 버튼
         </button>
         <Toaster richColors={args.richColors} expand={args.isExpand} />
@@ -99,7 +99,7 @@ export const Information: Story = {
   render: (args) => {
     return (
       <>
-        <button onClick={() => showToast("info", args)} className="rounded-md bg-blue-500 text-white px-4 py-2">
+        <button onClick={() => showToast("info", args)} className="rounded-md bg-blue-500 px-4 py-2 text-white">
           테스트 버튼
         </button>
         <Toaster richColors={args.richColors} expand={args.isExpand} />
@@ -113,7 +113,7 @@ export const Success: Story = {
   render: (args) => {
     return (
       <>
-        <button onClick={() => showToast("success", args)} className="rounded-md bg-blue-500 text-white px-4 py-2">
+        <button onClick={() => showToast("success", args)} className="rounded-md bg-blue-500 px-4 py-2 text-white">
           테스트 버튼
         </button>
         <Toaster richColors={args.richColors} expand={args.isExpand} />
@@ -127,7 +127,7 @@ export const Warning: Story = {
   render: (args) => {
     return (
       <>
-        <button onClick={() => showToast("warning", args)} className="rounded-md bg-blue-500 text-white px-4 py-2">
+        <button onClick={() => showToast("warning", args)} className="rounded-md bg-blue-500 px-4 py-2 text-white">
           테스트 버튼
         </button>
         <Toaster richColors={args.richColors} expand={args.isExpand} />
@@ -141,7 +141,7 @@ export const Error: Story = {
   render: (args) => {
     return (
       <>
-        <button onClick={() => showToast("error", args)} className="rounded-md bg-blue-500 text-white px-4 py-2">
+        <button onClick={() => showToast("error", args)} className="rounded-md bg-blue-500 px-4 py-2 text-white">
           테스트 버튼
         </button>
         <Toaster richColors={args.richColors} expand={args.isExpand} />
@@ -176,7 +176,7 @@ export const PromiseToast: Story = {
 
     return (
       <>
-        <button onClick={() => showToast()} className="rounded-md bg-blue-500 text-white px-4 py-2">
+        <button onClick={() => showToast()} className="rounded-md bg-blue-500 px-4 py-2 text-white">
           테스트 버튼
         </button>
         <Toaster richColors={args.richColors} expand={args.isExpand} />

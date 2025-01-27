@@ -12,14 +12,14 @@ export default function Home() {
     creator: "KoJaem & Cheomuk"
   }
   return (
-    <section className="flex flex-col gap-[48px] items-center">
-      <article className="flex flex-col gap-[8px] items-center mt-[20px]">
-        <h1 className="font-bold text-lg">밸런스 게임</h1>
+    <section className="flex flex-col items-center gap-[48px]">
+      <article className="mt-[20px] flex flex-col items-center gap-[8px]">
+        <h1 className="text-lg font-bold">밸런스 게임</h1>
         <h2 className="font-semibold">내가 만든 게임을 공유하고, 팔로워를 늘려보세요!</h2>
       </article>
       <section className="xl:px-[16px]">
-        <p className="text-md font-semibold w-fit">이번주 인기 밸런스게임</p>
-        <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-5 gap-[20px]">
+        <p className="w-fit text-md font-semibold">이번주 인기 밸런스게임</p>
+        <section className="grid grid-cols-1 gap-[20px] sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-5">
           <GameThumbnailCard {...dummy} />
           <GameThumbnailCard {...dummy} />
           <GameThumbnailCard {...dummy} />

@@ -24,7 +24,7 @@ export default function GameThumbnailCard(props: Params) {
   } = props
 
   return (
-    <section className="max-w-screen 2xsm:max-w-[300px] bg-white dark:bg-dark-30 border dark:border-gray rounded-sm shadow-md overflow-hidden">
+    <section className="max-w-screen overflow-hidden rounded-sm border bg-white shadow-md 2xsm:max-w-[300px] dark:border-gray dark:bg-dark-30">
       <ThumbnailSection
         firstItemThumbnail={firstItemThumbnail}
         firstItemTitle={firstItemTitle}

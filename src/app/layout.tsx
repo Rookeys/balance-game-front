@@ -23,7 +23,7 @@ export default async function RootLayout({
 
   return (
     <html lang="ko" suppressHydrationWarning>
-      <body className={`${MoneygraphyRounded.className} antialiased text-dark dark:text-light`}>
+      <body className={`${MoneygraphyRounded.className} text-dark antialiased dark:text-light`}>
         <AuthProvider session={session}>
           <ReactQueryProvider>
             <ThemeProvider>

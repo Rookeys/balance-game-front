@@ -6,7 +6,7 @@ interface Params extends ImageProps {
 }
 
 const ImageRatio = ({ ratio, ...props }: Params) => (
-  <div className="RatioContainer bg-white dark:bg-night flex items-center justify-center h-full">
+  <div className="RatioContainer flex h-full items-center justify-center bg-white dark:bg-night">
     <AspectRatio.Root ratio={ratio}>
       <Image {...props} alt={props.alt} />
     </AspectRatio.Root>

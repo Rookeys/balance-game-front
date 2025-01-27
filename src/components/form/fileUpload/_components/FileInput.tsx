@@ -17,7 +17,7 @@ export const FileInput = forwardRef<HTMLDivElement, Params>(
       <div
         ref={ref}
         {...props}
-        className={cn("relative w-full", isLimit ? "opacity-50 cursor-not-allowed" : "cursor-pointer")}
+        className={cn("relative w-full", isLimit ? "cursor-not-allowed opacity-50" : "cursor-pointer")}
       >
         <div
           className={cn("w-full transition-colors duration-300 ease-in-out", className, rounded && "rounded-lg")}
@@ -31,7 +31,7 @@ export const FileInput = forwardRef<HTMLDivElement, Params>(
                 rounded && "rounded-lg"
               )}
             >
-              <p className="text-blue font-medium">여기에 업로드 하세요 🚀</p>
+              <p className="font-medium text-blue">여기에 업로드 하세요 🚀</p>
             </div>
           )}
         </div>

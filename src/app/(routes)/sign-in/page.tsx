@@ -4,7 +4,7 @@ import { signOut } from "next-auth/react"
 
 export default function SignIn() {
   return (
-    <section className="flex justify-center mt-[80px]">
+    <section className="mt-[80px] flex justify-center">
       <article className="flex flex-col gap-[16px] px-[16px]">
         <h1 className="text-md font-semibold">로그인 및 회원가입</h1>
         <KakaoLoginButton className="2xsm:w-[300px]" />
