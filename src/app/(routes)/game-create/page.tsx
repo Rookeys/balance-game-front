@@ -5,6 +5,7 @@ import InputTextUnControlled from "@/components/form/inputText/InputTextUnContro
 import RadioGroup from "@/components/form/radioGroup/RadioGroup"
 import Select from "@/components/form/select/Select"
 import { useAsyncRoutePush } from "@/hooks/useAsyncRoutePush"
+import { log } from "@/utils/log"
 import { sleep } from "@/utils/sleep"
 import { gameSchema } from "@/validations/gameSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -60,7 +61,7 @@ export default function GameCreatePage() {
 
   const onSubmit = async (data: FieldValues) => {
     try {
-      console.log("data", data)
+      log("data", data)
       // Todo API 요청 시 isNamePublicItems 관련 데이터의 value 는 boolean 으로 관리할듯함.
 
       // await ~~~

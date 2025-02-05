@@ -2,6 +2,7 @@ import { Button } from "@/components/Button"
 import { InputErrorMessage } from "@/components/form/_components"
 import Select from "@/components/form/select/Select"
 import { generateRounds } from "@/utils/generateRounds"
+import { log } from "@/utils/log"
 import { sleep } from "@/utils/sleep"
 import { PostRoundType, roundSchema } from "@/validations/roundSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -25,7 +26,7 @@ export default function RoundForm({ totalItem, setIsOpen }: Params) {
   const onSubmit = async (data: FieldValues) => {
     try {
       await sleep(1000)
-      console.log("data", data)
+      log("data", data)
       setIsOpen(false)
     } catch {}
   }

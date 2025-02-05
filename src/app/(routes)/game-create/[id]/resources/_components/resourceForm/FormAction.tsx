@@ -1,5 +1,6 @@
 "use client"
 import { Button } from "@/components/Button"
+import { log } from "@/utils/log"
 import { FilePenLine, Trash2 } from "lucide-react"
 import dynamic from "next/dynamic"
 import { useState } from "react"
@@ -27,7 +28,7 @@ export default function FormAction({ id, name = "" }: Params) {
           description={`${name} 데이터를 삭제 하시겠습니까?`}
           onClose={() => setIsOpen(false)}
           overlayClose
-          onClick={() => console.log("삭제", id)}
+          onClick={() => log("삭제", id)}
         />
       )}
     </div>

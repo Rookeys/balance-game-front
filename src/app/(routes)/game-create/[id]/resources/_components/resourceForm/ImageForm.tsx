@@ -6,6 +6,7 @@ import { FieldValues, FormProvider, useForm } from "react-hook-form"
 import type { ResourceType } from "../../page"
 import ImageThumbnailBox from "../ImageThumbnailBox"
 import FormAction from "./FormAction"
+import { log } from "@/utils/log"
 
 type ImageResourceType = {
   name: string
@@ -24,7 +25,7 @@ export default function ImageForm(props: ResourceType) {
   const { handleSubmit, setValue, watch } = formMethods
 
   const onSubmit = (data: FieldValues) => {
-    console.log("data", data)
+    log("data", data)
   }
 
   const files = watch("files")

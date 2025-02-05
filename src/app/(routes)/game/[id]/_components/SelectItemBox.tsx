@@ -3,6 +3,7 @@ import { Button } from "@/components/Button"
 import useResizeHandler from "@/hooks/useResizeHandler"
 import { SCREEN_SIZE } from "@/styles/theme/screenSize"
 import { cn } from "@/utils/cn"
+import { log } from "@/utils/log"
 import { motion } from "motion/react"
 import dynamic from "next/dynamic"
 
@@ -24,7 +25,7 @@ export default function SelectItemBox({ id, url, type, title, selectedId, handle
 
   const handleAnimationComplete = () => {
     if (selectedId === id) {
-      console.log("animation complete!", id)
+      log("animation complete!", id)
     }
   }
 

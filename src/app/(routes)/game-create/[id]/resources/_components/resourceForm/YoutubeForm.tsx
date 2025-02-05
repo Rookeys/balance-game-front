@@ -5,6 +5,7 @@ import { FieldValues, FormProvider, useForm } from "react-hook-form"
 import type { ResourceType } from "../../page"
 import YoutubeThumbnailBox from "../YoutubeThumbnailBox"
 import FormAction from "./FormAction"
+import { log } from "@/utils/log"
 
 // const InputErrorMessage = dynamic(() => import("@/components/form/_components").then((mod) => mod.InputErrorMessage))
 
@@ -28,7 +29,7 @@ export default function YoutubeForm(props: ResourceType) {
   const { handleSubmit, setValue, watch } = formMethods
 
   const onSubmit = (data: FieldValues) => {
-    console.log("data", data)
+    log("data", data)
     // Todo start, end 가 0일때는 값 보내지않기
   }
 

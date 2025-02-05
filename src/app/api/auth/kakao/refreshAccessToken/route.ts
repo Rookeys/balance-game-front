@@ -8,7 +8,7 @@ const API_ROOT = process.env.NEXT_PUBLIC_API_ROOT
 export async function POST(request: Request) {
   // const cookieStore = cookies()
   // const refreshToken = cookieStore.get("refreshToken")
-  // console.log("refreshToken", refreshToken)
+  // log("refreshToken", refreshToken)
 
   const refreshToken = getCookie("refreshToken", { req: request })
 

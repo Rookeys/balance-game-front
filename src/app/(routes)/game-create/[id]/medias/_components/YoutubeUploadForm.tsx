@@ -3,6 +3,7 @@
 import { Button } from "@/components/Button"
 import InputTextControlled from "@/components/form/inputText/InputTextControlled"
 import { getYoutubeThumbnail } from "@/utils/getYoutubeThumbnail"
+import { log } from "@/utils/log"
 import { youtubeMediaSchema } from "@/validations/youtubeMediaSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import dynamic from "next/dynamic"
@@ -29,7 +30,7 @@ export function YoutubeUploadForm() {
   })
 
   const onSubmit = async (data: FieldValues) => {
-    console.log("data", data)
+    log("data", data)
     // Todo start, end 가 0일때는 값 보내지않기
   }
 

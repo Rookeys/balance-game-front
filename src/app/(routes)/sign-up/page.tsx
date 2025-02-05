@@ -3,6 +3,7 @@ import { Button } from "@/components/Button"
 import FileUploadDropZone from "@/components/form/fileUpload/FileUploadDropZone"
 import InputTextUnControlled from "@/components/form/inputText/InputTextUnControlled"
 import { useAsyncRoutePush } from "@/hooks/useAsyncRoutePush"
+import { log } from "@/utils/log"
 import { sleep } from "@/utils/sleep"
 import { signUpSchema } from "@/validations/signUpSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -28,7 +29,7 @@ export default function SignUp() {
 
   const onSubmit = async (data: FieldValues) => {
     try {
-      console.log("data", data)
+      log("data", data)
 
       // await ~~~
       await sleep(1000)

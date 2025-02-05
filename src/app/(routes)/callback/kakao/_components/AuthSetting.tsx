@@ -6,7 +6,6 @@ import { useEffect } from "react"
 
 export default function AuthSetting({ code }: { code: string }) {
   const router = useRouter()
-  console.log("code", code)
   useEffect(() => {
     const kakaoLogin = async () => {
       try {
@@ -22,7 +21,7 @@ export default function AuthSetting({ code }: { code: string }) {
           }
         )
         router.replace("/")
-        console.log("res", res)
+        log("res", res)
       } catch (error) {
         log(error)
       }

@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/Button"
 import FileUploadDropZone from "@/components/form/fileUpload/FileUploadDropZone"
+import { log } from "@/utils/log"
 import { FieldValues, useForm } from "react-hook-form"
 
 export function ImageUploadForm() {
@@ -13,7 +14,7 @@ export function ImageUploadForm() {
   } = useForm({})
 
   const onSubmit = async (data: FieldValues) => {
-    console.log("data", data)
+    log("data", data)
   }
 
   return (
