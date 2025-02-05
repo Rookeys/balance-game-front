@@ -6,9 +6,11 @@ import { NextResponse } from "next/server"
 
 const API_ROOT = process.env.NEXT_PUBLIC_API_ROOT
 export async function POST(request: Request) {
-  const response = NextResponse.json({ message: "Tokens set successfully" })
+  // const cookieStore = cookies()
+  // const refreshToken = cookieStore.get("refreshToken")
+  // console.log("refreshToken", refreshToken)
 
-  const refreshToken = getCookie("refreshToken", { req: request, res: response })
+  const refreshToken = getCookie("refreshToken", { req: request })
 
   try {
     const res = await axios.post(`${API_ROOT}/api/v1/users/refresh`, undefined, {
@@ -18,6 +20,8 @@ export async function POST(request: Request) {
     })
 
     const data: TokenResponse = res.data
+
+    const response = NextResponse.json({ message: "Tokens set successfully", accessToken: data.accessToken })
 
     setCookie("accessToken", data.accessToken, {
       req: request,

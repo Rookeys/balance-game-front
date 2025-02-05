@@ -29,7 +29,7 @@ export async function POST(request: Request) {
       secure: process.env.NODE_ENV === "production",
       sameSite: "strict",
       path: "/",
-      maxAge: res.accessTokenExpiresAt || 3600 * 24 * 7 // 초 단위
+      maxAge: res.refreshTokenExpiresAt || 3600 * 24 * 7 // 초 단위
     })
 
     // response.cookies.set("accessToken", res.accessToken || "", {

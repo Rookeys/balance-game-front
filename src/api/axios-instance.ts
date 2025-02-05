@@ -43,9 +43,11 @@ axiosInstance.interceptors.response.use(
     // 응답 오류가 있는 작업 수행
     if (error.response?.status === 401) {
       console.error("Unauthorized: 액세스 토큰이 만료되었거나 유효하지 않습니다.")
-
       try {
-        await axios.post(`${process.env.NEXT_PUBLIC_AUTH_URL}/api/auth/kakao/refreshAccessToken`)
+        const res = await axios.post(`${process.env.NEXT_PUBLIC_AUTH_URL}/api/auth/kakao/refreshAccessToken`)
+        const newAccessToken = res.data.accessToken
+        error.config.headers["Authorization"] = `Bearer ${newAccessToken}`
+        return axios(error.config) // 원래 요청을 재시도
       } catch (error) {
         log("error", error)
         if (!isServer()) {
