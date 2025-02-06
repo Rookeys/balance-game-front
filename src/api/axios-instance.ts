@@ -9,6 +9,7 @@ export const configuration = new Configuration({
 })
 
 export const axiosInstance = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_API_ROOT,
   timeout: 10000,
   headers: {
     "Content-Type": "application/json"
@@ -41,13 +42,15 @@ axiosInstance.interceptors.response.use(
   async function (error) {
     // 2xx 외의 범위에 있는 상태 코드는 이 함수를 트리거 합니다.
     // 응답 오류가 있는 작업 수행
-    if (error.response?.status === 401) {
+    const originalRequest = error.config
+    if (error.response?.status !== 401 || !originalRequest._retry) {
       console.error("Unauthorized: 액세스 토큰이 만료되었거나 유효하지 않습니다.")
       try {
         const res = await axios.post(`${process.env.NEXT_PUBLIC_AUTH_URL}/api/auth/kakao/refreshAccessToken`)
         const newAccessToken = res.data.accessToken
-        error.config.headers["Authorization"] = `Bearer ${newAccessToken}`
-        return axios(error.config) // 원래 요청을 재시도
+        originalRequest.headers["Authorization"] = `Bearer ${newAccessToken}`
+        originalRequest._retry = true
+        return axiosInstance(originalRequest)
       } catch (error) {
         log("error", error)
         if (!isServer()) {
