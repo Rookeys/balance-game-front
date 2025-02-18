@@ -1,12 +1,7 @@
 import { log } from "@/utils/log"
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios"
-import { Configuration } from "balance-game-api/dist/configuration"
 import { getSession } from "next-auth/react"
 import { refreshAccessToken } from "./auth/refreshAccessToken"
-
-export const configuration = new Configuration({
-  basePath: process.env.NEXT_PUBLIC_API_ROOT
-})
 
 export const clientInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_ROOT,

@@ -35,9 +35,6 @@ importers:
       axios:
         specifier: ^1.7.9
         version: 1.7.9
-      balance-game-api:
-        specifier: ^0.0.15
-        version: 0.0.15
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -2394,9 +2391,6 @@ packages:
     resolution: {integrity: sha512-LiWSbl4CRSIa5x/JAU6jZiG9eit9w6mz+yVMFwDE83LAWvt0AfGBoZ7HS/mkhrKuh2ZlzfVZYKoLjXdqw6Yt7Q==}
     peerDependencies:
       '@babel/core': ^7.4.0 || ^8.0.0-0 <8.0.0
-
-  balance-game-api@0.0.15:
-    resolution: {integrity: sha512-OQlaQXq4PRdWNeKEexqAyd661m1ORpZor2v79vrw8/BlG5GLFc+XjA0KBKKbkPugkm29rxebaEmwpNjjSGqUXw==}
 
   balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
@@ -8176,8 +8170,6 @@ snapshots:
       '@babel/helper-define-polyfill-provider': 0.6.3(@babel/core@7.26.9)
     transitivePeerDependencies:
       - supports-color
-
-  balance-game-api@0.0.15: {}
 
   balanced-match@1.0.2: {}
 

@@ -1,5 +1,5 @@
 import axios, { type AxiosResponse } from "axios"
-import type { TokenResponse } from "balance-game-api/dist/models/token-response"
+import type { TokenResponse } from "@/api/model/tokenResponse"
 
 export const refreshAccessToken = async (refreshToken: string): Promise<TokenResponse> => {
   try {

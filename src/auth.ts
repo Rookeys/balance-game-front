@@ -1,8 +1,9 @@
-import { postUsersLoginResponseAllData } from "@/services/oauth"
 import NextAuth, { type Session } from "next-auth"
 import type { JWT } from "next-auth/jwt"
 import KakaoProvider from "next-auth/providers/kakao"
 import { refreshAccessToken } from "./api/auth/refreshAccessToken"
+import axios from "axios"
+import { LoginRequest, LoginResponse } from "./api/model"
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [
@@ -21,30 +22,28 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     async jwt({ token, account, user }) {
       try {
         if (account && user) {
-          const response = await postUsersLoginResponseAllData({
-            loginRequest: {
-              email: token.email as string,
-              loginType: "KAKAO",
-              accessToken: account.access_token as string
-            }
-          })
+          const { data } = await axios.post<LoginResponse>(`${process.env.NEXT_PUBLIC_API_ROOT}/api/v1/users/login`, {
+            email: token.email as string,
+            loginType: "KAKAO",
+            accessToken: account.access_token as string
+          } as LoginRequest)
 
-          const responseAccessToken = response.data.accessToken
-          const responseRefreshToken = response.data.refreshToken
-          const responseAccessTokenExpiresAt = response.data.accessTokenExpiresAt
-          const responseRefreshTokenExpiresAt = response.data.refreshTokenExpiresAt
+          const accessToken = data.accessToken
+          const refreshToken = data.refreshToken
+          const accessTokenExpiresAt = data.accessTokenExpiresAt
+          const refreshTokenExpiresAt = data.refreshTokenExpiresAt
 
           const newToken: JWT = {
             ...token,
-            access_token: responseAccessToken,
-            refresh_token: responseRefreshToken
+            access_token: accessToken,
+            refresh_token: refreshToken
           }
 
-          if (responseAccessTokenExpiresAt) {
-            newToken.access_token_expires_at = Date.now() + responseAccessTokenExpiresAt * 1000 // * 초 단위이므로 Date 형식에 맞게 1000을 곱함 (밀리초)
+          if (accessTokenExpiresAt) {
+            newToken.access_token_expires_at = Date.now() + accessTokenExpiresAt * 1000 // * 초 단위이므로 Date 형식에 맞게 1000을 곱함 (밀리초)
           }
-          if (responseRefreshTokenExpiresAt) {
-            newToken.refresh_token_expires_at = Date.now() + responseRefreshTokenExpiresAt * 1000
+          if (refreshTokenExpiresAt) {
+            newToken.refresh_token_expires_at = Date.now() + refreshTokenExpiresAt * 1000
           }
           return newToken
         }
@@ -53,23 +52,23 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           return token
         } else {
           const {
-            accessToken: refreshedAccessToken,
-            refreshToken: refreshedRefreshToken,
-            accessTokenExpiresAt: refreshedAccessTokenExpiresAt,
-            refreshTokenExpiresAt: refreshedRefreshTokenExpiresAt
+            accessToken: newAccessToken,
+            refreshToken: newRefreshToken,
+            accessTokenExpiresAt: newAccessTokenExpiresAt,
+            refreshTokenExpiresAt: newRefreshTokenExpiresAt
           } = await refreshAccessToken(token.refresh_token as string)
 
           const newToken: JWT = {
             ...token,
-            access_token: refreshedAccessToken,
-            refresh_token: refreshedRefreshToken
+            access_token: newAccessToken,
+            refresh_token: newRefreshToken
           }
 
-          if (refreshedAccessTokenExpiresAt) {
-            newToken.access_token_expires_at = Date.now() + refreshedAccessTokenExpiresAt * 1000
+          if (newAccessTokenExpiresAt) {
+            newToken.access_token_expires_at = Date.now() + newAccessTokenExpiresAt * 1000
           }
-          if (refreshedRefreshTokenExpiresAt) {
-            newToken.refresh_token_expires_at = Date.now() + refreshedRefreshTokenExpiresAt * 1000
+          if (newRefreshTokenExpiresAt) {
+            newToken.refresh_token_expires_at = Date.now() + newRefreshTokenExpiresAt * 1000
           }
           return newToken
         }
