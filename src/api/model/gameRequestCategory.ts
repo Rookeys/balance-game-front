@@ -3,6 +3,7 @@
  */
 export type GameRequestCategory = (typeof GameRequestCategory)[keyof typeof GameRequestCategory]
 
+// eslint-disable-next-line @typescript-eslint/no-redeclare
 export const GameRequestCategory = {
   FUN: "FUN",
   HORROR: "HORROR",

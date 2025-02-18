@@ -3,6 +3,7 @@
  */
 export type GameResultResponseType = (typeof GameResultResponseType)[keyof typeof GameResultResponseType]
 
+// eslint-disable-next-line @typescript-eslint/no-redeclare
 export const GameResultResponseType = {
   IMAGE: "IMAGE",
   LINK: "LINK"

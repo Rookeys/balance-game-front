@@ -21,6 +21,9 @@ const eslintConfig = [
   {
     rules: {
       "@typescript-eslint/no-explicit-any": "off"
+    },
+    linterOptions: {
+      reportUnusedDisableDirectives: "off"
     }
   }
 ]
