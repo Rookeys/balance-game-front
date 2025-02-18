@@ -1,5 +1,6 @@
-import { auth } from "@/auth"
+import { authOptions } from "@/auth"
 import axios from "axios"
+import { getServerSession } from "next-auth"
 
 export const serverInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BACKEND_URL
@@ -8,7 +9,7 @@ export const serverInstance = axios.create({
 serverInstance.interceptors.request.use(
   async (config) => {
     try {
-      const session = await auth()
+      const session = await getServerSession(authOptions)
       const accessToken = session?.access_token
       config.headers["Authorization"] = `Bearer ${accessToken}`
       return config

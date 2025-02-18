@@ -1,11 +1,11 @@
-import NextAuth, { type Session } from "next-auth"
+import axios from "axios"
+import { AuthOptions, type Session } from "next-auth"
 import type { JWT } from "next-auth/jwt"
 import KakaoProvider from "next-auth/providers/kakao"
 import { refreshAccessToken } from "./api/auth/refreshAccessToken"
-import axios from "axios"
 import { LoginRequest, LoginResponse } from "./api/model"
 
-export const { handlers, auth, signIn, signOut } = NextAuth({
+export const authOptions: AuthOptions = {
   providers: [
     KakaoProvider({
       clientId: process.env.KAKAO_CLIENT_ID as string,
@@ -105,4 +105,4 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     }
   },
   secret: process.env.AUTH_SECRET
-})
+}
