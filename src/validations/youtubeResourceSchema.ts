@@ -7,4 +7,4 @@ export const youtubeMediaSchema = z.object({
   end: z.number().optional()
 })
 
-export type PostGameType = z.output<typeof youtubeMediaSchema>
+export type PostYoutubeMediaType = z.output<typeof youtubeMediaSchema>

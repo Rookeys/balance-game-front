@@ -3,7 +3,7 @@
 import { Button } from "@/components/Button"
 import InputTextControlled from "@/components/form/inputText/InputTextControlled"
 import { getYoutubeThumbnail } from "@/utils/getYoutubeThumbnail"
-import { youtubeMediaSchema } from "@/validations/youtubeMediaSchema"
+import { postYoutubeMediaSchema } from "@/validations/youtubeMediaSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import dynamic from "next/dynamic"
 import Image from "next/image"
@@ -25,7 +25,7 @@ export function YoutubeUploadForm() {
       start: 0,
       end: 0
     },
-    resolver: zodResolver(youtubeMediaSchema)
+    resolver: zodResolver(postYoutubeMediaSchema)
   })
 
   const onSubmit = async (data: FieldValues) => {
