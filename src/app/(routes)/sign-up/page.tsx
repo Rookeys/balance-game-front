@@ -4,7 +4,7 @@ import FileUploadDropZone from "@/components/form/fileUpload/FileUploadDropZone"
 import InputTextUnControlled from "@/components/form/inputText/InputTextUnControlled"
 import { useAsyncRoutePush } from "@/hooks/useAsyncRoutePush"
 import { sleep } from "@/utils/sleep"
-import { signUpSchema } from "@/validations/signUpSchema"
+import { PostSignUpSchema, signUpSchema } from "@/validations/signUpSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import type { FieldValues } from "react-hook-form"
 import { useForm } from "react-hook-form"
@@ -16,7 +16,7 @@ export default function SignUp() {
     setValue,
     handleSubmit,
     formState: { isSubmitting, errors }
-  } = useForm<{ nickname: string; files: File[] | null }>({
+  } = useForm<PostSignUpSchema>({
     defaultValues: {
       nickname: "",
       files: null

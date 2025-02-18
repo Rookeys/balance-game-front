@@ -6,19 +6,19 @@ import RadioGroup from "@/components/form/radioGroup/RadioGroup"
 import Select from "@/components/form/select/Select"
 import { useAsyncRoutePush } from "@/hooks/useAsyncRoutePush"
 import { sleep } from "@/utils/sleep"
-import { gameSchema } from "@/validations/gameSchema"
+import { gameSchema, PostGameType } from "@/validations/gameSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import type { FieldValues } from "react-hook-form"
 import { Controller, useForm } from "react-hook-form"
 
-type PostGameRequestType = {
-  title: string
-  description: string
-  category: string
-  isNamePublic: string
-  gameAccessType: "public" | "partial" | "private"
-  inviteCode: string
-}
+// type PostGameRequestType = {
+//   title: string
+//   description: string
+//   category: string
+//   isNamePublic: string
+//   gameAccessType: "public" | "partial" | "private"
+//   inviteCode: string
+// }
 
 const categoryItems: SelectOptionType[] = [
   { id: "entertainment", value: "entertainment", label: "연예" },
@@ -43,7 +43,7 @@ export default function GameCreatePage() {
     handleSubmit,
     control,
     formState: { errors, isSubmitting }
-  } = useForm<PostGameRequestType>({
+  } = useForm<PostGameType>({
     defaultValues: {
       // Todo API 연동 후 values: { ...기존데이터 } 로 수정
       title: "",
