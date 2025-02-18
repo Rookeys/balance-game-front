@@ -6,8 +6,7 @@ import { useAsyncRoutePush } from "@/hooks/useAsyncRoutePush"
 import { sleep } from "@/utils/sleep"
 import { postSignUpSchema, PostSignUpType } from "@/validations/signUpSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
-import type { FieldValues } from "react-hook-form"
-import { useForm } from "react-hook-form"
+import { useForm, type FieldValues } from "react-hook-form"
 
 export default function SignUp() {
   const {

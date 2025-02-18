@@ -8,8 +8,7 @@ import { useAsyncRoutePush } from "@/hooks/useAsyncRoutePush"
 import { sleep } from "@/utils/sleep"
 import { postGameSchema, PostGameType } from "@/validations/gameSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
-import type { FieldValues } from "react-hook-form"
-import { Controller, useForm } from "react-hook-form"
+import { Controller, useForm, type FieldValues } from "react-hook-form"
 
 // type PostGameRequestType = {
 //   title: string

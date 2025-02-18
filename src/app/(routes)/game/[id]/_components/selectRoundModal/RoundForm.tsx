@@ -3,10 +3,10 @@ import { InputErrorMessage } from "@/components/form/_components"
 import Select from "@/components/form/select/Select"
 import { generateRounds } from "@/utils/generateRounds"
 import { sleep } from "@/utils/sleep"
-import { PostRoundType, postRoundSchema } from "@/validations/roundSchema"
+import { postRoundSchema, type PostRoundType } from "@/validations/roundSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Dispatch, SetStateAction } from "react"
-import { Controller, FieldValues, useForm } from "react-hook-form"
+import { Controller, useForm, type FieldValues } from "react-hook-form"
 
 interface Params {
   totalItem: number

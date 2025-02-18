@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/Button"
 import FileUploadDropZone from "@/components/form/fileUpload/FileUploadDropZone"
-import { FieldValues, useForm } from "react-hook-form"
+import { useForm, type FieldValues } from "react-hook-form"
 
 export function ImageUploadForm() {
   const {
