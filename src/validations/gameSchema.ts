@@ -1,6 +1,6 @@
 import { z } from "zod"
 
-export const gameSchema = z
+export const postGameSchema = z
   .object({
     title: z.string().max(20, "제목은 20자 이내로 작성해주세요.").nonempty("제목은 필수입니다."),
     description: z.string().max(50, "설명은 50자 이내로 작성해주세요.").nonempty("설명은 필수입니다."),
@@ -19,4 +19,4 @@ export const gameSchema = z
     path: ["inviteCode"]
   })
 
-export type PostGameType = z.output<typeof gameSchema>
+export type PostGameType = z.output<typeof postGameSchema>

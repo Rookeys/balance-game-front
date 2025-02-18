@@ -3,7 +3,7 @@ import { InputErrorMessage } from "@/components/form/_components"
 import Select from "@/components/form/select/Select"
 import { generateRounds } from "@/utils/generateRounds"
 import { sleep } from "@/utils/sleep"
-import { PostRoundType, roundSchema } from "@/validations/roundSchema"
+import { PostRoundType, postRoundSchema } from "@/validations/roundSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Dispatch, SetStateAction } from "react"
 import { Controller, FieldValues, useForm } from "react-hook-form"
@@ -19,7 +19,7 @@ export default function RoundForm({ totalItem, setIsOpen }: Params) {
     control,
     formState: { isSubmitting, errors }
   } = useForm<PostRoundType>({
-    resolver: zodResolver(roundSchema)
+    resolver: zodResolver(postRoundSchema)
   })
 
   const onSubmit = async (data: FieldValues) => {

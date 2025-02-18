@@ -6,7 +6,7 @@ import RadioGroup from "@/components/form/radioGroup/RadioGroup"
 import Select from "@/components/form/select/Select"
 import { useAsyncRoutePush } from "@/hooks/useAsyncRoutePush"
 import { sleep } from "@/utils/sleep"
-import { gameSchema, PostGameType } from "@/validations/gameSchema"
+import { postGameSchema, PostGameType } from "@/validations/gameSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import type { FieldValues } from "react-hook-form"
 import { Controller, useForm } from "react-hook-form"
@@ -53,7 +53,7 @@ export default function GameCreatePage() {
       gameAccessType: "public",
       inviteCode: ""
     },
-    resolver: zodResolver(gameSchema)
+    resolver: zodResolver(postGameSchema)
   })
 
   const asyncPush = useAsyncRoutePush()
