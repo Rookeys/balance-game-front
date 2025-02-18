@@ -1,4 +1,4 @@
-import { auth } from "@/auth"
+import { authOptions } from "@/auth"
 import Header from "@/components/Header"
 import ToasterWithTheme from "@/components/ToasterWithTheme"
 import AuthProvider from "@/lib/providers/AuthProvider"
@@ -6,6 +6,7 @@ import ReactQueryProvider from "@/lib/providers/ReactQueryProvider"
 import "@/styles/globals.css"
 import "@/styles/reset.css"
 import type { Metadata } from "next"
+import { getServerSession } from "next-auth"
 import { ThemeProvider } from "next-themes"
 import { MoneygraphyRounded } from "./fonts"
 
@@ -19,7 +20,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const session = await auth()
+  const session = await getServerSession(authOptions)
 
   return (
     <html lang="ko" suppressHydrationWarning>
