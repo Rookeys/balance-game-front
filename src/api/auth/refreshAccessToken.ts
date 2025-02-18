@@ -8,7 +8,7 @@ export const refreshAccessToken = async (refreshToken: string): Promise<TokenRes
       undefined,
       {
         headers: {
-          RefreshToken: refreshToken,
+          RefreshToken: `Bearer ${refreshToken}`,
           "Cache-Control": "no-store"
         }
       }

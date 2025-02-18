@@ -16,9 +16,9 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     signIn: "/sign-in"
   },
   callbacks: {
-    authorized: async ({ auth }) => {
-      return !!auth
-    },
+    // authorized: async ({ auth }) => {
+    //   return !!auth
+    // },
     async jwt({ token, account, user }) {
       try {
         if (account && user) {
@@ -74,7 +74,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         }
       } catch (error: any) {
         console.log(error)
-        return token
+        console.log("된거아님?")
+        return { ...token, access_token: undefined, refresh_token: undefined }
       }
     },
 
@@ -85,7 +86,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         session.access_token_expires_at = token.access_token_expires_at
         session.refresh_token_expires_at = token.refresh_token_expires_at
       }
-
       return session
     },
 
