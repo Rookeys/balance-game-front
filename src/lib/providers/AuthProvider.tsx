@@ -1,7 +1,9 @@
 "use client"
 
+import { useSessionStore } from "@/store/session"
 import type { Session } from "next-auth"
 import { SessionProvider } from "next-auth/react"
+import { useEffect } from "react"
 
 interface Props {
   session: Session | null
@@ -9,6 +11,11 @@ interface Props {
 }
 
 const AuthProvider = ({ session, children }: Props) => {
+  const setSession = useSessionStore((state) => state.setSession)
+  useEffect(() => {
+    setSession(session)
+  }, [session])
+
   return <SessionProvider session={session}>{children}</SessionProvider>
 }
 

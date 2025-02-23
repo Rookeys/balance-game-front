@@ -2,6 +2,7 @@ import { log } from "@/utils/log"
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios"
 import { getSession, signOut } from "next-auth/react"
 import { refreshAccessToken } from "./auth/refreshAccessToken"
+import { useSessionStore } from "@/store/session"
 
 export const clientInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_ROOT,
@@ -14,7 +15,8 @@ export const clientInstance = axios.create({
 clientInstance.interceptors.request.use(
   async (config) => {
     // 요청이 전달되기 전에 작업 수행
-    const session = await getSession()
+    // const session = await getSession()
+    const session = useSessionStore.getState().session
     if (session?.access_token) {
       config.headers["Authorization"] = `Bearer ${session?.access_token}`
     }
