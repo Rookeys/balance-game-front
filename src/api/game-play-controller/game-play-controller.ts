@@ -8,7 +8,7 @@ type SecondParameter<T extends (...args: any) => any> = Parameters<T>[1]
 
 /**
  * 선택한 리소스를 업데이트하고 다음 페어를 반환.
- * @summary 플레이룸 업데이트 API
+ * @summary 플레이룸 결과 반영 API
  */
 export const updatePlayRoom = (
   gameId: number,
@@ -65,7 +65,7 @@ export type UpdatePlayRoomMutationBody = BodyType<GamePlayRequest>
 export type UpdatePlayRoomMutationError = ErrorType<GamePlayResponse>
 
 /**
- * @summary 플레이룸 업데이트 API
+ * @summary 플레이룸 결과 반영 API
  */
 export const useUpdatePlayRoom = <TError = ErrorType<GamePlayResponse>, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<
