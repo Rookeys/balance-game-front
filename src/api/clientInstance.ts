@@ -1,6 +1,6 @@
 import { log } from "@/utils/log"
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios"
-import { getSession } from "next-auth/react"
+import { getSession, signOut } from "next-auth/react"
 import { refreshAccessToken } from "./auth/refreshAccessToken"
 
 export const clientInstance = axios.create({
@@ -36,7 +36,7 @@ clientInstance.interceptors.response.use(
     // 2xx 외의 범위에 있는 상태 코드는 이 함수를 트리거 합니다.
     // 응답 오류가 있는 작업 수행
     const originalRequest = error.config
-    if (error.response?.status !== 401 || !originalRequest._retry) {
+    if (error.response?.status === 401 && !originalRequest._retry) {
       console.error("Unauthorized: 액세스 토큰이 만료되었거나 유효하지 않습니다.")
       try {
         const session = await getSession()
@@ -46,7 +46,8 @@ clientInstance.interceptors.response.use(
         return clientInstance(originalRequest)
       } catch (error) {
         log("error", error)
-        window.location.href = "/sign-in"
+        await signOut({ redirect: false })
+        // window.location.href = "/sign-in"
       }
     }
     return Promise.reject(error)

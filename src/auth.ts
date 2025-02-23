@@ -58,6 +58,8 @@ export const authOptions: AuthOptions = {
             refreshTokenExpiresAt: newRefreshTokenExpiresAt
           } = await refreshAccessToken(token.refresh_token as string)
 
+          console.log("리프레쉬 합니다~")
+
           const newToken: JWT = {
             ...token,
             access_token: newAccessToken,
@@ -74,7 +76,6 @@ export const authOptions: AuthOptions = {
         }
       } catch (error: any) {
         console.log(error)
-        console.log("된거아님?")
         return { ...token, access_token: undefined, refresh_token: undefined }
       }
     },
