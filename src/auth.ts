@@ -1,8 +1,8 @@
+import { refreshAccessToken } from "@/api/auth/refreshAccessToken"
 import axios from "axios"
 import { AuthOptions, type Session } from "next-auth"
 import type { JWT } from "next-auth/jwt"
 import KakaoProvider from "next-auth/providers/kakao"
-import { refreshAccessToken } from "@/api/auth/refreshAccessToken"
 import { LoginRequest, LoginResponse } from "./api/model"
 
 export const authOptions: AuthOptions = {
@@ -57,8 +57,6 @@ export const authOptions: AuthOptions = {
             accessTokenExpiresAt: newAccessTokenExpiresAt,
             refreshTokenExpiresAt: newRefreshTokenExpiresAt
           } = await refreshAccessToken(token.refresh_token as string)
-
-          console.log("리프레쉬 합니다~")
 
           const newToken: JWT = {
             ...token,
