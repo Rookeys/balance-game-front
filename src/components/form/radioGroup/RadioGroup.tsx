@@ -6,7 +6,7 @@ import { RadioItem } from "./_components"
 
 interface Params {
   name: string
-  value: string
+  value?: string
   items: SelectOptionType[]
   onChange: (value: string) => void
 }

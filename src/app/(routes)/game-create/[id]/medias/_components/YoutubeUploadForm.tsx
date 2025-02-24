@@ -8,7 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import dynamic from "next/dynamic"
 import Image from "next/image"
 import { useState } from "react"
-import { FieldValues, useForm } from "react-hook-form"
+import { useForm, type FieldValues } from "react-hook-form"
 
 const YoutubeModal = dynamic(() => import("@/components/modal/YoutubeModal"))
 const InputErrorMessage = dynamic(() => import("@/components/form/_components").then((mod) => mod.InputErrorMessage))

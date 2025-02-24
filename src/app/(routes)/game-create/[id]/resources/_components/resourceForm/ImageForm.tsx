@@ -2,7 +2,7 @@
 
 import FileUploadDropZone from "@/components/form/fileUpload/FileUploadDropZone"
 import InputTextControlled from "@/components/form/inputText/InputTextControlled"
-import { FieldValues, FormProvider, useForm } from "react-hook-form"
+import { FormProvider, useForm, type FieldValues } from "react-hook-form"
 import type { ResourceType } from "../../page"
 import ImageThumbnailBox from "../ImageThumbnailBox"
 import FormAction from "./FormAction"
