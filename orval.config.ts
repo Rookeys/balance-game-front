@@ -17,8 +17,8 @@ module.exports = {
         query: {
           useQuery: true,
           useInfinite: true,
-          useInfiniteQueryParam: "cursorId"
-          // useSuspenseQuery: true,
+          useInfiniteQueryParam: "cursorId",
+          useSuspenseQuery: true
           // useSuspenseInfiniteQuery: true
         },
         operations: {

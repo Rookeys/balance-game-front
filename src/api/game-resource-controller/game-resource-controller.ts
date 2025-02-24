@@ -1,4 +1,4 @@
-import { useInfiniteQuery, useMutation, useQuery } from "@tanstack/react-query"
+import { useInfiniteQuery, useMutation, useQuery, useSuspenseQuery } from "@tanstack/react-query"
 import type {
   DataTag,
   DefinedInitialDataOptions,
@@ -14,7 +14,9 @@ import type {
   UseMutationOptions,
   UseMutationResult,
   UseQueryOptions,
-  UseQueryResult
+  UseQueryResult,
+  UseSuspenseQueryOptions,
+  UseSuspenseQueryResult
 } from "@tanstack/react-query"
 import type { GameResourceRequest, GetResourcesParams, PageGameResourceResponse } from ".././model"
 import { customInstance } from ".././clientInstance"
@@ -447,6 +449,93 @@ export function useGetResources<
   const queryOptions = getGetResourcesQueryOptions(gameId, params, options)
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+
+  query.queryKey = queryOptions.queryKey
+
+  return query
+}
+
+export const getGetResourcesSuspenseQueryOptions = <
+  TData = Awaited<ReturnType<typeof getResources>>,
+  TError = ErrorType<PageGameResourceResponse>
+>(
+  gameId: number,
+  params?: GetResourcesParams,
+  options?: {
+    query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getResources>>, TError, TData>>
+    request?: SecondParameter<typeof customInstance>
+  }
+) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {}
+
+  const queryKey = queryOptions?.queryKey ?? getGetResourcesQueryKey(gameId, params)
+
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getResources>>> = ({ signal }) =>
+    getResources(gameId, params, requestOptions, signal)
+
+  return { queryKey, queryFn, ...queryOptions } as UseSuspenseQueryOptions<
+    Awaited<ReturnType<typeof getResources>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetResourcesSuspenseQueryResult = NonNullable<Awaited<ReturnType<typeof getResources>>>
+export type GetResourcesSuspenseQueryError = ErrorType<PageGameResourceResponse>
+
+export function useGetResourcesSuspense<
+  TData = Awaited<ReturnType<typeof getResources>>,
+  TError = ErrorType<PageGameResourceResponse>
+>(
+  gameId: number,
+  params: undefined | GetResourcesParams,
+  options: {
+    query: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getResources>>, TError, TData>>
+    request?: SecondParameter<typeof customInstance>
+  }
+): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetResourcesSuspense<
+  TData = Awaited<ReturnType<typeof getResources>>,
+  TError = ErrorType<PageGameResourceResponse>
+>(
+  gameId: number,
+  params?: GetResourcesParams,
+  options?: {
+    query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getResources>>, TError, TData>>
+    request?: SecondParameter<typeof customInstance>
+  }
+): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetResourcesSuspense<
+  TData = Awaited<ReturnType<typeof getResources>>,
+  TError = ErrorType<PageGameResourceResponse>
+>(
+  gameId: number,
+  params?: GetResourcesParams,
+  options?: {
+    query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getResources>>, TError, TData>>
+    request?: SecondParameter<typeof customInstance>
+  }
+): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary 게임 리소스 리스트 발급 API
+ */
+
+export function useGetResourcesSuspense<
+  TData = Awaited<ReturnType<typeof getResources>>,
+  TError = ErrorType<PageGameResourceResponse>
+>(
+  gameId: number,
+  params?: GetResourcesParams,
+  options?: {
+    query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getResources>>, TError, TData>>
+    request?: SecondParameter<typeof customInstance>
+  }
+): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+  const queryOptions = getGetResourcesSuspenseQueryOptions(gameId, params, options)
+
+  const query = useSuspenseQuery(queryOptions) as UseSuspenseQueryResult<TData, TError> & {
+    queryKey: DataTag<QueryKey, TData, TError>
+  }
 
   query.queryKey = queryOptions.queryKey
 

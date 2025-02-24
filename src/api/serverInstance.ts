@@ -3,7 +3,7 @@ import axios from "axios"
 import { getServerSession } from "next-auth"
 
 export const serverInstance = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_BACKEND_URL
+  baseURL: process.env.NEXT_PUBLIC_API_ROOT
 })
 
 serverInstance.interceptors.request.use(

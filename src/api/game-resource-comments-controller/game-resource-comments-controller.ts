@@ -1,4 +1,4 @@
-import { useInfiniteQuery, useMutation, useQuery } from "@tanstack/react-query"
+import { useInfiniteQuery, useMutation, useQuery, useSuspenseQuery } from "@tanstack/react-query"
 import type {
   DataTag,
   DefinedInitialDataOptions,
@@ -14,7 +14,9 @@ import type {
   UseMutationOptions,
   UseMutationResult,
   UseQueryOptions,
-  UseQueryResult
+  UseQueryResult,
+  UseSuspenseQueryOptions,
+  UseSuspenseQueryResult
 } from "@tanstack/react-query"
 import type {
   GameResourceCommentRequest,
@@ -494,6 +496,103 @@ export function useGetParentCommentsByGameResource1<
   return query
 }
 
+export const getGetParentCommentsByGameResource1SuspenseQueryOptions = <
+  TData = Awaited<ReturnType<typeof getParentCommentsByGameResource1>>,
+  TError = ErrorType<unknown>
+>(
+  resourceId: number,
+  params?: GetParentCommentsByGameResource1Params,
+  options?: {
+    query?: Partial<
+      UseSuspenseQueryOptions<Awaited<ReturnType<typeof getParentCommentsByGameResource1>>, TError, TData>
+    >
+    request?: SecondParameter<typeof customInstance>
+  }
+) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {}
+
+  const queryKey = queryOptions?.queryKey ?? getGetParentCommentsByGameResource1QueryKey(resourceId, params)
+
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getParentCommentsByGameResource1>>> = ({ signal }) =>
+    getParentCommentsByGameResource1(resourceId, params, requestOptions, signal)
+
+  return { queryKey, queryFn, ...queryOptions } as UseSuspenseQueryOptions<
+    Awaited<ReturnType<typeof getParentCommentsByGameResource1>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetParentCommentsByGameResource1SuspenseQueryResult = NonNullable<
+  Awaited<ReturnType<typeof getParentCommentsByGameResource1>>
+>
+export type GetParentCommentsByGameResource1SuspenseQueryError = ErrorType<unknown>
+
+export function useGetParentCommentsByGameResource1Suspense<
+  TData = Awaited<ReturnType<typeof getParentCommentsByGameResource1>>,
+  TError = ErrorType<unknown>
+>(
+  resourceId: number,
+  params: undefined | GetParentCommentsByGameResource1Params,
+  options: {
+    query: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getParentCommentsByGameResource1>>, TError, TData>>
+    request?: SecondParameter<typeof customInstance>
+  }
+): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetParentCommentsByGameResource1Suspense<
+  TData = Awaited<ReturnType<typeof getParentCommentsByGameResource1>>,
+  TError = ErrorType<unknown>
+>(
+  resourceId: number,
+  params?: GetParentCommentsByGameResource1Params,
+  options?: {
+    query?: Partial<
+      UseSuspenseQueryOptions<Awaited<ReturnType<typeof getParentCommentsByGameResource1>>, TError, TData>
+    >
+    request?: SecondParameter<typeof customInstance>
+  }
+): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetParentCommentsByGameResource1Suspense<
+  TData = Awaited<ReturnType<typeof getParentCommentsByGameResource1>>,
+  TError = ErrorType<unknown>
+>(
+  resourceId: number,
+  params?: GetParentCommentsByGameResource1Params,
+  options?: {
+    query?: Partial<
+      UseSuspenseQueryOptions<Awaited<ReturnType<typeof getParentCommentsByGameResource1>>, TError, TData>
+    >
+    request?: SecondParameter<typeof customInstance>
+  }
+): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary 게임 리소스 부모 댓글 리스트 발급 API
+ */
+
+export function useGetParentCommentsByGameResource1Suspense<
+  TData = Awaited<ReturnType<typeof getParentCommentsByGameResource1>>,
+  TError = ErrorType<unknown>
+>(
+  resourceId: number,
+  params?: GetParentCommentsByGameResource1Params,
+  options?: {
+    query?: Partial<
+      UseSuspenseQueryOptions<Awaited<ReturnType<typeof getParentCommentsByGameResource1>>, TError, TData>
+    >
+    request?: SecondParameter<typeof customInstance>
+  }
+): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+  const queryOptions = getGetParentCommentsByGameResource1SuspenseQueryOptions(resourceId, params, options)
+
+  const query = useSuspenseQuery(queryOptions) as UseSuspenseQueryResult<TData, TError> & {
+    queryKey: DataTag<QueryKey, TData, TError>
+  }
+
+  query.queryKey = queryOptions.queryKey
+
+  return query
+}
+
 /**
  * 해당 리소스에 댓글을 등록할 수 있다.
  * @summary 게임 리소스 댓글 등록 API
@@ -891,6 +990,110 @@ export function useGetChildrenCommentsByGameResource<
   const queryOptions = getGetChildrenCommentsByGameResourceQueryOptions(resourceId, parentId, params, options)
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+
+  query.queryKey = queryOptions.queryKey
+
+  return query
+}
+
+export const getGetChildrenCommentsByGameResourceSuspenseQueryOptions = <
+  TData = Awaited<ReturnType<typeof getChildrenCommentsByGameResource>>,
+  TError = ErrorType<unknown>
+>(
+  resourceId: number,
+  parentId: number,
+  params?: GetChildrenCommentsByGameResourceParams,
+  options?: {
+    query?: Partial<
+      UseSuspenseQueryOptions<Awaited<ReturnType<typeof getChildrenCommentsByGameResource>>, TError, TData>
+    >
+    request?: SecondParameter<typeof customInstance>
+  }
+) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {}
+
+  const queryKey = queryOptions?.queryKey ?? getGetChildrenCommentsByGameResourceQueryKey(resourceId, parentId, params)
+
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getChildrenCommentsByGameResource>>> = ({ signal }) =>
+    getChildrenCommentsByGameResource(resourceId, parentId, params, requestOptions, signal)
+
+  return { queryKey, queryFn, ...queryOptions } as UseSuspenseQueryOptions<
+    Awaited<ReturnType<typeof getChildrenCommentsByGameResource>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetChildrenCommentsByGameResourceSuspenseQueryResult = NonNullable<
+  Awaited<ReturnType<typeof getChildrenCommentsByGameResource>>
+>
+export type GetChildrenCommentsByGameResourceSuspenseQueryError = ErrorType<unknown>
+
+export function useGetChildrenCommentsByGameResourceSuspense<
+  TData = Awaited<ReturnType<typeof getChildrenCommentsByGameResource>>,
+  TError = ErrorType<unknown>
+>(
+  resourceId: number,
+  parentId: number,
+  params: undefined | GetChildrenCommentsByGameResourceParams,
+  options: {
+    query: Partial<
+      UseSuspenseQueryOptions<Awaited<ReturnType<typeof getChildrenCommentsByGameResource>>, TError, TData>
+    >
+    request?: SecondParameter<typeof customInstance>
+  }
+): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetChildrenCommentsByGameResourceSuspense<
+  TData = Awaited<ReturnType<typeof getChildrenCommentsByGameResource>>,
+  TError = ErrorType<unknown>
+>(
+  resourceId: number,
+  parentId: number,
+  params?: GetChildrenCommentsByGameResourceParams,
+  options?: {
+    query?: Partial<
+      UseSuspenseQueryOptions<Awaited<ReturnType<typeof getChildrenCommentsByGameResource>>, TError, TData>
+    >
+    request?: SecondParameter<typeof customInstance>
+  }
+): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetChildrenCommentsByGameResourceSuspense<
+  TData = Awaited<ReturnType<typeof getChildrenCommentsByGameResource>>,
+  TError = ErrorType<unknown>
+>(
+  resourceId: number,
+  parentId: number,
+  params?: GetChildrenCommentsByGameResourceParams,
+  options?: {
+    query?: Partial<
+      UseSuspenseQueryOptions<Awaited<ReturnType<typeof getChildrenCommentsByGameResource>>, TError, TData>
+    >
+    request?: SecondParameter<typeof customInstance>
+  }
+): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary 게임 리소스 대댓글 리스트 발급 API
+ */
+
+export function useGetChildrenCommentsByGameResourceSuspense<
+  TData = Awaited<ReturnType<typeof getChildrenCommentsByGameResource>>,
+  TError = ErrorType<unknown>
+>(
+  resourceId: number,
+  parentId: number,
+  params?: GetChildrenCommentsByGameResourceParams,
+  options?: {
+    query?: Partial<
+      UseSuspenseQueryOptions<Awaited<ReturnType<typeof getChildrenCommentsByGameResource>>, TError, TData>
+    >
+    request?: SecondParameter<typeof customInstance>
+  }
+): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+  const queryOptions = getGetChildrenCommentsByGameResourceSuspenseQueryOptions(resourceId, parentId, params, options)
+
+  const query = useSuspenseQuery(queryOptions) as UseSuspenseQueryResult<TData, TError> & {
+    queryKey: DataTag<QueryKey, TData, TError>
+  }
 
   query.queryKey = queryOptions.queryKey
 

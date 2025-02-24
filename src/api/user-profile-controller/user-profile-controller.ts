@@ -1,4 +1,4 @@
-import { useInfiniteQuery, useMutation, useQuery } from "@tanstack/react-query"
+import { useInfiniteQuery, useMutation, useQuery, useSuspenseQuery } from "@tanstack/react-query"
 import type {
   DataTag,
   DefinedInitialDataOptions,
@@ -14,7 +14,9 @@ import type {
   UseMutationOptions,
   UseMutationResult,
   UseQueryOptions,
-  UseQueryResult
+  UseQueryResult,
+  UseSuspenseQueryOptions,
+  UseSuspenseQueryResult
 } from "@tanstack/react-query"
 import type { GetMyGameListParams, PageGameListResponse, UserRequest, UserResponse } from ".././model"
 import { customInstance } from ".././clientInstance"
@@ -172,6 +174,73 @@ export function useGetProfile<TData = Awaited<ReturnType<typeof getProfile>>, TE
   const queryOptions = getGetProfileQueryOptions(options)
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+
+  query.queryKey = queryOptions.queryKey
+
+  return query
+}
+
+export const getGetProfileSuspenseQueryOptions = <
+  TData = Awaited<ReturnType<typeof getProfile>>,
+  TError = ErrorType<unknown>
+>(options?: {
+  query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getProfile>>, TError, TData>>
+  request?: SecondParameter<typeof customInstance>
+}) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {}
+
+  const queryKey = queryOptions?.queryKey ?? getGetProfileQueryKey()
+
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getProfile>>> = ({ signal }) =>
+    getProfile(requestOptions, signal)
+
+  return { queryKey, queryFn, ...queryOptions } as UseSuspenseQueryOptions<
+    Awaited<ReturnType<typeof getProfile>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetProfileSuspenseQueryResult = NonNullable<Awaited<ReturnType<typeof getProfile>>>
+export type GetProfileSuspenseQueryError = ErrorType<unknown>
+
+export function useGetProfileSuspense<
+  TData = Awaited<ReturnType<typeof getProfile>>,
+  TError = ErrorType<unknown>
+>(options: {
+  query: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getProfile>>, TError, TData>>
+  request?: SecondParameter<typeof customInstance>
+}): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetProfileSuspense<
+  TData = Awaited<ReturnType<typeof getProfile>>,
+  TError = ErrorType<unknown>
+>(options?: {
+  query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getProfile>>, TError, TData>>
+  request?: SecondParameter<typeof customInstance>
+}): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetProfileSuspense<
+  TData = Awaited<ReturnType<typeof getProfile>>,
+  TError = ErrorType<unknown>
+>(options?: {
+  query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getProfile>>, TError, TData>>
+  request?: SecondParameter<typeof customInstance>
+}): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary 프로필 정보 출력 API
+ */
+
+export function useGetProfileSuspense<
+  TData = Awaited<ReturnType<typeof getProfile>>,
+  TError = ErrorType<unknown>
+>(options?: {
+  query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getProfile>>, TError, TData>>
+  request?: SecondParameter<typeof customInstance>
+}): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+  const queryOptions = getGetProfileSuspenseQueryOptions(options)
+
+  const query = useSuspenseQuery(queryOptions) as UseSuspenseQueryResult<TData, TError> & {
+    queryKey: DataTag<QueryKey, TData, TError>
+  }
 
   query.queryKey = queryOptions.queryKey
 
@@ -487,6 +556,88 @@ export function useGetMyGameList<TData = Awaited<ReturnType<typeof getMyGameList
   const queryOptions = getGetMyGameListQueryOptions(params, options)
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+
+  query.queryKey = queryOptions.queryKey
+
+  return query
+}
+
+export const getGetMyGameListSuspenseQueryOptions = <
+  TData = Awaited<ReturnType<typeof getMyGameList>>,
+  TError = ErrorType<unknown>
+>(
+  params?: GetMyGameListParams,
+  options?: {
+    query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getMyGameList>>, TError, TData>>
+    request?: SecondParameter<typeof customInstance>
+  }
+) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {}
+
+  const queryKey = queryOptions?.queryKey ?? getGetMyGameListQueryKey(params)
+
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getMyGameList>>> = ({ signal }) =>
+    getMyGameList(params, requestOptions, signal)
+
+  return { queryKey, queryFn, ...queryOptions } as UseSuspenseQueryOptions<
+    Awaited<ReturnType<typeof getMyGameList>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetMyGameListSuspenseQueryResult = NonNullable<Awaited<ReturnType<typeof getMyGameList>>>
+export type GetMyGameListSuspenseQueryError = ErrorType<unknown>
+
+export function useGetMyGameListSuspense<
+  TData = Awaited<ReturnType<typeof getMyGameList>>,
+  TError = ErrorType<unknown>
+>(
+  params: undefined | GetMyGameListParams,
+  options: {
+    query: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getMyGameList>>, TError, TData>>
+    request?: SecondParameter<typeof customInstance>
+  }
+): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetMyGameListSuspense<
+  TData = Awaited<ReturnType<typeof getMyGameList>>,
+  TError = ErrorType<unknown>
+>(
+  params?: GetMyGameListParams,
+  options?: {
+    query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getMyGameList>>, TError, TData>>
+    request?: SecondParameter<typeof customInstance>
+  }
+): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetMyGameListSuspense<
+  TData = Awaited<ReturnType<typeof getMyGameList>>,
+  TError = ErrorType<unknown>
+>(
+  params?: GetMyGameListParams,
+  options?: {
+    query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getMyGameList>>, TError, TData>>
+    request?: SecondParameter<typeof customInstance>
+  }
+): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary 내가 만든 게임 리스트 확인 API
+ */
+
+export function useGetMyGameListSuspense<
+  TData = Awaited<ReturnType<typeof getMyGameList>>,
+  TError = ErrorType<unknown>
+>(
+  params?: GetMyGameListParams,
+  options?: {
+    query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getMyGameList>>, TError, TData>>
+    request?: SecondParameter<typeof customInstance>
+  }
+): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+  const queryOptions = getGetMyGameListSuspenseQueryOptions(params, options)
+
+  const query = useSuspenseQuery(queryOptions) as UseSuspenseQueryResult<TData, TError> & {
+    queryKey: DataTag<QueryKey, TData, TError>
+  }
 
   query.queryKey = queryOptions.queryKey
 
