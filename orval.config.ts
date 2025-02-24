@@ -18,6 +18,8 @@ module.exports = {
           useQuery: true,
           useInfinite: true,
           useInfiniteQueryParam: "cursorId"
+          // useSuspenseQuery: true,
+          // useSuspenseInfiniteQuery: true
         },
         operations: {
           existsByNickname: {

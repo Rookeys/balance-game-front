@@ -2,7 +2,7 @@ import axios from "axios"
 import { AuthOptions, type Session } from "next-auth"
 import type { JWT } from "next-auth/jwt"
 import KakaoProvider from "next-auth/providers/kakao"
-import { refreshAccessToken } from "./api/auth/refreshAccessToken"
+import { refreshAccessToken } from "@/api/auth/refreshAccessToken"
 import { LoginRequest, LoginResponse } from "./api/model"
 
 export const authOptions: AuthOptions = {
