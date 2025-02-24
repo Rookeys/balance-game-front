@@ -1,3 +1,4 @@
+"use client"
 import { Button } from "@/components/Button"
 import { InputErrorMessage } from "@/components/form/_components"
 import Select from "@/components/form/select/Select"

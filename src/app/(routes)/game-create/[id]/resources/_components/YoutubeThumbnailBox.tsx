@@ -1,3 +1,4 @@
+"use client"
 import { getYoutubeThumbnail } from "@/utils/getYoutubeThumbnail"
 import dynamic from "next/dynamic"
 import Image from "next/image"

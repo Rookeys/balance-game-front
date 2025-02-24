@@ -1,8 +1,8 @@
+import { refreshAccessToken } from "@/api/auth/refreshAccessToken"
 import axios from "axios"
 import { AuthOptions, type Session } from "next-auth"
 import type { JWT } from "next-auth/jwt"
 import KakaoProvider from "next-auth/providers/kakao"
-import { refreshAccessToken } from "@/api/auth/refreshAccessToken"
 import { LoginRequest, LoginResponse } from "./api/model"
 
 export const authOptions: AuthOptions = {
@@ -15,6 +15,9 @@ export const authOptions: AuthOptions = {
   pages: {
     signIn: "/sign-in"
   },
+  // session: {
+  //   maxAge: 60 * 10
+  // },
   callbacks: {
     // authorized: async ({ auth }) => {
     //   return !!auth
@@ -58,8 +61,6 @@ export const authOptions: AuthOptions = {
             refreshTokenExpiresAt: newRefreshTokenExpiresAt
           } = await refreshAccessToken(token.refresh_token as string)
 
-          console.log("리프레쉬 합니다~")
-
           const newToken: JWT = {
             ...token,
             access_token: newAccessToken,
@@ -76,7 +77,7 @@ export const authOptions: AuthOptions = {
         }
       } catch (error: any) {
         console.log(error)
-        return { ...token, access_token: undefined, refresh_token: undefined }
+        throw new Error("Refresh token expired")
       }
     },
 
