@@ -11,6 +11,10 @@ function makeQueryClient() {
         retry: 0,
         refetchOnWindowFocus: false
       }
+      // dehydrate: {
+      //   shouldDehydrateQuery: (query) => defaultShouldDehydrateQuery(query) || query.state.status === "pending",
+      //   shouldRedactErrors: () => false
+      // }
     }
   })
 }
