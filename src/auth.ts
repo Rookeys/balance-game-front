@@ -15,6 +15,9 @@ export const authOptions: AuthOptions = {
   pages: {
     signIn: "/sign-in"
   },
+  // session: {
+  //   maxAge: 60 * 10
+  // },
   callbacks: {
     // authorized: async ({ auth }) => {
     //   return !!auth
@@ -74,7 +77,7 @@ export const authOptions: AuthOptions = {
         }
       } catch (error: any) {
         console.log(error)
-        return { ...token, access_token: undefined, refresh_token: undefined }
+        throw new Error("Refresh token expired")
       }
     },
 
