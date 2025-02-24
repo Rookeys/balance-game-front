@@ -1,28 +1,23 @@
 "use client"
+import { useSaveGame } from "@/api/game-room-controller/game-room-controller"
+import { GameRequest } from "@/api/model/gameRequest"
+import { GameRequestAccessType } from "@/api/model/gameRequestAccessType"
+import { GameRequestCategory } from "@/api/model/gameRequestCategory"
 import { Button } from "@/components/Button"
 import { InputErrorMessage, InputLabel } from "@/components/form/_components"
 import InputTextUnControlled from "@/components/form/inputText/InputTextUnControlled"
 import RadioGroup from "@/components/form/radioGroup/RadioGroup"
 import Select from "@/components/form/select/Select"
 import { useAsyncRoutePush } from "@/hooks/useAsyncRoutePush"
-import { sleep } from "@/utils/sleep"
+import { parseBoolean } from "@/utils/parseBoolean"
 import { postGameSchema, PostGameType } from "@/validations/gameSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Controller, useForm, type FieldValues } from "react-hook-form"
-
-// type PostGameRequestType = {
-//   title: string
-//   description: string
-//   category: string
-//   isNamePublic: string
-//   gameAccessType: "public" | "partial" | "private"
-//   inviteCode: string
-// }
+import { Controller, useForm } from "react-hook-form"
 
 const categoryItems: SelectOptionType[] = [
-  { id: "entertainment", value: "entertainment", label: "연예" },
-  { id: "memories", value: "memories", label: "추억" },
-  { id: "other", value: "other", label: "기타" }
+  { id: "fun", value: GameRequestCategory.FUN, label: "재미" },
+  { id: "horror", value: GameRequestCategory.HORROR, label: "공포" },
+  { id: "hot", value: GameRequestCategory.HOT, label: "유행" }
 ]
 
 const isNamePublicItems: SelectOptionType[] = [
@@ -31,9 +26,9 @@ const isNamePublicItems: SelectOptionType[] = [
 ]
 
 const gameAccessTypeItems: SelectOptionType[] = [
-  { id: "game_public", value: "public", label: "공개" },
-  { id: "game_partial", value: "partial", label: "일부공개" },
-  { id: "game_private", value: "private", label: "비공개" }
+  { id: GameRequestAccessType.PUBLIC, value: GameRequestAccessType.PUBLIC, label: "공개" },
+  { id: GameRequestAccessType.PROTECTED, value: GameRequestAccessType.PROTECTED, label: "일부공개" },
+  { id: GameRequestAccessType.PRIVATE, value: GameRequestAccessType.PRIVATE, label: "비공개" }
 ]
 
 export default function GameCreatePage() {
@@ -47,9 +42,9 @@ export default function GameCreatePage() {
       // Todo API 연동 후 values: { ...기존데이터 } 로 수정
       title: "",
       description: "",
-      category: "",
-      isNamePublic: "true",
-      gameAccessType: "public",
+      category: GameRequestCategory.FUN,
+      namePublic: "true",
+      accessType: GameRequestAccessType.PUBLIC,
       inviteCode: ""
     },
     resolver: zodResolver(postGameSchema)
@@ -57,15 +52,15 @@ export default function GameCreatePage() {
 
   const asyncPush = useAsyncRoutePush()
 
-  const onSubmit = async (data: FieldValues) => {
+  const { mutateAsync } = useSaveGame()
+
+  const onSubmit = async (data: PostGameType) => {
     try {
-      console.log("data", data)
-      // Todo API 요청 시 isNamePublicItems 관련 데이터의 value 는 boolean 으로 관리할듯함.
+      const requestData = { ...data, namePublic: parseBoolean(data.namePublic) } satisfies GameRequest
 
-      // await ~~~
-      await sleep(1000)
-
-      await asyncPush("/game-create/1/medias")
+      const res = await mutateAsync({ data: requestData })
+      // await sleep(1000)
+      await asyncPush(`/game-create/${res}/medias`)
     } catch {}
   }
 
@@ -101,7 +96,7 @@ export default function GameCreatePage() {
         <article className="flex flex-col gap-[4px]">
           <InputLabel label="제작자 표시 (익명으로 설정 시 팔로워들이 확인할 수 없습니다)" />
           <Controller
-            name="isNamePublic"
+            name="namePublic"
             control={control}
             render={({ field }) => <RadioGroup {...field} items={isNamePublicItems} />}
           />
@@ -109,7 +104,7 @@ export default function GameCreatePage() {
         <article className="flex flex-col gap-[4px]">
           <InputLabel label="게임공개" />
           <Controller
-            name="gameAccessType"
+            name="accessType"
             control={control}
             render={({ field }) => <RadioGroup {...field} items={gameAccessTypeItems} />}
           />

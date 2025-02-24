@@ -1,5 +1,4 @@
 "use client"
-
 import InputTextControlled from "@/components/form/inputText/InputTextControlled"
 import { FormProvider, useForm, type FieldValues } from "react-hook-form"
 import type { ResourceType } from "../../page"
