@@ -6,11 +6,7 @@ export default function SignOutPageClient() {
   const { data: session, status } = useSession()
   useEffect(() => {
     if (status !== "loading") {
-      if (session) {
-        signOut({ callbackUrl: "/" })
-      } else {
-        window.location.href = "/"
-      }
+      signOut({ callbackUrl: "/" })
     }
   }, [session, status])
 
