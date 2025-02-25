@@ -1,6 +1,6 @@
 import { log } from "@/utils/log"
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios"
-import { getSession, signOut } from "next-auth/react"
+import { getSession } from "next-auth/react"
 import { refreshAccessToken } from "./auth/refreshAccessToken"
 
 export const clientInstance = axios.create({
@@ -46,8 +46,7 @@ clientInstance.interceptors.response.use(
         return clientInstance(originalRequest)
       } catch (error) {
         log("error", error)
-        await signOut({ redirect: false })
-        // window.location.href = "/sign-in"
+        window.location.reload()
       }
     }
     return Promise.reject(error)
