@@ -1,12 +1,12 @@
 import { serverInstance } from "@/api/serverInstance"
-import { getGetProfileQueryKey } from "@/api/user-profile-controller/user-profile-controller"
+import { getGetMyGameListQueryKey } from "@/api/user-profile-controller/user-profile-controller"
 import { log } from "@/utils/log"
 import { sleep } from "@/utils/sleep"
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query"
 import { notFound } from "next/navigation"
-import ExampleClient from "./ExampleClient"
+import ExampleClient2 from "./ExampleClient2"
 
-export default async function MyPageClient() {
+export default async function MyPageClient2() {
   // const { data: profileData } = useGetProfileSuspense()
   // console.log("profileData", profileData)
 
@@ -14,11 +14,11 @@ export default async function MyPageClient() {
 
   try {
     // await Promise.all([
-    await sleep(2000)
+    await sleep(5000)
     await queryClient.fetchQuery({
-      queryKey: getGetProfileQueryKey(),
+      queryKey: getGetMyGameListQueryKey(),
       queryFn: async () => {
-        const { data } = await serverInstance.get(`/api/v1/users/profile`)
+        const { data } = await serverInstance.get(`/api/v1/users/games`)
         return data
       }
     })
@@ -29,7 +29,7 @@ export default async function MyPageClient() {
   }
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <ExampleClient />
+      <ExampleClient2 />
     </HydrationBoundary>
   )
 }
