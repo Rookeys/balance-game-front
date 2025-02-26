@@ -1,9 +1,10 @@
-import { refreshAccessToken } from "@/api/auth/refreshAccessToken"
 import axios from "axios"
 import { AuthOptions, type Session } from "next-auth"
 import type { JWT } from "next-auth/jwt"
 import KakaoProvider from "next-auth/providers/kakao"
-import { LoginRequest, LoginResponse } from "./api/model"
+import { LoginRequest } from "@/api/orval/model/loginRequest"
+import { LoginResponse } from "@/api/orval/model/loginResponse"
+import { refreshAccessToken } from "@/api/auth/refreshAccessToken"
 
 export const authOptions: AuthOptions = {
   providers: [
@@ -13,7 +14,8 @@ export const authOptions: AuthOptions = {
     })
   ],
   pages: {
-    signIn: "/sign-in"
+    signIn: "/sign-in",
+    signOut: "/sign-out"
   },
   // session: {
   //   maxAge: 60 * 10

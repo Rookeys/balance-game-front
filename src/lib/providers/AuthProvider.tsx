@@ -6,7 +6,7 @@ import { SessionProvider } from "next-auth/react"
 import { useEffect } from "react"
 
 interface Props {
-  session: Session | null
+  session?: Session | null
   children: React.ReactNode
 }
 
