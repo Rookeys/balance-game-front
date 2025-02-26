@@ -3,7 +3,6 @@ import { useGetProfileSuspense } from "@/api/orval/client/user-profile-controlle
 
 export default function ExampleClient2() {
   const { data: profileData } = useGetProfileSuspense()
-  console.log("profileData", profileData)
   // const { data: profileData } = useGetProfile()
   // console.log("profileData", profileData)
 
