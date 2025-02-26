@@ -19,12 +19,12 @@ import type {
   UseSuspenseQueryResult
 } from "@tanstack/react-query"
 import type {
+  CustomPageImplGameResourceChildrenCommentResponse,
+  CustomPageImplGameResourceParentCommentResponse,
   GameResourceCommentRequest,
   GameResourceCommentUpdateRequest,
   GetChildrenCommentsByGameResourceParams,
-  GetParentCommentsByGameResource1Params,
-  PageGameResourceChildrenCommentResponse,
-  PageGameResourceParentCommentResponse
+  GetParentCommentsByGameResource1Params
 } from "../../model"
 import { customClientInstance } from "../../../clientInstance"
 import type { ErrorType, BodyType } from "../../../clientInstance"
@@ -196,7 +196,7 @@ export const getParentCommentsByGameResource1 = (
   options?: SecondParameter<typeof customClientInstance>,
   signal?: AbortSignal
 ) => {
-  return customClientInstance<PageGameResourceParentCommentResponse>(
+  return customClientInstance<CustomPageImplGameResourceParentCommentResponse>(
     {
       url: `/api/v1/games/resources/${encodeURIComponent(String(resourceId))}/comments`,
       method: "GET",
@@ -684,7 +684,7 @@ export const getChildrenCommentsByGameResource = (
   options?: SecondParameter<typeof customClientInstance>,
   signal?: AbortSignal
 ) => {
-  return customClientInstance<PageGameResourceChildrenCommentResponse>(
+  return customClientInstance<CustomPageImplGameResourceChildrenCommentResponse>(
     {
       url: `/api/v1/games/resources/${encodeURIComponent(String(resourceId))}/comments/${encodeURIComponent(String(parentId))}`,
       method: "GET",

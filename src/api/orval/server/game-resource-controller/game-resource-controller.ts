@@ -10,7 +10,7 @@ import type {
   UseQueryOptions,
   UseQueryResult
 } from "@tanstack/react-query"
-import type { GameResourceRequest, GetResourcesParams, PageGameResourceResponse } from "../../model"
+import type { CustomPageImplGameResourceResponse, GameResourceRequest, GetResourcesParams } from "../../model"
 import { customServerInstance } from "../../../serverInstance"
 import type { ErrorType, BodyType } from "../../../serverInstance"
 
@@ -65,7 +65,7 @@ export const getResources = (
   options?: SecondParameter<typeof customServerInstance>,
   signal?: AbortSignal
 ) => {
-  return customServerInstance<PageGameResourceResponse>(
+  return customServerInstance<CustomPageImplGameResourceResponse>(
     { url: `/api/v1/games/${encodeURIComponent(String(gameId))}/resources`, method: "GET", params, signal },
     options
   )
@@ -77,7 +77,7 @@ export const getGetResourcesQueryKey = (gameId: number, params?: GetResourcesPar
 
 export const getGetResourcesQueryOptions = <
   TData = Awaited<ReturnType<typeof getResources>>,
-  TError = ErrorType<PageGameResourceResponse>
+  TError = ErrorType<CustomPageImplGameResourceResponse>
 >(
   gameId: number,
   params?: GetResourcesParams,
@@ -101,11 +101,11 @@ export const getGetResourcesQueryOptions = <
 }
 
 export type GetResourcesQueryResult = NonNullable<Awaited<ReturnType<typeof getResources>>>
-export type GetResourcesQueryError = ErrorType<PageGameResourceResponse>
+export type GetResourcesQueryError = ErrorType<CustomPageImplGameResourceResponse>
 
 export function useGetResources<
   TData = Awaited<ReturnType<typeof getResources>>,
-  TError = ErrorType<PageGameResourceResponse>
+  TError = ErrorType<CustomPageImplGameResourceResponse>
 >(
   gameId: number,
   params: undefined | GetResourcesParams,
@@ -124,7 +124,7 @@ export function useGetResources<
 ): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 export function useGetResources<
   TData = Awaited<ReturnType<typeof getResources>>,
-  TError = ErrorType<PageGameResourceResponse>
+  TError = ErrorType<CustomPageImplGameResourceResponse>
 >(
   gameId: number,
   params?: GetResourcesParams,
@@ -143,7 +143,7 @@ export function useGetResources<
 ): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 export function useGetResources<
   TData = Awaited<ReturnType<typeof getResources>>,
-  TError = ErrorType<PageGameResourceResponse>
+  TError = ErrorType<CustomPageImplGameResourceResponse>
 >(
   gameId: number,
   params?: GetResourcesParams,
@@ -158,7 +158,7 @@ export function useGetResources<
 
 export function useGetResources<
   TData = Awaited<ReturnType<typeof getResources>>,
-  TError = ErrorType<PageGameResourceResponse>
+  TError = ErrorType<CustomPageImplGameResourceResponse>
 >(
   gameId: number,
   params?: GetResourcesParams,
@@ -181,7 +181,7 @@ export function useGetResources<
  */
 export const prefetchGetResources = async <
   TData = Awaited<ReturnType<typeof getResources>>,
-  TError = ErrorType<PageGameResourceResponse>
+  TError = ErrorType<CustomPageImplGameResourceResponse>
 >(
   queryClient: QueryClient,
   gameId: number,

@@ -10,7 +10,7 @@ import type {
   UseQueryOptions,
   UseQueryResult
 } from "@tanstack/react-query"
-import type { GetMyGameListParams, PageGameListResponse, UserRequest, UserResponse } from "../../model"
+import type { CustomPageImplGameListResponse, GetMyGameListParams, UserRequest, UserResponse } from "../../model"
 import { customServerInstance } from "../../../serverInstance"
 import type { ErrorType, BodyType } from "../../../serverInstance"
 
@@ -133,7 +133,7 @@ export const getMyGameList = (
   options?: SecondParameter<typeof customServerInstance>,
   signal?: AbortSignal
 ) => {
-  return customServerInstance<PageGameListResponse>(
+  return customServerInstance<CustomPageImplGameListResponse>(
     { url: `/api/v1/users/games`, method: "GET", params, signal },
     options
   )

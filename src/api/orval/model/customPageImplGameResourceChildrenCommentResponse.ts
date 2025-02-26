@@ -1,17 +1,19 @@
 import type { GameResourceChildrenCommentResponse } from "./gameResourceChildrenCommentResponse"
-import type { SortObject } from "./sortObject"
 import type { PageableObject } from "./pageableObject"
+import type { SortObject } from "./sortObject"
 
-export interface PageGameResourceChildrenCommentResponse {
+export interface CustomPageImplGameResourceChildrenCommentResponse {
+  content?: GameResourceChildrenCommentResponse[]
+  pageable?: PageableObject
+  hasPrev?: boolean
+  hasNext?: boolean
+  last?: boolean
   totalElements?: number
   totalPages?: number
   first?: boolean
-  last?: boolean
   size?: number
-  content?: GameResourceChildrenCommentResponse[]
   number?: number
   sort?: SortObject
   numberOfElements?: number
-  pageable?: PageableObject
   empty?: boolean
 }

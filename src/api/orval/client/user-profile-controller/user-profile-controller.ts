@@ -18,7 +18,7 @@ import type {
   UseSuspenseQueryOptions,
   UseSuspenseQueryResult
 } from "@tanstack/react-query"
-import type { GetMyGameListParams, PageGameListResponse, UserRequest, UserResponse } from "../../model"
+import type { CustomPageImplGameListResponse, GetMyGameListParams, UserRequest, UserResponse } from "../../model"
 import { customClientInstance } from "../../../clientInstance"
 import type { ErrorType, BodyType } from "../../../clientInstance"
 
@@ -322,7 +322,7 @@ export const getMyGameList = (
   options?: SecondParameter<typeof customClientInstance>,
   signal?: AbortSignal
 ) => {
-  return customClientInstance<PageGameListResponse>(
+  return customClientInstance<CustomPageImplGameListResponse>(
     { url: `/api/v1/users/games`, method: "GET", params, signal },
     options
   )

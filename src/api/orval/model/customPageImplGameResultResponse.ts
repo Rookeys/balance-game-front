@@ -1,17 +1,19 @@
 import type { GameResultResponse } from "./gameResultResponse"
-import type { SortObject } from "./sortObject"
 import type { PageableObject } from "./pageableObject"
+import type { SortObject } from "./sortObject"
 
-export interface PageGameResultResponse {
+export interface CustomPageImplGameResultResponse {
+  content?: GameResultResponse[]
+  pageable?: PageableObject
+  hasPrev?: boolean
+  hasNext?: boolean
+  last?: boolean
   totalElements?: number
   totalPages?: number
   first?: boolean
-  last?: boolean
   size?: number
-  content?: GameResultResponse[]
   number?: number
   sort?: SortObject
   numberOfElements?: number
-  pageable?: PageableObject
   empty?: boolean
 }

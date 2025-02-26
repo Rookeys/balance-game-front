@@ -18,7 +18,7 @@ import type {
   UseSuspenseQueryOptions,
   UseSuspenseQueryResult
 } from "@tanstack/react-query"
-import type { GameResourceRequest, GetResourcesParams, PageGameResourceResponse } from "../../model"
+import type { CustomPageImplGameResourceResponse, GameResourceRequest, GetResourcesParams } from "../../model"
 import { customClientInstance } from "../../../clientInstance"
 import type { ErrorType, BodyType } from "../../../clientInstance"
 
@@ -189,7 +189,7 @@ export const getResources = (
   options?: SecondParameter<typeof customClientInstance>,
   signal?: AbortSignal
 ) => {
-  return customClientInstance<PageGameResourceResponse>(
+  return customClientInstance<CustomPageImplGameResourceResponse>(
     { url: `/api/v1/games/${encodeURIComponent(String(gameId))}/resources`, method: "GET", params, signal },
     options
   )
@@ -201,7 +201,7 @@ export const getGetResourcesQueryKey = (gameId: number, params?: GetResourcesPar
 
 export const getGetResourcesInfiniteQueryOptions = <
   TData = InfiniteData<Awaited<ReturnType<typeof getResources>>, GetResourcesParams["cursorId"]>,
-  TError = ErrorType<PageGameResourceResponse>
+  TError = ErrorType<CustomPageImplGameResourceResponse>
 >(
   gameId: number,
   params?: GetResourcesParams,
@@ -239,11 +239,11 @@ export const getGetResourcesInfiniteQueryOptions = <
 }
 
 export type GetResourcesInfiniteQueryResult = NonNullable<Awaited<ReturnType<typeof getResources>>>
-export type GetResourcesInfiniteQueryError = ErrorType<PageGameResourceResponse>
+export type GetResourcesInfiniteQueryError = ErrorType<CustomPageImplGameResourceResponse>
 
 export function useGetResourcesInfinite<
   TData = InfiniteData<Awaited<ReturnType<typeof getResources>>, GetResourcesParams["cursorId"]>,
-  TError = ErrorType<PageGameResourceResponse>
+  TError = ErrorType<CustomPageImplGameResourceResponse>
 >(
   gameId: number,
   params: undefined | GetResourcesParams,
@@ -272,7 +272,7 @@ export function useGetResourcesInfinite<
 ): DefinedUseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 export function useGetResourcesInfinite<
   TData = InfiniteData<Awaited<ReturnType<typeof getResources>>, GetResourcesParams["cursorId"]>,
-  TError = ErrorType<PageGameResourceResponse>
+  TError = ErrorType<CustomPageImplGameResourceResponse>
 >(
   gameId: number,
   params?: GetResourcesParams,
@@ -301,7 +301,7 @@ export function useGetResourcesInfinite<
 ): UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 export function useGetResourcesInfinite<
   TData = InfiniteData<Awaited<ReturnType<typeof getResources>>, GetResourcesParams["cursorId"]>,
-  TError = ErrorType<PageGameResourceResponse>
+  TError = ErrorType<CustomPageImplGameResourceResponse>
 >(
   gameId: number,
   params?: GetResourcesParams,
@@ -325,7 +325,7 @@ export function useGetResourcesInfinite<
 
 export function useGetResourcesInfinite<
   TData = InfiniteData<Awaited<ReturnType<typeof getResources>>, GetResourcesParams["cursorId"]>,
-  TError = ErrorType<PageGameResourceResponse>
+  TError = ErrorType<CustomPageImplGameResourceResponse>
 >(
   gameId: number,
   params?: GetResourcesParams,
@@ -356,7 +356,7 @@ export function useGetResourcesInfinite<
 
 export const getGetResourcesQueryOptions = <
   TData = Awaited<ReturnType<typeof getResources>>,
-  TError = ErrorType<PageGameResourceResponse>
+  TError = ErrorType<CustomPageImplGameResourceResponse>
 >(
   gameId: number,
   params?: GetResourcesParams,
@@ -380,11 +380,11 @@ export const getGetResourcesQueryOptions = <
 }
 
 export type GetResourcesQueryResult = NonNullable<Awaited<ReturnType<typeof getResources>>>
-export type GetResourcesQueryError = ErrorType<PageGameResourceResponse>
+export type GetResourcesQueryError = ErrorType<CustomPageImplGameResourceResponse>
 
 export function useGetResources<
   TData = Awaited<ReturnType<typeof getResources>>,
-  TError = ErrorType<PageGameResourceResponse>
+  TError = ErrorType<CustomPageImplGameResourceResponse>
 >(
   gameId: number,
   params: undefined | GetResourcesParams,
@@ -403,7 +403,7 @@ export function useGetResources<
 ): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 export function useGetResources<
   TData = Awaited<ReturnType<typeof getResources>>,
-  TError = ErrorType<PageGameResourceResponse>
+  TError = ErrorType<CustomPageImplGameResourceResponse>
 >(
   gameId: number,
   params?: GetResourcesParams,
@@ -422,7 +422,7 @@ export function useGetResources<
 ): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 export function useGetResources<
   TData = Awaited<ReturnType<typeof getResources>>,
-  TError = ErrorType<PageGameResourceResponse>
+  TError = ErrorType<CustomPageImplGameResourceResponse>
 >(
   gameId: number,
   params?: GetResourcesParams,
@@ -437,7 +437,7 @@ export function useGetResources<
 
 export function useGetResources<
   TData = Awaited<ReturnType<typeof getResources>>,
-  TError = ErrorType<PageGameResourceResponse>
+  TError = ErrorType<CustomPageImplGameResourceResponse>
 >(
   gameId: number,
   params?: GetResourcesParams,
@@ -457,7 +457,7 @@ export function useGetResources<
 
 export const getGetResourcesSuspenseQueryOptions = <
   TData = Awaited<ReturnType<typeof getResources>>,
-  TError = ErrorType<PageGameResourceResponse>
+  TError = ErrorType<CustomPageImplGameResourceResponse>
 >(
   gameId: number,
   params?: GetResourcesParams,
@@ -481,11 +481,11 @@ export const getGetResourcesSuspenseQueryOptions = <
 }
 
 export type GetResourcesSuspenseQueryResult = NonNullable<Awaited<ReturnType<typeof getResources>>>
-export type GetResourcesSuspenseQueryError = ErrorType<PageGameResourceResponse>
+export type GetResourcesSuspenseQueryError = ErrorType<CustomPageImplGameResourceResponse>
 
 export function useGetResourcesSuspense<
   TData = Awaited<ReturnType<typeof getResources>>,
-  TError = ErrorType<PageGameResourceResponse>
+  TError = ErrorType<CustomPageImplGameResourceResponse>
 >(
   gameId: number,
   params: undefined | GetResourcesParams,
@@ -496,7 +496,7 @@ export function useGetResourcesSuspense<
 ): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 export function useGetResourcesSuspense<
   TData = Awaited<ReturnType<typeof getResources>>,
-  TError = ErrorType<PageGameResourceResponse>
+  TError = ErrorType<CustomPageImplGameResourceResponse>
 >(
   gameId: number,
   params?: GetResourcesParams,
@@ -507,7 +507,7 @@ export function useGetResourcesSuspense<
 ): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 export function useGetResourcesSuspense<
   TData = Awaited<ReturnType<typeof getResources>>,
-  TError = ErrorType<PageGameResourceResponse>
+  TError = ErrorType<CustomPageImplGameResourceResponse>
 >(
   gameId: number,
   params?: GetResourcesParams,
@@ -522,7 +522,7 @@ export function useGetResourcesSuspense<
 
 export function useGetResourcesSuspense<
   TData = Awaited<ReturnType<typeof getResources>>,
-  TError = ErrorType<PageGameResourceResponse>
+  TError = ErrorType<CustomPageImplGameResourceResponse>
 >(
   gameId: number,
   params?: GetResourcesParams,

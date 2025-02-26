@@ -11,12 +11,12 @@ import type {
   UseQueryResult
 } from "@tanstack/react-query"
 import type {
+  CustomPageImplGameResourceChildrenCommentResponse,
+  CustomPageImplGameResourceParentCommentResponse,
   GameResourceCommentRequest,
   GameResourceCommentUpdateRequest,
   GetChildrenCommentsByGameResourceParams,
-  GetParentCommentsByGameResource1Params,
-  PageGameResourceChildrenCommentResponse,
-  PageGameResourceParentCommentResponse
+  GetParentCommentsByGameResource1Params
 } from "../../model"
 import { customServerInstance } from "../../../serverInstance"
 import type { ErrorType, BodyType } from "../../../serverInstance"
@@ -72,7 +72,7 @@ export const getParentCommentsByGameResource1 = (
   options?: SecondParameter<typeof customServerInstance>,
   signal?: AbortSignal
 ) => {
-  return customServerInstance<PageGameResourceParentCommentResponse>(
+  return customServerInstance<CustomPageImplGameResourceParentCommentResponse>(
     {
       url: `/api/v1/games/resources/${encodeURIComponent(String(resourceId))}/comments`,
       method: "GET",
@@ -248,7 +248,7 @@ export const getChildrenCommentsByGameResource = (
   options?: SecondParameter<typeof customServerInstance>,
   signal?: AbortSignal
 ) => {
-  return customServerInstance<PageGameResourceChildrenCommentResponse>(
+  return customServerInstance<CustomPageImplGameResourceChildrenCommentResponse>(
     {
       url: `/api/v1/games/resources/${encodeURIComponent(String(resourceId))}/comments/${encodeURIComponent(String(parentId))}`,
       method: "GET",
