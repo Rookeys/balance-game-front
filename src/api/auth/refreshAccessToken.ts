@@ -1,5 +1,5 @@
 import axios, { type AxiosResponse } from "axios"
-import type { TokenResponse } from "@/api/model/tokenResponse"
+import type { TokenResponse } from "@/api/orval/model/tokenResponse"
 
 export const refreshAccessToken = async (refreshToken: string): Promise<TokenResponse> => {
   try {

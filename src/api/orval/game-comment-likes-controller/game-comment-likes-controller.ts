@@ -1,8 +1,8 @@
 import { useMutation } from "@tanstack/react-query"
 import type { MutationFunction, UseMutationOptions, UseMutationResult } from "@tanstack/react-query"
 import type { GameCommentLikeRequest } from ".././model"
-import { customInstance } from ".././clientInstance"
-import type { ErrorType, BodyType } from ".././clientInstance"
+import { customClientInstance } from "../../clientInstance"
+import type { ErrorType, BodyType } from "../../clientInstance"
 
 type SecondParameter<T extends (...args: any) => any> = Parameters<T>[1]
 
@@ -13,10 +13,10 @@ type SecondParameter<T extends (...args: any) => any> = Parameters<T>[1]
 export const toggleLike = (
   commentId: number,
   gameCommentLikeRequest: BodyType<GameCommentLikeRequest>,
-  options?: SecondParameter<typeof customInstance>,
+  options?: SecondParameter<typeof customClientInstance>,
   signal?: AbortSignal
 ) => {
-  return customInstance<boolean>(
+  return customClientInstance<boolean>(
     {
       url: `/api/v1/games/comments/${encodeURIComponent(String(commentId))}/likes`,
       method: "POST",
@@ -35,7 +35,7 @@ export const getToggleLikeMutationOptions = <TError = ErrorType<boolean>, TConte
     { commentId: number; data: BodyType<GameCommentLikeRequest> },
     TContext
   >
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }): UseMutationOptions<
   Awaited<ReturnType<typeof toggleLike>>,
   TError,
@@ -75,7 +75,7 @@ export const useToggleLike = <TError = ErrorType<boolean>, TContext = unknown>(o
     { commentId: number; data: BodyType<GameCommentLikeRequest> },
     TContext
   >
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }): UseMutationResult<
   Awaited<ReturnType<typeof toggleLike>>,
   TError,

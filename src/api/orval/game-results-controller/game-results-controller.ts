@@ -16,8 +16,8 @@ import type {
   UseSuspenseQueryResult
 } from "@tanstack/react-query"
 import type { GetResultRankingParams, PageGameResultResponse } from ".././model"
-import { customInstance } from ".././clientInstance"
-import type { ErrorType } from ".././clientInstance"
+import { customClientInstance } from "../../clientInstance"
+import type { ErrorType } from "../../clientInstance"
 
 type SecondParameter<T extends (...args: any) => any> = Parameters<T>[1]
 
@@ -28,10 +28,10 @@ type SecondParameter<T extends (...args: any) => any> = Parameters<T>[1]
 export const getResultRanking = (
   gameId: number,
   params?: GetResultRankingParams,
-  options?: SecondParameter<typeof customInstance>,
+  options?: SecondParameter<typeof customClientInstance>,
   signal?: AbortSignal
 ) => {
-  return customInstance<PageGameResultResponse>(
+  return customClientInstance<PageGameResultResponse>(
     { url: `/api/v1/games/${encodeURIComponent(String(gameId))}/results`, method: "GET", params, signal },
     options
   )
@@ -58,7 +58,7 @@ export const getGetResultRankingInfiniteQueryOptions = <
         GetResultRankingParams["cursorId"]
       >
     >
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ) => {
   const { query: queryOptions, request: requestOptions } = options ?? {}
@@ -111,7 +111,7 @@ export function useGetResultRankingInfinite<
         >,
         "initialData"
       >
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ): DefinedUseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 export function useGetResultRankingInfinite<
@@ -140,7 +140,7 @@ export function useGetResultRankingInfinite<
         >,
         "initialData"
       >
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ): UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 export function useGetResultRankingInfinite<
@@ -160,7 +160,7 @@ export function useGetResultRankingInfinite<
         GetResultRankingParams["cursorId"]
       >
     >
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ): UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 /**
@@ -184,7 +184,7 @@ export function useGetResultRankingInfinite<
         GetResultRankingParams["cursorId"]
       >
     >
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ): UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
   const queryOptions = getGetResultRankingInfiniteQueryOptions(gameId, params, options)
@@ -206,7 +206,7 @@ export const getGetResultRankingQueryOptions = <
   params?: GetResultRankingParams,
   options?: {
     query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getResultRanking>>, TError, TData>>
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ) => {
   const { query: queryOptions, request: requestOptions } = options ?? {}
@@ -239,7 +239,7 @@ export function useGetResultRanking<TData = Awaited<ReturnType<typeof getResultR
         >,
         "initialData"
       >
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 export function useGetResultRanking<TData = Awaited<ReturnType<typeof getResultRanking>>, TError = ErrorType<unknown>>(
@@ -255,7 +255,7 @@ export function useGetResultRanking<TData = Awaited<ReturnType<typeof getResultR
         >,
         "initialData"
       >
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 export function useGetResultRanking<TData = Awaited<ReturnType<typeof getResultRanking>>, TError = ErrorType<unknown>>(
@@ -263,7 +263,7 @@ export function useGetResultRanking<TData = Awaited<ReturnType<typeof getResultR
   params?: GetResultRankingParams,
   options?: {
     query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getResultRanking>>, TError, TData>>
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 /**
@@ -275,7 +275,7 @@ export function useGetResultRanking<TData = Awaited<ReturnType<typeof getResultR
   params?: GetResultRankingParams,
   options?: {
     query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getResultRanking>>, TError, TData>>
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
   const queryOptions = getGetResultRankingQueryOptions(gameId, params, options)
@@ -295,7 +295,7 @@ export const getGetResultRankingSuspenseQueryOptions = <
   params?: GetResultRankingParams,
   options?: {
     query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getResultRanking>>, TError, TData>>
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ) => {
   const { query: queryOptions, request: requestOptions } = options ?? {}
@@ -323,7 +323,7 @@ export function useGetResultRankingSuspense<
   params: undefined | GetResultRankingParams,
   options: {
     query: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getResultRanking>>, TError, TData>>
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 export function useGetResultRankingSuspense<
@@ -334,7 +334,7 @@ export function useGetResultRankingSuspense<
   params?: GetResultRankingParams,
   options?: {
     query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getResultRanking>>, TError, TData>>
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 export function useGetResultRankingSuspense<
@@ -345,7 +345,7 @@ export function useGetResultRankingSuspense<
   params?: GetResultRankingParams,
   options?: {
     query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getResultRanking>>, TError, TData>>
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 /**
@@ -360,7 +360,7 @@ export function useGetResultRankingSuspense<
   params?: GetResultRankingParams,
   options?: {
     query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getResultRanking>>, TError, TData>>
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
   const queryOptions = getGetResultRankingSuspenseQueryOptions(gameId, params, options)

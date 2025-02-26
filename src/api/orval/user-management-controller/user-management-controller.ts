@@ -13,8 +13,8 @@ import type {
   UseQueryResult
 } from "@tanstack/react-query"
 import type { ExistsByNicknameParams, LoginResponse, SignUpRequest } from ".././model"
-import { customInstance } from ".././clientInstance"
-import type { ErrorType, BodyType } from ".././clientInstance"
+import { customClientInstance } from "../../clientInstance"
+import type { ErrorType, BodyType } from "../../clientInstance"
 
 type SecondParameter<T extends (...args: any) => any> = Parameters<T>[1]
 
@@ -24,10 +24,10 @@ type SecondParameter<T extends (...args: any) => any> = Parameters<T>[1]
  */
 export const signUp = (
   signUpRequest: BodyType<SignUpRequest>,
-  options?: SecondParameter<typeof customInstance>,
+  options?: SecondParameter<typeof customClientInstance>,
   signal?: AbortSignal
 ) => {
-  return customInstance<LoginResponse>(
+  return customClientInstance<LoginResponse>(
     {
       url: `/api/v1/users/signup`,
       method: "POST",
@@ -41,7 +41,7 @@ export const signUp = (
 
 export const getSignUpMutationOptions = <TError = ErrorType<LoginResponse>, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<Awaited<ReturnType<typeof signUp>>, TError, { data: BodyType<SignUpRequest> }, TContext>
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }): UseMutationOptions<Awaited<ReturnType<typeof signUp>>, TError, { data: BodyType<SignUpRequest> }, TContext> => {
   const mutationKey = ["signUp"]
   const { mutation: mutationOptions, request: requestOptions } = options
@@ -70,7 +70,7 @@ export type SignUpMutationError = ErrorType<LoginResponse>
  */
 export const useSignUp = <TError = ErrorType<LoginResponse>, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<Awaited<ReturnType<typeof signUp>>, TError, { data: BodyType<SignUpRequest> }, TContext>
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }): UseMutationResult<Awaited<ReturnType<typeof signUp>>, TError, { data: BodyType<SignUpRequest> }, TContext> => {
   const mutationOptions = getSignUpMutationOptions(options)
 
@@ -80,13 +80,13 @@ export const useSignUp = <TError = ErrorType<LoginResponse>, TContext = unknown>
  * 회원 탈퇴 요청을 처리합니다.
  * @summary 회원 탈퇴 API
  */
-export const resign = (options?: SecondParameter<typeof customInstance>, signal?: AbortSignal) => {
-  return customInstance<boolean>({ url: `/api/v1/users/resign`, method: "POST", signal }, options)
+export const resign = (options?: SecondParameter<typeof customClientInstance>, signal?: AbortSignal) => {
+  return customClientInstance<boolean>({ url: `/api/v1/users/resign`, method: "POST", signal }, options)
 }
 
 export const getResignMutationOptions = <TError = ErrorType<unknown>, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<Awaited<ReturnType<typeof resign>>, TError, void, TContext>
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }): UseMutationOptions<Awaited<ReturnType<typeof resign>>, TError, void, TContext> => {
   const mutationKey = ["resign"]
   const { mutation: mutationOptions, request: requestOptions } = options
@@ -111,7 +111,7 @@ export type ResignMutationError = ErrorType<unknown>
  */
 export const useResign = <TError = ErrorType<unknown>, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<Awaited<ReturnType<typeof resign>>, TError, void, TContext>
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }): UseMutationResult<Awaited<ReturnType<typeof resign>>, TError, void, TContext> => {
   const mutationOptions = getResignMutationOptions(options)
 
@@ -123,10 +123,10 @@ export const useResign = <TError = ErrorType<unknown>, TContext = unknown>(optio
  */
 export const cancelResign = (
   cancelResignBody: BodyType<string>,
-  options?: SecondParameter<typeof customInstance>,
+  options?: SecondParameter<typeof customClientInstance>,
   signal?: AbortSignal
 ) => {
-  return customInstance<boolean>(
+  return customClientInstance<boolean>(
     {
       url: `/api/v1/users/cancel/resign`,
       method: "POST",
@@ -140,7 +140,7 @@ export const cancelResign = (
 
 export const getCancelResignMutationOptions = <TError = ErrorType<unknown>, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<Awaited<ReturnType<typeof cancelResign>>, TError, { data: BodyType<string> }, TContext>
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }): UseMutationOptions<Awaited<ReturnType<typeof cancelResign>>, TError, { data: BodyType<string> }, TContext> => {
   const mutationKey = ["cancelResign"]
   const { mutation: mutationOptions, request: requestOptions } = options
@@ -169,7 +169,7 @@ export type CancelResignMutationError = ErrorType<unknown>
  */
 export const useCancelResign = <TError = ErrorType<unknown>, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<Awaited<ReturnType<typeof cancelResign>>, TError, { data: BodyType<string> }, TContext>
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }): UseMutationResult<Awaited<ReturnType<typeof cancelResign>>, TError, { data: BodyType<string> }, TContext> => {
   const mutationOptions = getCancelResignMutationOptions(options)
 
@@ -181,10 +181,10 @@ export const useCancelResign = <TError = ErrorType<unknown>, TContext = unknown>
  */
 export const existsByNickname = (
   params: ExistsByNicknameParams,
-  options?: SecondParameter<typeof customInstance>,
+  options?: SecondParameter<typeof customClientInstance>,
   signal?: AbortSignal
 ) => {
-  return customInstance<boolean>({ url: `/api/v1/users/exists`, method: "GET", params, signal }, options)
+  return customClientInstance<boolean>({ url: `/api/v1/users/exists`, method: "GET", params, signal }, options)
 }
 
 export const getExistsByNicknameQueryKey = (params: ExistsByNicknameParams) => {
@@ -198,7 +198,7 @@ export const getExistsByNicknameQueryOptions = <
   params: ExistsByNicknameParams,
   options?: {
     query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof existsByNickname>>, TError, TData>>
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ) => {
   const { query: queryOptions, request: requestOptions } = options ?? {}
@@ -230,7 +230,7 @@ export function useExistsByNickname<TData = Awaited<ReturnType<typeof existsByNi
         >,
         "initialData"
       >
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 export function useExistsByNickname<TData = Awaited<ReturnType<typeof existsByNickname>>, TError = ErrorType<unknown>>(
@@ -245,14 +245,14 @@ export function useExistsByNickname<TData = Awaited<ReturnType<typeof existsByNi
         >,
         "initialData"
       >
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 export function useExistsByNickname<TData = Awaited<ReturnType<typeof existsByNickname>>, TError = ErrorType<unknown>>(
   params: ExistsByNicknameParams,
   options?: {
     query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof existsByNickname>>, TError, TData>>
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 /**
@@ -263,7 +263,7 @@ export function useExistsByNickname<TData = Awaited<ReturnType<typeof existsByNi
   params: ExistsByNicknameParams,
   options?: {
     query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof existsByNickname>>, TError, TData>>
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
   const queryOptions = getExistsByNicknameQueryOptions(params, options)

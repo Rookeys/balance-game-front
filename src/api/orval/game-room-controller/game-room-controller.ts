@@ -19,8 +19,8 @@ import type {
   UseSuspenseQueryResult
 } from "@tanstack/react-query"
 import type { GameRequest, GameResponse } from ".././model"
-import { customInstance } from ".././clientInstance"
-import type { ErrorType, BodyType } from ".././clientInstance"
+import { customClientInstance } from "../../clientInstance"
+import type { ErrorType, BodyType } from "../../clientInstance"
 
 type SecondParameter<T extends (...args: any) => any> = Parameters<T>[1]
 
@@ -30,10 +30,10 @@ type SecondParameter<T extends (...args: any) => any> = Parameters<T>[1]
  */
 export const getGameStatus = (
   gameId: number,
-  options?: SecondParameter<typeof customInstance>,
+  options?: SecondParameter<typeof customClientInstance>,
   signal?: AbortSignal
 ) => {
-  return customInstance<GameResponse>(
+  return customClientInstance<GameResponse>(
     { url: `/api/v1/games/${encodeURIComponent(String(gameId))}`, method: "GET", signal },
     options
   )
@@ -50,7 +50,7 @@ export const getGetGameStatusInfiniteQueryOptions = <
   gameId: number,
   options?: {
     query?: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getGameStatus>>, TError, TData>>
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ) => {
   const { query: queryOptions, request: requestOptions } = options ?? {}
@@ -85,7 +85,7 @@ export function useGetGameStatusInfinite<
         >,
         "initialData"
       >
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ): DefinedUseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 export function useGetGameStatusInfinite<
@@ -103,7 +103,7 @@ export function useGetGameStatusInfinite<
         >,
         "initialData"
       >
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ): UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 export function useGetGameStatusInfinite<
@@ -113,7 +113,7 @@ export function useGetGameStatusInfinite<
   gameId: number,
   options?: {
     query?: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getGameStatus>>, TError, TData>>
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ): UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 /**
@@ -127,7 +127,7 @@ export function useGetGameStatusInfinite<
   gameId: number,
   options?: {
     query?: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getGameStatus>>, TError, TData>>
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ): UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
   const queryOptions = getGetGameStatusInfiniteQueryOptions(gameId, options)
@@ -148,7 +148,7 @@ export const getGetGameStatusQueryOptions = <
   gameId: number,
   options?: {
     query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getGameStatus>>, TError, TData>>
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ) => {
   const { query: queryOptions, request: requestOptions } = options ?? {}
@@ -180,7 +180,7 @@ export function useGetGameStatus<TData = Awaited<ReturnType<typeof getGameStatus
         >,
         "initialData"
       >
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 export function useGetGameStatus<TData = Awaited<ReturnType<typeof getGameStatus>>, TError = ErrorType<GameResponse>>(
@@ -195,14 +195,14 @@ export function useGetGameStatus<TData = Awaited<ReturnType<typeof getGameStatus
         >,
         "initialData"
       >
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 export function useGetGameStatus<TData = Awaited<ReturnType<typeof getGameStatus>>, TError = ErrorType<GameResponse>>(
   gameId: number,
   options?: {
     query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getGameStatus>>, TError, TData>>
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 /**
@@ -213,7 +213,7 @@ export function useGetGameStatus<TData = Awaited<ReturnType<typeof getGameStatus
   gameId: number,
   options?: {
     query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getGameStatus>>, TError, TData>>
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
   const queryOptions = getGetGameStatusQueryOptions(gameId, options)
@@ -232,7 +232,7 @@ export const getGetGameStatusSuspenseQueryOptions = <
   gameId: number,
   options?: {
     query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getGameStatus>>, TError, TData>>
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ) => {
   const { query: queryOptions, request: requestOptions } = options ?? {}
@@ -259,7 +259,7 @@ export function useGetGameStatusSuspense<
   gameId: number,
   options: {
     query: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getGameStatus>>, TError, TData>>
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 export function useGetGameStatusSuspense<
@@ -269,7 +269,7 @@ export function useGetGameStatusSuspense<
   gameId: number,
   options?: {
     query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getGameStatus>>, TError, TData>>
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 export function useGetGameStatusSuspense<
@@ -279,7 +279,7 @@ export function useGetGameStatusSuspense<
   gameId: number,
   options?: {
     query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getGameStatus>>, TError, TData>>
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 /**
@@ -293,7 +293,7 @@ export function useGetGameStatusSuspense<
   gameId: number,
   options?: {
     query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getGameStatus>>, TError, TData>>
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
   const queryOptions = getGetGameStatusSuspenseQueryOptions(gameId, options)
@@ -314,9 +314,9 @@ export function useGetGameStatusSuspense<
 export const updateGameStatus = (
   gameId: number,
   gameRequest: BodyType<GameRequest>,
-  options?: SecondParameter<typeof customInstance>
+  options?: SecondParameter<typeof customClientInstance>
 ) => {
-  return customInstance<boolean>(
+  return customClientInstance<boolean>(
     {
       url: `/api/v1/games/${encodeURIComponent(String(gameId))}`,
       method: "PUT",
@@ -334,7 +334,7 @@ export const getUpdateGameStatusMutationOptions = <TError = ErrorType<boolean>, 
     { gameId: number; data: BodyType<GameRequest> },
     TContext
   >
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }): UseMutationOptions<
   Awaited<ReturnType<typeof updateGameStatus>>,
   TError,
@@ -374,7 +374,7 @@ export const useUpdateGameStatus = <TError = ErrorType<boolean>, TContext = unkn
     { gameId: number; data: BodyType<GameRequest> },
     TContext
   >
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }): UseMutationResult<
   Awaited<ReturnType<typeof updateGameStatus>>,
   TError,
@@ -389,8 +389,8 @@ export const useUpdateGameStatus = <TError = ErrorType<boolean>, TContext = unkn
  * 게임방을 삭제 가능.
  * @summary 게임방 삭제 API
  */
-export const deleteGame = (gameId: number, options?: SecondParameter<typeof customInstance>) => {
-  return customInstance<boolean>(
+export const deleteGame = (gameId: number, options?: SecondParameter<typeof customClientInstance>) => {
+  return customClientInstance<boolean>(
     { url: `/api/v1/games/${encodeURIComponent(String(gameId))}`, method: "DELETE" },
     options
   )
@@ -398,7 +398,7 @@ export const deleteGame = (gameId: number, options?: SecondParameter<typeof cust
 
 export const getDeleteGameMutationOptions = <TError = ErrorType<boolean>, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<Awaited<ReturnType<typeof deleteGame>>, TError, { gameId: number }, TContext>
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }): UseMutationOptions<Awaited<ReturnType<typeof deleteGame>>, TError, { gameId: number }, TContext> => {
   const mutationKey = ["deleteGame"]
   const { mutation: mutationOptions, request: requestOptions } = options
@@ -425,7 +425,7 @@ export type DeleteGameMutationError = ErrorType<boolean>
  */
 export const useDeleteGame = <TError = ErrorType<boolean>, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<Awaited<ReturnType<typeof deleteGame>>, TError, { gameId: number }, TContext>
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }): UseMutationResult<Awaited<ReturnType<typeof deleteGame>>, TError, { gameId: number }, TContext> => {
   const mutationOptions = getDeleteGameMutationOptions(options)
 
@@ -437,10 +437,10 @@ export const useDeleteGame = <TError = ErrorType<boolean>, TContext = unknown>(o
  */
 export const saveGame = (
   gameRequest: BodyType<GameRequest>,
-  options?: SecondParameter<typeof customInstance>,
+  options?: SecondParameter<typeof customClientInstance>,
   signal?: AbortSignal
 ) => {
-  return customInstance<number>(
+  return customClientInstance<number>(
     {
       url: `/api/v1/games`,
       method: "POST",
@@ -454,7 +454,7 @@ export const saveGame = (
 
 export const getSaveGameMutationOptions = <TError = ErrorType<number>, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<Awaited<ReturnType<typeof saveGame>>, TError, { data: BodyType<GameRequest> }, TContext>
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }): UseMutationOptions<Awaited<ReturnType<typeof saveGame>>, TError, { data: BodyType<GameRequest> }, TContext> => {
   const mutationKey = ["saveGame"]
   const { mutation: mutationOptions, request: requestOptions } = options
@@ -483,7 +483,7 @@ export type SaveGameMutationError = ErrorType<number>
  */
 export const useSaveGame = <TError = ErrorType<number>, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<Awaited<ReturnType<typeof saveGame>>, TError, { data: BodyType<GameRequest> }, TContext>
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }): UseMutationResult<Awaited<ReturnType<typeof saveGame>>, TError, { data: BodyType<GameRequest> }, TContext> => {
   const mutationOptions = getSaveGameMutationOptions(options)
 

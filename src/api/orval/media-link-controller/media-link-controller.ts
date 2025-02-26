@@ -1,8 +1,8 @@
 import { useMutation } from "@tanstack/react-query"
 import type { MutationFunction, UseMutationOptions, UseMutationResult } from "@tanstack/react-query"
 import type { LinkRequest } from ".././model"
-import { customInstance } from ".././clientInstance"
-import type { ErrorType, BodyType } from ".././clientInstance"
+import { customClientInstance } from "../../clientInstance"
+import type { ErrorType, BodyType } from "../../clientInstance"
 
 type SecondParameter<T extends (...args: any) => any> = Parameters<T>[1]
 
@@ -13,10 +13,10 @@ type SecondParameter<T extends (...args: any) => any> = Parameters<T>[1]
 export const saveLink = (
   gameId: number,
   linkRequest: BodyType<LinkRequest>,
-  options?: SecondParameter<typeof customInstance>,
+  options?: SecondParameter<typeof customClientInstance>,
   signal?: AbortSignal
 ) => {
-  return customInstance<boolean>(
+  return customClientInstance<boolean>(
     {
       url: `/api/v1/games/${encodeURIComponent(String(gameId))}/media/links`,
       method: "POST",
@@ -35,7 +35,7 @@ export const getSaveLinkMutationOptions = <TError = ErrorType<unknown>, TContext
     { gameId: number; data: BodyType<LinkRequest> },
     TContext
   >
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }): UseMutationOptions<
   Awaited<ReturnType<typeof saveLink>>,
   TError,
@@ -75,7 +75,7 @@ export const useSaveLink = <TError = ErrorType<unknown>, TContext = unknown>(opt
     { gameId: number; data: BodyType<LinkRequest> },
     TContext
   >
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }): UseMutationResult<
   Awaited<ReturnType<typeof saveLink>>,
   TError,

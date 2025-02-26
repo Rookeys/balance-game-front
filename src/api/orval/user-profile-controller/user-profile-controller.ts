@@ -19,8 +19,8 @@ import type {
   UseSuspenseQueryResult
 } from "@tanstack/react-query"
 import type { GetMyGameListParams, PageGameListResponse, UserRequest, UserResponse } from ".././model"
-import { customInstance } from ".././clientInstance"
-import type { ErrorType, BodyType } from ".././clientInstance"
+import { customClientInstance } from "../../clientInstance"
+import type { ErrorType, BodyType } from "../../clientInstance"
 
 type SecondParameter<T extends (...args: any) => any> = Parameters<T>[1]
 
@@ -28,8 +28,8 @@ type SecondParameter<T extends (...args: any) => any> = Parameters<T>[1]
  * 프로필 정보를 출력합니다.
  * @summary 프로필 정보 출력 API
  */
-export const getProfile = (options?: SecondParameter<typeof customInstance>, signal?: AbortSignal) => {
-  return customInstance<UserResponse>({ url: `/api/v1/users/profile`, method: "GET", signal }, options)
+export const getProfile = (options?: SecondParameter<typeof customClientInstance>, signal?: AbortSignal) => {
+  return customClientInstance<UserResponse>({ url: `/api/v1/users/profile`, method: "GET", signal }, options)
 }
 
 export const getGetProfileQueryKey = () => {
@@ -41,7 +41,7 @@ export const getGetProfileInfiniteQueryOptions = <
   TError = ErrorType<unknown>
 >(options?: {
   query?: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getProfile>>, TError, TData>>
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }) => {
   const { query: queryOptions, request: requestOptions } = options ?? {}
 
@@ -69,7 +69,7 @@ export function useGetProfileInfinite<
       DefinedInitialDataOptions<Awaited<ReturnType<typeof getProfile>>, TError, Awaited<ReturnType<typeof getProfile>>>,
       "initialData"
     >
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }): DefinedUseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 export function useGetProfileInfinite<
   TData = InfiniteData<Awaited<ReturnType<typeof getProfile>>>,
@@ -84,14 +84,14 @@ export function useGetProfileInfinite<
       >,
       "initialData"
     >
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }): UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 export function useGetProfileInfinite<
   TData = InfiniteData<Awaited<ReturnType<typeof getProfile>>>,
   TError = ErrorType<unknown>
 >(options?: {
   query?: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getProfile>>, TError, TData>>
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }): UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 /**
  * @summary 프로필 정보 출력 API
@@ -102,7 +102,7 @@ export function useGetProfileInfinite<
   TError = ErrorType<unknown>
 >(options?: {
   query?: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getProfile>>, TError, TData>>
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }): UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
   const queryOptions = getGetProfileInfiniteQueryOptions(options)
 
@@ -120,7 +120,7 @@ export const getGetProfileQueryOptions = <
   TError = ErrorType<unknown>
 >(options?: {
   query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getProfile>>, TError, TData>>
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }) => {
   const { query: queryOptions, request: requestOptions } = options ?? {}
 
@@ -145,7 +145,7 @@ export function useGetProfile<TData = Awaited<ReturnType<typeof getProfile>>, TE
       DefinedInitialDataOptions<Awaited<ReturnType<typeof getProfile>>, TError, Awaited<ReturnType<typeof getProfile>>>,
       "initialData"
     >
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 export function useGetProfile<TData = Awaited<ReturnType<typeof getProfile>>, TError = ErrorType<unknown>>(options?: {
   query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getProfile>>, TError, TData>> &
@@ -157,11 +157,11 @@ export function useGetProfile<TData = Awaited<ReturnType<typeof getProfile>>, TE
       >,
       "initialData"
     >
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 export function useGetProfile<TData = Awaited<ReturnType<typeof getProfile>>, TError = ErrorType<unknown>>(options?: {
   query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getProfile>>, TError, TData>>
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 /**
  * @summary 프로필 정보 출력 API
@@ -169,7 +169,7 @@ export function useGetProfile<TData = Awaited<ReturnType<typeof getProfile>>, TE
 
 export function useGetProfile<TData = Awaited<ReturnType<typeof getProfile>>, TError = ErrorType<unknown>>(options?: {
   query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getProfile>>, TError, TData>>
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
   const queryOptions = getGetProfileQueryOptions(options)
 
@@ -185,7 +185,7 @@ export const getGetProfileSuspenseQueryOptions = <
   TError = ErrorType<unknown>
 >(options?: {
   query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getProfile>>, TError, TData>>
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }) => {
   const { query: queryOptions, request: requestOptions } = options ?? {}
 
@@ -209,21 +209,21 @@ export function useGetProfileSuspense<
   TError = ErrorType<unknown>
 >(options: {
   query: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getProfile>>, TError, TData>>
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 export function useGetProfileSuspense<
   TData = Awaited<ReturnType<typeof getProfile>>,
   TError = ErrorType<unknown>
 >(options?: {
   query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getProfile>>, TError, TData>>
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 export function useGetProfileSuspense<
   TData = Awaited<ReturnType<typeof getProfile>>,
   TError = ErrorType<unknown>
 >(options?: {
   query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getProfile>>, TError, TData>>
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 /**
  * @summary 프로필 정보 출력 API
@@ -234,7 +234,7 @@ export function useGetProfileSuspense<
   TError = ErrorType<unknown>
 >(options?: {
   query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getProfile>>, TError, TData>>
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
   const queryOptions = getGetProfileSuspenseQueryOptions(options)
 
@@ -251,8 +251,11 @@ export function useGetProfileSuspense<
  * 프로필 정보를 수정합니다.
  * @summary 프로필 정보 수정 API
  */
-export const updateProfile = (userRequest: BodyType<UserRequest>, options?: SecondParameter<typeof customInstance>) => {
-  return customInstance<string>(
+export const updateProfile = (
+  userRequest: BodyType<UserRequest>,
+  options?: SecondParameter<typeof customClientInstance>
+) => {
+  return customClientInstance<string>(
     { url: `/api/v1/users/profile`, method: "PUT", headers: { "Content-Type": "application/json" }, data: userRequest },
     options
   )
@@ -265,7 +268,7 @@ export const getUpdateProfileMutationOptions = <TError = ErrorType<string>, TCon
     { data: BodyType<UserRequest> },
     TContext
   >
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }): UseMutationOptions<
   Awaited<ReturnType<typeof updateProfile>>,
   TError,
@@ -304,7 +307,7 @@ export const useUpdateProfile = <TError = ErrorType<string>, TContext = unknown>
     { data: BodyType<UserRequest> },
     TContext
   >
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }): UseMutationResult<Awaited<ReturnType<typeof updateProfile>>, TError, { data: BodyType<UserRequest> }, TContext> => {
   const mutationOptions = getUpdateProfileMutationOptions(options)
 
@@ -316,10 +319,13 @@ export const useUpdateProfile = <TError = ErrorType<string>, TContext = unknown>
  */
 export const getMyGameList = (
   params?: GetMyGameListParams,
-  options?: SecondParameter<typeof customInstance>,
+  options?: SecondParameter<typeof customClientInstance>,
   signal?: AbortSignal
 ) => {
-  return customInstance<PageGameListResponse>({ url: `/api/v1/users/games`, method: "GET", params, signal }, options)
+  return customClientInstance<PageGameListResponse>(
+    { url: `/api/v1/users/games`, method: "GET", params, signal },
+    options
+  )
 }
 
 export const getGetMyGameListQueryKey = (params?: GetMyGameListParams) => {
@@ -342,7 +348,7 @@ export const getGetMyGameListInfiniteQueryOptions = <
         GetMyGameListParams["cursorId"]
       >
     >
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ) => {
   const { query: queryOptions, request: requestOptions } = options ?? {}
@@ -394,7 +400,7 @@ export function useGetMyGameListInfinite<
         >,
         "initialData"
       >
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ): DefinedUseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 export function useGetMyGameListInfinite<
@@ -422,7 +428,7 @@ export function useGetMyGameListInfinite<
         >,
         "initialData"
       >
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ): UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 export function useGetMyGameListInfinite<
@@ -441,7 +447,7 @@ export function useGetMyGameListInfinite<
         GetMyGameListParams["cursorId"]
       >
     >
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ): UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 /**
@@ -464,7 +470,7 @@ export function useGetMyGameListInfinite<
         GetMyGameListParams["cursorId"]
       >
     >
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ): UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
   const queryOptions = getGetMyGameListInfiniteQueryOptions(params, options)
@@ -485,7 +491,7 @@ export const getGetMyGameListQueryOptions = <
   params?: GetMyGameListParams,
   options?: {
     query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getMyGameList>>, TError, TData>>
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ) => {
   const { query: queryOptions, request: requestOptions } = options ?? {}
@@ -517,7 +523,7 @@ export function useGetMyGameList<TData = Awaited<ReturnType<typeof getMyGameList
         >,
         "initialData"
       >
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 export function useGetMyGameList<TData = Awaited<ReturnType<typeof getMyGameList>>, TError = ErrorType<unknown>>(
@@ -532,14 +538,14 @@ export function useGetMyGameList<TData = Awaited<ReturnType<typeof getMyGameList
         >,
         "initialData"
       >
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 export function useGetMyGameList<TData = Awaited<ReturnType<typeof getMyGameList>>, TError = ErrorType<unknown>>(
   params?: GetMyGameListParams,
   options?: {
     query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getMyGameList>>, TError, TData>>
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 /**
@@ -550,7 +556,7 @@ export function useGetMyGameList<TData = Awaited<ReturnType<typeof getMyGameList
   params?: GetMyGameListParams,
   options?: {
     query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getMyGameList>>, TError, TData>>
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
   const queryOptions = getGetMyGameListQueryOptions(params, options)
@@ -569,7 +575,7 @@ export const getGetMyGameListSuspenseQueryOptions = <
   params?: GetMyGameListParams,
   options?: {
     query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getMyGameList>>, TError, TData>>
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ) => {
   const { query: queryOptions, request: requestOptions } = options ?? {}
@@ -596,7 +602,7 @@ export function useGetMyGameListSuspense<
   params: undefined | GetMyGameListParams,
   options: {
     query: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getMyGameList>>, TError, TData>>
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 export function useGetMyGameListSuspense<
@@ -606,7 +612,7 @@ export function useGetMyGameListSuspense<
   params?: GetMyGameListParams,
   options?: {
     query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getMyGameList>>, TError, TData>>
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 export function useGetMyGameListSuspense<
@@ -616,7 +622,7 @@ export function useGetMyGameListSuspense<
   params?: GetMyGameListParams,
   options?: {
     query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getMyGameList>>, TError, TData>>
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 /**
@@ -630,7 +636,7 @@ export function useGetMyGameListSuspense<
   params?: GetMyGameListParams,
   options?: {
     query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getMyGameList>>, TError, TData>>
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
   const queryOptions = getGetMyGameListSuspenseQueryOptions(params, options)

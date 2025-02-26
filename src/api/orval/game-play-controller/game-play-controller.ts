@@ -1,8 +1,8 @@
 import { useMutation } from "@tanstack/react-query"
 import type { MutationFunction, UseMutationOptions, UseMutationResult } from "@tanstack/react-query"
 import type { GamePlayRequest, GamePlayResponse, GamePlayRoundRequest } from ".././model"
-import { customInstance } from ".././clientInstance"
-import type { ErrorType, BodyType } from ".././clientInstance"
+import { customClientInstance } from "../../clientInstance"
+import type { ErrorType, BodyType } from "../../clientInstance"
 
 type SecondParameter<T extends (...args: any) => any> = Parameters<T>[1]
 
@@ -14,9 +14,9 @@ export const updatePlayRoom = (
   gameId: number,
   playId: number,
   gamePlayRequest: BodyType<GamePlayRequest>,
-  options?: SecondParameter<typeof customInstance>
+  options?: SecondParameter<typeof customClientInstance>
 ) => {
-  return customInstance<GamePlayResponse>(
+  return customClientInstance<GamePlayResponse>(
     {
       url: `/api/v1/games/${encodeURIComponent(String(gameId))}/play/${encodeURIComponent(String(playId))}`,
       method: "PUT",
@@ -34,7 +34,7 @@ export const getUpdatePlayRoomMutationOptions = <TError = ErrorType<GamePlayResp
     { gameId: number; playId: number; data: BodyType<GamePlayRequest> },
     TContext
   >
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }): UseMutationOptions<
   Awaited<ReturnType<typeof updatePlayRoom>>,
   TError,
@@ -74,7 +74,7 @@ export const useUpdatePlayRoom = <TError = ErrorType<GamePlayResponse>, TContext
     { gameId: number; playId: number; data: BodyType<GamePlayRequest> },
     TContext
   >
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }): UseMutationResult<
   Awaited<ReturnType<typeof updatePlayRoom>>,
   TError,
@@ -92,10 +92,10 @@ export const useUpdatePlayRoom = <TError = ErrorType<GamePlayResponse>, TContext
 export const createPlayRoom = (
   gameId: number,
   gamePlayRoundRequest: BodyType<GamePlayRoundRequest>,
-  options?: SecondParameter<typeof customInstance>,
+  options?: SecondParameter<typeof customClientInstance>,
   signal?: AbortSignal
 ) => {
-  return customInstance<GamePlayResponse>(
+  return customClientInstance<GamePlayResponse>(
     {
       url: `/api/v1/games/${encodeURIComponent(String(gameId))}/play`,
       method: "POST",
@@ -114,7 +114,7 @@ export const getCreatePlayRoomMutationOptions = <TError = ErrorType<GamePlayResp
     { gameId: number; data: BodyType<GamePlayRoundRequest> },
     TContext
   >
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }): UseMutationOptions<
   Awaited<ReturnType<typeof createPlayRoom>>,
   TError,
@@ -154,7 +154,7 @@ export const useCreatePlayRoom = <TError = ErrorType<GamePlayResponse>, TContext
     { gameId: number; data: BodyType<GamePlayRoundRequest> },
     TContext
   >
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }): UseMutationResult<
   Awaited<ReturnType<typeof createPlayRoom>>,
   TError,

@@ -1,8 +1,8 @@
 import { useMutation } from "@tanstack/react-query"
 import type { MutationFunction, UseMutationOptions, UseMutationResult } from "@tanstack/react-query"
 import type { PresignedUrlRequest, PresignedUrlsRequest } from ".././model"
-import { customInstance } from ".././clientInstance"
-import type { ErrorType, BodyType } from ".././clientInstance"
+import { customClientInstance } from "../../clientInstance"
+import type { ErrorType, BodyType } from "../../clientInstance"
 
 type SecondParameter<T extends (...args: any) => any> = Parameters<T>[1]
 
@@ -12,10 +12,10 @@ type SecondParameter<T extends (...args: any) => any> = Parameters<T>[1]
  */
 export const getPreSignedUrlForUser = (
   presignedUrlRequest: BodyType<PresignedUrlRequest>,
-  options?: SecondParameter<typeof customInstance>,
+  options?: SecondParameter<typeof customClientInstance>,
   signal?: AbortSignal
 ) => {
-  return customInstance<string>(
+  return customClientInstance<string>(
     {
       url: `/api/v1/media/single`,
       method: "POST",
@@ -34,7 +34,7 @@ export const getGetPreSignedUrlForUserMutationOptions = <TError = ErrorType<stri
     { data: BodyType<PresignedUrlRequest> },
     TContext
   >
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }): UseMutationOptions<
   Awaited<ReturnType<typeof getPreSignedUrlForUser>>,
   TError,
@@ -74,7 +74,7 @@ export const useGetPreSignedUrlForUser = <TError = ErrorType<string>, TContext =
     { data: BodyType<PresignedUrlRequest> },
     TContext
   >
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }): UseMutationResult<
   Awaited<ReturnType<typeof getPreSignedUrlForUser>>,
   TError,
@@ -91,10 +91,10 @@ export const useGetPreSignedUrlForUser = <TError = ErrorType<string>, TContext =
  */
 export const getPreSignedUrl = (
   presignedUrlsRequest: BodyType<PresignedUrlsRequest>,
-  options?: SecondParameter<typeof customInstance>,
+  options?: SecondParameter<typeof customClientInstance>,
   signal?: AbortSignal
 ) => {
-  return customInstance<string[]>(
+  return customClientInstance<string[]>(
     {
       url: `/api/v1/media/multiple`,
       method: "POST",
@@ -113,7 +113,7 @@ export const getGetPreSignedUrlMutationOptions = <TError = ErrorType<string[]>, 
     { data: BodyType<PresignedUrlsRequest> },
     TContext
   >
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }): UseMutationOptions<
   Awaited<ReturnType<typeof getPreSignedUrl>>,
   TError,
@@ -153,7 +153,7 @@ export const useGetPreSignedUrl = <TError = ErrorType<string[]>, TContext = unkn
     { data: BodyType<PresignedUrlsRequest> },
     TContext
   >
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }): UseMutationResult<
   Awaited<ReturnType<typeof getPreSignedUrl>>,
   TError,

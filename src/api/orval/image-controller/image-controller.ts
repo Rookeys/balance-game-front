@@ -1,8 +1,8 @@
 import { useMutation } from "@tanstack/react-query"
 import type { MutationFunction, UseMutationOptions, UseMutationResult } from "@tanstack/react-query"
 import type { ImageRequest } from ".././model"
-import { customInstance } from ".././clientInstance"
-import type { ErrorType, BodyType } from ".././clientInstance"
+import { customClientInstance } from "../../clientInstance"
+import type { ErrorType, BodyType } from "../../clientInstance"
 
 type SecondParameter<T extends (...args: any) => any> = Parameters<T>[1]
 
@@ -13,10 +13,10 @@ type SecondParameter<T extends (...args: any) => any> = Parameters<T>[1]
 export const saveImageForGame = (
   gameId: number,
   imageRequest: BodyType<ImageRequest>,
-  options?: SecondParameter<typeof customInstance>,
+  options?: SecondParameter<typeof customClientInstance>,
   signal?: AbortSignal
 ) => {
-  return customInstance<boolean>(
+  return customClientInstance<boolean>(
     {
       url: `/api/v1/games/${encodeURIComponent(String(gameId))}/media/images`,
       method: "POST",
@@ -35,7 +35,7 @@ export const getSaveImageForGameMutationOptions = <TError = ErrorType<unknown>, 
     { gameId: number; data: BodyType<ImageRequest> },
     TContext
   >
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }): UseMutationOptions<
   Awaited<ReturnType<typeof saveImageForGame>>,
   TError,
@@ -75,7 +75,7 @@ export const useSaveImageForGame = <TError = ErrorType<unknown>, TContext = unkn
     { gameId: number; data: BodyType<ImageRequest> },
     TContext
   >
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }): UseMutationResult<
   Awaited<ReturnType<typeof saveImageForGame>>,
   TError,

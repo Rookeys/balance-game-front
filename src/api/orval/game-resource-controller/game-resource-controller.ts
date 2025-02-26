@@ -19,8 +19,8 @@ import type {
   UseSuspenseQueryResult
 } from "@tanstack/react-query"
 import type { GameResourceRequest, GetResourcesParams, PageGameResourceResponse } from ".././model"
-import { customInstance } from ".././clientInstance"
-import type { ErrorType, BodyType } from ".././clientInstance"
+import { customClientInstance } from "../../clientInstance"
+import type { ErrorType, BodyType } from "../../clientInstance"
 
 type SecondParameter<T extends (...args: any) => any> = Parameters<T>[1]
 
@@ -32,9 +32,9 @@ export const updateResource = (
   gameId: number,
   resourceId: number,
   gameResourceRequest: BodyType<GameResourceRequest>,
-  options?: SecondParameter<typeof customInstance>
+  options?: SecondParameter<typeof customClientInstance>
 ) => {
-  return customInstance<boolean>(
+  return customClientInstance<boolean>(
     {
       url: `/api/v1/games/${encodeURIComponent(String(gameId))}/resources/${encodeURIComponent(String(resourceId))}`,
       method: "PUT",
@@ -52,7 +52,7 @@ export const getUpdateResourceMutationOptions = <TError = ErrorType<boolean>, TC
     { gameId: number; resourceId: number; data: BodyType<GameResourceRequest> },
     TContext
   >
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }): UseMutationOptions<
   Awaited<ReturnType<typeof updateResource>>,
   TError,
@@ -92,7 +92,7 @@ export const useUpdateResource = <TError = ErrorType<boolean>, TContext = unknow
     { gameId: number; resourceId: number; data: BodyType<GameResourceRequest> },
     TContext
   >
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }): UseMutationResult<
   Awaited<ReturnType<typeof updateResource>>,
   TError,
@@ -110,9 +110,9 @@ export const useUpdateResource = <TError = ErrorType<boolean>, TContext = unknow
 export const deleteResource = (
   gameId: number,
   resourceId: number,
-  options?: SecondParameter<typeof customInstance>
+  options?: SecondParameter<typeof customClientInstance>
 ) => {
-  return customInstance<boolean>(
+  return customClientInstance<boolean>(
     {
       url: `/api/v1/games/${encodeURIComponent(String(gameId))}/resources/${encodeURIComponent(String(resourceId))}`,
       method: "DELETE"
@@ -128,7 +128,7 @@ export const getDeleteResourceMutationOptions = <TError = ErrorType<boolean>, TC
     { gameId: number; resourceId: number },
     TContext
   >
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }): UseMutationOptions<
   Awaited<ReturnType<typeof deleteResource>>,
   TError,
@@ -168,7 +168,7 @@ export const useDeleteResource = <TError = ErrorType<boolean>, TContext = unknow
     { gameId: number; resourceId: number },
     TContext
   >
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }): UseMutationResult<
   Awaited<ReturnType<typeof deleteResource>>,
   TError,
@@ -186,10 +186,10 @@ export const useDeleteResource = <TError = ErrorType<boolean>, TContext = unknow
 export const getResources = (
   gameId: number,
   params?: GetResourcesParams,
-  options?: SecondParameter<typeof customInstance>,
+  options?: SecondParameter<typeof customClientInstance>,
   signal?: AbortSignal
 ) => {
-  return customInstance<PageGameResourceResponse>(
+  return customClientInstance<PageGameResourceResponse>(
     { url: `/api/v1/games/${encodeURIComponent(String(gameId))}/resources`, method: "GET", params, signal },
     options
   )
@@ -216,7 +216,7 @@ export const getGetResourcesInfiniteQueryOptions = <
         GetResourcesParams["cursorId"]
       >
     >
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ) => {
   const { query: queryOptions, request: requestOptions } = options ?? {}
@@ -267,7 +267,7 @@ export function useGetResourcesInfinite<
         >,
         "initialData"
       >
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ): DefinedUseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 export function useGetResourcesInfinite<
@@ -296,7 +296,7 @@ export function useGetResourcesInfinite<
         >,
         "initialData"
       >
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ): UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 export function useGetResourcesInfinite<
@@ -316,7 +316,7 @@ export function useGetResourcesInfinite<
         GetResourcesParams["cursorId"]
       >
     >
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ): UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 /**
@@ -340,7 +340,7 @@ export function useGetResourcesInfinite<
         GetResourcesParams["cursorId"]
       >
     >
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ): UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
   const queryOptions = getGetResourcesInfiniteQueryOptions(gameId, params, options)
@@ -362,7 +362,7 @@ export const getGetResourcesQueryOptions = <
   params?: GetResourcesParams,
   options?: {
     query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getResources>>, TError, TData>>
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ) => {
   const { query: queryOptions, request: requestOptions } = options ?? {}
@@ -398,7 +398,7 @@ export function useGetResources<
         >,
         "initialData"
       >
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 export function useGetResources<
@@ -417,7 +417,7 @@ export function useGetResources<
         >,
         "initialData"
       >
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 export function useGetResources<
@@ -428,7 +428,7 @@ export function useGetResources<
   params?: GetResourcesParams,
   options?: {
     query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getResources>>, TError, TData>>
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 /**
@@ -443,7 +443,7 @@ export function useGetResources<
   params?: GetResourcesParams,
   options?: {
     query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getResources>>, TError, TData>>
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
   const queryOptions = getGetResourcesQueryOptions(gameId, params, options)
@@ -463,7 +463,7 @@ export const getGetResourcesSuspenseQueryOptions = <
   params?: GetResourcesParams,
   options?: {
     query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getResources>>, TError, TData>>
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ) => {
   const { query: queryOptions, request: requestOptions } = options ?? {}
@@ -491,7 +491,7 @@ export function useGetResourcesSuspense<
   params: undefined | GetResourcesParams,
   options: {
     query: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getResources>>, TError, TData>>
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 export function useGetResourcesSuspense<
@@ -502,7 +502,7 @@ export function useGetResourcesSuspense<
   params?: GetResourcesParams,
   options?: {
     query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getResources>>, TError, TData>>
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 export function useGetResourcesSuspense<
@@ -513,7 +513,7 @@ export function useGetResourcesSuspense<
   params?: GetResourcesParams,
   options?: {
     query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getResources>>, TError, TData>>
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 /**
@@ -528,7 +528,7 @@ export function useGetResourcesSuspense<
   params?: GetResourcesParams,
   options?: {
     query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getResources>>, TError, TData>>
-    request?: SecondParameter<typeof customInstance>
+    request?: SecondParameter<typeof customClientInstance>
   }
 ): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
   const queryOptions = getGetResourcesSuspenseQueryOptions(gameId, params, options)

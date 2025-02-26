@@ -1,8 +1,8 @@
 import { useMutation } from "@tanstack/react-query"
 import type { MutationFunction, UseMutationOptions, UseMutationResult } from "@tanstack/react-query"
 import type { KakaoRequest, LoginRequest, LoginResponse, TokenResponse } from ".././model"
-import { customInstance } from ".././clientInstance"
-import type { ErrorType, BodyType } from ".././clientInstance"
+import { customClientInstance } from "../../clientInstance"
+import type { ErrorType, BodyType } from "../../clientInstance"
 
 type SecondParameter<T extends (...args: any) => any> = Parameters<T>[1]
 
@@ -10,13 +10,13 @@ type SecondParameter<T extends (...args: any) => any> = Parameters<T>[1]
  * 토큰을 발급합니다.
  * @summary 테스트 전용 로그인 API
  */
-export const testLogin = (options?: SecondParameter<typeof customInstance>, signal?: AbortSignal) => {
-  return customInstance<LoginResponse>({ url: `/api/v1/users/test/login`, method: "POST", signal }, options)
+export const testLogin = (options?: SecondParameter<typeof customClientInstance>, signal?: AbortSignal) => {
+  return customClientInstance<LoginResponse>({ url: `/api/v1/users/test/login`, method: "POST", signal }, options)
 }
 
 export const getTestLoginMutationOptions = <TError = ErrorType<LoginResponse>, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<Awaited<ReturnType<typeof testLogin>>, TError, void, TContext>
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }): UseMutationOptions<Awaited<ReturnType<typeof testLogin>>, TError, void, TContext> => {
   const mutationKey = ["testLogin"]
   const { mutation: mutationOptions, request: requestOptions } = options
@@ -41,7 +41,7 @@ export type TestLoginMutationError = ErrorType<LoginResponse>
  */
 export const useTestLogin = <TError = ErrorType<LoginResponse>, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<Awaited<ReturnType<typeof testLogin>>, TError, void, TContext>
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }): UseMutationResult<Awaited<ReturnType<typeof testLogin>>, TError, void, TContext> => {
   const mutationOptions = getTestLoginMutationOptions(options)
 
@@ -51,13 +51,13 @@ export const useTestLogin = <TError = ErrorType<LoginResponse>, TContext = unkno
  * RefreshToken 으로 AccessToken 을 재발급합니다.
  * @summary 토큰 재발급 API
  */
-export const refresh = (options?: SecondParameter<typeof customInstance>, signal?: AbortSignal) => {
-  return customInstance<TokenResponse>({ url: `/api/v1/users/refresh`, method: "POST", signal }, options)
+export const refresh = (options?: SecondParameter<typeof customClientInstance>, signal?: AbortSignal) => {
+  return customClientInstance<TokenResponse>({ url: `/api/v1/users/refresh`, method: "POST", signal }, options)
 }
 
 export const getRefreshMutationOptions = <TError = ErrorType<unknown>, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<Awaited<ReturnType<typeof refresh>>, TError, void, TContext>
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }): UseMutationOptions<Awaited<ReturnType<typeof refresh>>, TError, void, TContext> => {
   const mutationKey = ["refresh"]
   const { mutation: mutationOptions, request: requestOptions } = options
@@ -82,7 +82,7 @@ export type RefreshMutationError = ErrorType<unknown>
  */
 export const useRefresh = <TError = ErrorType<unknown>, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<Awaited<ReturnType<typeof refresh>>, TError, void, TContext>
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }): UseMutationResult<Awaited<ReturnType<typeof refresh>>, TError, void, TContext> => {
   const mutationOptions = getRefreshMutationOptions(options)
 
@@ -92,13 +92,13 @@ export const useRefresh = <TError = ErrorType<unknown>, TContext = unknown>(opti
  * 사용자를 로그 아웃 시킵니다.
  * @summary 로그 아웃 API
  */
-export const logout = (options?: SecondParameter<typeof customInstance>, signal?: AbortSignal) => {
-  return customInstance<boolean>({ url: `/api/v1/users/logout`, method: "POST", signal }, options)
+export const logout = (options?: SecondParameter<typeof customClientInstance>, signal?: AbortSignal) => {
+  return customClientInstance<boolean>({ url: `/api/v1/users/logout`, method: "POST", signal }, options)
 }
 
 export const getLogoutMutationOptions = <TError = ErrorType<unknown>, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<Awaited<ReturnType<typeof logout>>, TError, void, TContext>
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }): UseMutationOptions<Awaited<ReturnType<typeof logout>>, TError, void, TContext> => {
   const mutationKey = ["logout"]
   const { mutation: mutationOptions, request: requestOptions } = options
@@ -123,7 +123,7 @@ export type LogoutMutationError = ErrorType<unknown>
  */
 export const useLogout = <TError = ErrorType<unknown>, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<Awaited<ReturnType<typeof logout>>, TError, void, TContext>
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }): UseMutationResult<Awaited<ReturnType<typeof logout>>, TError, void, TContext> => {
   const mutationOptions = getLogoutMutationOptions(options)
 
@@ -135,10 +135,10 @@ export const useLogout = <TError = ErrorType<unknown>, TContext = unknown>(optio
  */
 export const login = (
   loginRequest: BodyType<LoginRequest>,
-  options?: SecondParameter<typeof customInstance>,
+  options?: SecondParameter<typeof customClientInstance>,
   signal?: AbortSignal
 ) => {
-  return customInstance<LoginResponse>(
+  return customClientInstance<LoginResponse>(
     {
       url: `/api/v1/users/login`,
       method: "POST",
@@ -152,7 +152,7 @@ export const login = (
 
 export const getLoginMutationOptions = <TError = ErrorType<LoginResponse>, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<Awaited<ReturnType<typeof login>>, TError, { data: BodyType<LoginRequest> }, TContext>
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }): UseMutationOptions<Awaited<ReturnType<typeof login>>, TError, { data: BodyType<LoginRequest> }, TContext> => {
   const mutationKey = ["login"]
   const { mutation: mutationOptions, request: requestOptions } = options
@@ -179,7 +179,7 @@ export type LoginMutationError = ErrorType<LoginResponse>
  */
 export const useLogin = <TError = ErrorType<LoginResponse>, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<Awaited<ReturnType<typeof login>>, TError, { data: BodyType<LoginRequest> }, TContext>
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }): UseMutationResult<Awaited<ReturnType<typeof login>>, TError, { data: BodyType<LoginRequest> }, TContext> => {
   const mutationOptions = getLoginMutationOptions(options)
 
@@ -191,10 +191,10 @@ export const useLogin = <TError = ErrorType<LoginResponse>, TContext = unknown>(
  */
 export const kakaoLogin = (
   kakaoRequest: BodyType<KakaoRequest>,
-  options?: SecondParameter<typeof customInstance>,
+  options?: SecondParameter<typeof customClientInstance>,
   signal?: AbortSignal
 ) => {
-  return customInstance<LoginResponse>(
+  return customClientInstance<LoginResponse>(
     {
       url: `/api/v1/users/login/kakao`,
       method: "POST",
@@ -213,7 +213,7 @@ export const getKakaoLoginMutationOptions = <TError = ErrorType<LoginResponse>, 
     { data: BodyType<KakaoRequest> },
     TContext
   >
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }): UseMutationOptions<Awaited<ReturnType<typeof kakaoLogin>>, TError, { data: BodyType<KakaoRequest> }, TContext> => {
   const mutationKey = ["kakaoLogin"]
   const { mutation: mutationOptions, request: requestOptions } = options
@@ -247,7 +247,7 @@ export const useKakaoLogin = <TError = ErrorType<LoginResponse>, TContext = unkn
     { data: BodyType<KakaoRequest> },
     TContext
   >
-  request?: SecondParameter<typeof customInstance>
+  request?: SecondParameter<typeof customClientInstance>
 }): UseMutationResult<Awaited<ReturnType<typeof kakaoLogin>>, TError, { data: BodyType<KakaoRequest> }, TContext> => {
   const mutationOptions = getKakaoLoginMutationOptions(options)
 

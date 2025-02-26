@@ -1,10 +1,10 @@
-import { serverInstance } from "@/api/serverInstance"
-import { getGetProfileQueryKey } from "@/api/user-profile-controller/user-profile-controller"
+import { getGetProfileQueryKey } from "@/api/orval/user-profile-controller/user-profile-controller"
 import { log } from "@/utils/log"
 import { sleep } from "@/utils/sleep"
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query"
 import { notFound } from "next/navigation"
 import ExampleClient1 from "./ExampleClient1"
+import { serverInstance } from "@/api/serverInstance"
 
 export default async function MyPageClient1() {
   // const { data: profileData } = useGetProfileSuspense()

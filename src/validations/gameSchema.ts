@@ -1,5 +1,5 @@
-import { GameRequestAccessType } from "@/api/model/gameRequestAccessType"
-import { GameRequestCategory } from "@/api/model/gameRequestCategory"
+import { GameRequestAccessType } from "@/api/orval/model/gameRequestAccessType"
+import { GameRequestCategory } from "@/api/orval/model/gameRequestCategory"
 import { getEnumValues } from "@/utils/getEnumValues"
 import { z } from "zod"
 

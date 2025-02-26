@@ -1,5 +1,5 @@
 "use client"
-import { useGetProfileSuspense } from "@/api/user-profile-controller/user-profile-controller"
+import { useGetProfileSuspense } from "@/api/orval/user-profile-controller/user-profile-controller"
 
 export default function ExampleClient1() {
   const { data: profileData } = useGetProfileSuspense()
