@@ -1,6 +1,7 @@
 "use client"
 
 import { useGetMyGameListInfinite } from "@/api/orval/client/user-profile-controller/user-profile-controller"
+import { GetMyGameListSortType } from "@/api/orval/model/getMyGameListSortType"
 import { useSession } from "next-auth/react"
 import { useEffect } from "react"
 import { useInView } from "react-intersection-observer"
@@ -9,14 +10,17 @@ export default function InfiniteScrollClient() {
   const { data: session } = useSession()
   console.log("session", session)
 
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useGetMyGameListInfinite(undefined, {
-    query: {
-      initialPageParam: undefined,
-      getNextPageParam: (lastPage) => {
-        return lastPage.hasNext ? lastPage.content?.[lastPage.content.length - 1].roomId : undefined
+  const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } = useGetMyGameListInfinite(
+    { sortType: GetMyGameListSortType.idDesc },
+    {
+      query: {
+        initialPageParam: undefined,
+        getNextPageParam: (lastPage) => {
+          return lastPage.hasNext ? lastPage.content?.[lastPage.content.length - 1].roomId : undefined
+        }
       }
     }
-  })
+  )
 
   const { ref, inView } = useInView({
     threshold: 1
@@ -28,8 +32,10 @@ export default function InfiniteScrollClient() {
     }
   }, [inView, fetchNextPage, hasNextPage])
 
+  if (isLoading) return <section className="h-[100vh] bg-red-50" />
+
   return (
-    <section className="flex flex-col gap-[20px]">
+    <section className="flex flex-col gap-[80px]">
       {data?.pages.map((page) => page.content?.map((game) => <p key={game.roomId}>{game.title}</p>))}
       {/* {data?.pages.flatMap((page) => page.content || []).map((game) => <p key={game.roomId}>{game.title}</p>)} */}
       {/* <button onClick={() => fetchNextPage()}>다음</button> */}
