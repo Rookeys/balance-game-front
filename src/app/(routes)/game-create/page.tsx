@@ -1,5 +1,5 @@
 "use client"
-import { useSaveGame } from "@/api/orval/game-room-controller/game-room-controller"
+import { useSaveGame } from "@/api/orval/client/game-room-controller/game-room-controller"
 import { GameRequest } from "@/api/orval/model/gameRequest"
 import { GameRequestAccessType } from "@/api/orval/model/gameRequestAccessType"
 import { GameRequestCategory } from "@/api/orval/model/gameRequestCategory"

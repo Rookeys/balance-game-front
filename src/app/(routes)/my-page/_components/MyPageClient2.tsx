@@ -1,4 +1,4 @@
-import { getGetMyGameListQueryKey } from "@/api/orval/user-profile-controller/user-profile-controller"
+import { getGetMyGameListQueryKey } from "@/api/orval/client/user-profile-controller/user-profile-controller"
 import { log } from "@/utils/log"
 import { sleep } from "@/utils/sleep"
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query"

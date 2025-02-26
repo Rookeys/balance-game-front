@@ -1,5 +1,5 @@
 "use client"
-import { useGetMyGameListSuspense } from "@/api/orval/user-profile-controller/user-profile-controller"
+import { useGetMyGameListSuspense } from "@/api/orval/client/user-profile-controller/user-profile-controller"
 
 export default function ExampleClient2() {
   const { data: gameData } = useGetMyGameListSuspense()

@@ -22,9 +22,9 @@ import type {
   CustomPageImplGameResultCommentResponse,
   GameResultCommentRequest,
   GetParentCommentsByGameResourceParams
-} from ".././model"
-import { customClientInstance } from "../../clientInstance"
-import type { ErrorType, BodyType } from "../../clientInstance"
+} from "../../model"
+import { customClientInstance } from "../../../clientInstance"
+import type { ErrorType, BodyType } from "../../../clientInstance"
 
 type SecondParameter<T extends (...args: any) => any> = Parameters<T>[1]
 

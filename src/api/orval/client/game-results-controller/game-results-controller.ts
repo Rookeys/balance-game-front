@@ -15,9 +15,9 @@ import type {
   UseSuspenseQueryOptions,
   UseSuspenseQueryResult
 } from "@tanstack/react-query"
-import type { GetResultRankingParams, PageGameResultResponse } from ".././model"
-import { customClientInstance } from "../../clientInstance"
-import type { ErrorType } from "../../clientInstance"
+import type { GetResultRankingParams, PageGameResultResponse } from "../../model"
+import { customClientInstance } from "../../../clientInstance"
+import type { ErrorType } from "../../../clientInstance"
 
 type SecondParameter<T extends (...args: any) => any> = Parameters<T>[1]
 

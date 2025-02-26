@@ -16,7 +16,7 @@ clientInstance.interceptors.request.use(
     // 요청이 전달되기 전에 작업 수행
     const session = await getSession()
     if (session?.access_token) {
-      config.headers["Authorization"] = `Bearer ${session?.access_token}`
+      config.headers["Authorization"] = `Bearer ${session.access_token}`
     }
     return config
   },

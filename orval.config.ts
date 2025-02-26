@@ -2,7 +2,7 @@ module.exports = {
   client: {
     output: {
       mode: "tags-split",
-      target: "src/api/orval",
+      target: "src/api/orval/client",
       schemas: "src/api/orval/model",
       client: "react-query",
       httpClient: "axios",

@@ -1,8 +1,8 @@
 import { useMutation } from "@tanstack/react-query"
 import type { MutationFunction, UseMutationOptions, UseMutationResult } from "@tanstack/react-query"
-import type { GameCommentLikeRequest } from ".././model"
-import { customClientInstance } from "../../clientInstance"
-import type { ErrorType, BodyType } from "../../clientInstance"
+import type { GameCommentLikeRequest } from "../../model"
+import { customClientInstance } from "../../../clientInstance"
+import type { ErrorType, BodyType } from "../../../clientInstance"
 
 type SecondParameter<T extends (...args: any) => any> = Parameters<T>[1]
 

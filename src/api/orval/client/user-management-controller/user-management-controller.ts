@@ -12,9 +12,9 @@ import type {
   UseQueryOptions,
   UseQueryResult
 } from "@tanstack/react-query"
-import type { ExistsByNicknameParams, LoginResponse, SignUpRequest } from ".././model"
-import { customClientInstance } from "../../clientInstance"
-import type { ErrorType, BodyType } from "../../clientInstance"
+import type { ExistsByNicknameParams, LoginResponse, SignUpRequest } from "../../model"
+import { customClientInstance } from "../../../clientInstance"
+import type { ErrorType, BodyType } from "../../../clientInstance"
 
 type SecondParameter<T extends (...args: any) => any> = Parameters<T>[1]
 
