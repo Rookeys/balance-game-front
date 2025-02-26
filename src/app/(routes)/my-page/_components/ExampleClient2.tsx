@@ -1,11 +1,11 @@
 "use client"
-import { useGetMyGameListSuspense } from "@/api/orval/client/user-profile-controller/user-profile-controller"
+import { useGetProfileSuspense } from "@/api/orval/client/user-profile-controller/user-profile-controller"
 
 export default function ExampleClient2() {
-  const { data: gameData } = useGetMyGameListSuspense()
-  console.log("gameData", gameData)
+  const { data: profileData } = useGetProfileSuspense()
+  console.log("profileData", profileData)
   // const { data: profileData } = useGetProfile()
   // console.log("profileData", profileData)
 
-  return <div>{gameData?.content && gameData?.content?.length > 0 && gameData.content[0].title}</div>
+  return <div>{profileData.email}</div>
 }

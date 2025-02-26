@@ -1,4 +1,4 @@
-import { prefetchGetMyGameList } from "@/api/orval/server/user-profile-controller/user-profile-controller"
+import { prefetchGetProfile } from "@/api/orval/server/user-profile-controller/user-profile-controller"
 import { log } from "@/utils/log"
 import { sleep } from "@/utils/sleep"
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query"
@@ -13,7 +13,7 @@ export default async function MyPageClient2() {
 
   try {
     await sleep(5000)
-    await prefetchGetMyGameList(queryClient)
+    await prefetchGetProfile(queryClient)
     // await Promise.all([prefetchGetMyGameList(queryClient)])
   } catch (error) {
     log("error", error)
