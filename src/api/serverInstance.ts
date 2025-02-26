@@ -1,5 +1,5 @@
 import { authOptions } from "@/auth"
-import axios from "axios"
+import axios, { AxiosRequestConfig, AxiosResponse } from "axios"
 import { getServerSession } from "next-auth"
 
 export const serverInstance = axios.create({
@@ -10,8 +10,9 @@ serverInstance.interceptors.request.use(
   async (config) => {
     try {
       const session = await getServerSession(authOptions)
-      const accessToken = session?.access_token
-      config.headers["Authorization"] = `Bearer ${accessToken}`
+      if (session?.access_token) {
+        config.headers["Authorization"] = `Bearer ${session.access_token}`
+      }
       return config
     } catch (error) {
       return Promise.reject(error)
@@ -32,3 +33,18 @@ serverInstance.interceptors.response.use(
     }
   }
 )
+
+export const customServerInstance = async <T>(config: AxiosRequestConfig, options?: AxiosRequestConfig): Promise<T> => {
+  const source = axios.CancelToken.source()
+  const promise = serverInstance({ ...config, ...options, cancelToken: source.token }).then(
+    ({ data }: AxiosResponse<T>) => data
+  )
+  // @ts-expect-error ...
+  promise.cancel = () => {
+    source.cancel("Query was cancelled")
+  }
+  return promise
+}
+
+export type ErrorType<Error> = Error
+export type BodyType<BodyData> = BodyData
