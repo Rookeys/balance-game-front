@@ -16,7 +16,8 @@ export default function InfiniteScrollClient() {
       query: {
         initialPageParam: undefined,
         getNextPageParam: (lastPage) => {
-          return lastPage.hasNext ? lastPage.content?.[lastPage.content.length - 1].roomId : undefined
+          const lastItem = lastPage.content?.[lastPage.content.length - 1]
+          return lastPage.hasNext ? lastItem?.roomId : undefined
         }
       }
     }
@@ -27,18 +28,17 @@ export default function InfiniteScrollClient() {
   })
 
   useEffect(() => {
-    if (inView && hasNextPage) {
+    if (inView && hasNextPage && !isFetchingNextPage) {
       fetchNextPage()
     }
-  }, [inView, fetchNextPage, hasNextPage])
+  }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage])
 
   if (isLoading) return <section className="h-[100vh] bg-red-50" />
 
   return (
     <section className="flex flex-col gap-[80px]">
-      {data?.pages.map((page) => page.content?.map((game) => <p key={game.roomId}>{game.title}</p>))}
-      {/* {data?.pages.flatMap((page) => page.content || []).map((game) => <p key={game.roomId}>{game.title}</p>)} */}
-      {/* <button onClick={() => fetchNextPage()}>다음</button> */}
+      {/* {data?.pages.map((page) => page.content?.map((game) => <p key={game.roomId}>{game.title}</p>))} */}
+      {data?.pages.flatMap((page) => page.content || []).map((game) => <p key={game.roomId}>{game.title}</p>)}
       <section ref={ref}>
         {isFetchingNextPage ? (
           <p>로딩중...</p>
