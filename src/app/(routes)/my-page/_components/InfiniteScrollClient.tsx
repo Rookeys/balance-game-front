@@ -36,14 +36,15 @@ export default function InfiniteScrollClient() {
   if (isLoading) return <section className="h-[100vh] bg-red-50" />
 
   return (
-    <section className="flex flex-col gap-[80px]">
+    <section className="relative flex flex-col gap-[80px]">
       {/* {data?.pages.map((page) => page.content?.map((game) => <p key={game.roomId}>{game.title}</p>))} */}
       {data?.pages.flatMap((page) => page.content || []).map((game) => <p key={game.roomId}>{game.title}</p>)}
-      <section ref={ref}>
+      <div ref={ref} className="pointer-events-none absolute bottom-[400px] h-[4px] w-full opacity-0" />
+      <section>
         {isFetchingNextPage ? (
           <p>로딩중...</p>
         ) : hasNextPage ? (
-          <p>스크롤을 더 내려주세요</p>
+          <p>-{/* 스크롤을 더 내려주세요 */}</p>
         ) : (
           <p>데이터가 더 이상 존재하지 않습니다.</p>
         )}
