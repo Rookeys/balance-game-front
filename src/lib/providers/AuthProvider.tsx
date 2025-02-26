@@ -12,9 +12,12 @@ interface Props {
 
 const AuthProvider = ({ session, children }: Props) => {
   const setSession = useSessionStore((state) => state.setSession)
+
   useEffect(() => {
-    setSession(session)
-  }, [session])
+    if (session) {
+      setSession(session)
+    }
+  }, [session, setSession])
 
   return <SessionProvider session={session}>{children}</SessionProvider>
 }
