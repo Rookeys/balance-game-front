@@ -1,14 +1,18 @@
 "use client"
+import { useSessionStore } from "@/store/session"
 import { signOut, useSession } from "next-auth/react"
 import { useEffect } from "react"
 
 export default function SignOutPageClient() {
   const { data: session, status } = useSession()
+  const clearSession = useSessionStore((state) => state.clearSession)
+
   useEffect(() => {
     if (status !== "loading") {
+      clearSession()
       signOut({ callbackUrl: "/" })
     }
-  }, [session, status])
+  }, [session, status, clearSession])
 
   return (
     <div role="status">
