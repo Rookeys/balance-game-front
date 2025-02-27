@@ -1,19 +1,65 @@
 "use client"
 
+import { useSaveImageForGame } from "@/api/orval/client/image-controller/image-controller"
+import { useGetPreSignedUrl } from "@/api/orval/client/presigned-url-controller/presigned-url-controller"
 import { Button } from "@/components/Button"
 import FileUploadDropZone from "@/components/form/fileUpload/FileUploadDropZone"
+import { log } from "@/utils/log"
+import axios from "axios"
+import { useParams } from "next/navigation"
 import { useForm, type FieldValues } from "react-hook-form"
+import { toast } from "sonner"
 
 export function ImageUploadForm() {
+  const { id } = useParams()
+
+  const { mutateAsync: RequestPresignedUrl } = useGetPreSignedUrl()
+
+  const { mutateAsync: SaveImageResources } = useSaveImageForGame()
+
   const {
     watch,
     setValue,
     handleSubmit,
+    reset,
     formState: { isSubmitting }
-  } = useForm({})
+  } = useForm()
 
   const onSubmit = async (data: FieldValues) => {
-    console.log("data", data)
+    try {
+      console.log("data", data)
+      if (!data.files || data.files.length === 0) {
+        toast.error("이미지를 업로드 해주세요")
+        return
+      }
+      const presignedUrls = await RequestPresignedUrl({ data: { prefix: "image", length: data.files.length } })
+
+      const res = await Promise.allSettled(
+        presignedUrls.map(async (presignedUrl, i) =>
+          // * 테스트용 에러발생
+          // if (Math.random() < 0.5) {
+          //   return Promise.reject(new Error(`랜덤 오류 발생: ${presignedUrl}`))
+          // }
+
+          axios.put(presignedUrl, data.files[i], {
+            headers: {
+              "Content-Type": data.files[i].type
+            }
+          })
+        )
+      )
+
+      const imageUrls = presignedUrls.filter((_, i) => res[i].status === "fulfilled")
+
+      const baseUrls = imageUrls.map((url) => new URL(url).origin + new URL(url).pathname)
+
+      await SaveImageResources({ gameId: Number(id), data: { urls: baseUrls } })
+
+      reset()
+    } catch (error) {
+      log("Upload failed", error)
+      toast.error("오류가 발생했습니다.")
+    }
   }
 
   return (
