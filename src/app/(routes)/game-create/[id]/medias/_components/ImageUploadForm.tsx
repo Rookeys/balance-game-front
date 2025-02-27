@@ -28,7 +28,7 @@ export function ImageUploadForm() {
   const onSubmit = async (data: FieldValues) => {
     try {
       if (!data.files || data.files.length === 0) {
-        toast.error("이미지를 업로드 해주세요")
+        toast.error("이미지를 한장 이상 업로드 해주세요")
         return
       }
       const presignedUrls = await RequestPresignedUrl({ data: { prefix: "image", length: data.files.length } })
@@ -57,7 +57,7 @@ export function ImageUploadForm() {
       reset()
     } catch (error) {
       log("Upload failed", error)
-      toast.error("오류가 발생했습니다.")
+      toast.error("오류가 발생했습니다. 다시 시도해주세요")
     }
   }
 
