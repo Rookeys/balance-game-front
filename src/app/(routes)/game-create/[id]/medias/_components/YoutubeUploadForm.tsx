@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@/components/Button"
-import InputTextControlled from "@/components/form/inputText/InputTextControlled"
+import InputText from "@/components/form/inputText/InputText"
 import { getYoutubeThumbnail } from "@/utils/getYoutubeThumbnail"
 import { postYoutubeMediaSchema } from "@/validations/youtubeMediaSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -39,7 +39,7 @@ export function YoutubeUploadForm() {
     <>
       <form onSubmit={handleSubmit(onSubmit)} className="flex w-full max-w-[500px] flex-col gap-[28px]">
         <p>동영상 업로드</p>
-        <InputTextControlled
+        <InputText
           id="url"
           value={watch("url")}
           onChange={(e) => setValue("url", e.target.value, { shouldValidate: true })}
@@ -58,7 +58,7 @@ export function YoutubeUploadForm() {
         />
         <article className="flex flex-wrap justify-between gap-[20px]">
           <div className="flex gap-[20px]">
-            <InputTextControlled
+            <InputText
               id="start"
               className="max-w-[100px]"
               placeholder="시작(초)"
@@ -67,7 +67,7 @@ export function YoutubeUploadForm() {
               value={watch("start")}
               onChange={(e) => setValue("start", Number(e.target.value), { shouldValidate: true })}
             />
-            <InputTextControlled
+            <InputText
               id="end"
               className="max-w-[100px]"
               placeholder="종료(초)"

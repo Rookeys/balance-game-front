@@ -10,7 +10,7 @@ import { GameRequestAccessType } from "@/api/orval/model/gameRequestAccessType"
 import { GameRequestCategory } from "@/api/orval/model/gameRequestCategory"
 import { Button } from "@/components/Button"
 import { InputErrorMessage, InputLabel } from "@/components/form/_components"
-import InputTextUnControlled from "@/components/form/inputText/InputTextUnControlled"
+import InputText from "@/components/form/inputText/InputText"
 import RadioGroup from "@/components/form/radioGroup/RadioGroup"
 import Select from "@/components/form/select/Select"
 import { useAsyncRoutePush } from "@/hooks/useAsyncRoutePush"
@@ -81,14 +81,14 @@ export default function GameForm() {
       className="flex w-full max-w-[500px] flex-col items-start justify-center gap-[28px]"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <InputTextUnControlled
+      <InputText
         className="w-full"
         id="title"
         label="제목"
         {...register("title")}
         errorMessage={errors.title?.message}
       />
-      <InputTextUnControlled
+      <InputText
         className="w-full"
         id="description"
         label="설명"
@@ -120,7 +120,7 @@ export default function GameForm() {
           render={({ field }) => <RadioGroup {...field} items={gameAccessTypeItems} />}
         />
       </article>
-      <InputTextUnControlled
+      <InputText
         className="w-full"
         id="inviteCode"
         label="초대코드"

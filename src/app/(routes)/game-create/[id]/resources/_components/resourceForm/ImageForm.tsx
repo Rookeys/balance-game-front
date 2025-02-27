@@ -1,6 +1,6 @@
 "use client"
 import FileUploadDropZone from "@/components/form/fileUpload/FileUploadDropZone"
-import InputTextControlled from "@/components/form/inputText/InputTextControlled"
+import InputText from "@/components/form/inputText/InputText"
 import { FormProvider, useForm, type FieldValues } from "react-hook-form"
 import type { ResourceType } from "../../page"
 import ImageThumbnailBox from "../ImageThumbnailBox"
@@ -41,7 +41,7 @@ export default function ImageForm(props: ResourceType) {
             />
           </article>
           <article className="w-[180px] flex-shrink-0 border-r border-dark p-4 dark:border-gray">
-            <InputTextControlled
+            <InputText
               id="name"
               value={watch("name")}
               onChange={(e) => setValue("name", e.target.value, { shouldValidate: true })}

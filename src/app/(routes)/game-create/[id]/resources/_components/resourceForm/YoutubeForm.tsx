@@ -1,5 +1,5 @@
 "use client"
-import InputTextControlled from "@/components/form/inputText/InputTextControlled"
+import InputText from "@/components/form/inputText/InputText"
 import { FormProvider, useForm, type FieldValues } from "react-hook-form"
 import type { ResourceType } from "../../page"
 import YoutubeThumbnailBox from "../YoutubeThumbnailBox"
@@ -39,7 +39,7 @@ export default function YoutubeForm(props: ResourceType) {
             <YoutubeThumbnailBox url={watch("url")} start={watch("start")} end={watch("end")} />
           </article>
           <article className="w-[180px] flex-shrink-0 border-r border-dark p-4 dark:border-gray">
-            <InputTextControlled
+            <InputText
               id="name"
               value={watch("name")}
               onChange={(e) => setValue("name", e.target.value, { shouldValidate: true })}
@@ -47,7 +47,7 @@ export default function YoutubeForm(props: ResourceType) {
           </article>
           <article className="w-[360px] flex-shrink-0 border-r border-dark p-4 dark:border-gray">
             <div className="flex flex-col gap-[12px]">
-              <InputTextControlled
+              <InputText
                 id="url"
                 value={watch("url")}
                 onChange={(e) => setValue("url", e.target.value, { shouldValidate: true })}
@@ -55,7 +55,7 @@ export default function YoutubeForm(props: ResourceType) {
               {/* // Todo 에러 발생 시 토스트메세지 출력하는것도 괜찮을것 같음 */}
               {/* {!!errors.url?.message && <InputErrorMessage id={"url"} errorMessage={errors.url?.message} />} */}
               <div className="flex gap-[12px]">
-                <InputTextControlled
+                <InputText
                   id="startTime"
                   className="max-w-[100px]"
                   placeholder="시작(초)"
@@ -64,7 +64,7 @@ export default function YoutubeForm(props: ResourceType) {
                   value={watch("start")}
                   onChange={(e) => setValue("start", Number(e.target.value), { shouldValidate: true })}
                 />
-                <InputTextControlled
+                <InputText
                   id="endTime"
                   className="max-w-[100px]"
                   placeholder="종료(초)"
