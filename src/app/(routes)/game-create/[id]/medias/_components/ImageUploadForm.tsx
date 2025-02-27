@@ -27,7 +27,6 @@ export function ImageUploadForm() {
 
   const onSubmit = async (data: FieldValues) => {
     try {
-      console.log("data", data)
       if (!data.files || data.files.length === 0) {
         toast.error("이미지를 업로드 해주세요")
         return
