@@ -13,8 +13,8 @@ export default function ImageThumbnailBox({ url }: Params) {
 
   return (
     <>
-      <div className="relative h-full min-h-[120px] w-full" onClick={() => setIsOpen(true)}>
-        <Image src={url} alt="Image thumbnail" className="cursor-pointer" fill sizes="120px" />
+      <div className="relative h-full min-h-[120px] w-full bg-blue-10" onClick={() => setIsOpen(true)}>
+        <Image src={url} alt="Image thumbnail" className="cursor-pointer object-contain" fill sizes="120px" />
       </div>
       {isOpen && <ImageModal url={url} onClose={() => setIsOpen(false)} />}
     </>
