@@ -45,7 +45,8 @@ export default function GameForm() {
   }
 
   const {
-    register,
+    watch,
+    setValue,
     handleSubmit,
     control,
     formState: { errors, isSubmitting }
@@ -85,14 +86,18 @@ export default function GameForm() {
         className="w-full"
         id="title"
         label="제목"
-        {...register("title")}
+        // {...register("title")}
+        value={watch("title")}
+        onChange={(e) => setValue("title", e.target.value)}
         errorMessage={errors.title?.message}
       />
       <InputText
         className="w-full"
         id="description"
         label="설명"
-        {...register("description")}
+        // {...register("description")}
+        value={watch("description")}
+        onChange={(e) => setValue("description", e.target.value)}
         errorMessage={errors.description?.message}
       />
       <article className="flex flex-col gap-[4px]">
@@ -124,7 +129,9 @@ export default function GameForm() {
         className="w-full"
         id="inviteCode"
         label="초대코드"
-        {...register("inviteCode")}
+        // {...register("inviteCode")}
+        value={watch("inviteCode")}
+        onChange={(e) => setValue("inviteCode", e.target.value)}
         errorMessage={errors.inviteCode?.message}
       />
       <p className="text-sm text-gray">
