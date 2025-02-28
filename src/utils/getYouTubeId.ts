@@ -1,4 +1,6 @@
 export function getYouTubeId(url: string) {
-  const arr = url.split(/(vi\/|v%3D|v=|\/v\/|youtu\.be\/|\/embed\/)/)
-  return undefined !== arr[2] ? arr[2].split(/[^\w-]/i)[0] : arr[0]
+  const regex =
+    /(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|\S+\/\S*\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/|youtube\.com\/shorts\/)([a-zA-Z0-9_-]{11})/
+  const match = url.match(regex)
+  return match ? match[1] : ""
 }
