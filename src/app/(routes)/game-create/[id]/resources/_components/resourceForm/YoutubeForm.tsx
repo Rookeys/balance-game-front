@@ -1,7 +1,7 @@
 "use client"
+import { GameResourceResponse } from "@/api/orval/model/gameResourceResponse"
 import InputText from "@/components/form/inputText/InputText"
 import { FormProvider, useForm, type FieldValues } from "react-hook-form"
-import type { ResourceType } from "../../page"
 import YoutubeThumbnailBox from "../YoutubeThumbnailBox"
 import FormAction from "./FormAction"
 
@@ -14,13 +14,13 @@ type YoutubeResourceType = {
   end?: number
 }
 
-export default function YoutubeForm(props: ResourceType) {
+export default function YoutubeForm(props: GameResourceResponse) {
   const formMethods = useForm<YoutubeResourceType>({
     defaultValues: {
-      name: props.name,
-      url: props.url,
-      start: props.start,
-      end: props.end
+      name: props.title,
+      url: props.content,
+      start: props.startSec,
+      end: props.endSec
     }
   })
 
@@ -77,10 +77,10 @@ export default function YoutubeForm(props: ResourceType) {
             </div>
           </article>
           <article className="flex w-[180px] flex-shrink-0 items-center justify-center border-r border-dark p-4 dark:border-gray">
-            <p>{props.winRate}</p>
+            <p>{(props?.winningNums || 0) / (props.totalPlayNums || 1)} %</p>
           </article>
           <article className="w-[180px] flex-shrink-0 p-4">
-            <FormAction id={props.id} name={props.name} />
+            <FormAction id={props.resourceId as number} name={props.title} />
           </article>
         </section>
       </form>

@@ -9,13 +9,14 @@ const ConfirmModal = dynamic(() => import("@/components/modal/ConfirmModal"))
 interface Params {
   id: number
   name?: string
+  disabled?: boolean
 }
 
-export default function FormAction({ id, name = "" }: Params) {
+export default function FormAction({ id, name = "", disabled }: Params) {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   return (
     <div className="flex h-full flex-wrap items-center justify-around gap-[4px]">
-      <Button type="submit" variant="custom">
+      <Button type="submit" variant="custom" disabled={disabled}>
         <FilePenLine />
       </Button>
       <Button type="button" variant="custom" onClick={() => setIsOpen(true)}>
