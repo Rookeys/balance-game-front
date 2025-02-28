@@ -30,3 +30,20 @@ export const postGameSchema = z
   )
 
 export type PostGameType = z.output<typeof postGameSchema>
+
+export const categoryItems: SelectOptionType[] = [
+  { id: GameRequestCategory.FUN, value: GameRequestCategory.FUN, label: "재미" },
+  { id: GameRequestCategory.HORROR, value: GameRequestCategory.HORROR, label: "공포" },
+  { id: GameRequestCategory.HOT, value: GameRequestCategory.HOT, label: "유행" }
+]
+
+export const isNamePublicItems: SelectOptionType[] = [
+  { id: "is_name_public", value: "true", label: "공개" },
+  { id: "is_name_private", value: "false", label: "비공개" }
+]
+
+export const gameAccessTypeItems: SelectOptionType[] = [
+  { id: GameRequestAccessType.PUBLIC, value: GameRequestAccessType.PUBLIC, label: "공개" },
+  { id: GameRequestAccessType.PROTECTED, value: GameRequestAccessType.PROTECTED, label: "일부공개" },
+  { id: GameRequestAccessType.PRIVATE, value: GameRequestAccessType.PRIVATE, label: "비공개" }
+]

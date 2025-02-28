@@ -13,6 +13,8 @@ export interface GameResultResponse {
   startSec?: number
   /** Youtube Link 끝 시간 */
   endSec?: number
-  /** 우승 비율 */
-  winRate?: number
+  /** 우승 횟수 */
+  winningNums?: number
+  /** 게임 진행 횟수 */
+  totalPlayNums?: number
 }

@@ -1,21 +1,4 @@
-"use client"
-
-import dynamic from "next/dynamic"
-import { mockData } from "./mockdata"
-
-const ImageForm = dynamic(() => import("./_components/resourceForm/ImageForm"))
-const YoutubeForm = dynamic(() => import("./_components/resourceForm/YoutubeForm"))
-
-export interface ResourceType {
-  id: number
-  url: string
-  type: "image" | "youtube"
-  name: string
-  media: string
-  winRate: string
-  start?: number
-  end?: number
-}
+import ResourceForm from "./_components/ResourceForm"
 
 export default function ResourcePage() {
   return (
@@ -34,9 +17,7 @@ export default function ResourcePage() {
         </article>
 
         {/* Body */}
-        {mockData.map((data) =>
-          data.type === "image" ? <ImageForm key={data.id} {...data} /> : <YoutubeForm key={data.id} {...data} />
-        )}
+        <ResourceForm />
       </section>
     </section>
   )

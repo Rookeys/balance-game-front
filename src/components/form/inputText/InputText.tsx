@@ -12,33 +12,34 @@ interface Params extends InputHTMLAttributes<HTMLInputElement> {
   labelClassName?: string
 }
 
-const InputTextUnControlled = ({
+const InputText: React.FC<Params> = ({
   label,
+  value,
+  onChange,
   required = false,
-  placeholder = "",
   id,
   errorMessage,
   ariaLabel,
   className,
   labelClassName,
-  ...props
-}: Params) => {
+  ...rest
+}) => {
   return (
     <section className={cn("inline-flex flex-col gap-[4px]", className)}>
-      {label && <InputLabel id={id} label={label} className={labelClassName} />}
+      {label && <InputLabel id={id} label={label} required={required} className={labelClassName} />}
       <input
         id={id}
-        type="text"
-        className="w-full rounded-xsm border-[2px] px-2 py-1"
-        placeholder={placeholder}
+        className="w-full rounded-xsm border-[2px] px-2 py-1 dark:border-gray dark:bg-dark-30"
+        value={value}
+        onChange={onChange}
         required={required}
         aria-invalid={!!errorMessage}
         aria-label={ariaLabel}
-        {...props}
+        {...rest}
       />
       {!!errorMessage && <InputErrorMessage id={id} errorMessage={errorMessage} />}
     </section>
   )
 }
 
-export default InputTextUnControlled
+export default InputText

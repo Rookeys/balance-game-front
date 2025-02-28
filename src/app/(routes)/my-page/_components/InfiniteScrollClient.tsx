@@ -33,8 +33,7 @@ export default function InfiniteScrollClient() {
 
   return (
     <section className="relative flex flex-col gap-[80px]">
-      {/* {data?.pages.map((page) => page.content?.map((game) => <p key={game.roomId}>{game.title}</p>))} */}
-      {data?.pages.flatMap((page) => page.content || []).map((game) => <p key={game.roomId}>{game.title}</p>)}
+      {data?.pages.map((page) => page.content?.map((game) => <p key={game?.roomId}>{game?.title}</p>))}
       {!isFetchingNextPage && (
         <div ref={ref} className="pointer-events-none absolute bottom-[400px] h-[4px] w-full opacity-0" />
       )}

@@ -3,7 +3,7 @@ import ImageRatio from "@/components/ImageRatio"
 import ModalWrapper from "@/components/modal/ModalWrapper"
 
 interface Params {
-  url: string
+  url?: string
   onClose: () => void
 }
 
@@ -14,7 +14,7 @@ export default function ImageModal({ url, onClose }: Params) {
         <ImageRatio
           className="object-cover"
           ratio={1}
-          src={url}
+          src={url ?? "/"}
           alt={`thumbnail`}
           fill
           sizes="(max-width: 320px) 300px, (max-width: 768px) 80vw, 600px"

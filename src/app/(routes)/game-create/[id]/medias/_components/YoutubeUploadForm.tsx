@@ -1,36 +1,55 @@
 "use client"
 
+import { getGetResourcesQueryKey } from "@/api/orval/client/game-resource-controller/game-resource-controller"
+import { useSaveLink } from "@/api/orval/client/media-link-controller/media-link-controller"
+import { LinkRequest } from "@/api/orval/model/linkRequest"
 import { Button } from "@/components/Button"
-import InputTextControlled from "@/components/form/inputText/InputTextControlled"
+import InputText from "@/components/form/inputText/InputText"
 import { getYoutubeThumbnail } from "@/utils/getYoutubeThumbnail"
+import { log } from "@/utils/log"
 import { postYoutubeMediaSchema } from "@/validations/youtubeMediaSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { useQueryClient } from "@tanstack/react-query"
 import dynamic from "next/dynamic"
 import Image from "next/image"
+import { useParams } from "next/navigation"
 import { useState } from "react"
-import { useForm, type FieldValues } from "react-hook-form"
+import { useForm } from "react-hook-form"
+import { toast } from "sonner"
 
 const YoutubeModal = dynamic(() => import("@/components/modal/YoutubeModal"))
 const InputErrorMessage = dynamic(() => import("@/components/form/_components").then((mod) => mod.InputErrorMessage))
 
 export function YoutubeUploadForm() {
+  const { id } = useParams()
+  const { mutateAsync } = useSaveLink()
+
+  const queryClient = useQueryClient()
+
   const {
     watch,
     setValue,
     handleSubmit,
+    reset,
     formState: { isSubmitting, errors }
-  } = useForm({
+  } = useForm<LinkRequest>({
     defaultValues: {
-      url: "",
-      start: 0,
-      end: 0
+      url: ""
+      // startSec: 0,
+      // endSec: 0
     },
     resolver: zodResolver(postYoutubeMediaSchema)
   })
 
-  const onSubmit = async (data: FieldValues) => {
-    console.log("data", data)
-    // Todo start, end 가 0일때는 값 보내지않기
+  const onSubmit = async (data: LinkRequest) => {
+    try {
+      await mutateAsync({ gameId: Number(id), data })
+      await queryClient.invalidateQueries({ queryKey: getGetResourcesQueryKey(Number(id)) })
+      reset()
+    } catch (error) {
+      log(error)
+      toast.error("오류가 발생했습니다. 다시 시도해주세요")
+    }
   }
 
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -39,7 +58,7 @@ export function YoutubeUploadForm() {
     <>
       <form onSubmit={handleSubmit(onSubmit)} className="flex w-full max-w-[500px] flex-col gap-[28px]">
         <p>동영상 업로드</p>
-        <InputTextControlled
+        <InputText
           id="url"
           value={watch("url")}
           onChange={(e) => setValue("url", e.target.value, { shouldValidate: true })}
@@ -58,23 +77,36 @@ export function YoutubeUploadForm() {
         />
         <article className="flex flex-wrap justify-between gap-[20px]">
           <div className="flex gap-[20px]">
-            <InputTextControlled
-              id="start"
+            <InputText
+              id="startSec"
               className="max-w-[100px]"
               placeholder="시작(초)"
-              type="number"
-              min={0}
-              value={watch("start")}
-              onChange={(e) => setValue("start", Number(e.target.value), { shouldValidate: true })}
+              type="text"
+              pattern="\d*"
+              value={watch("startSec") ?? ""}
+              // onChange={(e) => setValue("startSec", Number(e.target.value), { shouldValidate: true })}
+              onChange={(e) => {
+                const value = e.target.value
+                // 숫자 외의 문자가 입력되지 않도록 처리
+                if (/^\d*$/.test(value)) {
+                  setValue("startSec", value === "" ? undefined : Number(value), { shouldValidate: true })
+                }
+              }}
             />
-            <InputTextControlled
+            <InputText
               id="end"
               className="max-w-[100px]"
               placeholder="종료(초)"
-              type="number"
-              min={0}
-              value={watch("end")}
-              onChange={(e) => setValue("end", Number(e.target.value), { shouldValidate: true })}
+              type="text"
+              pattern="\d*"
+              value={watch("endSec") ?? ""}
+              // onChange={(e) => setValue("endSec", Number(e.target.value), { shouldValidate: true })}
+              onChange={(e) => {
+                const value = e.target.value
+                if (/^\d*$/.test(value)) {
+                  setValue("endSec", value === "" ? undefined : Number(value), { shouldValidate: true })
+                }
+              }}
             />
           </div>
           <Button
@@ -89,8 +121,8 @@ export function YoutubeUploadForm() {
       {isOpen && (
         <YoutubeModal
           url={watch("url")}
-          start={watch("start")}
-          end={watch("end")}
+          start={watch("startSec")}
+          end={watch("endSec")}
           onClose={() => setIsOpen(false)}
           overlayClose
         />

@@ -1,7 +1,7 @@
 "use client"
 import { Button } from "@/components/Button"
 import FileUploadDropZone from "@/components/form/fileUpload/FileUploadDropZone"
-import InputTextUnControlled from "@/components/form/inputText/InputTextUnControlled"
+import InputText from "@/components/form/inputText/InputText"
 import { useAsyncRoutePush } from "@/hooks/useAsyncRoutePush"
 import { sleep } from "@/utils/sleep"
 import { postSignUpSchema, PostSignUpType } from "@/validations/signUpSchema"
@@ -42,7 +42,7 @@ export default function SignUp() {
         className="flex w-full max-w-[500px] flex-col items-start justify-center gap-[28px]"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <InputTextUnControlled
+        <InputText
           className="w-full"
           id="nickname"
           label="제목"

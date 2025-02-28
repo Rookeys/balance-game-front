@@ -22,7 +22,9 @@ export const FileUploader = ({
   const [isLimit, setIsLimit] = useState(false)
   const {
     accept = {
-      "image/*": [".jpg", ".jpeg", ".png"]
+      // "image/*": [".jpg", ".jpeg", ".png"]
+      "image/jpeg": [".jpg", ".jpeg"],
+      "image/png": [".png"]
     },
     maxFiles = 1,
     maxSize = 4 * 1024 * 1024,
@@ -40,6 +42,8 @@ export const FileUploader = ({
 
   const onDrop = useCallback(
     (acceptedFiles: File[], rejectedFiles: FileRejection[]) => {
+      console.log("acceptedFiles", acceptedFiles)
+
       const files = acceptedFiles
 
       if (!files) {
