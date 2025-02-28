@@ -10,7 +10,7 @@ import { GameResourceResponse } from "@/api/orval/model/gameResourceResponse"
 import FileUploadDropZone from "@/components/form/fileUpload/FileUploadDropZone"
 import InputText from "@/components/form/inputText/InputText"
 import { log } from "@/utils/log"
-import { putGameImageResourceSchema, PutImageResourceType } from "@/validations/gameResourceSchema"
+import { putGameImageResourceSchema, PutGameImageResourceType } from "@/validations/gameResourceSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useQueryClient } from "@tanstack/react-query"
 import axios from "axios"
@@ -20,12 +20,12 @@ import { toast } from "sonner"
 import ImageThumbnailBox from "../ImageThumbnailBox"
 import FormAction from "./FormAction"
 
-export default function ImageForm({ ...props }: GameResourceResponse) {
+export default function ImageForm(props: GameResourceResponse) {
   const { id } = useParams()
 
   const queryClient = useQueryClient()
 
-  const formMethods = useForm<PutImageResourceType>({
+  const formMethods = useForm<PutGameImageResourceType>({
     defaultValues: {
       title: props.title,
       type: GameResourceRequestType.IMAGE
@@ -44,7 +44,7 @@ export default function ImageForm({ ...props }: GameResourceResponse) {
     formState: { isSubmitting }
   } = formMethods
 
-  const onSubmit = async (data: PutImageResourceType) => {
+  const onSubmit = async (data: PutGameImageResourceType) => {
     try {
       let imageURL = null
       if (data.files && data.files.length > 0) {
@@ -58,11 +58,15 @@ export default function ImageForm({ ...props }: GameResourceResponse) {
         imageURL = new URL(presignedUrl).origin + new URL(presignedUrl).pathname
       }
 
-      const gameResourceRequest = {
+      const putGameResourceRequest = {
         ...data,
         content: imageURL ? imageURL : props.content
       } satisfies GameResourceRequest
-      await UpdateImageResource({ gameId: Number(id), resourceId: Number(props.resourceId), data: gameResourceRequest })
+      await UpdateImageResource({
+        gameId: Number(id),
+        resourceId: Number(props.resourceId),
+        data: putGameResourceRequest
+      })
       await queryClient.invalidateQueries({ queryKey: getGetResourcesQueryKey(Number(id)) })
       setValue("files", [], { shouldValidate: true })
     } catch (error) {
