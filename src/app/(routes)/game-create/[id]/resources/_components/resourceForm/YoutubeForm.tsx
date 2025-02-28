@@ -84,19 +84,32 @@ export default function YoutubeForm(props: GameResourceResponse) {
                   id="startTime"
                   className="max-w-[100px]"
                   placeholder="시작(초)"
-                  type="number"
-                  min={0}
-                  value={watch("startSec")}
-                  onChange={(e) => setValue("startSec", Number(e.target.value), { shouldValidate: true })}
+                  type="text"
+                  pattern="\d*"
+                  value={watch("startSec") ?? ""}
+                  // onChange={(e) => setValue("startSec", Number(e.target.value), { shouldValidate: true })}
+                  onChange={(e) => {
+                    const value = e.target.value
+                    // 숫자 외의 문자가 입력되지 않도록 처리
+                    if (/^\d*$/.test(value)) {
+                      setValue("startSec", value === "" ? undefined : Number(value), { shouldValidate: true })
+                    }
+                  }}
                 />
                 <InputText
                   id="endTime"
                   className="max-w-[100px]"
                   placeholder="종료(초)"
-                  type="number"
-                  min={0}
-                  value={watch("endSec")}
-                  onChange={(e) => setValue("endSec", Number(e.target.value), { shouldValidate: true })}
+                  type="text"
+                  pattern="\d*"
+                  value={watch("endSec") ?? ""}
+                  // onChange={(e) => setValue("endSec", Number(e.target.value), { shouldValidate: true })}
+                  onChange={(e) => {
+                    const value = e.target.value
+                    if (/^\d*$/.test(value)) {
+                      setValue("endSec", value === "" ? undefined : Number(value), { shouldValidate: true })
+                    }
+                  }}
                 />
               </div>
             </div>
