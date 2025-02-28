@@ -80,7 +80,7 @@ export default function YoutubeForm(props: GameResourceResponse) {
             <p>{(props?.winningNums || 0) / (props.totalPlayNums || 1)} %</p>
           </article>
           <article className="w-[180px] flex-shrink-0 p-4">
-            <FormAction id={props.resourceId as number} name={props.title} />
+            <FormAction resourceId={props.resourceId as number} name={props.title} />
           </article>
         </section>
       </form>
