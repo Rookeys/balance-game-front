@@ -1,5 +1,6 @@
 "use client"
 
+import { getGetResourcesQueryKey } from "@/api/orval/client/game-resource-controller/game-resource-controller"
 import { useSaveLink } from "@/api/orval/client/media-link-controller/media-link-controller"
 import { LinkRequest } from "@/api/orval/model/linkRequest"
 import { Button } from "@/components/Button"
@@ -8,6 +9,7 @@ import { getYoutubeThumbnail } from "@/utils/getYoutubeThumbnail"
 import { log } from "@/utils/log"
 import { postYoutubeMediaSchema } from "@/validations/youtubeMediaSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { useQueryClient } from "@tanstack/react-query"
 import dynamic from "next/dynamic"
 import Image from "next/image"
 import { useParams } from "next/navigation"
@@ -21,6 +23,8 @@ const InputErrorMessage = dynamic(() => import("@/components/form/_components").
 export function YoutubeUploadForm() {
   const { id } = useParams()
   const { mutateAsync } = useSaveLink()
+
+  const queryClient = useQueryClient()
 
   const {
     watch,
@@ -40,6 +44,7 @@ export function YoutubeUploadForm() {
   const onSubmit = async (data: LinkRequest) => {
     try {
       await mutateAsync({ gameId: Number(id), data })
+      await queryClient.invalidateQueries({ queryKey: getGetResourcesQueryKey(Number(id)) })
       reset()
     } catch (error) {
       log(error)

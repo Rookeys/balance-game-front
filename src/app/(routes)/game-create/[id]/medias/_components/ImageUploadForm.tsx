@@ -1,10 +1,12 @@
 "use client"
 
+import { getGetResourcesQueryKey } from "@/api/orval/client/game-resource-controller/game-resource-controller"
 import { useSaveImageForGame } from "@/api/orval/client/image-controller/image-controller"
 import { useGetPreSignedUrl } from "@/api/orval/client/presigned-url-controller/presigned-url-controller"
 import { Button } from "@/components/Button"
 import FileUploadDropZone from "@/components/form/fileUpload/FileUploadDropZone"
 import { log } from "@/utils/log"
+import { useQueryClient } from "@tanstack/react-query"
 import axios from "axios"
 import { useParams } from "next/navigation"
 import { useForm, type FieldValues } from "react-hook-form"
@@ -12,6 +14,8 @@ import { toast } from "sonner"
 
 export function ImageUploadForm() {
   const { id } = useParams()
+
+  const queryClient = useQueryClient()
 
   const { mutateAsync: RequestPresignedUrl } = useGetPreSignedUrl()
 
@@ -53,6 +57,8 @@ export function ImageUploadForm() {
       const baseUrls = imageUrls.map((url) => new URL(url).origin + new URL(url).pathname)
 
       await SaveImageResources({ gameId: Number(id), data: { urls: baseUrls } })
+
+      await queryClient.invalidateQueries({ queryKey: getGetResourcesQueryKey(Number(id)) })
 
       reset()
     } catch (error) {
