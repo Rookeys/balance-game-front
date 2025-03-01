@@ -2,9 +2,9 @@
 import { useGetGameDetails } from "@/api/orval/client/game-play-controller/game-play-controller"
 import { useGetResource } from "@/api/orval/client/game-resource-controller/game-resource-controller"
 import { Button } from "@/components/Button"
+import ResourceItem from "@/components/ResourceItem"
 import Link from "next/link"
 import { useParams, useSearchParams } from "next/navigation"
-import ResourceItem from "./ResourceItem"
 
 export default function GameResultPageClient() {
   const { id } = useParams()

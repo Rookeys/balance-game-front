@@ -1,23 +1,19 @@
 "use client"
 
 import { useGetMyGameListInfinite } from "@/api/orval/client/user-profile-controller/user-profile-controller"
-import { GetMyGameListSortType } from "@/api/orval/model/getMyGameListSortType"
 import { useEffect } from "react"
 import { useInView } from "react-intersection-observer"
 
 export default function InfiniteScrollClient() {
-  const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } = useGetMyGameListInfinite(
-    { sortType: GetMyGameListSortType.idDesc },
-    {
-      query: {
-        initialPageParam: undefined,
-        getNextPageParam: (lastPage) => {
-          const lastItem = lastPage.content?.[lastPage.content.length - 1]
-          return lastPage.hasNext ? lastItem?.roomId : undefined
-        }
+  const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } = useGetMyGameListInfinite(undefined, {
+    query: {
+      initialPageParam: undefined,
+      getNextPageParam: (lastPage) => {
+        const lastItem = lastPage.content?.[lastPage.content.length - 1]
+        return lastPage.hasNext ? lastItem?.roomId : undefined
       }
     }
-  )
+  })
 
   const { ref, inView } = useInView({
     threshold: 1
