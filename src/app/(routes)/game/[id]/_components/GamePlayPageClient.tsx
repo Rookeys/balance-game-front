@@ -1,6 +1,6 @@
 "use client"
 
-import { useContinuePlayRoom } from "@/api/orval/client/game-play-controller/game-play-controller"
+import { useContinuePlayRoom, useGetGameDetails } from "@/api/orval/client/game-play-controller/game-play-controller"
 import Image from "next/image"
 import { useParams } from "next/navigation"
 import { useState } from "react"
@@ -13,8 +13,9 @@ interface Params {
 export default function GamePlayPageClient({ gameId }: Params) {
   const { id } = useParams()
 
-  const { data } = useContinuePlayRoom(Number(id), gameId)
-  console.log("data", data)
+  const { data: gameRoomData } = useGetGameDetails(Number(id))
+
+  const { data: gamePlayData } = useContinuePlayRoom(Number(id), gameId)
 
   const [selectedId, setSelectedId] = useState<string>()
 
@@ -26,25 +27,28 @@ export default function GamePlayPageClient({ gameId }: Params) {
   return (
     <section className="flex flex-col">
       <article className="flex items-center justify-center">
-        <p className="my-[8px] text-lg font-semibold">게임 타이틀 n강 라운드/전체라운드</p>
+        <p className="my-[8px] text-lg font-semibold">
+          {gameRoomData?.title} {gamePlayData?.totalRoundNums}강 {gamePlayData?.currentRoundNums} /{" "}
+          {gamePlayData?.totalRoundNums ? gamePlayData?.totalRoundNums / 2 : ""}
+        </p>
       </article>
       <section className="flex min-h-[80vh] items-center justify-center">
         <SelectItemBox
-          id="image-id"
-          url="https://avatars.githubusercontent.com/u/62785823?v=4"
-          title="github"
-          type="image"
+          id={gamePlayData?.leftResource?.resourceId?.toString()}
+          url={gamePlayData?.leftResource?.content}
+          title={gamePlayData?.leftResource?.title}
+          type={gamePlayData?.leftResource?.type}
           selectedId={selectedId}
           handleSelectItem={handleSelectItem}
         />
-        <div className="pointer-events-none absolute z-[40] h-fit w-fit bg-white/50">
+        <div className="pointer-events-none absolute start-[50%] top-[50%] z-[40] translate-x-[-50%] translate-y-[-50%] bg-white/50">
           <Image width={80} height={80} src={"/images/vs.png"} alt="vs icon" className="object-contain" />
         </div>
         <SelectItemBox
-          id="youtube-id"
-          url="https://www.youtube.com/watch?v=W3qIzaNndH4"
-          title="youtube"
-          type="youtube"
+          id={gamePlayData?.rightResource?.resourceId?.toString()}
+          url={gamePlayData?.rightResource?.content}
+          title={gamePlayData?.rightResource?.title}
+          type={gamePlayData?.rightResource?.type}
           selectedId={selectedId}
           handleSelectItem={handleSelectItem}
         />
