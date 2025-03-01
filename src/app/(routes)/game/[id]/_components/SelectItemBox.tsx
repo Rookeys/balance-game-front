@@ -39,7 +39,7 @@ export default function SelectItemBox({
         animate={{
           scale: !!selectedId ? (selected ? [1, 1.25, 1, 1.25, 1] : 0.25) : 1,
           transition: {
-            duration: 0.5
+            duration: 0.4
           }
         }}
         onAnimationComplete={handleAnimationComplete}
@@ -68,7 +68,7 @@ export default function SelectItemBox({
       animate={{
         scale: !!selectedId ? (selected ? [1, 1.25, 1, 1.25, 1] : 0.25) : 1,
         transition: {
-          duration: 0.5
+          duration: 0.4
         }
       }}
       onAnimationComplete={handleAnimationComplete}

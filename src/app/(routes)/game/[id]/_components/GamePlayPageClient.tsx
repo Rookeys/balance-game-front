@@ -1,27 +1,68 @@
 "use client"
 
-import { useContinuePlayRoom, useGetGameDetails } from "@/api/orval/client/game-play-controller/game-play-controller"
+import {
+  useContinuePlayRoom,
+  useGetGameDetails,
+  useUpdatePlayRoom
+} from "@/api/orval/client/game-play-controller/game-play-controller"
+import { GamePlayRequest } from "@/api/orval/model/gamePlayRequest"
+import { sleep } from "@/utils/sleep"
 import Image from "next/image"
 import { useParams } from "next/navigation"
 import { useState } from "react"
 import SelectItemBox from "./SelectItemBox"
+import { removePlayIdCookie } from "@/app/(routes)/game/[id]/_server/playIdCookie"
 
 interface Params {
-  gameId: number
+  playId: number
 }
 
-export default function GamePlayPageClient({ gameId }: Params) {
+export default function GamePlayPageClient({ playId }: Params) {
   const { id } = useParams()
+
+  // const queryClient = useQueryClient()
 
   const { data: gameRoomData } = useGetGameDetails(Number(id))
 
-  const { data: gamePlayData } = useContinuePlayRoom(Number(id), gameId)
+  const { data: gamePlayData } = useContinuePlayRoom(Number(id), playId)
 
   const [selectedId, setSelectedId] = useState<string>()
 
-  const handleSelectItem = (id: string) => {
+  const { mutateAsync } = useUpdatePlayRoom()
+
+  const returnPutGamePlayRequest = (selectedId: number): GamePlayRequest => {
+    const winResourceId =
+      gamePlayData?.leftResource?.resourceId === selectedId
+        ? Number(gamePlayData?.leftResource?.resourceId)
+        : Number(gamePlayData?.rightResource?.resourceId)
+
+    const loseResourceId =
+      gamePlayData?.leftResource?.resourceId === selectedId
+        ? Number(gamePlayData?.rightResource?.resourceId)
+        : Number(gamePlayData?.leftResource?.resourceId)
+
+    return {
+      winResourceId,
+      loseResourceId
+    } satisfies GamePlayRequest
+  }
+
+  const handleSelectItem = async (id: string) => {
     if (selectedId) return
     setSelectedId(id)
+    await sleep(500)
+
+    const response = await mutateAsync({
+      gameId: Number(id),
+      playId: playId,
+      data: returnPutGamePlayRequest(Number(selectedId))
+    })
+
+    if (!!response.winningResource) {
+      await removePlayIdCookie()
+    }
+
+    window.location.reload()
   }
 
   return (

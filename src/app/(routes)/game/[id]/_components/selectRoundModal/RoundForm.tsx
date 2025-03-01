@@ -1,7 +1,7 @@
 "use client"
 import { useCreatePlayRoom } from "@/api/orval/client/game-play-controller/game-play-controller"
 import { GamePlayRoundRequest } from "@/api/orval/model/gamePlayRoundRequest"
-import { setPlayIdCookie } from "@/app/(routes)/game/[id]/_server/setCookiePlayId"
+import { setPlayIdCookie } from "@/app/(routes)/game/[id]/_server/playIdCookie"
 import { Button } from "@/components/Button"
 import { InputErrorMessage } from "@/components/form/_components"
 import Select from "@/components/form/select/Select"
