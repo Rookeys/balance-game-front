@@ -1,5 +1,4 @@
 import type { GamePlayResourceResponse } from "./gamePlayResourceResponse"
-import type { GamePlayWinningResourceResponse } from "./gamePlayWinningResourceResponse"
 
 export interface GamePlayResponse {
   /** 게임방 id */
@@ -10,5 +9,4 @@ export interface GamePlayResponse {
   currentRoundNums?: number
   leftResource?: GamePlayResourceResponse
   rightResource?: GamePlayResourceResponse
-  winningResource?: GamePlayWinningResourceResponse
 }
