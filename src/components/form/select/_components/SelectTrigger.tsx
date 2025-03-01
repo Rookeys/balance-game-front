@@ -3,6 +3,7 @@ import { ChevronDown } from "lucide-react"
 
 interface Params {
   ref?: React.Ref<HTMLButtonElement>
+  placeholder?: string
 }
 
 export const SelectTrigger = (props: Params) => {
@@ -11,7 +12,7 @@ export const SelectTrigger = (props: Params) => {
       className="inline-flex items-center justify-between rounded-xsm border border-gray-20 px-4 py-2 text-sm font-medium hover:bg-light focus:outline-none dark:border-gray-70 dark:hover:bg-dark-night"
       {...props}
     >
-      <SelectPrimitive.Value placeholder="카테고리 선택" />
+      <SelectPrimitive.Value placeholder={props.placeholder} />
       <SelectPrimitive.Icon>
         <ChevronDown className="h-[20px] w-[20px] text-gray" />
       </SelectPrimitive.Icon>

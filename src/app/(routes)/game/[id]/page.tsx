@@ -1,52 +1,52 @@
-"use client"
-import Image from "next/image"
-import { useEffect, useState } from "react"
-import SelectItemBox from "./_components/SelectItemBox"
-import SelectRoundModal from "./_components/selectRoundModal"
+import {
+  prefetchContinuePlayRoom,
+  prefetchGetGameDetails
+} from "@/api/orval/server/game-play-controller/game-play-controller"
+import { COOKIE_KEY } from "@/constants/cookie"
+import { log } from "@/utils/log"
+import { cookies } from "next/headers"
+import { notFound } from "next/navigation"
+import NewGamePageClient from "./_components/NewGamePageClient"
+import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query"
+import GamePlayPageClient from "./_components/GamePlayPageClient"
 
-export default function Game() {
-  const [isOpen, setIsOpen] = useState<boolean>(false)
-  const [selectedId, setSelectedId] = useState<string>()
+interface Params {
+  id: string
+}
 
-  useEffect(() => {
-    setIsOpen(true)
-  }, [])
+interface GamePlayPageProps {
+  params: Promise<Params>
+}
 
-  const handleSelectItem = (id: string) => {
-    if (selectedId) return
-    setSelectedId(id)
+export default async function Game({ params }: GamePlayPageProps) {
+  const { id } = await params
+  const cookieStore = await cookies()
+  const existingGameID = cookieStore.get(COOKIE_KEY.GAME_ID)
+  const queryClient = new QueryClient()
+
+  try {
+    await Promise.all([
+      prefetchGetGameDetails(queryClient, Number(id)),
+      existingGameID && prefetchContinuePlayRoom(queryClient, Number(id), Number(existingGameID?.value))
+    ])
+
+    if (existingGameID) {
+      // Todo 게임하기 or 이어하기 설정, 완료 시 쿠키삭제
+      return (
+        <HydrationBoundary state={dehydrate(queryClient)}>
+          <GamePlayPageClient gameId={Number(existingGameID.value)} />
+        </HydrationBoundary>
+      )
+    } else {
+      // Todo 일부공개 시 inviteCode 넣는 로직
+      return (
+        <HydrationBoundary state={dehydrate(queryClient)}>
+          <NewGamePageClient />
+        </HydrationBoundary>
+      )
+    }
+  } catch (error) {
+    log(error)
+    notFound()
   }
-
-  return (
-    <section className="flex flex-col">
-      <article className="flex items-center justify-center">
-        <p className="my-[8px] text-lg font-semibold">게임 타이틀 n강 라운드/전체라운드</p>
-      </article>
-      <section className="flex min-h-[80vh] items-center justify-center">
-        {/* <SelectItemBox url="https://avatars.githubusercontent.com/u/62785823?v=4" title="github" type="image" /> */}
-        <SelectItemBox
-          id="image-id"
-          url="https://avatars.githubusercontent.com/u/62785823?v=4"
-          title="github"
-          type="image"
-          selectedId={selectedId}
-          handleSelectItem={handleSelectItem}
-        />
-        <div className="pointer-events-none absolute z-[40] h-fit w-fit bg-white/50">
-          <Image width={80} height={80} src={"/images/vs.png"} alt="vs icon" className="object-contain" />
-        </div>
-        <SelectItemBox
-          id="youtube-id"
-          url="https://www.youtube.com/watch?v=W3qIzaNndH4"
-          title="youtube"
-          type="youtube"
-          selectedId={selectedId}
-          handleSelectItem={handleSelectItem}
-        />
-      </section>
-      {isOpen && (
-        <SelectRoundModal title="게임 타이틀" description="게임 디스크립션" totalItem={200} setIsOpen={setIsOpen} />
-      )}
-    </section>
-  )
 }

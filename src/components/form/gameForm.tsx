@@ -105,7 +105,7 @@ export default function GameForm() {
         <Controller
           name="category"
           control={control}
-          render={({ field }) => <Select {...field} items={categoryItems} />}
+          render={({ field }) => <Select {...field} placeholder="카테고리 선택" items={categoryItems} />}
         />
         {!!errors.category?.message && <InputErrorMessage id={"category"} errorMessage={errors.category?.message} />}
       </article>
