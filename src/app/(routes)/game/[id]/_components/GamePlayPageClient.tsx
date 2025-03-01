@@ -6,12 +6,12 @@ import {
   useUpdatePlayRoom
 } from "@/api/orval/client/game-play-controller/game-play-controller"
 import { GamePlayRequest } from "@/api/orval/model/gamePlayRequest"
+import { removePlayIdCookie } from "@/app/(routes)/game/[id]/_server/playIdCookie"
 import { sleep } from "@/utils/sleep"
 import Image from "next/image"
-import { useParams } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 import { useState } from "react"
 import SelectItemBox from "./SelectItemBox"
-import { removePlayIdCookie } from "@/app/(routes)/game/[id]/_server/playIdCookie"
 
 interface Params {
   playId: number
@@ -20,7 +20,7 @@ interface Params {
 export default function GamePlayPageClient({ playId }: Params) {
   const { id } = useParams()
 
-  // const queryClient = useQueryClient()
+  const router = useRouter()
 
   const { data: gameRoomData } = useGetGameDetails(Number(id))
 
@@ -47,21 +47,27 @@ export default function GamePlayPageClient({ playId }: Params) {
     } satisfies GamePlayRequest
   }
 
-  const handleSelectItem = async (id: string) => {
+  const handleSelectItem = async (selectedResourceId: string) => {
     if (selectedId) return
-    setSelectedId(id)
+    setSelectedId(selectedResourceId)
     await sleep(500)
 
-    const response = await mutateAsync({
+    await mutateAsync({
       gameId: Number(id),
       playId: playId,
-      data: returnPutGamePlayRequest(Number(selectedId))
+      data: returnPutGamePlayRequest(Number(selectedResourceId))
     })
 
-    if (!!response.winningResource) {
+    if (gamePlayData?.totalRoundNums === 2 && gamePlayData.currentRoundNums === 1) {
+      // 결승전 선택 후 처리
       await removePlayIdCookie()
+      if (selectedResourceId) {
+        const query = new URLSearchParams({ resourceId: selectedResourceId }).toString()
+        router.replace(`/game/${id}/results?${query}`)
+        return
+      }
     }
-
+    // 게임 계속 진행
     window.location.reload()
   }
 
