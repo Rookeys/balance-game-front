@@ -1,4 +1,4 @@
-import GameForm from "@/components/form/gameForm"
+import GameForm from "@/components/form/gameRoom/GameForm"
 
 export default function GameCreatePage() {
   return (

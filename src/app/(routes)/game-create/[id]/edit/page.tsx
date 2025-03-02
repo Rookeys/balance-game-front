@@ -1,5 +1,5 @@
 import { prefetchGetGameStatus } from "@/api/orval/server/game-room-controller/game-room-controller"
-import GameForm from "@/components/form/gameForm"
+import GameForm from "@/components/form/gameRoom/GameForm"
 import { log } from "@/utils/log"
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query"
 import { notFound } from "next/navigation"

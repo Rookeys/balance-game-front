@@ -6,12 +6,12 @@ import {
   useUpdatePlayRoom
 } from "@/api/orval/client/game-play-controller/game-play-controller"
 import { GamePlayRequest } from "@/api/orval/model/gamePlayRequest"
-import { removePlayIdCookie } from "@/app/(routes)/game/[id]/_server/playIdCookie"
 import { sleep } from "@/utils/sleep"
 import Image from "next/image"
 import { useParams, useRouter } from "next/navigation"
 import { useState } from "react"
 import SelectItemBox from "./SelectItemBox"
+import { removePlayIdCookie } from "@/lib/cookies/playIdCookie"
 
 interface Params {
   playId: number
