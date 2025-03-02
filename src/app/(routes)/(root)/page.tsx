@@ -1,8 +1,8 @@
-import GameThumbnailCard from "@/components/form/gameThumbnail/GameThumbnailCard"
+import GameThumbnailCard from "@/components/gameThumbnail/GameThumbnailCard"
 
 export default function Home() {
   const dummy = {
-    id: "1",
+    id: "272",
     firstItemThumbnail: "https://avatars.githubusercontent.com/u/62785823?v=4",
     firstItemTitle: "고재민",
     secondItemThumbnail: "https://avatars.githubusercontent.com/u/84797433?v=4",

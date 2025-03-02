@@ -5,13 +5,14 @@ interface Params {
   name: string
   value: string
   items: SelectOptionType[]
+  placeholder?: string
   onChange: (value: string) => void
 }
 
-const Select = ({ name, value, items, onChange }: Params) => {
+const Select = ({ name, value, items, placeholder, onChange }: Params) => {
   return (
     <SelectPrimitive.Root name={name} value={value} onValueChange={onChange}>
-      <SelectTrigger />
+      <SelectTrigger placeholder={placeholder} />
       {items.length > 0 && <SelectOpenContent items={items} />}
     </SelectPrimitive.Root>
   )

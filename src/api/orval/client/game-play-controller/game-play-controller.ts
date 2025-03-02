@@ -18,7 +18,13 @@ import type {
   UseSuspenseQueryOptions,
   UseSuspenseQueryResult
 } from "@tanstack/react-query"
-import type { GamePlayRequest, GamePlayResponse, GamePlayRoundRequest } from "../../model"
+import type {
+  ContinuePlayRoomParams,
+  GameInfoResponse,
+  GamePlayRequest,
+  GamePlayResponse,
+  GamePlayRoundRequest
+} from "../../model"
 import { customClientInstance } from "../../../clientInstance"
 import type { ErrorType, BodyType } from "../../../clientInstance"
 
@@ -31,6 +37,7 @@ type SecondParameter<T extends (...args: any) => any> = Parameters<T>[1]
 export const continuePlayRoom = (
   gameId: number,
   playId: number,
+  params?: ContinuePlayRoomParams,
   options?: SecondParameter<typeof customClientInstance>,
   signal?: AbortSignal
 ) => {
@@ -38,117 +45,15 @@ export const continuePlayRoom = (
     {
       url: `/api/v1/games/${encodeURIComponent(String(gameId))}/play/${encodeURIComponent(String(playId))}`,
       method: "GET",
+      params,
       signal
     },
     options
   )
 }
 
-export const getContinuePlayRoomQueryKey = (gameId: number, playId: number) => {
-  return [`/api/v1/games/${gameId}/play/${playId}`] as const
-}
-
-export const getContinuePlayRoomInfiniteQueryOptions = <
-  TData = InfiniteData<Awaited<ReturnType<typeof continuePlayRoom>>>,
-  TError = ErrorType<unknown>
->(
-  gameId: number,
-  playId: number,
-  options?: {
-    query?: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof continuePlayRoom>>, TError, TData>>
-    request?: SecondParameter<typeof customClientInstance>
-  }
-) => {
-  const { query: queryOptions, request: requestOptions } = options ?? {}
-
-  const queryKey = queryOptions?.queryKey ?? getContinuePlayRoomQueryKey(gameId, playId)
-
-  const queryFn: QueryFunction<Awaited<ReturnType<typeof continuePlayRoom>>> = ({ signal }) =>
-    continuePlayRoom(gameId, playId, requestOptions, signal)
-
-  return { queryKey, queryFn, enabled: !!(gameId && playId), ...queryOptions } as UseInfiniteQueryOptions<
-    Awaited<ReturnType<typeof continuePlayRoom>>,
-    TError,
-    TData
-  > & { queryKey: DataTag<QueryKey, TData, TError> }
-}
-
-export type ContinuePlayRoomInfiniteQueryResult = NonNullable<Awaited<ReturnType<typeof continuePlayRoom>>>
-export type ContinuePlayRoomInfiniteQueryError = ErrorType<unknown>
-
-export function useContinuePlayRoomInfinite<
-  TData = InfiniteData<Awaited<ReturnType<typeof continuePlayRoom>>>,
-  TError = ErrorType<unknown>
->(
-  gameId: number,
-  playId: number,
-  options: {
-    query: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof continuePlayRoom>>, TError, TData>> &
-      Pick<
-        DefinedInitialDataOptions<
-          Awaited<ReturnType<typeof continuePlayRoom>>,
-          TError,
-          Awaited<ReturnType<typeof continuePlayRoom>>
-        >,
-        "initialData"
-      >
-    request?: SecondParameter<typeof customClientInstance>
-  }
-): DefinedUseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useContinuePlayRoomInfinite<
-  TData = InfiniteData<Awaited<ReturnType<typeof continuePlayRoom>>>,
-  TError = ErrorType<unknown>
->(
-  gameId: number,
-  playId: number,
-  options?: {
-    query?: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof continuePlayRoom>>, TError, TData>> &
-      Pick<
-        UndefinedInitialDataOptions<
-          Awaited<ReturnType<typeof continuePlayRoom>>,
-          TError,
-          Awaited<ReturnType<typeof continuePlayRoom>>
-        >,
-        "initialData"
-      >
-    request?: SecondParameter<typeof customClientInstance>
-  }
-): UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useContinuePlayRoomInfinite<
-  TData = InfiniteData<Awaited<ReturnType<typeof continuePlayRoom>>>,
-  TError = ErrorType<unknown>
->(
-  gameId: number,
-  playId: number,
-  options?: {
-    query?: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof continuePlayRoom>>, TError, TData>>
-    request?: SecondParameter<typeof customClientInstance>
-  }
-): UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-/**
- * @summary 게임 이어 하기
- */
-
-export function useContinuePlayRoomInfinite<
-  TData = InfiniteData<Awaited<ReturnType<typeof continuePlayRoom>>>,
-  TError = ErrorType<unknown>
->(
-  gameId: number,
-  playId: number,
-  options?: {
-    query?: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof continuePlayRoom>>, TError, TData>>
-    request?: SecondParameter<typeof customClientInstance>
-  }
-): UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
-  const queryOptions = getContinuePlayRoomInfiniteQueryOptions(gameId, playId, options)
-
-  const query = useInfiniteQuery(queryOptions) as UseInfiniteQueryResult<TData, TError> & {
-    queryKey: DataTag<QueryKey, TData, TError>
-  }
-
-  query.queryKey = queryOptions.queryKey
-
-  return query
+export const getContinuePlayRoomQueryKey = (gameId: number, playId: number, params?: ContinuePlayRoomParams) => {
+  return [`/api/v1/games/${gameId}/play/${playId}`, ...(params ? [params] : [])] as const
 }
 
 export const getContinuePlayRoomQueryOptions = <
@@ -157,6 +62,7 @@ export const getContinuePlayRoomQueryOptions = <
 >(
   gameId: number,
   playId: number,
+  params?: ContinuePlayRoomParams,
   options?: {
     query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof continuePlayRoom>>, TError, TData>>
     request?: SecondParameter<typeof customClientInstance>
@@ -164,10 +70,10 @@ export const getContinuePlayRoomQueryOptions = <
 ) => {
   const { query: queryOptions, request: requestOptions } = options ?? {}
 
-  const queryKey = queryOptions?.queryKey ?? getContinuePlayRoomQueryKey(gameId, playId)
+  const queryKey = queryOptions?.queryKey ?? getContinuePlayRoomQueryKey(gameId, playId, params)
 
   const queryFn: QueryFunction<Awaited<ReturnType<typeof continuePlayRoom>>> = ({ signal }) =>
-    continuePlayRoom(gameId, playId, requestOptions, signal)
+    continuePlayRoom(gameId, playId, params, requestOptions, signal)
 
   return { queryKey, queryFn, enabled: !!(gameId && playId), ...queryOptions } as UseQueryOptions<
     Awaited<ReturnType<typeof continuePlayRoom>>,
@@ -182,6 +88,7 @@ export type ContinuePlayRoomQueryError = ErrorType<unknown>
 export function useContinuePlayRoom<TData = Awaited<ReturnType<typeof continuePlayRoom>>, TError = ErrorType<unknown>>(
   gameId: number,
   playId: number,
+  params: undefined | ContinuePlayRoomParams,
   options: {
     query: Partial<UseQueryOptions<Awaited<ReturnType<typeof continuePlayRoom>>, TError, TData>> &
       Pick<
@@ -198,6 +105,7 @@ export function useContinuePlayRoom<TData = Awaited<ReturnType<typeof continuePl
 export function useContinuePlayRoom<TData = Awaited<ReturnType<typeof continuePlayRoom>>, TError = ErrorType<unknown>>(
   gameId: number,
   playId: number,
+  params?: ContinuePlayRoomParams,
   options?: {
     query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof continuePlayRoom>>, TError, TData>> &
       Pick<
@@ -214,6 +122,7 @@ export function useContinuePlayRoom<TData = Awaited<ReturnType<typeof continuePl
 export function useContinuePlayRoom<TData = Awaited<ReturnType<typeof continuePlayRoom>>, TError = ErrorType<unknown>>(
   gameId: number,
   playId: number,
+  params?: ContinuePlayRoomParams,
   options?: {
     query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof continuePlayRoom>>, TError, TData>>
     request?: SecondParameter<typeof customClientInstance>
@@ -226,101 +135,15 @@ export function useContinuePlayRoom<TData = Awaited<ReturnType<typeof continuePl
 export function useContinuePlayRoom<TData = Awaited<ReturnType<typeof continuePlayRoom>>, TError = ErrorType<unknown>>(
   gameId: number,
   playId: number,
+  params?: ContinuePlayRoomParams,
   options?: {
     query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof continuePlayRoom>>, TError, TData>>
     request?: SecondParameter<typeof customClientInstance>
   }
 ): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
-  const queryOptions = getContinuePlayRoomQueryOptions(gameId, playId, options)
+  const queryOptions = getContinuePlayRoomQueryOptions(gameId, playId, params, options)
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-
-  query.queryKey = queryOptions.queryKey
-
-  return query
-}
-
-export const getContinuePlayRoomSuspenseQueryOptions = <
-  TData = Awaited<ReturnType<typeof continuePlayRoom>>,
-  TError = ErrorType<unknown>
->(
-  gameId: number,
-  playId: number,
-  options?: {
-    query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof continuePlayRoom>>, TError, TData>>
-    request?: SecondParameter<typeof customClientInstance>
-  }
-) => {
-  const { query: queryOptions, request: requestOptions } = options ?? {}
-
-  const queryKey = queryOptions?.queryKey ?? getContinuePlayRoomQueryKey(gameId, playId)
-
-  const queryFn: QueryFunction<Awaited<ReturnType<typeof continuePlayRoom>>> = ({ signal }) =>
-    continuePlayRoom(gameId, playId, requestOptions, signal)
-
-  return { queryKey, queryFn, ...queryOptions } as UseSuspenseQueryOptions<
-    Awaited<ReturnType<typeof continuePlayRoom>>,
-    TError,
-    TData
-  > & { queryKey: DataTag<QueryKey, TData, TError> }
-}
-
-export type ContinuePlayRoomSuspenseQueryResult = NonNullable<Awaited<ReturnType<typeof continuePlayRoom>>>
-export type ContinuePlayRoomSuspenseQueryError = ErrorType<unknown>
-
-export function useContinuePlayRoomSuspense<
-  TData = Awaited<ReturnType<typeof continuePlayRoom>>,
-  TError = ErrorType<unknown>
->(
-  gameId: number,
-  playId: number,
-  options: {
-    query: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof continuePlayRoom>>, TError, TData>>
-    request?: SecondParameter<typeof customClientInstance>
-  }
-): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useContinuePlayRoomSuspense<
-  TData = Awaited<ReturnType<typeof continuePlayRoom>>,
-  TError = ErrorType<unknown>
->(
-  gameId: number,
-  playId: number,
-  options?: {
-    query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof continuePlayRoom>>, TError, TData>>
-    request?: SecondParameter<typeof customClientInstance>
-  }
-): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useContinuePlayRoomSuspense<
-  TData = Awaited<ReturnType<typeof continuePlayRoom>>,
-  TError = ErrorType<unknown>
->(
-  gameId: number,
-  playId: number,
-  options?: {
-    query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof continuePlayRoom>>, TError, TData>>
-    request?: SecondParameter<typeof customClientInstance>
-  }
-): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-/**
- * @summary 게임 이어 하기
- */
-
-export function useContinuePlayRoomSuspense<
-  TData = Awaited<ReturnType<typeof continuePlayRoom>>,
-  TError = ErrorType<unknown>
->(
-  gameId: number,
-  playId: number,
-  options?: {
-    query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof continuePlayRoom>>, TError, TData>>
-    request?: SecondParameter<typeof customClientInstance>
-  }
-): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
-  const queryOptions = getContinuePlayRoomSuspenseQueryOptions(gameId, playId, options)
-
-  const query = useSuspenseQuery(queryOptions) as UseSuspenseQueryResult<TData, TError> & {
-    queryKey: DataTag<QueryKey, TData, TError>
-  }
 
   query.queryKey = queryOptions.queryKey
 
@@ -406,6 +229,289 @@ export const useUpdatePlayRoom = <TError = ErrorType<GamePlayResponse>, TContext
 
   return useMutation(mutationOptions)
 }
+/**
+ * 게임의 전반적인 명세 데이터 출력한다.
+ * @summary 게임의 전반적인 명세 데이터 출력
+ */
+export const getGameDetails = (
+  gameId: number,
+  options?: SecondParameter<typeof customClientInstance>,
+  signal?: AbortSignal
+) => {
+  return customClientInstance<GameInfoResponse>(
+    { url: `/api/v1/games/${encodeURIComponent(String(gameId))}/play`, method: "GET", signal },
+    options
+  )
+}
+
+export const getGetGameDetailsQueryKey = (gameId: number) => {
+  return [`/api/v1/games/${gameId}/play`] as const
+}
+
+export const getGetGameDetailsInfiniteQueryOptions = <
+  TData = InfiniteData<Awaited<ReturnType<typeof getGameDetails>>>,
+  TError = ErrorType<unknown>
+>(
+  gameId: number,
+  options?: {
+    query?: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getGameDetails>>, TError, TData>>
+    request?: SecondParameter<typeof customClientInstance>
+  }
+) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {}
+
+  const queryKey = queryOptions?.queryKey ?? getGetGameDetailsQueryKey(gameId)
+
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getGameDetails>>> = ({ signal }) =>
+    getGameDetails(gameId, requestOptions, signal)
+
+  return { queryKey, queryFn, enabled: !!gameId, ...queryOptions } as UseInfiniteQueryOptions<
+    Awaited<ReturnType<typeof getGameDetails>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetGameDetailsInfiniteQueryResult = NonNullable<Awaited<ReturnType<typeof getGameDetails>>>
+export type GetGameDetailsInfiniteQueryError = ErrorType<unknown>
+
+export function useGetGameDetailsInfinite<
+  TData = InfiniteData<Awaited<ReturnType<typeof getGameDetails>>>,
+  TError = ErrorType<unknown>
+>(
+  gameId: number,
+  options: {
+    query: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getGameDetails>>, TError, TData>> &
+      Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getGameDetails>>,
+          TError,
+          Awaited<ReturnType<typeof getGameDetails>>
+        >,
+        "initialData"
+      >
+    request?: SecondParameter<typeof customClientInstance>
+  }
+): DefinedUseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetGameDetailsInfinite<
+  TData = InfiniteData<Awaited<ReturnType<typeof getGameDetails>>>,
+  TError = ErrorType<unknown>
+>(
+  gameId: number,
+  options?: {
+    query?: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getGameDetails>>, TError, TData>> &
+      Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getGameDetails>>,
+          TError,
+          Awaited<ReturnType<typeof getGameDetails>>
+        >,
+        "initialData"
+      >
+    request?: SecondParameter<typeof customClientInstance>
+  }
+): UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetGameDetailsInfinite<
+  TData = InfiniteData<Awaited<ReturnType<typeof getGameDetails>>>,
+  TError = ErrorType<unknown>
+>(
+  gameId: number,
+  options?: {
+    query?: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getGameDetails>>, TError, TData>>
+    request?: SecondParameter<typeof customClientInstance>
+  }
+): UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary 게임의 전반적인 명세 데이터 출력
+ */
+
+export function useGetGameDetailsInfinite<
+  TData = InfiniteData<Awaited<ReturnType<typeof getGameDetails>>>,
+  TError = ErrorType<unknown>
+>(
+  gameId: number,
+  options?: {
+    query?: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getGameDetails>>, TError, TData>>
+    request?: SecondParameter<typeof customClientInstance>
+  }
+): UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+  const queryOptions = getGetGameDetailsInfiniteQueryOptions(gameId, options)
+
+  const query = useInfiniteQuery(queryOptions) as UseInfiniteQueryResult<TData, TError> & {
+    queryKey: DataTag<QueryKey, TData, TError>
+  }
+
+  query.queryKey = queryOptions.queryKey
+
+  return query
+}
+
+export const getGetGameDetailsQueryOptions = <
+  TData = Awaited<ReturnType<typeof getGameDetails>>,
+  TError = ErrorType<unknown>
+>(
+  gameId: number,
+  options?: {
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getGameDetails>>, TError, TData>>
+    request?: SecondParameter<typeof customClientInstance>
+  }
+) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {}
+
+  const queryKey = queryOptions?.queryKey ?? getGetGameDetailsQueryKey(gameId)
+
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getGameDetails>>> = ({ signal }) =>
+    getGameDetails(gameId, requestOptions, signal)
+
+  return { queryKey, queryFn, enabled: !!gameId, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof getGameDetails>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetGameDetailsQueryResult = NonNullable<Awaited<ReturnType<typeof getGameDetails>>>
+export type GetGameDetailsQueryError = ErrorType<unknown>
+
+export function useGetGameDetails<TData = Awaited<ReturnType<typeof getGameDetails>>, TError = ErrorType<unknown>>(
+  gameId: number,
+  options: {
+    query: Partial<UseQueryOptions<Awaited<ReturnType<typeof getGameDetails>>, TError, TData>> &
+      Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getGameDetails>>,
+          TError,
+          Awaited<ReturnType<typeof getGameDetails>>
+        >,
+        "initialData"
+      >
+    request?: SecondParameter<typeof customClientInstance>
+  }
+): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetGameDetails<TData = Awaited<ReturnType<typeof getGameDetails>>, TError = ErrorType<unknown>>(
+  gameId: number,
+  options?: {
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getGameDetails>>, TError, TData>> &
+      Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getGameDetails>>,
+          TError,
+          Awaited<ReturnType<typeof getGameDetails>>
+        >,
+        "initialData"
+      >
+    request?: SecondParameter<typeof customClientInstance>
+  }
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetGameDetails<TData = Awaited<ReturnType<typeof getGameDetails>>, TError = ErrorType<unknown>>(
+  gameId: number,
+  options?: {
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getGameDetails>>, TError, TData>>
+    request?: SecondParameter<typeof customClientInstance>
+  }
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary 게임의 전반적인 명세 데이터 출력
+ */
+
+export function useGetGameDetails<TData = Awaited<ReturnType<typeof getGameDetails>>, TError = ErrorType<unknown>>(
+  gameId: number,
+  options?: {
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getGameDetails>>, TError, TData>>
+    request?: SecondParameter<typeof customClientInstance>
+  }
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+  const queryOptions = getGetGameDetailsQueryOptions(gameId, options)
+
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+
+  query.queryKey = queryOptions.queryKey
+
+  return query
+}
+
+export const getGetGameDetailsSuspenseQueryOptions = <
+  TData = Awaited<ReturnType<typeof getGameDetails>>,
+  TError = ErrorType<unknown>
+>(
+  gameId: number,
+  options?: {
+    query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getGameDetails>>, TError, TData>>
+    request?: SecondParameter<typeof customClientInstance>
+  }
+) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {}
+
+  const queryKey = queryOptions?.queryKey ?? getGetGameDetailsQueryKey(gameId)
+
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getGameDetails>>> = ({ signal }) =>
+    getGameDetails(gameId, requestOptions, signal)
+
+  return { queryKey, queryFn, ...queryOptions } as UseSuspenseQueryOptions<
+    Awaited<ReturnType<typeof getGameDetails>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetGameDetailsSuspenseQueryResult = NonNullable<Awaited<ReturnType<typeof getGameDetails>>>
+export type GetGameDetailsSuspenseQueryError = ErrorType<unknown>
+
+export function useGetGameDetailsSuspense<
+  TData = Awaited<ReturnType<typeof getGameDetails>>,
+  TError = ErrorType<unknown>
+>(
+  gameId: number,
+  options: {
+    query: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getGameDetails>>, TError, TData>>
+    request?: SecondParameter<typeof customClientInstance>
+  }
+): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetGameDetailsSuspense<
+  TData = Awaited<ReturnType<typeof getGameDetails>>,
+  TError = ErrorType<unknown>
+>(
+  gameId: number,
+  options?: {
+    query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getGameDetails>>, TError, TData>>
+    request?: SecondParameter<typeof customClientInstance>
+  }
+): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetGameDetailsSuspense<
+  TData = Awaited<ReturnType<typeof getGameDetails>>,
+  TError = ErrorType<unknown>
+>(
+  gameId: number,
+  options?: {
+    query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getGameDetails>>, TError, TData>>
+    request?: SecondParameter<typeof customClientInstance>
+  }
+): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary 게임의 전반적인 명세 데이터 출력
+ */
+
+export function useGetGameDetailsSuspense<
+  TData = Awaited<ReturnType<typeof getGameDetails>>,
+  TError = ErrorType<unknown>
+>(
+  gameId: number,
+  options?: {
+    query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getGameDetails>>, TError, TData>>
+    request?: SecondParameter<typeof customClientInstance>
+  }
+): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+  const queryOptions = getGetGameDetailsSuspenseQueryOptions(gameId, options)
+
+  const query = useSuspenseQuery(queryOptions) as UseSuspenseQueryResult<TData, TError> & {
+    queryKey: DataTag<QueryKey, TData, TError>
+  }
+
+  query.queryKey = queryOptions.queryKey
+
+  return query
+}
+
 /**
  * n강만큼 데이터가 준비되고 첫 2개의 데이터를 반환.
  * @summary 플레이룸 생성 및 게임 시작 API

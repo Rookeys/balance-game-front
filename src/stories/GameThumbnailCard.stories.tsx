@@ -1,4 +1,4 @@
-import GameThumbnailCard from "@/components/form/gameThumbnail/GameThumbnailCard"
+import GameThumbnailCard from "@/components/gameThumbnail/GameThumbnailCard"
 import type { Meta, StoryObj } from "@storybook/react"
 
 const meta: Meta<typeof GameThumbnailCard> = {

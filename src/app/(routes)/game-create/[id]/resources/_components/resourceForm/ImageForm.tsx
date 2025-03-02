@@ -108,7 +108,7 @@ export default function ImageForm(props: GameResourceResponse) {
             />
           </article>
           <article className="flex w-[180px] flex-shrink-0 items-center justify-center border-r border-dark p-4 dark:border-gray">
-            <p>{(props?.winningNums || 0) / (props.totalPlayNums || 1)} %</p>
+            <p>{(((props?.winningNums || 0) / (props.totalPlayNums || 1)) * 100).toFixed(2)} %</p>
           </article>
           <article className="w-[180px] flex-shrink-0 p-4">
             <FormAction resourceId={props.resourceId as number} name={props.title} disabled={isSubmitting} />

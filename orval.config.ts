@@ -27,6 +27,12 @@ module.exports = {
               useQuery: true,
               useInfinite: false
             }
+          },
+          continuePlayRoom: {
+            query: {
+              useQuery: true,
+              useInfinite: false
+            }
           }
         }
       },
