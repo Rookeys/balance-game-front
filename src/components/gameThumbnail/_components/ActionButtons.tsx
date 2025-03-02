@@ -1,5 +1,6 @@
 "use client"
 import { Button } from "@/components/Button"
+import { share } from "@/utils/share"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 interface Params {
@@ -21,7 +22,12 @@ export function ActionButtons({ id }: Params) {
       >
         <Link href={`/game/${id}/ranking`}>🔥 랭킹확인</Link>
       </Button>
-      <Button className="bg-blue text-sm text-light hover:bg-blue-60 dark:bg-blue-70 dark:hover:bg-blue-80">
+      <Button
+        className="bg-blue text-sm text-light hover:bg-blue-60 dark:bg-blue-70 dark:hover:bg-blue-80"
+        onClick={() =>
+          share({ title: "KoJaem's Github", text: "KoJaem 깃허브로 초대합니다", url: "https://kojaem.me" })
+        }
+      >
         공유하기
       </Button>
     </article>
