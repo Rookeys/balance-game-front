@@ -11,7 +11,7 @@ interface Params {
   start?: number
   end?: number
 }
-export default function YoutubeThumbnailBox({ url, start, end }: Params) {
+export default function YoutubeThumbnailBoxWithModal({ url, start, end }: Params) {
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
   return (
