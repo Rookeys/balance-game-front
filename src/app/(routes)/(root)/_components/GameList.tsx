@@ -27,8 +27,9 @@ export default function GameList() {
   }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage])
 
   if (isLoading) return <section className="h-[100vh] bg-red-50" />
+
   return (
-    <section className="grid grid-cols-1 gap-[20px] sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-5">
+    <section className="relative grid grid-cols-1 gap-[20px] sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-5">
       {data?.pages.map((page) =>
         page.content?.map((game) => (
           <article key={game?.roomId}>
@@ -37,7 +38,7 @@ export default function GameList() {
         ))
       )}
       {!isFetchingNextPage && (
-        <div ref={ref} className="pointer-events-none absolute bottom-[400px] h-[4px] w-full opacity-0" />
+        <div ref={ref} className="pointer-events-none absolute bottom-[400px] start-0 h-[4px] w-full opacity-0" />
       )}
       <section>
         {isFetchingNextPage ? (
