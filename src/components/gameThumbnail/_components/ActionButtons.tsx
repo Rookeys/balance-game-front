@@ -4,7 +4,7 @@ import { share } from "@/utils/share"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 interface Params {
-  id: string
+  id?: number
 }
 export function ActionButtons({ id }: Params) {
   const router = useRouter()
