@@ -22,8 +22,6 @@ export default function RankingPageClient() {
     }
   )
 
-  console.log("data", data)
-
   const { ref, inView } = useInView({
     threshold: 1
   })
@@ -42,7 +40,12 @@ export default function RankingPageClient() {
         page.content?.map((resource) => (
           <article key={resource.resourceId} className="relative flex items-center gap-[20px]">
             <section className="w-full max-w-[300px]">
-              <ResourceItem content={resource.content} type={resource.type} />
+              <ResourceItem
+                content={resource.content}
+                type={resource.type}
+                start={resource.startSec}
+                end={resource.endSec}
+              />
             </section>
             <div className="flex flex-col gap-[20px]">
               <p>{resource.title}</p>

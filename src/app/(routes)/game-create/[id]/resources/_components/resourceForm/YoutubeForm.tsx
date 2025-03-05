@@ -11,9 +11,9 @@ import { putGameYoutubeResourceSchema, PutGameYoutubeResourceType } from "@/vali
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useParams } from "next/navigation"
 import { FormProvider, useForm } from "react-hook-form"
-import YoutubeThumbnailBox from "../YoutubeThumbnailBox"
 import FormAction from "./FormAction"
 import { useQueryClient } from "@tanstack/react-query"
+import YoutubeThumbnailBoxWithModal from "../YoutubeThumbnailBoxWithModal"
 
 // const InputErrorMessage = dynamic(() => import("@/components/form/_components").then((mod) => mod.InputErrorMessage))
 
@@ -61,7 +61,11 @@ export default function YoutubeForm(props: GameResourceResponse) {
       <form onSubmit={handleSubmit(onSubmit)}>
         <section className="flex w-fit border-b border-dark dark:border-gray">
           <article className="w-[180px] flex-shrink-0 border-r border-dark dark:border-gray">
-            <YoutubeThumbnailBox url={watch("content") ?? ""} start={watch("startSec")} end={watch("endSec")} />
+            <YoutubeThumbnailBoxWithModal
+              url={watch("content") ?? ""}
+              start={watch("startSec")}
+              end={watch("endSec")}
+            />
           </article>
           <article className="w-[180px] flex-shrink-0 border-r border-dark p-4 dark:border-gray">
             <InputText
