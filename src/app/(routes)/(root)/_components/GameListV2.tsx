@@ -11,7 +11,7 @@ export default function GameListV2() {
       {Array.from({ length: 10 }, (_, index) => (
         <SwiperSlide key={index} className="mr-[20px] !w-fit first:mr-[20px] last:mr-[2px]">
           {/* 1200px 레이아웃 오차값 계산을 위해 last:mr-[2px] 추가 */}
-          <GameThumbnailCardV2 index={index} />
+          <GameThumbnailCardV2 src={"/images/Rookeys.png"} index={index} />
         </SwiperSlide>
       ))}
     </Swiper>
