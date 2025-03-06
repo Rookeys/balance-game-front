@@ -2,7 +2,11 @@ import { GameListResponse } from "@/api/orval/model/gameListResponse"
 import { EllipsisVertical, Play } from "lucide-react"
 import Image from "next/image"
 
-export default function GameThumbnailCardV2(props: GameListResponse) {
+interface Params extends GameListResponse {
+  index: number
+}
+
+export default function GameThumbnailCardV2({ index, ...props }: Params) {
   // const { roomId, leftSelection, rightSelection, title, description, nickname } = props
   const {} = props
 
@@ -21,7 +25,7 @@ export default function GameThumbnailCardV2(props: GameListResponse) {
             blurDataURL="data:image/jepg;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mO88B8AAqUB0Y/H4mkAAAAASUVORK5CYII="
           />
           <div className="absolute start-0 top-0 rounded-br-[12px] rounded-tl-[12px] bg-gray-50 px-[16px] py-[4px]">
-            1
+            {index + 1}
           </div>
         </div>
       </article>
