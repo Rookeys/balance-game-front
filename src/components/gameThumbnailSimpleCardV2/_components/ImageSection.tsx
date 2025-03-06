@@ -2,10 +2,10 @@ import Image from "next/image"
 
 interface Params {
   src: string
-  index: number
+  tag?: string
 }
 
-export default function ImageSection({ src, index }: Params) {
+export default function ImageSection({ src, tag }: Params) {
   return (
     <article className="relative h-[158px] overflow-hidden rounded-[12px] bg-gray-10 md:h-[228px]">
       <Image
@@ -18,9 +18,7 @@ export default function ImageSection({ src, index }: Params) {
         placeholder="blur"
         blurDataURL="data:image/jepg;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mO88B8AAqUB0Y/H4mkAAAAASUVORK5CYII="
       />
-      <div className="absolute start-0 top-0 rounded-br-[12px] rounded-tl-[12px] bg-gray-50 px-[16px] py-[4px]">
-        {index + 1}
-      </div>
+      {tag && <div className="absolute start-[12px] top-[12px] rounded-[4px] bg-gray-50 px-[8px] py-[4px]">{tag}</div>}
     </article>
   )
 }

@@ -6,16 +6,16 @@ import TitleSection from "./_components/TitleSection"
 
 interface Params extends GameListResponse {
   src: string
-  index: number
+  tag?: string
 }
 
-export default function GameThumbnailSimpleCardV2({ src, index, ...props }: Params) {
+export default function GameThumbnailSimpleCardV2({ src, tag, ...props }: Params) {
   // const { roomId, leftSelection, rightSelection, title, description, nickname } = props
   const {} = props
 
   return (
     <section className="flex w-[182px] flex-col gap-[16px] md:w-[285px]">
-      <ImageSection src={src} index={index} />
+      <ImageSection src={src} tag={tag} />
       <SocialActionSection />
       <TitleSection />
       <MetaInfoSection />
