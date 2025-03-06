@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react"
 import { Navigation } from "swiper/modules"
 import "swiper/css"
 import "swiper/css/navigation"
-import GameThumbnailCardV2 from "@/components/gameThumbnailV2/GameThumbnailCardV2"
+import GameThumbnailCardV2 from "@/components/gameThumbnailCardV2/GameThumbnailCardV2"
 export default function GameListV2() {
   return (
     <div className="mx-[-16px] md:mx-[-24px] lg:mx-0">
