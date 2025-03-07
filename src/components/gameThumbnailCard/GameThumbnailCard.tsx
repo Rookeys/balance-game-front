@@ -9,7 +9,7 @@ interface Params extends GameListResponse {
   index: number
 }
 
-export default function GameThumbnailCardV2({ src, index, ...props }: Params) {
+export default function GameThumbnailCard({ src, index, ...props }: Params) {
   // const { roomId, leftSelection, rightSelection, title, description, nickname } = props
   const {} = props
 

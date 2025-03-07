@@ -1,8 +1,8 @@
-import GameThumbnailSimpleCardV2 from "@/components/gameThumbnailSimpleCardV2/GameThumbnailSimpleCardV2"
 import SliderTitle from "@/components/slider/SliderTitle"
 import SliderWrapper from "@/components/slider/SliderWrapper"
 import { SwiperSlide } from "swiper/react"
 import "@/styles/navigation.css"
+import GameThumbnailSimpleCard from "@/components/gameThumbnailSimpleCard/GameThumbnailSimpleCard"
 
 export default function RecentlyGames() {
   return (
@@ -19,7 +19,7 @@ export default function RecentlyGames() {
             key={index}
             className="ms-[16px] !w-fit md:ms-[24px] md:last:mr-[24px] lg:!ms-0 lg:mr-[20px] lg:!w-fit lg:first:ms-0 lg:last:mr-[-14px]"
           >
-            <GameThumbnailSimpleCardV2 src={"/images/Rookeys.png"} tag="New" />
+            <GameThumbnailSimpleCard src={"/images/Rookeys.png"} tag="New" />
           </SwiperSlide>
         ))}
       </SliderWrapper>

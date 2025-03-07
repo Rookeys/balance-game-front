@@ -38,7 +38,7 @@ export default function SliderWrapper({ prevElId, nextElId, children }: Params) 
             key={index}
             className="ms-[16px] !w-fit md:ms-[24px] md:last:mr-[24px] lg:!ms-0 lg:mr-[20px] lg:!w-fit lg:first:ms-0 lg:last:mr-[-14px]"
           >
-            <GameThumbnailCardV2 src={"/images/Rookeys.png"} index={index} />
+            <GameThumbnailCard src={"/images/Rookeys.png"} index={index} />
           </SwiperSlide>
         ))} */}
         {children}
