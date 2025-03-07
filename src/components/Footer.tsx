@@ -16,7 +16,7 @@ export default function Footer() {
           </div>
         </article>
       </section>
-      <p className="inline-block w-fit">© 2025. Servicename. All Rights Reserved</p>
+      <p className="inline-block w-fit">© {new Date().getFullYear()}. Servicename. All Rights Reserved</p>
     </section>
   )
 }
