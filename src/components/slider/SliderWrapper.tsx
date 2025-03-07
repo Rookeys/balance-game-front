@@ -1,11 +1,18 @@
 "use client"
 
-import { Swiper, SwiperSlide } from "swiper/react"
-import { Navigation } from "swiper/modules"
+import { ReactNode } from "react"
 import "swiper/css"
 import "swiper/css/navigation"
-import GameThumbnailCardV2 from "@/components/gameThumbnailCardV2/GameThumbnailCardV2"
-export default function GameListV2() {
+import { Navigation } from "swiper/modules"
+import { Swiper } from "swiper/react"
+
+interface Params {
+  prevElId: string
+  nextElId: string
+  children: ReactNode
+}
+
+export default function SliderWrapper({ prevElId, nextElId, children }: Params) {
   return (
     <div className="mx-[-16px] md:mx-[-24px] lg:mx-0">
       <Swiper
@@ -20,23 +27,21 @@ export default function GameListV2() {
         //   }
         // }}
         navigation={{
-          prevEl: "#custom-GameList-prev",
-          nextEl: "#custom-GameList-next"
+          prevEl: `#${prevElId}`,
+          nextEl: `#${nextElId}`
         }}
         slidesOffsetAfter={16}
       >
-        {Array.from({ length: 10 }, (_, index) => (
-          //
-          // ms-[16px] !w-fit lg:first:ms-0
-          // mr-[20px] !w-fit last:mr-[-14px]
+        {/* 1200px 레이아웃 오차값 계산을 위해 lg:last:mr-[2px] 추가 */}
+        {/* {Array.from({ length: 10 }, (_, index) => (
           <SwiperSlide
             key={index}
             className="ms-[16px] !w-fit md:ms-[24px] md:last:mr-[24px] lg:!ms-0 lg:mr-[20px] lg:!w-fit lg:first:ms-0 lg:last:mr-[-14px]"
           >
-            {/* 1200px 레이아웃 오차값 계산을 위해 lg:last:mr-[2px] 추가 */}
             <GameThumbnailCardV2 src={"/images/Rookeys.png"} index={index} />
           </SwiperSlide>
-        ))}
+        ))} */}
+        {children}
       </Swiper>
     </div>
   )

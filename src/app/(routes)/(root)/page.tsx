@@ -1,28 +1,14 @@
-import "@/styles/navigation.css"
-import GameListV2 from "./_components/GameListV2"
-import SliderTitle from "./_components/SliderTitle"
+"use client"
+import MonthlyTrendingGames from "./_components/MonthlyTrendingGames"
+import RecentlyGames from "./_components/RecentlyGames"
+import WeeklyTrendingGames from "./_components/WeeklyTrendingGames"
 
 export default function Home() {
   return (
-    <section className="mx-[16px] my-[20px] bg-red-10 md:mx-[24px] lg:mx-[120px]">
-      <article className="flex w-full max-w-[1200px] flex-col gap-[12px] justify-self-center">
-        <SliderTitle
-          title="주간 인기 월드컵 TOP 10"
-          titleIcon="💥"
-          prevElId="custom-GameList-prev"
-          nextElId="custom-GameList-next"
-        />
-        <GameListV2 />
-      </article>
-      {/* <article className="flex w-full max-w-[1200px] flex-col gap-[12px] justify-self-center">
-        <SliderTitle
-          title="주간 인기 월드컵 TOP 10"
-          titleIcon="💥"
-          prevElId="custom-GameList-prev"
-          nextElId="custom-GameList-next"
-        />
-        <GameListV2 />
-      </article> */}
+    <section className="flex flex-col items-center gap-[60px] bg-red-10 px-[16px] md:gap-[80px] md:px-[24px] lg:px-[120px]">
+      <WeeklyTrendingGames />
+      <RecentlyGames />
+      <MonthlyTrendingGames />
     </section>
   )
 }
