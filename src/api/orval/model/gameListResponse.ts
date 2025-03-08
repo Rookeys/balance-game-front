@@ -9,6 +9,8 @@ export interface GameListResponse {
   title?: string
   /** 설명 */
   description?: string
+  /** 총 플레이 횟수 */
+  totalPlayNums?: number
   leftSelection?: GameListSelectionResponse
   rightSelection?: GameListSelectionResponse
 }
