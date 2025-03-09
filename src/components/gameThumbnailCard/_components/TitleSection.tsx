@@ -1,5 +1,3 @@
-import React from "react"
-
 export default function TitleSection() {
   return (
     <article className="flex flex-col gap-[12px]">

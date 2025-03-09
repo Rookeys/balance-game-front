@@ -1,3 +1,4 @@
+"use client"
 import SliderTitle from "@/components/slider/SliderTitle"
 import SliderWrapper from "@/components/slider/SliderWrapper"
 import { SwiperSlide } from "swiper/react"
@@ -17,7 +18,7 @@ export default function RecentlyGames() {
         {Array.from({ length: 10 }, (_, index) => (
           <SwiperSlide
             key={index}
-            className="ms-[16px] !w-fit md:ms-[24px] md:last:mr-[24px] lg:!ms-0 lg:mr-[20px] lg:!w-fit lg:first:ms-0 lg:last:mr-[-14px]"
+            className="ms-[16px] !w-fit md:ms-[24px] md:last:mr-[24px] lg:!ms-0 lg:mr-[20px] lg:first:ms-0 lg:last:mr-[-14px]"
           >
             <GameThumbnailSimpleCard src={"/images/Rookeys.png"} tag="New" />
           </SwiperSlide>
