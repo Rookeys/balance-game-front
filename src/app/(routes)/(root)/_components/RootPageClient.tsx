@@ -9,8 +9,8 @@ import CategorySlider from "./CategorySlider"
 export default function RootPageClient() {
   return (
     <section className="flex flex-col items-center gap-[60px] bg-red-10 px-[16px] md:gap-[80px] md:px-[24px] lg:px-[120px]">
-      <article className="flex w-full flex-col items-center gap-[40px]">
-        <div className="w-full max-w-[720px]">
+      <article className="flex w-full max-w-[1200px] flex-col gap-[40px]">
+        <div className="w-full max-w-[720px] self-center">
           <SearchInput
             Icon={Search}
             iconProps={{ color: "#686E75" }}
