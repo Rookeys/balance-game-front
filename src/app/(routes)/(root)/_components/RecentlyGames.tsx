@@ -1,6 +1,6 @@
 "use client"
 import SliderTitle from "@/components/slider/SliderTitle"
-import SliderWrapper from "@/components/slider/SliderWrapper"
+import GameSliderWrapper from "@/components/slider/GameSliderWrapper"
 import { SwiperSlide } from "swiper/react"
 import "@/styles/navigation.css"
 import GameThumbnailSimpleCard from "@/components/gameThumbnailSimpleCard/GameThumbnailSimpleCard"
@@ -14,7 +14,7 @@ export default function RecentlyGames() {
         prevElId="recently-games-list-prev"
         nextElId="recently-games-list-next"
       />
-      <SliderWrapper prevElId="recently-games-list-prev" nextElId="recently-games-list-next">
+      <GameSliderWrapper prevElId="recently-games-list-prev" nextElId="recently-games-list-next">
         {Array.from({ length: 10 }, (_, index) => (
           <SwiperSlide
             key={index}
@@ -23,7 +23,7 @@ export default function RecentlyGames() {
             <GameThumbnailSimpleCard src={"/images/Rookeys.png"} tag="New" />
           </SwiperSlide>
         ))}
-      </SliderWrapper>
+      </GameSliderWrapper>
     </section>
   )
 }

@@ -1,6 +1,6 @@
 "use client"
 import SliderTitle from "@/components/slider/SliderTitle"
-import SliderWrapper from "@/components/slider/SliderWrapper"
+import GameSliderWrapper from "@/components/slider/GameSliderWrapper"
 import { SwiperSlide } from "swiper/react"
 import "@/styles/navigation.css"
 import GameThumbnailCard from "@/components/gameThumbnailCard/GameThumbnailCard"
@@ -14,7 +14,7 @@ export default function MonthlyTrendingGames() {
         prevElId="monthly-trending-games-list-prev"
         nextElId="monthly-trending-games-list-next"
       />
-      <SliderWrapper prevElId="monthly-trending-games-list-prev" nextElId="monthly-trending-games-list-next">
+      <GameSliderWrapper prevElId="monthly-trending-games-list-prev" nextElId="monthly-trending-games-list-next">
         {Array.from({ length: 10 }, (_, index) => (
           <SwiperSlide
             key={index}
@@ -23,7 +23,7 @@ export default function MonthlyTrendingGames() {
             <GameThumbnailCard src={"/images/Rookeys.png"} index={index} />
           </SwiperSlide>
         ))}
-      </SliderWrapper>
+      </GameSliderWrapper>
     </section>
   )
 }
