@@ -1,6 +1,7 @@
 "use client"
 
 import Banner from "./Banner"
+import GameCreateSuggestionCTA from "./GameCreateSuggestionCTA"
 import MonthlyTrendingGames from "./MonthlyTrendingGames"
 import RecentlyGames from "./RecentlyGames"
 import SearchAndCategory from "./SearchAndCategory"
@@ -14,6 +15,7 @@ export default function RootPageClient() {
         <WeeklyTrendingGames />
         <RecentlyGames />
         <MonthlyTrendingGames />
+        <GameCreateSuggestionCTA />
       </section>
     </section>
   )
