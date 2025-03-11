@@ -18,7 +18,7 @@ export default function MonthlyTrendingGames() {
         {Array.from({ length: 10 }, (_, index) => (
           <SwiperSlide
             key={index}
-            className="mr-[20px] !w-fit first:ms-[16px] last:mr-[16px] first:md:ms-[24px] last:md:mr-[24px] first:lg:ms-0 last:lg:mr-0"
+            className="ms-[20px] !w-fit first:ms-[16px] last:mr-[16px] first:md:ms-[24px] last:md:mr-[24px] first:lg:ms-0 last:lg:mr-0"
           >
             <GameThumbnailCard src={"/images/Rookeys.png"} index={index} />
           </SwiperSlide>
