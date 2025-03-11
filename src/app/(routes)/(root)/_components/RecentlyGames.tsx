@@ -3,7 +3,7 @@ import SliderTitle from "@/components/slider/SliderTitle"
 import GameSliderWrapper from "@/components/slider/GameSliderWrapper"
 import { SwiperSlide } from "swiper/react"
 import "@/styles/navigation.css"
-import GameThumbnailSimpleCard from "@/components/gameThumbnailSimpleCard/GameThumbnailSimpleCard"
+import GameThumbnailSimpleCard from "@/components/gameThumbnailCard/GameThumbnailSimpleCard"
 
 export default function RecentlyGames() {
   return (

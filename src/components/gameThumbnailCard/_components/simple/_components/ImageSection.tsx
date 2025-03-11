@@ -10,8 +10,8 @@ export default function ImageSection({ src, tag }: Params) {
     <article className="relative h-[158px] overflow-hidden rounded-[12px] bg-gray-10 md:h-[228px]">
       <Image
         src={src}
-        // className="object-contain object-center"
-        className="object-cover object-center"
+        className="object-contain object-center"
+        // className="object-cover object-center"
         alt="Game-Thumbnail"
         fill
         sizes="(max-width: 768px) 182px, 285px"

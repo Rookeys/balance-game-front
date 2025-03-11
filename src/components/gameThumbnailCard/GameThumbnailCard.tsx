@@ -1,8 +1,8 @@
 import { GameListResponse } from "@/api/orval/model/gameListResponse"
-import ImageSection from "./_components/ImageSection"
-import MetaInfoSection from "./_components/MetaInfoSection"
-import SocialActionSection from "./_components/SocialActionSection"
-import TitleSection from "./_components/TitleSection"
+import ImageSection from "./_components/basic/ImageSection"
+import MetaInfoSection from "./_components/common/MetaInfoSection"
+import SocialActionSection from "./_components/basic/SocialActionSection"
+import TitleSection from "./_components/basic/TitleSection"
 
 interface Params extends GameListResponse {
   src: string
