@@ -23,7 +23,7 @@ export default function Banner() {
       >
         {Array.from({ length: 5 }, (_, index) => (
           <SwiperSlide className="w-full px-[16px] md:px-[24px] lg:px-0" key={index}>
-            <section className="flex h-full w-full max-w-[1200px] bg-red-10 pb-[112px] pt-[88px] lg:mx-auto">
+            <section className="mx-auto flex h-full w-full max-w-[1200px] bg-red-10 pb-[112px] pt-[88px]">
               <article>{index + 1}</article>
             </section>
           </SwiperSlide>
