@@ -15,6 +15,7 @@ export default function GameThumbnailCard({ src, index, ...props }: Params) {
 
   return (
     <section className="flex w-[272px] flex-col gap-[16px] md:w-[386px]">
+      {/* lg:w-[384px] */}
       <ImageSection src={src} index={index} />
       <SocialActionSection />
       <TitleSection />

@@ -4,8 +4,11 @@ import GameSliderWrapper from "@/components/slider/GameSliderWrapper"
 import { SwiperSlide } from "swiper/react"
 import GameThumbnailCard from "@/components/gameThumbnailCard/GameThumbnailCard"
 import "@/styles/navigation.css"
+// import { useGetResources1 } from "@/api/orval/client/main-page-controller/main-page-controller"
 
 export default function WeeklyTrendingGames() {
+  // const { data } = useGetResources1()
+
   return (
     <section className="flex w-full max-w-[1200px] flex-col gap-[12px]">
       <SliderTitle
@@ -18,7 +21,7 @@ export default function WeeklyTrendingGames() {
         {Array.from({ length: 10 }, (_, index) => (
           <SwiperSlide
             key={index}
-            className="ms-[20px] !w-fit first:ms-[16px] last:mr-[16px] first:md:ms-[24px] last:md:mr-[24px] first:lg:ms-0 last:lg:mr-0"
+            className="ms-[16px] !w-fit last:mr-[16px] md:ms-[24px] last:md:mr-[24px] lg:mr-[24px] lg:ms-0 last:lg:mr-0"
           >
             <GameThumbnailCard src={"/images/Rookeys.png"} index={index} />
           </SwiperSlide>
