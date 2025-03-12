@@ -3,11 +3,14 @@ import SliderTitle from "@/components/slider/SliderTitle"
 import GameSliderWrapper from "@/components/slider/GameSliderWrapper"
 import { SwiperSlide } from "swiper/react"
 import GameThumbnailCard from "@/components/gameThumbnailCard/GameThumbnailCard"
+import { useGetMainGameList } from "@/api/orval/client/main-page-controller/main-page-controller"
+import { GetMainGameListSortType } from "@/api/orval/model/getMainGameListSortType"
 import "@/styles/navigation.css"
-// import { useGetResources1 } from "@/api/orval/client/main-page-controller/main-page-controller"
 
 export default function WeeklyTrendingGames() {
-  // const { data } = useGetResources1()
+  const { data } = useGetMainGameList({ size: 10, sortType: GetMainGameListSortType.week })
+
+  console.log("data", data)
 
   return (
     <section className="flex w-full max-w-[1200px] flex-col gap-[12px]">

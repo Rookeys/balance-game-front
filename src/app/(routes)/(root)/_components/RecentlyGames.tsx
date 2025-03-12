@@ -4,8 +4,13 @@ import GameSliderWrapper from "@/components/slider/GameSliderWrapper"
 import { SwiperSlide } from "swiper/react"
 import "@/styles/navigation.css"
 import GameThumbnailSimpleCard from "@/components/gameThumbnailCard/GameThumbnailSimpleCard"
+import { useGetMainGameList } from "@/api/orval/client/main-page-controller/main-page-controller"
+import { GetMainGameListSortType } from "@/api/orval/model/getMainGameListSortType"
 
 export default function RecentlyGames() {
+  const { data } = useGetMainGameList({ size: 10, sortType: GetMainGameListSortType.recent })
+  console.log("data", data)
+
   return (
     <section className="flex w-full max-w-[1200px] flex-col gap-[12px]">
       <SliderTitle

@@ -4,8 +4,12 @@ import GameSliderWrapper from "@/components/slider/GameSliderWrapper"
 import { SwiperSlide } from "swiper/react"
 import "@/styles/navigation.css"
 import GameThumbnailCard from "@/components/gameThumbnailCard/GameThumbnailCard"
+import { GetMainGameListSortType } from "@/api/orval/model/getMainGameListSortType"
+import { useGetMainGameList } from "@/api/orval/client/main-page-controller/main-page-controller"
 
 export default function MonthlyTrendingGames() {
+  const { data } = useGetMainGameList({ size: 10, sortType: GetMainGameListSortType.month })
+  console.log("data", data)
   return (
     <section className="flex w-full max-w-[1200px] flex-col gap-[12px]">
       <SliderTitle
