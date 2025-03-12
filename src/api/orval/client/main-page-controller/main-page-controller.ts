@@ -15,7 +15,7 @@ import type {
   UseSuspenseQueryOptions,
   UseSuspenseQueryResult
 } from "@tanstack/react-query"
-import type { CustomPageImplGameListResponse, GetResources1Params } from "../../model"
+import type { CustomPageImplGameListResponse, GetMainGameListParams } from "../../model"
 import { customClientInstance } from "../../../clientInstance"
 import type { ErrorType } from "../../../clientInstance"
 
@@ -25,8 +25,8 @@ type SecondParameter<T extends (...args: any) => any> = Parameters<T>[1]
  * 메인 페이지 리스트 목록을 제공한다.
  * @summary 메인 페이지 리스트 발급 API
  */
-export const getResources1 = (
-  params?: GetResources1Params,
+export const getMainGameList = (
+  params?: GetMainGameListParams,
   options?: SecondParameter<typeof customClientInstance>,
   signal?: AbortSignal
 ) => {
@@ -36,24 +36,24 @@ export const getResources1 = (
   )
 }
 
-export const getGetResources1QueryKey = (params?: GetResources1Params) => {
+export const getGetMainGameListQueryKey = (params?: GetMainGameListParams) => {
   return [`/api/v1/games/list`, ...(params ? [params] : [])] as const
 }
 
-export const getGetResources1InfiniteQueryOptions = <
-  TData = InfiniteData<Awaited<ReturnType<typeof getResources1>>, GetResources1Params["cursorId"]>,
+export const getGetMainGameListInfiniteQueryOptions = <
+  TData = InfiniteData<Awaited<ReturnType<typeof getMainGameList>>, GetMainGameListParams["cursorId"]>,
   TError = ErrorType<unknown>
 >(
-  params?: GetResources1Params,
+  params?: GetMainGameListParams,
   options?: {
     query?: Partial<
       UseInfiniteQueryOptions<
-        Awaited<ReturnType<typeof getResources1>>,
+        Awaited<ReturnType<typeof getMainGameList>>,
         TError,
         TData,
-        Awaited<ReturnType<typeof getResources1>>,
+        Awaited<ReturnType<typeof getMainGameList>>,
         QueryKey,
-        GetResources1Params["cursorId"]
+        GetMainGameListParams["cursorId"]
       >
     >
     request?: SecondParameter<typeof customClientInstance>
@@ -61,49 +61,49 @@ export const getGetResources1InfiniteQueryOptions = <
 ) => {
   const { query: queryOptions, request: requestOptions } = options ?? {}
 
-  const queryKey = queryOptions?.queryKey ?? getGetResources1QueryKey(params)
+  const queryKey = queryOptions?.queryKey ?? getGetMainGameListQueryKey(params)
 
   const queryFn: QueryFunction<
-    Awaited<ReturnType<typeof getResources1>>,
+    Awaited<ReturnType<typeof getMainGameList>>,
     QueryKey,
-    GetResources1Params["cursorId"]
+    GetMainGameListParams["cursorId"]
   > = ({ signal, pageParam }) =>
-    getResources1({ ...params, cursorId: pageParam || params?.["cursorId"] }, requestOptions, signal)
+    getMainGameList({ ...params, cursorId: pageParam || params?.["cursorId"] }, requestOptions, signal)
 
   return { queryKey, queryFn, ...queryOptions } as UseInfiniteQueryOptions<
-    Awaited<ReturnType<typeof getResources1>>,
+    Awaited<ReturnType<typeof getMainGameList>>,
     TError,
     TData,
-    Awaited<ReturnType<typeof getResources1>>,
+    Awaited<ReturnType<typeof getMainGameList>>,
     QueryKey,
-    GetResources1Params["cursorId"]
+    GetMainGameListParams["cursorId"]
   > & { queryKey: DataTag<QueryKey, TData, TError> }
 }
 
-export type GetResources1InfiniteQueryResult = NonNullable<Awaited<ReturnType<typeof getResources1>>>
-export type GetResources1InfiniteQueryError = ErrorType<unknown>
+export type GetMainGameListInfiniteQueryResult = NonNullable<Awaited<ReturnType<typeof getMainGameList>>>
+export type GetMainGameListInfiniteQueryError = ErrorType<unknown>
 
-export function useGetResources1Infinite<
-  TData = InfiniteData<Awaited<ReturnType<typeof getResources1>>, GetResources1Params["cursorId"]>,
+export function useGetMainGameListInfinite<
+  TData = InfiniteData<Awaited<ReturnType<typeof getMainGameList>>, GetMainGameListParams["cursorId"]>,
   TError = ErrorType<unknown>
 >(
-  params: undefined | GetResources1Params,
+  params: undefined | GetMainGameListParams,
   options: {
     query: Partial<
       UseInfiniteQueryOptions<
-        Awaited<ReturnType<typeof getResources1>>,
+        Awaited<ReturnType<typeof getMainGameList>>,
         TError,
         TData,
-        Awaited<ReturnType<typeof getResources1>>,
+        Awaited<ReturnType<typeof getMainGameList>>,
         QueryKey,
-        GetResources1Params["cursorId"]
+        GetMainGameListParams["cursorId"]
       >
     > &
       Pick<
         DefinedInitialDataOptions<
-          Awaited<ReturnType<typeof getResources1>>,
+          Awaited<ReturnType<typeof getMainGameList>>,
           TError,
-          Awaited<ReturnType<typeof getResources1>>,
+          Awaited<ReturnType<typeof getMainGameList>>,
           QueryKey
         >,
         "initialData"
@@ -111,27 +111,27 @@ export function useGetResources1Infinite<
     request?: SecondParameter<typeof customClientInstance>
   }
 ): DefinedUseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetResources1Infinite<
-  TData = InfiniteData<Awaited<ReturnType<typeof getResources1>>, GetResources1Params["cursorId"]>,
+export function useGetMainGameListInfinite<
+  TData = InfiniteData<Awaited<ReturnType<typeof getMainGameList>>, GetMainGameListParams["cursorId"]>,
   TError = ErrorType<unknown>
 >(
-  params?: GetResources1Params,
+  params?: GetMainGameListParams,
   options?: {
     query?: Partial<
       UseInfiniteQueryOptions<
-        Awaited<ReturnType<typeof getResources1>>,
+        Awaited<ReturnType<typeof getMainGameList>>,
         TError,
         TData,
-        Awaited<ReturnType<typeof getResources1>>,
+        Awaited<ReturnType<typeof getMainGameList>>,
         QueryKey,
-        GetResources1Params["cursorId"]
+        GetMainGameListParams["cursorId"]
       >
     > &
       Pick<
         UndefinedInitialDataOptions<
-          Awaited<ReturnType<typeof getResources1>>,
+          Awaited<ReturnType<typeof getMainGameList>>,
           TError,
-          Awaited<ReturnType<typeof getResources1>>,
+          Awaited<ReturnType<typeof getMainGameList>>,
           QueryKey
         >,
         "initialData"
@@ -139,20 +139,20 @@ export function useGetResources1Infinite<
     request?: SecondParameter<typeof customClientInstance>
   }
 ): UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetResources1Infinite<
-  TData = InfiniteData<Awaited<ReturnType<typeof getResources1>>, GetResources1Params["cursorId"]>,
+export function useGetMainGameListInfinite<
+  TData = InfiniteData<Awaited<ReturnType<typeof getMainGameList>>, GetMainGameListParams["cursorId"]>,
   TError = ErrorType<unknown>
 >(
-  params?: GetResources1Params,
+  params?: GetMainGameListParams,
   options?: {
     query?: Partial<
       UseInfiniteQueryOptions<
-        Awaited<ReturnType<typeof getResources1>>,
+        Awaited<ReturnType<typeof getMainGameList>>,
         TError,
         TData,
-        Awaited<ReturnType<typeof getResources1>>,
+        Awaited<ReturnType<typeof getMainGameList>>,
         QueryKey,
-        GetResources1Params["cursorId"]
+        GetMainGameListParams["cursorId"]
       >
     >
     request?: SecondParameter<typeof customClientInstance>
@@ -162,26 +162,26 @@ export function useGetResources1Infinite<
  * @summary 메인 페이지 리스트 발급 API
  */
 
-export function useGetResources1Infinite<
-  TData = InfiniteData<Awaited<ReturnType<typeof getResources1>>, GetResources1Params["cursorId"]>,
+export function useGetMainGameListInfinite<
+  TData = InfiniteData<Awaited<ReturnType<typeof getMainGameList>>, GetMainGameListParams["cursorId"]>,
   TError = ErrorType<unknown>
 >(
-  params?: GetResources1Params,
+  params?: GetMainGameListParams,
   options?: {
     query?: Partial<
       UseInfiniteQueryOptions<
-        Awaited<ReturnType<typeof getResources1>>,
+        Awaited<ReturnType<typeof getMainGameList>>,
         TError,
         TData,
-        Awaited<ReturnType<typeof getResources1>>,
+        Awaited<ReturnType<typeof getMainGameList>>,
         QueryKey,
-        GetResources1Params["cursorId"]
+        GetMainGameListParams["cursorId"]
       >
     >
     request?: SecondParameter<typeof customClientInstance>
   }
 ): UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
-  const queryOptions = getGetResources1InfiniteQueryOptions(params, options)
+  const queryOptions = getGetMainGameListInfiniteQueryOptions(params, options)
 
   const query = useInfiniteQuery(queryOptions) as UseInfiniteQueryResult<TData, TError> & {
     queryKey: DataTag<QueryKey, TData, TError>
@@ -192,67 +192,67 @@ export function useGetResources1Infinite<
   return query
 }
 
-export const getGetResources1QueryOptions = <
-  TData = Awaited<ReturnType<typeof getResources1>>,
+export const getGetMainGameListQueryOptions = <
+  TData = Awaited<ReturnType<typeof getMainGameList>>,
   TError = ErrorType<unknown>
 >(
-  params?: GetResources1Params,
+  params?: GetMainGameListParams,
   options?: {
-    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getResources1>>, TError, TData>>
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getMainGameList>>, TError, TData>>
     request?: SecondParameter<typeof customClientInstance>
   }
 ) => {
   const { query: queryOptions, request: requestOptions } = options ?? {}
 
-  const queryKey = queryOptions?.queryKey ?? getGetResources1QueryKey(params)
+  const queryKey = queryOptions?.queryKey ?? getGetMainGameListQueryKey(params)
 
-  const queryFn: QueryFunction<Awaited<ReturnType<typeof getResources1>>> = ({ signal }) =>
-    getResources1(params, requestOptions, signal)
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getMainGameList>>> = ({ signal }) =>
+    getMainGameList(params, requestOptions, signal)
 
   return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
-    Awaited<ReturnType<typeof getResources1>>,
+    Awaited<ReturnType<typeof getMainGameList>>,
     TError,
     TData
   > & { queryKey: DataTag<QueryKey, TData, TError> }
 }
 
-export type GetResources1QueryResult = NonNullable<Awaited<ReturnType<typeof getResources1>>>
-export type GetResources1QueryError = ErrorType<unknown>
+export type GetMainGameListQueryResult = NonNullable<Awaited<ReturnType<typeof getMainGameList>>>
+export type GetMainGameListQueryError = ErrorType<unknown>
 
-export function useGetResources1<TData = Awaited<ReturnType<typeof getResources1>>, TError = ErrorType<unknown>>(
-  params: undefined | GetResources1Params,
+export function useGetMainGameList<TData = Awaited<ReturnType<typeof getMainGameList>>, TError = ErrorType<unknown>>(
+  params: undefined | GetMainGameListParams,
   options: {
-    query: Partial<UseQueryOptions<Awaited<ReturnType<typeof getResources1>>, TError, TData>> &
+    query: Partial<UseQueryOptions<Awaited<ReturnType<typeof getMainGameList>>, TError, TData>> &
       Pick<
         DefinedInitialDataOptions<
-          Awaited<ReturnType<typeof getResources1>>,
+          Awaited<ReturnType<typeof getMainGameList>>,
           TError,
-          Awaited<ReturnType<typeof getResources1>>
+          Awaited<ReturnType<typeof getMainGameList>>
         >,
         "initialData"
       >
     request?: SecondParameter<typeof customClientInstance>
   }
 ): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetResources1<TData = Awaited<ReturnType<typeof getResources1>>, TError = ErrorType<unknown>>(
-  params?: GetResources1Params,
+export function useGetMainGameList<TData = Awaited<ReturnType<typeof getMainGameList>>, TError = ErrorType<unknown>>(
+  params?: GetMainGameListParams,
   options?: {
-    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getResources1>>, TError, TData>> &
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getMainGameList>>, TError, TData>> &
       Pick<
         UndefinedInitialDataOptions<
-          Awaited<ReturnType<typeof getResources1>>,
+          Awaited<ReturnType<typeof getMainGameList>>,
           TError,
-          Awaited<ReturnType<typeof getResources1>>
+          Awaited<ReturnType<typeof getMainGameList>>
         >,
         "initialData"
       >
     request?: SecondParameter<typeof customClientInstance>
   }
 ): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetResources1<TData = Awaited<ReturnType<typeof getResources1>>, TError = ErrorType<unknown>>(
-  params?: GetResources1Params,
+export function useGetMainGameList<TData = Awaited<ReturnType<typeof getMainGameList>>, TError = ErrorType<unknown>>(
+  params?: GetMainGameListParams,
   options?: {
-    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getResources1>>, TError, TData>>
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getMainGameList>>, TError, TData>>
     request?: SecondParameter<typeof customClientInstance>
   }
 ): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -260,14 +260,14 @@ export function useGetResources1<TData = Awaited<ReturnType<typeof getResources1
  * @summary 메인 페이지 리스트 발급 API
  */
 
-export function useGetResources1<TData = Awaited<ReturnType<typeof getResources1>>, TError = ErrorType<unknown>>(
-  params?: GetResources1Params,
+export function useGetMainGameList<TData = Awaited<ReturnType<typeof getMainGameList>>, TError = ErrorType<unknown>>(
+  params?: GetMainGameListParams,
   options?: {
-    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getResources1>>, TError, TData>>
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getMainGameList>>, TError, TData>>
     request?: SecondParameter<typeof customClientInstance>
   }
 ): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
-  const queryOptions = getGetResources1QueryOptions(params, options)
+  const queryOptions = getGetMainGameListQueryOptions(params, options)
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 
@@ -276,60 +276,60 @@ export function useGetResources1<TData = Awaited<ReturnType<typeof getResources1
   return query
 }
 
-export const getGetResources1SuspenseQueryOptions = <
-  TData = Awaited<ReturnType<typeof getResources1>>,
+export const getGetMainGameListSuspenseQueryOptions = <
+  TData = Awaited<ReturnType<typeof getMainGameList>>,
   TError = ErrorType<unknown>
 >(
-  params?: GetResources1Params,
+  params?: GetMainGameListParams,
   options?: {
-    query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getResources1>>, TError, TData>>
+    query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getMainGameList>>, TError, TData>>
     request?: SecondParameter<typeof customClientInstance>
   }
 ) => {
   const { query: queryOptions, request: requestOptions } = options ?? {}
 
-  const queryKey = queryOptions?.queryKey ?? getGetResources1QueryKey(params)
+  const queryKey = queryOptions?.queryKey ?? getGetMainGameListQueryKey(params)
 
-  const queryFn: QueryFunction<Awaited<ReturnType<typeof getResources1>>> = ({ signal }) =>
-    getResources1(params, requestOptions, signal)
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getMainGameList>>> = ({ signal }) =>
+    getMainGameList(params, requestOptions, signal)
 
   return { queryKey, queryFn, ...queryOptions } as UseSuspenseQueryOptions<
-    Awaited<ReturnType<typeof getResources1>>,
+    Awaited<ReturnType<typeof getMainGameList>>,
     TError,
     TData
   > & { queryKey: DataTag<QueryKey, TData, TError> }
 }
 
-export type GetResources1SuspenseQueryResult = NonNullable<Awaited<ReturnType<typeof getResources1>>>
-export type GetResources1SuspenseQueryError = ErrorType<unknown>
+export type GetMainGameListSuspenseQueryResult = NonNullable<Awaited<ReturnType<typeof getMainGameList>>>
+export type GetMainGameListSuspenseQueryError = ErrorType<unknown>
 
-export function useGetResources1Suspense<
-  TData = Awaited<ReturnType<typeof getResources1>>,
+export function useGetMainGameListSuspense<
+  TData = Awaited<ReturnType<typeof getMainGameList>>,
   TError = ErrorType<unknown>
 >(
-  params: undefined | GetResources1Params,
+  params: undefined | GetMainGameListParams,
   options: {
-    query: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getResources1>>, TError, TData>>
+    query: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getMainGameList>>, TError, TData>>
     request?: SecondParameter<typeof customClientInstance>
   }
 ): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetResources1Suspense<
-  TData = Awaited<ReturnType<typeof getResources1>>,
+export function useGetMainGameListSuspense<
+  TData = Awaited<ReturnType<typeof getMainGameList>>,
   TError = ErrorType<unknown>
 >(
-  params?: GetResources1Params,
+  params?: GetMainGameListParams,
   options?: {
-    query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getResources1>>, TError, TData>>
+    query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getMainGameList>>, TError, TData>>
     request?: SecondParameter<typeof customClientInstance>
   }
 ): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetResources1Suspense<
-  TData = Awaited<ReturnType<typeof getResources1>>,
+export function useGetMainGameListSuspense<
+  TData = Awaited<ReturnType<typeof getMainGameList>>,
   TError = ErrorType<unknown>
 >(
-  params?: GetResources1Params,
+  params?: GetMainGameListParams,
   options?: {
-    query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getResources1>>, TError, TData>>
+    query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getMainGameList>>, TError, TData>>
     request?: SecondParameter<typeof customClientInstance>
   }
 ): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -337,17 +337,17 @@ export function useGetResources1Suspense<
  * @summary 메인 페이지 리스트 발급 API
  */
 
-export function useGetResources1Suspense<
-  TData = Awaited<ReturnType<typeof getResources1>>,
+export function useGetMainGameListSuspense<
+  TData = Awaited<ReturnType<typeof getMainGameList>>,
   TError = ErrorType<unknown>
 >(
-  params?: GetResources1Params,
+  params?: GetMainGameListParams,
   options?: {
-    query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getResources1>>, TError, TData>>
+    query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getMainGameList>>, TError, TData>>
     request?: SecondParameter<typeof customClientInstance>
   }
 ): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
-  const queryOptions = getGetResources1SuspenseQueryOptions(params, options)
+  const queryOptions = getGetMainGameListSuspenseQueryOptions(params, options)
 
   const query = useSuspenseQuery(queryOptions) as UseSuspenseQueryResult<TData, TError> & {
     queryKey: DataTag<QueryKey, TData, TError>

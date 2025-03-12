@@ -7,5 +7,15 @@ export type GameRequestCategory = (typeof GameRequestCategory)[keyof typeof Game
 export const GameRequestCategory = {
   FUN: "FUN",
   HORROR: "HORROR",
-  HOT: "HOT"
+  HOT: "HOT",
+  ACTION: "ACTION",
+  ADVENTURE: "ADVENTURE",
+  MYSTERY: "MYSTERY",
+  FANTASY: "FANTASY",
+  THRILLER: "THRILLER",
+  SF: "SF",
+  DRAMA: "DRAMA",
+  ROMANCE: "ROMANCE",
+  CRIME: "CRIME",
+  SURVIVAL: "SURVIVAL"
 } as const
