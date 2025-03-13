@@ -1,0 +1,33 @@
+import { colorGroups } from "@/storybook/colorGroup"
+import { COLORS } from "@/styles/theme/colors"
+import { ColorItem, ColorPalette, Meta } from "@storybook/addon-docs"
+
+<Meta title="System/Colors" />
+
+# Color Palette
+
+<ColorPalette>
+  {colorGroups.map(({ title, subtitle, key, colorSteps }) => (
+    <ColorItem
+      key={key}
+      title={title}
+      subtitle={subtitle}
+      colors={
+        colorSteps && colorSteps.length > 0
+          ? colorSteps.reduce((acc, step) => {
+              {
+                /* acc[`${step} `]에 공백 설정한 이유: https://github.com/storybookjs/storybook/issues/22067 */
+              }
+              acc[`${step} `] =
+                COLORS[`${key}_${step}`] !== undefined
+                  ? COLORS[`${key}_${step}`]
+                  : step === "DEFAULT"
+                    ? COLORS[key]
+                    : null
+              return acc
+            }, {})
+          : { DEFAULT: COLORS[key] } // colorSteps가 없을 경우 기본 색상만 사용
+      }
+    />
+  ))}
+</ColorPalette>

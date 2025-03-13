@@ -1,0 +1,110 @@
+import { FONT_SIZE } from "@/styles/theme/fontSize"
+import { FONT_WEIGHT } from "@/styles/theme/fontWeight"
+import { Meta, Typeset } from "@storybook/blocks"
+
+<Meta title="System/Typography" />
+
+export const typography = {
+  type: {
+    font: "MoneygraphyRounded, sans-serif"
+  },
+  weight: FONT_WEIGHT,
+  size: FONT_SIZE
+}
+
+export const SampleText = "This is Typography storybook."
+
+# Typography
+
+## **Weights**
+
+- **light: 300**
+- **regular: 400 (default)**
+- **medium: 500**
+- **semibold: 600**
+- **bold: 700**
+
+## **light**
+
+<Typeset
+  fontSizes={[
+    parseInt(typography.size["2xl"]),
+    parseInt(typography.size.xl),
+    parseInt(typography.size.lg),
+    parseInt(typography.size.md),
+    parseInt(typography.size.base),
+    parseInt(typography.size.sm),
+    parseInt(typography.size.xsm)
+  ]}
+  fontWeight={typography.weight.light}
+  sampleText={SampleText}
+  fontFamily={typography.type.font}
+/>
+
+## **regular**
+
+<Typeset
+  fontSizes={[
+    parseInt(typography.size["2xl"]),
+    parseInt(typography.size.xl),
+    parseInt(typography.size.lg),
+    parseInt(typography.size.md),
+    parseInt(typography.size.base),
+    parseInt(typography.size.sm),
+    parseInt(typography.size.xsm)
+  ]}
+  fontWeight={typography.weight.regular}
+  sampleText={SampleText}
+  fontFamily={typography.type.font}
+/>
+
+## **medium**
+
+<Typeset
+  fontSizes={[
+    parseInt(typography.size["2xl"]),
+    parseInt(typography.size.xl),
+    parseInt(typography.size.lg),
+    parseInt(typography.size.md),
+    parseInt(typography.size.base),
+    parseInt(typography.size.sm),
+    parseInt(typography.size.xsm)
+  ]}
+  fontWeight={typography.weight.medium}
+  sampleText={SampleText}
+  fontFamily={typography.type.font}
+/>
+
+## **semibold**
+
+<Typeset
+  fontSizes={[
+    parseInt(typography.size["2xl"]),
+    parseInt(typography.size.xl),
+    parseInt(typography.size.lg),
+    parseInt(typography.size.md),
+    parseInt(typography.size.base),
+    parseInt(typography.size.sm),
+    parseInt(typography.size.xsm)
+  ]}
+  fontWeight={typography.weight.semibold}
+  sampleText={SampleText}
+  fontFamily={typography.type.font}
+/>
+
+## **bold**
+
+<Typeset
+  fontSizes={[
+    parseInt(typography.size["2xl"]),
+    parseInt(typography.size.xl),
+    parseInt(typography.size.lg),
+    parseInt(typography.size.md),
+    parseInt(typography.size.base),
+    parseInt(typography.size.sm),
+    parseInt(typography.size.xsm)
+  ]}
+  fontWeight={typography.weight.bold}
+  sampleText={SampleText}
+  fontFamily={typography.type.font}
+/>
