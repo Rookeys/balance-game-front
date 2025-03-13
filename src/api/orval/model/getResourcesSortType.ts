@@ -4,6 +4,6 @@ export type GetResourcesSortType = (typeof GetResourcesSortType)[keyof typeof Ge
 export const GetResourcesSortType = {
   winRateAsc: "winRateAsc",
   winRateDesc: "winRateDesc",
-  idAsc: "idAsc",
-  idDesc: "idDesc"
+  old: "old",
+  resent: "resent"
 } as const

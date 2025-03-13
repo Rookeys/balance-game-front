@@ -1,7 +1,10 @@
-export type GetMyGameListCategory = (typeof GetMyGameListCategory)[keyof typeof GetMyGameListCategory]
+/**
+ * 카테고리
+ */
+export type GameListResponseCategory = (typeof GameListResponseCategory)[keyof typeof GameListResponseCategory]
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
-export const GetMyGameListCategory = {
+export const GameListResponseCategory = {
   FUN: "FUN",
   HORROR: "HORROR",
   HOT: "HOT",

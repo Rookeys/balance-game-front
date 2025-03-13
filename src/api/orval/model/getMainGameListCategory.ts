@@ -4,5 +4,15 @@ export type GetMainGameListCategory = (typeof GetMainGameListCategory)[keyof typ
 export const GetMainGameListCategory = {
   FUN: "FUN",
   HORROR: "HORROR",
-  ACTION: "ACTION"
+  HOT: "HOT",
+  ACTION: "ACTION",
+  ADVENTURE: "ADVENTURE",
+  MYSTERY: "MYSTERY",
+  FANTASY: "FANTASY",
+  THRILLER: "THRILLER",
+  SF: "SF",
+  DRAMA: "DRAMA",
+  ROMANCE: "ROMANCE",
+  CRIME: "CRIME",
+  SURVIVAL: "SURVIVAL"
 } as const
