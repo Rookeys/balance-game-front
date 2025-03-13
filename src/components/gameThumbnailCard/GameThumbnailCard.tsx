@@ -1,10 +1,11 @@
 import { GameListResponse } from "@/api/orval/model/gameListResponse"
 import ImageSection from "./_components/basic/ImageSection"
 import MetaInfoSection from "./_components/common/MetaInfoSection"
-import SocialActionSection from "./_components/common/SocialActionSection"
 import TitleSection from "./_components/basic/TitleSection"
 import { getYoutubeThumbnail } from "@/utils/getYoutubeThumbnail"
 import { GameListSelectionResponseType } from "@/api/orval/model/gameListSelectionResponseType"
+import SocialActionSection from "./_components/common/SocialActionSection"
+import Link from "next/link"
 
 interface Params extends GameListResponse {
   index: number
@@ -14,7 +15,7 @@ export default function GameThumbnailCard({ index, ...props }: Params) {
   const { roomId, leftSelection, title, description, category, userResponse, totalPlayNums } = props
 
   return (
-    <section className="flex w-[272px] flex-col gap-[16px] md:w-[386px]">
+    <Link href={`/game/${roomId}`} className="flex w-[272px] flex-col gap-[16px] md:w-[386px]">
       {/* lg:w-[384px] */}
       <ImageSection
         src={
@@ -24,13 +25,13 @@ export default function GameThumbnailCard({ index, ...props }: Params) {
         }
         index={index}
       />
-      <SocialActionSection id={roomId} category={category} />
+      <SocialActionSection id={roomId} title={title} category={category} />
       <TitleSection title={title} description={description} />
       <MetaInfoSection
         creatorNickname={userResponse?.nickname}
         creatorImage={userResponse?.profileImageUrl}
         totalPlayNums={totalPlayNums}
       />
-    </section>
+    </Link>
   )
 }

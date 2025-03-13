@@ -6,6 +6,7 @@ import MetaInfoSection from "./_components/common/MetaInfoSection"
 import { getYoutubeThumbnail } from "@/utils/getYoutubeThumbnail"
 import { GameListSelectionResponseType } from "@/api/orval/model/gameListSelectionResponseType"
 import SocialActionSection from "./_components/common/SocialActionSection"
+import Link from "next/link"
 
 interface Params extends GameListResponse {
   tag?: string
@@ -16,7 +17,7 @@ export default function GameThumbnailSimpleCard({ tag, fixedSize = true, ...prop
   const { roomId, leftSelection, title, category, userResponse, totalPlayNums } = props
 
   return (
-    <section className={cn("flex flex-col gap-[16px]", fixedSize && "w-[182px] md:w-[285px]")}>
+    <Link href={`/game/${roomId}`} className={cn("flex flex-col gap-[16px]", fixedSize && "w-[182px] md:w-[285px]")}>
       <ImageSection
         src={
           leftSelection?.type === GameListSelectionResponseType.LINK
@@ -32,6 +33,6 @@ export default function GameThumbnailSimpleCard({ tag, fixedSize = true, ...prop
         creatorImage={userResponse?.profileImageUrl}
         totalPlayNums={totalPlayNums}
       />
-    </section>
+    </Link>
   )
 }
