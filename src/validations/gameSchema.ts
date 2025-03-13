@@ -5,8 +5,8 @@ import { z } from "zod"
 
 export const postGameSchema = z
   .object({
-    title: z.string().max(20, "제목은 20자 이내로 작성해주세요.").nonempty("제목은 필수입니다."),
-    description: z.string().max(50, "설명은 50자 이내로 작성해주세요.").optional(),
+    title: z.string().max(50, "제목은 50자 이내로 작성해주세요.").nonempty("제목은 필수입니다."),
+    description: z.string().max(100, "설명은 100자 이내로 작성해주세요.").optional(),
     category: z.enum(getEnumValues(GameRequestCategory)),
     namePrivate: z
       .string({

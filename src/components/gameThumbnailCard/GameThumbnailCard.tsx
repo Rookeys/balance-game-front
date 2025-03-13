@@ -1,7 +1,7 @@
 import { GameListResponse } from "@/api/orval/model/gameListResponse"
 import ImageSection from "./_components/basic/ImageSection"
 import MetaInfoSection from "./_components/common/MetaInfoSection"
-import TitleSection from "./_components/basic/TitleSection"
+import TitleSection from "./_components/common/TitleSection"
 import { getYoutubeThumbnail } from "@/utils/getYoutubeThumbnail"
 import { GameListSelectionResponseType } from "@/api/orval/model/gameListSelectionResponseType"
 import SocialActionSection from "./_components/common/SocialActionSection"
