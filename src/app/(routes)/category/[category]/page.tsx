@@ -3,6 +3,7 @@ import { notFound } from "next/navigation"
 import CategoryGameList from "./_components/CategoryGameList"
 import Filter from "./_components/Filter"
 import Title from "./_components/Title"
+import ScrollTopButton from "@/components/ScrollTopButton"
 
 interface Params {
   category: string
@@ -26,6 +27,7 @@ export default async function CategoryGame({ params }: CategoryGameProps) {
         <Filter />
       </article>
       <CategoryGameList />
+      <ScrollTopButton />
     </section>
   )
 }
