@@ -8,7 +8,7 @@ export const postGameSchema = z
     title: z.string().max(20, "제목은 20자 이내로 작성해주세요.").nonempty("제목은 필수입니다."),
     description: z.string().max(50, "설명은 50자 이내로 작성해주세요.").optional(),
     category: z.enum(getEnumValues(GameRequestCategory)),
-    namePublic: z
+    namePrivate: z
       .string({
         required_error: "생성자 표시 여부는 필수입니다."
       })
@@ -37,9 +37,9 @@ export const categoryItems: SelectOptionType[] = [
   { id: GameRequestCategory.HOT, value: GameRequestCategory.HOT, label: "유행" }
 ]
 
-export const isNamePublicItems: SelectOptionType[] = [
-  { id: "is_name_public", value: "true", label: "공개" },
-  { id: "is_name_private", value: "false", label: "비공개" }
+export const isNamePrivateItems: SelectOptionType[] = [
+  { id: "is_name_private_false", value: "false", label: "공개" },
+  { id: "is_name_private_true", value: "true", label: "비공개" }
 ]
 
 export const gameAccessTypeItems: SelectOptionType[] = [
