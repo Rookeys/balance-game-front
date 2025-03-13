@@ -42,8 +42,6 @@ export const FileUploader = ({
 
   const onDrop = useCallback(
     (acceptedFiles: File[], rejectedFiles: FileRejection[]) => {
-      console.log("acceptedFiles", acceptedFiles)
-
       const files = acceptedFiles
 
       if (!files) {

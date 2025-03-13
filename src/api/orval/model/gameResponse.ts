@@ -14,5 +14,5 @@ export interface GameResponse {
   inviteCode?: string
   /** 카테고리 설정 */
   category?: GameResponseCategory
-  namePublic?: boolean
+  namePrivate?: boolean
 }

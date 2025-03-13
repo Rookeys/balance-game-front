@@ -18,7 +18,7 @@ import { parseBoolean } from "@/utils/parseBoolean"
 import {
   categoryItems,
   gameAccessTypeItems,
-  isNamePublicItems,
+  isNamePrivateItems,
   postGameSchema,
   PostGameType
 } from "@/validations/gameSchema"
@@ -39,7 +39,7 @@ export default function GameForm() {
     title: data?.title ?? "",
     description: data?.description ?? "",
     category: data?.category ?? GameRequestCategory.FUN,
-    namePublic: String(data?.namePublic ?? "true"),
+    namePrivate: String(data?.namePrivate ?? "false"),
     accessType: data?.accessType ?? GameRequestAccessType.PUBLIC,
     inviteCode: data?.inviteCode ?? ""
   }
@@ -62,7 +62,7 @@ export default function GameForm() {
 
   const onSubmit = async (data: PostGameType) => {
     try {
-      const requestData = { ...data, namePublic: parseBoolean(data.namePublic) } satisfies GameRequest
+      const requestData = { ...data, namePrivate: parseBoolean(data.namePrivate) } satisfies GameRequest
 
       if (id) {
         await UpdateGame({ gameId: Number(id), data: requestData })
@@ -112,9 +112,9 @@ export default function GameForm() {
       <article className="flex flex-col gap-[4px]">
         <InputLabel label="제작자 표시 (익명으로 설정 시 팔로워들이 확인할 수 없습니다)" />
         <Controller
-          name="namePublic"
+          name="namePrivate"
           control={control}
-          render={({ field }) => <RadioGroup {...field} items={isNamePublicItems} />}
+          render={({ field }) => <RadioGroup {...field} items={isNamePrivateItems} />}
         />
       </article>
       <article className="flex flex-col gap-[4px]">

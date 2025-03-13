@@ -4,6 +4,6 @@ export type GetResultRankingSortType = (typeof GetResultRankingSortType)[keyof t
 export const GetResultRankingSortType = {
   winRateAsc: "winRateAsc",
   winRateDesc: "winRateDesc",
-  idAsc: "idAsc",
-  idDesc: "idDesc"
+  old: "old",
+  resent: "resent"
 } as const

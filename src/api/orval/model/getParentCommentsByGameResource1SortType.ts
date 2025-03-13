@@ -5,6 +5,6 @@ export type GetParentCommentsByGameResource1SortType =
 export const GetParentCommentsByGameResource1SortType = {
   likeAsc: "likeAsc",
   likeDesc: "likeDesc",
-  idAsc: "idAsc",
-  idDesc: "idDesc"
+  old: "old",
+  resent: "resent"
 } as const

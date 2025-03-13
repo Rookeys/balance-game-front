@@ -1,5 +1,3 @@
-import React from "react"
-
 interface KakaoSymbolProps {
   size?: number | string
   color?: string

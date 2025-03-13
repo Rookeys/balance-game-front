@@ -13,6 +13,10 @@ const nextConfig: NextConfig = {
         hostname: "i.ytimg.com"
       },
       {
+        protocol: "http",
+        hostname: "img1.kakaocdn.net"
+      },
+      {
         protocol: "https",
         hostname: "balance-game.s3.ap-northeast-2.amazonaws.com"
       }

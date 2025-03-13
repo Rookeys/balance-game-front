@@ -9,6 +9,7 @@ import type { Metadata } from "next"
 import { getServerSession } from "next-auth"
 import { ThemeProvider } from "next-themes"
 import { MoneygraphyRounded } from "./fonts"
+import Footer from "@/components/Footer"
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -31,6 +32,7 @@ export default async function RootLayout({
               <div id="portal" />
               <Header />
               {children}
+              <Footer />
               <ToasterWithTheme />
             </ThemeProvider>
           </ReactQueryProvider>

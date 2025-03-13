@@ -1,3 +1,4 @@
+import type { GetMyGameListCategory } from "./getMyGameListCategory"
 import type { GetMyGameListSortType } from "./getMyGameListSortType"
 
 export type GetMyGameListParams = {
@@ -13,6 +14,10 @@ export type GetMyGameListParams = {
    * 검색할 리소스 제목
    */
   title?: string
+  /**
+   * 카테고리
+   */
+  category?: GetMyGameListCategory
   /**
    * 정렬 방식
    */

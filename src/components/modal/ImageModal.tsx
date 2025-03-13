@@ -10,7 +10,7 @@ interface Params {
 export default function ImageModal({ url, onClose }: Params) {
   return (
     <ModalWrapper onClose={onClose} overlayClose>
-      <div className="relative z-[100] w-[80vw] 2xsm:w-[300px] md:w-[600px]">
+      <div className="2xsm:w-[300px] relative z-[100] w-[80vw] md:w-[600px]">
         <ImageRatio
           className="object-cover"
           ratio={1}

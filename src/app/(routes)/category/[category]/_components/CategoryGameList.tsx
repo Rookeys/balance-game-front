@@ -1,12 +1,11 @@
 "use client"
-
-import { useGetResources1Infinite } from "@/api/orval/client/main-page-controller/main-page-controller"
-import GameThumbnailCard from "@/components/gameThumbnail/GameThumbnailCard"
+import { useGetMainGameListInfinite } from "@/api/orval/client/main-page-controller/main-page-controller"
+import GameThumbnailSimpleCard from "@/components/gameThumbnailCard/GameThumbnailSimpleCard"
 import { useEffect } from "react"
 import { useInView } from "react-intersection-observer"
 
-export default function GameList() {
-  const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } = useGetResources1Infinite(undefined, {
+export default function CategoryGameList() {
+  const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } = useGetMainGameListInfinite(undefined, {
     query: {
       initialPageParam: undefined,
       getNextPageParam: (lastPage) => {
@@ -29,16 +28,12 @@ export default function GameList() {
   if (isLoading) return <section className="h-[100vh] bg-red-50" />
 
   return (
-    <section className="relative grid grid-cols-1 gap-[20px] sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-5">
-      {data?.pages.map((page) =>
-        page.content?.map((game) => (
-          <article key={game?.roomId}>
-            <GameThumbnailCard {...game} />
-          </article>
-        ))
+    <section className="relative grid grid-cols-2 gap-x-[20px] gap-y-[20px] md:grid-cols-4 md:gap-y-[40px]">
+      {data?.pages?.map((page) =>
+        page.content?.map((game, index) => <GameThumbnailSimpleCard key={index} fixedSize={false} {...game} />)
       )}
       {!isFetchingNextPage && (
-        <div ref={ref} className="pointer-events-none absolute bottom-[400px] start-0 h-[4px] w-full opacity-0" />
+        <div ref={ref} className="pointer-events-none absolute bottom-[200px] h-[4px] w-full opacity-0" />
       )}
       <section>
         {isFetchingNextPage ? (

@@ -48,7 +48,7 @@ clientInstance.interceptors.response.use(
         return clientInstance(originalRequest)
       } catch (error) {
         log("error", error)
-        window.location.reload()
+        window.location.href = "/sign-out"
       }
     }
     return Promise.reject(error)
