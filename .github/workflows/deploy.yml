@@ -28,7 +28,8 @@ jobs:
           destination-github-username: KoJaem
           destination-repository-name: balance-game-front-deploy
           user-email: ${{ secrets.KOJAEM_EMAIL }}
-          commit-message: "${{ github.event.commits[0].message || 'Manual commit from GitHub Actions' }}"
+          # commit-message: "${{ github.event.commits[0].message || 'Manual commit from GitHub Actions' }}"
+          commit-message: "Deploy from Github Actions"
           target-branch: main
 
       - name: Test get variable exported by push-to-another-repository
