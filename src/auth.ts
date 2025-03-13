@@ -41,11 +41,15 @@ export const authOptions: AuthOptions = {
             const refreshToken = data.refreshToken
             const accessTokenExpiresAt = data.accessTokenExpiresAt
             const refreshTokenExpiresAt = data.refreshTokenExpiresAt
+            const nickname = data.nickname
+            const image = data.fileUrl
 
             const newToken: JWT = {
               ...token,
               access_token: accessToken,
-              refresh_token: refreshToken
+              refresh_token: refreshToken,
+              nickname: nickname,
+              image: image
             }
 
             if (accessTokenExpiresAt) {
@@ -73,11 +77,15 @@ export const authOptions: AuthOptions = {
               const refreshToken = data.refreshToken
               const accessTokenExpiresAt = data.accessTokenExpiresAt
               const refreshTokenExpiresAt = data.refreshTokenExpiresAt
+              const nickname = data.nickname
+              const image = data.fileUrl
 
               const newToken: JWT = {
                 ...token,
                 access_token: accessToken,
-                refresh_token: refreshToken
+                refresh_token: refreshToken,
+                nickname: nickname,
+                image: image
               }
 
               if (accessTokenExpiresAt) {
@@ -126,6 +134,8 @@ export const authOptions: AuthOptions = {
         session.refresh_token = token.refresh_token
         session.access_token_expires_at = token.access_token_expires_at
         session.refresh_token_expires_at = token.refresh_token_expires_at
+        session.user.nickname = token.nickname
+        session.user.image = token.image
       }
       return session
     },
