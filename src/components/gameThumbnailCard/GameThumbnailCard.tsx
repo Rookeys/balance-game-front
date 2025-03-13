@@ -1,25 +1,36 @@
 import { GameListResponse } from "@/api/orval/model/gameListResponse"
 import ImageSection from "./_components/basic/ImageSection"
 import MetaInfoSection from "./_components/common/MetaInfoSection"
-import SocialActionSection from "./_components/basic/SocialActionSection"
+import SocialActionSection from "./_components/common/SocialActionSection"
 import TitleSection from "./_components/basic/TitleSection"
+import { getYoutubeThumbnail } from "@/utils/getYoutubeThumbnail"
+import { GameListSelectionResponseType } from "@/api/orval/model/gameListSelectionResponseType"
 
 interface Params extends GameListResponse {
-  src: string
   index: number
 }
 
-export default function GameThumbnailCard({ src, index, ...props }: Params) {
-  // const { roomId, leftSelection, rightSelection, title, description, nickname } = props
-  const {} = props
+export default function GameThumbnailCard({ index, ...props }: Params) {
+  const { roomId, leftSelection, title, description, category, userResponse, totalPlayNums } = props
 
   return (
     <section className="flex w-[272px] flex-col gap-[16px] md:w-[386px]">
       {/* lg:w-[384px] */}
-      <ImageSection src={src} index={index} />
-      <SocialActionSection />
-      <TitleSection />
-      <MetaInfoSection />
+      <ImageSection
+        src={
+          leftSelection?.type === GameListSelectionResponseType.LINK
+            ? getYoutubeThumbnail(leftSelection?.content)
+            : leftSelection?.content
+        }
+        index={index}
+      />
+      <SocialActionSection id={roomId} category={category} />
+      <TitleSection title={title} description={description} />
+      <MetaInfoSection
+        creatorNickname={userResponse?.nickname}
+        creatorImage={userResponse?.profileImageUrl}
+        totalPlayNums={totalPlayNums}
+      />
     </section>
   )
 }

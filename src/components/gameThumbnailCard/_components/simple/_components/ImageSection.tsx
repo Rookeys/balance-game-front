@@ -1,7 +1,7 @@
 import Image from "next/image"
 
 interface Params {
-  src: string
+  src?: string
   tag?: string
 }
 
@@ -9,7 +9,7 @@ export default function ImageSection({ src, tag }: Params) {
   return (
     <article className="relative h-[158px] overflow-hidden rounded-[12px] bg-gray-10 md:h-[228px]">
       <Image
-        src={src}
+        src={src ?? "/"}
         className="object-contain object-center"
         // className="object-cover object-center"
         alt="Game-Thumbnail"

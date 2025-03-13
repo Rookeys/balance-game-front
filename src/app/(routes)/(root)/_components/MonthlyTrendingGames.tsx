@@ -9,7 +9,6 @@ import { useGetMainGameList } from "@/api/orval/client/main-page-controller/main
 
 export default function MonthlyTrendingGames() {
   const { data } = useGetMainGameList({ size: 10, sortType: GetMainGameListSortType.month })
-  console.log("data", data)
   return (
     <section className="flex w-full max-w-[1200px] flex-col gap-[12px]">
       <SliderTitle
@@ -19,12 +18,12 @@ export default function MonthlyTrendingGames() {
         nextElId="monthly-trending-games-list-next"
       />
       <GameSliderWrapper prevElId="monthly-trending-games-list-prev" nextElId="monthly-trending-games-list-next">
-        {Array.from({ length: 10 }, (_, index) => (
+        {data?.content?.map((game, index) => (
           <SwiperSlide
             key={index}
             className="ms-[16px] !w-fit last:mr-[16px] md:ms-[24px] last:md:mr-[24px] lg:mr-[24px] lg:ms-0 last:lg:mr-0"
           >
-            <GameThumbnailCard src={"/images/Rookeys.png"} index={index} />
+            <GameThumbnailCard index={index} {...game} />
           </SwiperSlide>
         ))}
       </GameSliderWrapper>
