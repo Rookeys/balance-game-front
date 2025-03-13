@@ -15,8 +15,7 @@ export default function GameThumbnailCard({ index, ...props }: Params) {
   const { roomId, leftSelection, title, description, category, userResponse, totalPlayNums } = props
 
   return (
-    <Link href={`/game/${roomId}`} className="flex w-[272px] flex-col gap-[16px] md:w-[386px]">
-      {/* lg:w-[384px] */}
+    <Link href={`/game/${roomId}`} className="flex w-[272px] flex-col gap-[12px] md:w-[384px]">
       <ImageSection
         src={
           leftSelection?.type === GameListSelectionResponseType.LINK

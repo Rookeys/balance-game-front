@@ -9,7 +9,7 @@ interface Params extends ImageProps {
 export default function CategoryBox({ href, label, ...props }: Params) {
   return (
     <Link href={href}>
-      <section className="flex h-[128px] w-[102px] items-center justify-center rounded-[12px] bg-gray-10 px-[24px] py-[20px]">
+      <section className="flex h-[128px] w-[98px] items-center justify-center rounded-[12px] bg-gray-10 px-[24px] py-[20px]">
         <article className="flex flex-col items-center gap-[8px]">
           <Image {...props} width={76} height={76} alt="category" />
           {/* <div className="h-[80px] w-[80px] bg-gray-30" /> */}

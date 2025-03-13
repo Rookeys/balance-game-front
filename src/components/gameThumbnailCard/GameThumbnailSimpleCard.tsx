@@ -17,7 +17,7 @@ export default function GameThumbnailSimpleCard({ tag, fixedSize = true, ...prop
   const { roomId, leftSelection, title, description, category, userResponse, totalPlayNums } = props
 
   return (
-    <Link href={`/game/${roomId}`} className={cn("flex flex-col gap-[16px]", fixedSize && "w-[182px] md:w-[285px]")}>
+    <Link href={`/game/${roomId}`} className={cn("flex flex-col gap-[8px]", fixedSize && "w-[182px] md:w-[282px]")}>
       <ImageSection
         src={
           leftSelection?.type === GameListSelectionResponseType.LINK
@@ -26,7 +26,7 @@ export default function GameThumbnailSimpleCard({ tag, fixedSize = true, ...prop
         }
         tag={tag}
       />
-      <SocialActionSection id={roomId} category={category} />
+      <SocialActionSection id={roomId} title={title} category={category} />
       <TitleSection title={title} description={description} />
       <MetaInfoSection
         creatorNickname={userResponse?.nickname}

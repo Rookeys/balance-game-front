@@ -14,7 +14,7 @@ export default function ImageSection({ src, index }: Params) {
         // className="object-cover object-center"
         alt="Game-Thumbnail"
         fill
-        sizes="(max-width: 768px) 272px, 386px"
+        sizes="(max-width: 768px) 272px, 384px"
         placeholder="blur"
         blurDataURL="data:image/jepg;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mO88B8AAqUB0Y/H4mkAAAAASUVORK5CYII="
       />

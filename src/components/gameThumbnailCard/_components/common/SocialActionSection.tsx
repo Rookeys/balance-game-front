@@ -17,7 +17,7 @@ export default function SocialActionSection({ id, title, category }: Params) {
     e.preventDefault()
     const shareData: ShareAPIRequest = {
       title: `피케이드에 초대합니다`,
-      text: `${title} 플레이`,
+      text: `${title ?? ""}플레이`,
       url: `https://github.com/kojaem/${id}`
     }
     share(shareData)
@@ -34,8 +34,8 @@ export default function SocialActionSection({ id, title, category }: Params) {
         }}
       />
       {isOpen && (
-        <section className="absolute end-0 top-[32px] bg-white">
-          <Button onClick={handleShare}>
+        <section className="absolute end-0 top-[32px] rounded-[8px] border bg-white">
+          <Button variant="custom" className="px-[24px] py-[20px]" onClick={handleShare}>
             <p>공유하기</p>
           </Button>
         </section>
