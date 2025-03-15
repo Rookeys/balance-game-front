@@ -7,6 +7,7 @@ import { useRouter, useSearchParams } from "next/navigation"
 export default function SearchInputWrapper() {
   const router = useRouter()
   const searchParams = useSearchParams()
+  const keyword = searchParams.get("keyword")
 
   const handleSearch = (keyword: string) => {
     const params = new URLSearchParams(searchParams)
@@ -20,6 +21,7 @@ export default function SearchInputWrapper() {
       <SearchInput
         Icon={Search}
         iconProps={{ color: "#686E75" }}
+        defaultValue={keyword ?? ""}
         onSearch={handleSearch}
         placeholder="제목, 인물 이름으로 월드컵 찾기"
         className="h-[48px]"
