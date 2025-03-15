@@ -11,7 +11,7 @@ export default function Header() {
   const { data: session } = useSession()
 
   return (
-    <header className="flex items-center justify-between border-b border-gray-20 bg-light px-[12px] py-[8px] dark:border-gray-70 dark:bg-dark-night">
+    <header className="flex h-[64px] items-center justify-between border-b border-gray-20 bg-light px-[12px] py-[8px] dark:border-gray-70 dark:bg-dark-night">
       <section className="flex items-center gap-[40px]">
         <Link href={"/"} className="flex-shrink-0">
           <Logo />

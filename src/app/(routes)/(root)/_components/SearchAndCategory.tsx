@@ -13,6 +13,7 @@ export default function SearchAndCategory() {
           iconProps={{ color: "#686E75" }}
           onSearch={() => console.log("검색")}
           placeholder="제목, 인물 이름으로 월드컵 찾기"
+          className="h-[48px]"
         />
       </div>
       <CategorySlider />
