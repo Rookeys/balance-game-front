@@ -1,9 +1,9 @@
 import { GetMainGameListCategory } from "@/api/orval/model/getMainGameListCategory"
 import { notFound } from "next/navigation"
 import CategoryGameList from "./_components/CategoryGameList"
-import Filter from "./_components/Filter"
 import Title from "./_components/Title"
 import ScrollTopButton from "@/components/ScrollTopButton"
+import Filter from "@/components/Filter"
 
 interface Params {
   category: string
