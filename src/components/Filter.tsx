@@ -1,7 +1,51 @@
+"use client"
+
+import { GetMainGameListSortType } from "@/api/orval/model/getMainGameListSortType"
+import { ChevronDown } from "lucide-react"
+import { useState } from "react"
+import { Button } from "@/components/Button"
+import { useRouter, useSearchParams } from "next/navigation"
+
+const filters = [
+  { value: GetMainGameListSortType.recent, label: "최신순" },
+  { value: GetMainGameListSortType.week, label: "인기순" }
+]
+
 export default function Filter() {
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const searchParams = useSearchParams()
+  const sort = searchParams.get("sort")
+  const router = useRouter()
+
+  const handleFilter = (sort: string) => {
+    const params = new URLSearchParams(searchParams)
+    params.set("sort", sort)
+
+    router.replace(`?${params.toString()}`, { scroll: false })
+  }
+
   return (
-    <section>
-      <p>최신순</p>
+    <section className="relative z-10">
+      <Button variant="custom" className="flex gap-[2px]" onClick={() => setIsOpen((prev) => !prev)}>
+        <p>{sort === GetMainGameListSortType.old ? "오래된순" : "최신순"}</p>
+        <ChevronDown />
+      </Button>
+      {isOpen && (
+        <section className="absolute end-0 top-[32px] divide-y rounded-[8px] border bg-white p-[8px]">
+          {filters.map((filter) => (
+            <Button
+              key={filter.value}
+              variant="custom"
+              className="rounded-none w-full whitespace-nowrap px-[16px] py-[12px]"
+              onClick={() => {
+                handleFilter(filter.value)
+              }}
+            >
+              {filter.label}
+            </Button>
+          ))}
+        </section>
+      )}
     </section>
   )
 }

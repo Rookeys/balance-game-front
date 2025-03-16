@@ -1,5 +1,6 @@
 "use client"
 import { useGetMainGameListInfinite } from "@/api/orval/client/main-page-controller/main-page-controller"
+import { GetMainGameListSortType } from "@/api/orval/model/getMainGameListSortType"
 import GameThumbnailSimpleCard from "@/components/gameThumbnailCard/GameThumbnailSimpleCard"
 import { useSearchParams } from "next/navigation"
 import { useEffect } from "react"
@@ -9,8 +10,10 @@ export default function SearchGameList() {
   const searchParams = useSearchParams()
   const keyword = searchParams.get("keyword")
 
+  const sort = searchParams.get("sort") as GetMainGameListSortType | undefined
+
   const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } = useGetMainGameListInfinite(
-    { title: keyword as string },
+    { title: keyword as string, sortType: sort },
     {
       query: {
         initialPageParam: undefined,
