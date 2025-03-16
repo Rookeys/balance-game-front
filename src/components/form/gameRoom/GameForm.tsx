@@ -13,15 +13,10 @@ import { InputErrorMessage, InputLabel } from "@/components/form/_components"
 import InputText from "@/components/form/inputText/InputText"
 import RadioGroup from "@/components/form/radioGroup/RadioGroup"
 import Select from "@/components/form/select/Select"
+import { categories } from "@/constants/categories"
 import { useAsyncRoutePush } from "@/hooks/useAsyncRoutePush"
 import { parseBoolean } from "@/utils/parseBoolean"
-import {
-  categoryItems,
-  gameAccessTypeItems,
-  isNamePrivateItems,
-  postGameSchema,
-  PostGameType
-} from "@/validations/gameSchema"
+import { gameAccessTypeItems, isNamePrivateItems, postGameSchema, PostGameType } from "@/validations/gameSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useQueryClient } from "@tanstack/react-query"
 import { useParams } from "next/navigation"
@@ -105,7 +100,7 @@ export default function GameForm() {
         <Controller
           name="category"
           control={control}
-          render={({ field }) => <Select {...field} placeholder="카테고리 선택" items={categoryItems} />}
+          render={({ field }) => <Select {...field} placeholder="카테고리 선택" items={categories} />}
         />
         {!!errors.category?.message && <InputErrorMessage id={"category"} errorMessage={errors.category?.message} />}
       </article>

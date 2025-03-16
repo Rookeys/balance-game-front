@@ -1,19 +1,28 @@
 "use client"
 import { useGetMainGameListInfinite } from "@/api/orval/client/main-page-controller/main-page-controller"
+import { GetMainGameListCategory } from "@/api/orval/model/getMainGameListCategory"
 import GameThumbnailSimpleCard from "@/components/gameThumbnailCard/GameThumbnailSimpleCard"
+import { useParams } from "next/navigation"
 import { useEffect } from "react"
 import { useInView } from "react-intersection-observer"
 
 export default function CategoryGameList() {
-  const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } = useGetMainGameListInfinite(undefined, {
-    query: {
-      initialPageParam: undefined,
-      getNextPageParam: (lastPage) => {
-        const lastItem = lastPage.content?.[lastPage.content.length - 1]
-        return lastPage.hasNext ? lastItem?.roomId : undefined
+  const { category } = useParams()
+
+  const formattedCategory = category?.toString()?.toUpperCase() as GetMainGameListCategory | undefined
+
+  const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } = useGetMainGameListInfinite(
+    { category: formattedCategory },
+    {
+      query: {
+        initialPageParam: undefined,
+        getNextPageParam: (lastPage) => {
+          const lastItem = lastPage.content?.[lastPage.content.length - 1]
+          return lastPage.hasNext ? lastItem?.roomId : undefined
+        }
       }
     }
-  })
+  )
 
   const { ref, inView } = useInView({
     threshold: 1
