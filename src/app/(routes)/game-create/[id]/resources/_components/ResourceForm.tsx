@@ -51,7 +51,7 @@ export default function ResourceForm() {
           )
         )
       )}
-      {!isFetchingNextPage && <div ref={ref} className="pointer-events-none absolute bottom-[400px] h-[4px] w-full" />}
+      {!isFetchingNextPage && <div ref={ref} className="pointer-events-none absolute bottom-[200px] h-[4px] w-full" />}
       <section>
         {isFetchingNextPage ? (
           <p>로딩중...</p>
