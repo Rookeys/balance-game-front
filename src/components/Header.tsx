@@ -41,7 +41,7 @@ export default function Header() {
           <Link href={"/my-page"} aria-label="my-page">
             <Image
               className="rounded-full object-contain"
-              src={session?.user?.image ?? "/"}
+              src={session?.user?.image ?? "/images/Rookeys.png"}
               alt="profile-image"
               width={40}
               height={40}
