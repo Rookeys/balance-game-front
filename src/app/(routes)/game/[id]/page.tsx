@@ -21,20 +21,23 @@ interface GamePlayPageProps {
 export default async function Game({ params }: GamePlayPageProps) {
   const { id } = await params
   const cookieStore = await cookies()
-  const existingGameID = cookieStore.get(COOKIE_KEY.GAME_ID)
+  const previousGameId = cookieStore.get(COOKIE_KEY.GAME_ID)
+  const existingPlayId = cookieStore.get(COOKIE_KEY.PLAY_ID)
   const queryClient = new QueryClient()
+
+  const isSameGameId = previousGameId?.value === id
 
   try {
     await Promise.all([
       prefetchGetGameDetails(queryClient, Number(id)),
-      existingGameID && prefetchContinuePlayRoom(queryClient, Number(id), Number(existingGameID?.value))
+      isSameGameId && existingPlayId && prefetchContinuePlayRoom(queryClient, Number(id), Number(existingPlayId?.value))
     ])
 
-    if (existingGameID) {
+    if (isSameGameId && existingPlayId) {
       // Todo 게임하기 or 이어하기 설정, 완료 시 쿠키삭제
       return (
         <HydrationBoundary state={dehydrate(queryClient)}>
-          <GamePlayPageClient playId={Number(existingGameID.value)} />
+          <GamePlayPageClient playId={Number(existingPlayId.value)} />
         </HydrationBoundary>
       )
     } else {
