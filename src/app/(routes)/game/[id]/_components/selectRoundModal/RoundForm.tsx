@@ -37,7 +37,7 @@ export default function RoundForm({ totalItem }: Params) {
         roundNumber: Number(data.roundNumber)
       } satisfies GamePlayRoundRequest
       const res = await mutateAsync({ gameId: Number(id), data: postGamePlayRoundRequest })
-      await setPlayIdCookie(res.playId as number)
+      await setPlayIdCookie(res.playId as number, id as string)
     } catch {
       toast.error("오류가 발생했습니다.")
     }
