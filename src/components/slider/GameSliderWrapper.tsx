@@ -7,8 +7,8 @@ import { Navigation } from "swiper/modules"
 import { Swiper } from "swiper/react"
 
 interface Params {
-  prevElId: string
-  nextElId: string
+  prevElId?: string
+  nextElId?: string
   children: ReactNode
 }
 

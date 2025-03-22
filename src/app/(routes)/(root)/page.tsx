@@ -10,6 +10,8 @@ import { PrefetchBoundary } from "@/lib/providers/PrefetchBoundary"
 import { QueryClient } from "@tanstack/react-query"
 import { notFound } from "next/navigation"
 import { Suspense } from "react"
+import SkeletonList from "./_components/SkeletonCardList"
+import SkeletonSimpleCardList from "./_components/SkeletonSimpleCardList"
 
 export default async function RootPage() {
   const queryClient = new QueryClient()
@@ -19,7 +21,7 @@ export default async function RootPage() {
       <Banner />
       <section className="flex w-full flex-col items-center gap-[60px] bg-red-10 px-[16px] md:gap-[80px] md:px-[24px] lg:px-[120px]">
         <SearchAndCategory />
-        <Suspense fallback={<p>테스트</p>}>
+        <Suspense fallback={<SkeletonList title="주간 인기 월드컵 TOP 10" titleIcon="💥" />}>
           <PrefetchBoundary
             prefetchActions={prefetchGetMainGameList(queryClient, { size: 10, sortType: GetMainGameListSortType.week })}
             queryClient={queryClient}
@@ -28,7 +30,7 @@ export default async function RootPage() {
             <WeeklyTrendingGames />
           </PrefetchBoundary>
         </Suspense>
-        <Suspense fallback={<p>테스트</p>}>
+        <Suspense fallback={<SkeletonSimpleCardList title="최근 등록된 이상형 월드컵" titleIcon="✨" />}>
           <PrefetchBoundary
             prefetchActions={prefetchGetMainGameList(queryClient, {
               size: 10,
@@ -40,7 +42,7 @@ export default async function RootPage() {
             <RecentlyGames />
           </PrefetchBoundary>
         </Suspense>
-        <Suspense fallback={<p>테스트</p>}>
+        <Suspense fallback={<SkeletonList title="월간 인기 월드컵 TOP 10" titleIcon="🕹️" />}>
           <PrefetchBoundary
             prefetchActions={prefetchGetMainGameList(queryClient, {
               size: 10,
