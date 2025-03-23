@@ -10,7 +10,7 @@ import { useGetMainGameList } from "@/api/orval/client/main-page-controller/main
 export default function MonthlyTrendingGames() {
   const { data } = useGetMainGameList({ size: 10, sortType: GetMainGameListSortType.month })
   return (
-    <section className="flex w-full max-w-[1200px] flex-col gap-[12px]">
+    <section className="flex h-[474px] w-full max-w-[1200px] flex-col gap-[12px] md:h-[580px] lg:h-[556px]">
       <SliderTitle
         title="월간 인기 월드컵 TOP 10"
         titleIcon="🕹️"
