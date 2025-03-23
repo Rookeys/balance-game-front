@@ -2,9 +2,9 @@ export type GetMainGameListSortType = (typeof GetMainGameListSortType)[keyof typ
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const GetMainGameListSortType = {
-  old: "old",
-  recent: "recent",
-  playDesc: "playDesc",
-  week: "week",
-  month: "month"
+  OLD: "OLD",
+  RECENT: "RECENT",
+  PLAY_DESC: "PLAY_DESC",
+  WEEK: "WEEK",
+  MONTH: "MONTH"
 } as const

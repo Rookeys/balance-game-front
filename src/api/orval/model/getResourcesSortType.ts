@@ -2,8 +2,8 @@ export type GetResourcesSortType = (typeof GetResourcesSortType)[keyof typeof Ge
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const GetResourcesSortType = {
-  winRateAsc: "winRateAsc",
-  winRateDesc: "winRateDesc",
-  old: "old",
-  resent: "resent"
+  WIN_RATE_ASC: "WIN_RATE_ASC",
+  WIN_RATE_DESC: "WIN_RATE_DESC",
+  OLD: "OLD",
+  RESENT: "RESENT"
 } as const

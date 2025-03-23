@@ -15,4 +15,5 @@ export interface GameResponse {
   /** 카테고리 설정 */
   category?: GameResponseCategory
   namePrivate?: boolean
+  blind?: boolean
 }

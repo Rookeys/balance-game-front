@@ -9,7 +9,7 @@ import { GetMainGameListSortType } from "@/api/orval/model/getMainGameListSortTy
 import { GameListResponse } from "@/api/orval/model/gameListResponse"
 
 export default function RecentlyGames() {
-  const { data } = useGetMainGameList({ size: 10, sortType: GetMainGameListSortType.recent })
+  const { data } = useGetMainGameList({ size: 10, sortType: GetMainGameListSortType.RECENT })
 
   const checkTag = (game: GameListResponse) => {
     if (game?.weekPlayNums && game?.weekPlayNums >= 5) {

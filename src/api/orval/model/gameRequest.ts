@@ -13,4 +13,5 @@ export interface GameRequest {
   /** 카테고리 설정 */
   category: GameRequestCategory
   namePrivate?: boolean
+  blind?: boolean
 }

@@ -23,7 +23,7 @@ export default async function RootPage() {
         <SearchAndCategory />
         <Suspense fallback={<SkeletonList title="주간 인기 월드컵 TOP 10" titleIcon="💥" />}>
           <PrefetchBoundary
-            prefetchActions={prefetchGetMainGameList(queryClient, { size: 10, sortType: GetMainGameListSortType.week })}
+            prefetchActions={prefetchGetMainGameList(queryClient, { size: 10, sortType: GetMainGameListSortType.WEEK })}
             queryClient={queryClient}
             onError={notFound}
           >
@@ -34,7 +34,7 @@ export default async function RootPage() {
           <PrefetchBoundary
             prefetchActions={prefetchGetMainGameList(queryClient, {
               size: 10,
-              sortType: GetMainGameListSortType.recent
+              sortType: GetMainGameListSortType.RECENT
             })}
             queryClient={queryClient}
             onError={notFound}
@@ -46,7 +46,7 @@ export default async function RootPage() {
           <PrefetchBoundary
             prefetchActions={prefetchGetMainGameList(queryClient, {
               size: 10,
-              sortType: GetMainGameListSortType.month
+              sortType: GetMainGameListSortType.MONTH
             })}
             queryClient={queryClient}
             onError={notFound}

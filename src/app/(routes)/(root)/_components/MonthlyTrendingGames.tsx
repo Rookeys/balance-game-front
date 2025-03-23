@@ -8,7 +8,7 @@ import { GetMainGameListSortType } from "@/api/orval/model/getMainGameListSortTy
 import { useGetMainGameList } from "@/api/orval/client/main-page-controller/main-page-controller"
 
 export default function MonthlyTrendingGames() {
-  const { data } = useGetMainGameList({ size: 10, sortType: GetMainGameListSortType.month })
+  const { data } = useGetMainGameList({ size: 10, sortType: GetMainGameListSortType.MONTH })
   return (
     <section className="flex h-[474px] w-full max-w-[1200px] flex-col gap-[12px] md:h-[580px] lg:h-[556px]">
       <SliderTitle

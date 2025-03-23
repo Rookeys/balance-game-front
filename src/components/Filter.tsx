@@ -7,8 +7,8 @@ import { Button } from "@/components/Button"
 import { useRouter, useSearchParams } from "next/navigation"
 
 const filters = [
-  { value: GetMainGameListSortType.recent, label: "최신순" },
-  { value: GetMainGameListSortType.week, label: "인기순" }
+  { value: GetMainGameListSortType.RECENT, label: "최신순" },
+  { value: GetMainGameListSortType.WEEK, label: "인기순" }
 ]
 
 export default function Filter() {
@@ -27,7 +27,7 @@ export default function Filter() {
   return (
     <section className="relative z-10">
       <Button variant="custom" className="flex gap-[2px]" onClick={() => setIsOpen((prev) => !prev)}>
-        <p>{sort === GetMainGameListSortType.old ? "오래된순" : "최신순"}</p>
+        <p>{sort === GetMainGameListSortType.OLD ? "오래된순" : "최신순"}</p>
         <ChevronDown />
       </Button>
       {isOpen && (

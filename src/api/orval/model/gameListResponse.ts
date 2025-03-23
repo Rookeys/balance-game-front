@@ -9,6 +9,8 @@ export interface GameListResponse {
   title?: string
   /** 설명 */
   description?: string
+  /** 썸네일 블라인드 여부 */
+  isBlind?: boolean
   /** 카테고리 */
   category?: GameListResponseCategory
   /** 총 플레이 횟수 */

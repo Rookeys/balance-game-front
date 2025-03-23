@@ -8,7 +8,7 @@ import "@/styles/navigation.css"
 import { SwiperSlide } from "swiper/react"
 
 export default function WeeklyTrendingGames() {
-  const { data } = useGetMainGameList({ size: 10, sortType: GetMainGameListSortType.week })
+  const { data } = useGetMainGameList({ size: 10, sortType: GetMainGameListSortType.WEEK })
   return (
     <section className="flex h-[474px] w-full max-w-[1200px] flex-col gap-[12px] md:h-[580px] lg:h-[556px]">
       <SliderTitle
