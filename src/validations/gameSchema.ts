@@ -8,11 +8,10 @@ export const postGameSchema = z
     title: z.string().max(50, "제목은 50자 이내로 작성해주세요.").nonempty("제목은 필수입니다."),
     description: z.string().max(100, "설명은 100자 이내로 작성해주세요.").optional(),
     category: z.enum(getEnumValues(GameRequestCategory)),
-    namePrivate: z
-      .string({
-        required_error: "생성자 표시 여부는 필수입니다."
-      })
-      .optional(),
+    namePrivate: z.string({
+      required_error: "생성자 표시 여부는 필수입니다."
+    }),
+    blind: z.string().optional(),
     accessType: z.enum(getEnumValues(GameRequestAccessType), {
       required_error: "공개 범위는 필수입니다.",
       invalid_type_error: "유효한 공개 범위를 선택해주세요."
@@ -40,4 +39,9 @@ export const gameAccessTypeItems: SelectOptionType[] = [
   { id: GameRequestAccessType.PUBLIC, value: GameRequestAccessType.PUBLIC, label: "공개" },
   { id: GameRequestAccessType.PROTECTED, value: GameRequestAccessType.PROTECTED, label: "일부공개" },
   { id: GameRequestAccessType.PRIVATE, value: GameRequestAccessType.PRIVATE, label: "비공개" }
+]
+
+export const isBlindItems: SelectOptionType[] = [
+  { id: "is_blind_false", value: "false", label: "필요X" },
+  { id: "is_blind_true", value: "true", label: "필요O" }
 ]

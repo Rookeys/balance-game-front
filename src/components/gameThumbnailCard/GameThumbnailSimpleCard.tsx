@@ -25,6 +25,7 @@ export default function GameThumbnailSimpleCard({ tag, fixedSize = true, ...prop
             : leftSelection?.content
         }
         tag={tag}
+        isBlind={props.isBlind}
       />
       <SocialActionSection id={roomId} title={title} category={category} />
       <TitleSection title={title} description={description} />

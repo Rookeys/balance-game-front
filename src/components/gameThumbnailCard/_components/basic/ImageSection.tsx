@@ -1,16 +1,18 @@
+import { cn } from "@/utils/cn"
 import Image from "next/image"
 
 interface Params {
   src?: string
   index: number
+  isBlind?: boolean
 }
 
-export default function ImageSection({ src, index }: Params) {
+export default function ImageSection({ src, index, isBlind }: Params) {
   return (
     <article className="relative h-[218px] overflow-hidden rounded-[12px] bg-gray-10 md:h-[308px]">
       <Image
         src={src ?? "/"}
-        className="object-contain object-center"
+        className={cn("object-contain object-center", isBlind && "brightness-40 saturate-75 blur-2xl")}
         // className="object-cover object-center"
         alt="Game-Thumbnail"
         fill

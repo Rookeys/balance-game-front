@@ -16,7 +16,13 @@ import Select from "@/components/form/select/Select"
 import { categories } from "@/constants/categories"
 import { useAsyncRoutePush } from "@/hooks/useAsyncRoutePush"
 import { parseBoolean } from "@/utils/parseBoolean"
-import { gameAccessTypeItems, isNamePrivateItems, postGameSchema, PostGameType } from "@/validations/gameSchema"
+import {
+  gameAccessTypeItems,
+  isBlindItems,
+  isNamePrivateItems,
+  postGameSchema,
+  PostGameType
+} from "@/validations/gameSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useQueryClient } from "@tanstack/react-query"
 import { useParams } from "next/navigation"
@@ -32,6 +38,7 @@ export default function GameForm() {
 
   const normalizedData = {
     title: data?.title ?? "",
+    blind: String(data?.blind ?? "false"),
     description: data?.description ?? "",
     category: data?.category ?? GameRequestCategory.FUN,
     namePrivate: String(data?.namePrivate ?? "false"),
@@ -57,7 +64,11 @@ export default function GameForm() {
 
   const onSubmit = async (data: PostGameType) => {
     try {
-      const requestData = { ...data, namePrivate: parseBoolean(data.namePrivate) } satisfies GameRequest
+      const requestData = {
+        ...data,
+        namePrivate: parseBoolean(data.namePrivate),
+        blind: parseBoolean(data.blind)
+      } satisfies GameRequest
 
       if (id) {
         await UpdateGame({ gameId: Number(id), data: requestData })
@@ -118,6 +129,14 @@ export default function GameForm() {
           name="accessType"
           control={control}
           render={({ field }) => <RadioGroup {...field} items={gameAccessTypeItems} />}
+        />
+      </article>
+      <article className="flex flex-col gap-[4px]">
+        <InputLabel label="썸네일 블라인드" />
+        <Controller
+          name="blind"
+          control={control}
+          render={({ field }) => <RadioGroup {...field} items={isBlindItems} />}
         />
       </article>
       <InputText
