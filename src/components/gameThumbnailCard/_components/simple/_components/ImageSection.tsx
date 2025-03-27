@@ -1,9 +1,10 @@
 "use client"
 import { Button } from "@/components/Button"
+import { CookieContext } from "@/lib/providers/CookieProvider"
 import { cn } from "@/utils/cn"
 import { Eye, EyeClosed } from "lucide-react"
 import Image from "next/image"
-import { useState } from "react"
+import { useContext, useState } from "react"
 
 interface Params {
   src?: string
@@ -13,11 +14,12 @@ interface Params {
 
 export default function ImageSection({ src, tag, isBlind = false }: Params) {
   const [blur, setBlur] = useState<boolean>(isBlind)
+  const { noBlind } = useContext(CookieContext)
   return (
     <article className="relative h-[146px] overflow-hidden rounded-[12px] bg-red-10 md:h-[226px]">
       <Image
         src={src ?? "/"}
-        className={cn("object-contain object-center", blur && "brightness-40 saturate-75 blur-2xl")}
+        className={cn("object-contain object-center", !noBlind && blur && "brightness-40 saturate-75 blur-2xl")}
         // className="object-cover object-center"
         alt="Game-Thumbnail"
         fill
@@ -26,7 +28,7 @@ export default function ImageSection({ src, tag, isBlind = false }: Params) {
         blurDataURL="data:image/jepg;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mO88B8AAqUB0Y/H4mkAAAAASUVORK5CYII="
       />
       {tag && <div className="absolute start-[12px] top-[12px] rounded-[4px] bg-gray-50 px-[8px] py-[4px]">{tag}</div>}
-      {isBlind && (
+      {!noBlind && isBlind && (
         <Button
           className="absolute end-[12px] top-[12px] rounded-[4px] bg-gray-50 px-[8px] py-[4px]"
           onClick={(e) => {
