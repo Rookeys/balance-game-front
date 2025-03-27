@@ -6,6 +6,7 @@ import ThemeToggle from "./ThemeToggle"
 import { useSession } from "next-auth/react"
 import Image from "next/image"
 import { SquarePlus } from "lucide-react"
+import BlindToggle from "./BlindToggle"
 
 export default function Header() {
   const { data: session } = useSession()
@@ -37,6 +38,7 @@ export default function Header() {
           </>
         )}
         <ThemeToggle />
+        <BlindToggle />
         {session ? (
           <Link href={"/my-page"} aria-label="my-page">
             <Image

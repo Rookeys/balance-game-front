@@ -10,6 +10,9 @@ import { getServerSession } from "next-auth"
 import { ThemeProvider } from "next-themes"
 import { MoneygraphyRounded } from "./fonts"
 import Footer from "@/components/Footer"
+import CookieProvider from "@/lib/providers/CookieProvider"
+import { cookies } from "next/headers"
+import { parseBoolean } from "@/utils/parseBoolean"
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -22,19 +25,23 @@ export default async function RootLayout({
   children: React.ReactNode
 }>) {
   const session = await getServerSession(authOptions)
+  const cookieStore = await cookies()
+  const noBlind = parseBoolean(cookieStore.get("noBlind")?.value)
 
   return (
     <html lang="ko" suppressHydrationWarning>
       <body className={`${MoneygraphyRounded.className} text-dark antialiased dark:text-light`}>
         <AuthProvider session={session}>
           <ReactQueryProvider>
-            <ThemeProvider>
-              <div id="portal" />
-              <Header />
-              {children}
-              <Footer />
-              <ToasterWithTheme />
-            </ThemeProvider>
+            <CookieProvider noBlind={noBlind}>
+              <ThemeProvider>
+                <div id="portal" />
+                <Header />
+                {children}
+                <Footer />
+                <ToasterWithTheme />
+              </ThemeProvider>
+            </CookieProvider>
           </ReactQueryProvider>
         </AuthProvider>
       </body>
