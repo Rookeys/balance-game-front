@@ -26,12 +26,16 @@ export default function Filter() {
 
   return (
     <section className="relative z-10">
-      <Button variant="custom" className="flex gap-[2px]" onClick={() => setIsOpen((prev) => !prev)}>
+      <Button
+        variant="custom"
+        className="flex gap-[8px] rounded-[4px] border px-[12px] py-[8px]"
+        onClick={() => setIsOpen((prev) => !prev)}
+      >
         <p>{sort === GetMainGameListSortType.OLD ? "오래된순" : "최신순"}</p>
         <ChevronDown />
       </Button>
       {isOpen && (
-        <section className="absolute end-0 top-[32px] divide-y rounded-[8px] border bg-white p-[8px]">
+        <section className="absolute end-0 top-[48px] divide-y rounded-[4px] border bg-white p-[8px]">
           {filters.map((filter) => (
             <Button
               key={filter.value}
