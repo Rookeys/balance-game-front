@@ -9,7 +9,7 @@ import { GameRequest } from "@/api/orval/model/gameRequest"
 import { GameRequestAccessType } from "@/api/orval/model/gameRequestAccessType"
 import { GameRequestCategoriesItem } from "@/api/orval/model/gameRequestCategoriesItem"
 import { Button } from "@/components/Button"
-import { InputErrorMessage, InputLabel } from "@/components/form/_components"
+import { InputLabel } from "@/components/form/_components"
 import InputText from "@/components/form/inputText/InputText"
 import { useAsyncRoutePush } from "@/hooks/useAsyncRoutePush"
 import { postGameSchema } from "@/validations/gameSchema"
@@ -18,6 +18,7 @@ import { useQueryClient } from "@tanstack/react-query"
 import { useParams } from "next/navigation"
 import { Controller, useForm } from "react-hook-form"
 import { toast } from "sonner"
+import Radio from "@/components/form/radio/Radio"
 
 type CategoryType = (typeof GameRequestCategoriesItem)[keyof typeof GameRequestCategoriesItem]
 
@@ -107,55 +108,33 @@ export default function GameForm() {
         errorMessage={errors.description?.message}
       />
       <article className="flex flex-col gap-[4px]">
-        <InputLabel label="카테고리 선택" />
-        {/* <Controller
-          name="categories"
-          control={control}
-          render={({ field }) => <Select {...field} placeholder="카테고리 선택" items={categories} />}
-        /> */}
-        {!!errors.categories?.message && (
-          <InputErrorMessage id={"categories"} errorMessage={errors.categories?.message} />
-        )}
-      </article>
-      <article className="flex flex-col gap-[4px]">
         <InputLabel label="제작자 표시 (익명으로 설정 시 팔로워들이 확인할 수 없습니다)" />
-        {/* <Controller
-          name="isNamePrivate"
-          control={control}
-          render={({ field }) => <RadioGroup {...field} items={isNamePrivateItems} />}
-        /> */}
         <Controller
           name="accessType"
           control={control}
           render={({ field }) => (
-            <div className="flex flex-col space-y-2">
-              <label className="flex items-center space-x-2">
-                <input
-                  type="radio"
-                  value={GameRequestAccessType.PUBLIC}
-                  checked={field.value === GameRequestAccessType.PUBLIC}
-                  onChange={() => field.onChange(GameRequestAccessType.PUBLIC)}
-                />
-                <span>전체공개</span>
-              </label>
-              <label className="flex items-center space-x-2">
-                <input
-                  type="radio"
-                  value={GameRequestAccessType.PROTECTED}
-                  checked={field.value === GameRequestAccessType.PROTECTED}
-                  onChange={() => field.onChange(GameRequestAccessType.PROTECTED)}
-                />
-                <span>일부공개</span>
-              </label>
-              <label className="flex items-center space-x-2">
-                <input
-                  type="radio"
-                  value={GameRequestAccessType.PRIVATE}
-                  checked={field.value === GameRequestAccessType.PRIVATE}
-                  onChange={() => field.onChange(GameRequestAccessType.PRIVATE)}
-                />
-                <span>비공개</span>
-              </label>
+            <div className="flex flex-col gap-[4px]">
+              <Radio
+                id={GameRequestAccessType.PUBLIC}
+                value={GameRequestAccessType.PUBLIC}
+                checked={field.value === GameRequestAccessType.PUBLIC}
+                onChange={() => field.onChange(GameRequestAccessType.PUBLIC)}
+                label="공개"
+              />
+              <Radio
+                id={GameRequestAccessType.PROTECTED}
+                value={GameRequestAccessType.PROTECTED}
+                checked={field.value === GameRequestAccessType.PROTECTED}
+                onChange={() => field.onChange(GameRequestAccessType.PROTECTED)}
+                label="일부공개"
+              />
+              <Radio
+                id={GameRequestAccessType.PRIVATE}
+                value={GameRequestAccessType.PRIVATE}
+                checked={field.value === GameRequestAccessType.PRIVATE}
+                onChange={() => field.onChange(GameRequestAccessType.PRIVATE)}
+                label="비공개"
+              />
             </div>
           )}
         />
