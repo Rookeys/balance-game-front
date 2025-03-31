@@ -2,7 +2,7 @@
 import { Button } from "@/components/Button"
 import { CookieContext } from "@/lib/providers/CookieProvider"
 import { cn } from "@/utils/cn"
-import { Eye, EyeClosed } from "lucide-react"
+import { Eye, EyeClosed, Play } from "lucide-react"
 import Image from "next/image"
 import { useContext, useState } from "react"
 
@@ -10,9 +10,10 @@ interface Params {
   src?: string
   index: number
   isBlind?: boolean
+  totalPlayNums?: number
 }
 
-export default function ImageSection({ src, index, isBlind = false }: Params) {
+export default function ImageSection({ src, index, isBlind = false, totalPlayNums }: Params) {
   const [blur, setBlur] = useState<boolean>(isBlind)
   const { noBlind } = useContext(CookieContext)
   return (
@@ -27,6 +28,12 @@ export default function ImageSection({ src, index, isBlind = false }: Params) {
         placeholder="blur"
         blurDataURL="data:image/jepg;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mO88B8AAqUB0Y/H4mkAAAAASUVORK5CYII="
       />
+      <div className="absolute bottom-[8px] start-[12px] rounded-[4px] bg-black/40 p-[4px] text-white">
+        <div className="flex items-center">
+          <Play size={24} />
+          <p>{totalPlayNums}</p>
+        </div>
+      </div>
       <div className="absolute start-0 top-0 rounded-br-[12px] rounded-tl-[12px] bg-gray-50 px-[16px] py-[4px]">
         {index + 1}
       </div>

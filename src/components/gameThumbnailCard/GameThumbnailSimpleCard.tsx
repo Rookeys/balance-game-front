@@ -26,14 +26,11 @@ export default function GameThumbnailSimpleCard({ tag, fixedSize = true, ...prop
         }
         tag={tag}
         isBlind={props.isBlind}
+        totalPlayNums={totalPlayNums}
       />
       <SocialActionSection id={roomId} title={title} categories={categories} />
       <TitleSection title={title} description={description} />
-      <MetaInfoSection
-        creatorNickname={userResponse?.nickname}
-        creatorImage={userResponse?.profileImageUrl}
-        totalPlayNums={totalPlayNums}
-      />
+      <MetaInfoSection creatorNickname={userResponse?.nickname} creatorImage={userResponse?.profileImageUrl} />
     </Link>
   )
 }

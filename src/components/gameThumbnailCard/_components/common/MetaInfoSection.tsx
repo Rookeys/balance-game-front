@@ -1,13 +1,11 @@
-import { Play } from "lucide-react"
 import Image from "next/image"
 
 interface Params {
   creatorNickname?: string
   creatorImage?: string
-  totalPlayNums?: number
 }
 
-export default function MetaInfoSection({ creatorNickname, creatorImage, totalPlayNums }: Params) {
+export default function MetaInfoSection({ creatorNickname, creatorImage }: Params) {
   return (
     <article className="flex flex-col justify-between lg:flex-row">
       <div className="flex items-center gap-[4px]">
@@ -22,10 +20,11 @@ export default function MetaInfoSection({ creatorNickname, creatorImage, totalPl
         />
         <p className="line-clamp-1">{creatorNickname}</p>
       </div>
-      <div className="flex items-center">
+      {/* 높이 390 -> 366 */}
+      {/* <div className="flex items-center">
         <Play size={24} />
         <p>{totalPlayNums}</p>
-      </div>
+      </div> */}
     </article>
   )
 }
