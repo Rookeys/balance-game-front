@@ -1,6 +1,8 @@
 "use client"
+import { GameListResponseCategoriesItem } from "@/api/orval/model/gameListResponseCategoriesItem"
 import { Button } from "@/components/Button"
 import GameReportModal from "@/components/GameReportModal"
+import { cn } from "@/utils/cn"
 import { share, ShareAPIRequest } from "@/utils/share"
 import { EllipsisVertical } from "lucide-react"
 import { useState } from "react"
@@ -8,10 +10,10 @@ import { useState } from "react"
 interface Params {
   id?: number
   title?: string
-  category?: string
+  categories?: GameListResponseCategoriesItem[]
 }
 
-export default function SocialActionSection({ id, title, category }: Params) {
+export default function SocialActionSection({ id, title, categories }: Params) {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [reportModal, setReportModal] = useState<boolean>(false)
 
@@ -25,8 +27,22 @@ export default function SocialActionSection({ id, title, category }: Params) {
   }
 
   return (
-    <article className="relative flex h-[32px] items-center justify-between" onClick={(e) => e.preventDefault()}>
-      {category ? <p className="rounded-[4px] bg-gray-30 px-[8px] py-[4px]">{category}</p> : <p></p>}
+    <article
+      className={cn(
+        "relative flex h-[32px] items-center justify-between",
+        categories && categories.length > 0 ? "justify-between" : "justify-end"
+      )}
+      onClick={(e) => e.preventDefault()}
+    >
+      {categories && categories?.length > 0 && (
+        <article className="flex gap-[4px]">
+          {categories.map((category, i) => (
+            <p className="rounded-[4px] bg-gray-30 px-[8px] py-[4px]" key={`${category}-${i}`}>
+              {category}
+            </p>
+          ))}
+        </article>
+      )}
       <EllipsisVertical
         size={24}
         onClick={() => {

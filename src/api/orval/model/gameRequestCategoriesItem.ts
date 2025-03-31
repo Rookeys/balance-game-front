@@ -1,10 +1,10 @@
 /**
  * 카테고리 설정
  */
-export type GameResponseCategory = (typeof GameResponseCategory)[keyof typeof GameResponseCategory]
+export type GameRequestCategoriesItem = (typeof GameRequestCategoriesItem)[keyof typeof GameRequestCategoriesItem]
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
-export const GameResponseCategory = {
+export const GameRequestCategoriesItem = {
   FUN: "FUN",
   HORROR: "HORROR",
   HOT: "HOT",

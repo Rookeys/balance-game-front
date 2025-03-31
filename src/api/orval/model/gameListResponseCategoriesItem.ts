@@ -1,10 +1,11 @@
 /**
  * 카테고리
  */
-export type GameListResponseCategory = (typeof GameListResponseCategory)[keyof typeof GameListResponseCategory]
+export type GameListResponseCategoriesItem =
+  (typeof GameListResponseCategoriesItem)[keyof typeof GameListResponseCategoriesItem]
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
-export const GameListResponseCategory = {
+export const GameListResponseCategoriesItem = {
   FUN: "FUN",
   HORROR: "HORROR",
   HOT: "HOT",

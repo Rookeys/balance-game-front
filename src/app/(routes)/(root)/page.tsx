@@ -31,16 +31,16 @@ export default async function RootPage() {
           </PrefetchBoundary>
         </Suspense>
         <Suspense fallback={<SkeletonSimpleCardList title="최근 등록된 이상형 월드컵" titleIcon="✨" />}>
-          <PrefetchBoundary
+          {/* <PrefetchBoundary
             prefetchActions={prefetchGetMainGameList(queryClient, {
               size: 10,
               sortType: GetMainGameListSortType.RECENT
             })}
             queryClient={queryClient}
             onError={notFound}
-          >
-            <RecentlyGames />
-          </PrefetchBoundary>
+          > */}
+          <RecentlyGames />
+          {/* </PrefetchBoundary> */}
         </Suspense>
         <Suspense fallback={<SkeletonList title="월간 인기 월드컵 TOP 10" titleIcon="🕹️" />}>
           <PrefetchBoundary

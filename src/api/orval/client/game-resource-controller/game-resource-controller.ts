@@ -401,6 +401,82 @@ export const useUpdateResource = <TError = ErrorType<boolean>, TContext = unknow
   return useMutation(mutationOptions)
 }
 /**
+ * 등록된 리소스를 삭제할 수 있다.
+ * @summary 게임 리소스 삭제 API
+ */
+export const deleteResource = (
+  gameId: number,
+  resourceId: number,
+  options?: SecondParameter<typeof customClientInstance>
+) => {
+  return customClientInstance<boolean>(
+    {
+      url: `/api/v1/games/${encodeURIComponent(String(gameId))}/resources/${encodeURIComponent(String(resourceId))}`,
+      method: "DELETE"
+    },
+    options
+  )
+}
+
+export const getDeleteResourceMutationOptions = <TError = ErrorType<boolean>, TContext = unknown>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof deleteResource>>,
+    TError,
+    { gameId: number; resourceId: number },
+    TContext
+  >
+  request?: SecondParameter<typeof customClientInstance>
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof deleteResource>>,
+  TError,
+  { gameId: number; resourceId: number },
+  TContext
+> => {
+  const mutationKey = ["deleteResource"]
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation && "mutationKey" in options.mutation && options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined }
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof deleteResource>>,
+    { gameId: number; resourceId: number }
+  > = (props) => {
+    const { gameId, resourceId } = props ?? {}
+
+    return deleteResource(gameId, resourceId, requestOptions)
+  }
+
+  return { mutationFn, ...mutationOptions }
+}
+
+export type DeleteResourceMutationResult = NonNullable<Awaited<ReturnType<typeof deleteResource>>>
+
+export type DeleteResourceMutationError = ErrorType<boolean>
+
+/**
+ * @summary 게임 리소스 삭제 API
+ */
+export const useDeleteResource = <TError = ErrorType<boolean>, TContext = unknown>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof deleteResource>>,
+    TError,
+    { gameId: number; resourceId: number },
+    TContext
+  >
+  request?: SecondParameter<typeof customClientInstance>
+}): UseMutationResult<
+  Awaited<ReturnType<typeof deleteResource>>,
+  TError,
+  { gameId: number; resourceId: number },
+  TContext
+> => {
+  const mutationOptions = getDeleteResourceMutationOptions(options)
+
+  return useMutation(mutationOptions)
+}
+/**
  * 해당 게임방의 리소스 목록을 제공한다.
  * @summary 게임 리소스 리스트 발급 API
  */
@@ -764,10 +840,10 @@ export function useGetResourcesSuspense<
 }
 
 /**
- * 등록된 리소스를 삭제할 수 있다.
- * @summary 게임 리소스 삭제 API
+ * 등록된 리소스를 선택 삭제할 수 있다.
+ * @summary 게임 리소스 선택 삭제 API
  */
-export const deleteResource = (
+export const deleteSelectResources = (
   gameId: number,
   gameResourceDeleteRequest: BodyType<GameResourceDeleteRequest>,
   options?: SecondParameter<typeof customClientInstance>
@@ -783,21 +859,21 @@ export const deleteResource = (
   )
 }
 
-export const getDeleteResourceMutationOptions = <TError = ErrorType<boolean>, TContext = unknown>(options?: {
+export const getDeleteSelectResourcesMutationOptions = <TError = ErrorType<boolean>, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<
-    Awaited<ReturnType<typeof deleteResource>>,
+    Awaited<ReturnType<typeof deleteSelectResources>>,
     TError,
     { gameId: number; data: BodyType<GameResourceDeleteRequest> },
     TContext
   >
   request?: SecondParameter<typeof customClientInstance>
 }): UseMutationOptions<
-  Awaited<ReturnType<typeof deleteResource>>,
+  Awaited<ReturnType<typeof deleteSelectResources>>,
   TError,
   { gameId: number; data: BodyType<GameResourceDeleteRequest> },
   TContext
 > => {
-  const mutationKey = ["deleteResource"]
+  const mutationKey = ["deleteSelectResources"]
   const { mutation: mutationOptions, request: requestOptions } = options
     ? options.mutation && "mutationKey" in options.mutation && options.mutation.mutationKey
       ? options
@@ -805,39 +881,39 @@ export const getDeleteResourceMutationOptions = <TError = ErrorType<boolean>, TC
     : { mutation: { mutationKey }, request: undefined }
 
   const mutationFn: MutationFunction<
-    Awaited<ReturnType<typeof deleteResource>>,
+    Awaited<ReturnType<typeof deleteSelectResources>>,
     { gameId: number; data: BodyType<GameResourceDeleteRequest> }
   > = (props) => {
     const { gameId, data } = props ?? {}
 
-    return deleteResource(gameId, data, requestOptions)
+    return deleteSelectResources(gameId, data, requestOptions)
   }
 
   return { mutationFn, ...mutationOptions }
 }
 
-export type DeleteResourceMutationResult = NonNullable<Awaited<ReturnType<typeof deleteResource>>>
-export type DeleteResourceMutationBody = BodyType<GameResourceDeleteRequest>
-export type DeleteResourceMutationError = ErrorType<boolean>
+export type DeleteSelectResourcesMutationResult = NonNullable<Awaited<ReturnType<typeof deleteSelectResources>>>
+export type DeleteSelectResourcesMutationBody = BodyType<GameResourceDeleteRequest>
+export type DeleteSelectResourcesMutationError = ErrorType<boolean>
 
 /**
- * @summary 게임 리소스 삭제 API
+ * @summary 게임 리소스 선택 삭제 API
  */
-export const useDeleteResource = <TError = ErrorType<boolean>, TContext = unknown>(options?: {
+export const useDeleteSelectResources = <TError = ErrorType<boolean>, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<
-    Awaited<ReturnType<typeof deleteResource>>,
+    Awaited<ReturnType<typeof deleteSelectResources>>,
     TError,
     { gameId: number; data: BodyType<GameResourceDeleteRequest> },
     TContext
   >
   request?: SecondParameter<typeof customClientInstance>
 }): UseMutationResult<
-  Awaited<ReturnType<typeof deleteResource>>,
+  Awaited<ReturnType<typeof deleteSelectResources>>,
   TError,
   { gameId: number; data: BodyType<GameResourceDeleteRequest> },
   TContext
 > => {
-  const mutationOptions = getDeleteResourceMutationOptions(options)
+  const mutationOptions = getDeleteSelectResourcesMutationOptions(options)
 
   return useMutation(mutationOptions)
 }
