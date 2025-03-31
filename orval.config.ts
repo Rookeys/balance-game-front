@@ -33,6 +33,12 @@ module.exports = {
               useQuery: true,
               useInfinite: false
             }
+          },
+          getCategoryNums: {
+            query: {
+              useQuery: true,
+              useInfinite: false
+            }
           }
         }
       },

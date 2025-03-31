@@ -15,7 +15,12 @@ import type {
   UseSuspenseQueryOptions,
   UseSuspenseQueryResult
 } from "@tanstack/react-query"
-import type { CustomPageImplGameListResponse, GetMainGameListParams } from "../../model"
+import type {
+  CustomPageImplGameListResponse,
+  GameCategoryNumsResponse,
+  GetCategoryNumsParams,
+  GetMainGameListParams
+} from "../../model"
 import { customClientInstance } from "../../../clientInstance"
 import type { ErrorType } from "../../../clientInstance"
 
@@ -352,6 +357,109 @@ export function useGetMainGameListSuspense<
   const query = useSuspenseQuery(queryOptions) as UseSuspenseQueryResult<TData, TError> & {
     queryKey: DataTag<QueryKey, TData, TError>
   }
+
+  query.queryKey = queryOptions.queryKey
+
+  return query
+}
+
+/**
+ * 각 카테고리 별 게임 갯수를 출력한다.
+ * @summary 각 카테고리 별 게임 갯수 출력 API
+ */
+export const getCategoryNums = (
+  params?: GetCategoryNumsParams,
+  options?: SecondParameter<typeof customClientInstance>,
+  signal?: AbortSignal
+) => {
+  return customClientInstance<GameCategoryNumsResponse>(
+    { url: `/api/v1/games/categories`, method: "GET", params, signal },
+    options
+  )
+}
+
+export const getGetCategoryNumsQueryKey = (params?: GetCategoryNumsParams) => {
+  return [`/api/v1/games/categories`, ...(params ? [params] : [])] as const
+}
+
+export const getGetCategoryNumsQueryOptions = <
+  TData = Awaited<ReturnType<typeof getCategoryNums>>,
+  TError = ErrorType<unknown>
+>(
+  params?: GetCategoryNumsParams,
+  options?: {
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getCategoryNums>>, TError, TData>>
+    request?: SecondParameter<typeof customClientInstance>
+  }
+) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {}
+
+  const queryKey = queryOptions?.queryKey ?? getGetCategoryNumsQueryKey(params)
+
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getCategoryNums>>> = ({ signal }) =>
+    getCategoryNums(params, requestOptions, signal)
+
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof getCategoryNums>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetCategoryNumsQueryResult = NonNullable<Awaited<ReturnType<typeof getCategoryNums>>>
+export type GetCategoryNumsQueryError = ErrorType<unknown>
+
+export function useGetCategoryNums<TData = Awaited<ReturnType<typeof getCategoryNums>>, TError = ErrorType<unknown>>(
+  params: undefined | GetCategoryNumsParams,
+  options: {
+    query: Partial<UseQueryOptions<Awaited<ReturnType<typeof getCategoryNums>>, TError, TData>> &
+      Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getCategoryNums>>,
+          TError,
+          Awaited<ReturnType<typeof getCategoryNums>>
+        >,
+        "initialData"
+      >
+    request?: SecondParameter<typeof customClientInstance>
+  }
+): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetCategoryNums<TData = Awaited<ReturnType<typeof getCategoryNums>>, TError = ErrorType<unknown>>(
+  params?: GetCategoryNumsParams,
+  options?: {
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getCategoryNums>>, TError, TData>> &
+      Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getCategoryNums>>,
+          TError,
+          Awaited<ReturnType<typeof getCategoryNums>>
+        >,
+        "initialData"
+      >
+    request?: SecondParameter<typeof customClientInstance>
+  }
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetCategoryNums<TData = Awaited<ReturnType<typeof getCategoryNums>>, TError = ErrorType<unknown>>(
+  params?: GetCategoryNumsParams,
+  options?: {
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getCategoryNums>>, TError, TData>>
+    request?: SecondParameter<typeof customClientInstance>
+  }
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary 각 카테고리 별 게임 갯수 출력 API
+ */
+
+export function useGetCategoryNums<TData = Awaited<ReturnType<typeof getCategoryNums>>, TError = ErrorType<unknown>>(
+  params?: GetCategoryNumsParams,
+  options?: {
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getCategoryNums>>, TError, TData>>
+    request?: SecondParameter<typeof customClientInstance>
+  }
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+  const queryOptions = getGetCategoryNumsQueryOptions(params, options)
+
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 
   query.queryKey = queryOptions.queryKey
 

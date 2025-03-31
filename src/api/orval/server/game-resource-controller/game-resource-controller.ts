@@ -176,6 +176,24 @@ export const updateResource = (
 }
 
 /**
+ * 등록된 리소스를 삭제할 수 있다.
+ * @summary 게임 리소스 삭제 API
+ */
+export const deleteResource = (
+  gameId: number,
+  resourceId: number,
+  options?: SecondParameter<typeof customServerInstance>
+) => {
+  return customServerInstance<boolean>(
+    {
+      url: `/api/v1/games/${encodeURIComponent(String(gameId))}/resources/${encodeURIComponent(String(resourceId))}`,
+      method: "DELETE"
+    },
+    options
+  )
+}
+
+/**
  * 해당 게임방의 리소스 목록을 제공한다.
  * @summary 게임 리소스 리스트 발급 API
  */
@@ -319,10 +337,10 @@ export const prefetchGetResources = async <
 }
 
 /**
- * 등록된 리소스를 삭제할 수 있다.
- * @summary 게임 리소스 삭제 API
+ * 등록된 리소스를 선택 삭제할 수 있다.
+ * @summary 게임 리소스 선택 삭제 API
  */
-export const deleteResource = (
+export const deleteSelectResources = (
   gameId: number,
   gameResourceDeleteRequest: BodyType<GameResourceDeleteRequest>,
   options?: SecondParameter<typeof customServerInstance>
