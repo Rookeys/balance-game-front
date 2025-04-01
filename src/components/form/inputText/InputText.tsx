@@ -22,6 +22,7 @@ const InputText: React.FC<Params> = ({
   ariaLabel,
   className,
   labelClassName,
+  maxLength,
   ...rest
 }) => {
   return (
@@ -29,7 +30,7 @@ const InputText: React.FC<Params> = ({
       {label && <InputLabel id={id} label={label} required={required} className={labelClassName} />}
       <input
         id={id}
-        className="w-full rounded-xsm border-[2px] px-2 py-1 dark:border-gray dark:bg-dark-30"
+        className="w-full rounded-[12px] border-[2px] px-[16px] py-[16px] dark:border-gray dark:bg-dark-30"
         value={value}
         onChange={onChange}
         required={required}
@@ -37,6 +38,11 @@ const InputText: React.FC<Params> = ({
         aria-label={ariaLabel}
         {...rest}
       />
+      {maxLength && (
+        <p className="self-end">
+          {value?.toString().length ?? 0}/{maxLength}
+        </p>
+      )}
       {!!errorMessage && <InputErrorMessage id={id} errorMessage={errorMessage} />}
     </section>
   )
