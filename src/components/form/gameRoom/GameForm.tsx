@@ -16,7 +16,7 @@ import { postGameSchema } from "@/validations/gameSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useQueryClient } from "@tanstack/react-query"
 import { useParams } from "next/navigation"
-import { Controller, useForm } from "react-hook-form"
+import { Controller, FormProvider, useForm } from "react-hook-form"
 import { toast } from "sonner"
 import Radio from "@/components/form/radio/Radio"
 
@@ -29,25 +29,27 @@ export default function GameForm() {
 
   const { data } = useGetGameStatus(Number(id), { query: { enabled: !!id } })
 
-  const {
-    watch,
-    setValue,
-    handleSubmit,
-    control,
-    formState: { errors, isSubmitting }
-  } = useForm<GameRequest>({
+  const formMethods = useForm<GameRequest>({
     values: {
       title: data?.title ?? "",
-      isBlind: false,
+      existsBlind: false,
       description: data?.description ?? "",
       categories: data?.categories ?? [],
-      isNamePrivate: false,
+      existsNamePrivate: false,
       accessType: data?.accessType ?? GameRequestAccessType.PUBLIC,
       inviteCode: data?.inviteCode ?? ""
     },
     // values: mapValues(data ?? {}, (value) => value ?? ""),
     resolver: zodResolver(postGameSchema)
   })
+
+  const {
+    watch,
+    setValue,
+    handleSubmit,
+    control,
+    formState: { errors, isSubmitting }
+  } = formMethods
 
   const asyncPush = useAsyncRoutePush()
 
@@ -85,219 +87,141 @@ export default function GameForm() {
   }
 
   return (
-    <form
-      className="flex w-full max-w-[500px] flex-col items-start justify-center gap-[28px]"
-      onSubmit={handleSubmit(onSubmit)}
-    >
-      <InputText
-        className="w-full"
-        id="title"
-        label="제목"
-        // {...register("title")}
-        value={watch("title")}
-        onChange={(e) => setValue("title", e.target.value)}
-        errorMessage={errors.title?.message}
-      />
-      <InputText
-        className="w-full"
-        id="description"
-        label="설명"
-        // {...register("description")}
-        value={watch("description")}
-        onChange={(e) => setValue("description", e.target.value)}
-        errorMessage={errors.description?.message}
-      />
-      <article className="flex flex-col gap-[4px]">
-        <InputLabel label="제작자 표시 (익명으로 설정 시 팔로워들이 확인할 수 없습니다)" />
-        <Controller
-          name="accessType"
-          control={control}
-          render={({ field }) => (
-            <div className="flex flex-col gap-[4px]">
-              <Radio
-                id={GameRequestAccessType.PUBLIC}
-                value={GameRequestAccessType.PUBLIC}
-                checked={field.value === GameRequestAccessType.PUBLIC}
-                onChange={() => field.onChange(GameRequestAccessType.PUBLIC)}
-                label="공개"
-              />
-              <Radio
-                id={GameRequestAccessType.PROTECTED}
-                value={GameRequestAccessType.PROTECTED}
-                checked={field.value === GameRequestAccessType.PROTECTED}
-                onChange={() => field.onChange(GameRequestAccessType.PROTECTED)}
-                label="일부공개"
-              />
-              <Radio
-                id={GameRequestAccessType.PRIVATE}
-                value={GameRequestAccessType.PRIVATE}
-                checked={field.value === GameRequestAccessType.PRIVATE}
-                onChange={() => field.onChange(GameRequestAccessType.PRIVATE)}
-                label="비공개"
-              />
-            </div>
-          )}
+    <FormProvider {...formMethods}>
+      <form className="" onSubmit={handleSubmit(onSubmit)}>
+        <InputText
+          className="w-full"
+          id="title"
+          label="제목"
+          // {...register("title")}
+          value={watch("title")}
+          onChange={(e) => setValue("title", e.target.value)}
+          errorMessage={errors.title?.message}
         />
-      </article>
-      <article className="flex flex-col gap-[4px]">
-        <InputLabel label="썸네일 블라인드" />
-        <Controller
-          name="isBlind"
-          control={control}
-          render={({ field }) => (
-            <div className="flex space-x-4">
-              <button
-                type="button"
-                className={`rounded-lg px-4 py-2 ${field.value ? "bg-blue-500 text-white" : "bg-gray-300"}`}
-                onClick={() => field.onChange(true)}
-              >
-                True
-              </button>
-              <button
-                type="button"
-                className={`rounded-lg px-4 py-2 ${!field.value ? "bg-red-500 text-white" : "bg-gray-300"}`}
-                onClick={() => field.onChange(false)}
-              >
-                False
-              </button>
-            </div>
-          )}
+        <InputText
+          className="w-full"
+          id="description"
+          label="설명"
+          // {...register("description")}
+          value={watch("description")}
+          onChange={(e) => setValue("description", e.target.value)}
+          errorMessage={errors.description?.message}
         />
-      </article>
-      <div>
-        <h3 className="text-md font-semibold">카테고리 선택 (최대 2개)</h3>
-        <div className="mt-2 flex flex-wrap gap-2">
-          {categories.map((category) => (
-            <button
-              key={category}
-              type="button"
-              className={`rounded-lg border px-3 py-1 ${selectedCategories.includes(category) ? "bg-blue-500 text-white" : "bg-gray-200"}`}
-              onClick={() => handleCategoryChange(category as CategoryType)}
-            >
-              {category}
-            </button>
-          ))}
+        <article className="flex flex-col gap-[4px]">
+          <InputLabel label="제작자 표시 (익명으로 설정 시 팔로워들이 확인할 수 없습니다)" />
+          <Controller
+            name="existsNamePrivate"
+            control={control}
+            render={({ field }) => (
+              <div className="flex space-x-4">
+                <button
+                  type="button"
+                  className={`rounded-lg px-4 py-2 ${field.value ? "bg-blue-500 text-white" : "bg-gray-300"}`}
+                  onClick={() => field.onChange(true)}
+                >
+                  True
+                </button>
+                <button
+                  type="button"
+                  className={`rounded-lg px-4 py-2 ${!field.value ? "bg-red-500 text-white" : "bg-gray-300"}`}
+                  onClick={() => field.onChange(false)}
+                >
+                  False
+                </button>
+              </div>
+            )}
+          />
+          <InputLabel label="게임공개 여부" />
+          <Controller
+            name="accessType"
+            control={control}
+            render={({ field }) => (
+              <div className="flex flex-col gap-[4px]">
+                <Radio
+                  id={GameRequestAccessType.PUBLIC}
+                  value={GameRequestAccessType.PUBLIC}
+                  checked={field.value === GameRequestAccessType.PUBLIC}
+                  onChange={() => field.onChange(GameRequestAccessType.PUBLIC)}
+                  label="공개"
+                />
+                <Radio
+                  id={GameRequestAccessType.PROTECTED}
+                  value={GameRequestAccessType.PROTECTED}
+                  checked={field.value === GameRequestAccessType.PROTECTED}
+                  onChange={() => field.onChange(GameRequestAccessType.PROTECTED)}
+                  label="일부공개"
+                />
+                <Radio
+                  id={GameRequestAccessType.PRIVATE}
+                  value={GameRequestAccessType.PRIVATE}
+                  checked={field.value === GameRequestAccessType.PRIVATE}
+                  onChange={() => field.onChange(GameRequestAccessType.PRIVATE)}
+                  label="비공개"
+                />
+              </div>
+            )}
+          />
+        </article>
+        <article className="flex flex-col gap-[4px]">
+          <InputLabel label="썸네일 블라인드" />
+          <Controller
+            name="existsBlind"
+            control={control}
+            render={({ field }) => (
+              <div className="flex space-x-4">
+                <button
+                  type="button"
+                  className={`rounded-lg px-4 py-2 ${field.value ? "bg-blue-500 text-white" : "bg-gray-300"}`}
+                  onClick={() => field.onChange(true)}
+                >
+                  True
+                </button>
+                <button
+                  type="button"
+                  className={`rounded-lg px-4 py-2 ${!field.value ? "bg-red-500 text-white" : "bg-gray-300"}`}
+                  onClick={() => field.onChange(false)}
+                >
+                  False
+                </button>
+              </div>
+            )}
+          />
+        </article>
+        <div>
+          <h3 className="text-md font-semibold">카테고리 선택 (최대 2개)</h3>
+          <div className="mt-2 flex flex-wrap gap-2">
+            {categories.map((category) => (
+              <button
+                key={category}
+                type="button"
+                className={`rounded-lg border px-3 py-1 ${selectedCategories.includes(category) ? "bg-blue-500 text-white" : "bg-gray-200"}`}
+                onClick={() => handleCategoryChange(category as CategoryType)}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
-      <InputText
-        className="w-full"
-        id="inviteCode"
-        label="초대코드"
-        // {...register("inviteCode")}
-        value={watch("inviteCode")}
-        onChange={(e) => setValue("inviteCode", e.target.value)}
-        errorMessage={errors.inviteCode?.message}
-      />
-      <p className="text-sm text-gray">
-        ⭐️ 게임의 부적절함을 확인하기 위해 일부공개 게임은 개발자가 확인할 수 있습니다
-      </p>
-      <Button
-        type="submit"
-        disabled={isSubmitting}
-        className="bg-primary text-light hover:bg-primary-60 dark:bg-primary-70 dark:hover:bg-primary-80"
-      >
-        다음
-      </Button>
-    </form>
+        <InputText
+          className="w-full"
+          id="inviteCode"
+          label="초대코드"
+          // {...register("inviteCode")}
+          value={watch("inviteCode")}
+          onChange={(e) => setValue("inviteCode", e.target.value)}
+          errorMessage={errors.inviteCode?.message}
+        />
+        <p className="text-sm text-gray">
+          ⭐️ 게임의 부적절함을 확인하기 위해 일부공개 게임은 개발자가 확인할 수 있습니다
+        </p>
+        <Button
+          type="submit"
+          disabled={isSubmitting}
+          className="bg-primary text-light hover:bg-primary-60 dark:bg-primary-70 dark:hover:bg-primary-80"
+        >
+          다음
+        </Button>
+      </form>
+    </FormProvider>
   )
 }
-
-// "use client"
-// import { useForm, Controller } from "react-hook-form"
-
-// const PrivacyOptions = () => {
-//   const { control, handleSubmit } = useForm({
-//     defaultValues: { privacy: "public", toggle: false, booleanOption: true }
-//   })
-
-//   const onSubmit = (data: { privacy: string; toggle: boolean; booleanOption: boolean }) => {
-//     console.log("Selected Privacy Option:", data.privacy)
-//     console.log("Toggle State:", data.toggle)
-//     console.log("Boolean Option State:", data.booleanOption)
-//   }
-
-//   return (
-//     <form onSubmit={handleSubmit(onSubmit)} className="w-80 space-y-4 rounded-lg border p-4">
-//       <h2 className="text-lg font-semibold">공개 범위 설정</h2>
-//       <Controller
-//         name="privacy"
-//         control={control}
-//         render={({ field }) => (
-//           <div className="flex flex-col space-y-2">
-//             <label className="flex items-center space-x-2">
-//               <input
-//                 type="radio"
-//                 value="public"
-//                 checked={field.value === "public"}
-//                 onChange={() => field.onChange("public")}
-//               />
-//               <span>전체공개</span>
-//             </label>
-//             <label className="flex items-center space-x-2">
-//               <input
-//                 type="radio"
-//                 value="partial"
-//                 checked={field.value === "partial"}
-//                 onChange={() => field.onChange("partial")}
-//               />
-//               <span>일부공개</span>
-//             </label>
-//             <label className="flex items-center space-x-2">
-//               <input
-//                 type="radio"
-//                 value="private"
-//                 checked={field.value === "private"}
-//                 onChange={() => field.onChange("private")}
-//               />
-//               <span>비공개</span>
-//             </label>
-//           </div>
-//         )}
-//       />
-//       <Controller
-//         name="toggle"
-//         control={control}
-//         render={({ field }) => (
-//           <label className="flex cursor-pointer items-center space-x-2">
-//             <div
-//               className={`flex h-6 w-12 items-center rounded-full bg-gray-300 p-1 duration-300 ${field.value ? "bg-blue-500" : ""}`}
-//               onClick={() => field.onChange(!field.value)}
-//             >
-//               <div
-//                 className={`h-5 w-5 transform rounded-full bg-white shadow-md duration-300 ${field.value ? "translate-x-6" : ""}`}
-//               />
-//             </div>
-//             <span>{field.value ? "활성화" : "비활성화"}</span>
-//           </label>
-//         )}
-//       />
-// <Controller
-//   name="booleanOption"
-//   control={control}
-//   render={({ field }) => (
-//     <div className="flex space-x-4">
-//       <button
-//         type="button"
-//         className={`rounded-lg px-4 py-2 ${field.value ? "bg-blue-500 text-white" : "bg-gray-300"}`}
-//         onClick={() => field.onChange(true)}
-//       >
-//         True
-//       </button>
-//       <button
-//         type="button"
-//         className={`rounded-lg px-4 py-2 ${!field.value ? "bg-red-500 text-white" : "bg-gray-300"}`}
-//         onClick={() => field.onChange(false)}
-//       >
-//         False
-//       </button>
-//     </div>
-//   )}
-// />
-//       <button type="submit" className="rounded-lg bg-blue-500 px-4 py-2 text-white">
-//         저장
-//       </button>
-//     </form>
-//   )
-// }
-
-// export default PrivacyOptions

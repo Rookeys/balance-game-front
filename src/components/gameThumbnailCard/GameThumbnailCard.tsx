@@ -12,7 +12,7 @@ interface Params extends GameListResponse {
 }
 
 export default function GameThumbnailCard({ index, ...props }: Params) {
-  const { roomId, leftSelection, title, description, categories, userResponse, totalPlayNums } = props
+  const { roomId, leftSelection, title, description, categories, userResponse, totalPlayNums, existsBlind } = props
 
   return (
     <Link href={`/game/${roomId}`} className="flex w-[272px] flex-col gap-[12px] md:w-[384px]">
@@ -23,7 +23,7 @@ export default function GameThumbnailCard({ index, ...props }: Params) {
             : leftSelection?.content
         }
         index={index}
-        isBlind={props.isBlind}
+        isBlind={existsBlind}
         totalPlayNums={totalPlayNums}
       />
       <SocialActionSection id={roomId} title={title} categories={categories} />

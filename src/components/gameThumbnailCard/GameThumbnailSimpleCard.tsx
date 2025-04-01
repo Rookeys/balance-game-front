@@ -14,7 +14,7 @@ interface Params extends GameListResponse {
 }
 
 export default function GameThumbnailSimpleCard({ tag, fixedSize = true, ...props }: Params) {
-  const { roomId, leftSelection, title, description, categories, userResponse, totalPlayNums } = props
+  const { roomId, leftSelection, title, description, categories, userResponse, totalPlayNums, existsBlind } = props
 
   return (
     <Link href={`/game/${roomId}`} className={cn("flex flex-col gap-[8px]", fixedSize && "w-[182px] md:w-[282px]")}>
@@ -25,7 +25,7 @@ export default function GameThumbnailSimpleCard({ tag, fixedSize = true, ...prop
             : leftSelection?.content
         }
         tag={tag}
-        isBlind={props.isBlind}
+        isBlind={existsBlind}
         totalPlayNums={totalPlayNums}
       />
       <SocialActionSection id={roomId} title={title} categories={categories} />
