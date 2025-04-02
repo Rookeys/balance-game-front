@@ -18,16 +18,16 @@ import { FieldErrors, FormProvider, useForm } from "react-hook-form"
 import { toast } from "sonner"
 import MobileTab from "./_components/MobileTab"
 import SideBar from "./_components/SideBar"
+import useBlockNavigation from "@/hooks/useBlockNavigation"
+import ConfirmModal from "@/components/modal/ConfirmModal"
 
 const GameInformationForm = dynamic(() => import("./_components/GameInformationForm"))
 const GameAccessForm = dynamic(() => import("./_components/GameAccessForm"))
 
 export default function GameForm() {
   const { id } = useParams()
-
   const [step, setStep] = useState<1 | 2>(1)
-
-  // usePreventBeforeUnloadLeave(true)
+  const { isAttemptingNavigation, proceedNavigation, cancelNavigation } = useBlockNavigation(true, [])
 
   const queryClient = useQueryClient()
 
@@ -88,6 +88,14 @@ export default function GameForm() {
         {step === 2 && <GameAccessForm />}
         <SideBar step={step} setStep={setStep} />
       </form>
+      {isAttemptingNavigation && (
+        <ConfirmModal
+          title="페이지를 나가시겠습니까?"
+          description="저장하지 않은 내용은 사라집니다."
+          onClick={proceedNavigation}
+          onClose={cancelNavigation}
+        />
+      )}
     </FormProvider>
   )
 }
