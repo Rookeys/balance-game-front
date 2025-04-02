@@ -15,7 +15,7 @@ export default function GameAccessForm() {
           <p>공개 여부를 설정해 주세요</p>
           <p>🔓</p>
         </div>
-        <p>공개 월드컵은 만든 후에도 비공개로 변경할 수 있어요.</p>
+        <p>월드컵 설정은 만든후에도 변경할 수 있어요.</p>
       </article>
       <article className="flex flex-col gap-[12px]">
         <InputLabel label="제작자 공개" />
