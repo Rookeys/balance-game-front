@@ -47,6 +47,8 @@ export default function Header() {
               alt="profile-image"
               width={40}
               height={40}
+              placeholder="blur"
+              blurDataURL="data:image/jepg;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mO88B8AAqUB0Y/H4mkAAAAASUVORK5CYII="
             />
           </Link>
         ) : (

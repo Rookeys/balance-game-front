@@ -6,7 +6,9 @@ export const postGameSchema = z
   .object({
     title: z.string().max(50, "제목은 50자 이내로 작성해주세요.").nonempty("제목은 필수입니다."),
     description: z.string().max(100, "설명은 100자 이내로 작성해주세요.").optional(),
-    categories: z.array(z.enum(getEnumValues(GameRequestCategoriesItem))),
+    categories: z
+      .array(z.enum(getEnumValues(GameRequestCategoriesItem)))
+      .min(1, "카테고리는 최소 1개 이상 선택해야 합니다."),
     existsNamePrivate: z.boolean({
       required_error: "생성자 표시 여부는 필수입니다."
     }),

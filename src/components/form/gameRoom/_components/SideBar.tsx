@@ -1,39 +1,83 @@
+"use client"
 import { Button } from "@/components/Button"
-import { Circle } from "lucide-react"
+import { cn } from "@/utils/cn"
+import { Circle, CircleCheck } from "lucide-react"
+import { usePathname } from "next/navigation"
+import { Dispatch, SetStateAction } from "react"
+import { toast } from "sonner"
 
-export default function SideBar() {
+interface Params {
+  step: 1 | 2
+  setStep: Dispatch<SetStateAction<1 | 2>>
+}
+
+export default function SideBar({ step, setStep }: Params) {
+  const pathname = usePathname()
+  const isNewPage = pathname.includes("new")
+  const percent = !pathname.includes("new") ? 100 : step === 1 ? 0 : 33
+
+  // const { watch } = useFormContext<GameRequest>()
+
   return (
     <section className="hidden h-fit flex-shrink-0 flex-col gap-[24px] md:flex md:w-[224px] lg:w-[282px]">
       <section className="flex flex-col gap-[20px] rounded-[40px] border px-[16px] py-[40px]">
         <article className="flex items-center justify-between">
           <p>월드컵 완성까지</p>
-          <p className="rounded-[100px] bg-gray-10 px-[12px] py-[4px]">n%</p>
+          <p className="rounded-[100px] bg-gray-10 px-[12px] py-[4px]">{percent}%</p>
         </article>
         <div className="relative h-[12px] w-full rounded-full bg-[#F5F5F5]">
-          <div className="h-[12px] rounded-full bg-black" style={{ width: `${0}%` }} />
+          <div className="h-[12px] rounded-full bg-black" style={{ width: `${percent}%` }} />
           <div
             className="absolute top-1/2 h-[16px] w-[16px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-black"
-            style={{ left: `${0}%` }}
+            style={{ left: `${percent}%` }}
           />
         </div>
         <hr />
-        <article className="flex items-center justify-between">
+        <button type="button" className="flex items-center justify-between" onClick={() => setStep(1)}>
           <p>월드컵 정보</p>
-          <Circle stroke="#DDDDDD" />
+          {step === 1 ? <CircleCheck fill="#000000" stroke="#DDDDDD" /> : <Circle stroke="#DDDDDD" />}
+          {/* <Circle stroke="#DDDDDD" /> */}
           {/* <CircleCheck fill="#000000" stroke="#DDDDDD" /> */}
-        </article>
-        <article className="flex items-center justify-between">
+        </button>
+        <button type="button" className="flex items-center justify-between" onClick={() => setStep(2)}>
           <p>공개 설정</p>
-          <Circle stroke="#DDDDDD" />
+          {step === 2 ? <CircleCheck fill="#000000" stroke="#DDDDDD" /> : <Circle stroke="#DDDDDD" />}
+          {/* <Circle stroke="#DDDDDD" /> */}
           {/* <CircleCheck fill="#000000" stroke="#DDDDDD" /> */}
-        </article>
-        <article className="flex items-center justify-between">
+        </button>
+        <button
+          type="button"
+          className={cn("flex items-center justify-between rounded-[40px]", isNewPage && "bg-gray-10")}
+          onClick={() => {
+            if (isNewPage) {
+              toast.warning("먼저 게임방을 생성 해주세요")
+            } else {
+              toast.success("페이지 이동 구현필요")
+            }
+          }}
+        >
           <p>콘텐츠</p>
           <Circle stroke="#DDDDDD" />
           {/* <CircleCheck fill="#000000" stroke="#DDDDDD" /> */}
-        </article>
+        </button>
       </section>
-      <Button className="bg-black text-white">다음</Button>
+      <Button
+        key={`${step}-button`}
+        className="bg-black text-white"
+        type={step === 1 ? "button" : "submit"}
+        onClick={() => {
+          console.log("step", step)
+          if (step === 1) {
+            // if (!watch("title") || !watch("description") || watch("categories").length < 1) {
+            //   toast.warning("월드컵 정보를 확인 해주세요")
+            // } else {
+            setStep(2)
+            // }
+          }
+        }}
+      >
+        다음
+      </Button>
     </section>
   )
 }

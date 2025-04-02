@@ -2,7 +2,7 @@
 
 import { InputErrorMessage, InputLabel } from "@/components/form/_components"
 import { cn } from "@/utils/cn"
-import { InputHTMLAttributes } from "react"
+import { InputHTMLAttributes, ReactNode } from "react"
 
 interface Params extends InputHTMLAttributes<HTMLInputElement> {
   id: string
@@ -10,6 +10,7 @@ interface Params extends InputHTMLAttributes<HTMLInputElement> {
   errorMessage?: string
   ariaLabel?: string
   labelClassName?: string
+  SubDescription?: ReactNode
 }
 
 const InputText: React.FC<Params> = ({
@@ -23,6 +24,7 @@ const InputText: React.FC<Params> = ({
   className,
   labelClassName,
   maxLength,
+  SubDescription,
   ...rest
 }) => {
   return (
@@ -38,7 +40,8 @@ const InputText: React.FC<Params> = ({
         aria-label={ariaLabel}
         {...rest}
       />
-      {maxLength && (
+      {SubDescription && SubDescription}
+      {!SubDescription && maxLength && (
         <p className="self-end">
           {value?.toString().length ?? 0}/{maxLength}
         </p>

@@ -25,7 +25,7 @@ export default function GameInformationForm() {
   }
 
   return (
-    <section className="flex flex-col gap-[40px]">
+    <section className="flex w-full flex-col gap-[40px]">
       <article className="flex flex-col gap-[4px]">
         <div className="flex gap-[4px]">
           <p>월드컵 정보를 입력해 주세요</p>
