@@ -5,11 +5,13 @@ import { useSaveLink } from "@/api/orval/client/media-link-controller/media-link
 import { LinkRequest } from "@/api/orval/model/linkRequest"
 import { Button } from "@/components/Button"
 import InputText from "@/components/form/inputText/InputText"
+import ButtonYoutubePlay from "@/icons/Button_youtubePlay"
 import { getYoutubeThumbnail } from "@/utils/getYoutubeThumbnail"
 import { log } from "@/utils/log"
 import { postYoutubeMediaSchema } from "@/validations/youtubeMediaSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useQueryClient } from "@tanstack/react-query"
+import { CircleAlert } from "lucide-react"
 import dynamic from "next/dynamic"
 import Image from "next/image"
 import { useParams } from "next/navigation"
@@ -18,7 +20,7 @@ import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 
 const YoutubeModal = dynamic(() => import("@/components/modal/YoutubeModal"))
-const InputErrorMessage = dynamic(() => import("@/components/form/_components").then((mod) => mod.InputErrorMessage))
+// const InputErrorMessage = dynamic(() => import("@/components/form/_components").then((mod) => mod.InputErrorMessage))
 
 export function YoutubeUploadForm() {
   const { id } = useParams()
@@ -31,7 +33,7 @@ export function YoutubeUploadForm() {
     setValue,
     handleSubmit,
     reset,
-    formState: { isSubmitting, errors }
+    formState: { isSubmitting }
   } = useForm<LinkRequest>({
     defaultValues: {
       url: ""
@@ -56,30 +58,43 @@ export function YoutubeUploadForm() {
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)} className="flex w-full max-w-[500px] flex-col gap-[28px]">
-        <p>동영상 업로드</p>
+      <form onSubmit={handleSubmit(onSubmit)} className="flex w-full flex-col gap-[12px]">
+        <p>유튜브 동영상 추가</p>
+        <div className="relative h-[192px] overflow-hidden rounded-[12px] bg-black md:h-[265px] lg:h-[502px]">
+          {watch("url") ? (
+            <>
+              <ButtonYoutubePlay />
+              <Image
+                src={getYoutubeThumbnail(watch("url"))}
+                alt="Video Thumbnail"
+                fill
+                onClick={() => setIsOpen(true)}
+                unoptimized
+                // loader={({ src }) => src}
+                // sizes="(max-width: 640px) 90vw, 300px"
+                className="mx-auto object-contain"
+              />
+            </>
+          ) : (
+            <div className="flex h-full flex-col items-center justify-center gap-[12px] bg-gray-10">
+              <div className="h-[60px] w-[60px] bg-red-10 md:h-[100px] md:w-[100px]" />
+              <p>유튜브 링크를 추가해 주세요</p>
+              <p>아래 입력란에 유튜브 링크를 넣고 동영상을 추가해 보세요.</p>
+            </div>
+          )}
+        </div>
         <InputText
           id="url"
           value={watch("url")}
           onChange={(e) => setValue("url", e.target.value, { shouldValidate: true })}
+          placeholder="유튜브 링크를 추가해 주세요."
         />
-        {!!errors.url?.message && <InputErrorMessage id={"round"} errorMessage={errors.url?.message} />}
-        <Image
-          src={getYoutubeThumbnail(watch("url"))}
-          alt="Video Thumbnail"
-          width={300}
-          height={225}
-          sizes="(max-width: 640px) 90vw, 300px"
-          onClick={() => setIsOpen(true)}
-          unoptimized
-          // loader={({ src }) => src}
-          className="mx-auto rounded-xsm"
-        />
-        <article className="flex flex-wrap justify-between gap-[20px]">
-          <div className="flex gap-[20px]">
+        {/* {!!errors.url?.message && <InputErrorMessage id={"round"} errorMessage={errors.url?.message} />} */}
+        <article className="flex items-center justify-between gap-[20px]">
+          <div className="flex w-full gap-[20px]">
             <InputText
               id="startSec"
-              className="max-w-[100px]"
+              className="w-full"
               placeholder="시작(초)"
               type="text"
               pattern="\d*"
@@ -95,7 +110,7 @@ export function YoutubeUploadForm() {
             />
             <InputText
               id="end"
-              className="max-w-[100px]"
+              className="w-full"
               placeholder="종료(초)"
               type="text"
               pattern="\d*"
@@ -109,6 +124,14 @@ export function YoutubeUploadForm() {
               }}
             />
           </div>
+        </article>
+        <div className="flex items-start justify-between">
+          <div className="flex items-center justify-between text-gray-50">
+            <div className="flex items-center gap-[4px]">
+              <CircleAlert className="fill-gray-30 text-white" />
+              <p>부적절하거나 불쾌감을 주는 콘텐츠는 삭제될 수 있어요.</p>
+            </div>
+          </div>
           <Button
             type="submit"
             disabled={isSubmitting}
@@ -116,7 +139,7 @@ export function YoutubeUploadForm() {
           >
             저장
           </Button>
-        </article>
+        </div>
       </form>
       {isOpen && (
         <YoutubeModal

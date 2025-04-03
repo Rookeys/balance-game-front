@@ -56,7 +56,7 @@ export default function SignUp() {
             onValueChange={(files) => setValue("files", files, { shouldValidate: true })}
             maxFiles={1}
             multiple={false}
-            thumbnailCenter
+            thumbnailClassName="self-center"
           />
         </article>
         <Button

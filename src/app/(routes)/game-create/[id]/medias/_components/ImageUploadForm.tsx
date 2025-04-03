@@ -8,6 +8,7 @@ import FileUploadDropZone from "@/components/form/fileUpload/FileUploadDropZone"
 import { log } from "@/utils/log"
 import { useQueryClient } from "@tanstack/react-query"
 import axios from "axios"
+import { CircleAlert } from "lucide-react"
 import { useParams } from "next/navigation"
 import { useForm, type FieldValues } from "react-hook-form"
 import { toast } from "sonner"
@@ -68,12 +69,24 @@ export function ImageUploadForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex w-full max-w-[500px] flex-col gap-[28px]">
-      <p>이미지 업로드</p>
+    <form onSubmit={handleSubmit(onSubmit)} className="flex w-full flex-col gap-[12px]">
+      <div className="flex flex-col gap-[4px]">
+        <p>이미지 추가</p>
+        <p>JPEG, JPG, PNG를 지원하며 이미지당 4MB, 한 번에 최대 10장 업로드 할 수 있어요.</p>
+      </div>
       <FileUploadDropZone
         value={watch("files") ?? []}
         onValueChange={(files) => setValue("files", files, { shouldValidate: true })}
       />
+      <div className="flex items-center justify-between text-gray-50">
+        <div className="flex items-center gap-[4px]">
+          <CircleAlert className="fill-gray-30 text-white" />
+          <p>부적절하거나 불쾌감을 주는 콘텐츠는 삭제될 수 있어요.</p>
+        </div>
+        <p className="self-start">
+          {watch("inviteCode")?.toString().length ?? 0}/{10}
+        </p>
+      </div>
       <Button
         type="submit"
         disabled={isSubmitting}

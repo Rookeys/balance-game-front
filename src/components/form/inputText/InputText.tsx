@@ -9,6 +9,7 @@ interface Params extends InputHTMLAttributes<HTMLInputElement> {
   label?: string
   errorMessage?: string
   ariaLabel?: string
+  inputClassName?: string
   labelClassName?: string
   SubDescription?: ReactNode
 }
@@ -22,6 +23,7 @@ const InputText: React.FC<Params> = ({
   errorMessage,
   ariaLabel,
   className,
+  inputClassName,
   labelClassName,
   maxLength,
   SubDescription,
@@ -32,7 +34,10 @@ const InputText: React.FC<Params> = ({
       {label && <InputLabel id={id} label={label} required={required} className={labelClassName} />}
       <input
         id={id}
-        className="w-full rounded-[12px] border-[2px] px-[16px] py-[16px] dark:border-gray dark:bg-dark-30"
+        className={cn(
+          "w-full rounded-[12px] border-[2px] px-[16px] py-[16px] dark:border-gray dark:bg-dark-30",
+          inputClassName
+        )}
         value={value}
         onChange={onChange}
         required={required}
