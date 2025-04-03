@@ -53,6 +53,9 @@ importers:
       next-auth:
         specifier: ^4.24.11
         version: 4.24.11(next@15.2.4(@babel/core@7.26.9)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      next-navigation-guard:
+        specifier: ^0.1.2
+        version: 0.1.2(next@15.2.4(@babel/core@7.26.9)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)
       next-themes:
         specifier: ^0.4.4
         version: 0.4.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -4033,6 +4036,12 @@ packages:
         optional: true
       nodemailer:
         optional: true
+
+  next-navigation-guard@0.1.2:
+    resolution: {integrity: sha512-gh+hUMqnI9a/iQ3sxCd7aagQB0NTioe7kj7UJagVfWh+GWfyr4mErlBy2yNZk0VyXebtW86I3cP6lcwraIFhYA==}
+    peerDependencies:
+      next: ^14 || ^15
+      react: ^18.3.1
 
   next-themes@0.4.4:
     resolution: {integrity: sha512-LDQ2qIOJF0VnuVrrMSMLrWGjRMkq+0mpgl6e0juCLqdJ+oo8Q84JRWT6Wh11VDQKkMMe+dVzDKLWs5n87T+PkQ==}
@@ -10037,6 +10046,11 @@ snapshots:
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
       uuid: 8.3.2
+
+  next-navigation-guard@0.1.2(next@15.2.4(@babel/core@7.26.9)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0):
+    dependencies:
+      next: 15.2.4(@babel/core@7.26.9)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      react: 19.0.0
 
   next-themes@0.4.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
     dependencies:

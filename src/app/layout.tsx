@@ -1,18 +1,20 @@
 import { authOptions } from "@/auth"
+import Footer from "@/components/Footer"
 import Header from "@/components/Header"
 import ToasterWithTheme from "@/components/ToasterWithTheme"
 import AuthProvider from "@/lib/providers/AuthProvider"
+import CookieProvider from "@/lib/providers/CookieProvider"
 import ReactQueryProvider from "@/lib/providers/ReactQueryProvider"
 import "@/styles/globals.css"
 import "@/styles/reset.css"
+import { parseBoolean } from "@/utils/parseBoolean"
 import type { Metadata } from "next"
 import { getServerSession } from "next-auth"
 import { ThemeProvider } from "next-themes"
-import { MoneygraphyRounded } from "./fonts"
-import Footer from "@/components/Footer"
-import CookieProvider from "@/lib/providers/CookieProvider"
 import { cookies } from "next/headers"
-import { parseBoolean } from "@/utils/parseBoolean"
+import { MoneygraphyRounded } from "./fonts"
+import { NavigationGuardProvider } from "next-navigation-guard"
+import RouterPreventer from "@/components/RouterPreventer"
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -34,13 +36,16 @@ export default async function RootLayout({
         <AuthProvider session={session}>
           <ReactQueryProvider>
             <CookieProvider noBlind={noBlind}>
-              <ThemeProvider>
-                <div id="portal" />
-                <Header />
-                {children}
-                <Footer />
-                <ToasterWithTheme />
-              </ThemeProvider>
+              <NavigationGuardProvider>
+                <ThemeProvider>
+                  <div id="portal" />
+                  <Header />
+                  {children}
+                  <Footer />
+                  <ToasterWithTheme />
+                </ThemeProvider>
+                <RouterPreventer />
+              </NavigationGuardProvider>
             </CookieProvider>
           </ReactQueryProvider>
         </AuthProvider>
