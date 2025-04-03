@@ -45,6 +45,33 @@ export default function GameAccessForm() {
         />
       </article>
       <article className="flex flex-col gap-[12px]">
+        <InputLabel label="썸네일 블라인드" />
+        <Controller
+          name="existsBlind"
+          control={control}
+          render={({ field }) => (
+            <div className="flex gap-[12px]">
+              <SelectButton
+                title="사용"
+                description="썸네일에 블라인드가 적용돼요"
+                onClick={() => {
+                  field.onChange(true)
+                }}
+                selected={field.value === true}
+              />
+              <SelectButton
+                title="사용X"
+                description="썸네일에 블라인드가 적용되지 않아요"
+                onClick={() => {
+                  field.onChange(false)
+                }}
+                selected={field.value === false}
+              />
+            </div>
+          )}
+        />
+      </article>
+      <article className="flex flex-col gap-[12px]">
         <InputLabel label="월드컵 공개" />
         <Controller
           name="accessType"
@@ -73,7 +100,7 @@ export default function GameAccessForm() {
                   value={watch("inviteCode")}
                   onChange={(e) => {
                     if (e.target.value.length <= 10) {
-                      setValue("inviteCode", e.target.value, { shouldValidate: true })
+                      setValue("inviteCode", e.target.value, { shouldValidate: true, shouldDirty: true })
                     }
                   }}
                   placeholder="초대 코드를 생성해 주세요"

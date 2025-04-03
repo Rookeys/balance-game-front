@@ -13,11 +13,12 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useQueryClient } from "@tanstack/react-query"
 import dynamic from "next/dynamic"
 import { useParams } from "next/navigation"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { FieldErrors, FormProvider, useForm } from "react-hook-form"
 import { toast } from "sonner"
 import MobileTab from "./_components/MobileTab"
 import SideBar from "./_components/SideBar"
+import { useNavigationStore } from "@/store/isGuardEnabled"
 
 const GameInformationForm = dynamic(() => import("./_components/GameInformationForm"))
 const GameAccessForm = dynamic(() => import("./_components/GameAccessForm"))
@@ -25,6 +26,7 @@ const GameAccessForm = dynamic(() => import("./_components/GameAccessForm"))
 export default function GameForm() {
   const { id } = useParams()
   const [step, setStep] = useState<1 | 2>(1)
+  const setIsGuardEnabled = useNavigationStore((state) => state.setIsGuard)
 
   const queryClient = useQueryClient()
 
@@ -43,7 +45,18 @@ export default function GameForm() {
     resolver: zodResolver(postGameSchema)
   })
 
-  const { handleSubmit } = formMethods
+  const {
+    handleSubmit,
+    formState: { isDirty }
+  } = formMethods
+
+  useEffect(() => {
+    if (isDirty) {
+      setIsGuardEnabled(true)
+    } else {
+      setIsGuardEnabled(false)
+    }
+  }, [isDirty, setIsGuardEnabled])
 
   const asyncPush = useAsyncRoutePush()
 
@@ -53,6 +66,7 @@ export default function GameForm() {
   const onSubmit = async (data: GameRequest) => {
     try {
       console.log("data", data)
+      setIsGuardEnabled(false)
       if (id) {
         await UpdateGame({ gameId: Number(id), data })
         queryClient.invalidateQueries({ queryKey: getGetGameStatusQueryKey(Number(id)) })
