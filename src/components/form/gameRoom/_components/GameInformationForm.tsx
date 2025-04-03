@@ -1,9 +1,9 @@
 import { GameRequest } from "@/api/orval/model/gameRequest"
 import { GameRequestCategoriesItem } from "@/api/orval/model/gameRequestCategoriesItem"
 import { Button } from "@/components/Button"
-import InputText from "@/components/form/inputText/InputText"
 import { cn } from "@/utils/cn"
 import { useFormContext } from "react-hook-form"
+import Textarea from "../../textarea/Textarea"
 
 type CategoryType = (typeof GameRequestCategoriesItem)[keyof typeof GameRequestCategoriesItem]
 
@@ -37,7 +37,7 @@ export default function GameInformationForm() {
         </p>
       </article>
       <article className="flex flex-col gap-[12px]">
-        <InputText
+        <Textarea
           id="title"
           value={watch("title")}
           onChange={(e) => {
@@ -48,10 +48,12 @@ export default function GameInformationForm() {
           placeholder="제목을 입력해주세요"
           label="제목"
           maxLength={50}
+          disableEnter
+          rows={3}
         />
       </article>
       <article className="flex flex-col gap-[12px]">
-        <InputText
+        <Textarea
           id="description"
           value={watch("description")}
           onChange={(e) => {
@@ -62,6 +64,8 @@ export default function GameInformationForm() {
           placeholder="설명을 입력해주세요"
           label="설명"
           maxLength={100}
+          disableEnter
+          rows={3}
         />
       </article>
       <article className="flex flex-col gap-[12px]">
