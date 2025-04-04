@@ -7,6 +7,7 @@ import { getYoutubeThumbnail } from "@/utils/getYoutubeThumbnail"
 import { EllipsisVertical } from "lucide-react"
 import Image from "next/image"
 import { useState } from "react"
+import ResourceDeleteModal from "./ResourceDeleteModal"
 
 const editItems = [
   { value: "edit", label: "수정" },
@@ -19,12 +20,17 @@ interface Params {
 
 export default function ResourceTableContents({ resource }: Params) {
   const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [isOpenDeleteModal, setIsOpenDeleteModal] = useState<boolean>(false)
+
+  const handleDelete = () => {
+    console.log("단일삭제", resource.resourceId)
+  }
 
   const handleClick = (value: "edit" | "delete") => {
     if (value === "edit") {
       // 수정모달
     } else {
-      // 삭제모달
+      setIsOpenDeleteModal(true)
     }
   }
 
@@ -83,6 +89,7 @@ export default function ResourceTableContents({ resource }: Params) {
           </section>
         )}
       </div>
+      {isOpenDeleteModal && <ResourceDeleteModal onClick={handleDelete} onClose={() => setIsOpenDeleteModal(false)} />}
     </section>
   )
 }

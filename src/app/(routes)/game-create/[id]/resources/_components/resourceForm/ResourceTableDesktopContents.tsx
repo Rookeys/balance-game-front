@@ -5,6 +5,8 @@ import { cn } from "@/utils/cn"
 import { getYoutubeThumbnail } from "@/utils/getYoutubeThumbnail"
 import { Square, SquarePen, Trash2 } from "lucide-react"
 import Image from "next/image"
+import { useState } from "react"
+import ResourceDeleteModal from "./ResourceDeleteModal"
 
 interface Params {
   resource: GameResourceResponse
@@ -12,6 +14,12 @@ interface Params {
   tableBaseClassName?: string
 }
 export default function ResourceTableDesktopContents({ resource, indexNum, tableBaseClassName }: Params) {
+  const [isOpenDeleteModal, setIsOpenDeleteModal] = useState<boolean>(false)
+
+  const handleDelete = () => {
+    console.log("단일삭제", resource.resourceId)
+  }
+
   return (
     <section className={cn("h-[96px]", tableBaseClassName)} key={resource.resourceId}>
       <div className="col-span-1 flex items-center justify-center">
@@ -60,10 +68,14 @@ export default function ResourceTableDesktopContents({ resource, indexNum, table
         <button className="h-[40px] w-[40px] rounded-[4px] bg-gray-10 p-[8px]">
           <SquarePen />
         </button>
-        <button className="h-[40px] w-[40px] rounded-[4px] bg-gray-10 p-[8px]">
+        <button
+          className="h-[40px] w-[40px] rounded-[4px] bg-gray-10 p-[8px]"
+          onClick={() => setIsOpenDeleteModal(true)}
+        >
           <Trash2 />
         </button>
       </div>
+      {isOpenDeleteModal && <ResourceDeleteModal onClick={handleDelete} onClose={() => setIsOpenDeleteModal(false)} />}
     </section>
   )
 }
