@@ -13,7 +13,7 @@ export default function SelectButton({ title, description, selected, onClick }: 
   return (
     <button
       type="button"
-      className={cn("w-full rounded-[12px] border p-[16px]", selected && "bg-blue-10")}
+      className={cn("w-full rounded-[12px] border p-[16px] text-start", selected && "bg-blue-10")}
       onClick={onClick}
     >
       <div className="flex items-center gap-[12px]">

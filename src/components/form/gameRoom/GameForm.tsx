@@ -19,6 +19,7 @@ import { toast } from "sonner"
 import MobileTab from "./_components/MobileTab"
 import SideBar from "./_components/SideBar"
 import { useNavigationStore } from "@/store/isGuardEnabled"
+import BottomBar from "./_components/BottomBar"
 
 const GameInformationForm = dynamic(() => import("./_components/GameInformationForm"))
 const GameAccessForm = dynamic(() => import("./_components/GameAccessForm"))
@@ -98,6 +99,7 @@ export default function GameForm() {
         {step === 1 && <GameInformationForm />}
         {step === 2 && <GameAccessForm />}
         <SideBar step={step} setStep={setStep} />
+        <BottomBar step={step} setStep={setStep} />
       </form>
     </FormProvider>
   )
