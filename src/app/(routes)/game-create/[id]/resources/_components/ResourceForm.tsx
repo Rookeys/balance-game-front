@@ -1,48 +1,25 @@
 "use client"
 
+import { useGetResources } from "@/api/orval/client/game-resource-controller/game-resource-controller"
 import Filter from "@/components/Filter"
 import MobileTab from "@/components/form/gameRoom/_components/MobileTab"
 import SideBar from "@/components/form/gameRoom/_components/SideBar"
 import SearchInput from "@/components/SearchInput"
 import { resourceListFilters } from "@/constants/filters"
+import useResizeHandler from "@/hooks/useResizeHandler"
+import { SCREEN_SIZE } from "@/styles/theme/screenSize"
 import { Search, Square } from "lucide-react"
+import { useParams } from "next/navigation"
 import MediaTab from "../../medias/_components/MediaTab"
 import ResourceTable from "./resourceForm/ResourceTable"
 import ResourceTableDesktop from "./resourceForm/ResourceTableDesktop"
-import useResizeHandler from "@/hooks/useResizeHandler"
-import { SCREEN_SIZE } from "@/styles/theme/screenSize"
-
-// const ImageForm = dynamic(() => import("./resourceForm/ImageForm"))
-// const YoutubeForm = dynamic(() => import("./resourceForm/YoutubeForm"))
 
 export default function ResourceForm() {
   const windowWidth = useResizeHandler()
-  // const { id } = useParams()
-  // const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } = useGetResourcesInfinite(
-  //   Number(id),
-  //   undefined,
-  //   {
-  //     query: {
-  //       initialPageParam: undefined,
-  //       getNextPageParam: (lastPage) => {
-  //         const lastItem = lastPage.content?.[lastPage.content.length - 1]
-  //         return lastPage.hasNext ? lastItem?.resourceId : undefined
-  //       }
-  //     }
-  //   }
-  // )
+  const { id } = useParams()
 
-  // const { ref, inView } = useInView({
-  //   threshold: 1
-  // })
-
-  // useEffect(() => {
-  //   if (inView && hasNextPage && !isFetchingNextPage) {
-  //     fetchNextPage()
-  //   }
-  // }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage])
-
-  // if (isLoading) return <section className="h-[100vh] bg-red-50" />
+  const { data } = useGetResources(Number(id), { size: 10 })
+  console.log("data", data?.content)
 
   return (
     <>
@@ -65,11 +42,14 @@ export default function ResourceForm() {
               업로드한 콘텐츠 n개, 4강까지 플레이 가능해요.
             </p>
           </div>
-          {/* <ImageUploadForm />
-          <YoutubeUploadForm /> */}
           <section className="flex flex-col gap-[12px]">
             <article className="flex flex-col justify-between gap-[12px] lg:h-[40px] lg:flex-row-reverse">
-              <SearchInput placeholder="이름으로 콘텐츠 찾기" Icon={Search} className="lg:max-w-[340px]" />
+              <SearchInput
+                placeholder="이름으로 콘텐츠 찾기"
+                Icon={Search}
+                className="lg:max-w-[340px]"
+                onSearch={(e) => console.log("test", e)}
+              />
               <article className="flex items-center gap-[12px]">
                 <div className="flex items-center gap-[4px]">
                   <Square />
@@ -79,7 +59,12 @@ export default function ResourceForm() {
                 <Filter filters={resourceListFilters} />
               </article>
             </article>
-            {windowWidth > SCREEN_SIZE.md ? <ResourceTableDesktop /> : <ResourceTable />}
+            {windowWidth !== 0 &&
+              (windowWidth > SCREEN_SIZE.md ? (
+                <ResourceTableDesktop resources={data?.content} />
+              ) : (
+                <ResourceTable resources={data?.content} />
+              ))}
           </section>
         </section>
         <SideBar step={2} setStep={() => {}} />

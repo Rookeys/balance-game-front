@@ -4,6 +4,7 @@ import { ImageUploadForm } from "./ImageUploadForm"
 import { YoutubeUploadForm } from "./YoutubeUploadForm"
 import MobileTab from "@/components/form/gameRoom/_components/MobileTab"
 import MediaTab from "./MediaTab"
+import BottomBar from "@/components/form/gameRoom/_components/BottomBar"
 
 export default function MediaForm() {
   return (
@@ -32,6 +33,7 @@ export default function MediaForm() {
         </section>
         <SideBar step={2} setStep={() => {}} />
       </section>
+      <BottomBar step={2} setStep={() => {}} />
     </>
   )
 }
