@@ -24,7 +24,7 @@ export default function SearchInputWrapper() {
         defaultValue={keyword ?? ""}
         onSearch={handleSearch}
         placeholder="제목, 인물 이름으로 월드컵 찾기"
-        className="h-[48px]"
+        inputClassName="h-[48px]"
       />
     </div>
   )

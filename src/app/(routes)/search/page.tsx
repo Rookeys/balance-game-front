@@ -3,6 +3,7 @@ import ScrollTopButton from "@/components/ScrollTopButton"
 import SearchGameList from "./_components/SearchGameList"
 import SearchInputWrapper from "./_components/SearchInputWrapper"
 import Title from "./_components/Title"
+import { gameListFilters } from "@/constants/filters"
 
 // interface SearchPageProps {
 //   searchParams: Promise<{
@@ -18,7 +19,7 @@ export default async function SearchPage() {
       <SearchInputWrapper />
       <article className="flex items-center justify-between">
         <Title />
-        <Filter />
+        <Filter filters={gameListFilters} />
       </article>
       <SearchGameList />
       <ScrollTopButton />

@@ -6,6 +6,8 @@ import { SCREEN_SIZE } from "./src/styles/theme/screenSize"
 
 const isStorybook = process.env.STORYBOOK === "true"
 
+const convertedScreenSize = Object.fromEntries(Object.entries(SCREEN_SIZE).map(([key, value]) => [key, `${value}px`]))
+
 const config = {
   darkMode: ["selector", "[data-theme='dark']"],
   content: [
@@ -15,7 +17,7 @@ const config = {
     ...(isStorybook ? ["./src/stories/**/*.{js,ts,jsx,tsx,mdx}"] : [])
   ],
   theme: {
-    screens: SCREEN_SIZE,
+    screens: convertedScreenSize,
     borderRadius: BORDER_RADIUS,
     fontWeight: FONT_WEIGHT,
     fontSize: FONT_SIZE,

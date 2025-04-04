@@ -1,5 +1,6 @@
 "use client"
 import { Button } from "@/components/Button"
+import ProgressBar from "@/components/ProgressBar"
 import { cn } from "@/utils/cn"
 import { Circle, CircleCheck } from "lucide-react"
 import { usePathname } from "next/navigation"
@@ -25,13 +26,7 @@ export default function SideBar({ step, setStep }: Params) {
           <p>월드컵 완성까지</p>
           <p className="rounded-[100px] bg-gray-10 px-[12px] py-[4px]">{percent}%</p>
         </article>
-        <div className="relative h-[12px] w-full rounded-full bg-[#F5F5F5]">
-          <div className="h-[12px] rounded-full bg-black" style={{ width: `${percent}%` }} />
-          <div
-            className="absolute top-1/2 h-[16px] w-[16px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-black"
-            style={{ left: `${percent}%` }}
-          />
-        </div>
+        <ProgressBar percent={percent} />
         <hr />
         <button type="button" className="flex items-center justify-between" onClick={() => setStep(1)}>
           <p>월드컵 정보</p>

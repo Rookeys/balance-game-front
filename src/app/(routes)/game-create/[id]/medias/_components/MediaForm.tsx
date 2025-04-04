@@ -11,8 +11,8 @@ export default function MediaForm() {
       <MobileTab step={2} setStep={() => {}} />
       <section className="flex w-full max-w-[1200px] justify-center gap-[24px] px-[16px] lg:px-0">
         <section className="flex w-full flex-col gap-[40px]">
+          <MediaTab />
           <div className="flex flex-col gap-[20px]">
-            <MediaTab />
             <article className="flex flex-col gap-[4px]">
               <div className="flex gap-[4px]">
                 <p>콘텐츠 업로드</p>

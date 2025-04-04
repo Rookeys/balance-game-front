@@ -9,9 +9,11 @@ interface Params extends InputHTMLAttributes<HTMLInputElement> {
   onSearch?: (value: string) => void
   Icon?: ComponentType<SVGProps<SVGSVGElement>>
   iconProps?: Omit<LucideProps, "ref">
+  className?: string
+  inputClassName?: string
 }
 
-export default function SearchInput({ onSearch, Icon, iconProps, ...props }: Params) {
+export default function SearchInput({ onSearch, Icon, iconProps, className, inputClassName, ...props }: Params) {
   const inputRef = useRef<HTMLInputElement>(null)
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -27,18 +29,18 @@ export default function SearchInput({ onSearch, Icon, iconProps, ...props }: Par
   }
 
   return (
-    <section className="relative flex w-full items-center">
+    <section className={cn("relative flex w-full items-center", className)}>
       <input
         {...props}
         onKeyDown={handleKeyDown}
         ref={inputRef}
         className={cn(
-          "w-full rounded-[12px] bg-blue-10 px-[24px] py-[12px] outline-none placeholder:text-[#686E75]",
-          Icon && `ps-[56px]`,
-          props.className
+          "h-full w-full rounded-[12px] bg-blue-10 px-[24px] py-[12px] outline-none placeholder:text-[#686E75]",
+          Icon && `ps-[48px]`,
+          inputClassName
         )}
       />
-      {Icon && <IconButton onClick={handleClick} className="absolute start-[24px]" Icon={Icon} iconProps={iconProps} />}
+      {Icon && <IconButton onClick={handleClick} className="absolute start-[16px]" Icon={Icon} iconProps={iconProps} />}
     </section>
   )
 }
