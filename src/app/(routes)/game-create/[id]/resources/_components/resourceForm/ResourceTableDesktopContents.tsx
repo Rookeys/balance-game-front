@@ -46,7 +46,10 @@ export default function ResourceTableDesktopContents({ resource, indexNum, table
       </div>
       <div className="col-span-5 flex items-center px-[16px]">
         <div className="flex w-full flex-col">
-          <ProgressBar percent={10} needIndicator={false} />
+          <ProgressBar
+            percent={Number((((resource.winningNums || 0) / (resource.totalPlayNums || 1)) * 100).toFixed(2))}
+            needIndicator={false}
+          />
           <div className="flex items-center justify-between">
             <p>{(((resource.winningNums || 0) / (resource.totalPlayNums || 1)) * 100).toFixed(2)} %</p>
             <p>{resource.winningNums}번 우승</p>

@@ -48,7 +48,10 @@ export default function ResourceTableContents({ resource }: Params) {
         </p>
         <p className="line-clamp-1">{resource.title || "\u00A0"}</p>
         <div className="flex flex-col">
-          <ProgressBar percent={10} needIndicator={false} />
+          <ProgressBar
+            percent={Number((((resource.winningNums || 0) / (resource.totalPlayNums || 1)) * 100).toFixed(2))}
+            needIndicator={false}
+          />
           <div className="flex items-center justify-between">
             <p>{(((resource.winningNums || 0) / (resource.totalPlayNums || 1)) * 100).toFixed(2)} %</p>
             <p>{resource.winningNums}번 우승</p>
