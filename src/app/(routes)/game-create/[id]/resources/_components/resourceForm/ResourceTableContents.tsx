@@ -8,6 +8,8 @@ import { EllipsisVertical } from "lucide-react"
 import Image from "next/image"
 import { useState } from "react"
 import ResourceDeleteModal from "./ResourceDeleteModal"
+import ImageEditModal from "./ImageEditModal"
+import YoutubeEditModal from "./YoutubeEditModal"
 
 const editItems = [
   { value: "edit", label: "수정" },
@@ -20,6 +22,7 @@ interface Params {
 
 export default function ResourceTableContents({ resource }: Params) {
   const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [isOpenEditModal, setIsOpenEditModal] = useState<boolean>(false)
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState<boolean>(false)
 
   const handleDelete = () => {
@@ -28,7 +31,8 @@ export default function ResourceTableContents({ resource }: Params) {
 
   const handleClick = (value: "edit" | "delete") => {
     if (value === "edit") {
-      // 수정모달
+      //
+      setIsOpenEditModal(true)
     } else {
       setIsOpenDeleteModal(true)
     }
@@ -90,6 +94,20 @@ export default function ResourceTableContents({ resource }: Params) {
         )}
       </div>
       {isOpenDeleteModal && <ResourceDeleteModal onClick={handleDelete} onClose={() => setIsOpenDeleteModal(false)} />}
+      {isOpenEditModal &&
+        (resource.type === GameResourceResponseType.IMAGE ? (
+          <ImageEditModal
+            onClose={() => setIsOpenEditModal(false)}
+            onSave={() => console.log("저장")}
+            onDelete={() => console.log("식제")}
+          />
+        ) : (
+          <YoutubeEditModal
+            onClose={() => setIsOpenEditModal(false)}
+            onSave={() => console.log("저장")}
+            onDelete={() => console.log("식제")}
+          />
+        ))}
     </section>
   )
 }

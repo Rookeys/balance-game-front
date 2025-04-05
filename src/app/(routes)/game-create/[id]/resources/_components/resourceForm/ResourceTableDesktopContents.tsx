@@ -7,6 +7,8 @@ import { Square, SquarePen, Trash2 } from "lucide-react"
 import Image from "next/image"
 import { useState } from "react"
 import ResourceDeleteModal from "./ResourceDeleteModal"
+import ImageEditModal from "./ImageEditModal"
+import YoutubeEditModal from "./YoutubeEditModal"
 
 interface Params {
   resource: GameResourceResponse
@@ -14,6 +16,7 @@ interface Params {
   tableBaseClassName?: string
 }
 export default function ResourceTableDesktopContents({ resource, indexNum, tableBaseClassName }: Params) {
+  const [isOpenEditModal, setIsOpenEditModal] = useState<boolean>(false)
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState<boolean>(false)
 
   const handleDelete = () => {
@@ -65,7 +68,7 @@ export default function ResourceTableDesktopContents({ resource, indexNum, table
         </div>
       </div>
       <div className="col-span-3 flex flex-wrap items-center gap-[8px] px-[16px]">
-        <button className="h-[40px] w-[40px] rounded-[4px] bg-gray-10 p-[8px]">
+        <button className="h-[40px] w-[40px] rounded-[4px] bg-gray-10 p-[8px]" onClick={() => setIsOpenEditModal(true)}>
           <SquarePen />
         </button>
         <button
@@ -76,6 +79,20 @@ export default function ResourceTableDesktopContents({ resource, indexNum, table
         </button>
       </div>
       {isOpenDeleteModal && <ResourceDeleteModal onClick={handleDelete} onClose={() => setIsOpenDeleteModal(false)} />}
+      {isOpenEditModal &&
+        (resource.type === GameResourceResponseType.IMAGE ? (
+          <ImageEditModal
+            onClose={() => setIsOpenEditModal(false)}
+            onSave={() => console.log("저장")}
+            onDelete={() => console.log("식제")}
+          />
+        ) : (
+          <YoutubeEditModal
+            onClose={() => setIsOpenEditModal(false)}
+            onSave={() => console.log("저장")}
+            onDelete={() => console.log("식제")}
+          />
+        ))}
     </section>
   )
 }

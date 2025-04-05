@@ -2,6 +2,7 @@
 import { Button } from "@/components/Button"
 import ModalWrapper from "./ModalWrapper"
 import { XIcon } from "lucide-react"
+import { cn } from "@/utils/cn"
 
 interface Params {
   title?: string
@@ -9,12 +10,25 @@ interface Params {
   onClose?: () => void
   onClick?: () => void
   overlayClose?: boolean
+  className?: string
 }
 
-export default function ConfirmModal({ title, description, onClick, onClose, overlayClose = false }: Params) {
+export default function ConfirmModal({
+  title,
+  description,
+  onClick,
+  onClose,
+  overlayClose = false,
+  className
+}: Params) {
   return (
     <ModalWrapper onClose={onClose} overlayClose={overlayClose}>
-      <section className="z-[999] mx-[16px] w-full max-w-[400px] rounded-[16px] bg-white p-[16px] text-center dark:border dark:border-gray-70 dark:bg-night">
+      <section
+        className={cn(
+          "z-[999] mx-[16px] w-full max-w-[400px] rounded-[16px] bg-white p-[16px] text-center dark:border dark:border-gray-70 dark:bg-night",
+          className
+        )}
+      >
         <article className="flex items-center justify-end">
           <XIcon size={24} className="cursor-pointer" onClick={onClose} />
         </article>
