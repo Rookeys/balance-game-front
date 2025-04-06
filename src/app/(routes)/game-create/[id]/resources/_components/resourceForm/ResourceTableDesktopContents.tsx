@@ -16,13 +16,15 @@ interface Params {
   tableBaseClassName?: string
   isOpenEditState: [boolean, Dispatch<SetStateAction<boolean>>]
   isOpenDeleteState: [boolean, Dispatch<SetStateAction<boolean>>]
+  onSave?: () => void
 }
 export default function ResourceTableDesktopContents({
   resource,
   indexNum,
   tableBaseClassName,
   isOpenEditState,
-  isOpenDeleteState
+  isOpenDeleteState,
+  onSave
 }: Params) {
   const [isOpenEditModal, setIsOpenEditModal] = isOpenEditState
   const [isOpenDeleteModal, setIsOpenDeleteModal] = isOpenDeleteState
@@ -94,9 +96,9 @@ export default function ResourceTableDesktopContents({
       {isOpenDeleteModal && <ResourceDeleteModal onClick={handleDelete} onClose={() => setIsOpenDeleteModal(false)} />}
       {isOpenEditModal &&
         (resource.type === GameResourceResponseType.IMAGE ? (
-          <ImageEditModal onClose={() => setIsOpenEditModal(false)} onSave={() => console.log("저장")} />
+          <ImageEditModal onClose={() => setIsOpenEditModal(false)} onSave={onSave} />
         ) : (
-          <YoutubeEditModal onClose={() => setIsOpenEditModal(false)} onSave={() => console.log("저장")} />
+          <YoutubeEditModal onClose={() => setIsOpenEditModal(false)} onSave={onSave} />
         ))}
     </section>
   )

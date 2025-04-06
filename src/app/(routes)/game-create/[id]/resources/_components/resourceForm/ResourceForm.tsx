@@ -1,11 +1,23 @@
 "use client"
 
+import {
+  getGetResourcesQueryKey,
+  useUpdateResource
+} from "@/api/orval/client/game-resource-controller/game-resource-controller"
+import { useGetPreSignedUrl } from "@/api/orval/client/presigned-url-controller/presigned-url-controller"
 import { GameResourceRequest } from "@/api/orval/model/gameResourceRequest"
 import { GameResourceResponse } from "@/api/orval/model/gameResourceResponse"
 import useResizeHandler from "@/hooks/useResizeHandler"
 import { SCREEN_SIZE } from "@/styles/theme/screenSize"
+import { log } from "@/utils/log"
+import { putGameImageResourceSchema } from "@/validations/gameResourceSchema"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useQueryClient } from "@tanstack/react-query"
+import axios from "axios"
+import { useParams } from "next/navigation"
 import { useState } from "react"
 import { FormProvider, useForm } from "react-hook-form"
+import { toast } from "sonner"
 import ResourceTableContents from "./ResourceTableContents"
 import ResourceTableDesktopContents from "./ResourceTableDesktopContents"
 
@@ -15,24 +27,71 @@ interface Params {
   tableBaseClassName?: string
 }
 
+export type EditResourceType = GameResourceRequest & { newImage?: File[] | null }
+
 export default function ResourceForm({ resource, indexNum, tableBaseClassName }: Params) {
+  const { id } = useParams()
+
+  const queryClient = useQueryClient()
+
   const isOpenEditState = useState<boolean>(false)
   const isOpenDeleteState = useState<boolean>(false)
 
   const windowWidth = useResizeHandler()
 
-  const formMethods = useForm<GameResourceRequest>({
-    values: { ...resource }
+  const formMethods = useForm<EditResourceType>({
+    values: { ...resource },
+    resolver: zodResolver(putGameImageResourceSchema)
   })
+
+  const { mutateAsync: RequestPresignedUrl } = useGetPreSignedUrl()
+
+  const { mutateAsync: UpdateImageResource } = useUpdateResource()
 
   // const handleDelete = () => {
   //   console.log("단일삭제", resource.resourceId)
   // }
 
-  const { handleSubmit } = formMethods
+  const { handleSubmit, setValue } = formMethods
 
-  const onSubmit = (data: GameResourceRequest) => {
-    console.log("data", data)
+  const onSubmit = async (data: EditResourceType) => {
+    try {
+      let imageURL = null
+      if (data.newImage && data.newImage.length > 0) {
+        const presignedUrl = (await RequestPresignedUrl({ data: { prefix: "image", length: 1 } }))[0] // 해당 폼에서는 무조건 1임
+
+        await axios.put(presignedUrl, data.newImage[0], {
+          headers: {
+            "Content-Type": data.newImage[0].type
+          }
+        })
+        imageURL = new URL(presignedUrl).origin + new URL(presignedUrl).pathname
+      }
+
+      if (!imageURL && !data.content) {
+        toast.warning("컨텐츠를 확인해 주세요.")
+        return
+      }
+
+      const putGameResourceRequest = {
+        ...data,
+        content: imageURL ? imageURL : data.content
+      } satisfies GameResourceRequest
+      await UpdateImageResource({
+        gameId: Number(id),
+        resourceId: Number(resource.resourceId),
+        data: putGameResourceRequest
+      })
+      await queryClient.invalidateQueries({ queryKey: getGetResourcesQueryKey(Number(id)) })
+      setValue("newImage", [], { shouldValidate: true })
+    } catch (error) {
+      log(error)
+      toast("오류가 발생했습니다.")
+    }
+  }
+
+  const handleSave = () => {
+    return handleSubmit(onSubmit)()
   }
 
   return (
@@ -46,12 +105,14 @@ export default function ResourceForm({ resource, indexNum, tableBaseClassName }:
               tableBaseClassName={tableBaseClassName}
               isOpenEditState={isOpenEditState}
               isOpenDeleteState={isOpenDeleteState}
+              onSave={handleSave}
             />
           ) : (
             <ResourceTableContents
               resource={resource}
               isOpenEditState={isOpenEditState}
               isOpenDeleteState={isOpenDeleteState}
+              onSave={handleSave}
             />
           ))}
       </form>

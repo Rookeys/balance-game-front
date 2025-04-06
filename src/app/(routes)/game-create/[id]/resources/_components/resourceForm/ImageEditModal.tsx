@@ -1,13 +1,14 @@
 "use client"
 
-import { GameResourceRequest } from "@/api/orval/model/gameResourceRequest"
 import { Button } from "@/components/Button"
+import FileUploadDropZoneResource from "@/components/form/fileUpload/FileUploadDropZoneResource"
 import InputText from "@/components/form/inputText/InputText"
 import ModalWrapper from "@/components/modal/ModalWrapper"
 import { cn } from "@/utils/cn"
 import { CircleAlert, XIcon } from "lucide-react"
 import Image from "next/image"
 import { useFormContext } from "react-hook-form"
+import { EditResourceType } from "./ResourceForm"
 
 interface Params {
   onClose?: () => void
@@ -16,7 +17,7 @@ interface Params {
 }
 
 export default function ImageEditModal({ onClose, onSave, overlayClose }: Params) {
-  const { watch, setValue } = useFormContext<GameResourceRequest>()
+  const { watch, setValue } = useFormContext<EditResourceType>()
 
   return (
     <ModalWrapper overlayClose={overlayClose} onClose={onClose}>
@@ -32,9 +33,21 @@ export default function ImageEditModal({ onClose, onSave, overlayClose }: Params
         </article>
         <article className="flex flex-col gap-[24px] pb-[40px] pt-[20px]">
           <div className="flex flex-col gap-[12px]">
-            <div className="relative aspect-[5/4] w-full">
-              <Image src={watch("content") || "/"} fill alt="thumbnail" />
-            </div>
+            {watch("content") ? (
+              <div className="relative aspect-[5/4] w-full">
+                <Image src={watch("content") || "/"} fill alt="thumbnail" />
+              </div>
+            ) : (
+              <FileUploadDropZoneResource
+                value={watch("newImage") ?? []}
+                onValueChange={(files) => setValue("newImage", files, { shouldValidate: true })}
+                rounded={true}
+                isThumbnail={true}
+                isFileName={false}
+                multiple={false}
+                maxFiles={1}
+              />
+            )}
             <div className="flex gap-[4px] text-gray-30">
               <CircleAlert className="flex-shrink-0 fill-gray-30 text-white" />
               <p className="text-[14px]">JPEG, JPG, PNG 형식을 지원하며 이미지 당 최대 4MB까지 업로드할 수 있어요.</p>

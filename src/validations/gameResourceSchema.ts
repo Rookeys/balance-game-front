@@ -2,9 +2,12 @@ import { GameResourceRequestType } from "@/api/orval/model/gameResourceRequestTy
 import { z } from "zod"
 
 export const putGameImageResourceSchema = z.object({
-  title: z.string().min(1, "제목은 필수입니다"),
-  type: z.enum([GameResourceRequestType.IMAGE]),
-  files: z.array(z.instanceof(File)).optional().nullable()
+  title: z.string().optional(),
+  type: z.nativeEnum(GameResourceRequestType).optional(),
+  content: z.string().optional(),
+  startSec: z.number().optional(),
+  endSec: z.number().optional(),
+  newImage: z.array(z.instanceof(File)).nullable().optional()
 })
 
 export type PutGameImageResourceType = z.output<typeof putGameImageResourceSchema>

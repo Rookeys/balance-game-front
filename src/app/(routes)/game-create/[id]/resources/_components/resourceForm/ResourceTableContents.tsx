@@ -20,9 +20,10 @@ interface Params {
   resource: GameResourceResponse
   isOpenEditState: [boolean, Dispatch<SetStateAction<boolean>>]
   isOpenDeleteState: [boolean, Dispatch<SetStateAction<boolean>>]
+  onSave?: () => void
 }
 
-export default function ResourceTableContents({ resource, isOpenEditState, isOpenDeleteState }: Params) {
+export default function ResourceTableContents({ resource, isOpenEditState, isOpenDeleteState, onSave }: Params) {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [isOpenEditModal, setIsOpenEditModal] = isOpenEditState
   const [isOpenDeleteModal, setIsOpenDeleteModal] = isOpenDeleteState
@@ -99,9 +100,9 @@ export default function ResourceTableContents({ resource, isOpenEditState, isOpe
       {isOpenDeleteModal && <ResourceDeleteModal onClick={handleDelete} onClose={() => setIsOpenDeleteModal(false)} />}
       {isOpenEditModal &&
         (resource.type === GameResourceResponseType.IMAGE ? (
-          <ImageEditModal onClose={() => setIsOpenEditModal(false)} onSave={() => console.log("저장")} />
+          <ImageEditModal onClose={() => setIsOpenEditModal(false)} onSave={onSave} />
         ) : (
-          <YoutubeEditModal onClose={() => setIsOpenEditModal(false)} onSave={() => console.log("저장")} />
+          <YoutubeEditModal onClose={() => setIsOpenEditModal(false)} onSave={onSave} />
         ))}
     </section>
   )
