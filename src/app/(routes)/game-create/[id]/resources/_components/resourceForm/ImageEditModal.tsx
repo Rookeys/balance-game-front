@@ -58,6 +58,7 @@ export default function ImageEditModal({ onClose, onSave, overlayClose }: Params
             value={watch("title")}
             onChange={(e) => setValue("title", e.target.value, { shouldValidate: true })}
             maxLength={20}
+            label="이름"
           />
         </article>
         <article className="flex items-center justify-between gap-[12px] pb-[40px]">

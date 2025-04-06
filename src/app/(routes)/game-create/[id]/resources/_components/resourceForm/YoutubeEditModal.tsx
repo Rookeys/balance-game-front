@@ -100,6 +100,16 @@ export default function YoutubeEditModal({ onClose, onSave, overlayClose }: Para
               시작/종료 시간은 선택 사항이에요. 설정하면 해당 구간이 반복 재생되므로, 하이라이트 설정을 권장해요.
             </p>
           </div>
+          <article className="w-full">
+            <InputText
+              id="title"
+              className="w-full"
+              value={watch("title")}
+              onChange={(e) => setValue("title", e.target.value, { shouldValidate: true })}
+              maxLength={20}
+              label="이름"
+            />
+          </article>
         </article>
         <article className="flex items-center justify-between gap-[12px] pb-[40px]">
           <Button
