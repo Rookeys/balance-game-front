@@ -1,20 +1,23 @@
 "use client"
 
+import { GameResourceRequest } from "@/api/orval/model/gameResourceRequest"
 import { Button } from "@/components/Button"
 import InputText from "@/components/form/inputText/InputText"
 import ModalWrapper from "@/components/modal/ModalWrapper"
 import { cn } from "@/utils/cn"
+import { getYoutubeThumbnail } from "@/utils/getYoutubeThumbnail"
 import { CircleAlert, XIcon } from "lucide-react"
 import Image from "next/image"
+import { useFormContext } from "react-hook-form"
 
 interface Params {
   onClose?: () => void
-  onDelete?: () => void
   onSave?: () => void
   overlayClose?: boolean
 }
 
-export default function YoutubeEditModal({ onClose, onDelete, onSave, overlayClose }: Params) {
+export default function YoutubeEditModal({ onClose, onSave, overlayClose }: Params) {
+  const { watch, setValue } = useFormContext<GameResourceRequest>()
   return (
     <ModalWrapper overlayClose={overlayClose} onClose={onClose}>
       <section
@@ -33,14 +36,13 @@ export default function YoutubeEditModal({ onClose, onDelete, onSave, overlayClo
               className={cn("relative aspect-[16/9] w-full")}
               // className={cn("relative aspect-[16/9] w-full", watch('url') && 'bg-black')}
             >
-              {false ? (
-                // {watch("url") ? (
+              {!!watch("content") ? (
                 <Image
-                  src={"/images/Rookeys.png"}
-                  // src={getYoutubeThumbnail(watch("url"))}
+                  src={getYoutubeThumbnail(watch("content"))}
                   fill
                   alt="thumbnail"
                   className="object-contain"
+                  unoptimized
                 />
               ) : (
                 <div className="relative h-full w-full overflow-hidden rounded-[12px] bg-black">
@@ -55,10 +57,42 @@ export default function YoutubeEditModal({ onClose, onDelete, onSave, overlayClo
           </div>
         </article>
         <article className="mb-[40px] flex flex-col gap-[12px]">
-          <InputText id="test" className="w-full" />
+          <InputText
+            id="content"
+            value={watch("content")}
+            onChange={(e) => setValue("content", e.target.value, { shouldValidate: true })}
+          />
           <article className="flex items-center gap-[12px]">
-            <InputText id="test" className="w-full" />
-            <InputText id="test" className="w-full" />
+            <InputText
+              id="startSec"
+              className="w-full"
+              placeholder="시작(초)"
+              type="text"
+              pattern="\d*"
+              value={watch("startSec") ?? ""}
+              // onChange={(e) => setValue("startSec", Number(e.target.value), { shouldValidate: true })}
+              onChange={(e) => {
+                const value = e.target.value
+                // 숫자 외의 문자가 입력되지 않도록 처리
+                if (/^\d*$/.test(value)) {
+                  setValue("startSec", value === "" ? undefined : Number(value), { shouldValidate: true })
+                }
+              }}
+            />
+            <InputText
+              id="endSec"
+              className="w-full"
+              placeholder="종료(초)"
+              type="text"
+              pattern="\d*"
+              value={watch("endSec") ?? ""}
+              onChange={(e) => {
+                const value = e.target.value
+                if (/^\d*$/.test(value)) {
+                  setValue("endSec", value === "" ? undefined : Number(value), { shouldValidate: true })
+                }
+              }}
+            />
           </article>
           <div className="flex gap-[4px] text-start text-gray-30">
             <CircleAlert className="flex-shrink-0 fill-gray-30 text-white" />
@@ -69,12 +103,14 @@ export default function YoutubeEditModal({ onClose, onDelete, onSave, overlayClo
         </article>
         <article className="flex items-center justify-between gap-[12px] pb-[40px]">
           <Button
+            type="button"
             className="w-fit rounded-[12px] bg-dark-20 px-[28px] py-[12px] text-white hover:bg-dark-30"
-            onClick={onDelete}
+            onClick={() => setValue("content", "", { shouldValidate: true })}
           >
             동영상 삭제
           </Button>
           <Button
+            type="button"
             className="w-fit rounded-[12px] bg-blue-40 px-[28px] py-[12px] text-white hover:bg-blue-50"
             onClick={onSave}
           >

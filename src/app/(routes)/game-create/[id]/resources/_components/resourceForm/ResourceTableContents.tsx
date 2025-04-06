@@ -6,7 +6,7 @@ import ProgressBar from "@/components/ProgressBar"
 import { getYoutubeThumbnail } from "@/utils/getYoutubeThumbnail"
 import { EllipsisVertical } from "lucide-react"
 import Image from "next/image"
-import { useState } from "react"
+import { Dispatch, SetStateAction, useState } from "react"
 import ResourceDeleteModal from "./ResourceDeleteModal"
 import ImageEditModal from "./ImageEditModal"
 import YoutubeEditModal from "./YoutubeEditModal"
@@ -18,12 +18,14 @@ const editItems = [
 
 interface Params {
   resource: GameResourceResponse
+  isOpenEditState: [boolean, Dispatch<SetStateAction<boolean>>]
+  isOpenDeleteState: [boolean, Dispatch<SetStateAction<boolean>>]
 }
 
-export default function ResourceTableContents({ resource }: Params) {
+export default function ResourceTableContents({ resource, isOpenEditState, isOpenDeleteState }: Params) {
   const [isOpen, setIsOpen] = useState<boolean>(false)
-  const [isOpenEditModal, setIsOpenEditModal] = useState<boolean>(false)
-  const [isOpenDeleteModal, setIsOpenDeleteModal] = useState<boolean>(false)
+  const [isOpenEditModal, setIsOpenEditModal] = isOpenEditState
+  const [isOpenDeleteModal, setIsOpenDeleteModal] = isOpenDeleteState
 
   const handleDelete = () => {
     console.log("단일삭제", resource.resourceId)
@@ -31,7 +33,6 @@ export default function ResourceTableContents({ resource }: Params) {
 
   const handleClick = (value: "edit" | "delete") => {
     if (value === "edit") {
-      //
       setIsOpenEditModal(true)
     } else {
       setIsOpenDeleteModal(true)
@@ -70,6 +71,7 @@ export default function ResourceTableContents({ resource }: Params) {
       </article>
       <div className="relative flex items-start">
         <button
+          type="button"
           onClick={() => {
             setIsOpen((prev) => !prev)
           }}
@@ -80,6 +82,7 @@ export default function ResourceTableContents({ resource }: Params) {
           <section className="absolute end-0 top-[28px] w-[124px] divide-y rounded-[8px] border bg-white p-[8px]">
             {editItems.map((editItem) => (
               <Button
+                type="button"
                 key={editItem.value}
                 variant="custom"
                 className="rounded-none w-full whitespace-nowrap px-[16px] py-[12px]"
@@ -96,17 +99,9 @@ export default function ResourceTableContents({ resource }: Params) {
       {isOpenDeleteModal && <ResourceDeleteModal onClick={handleDelete} onClose={() => setIsOpenDeleteModal(false)} />}
       {isOpenEditModal &&
         (resource.type === GameResourceResponseType.IMAGE ? (
-          <ImageEditModal
-            onClose={() => setIsOpenEditModal(false)}
-            onSave={() => console.log("저장")}
-            onDelete={() => console.log("식제")}
-          />
+          <ImageEditModal onClose={() => setIsOpenEditModal(false)} onSave={() => console.log("저장")} />
         ) : (
-          <YoutubeEditModal
-            onClose={() => setIsOpenEditModal(false)}
-            onSave={() => console.log("저장")}
-            onDelete={() => console.log("식제")}
-          />
+          <YoutubeEditModal onClose={() => setIsOpenEditModal(false)} onSave={() => console.log("저장")} />
         ))}
     </section>
   )

@@ -38,12 +38,14 @@ export default function ConfirmModal({
         </article>
         <article className="flex items-center justify-between gap-[12px] pb-[40px]">
           <Button
+            type="button"
             className="w-full rounded-[12px] bg-dark-20 px-[28px] py-[12px] text-white hover:bg-dark-30"
             onClick={onClose}
           >
             취소
           </Button>
           <Button
+            type="button"
             className="w-full rounded-[12px] bg-blue-40 px-[28px] py-[12px] text-white hover:bg-blue-50"
             onClick={onClick}
           >

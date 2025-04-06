@@ -109,7 +109,7 @@ export function YoutubeUploadForm() {
               }}
             />
             <InputText
-              id="end"
+              id="endSec"
               className="w-full"
               placeholder="종료(초)"
               type="text"

@@ -1,26 +1,15 @@
 "use client"
 
-import { useGetResources } from "@/api/orval/client/game-resource-controller/game-resource-controller"
 import Filter from "@/components/Filter"
 import MobileTab from "@/components/form/gameRoom/_components/MobileTab"
 import SideBar from "@/components/form/gameRoom/_components/SideBar"
 import SearchInput from "@/components/SearchInput"
 import { resourceListFilters } from "@/constants/filters"
-import useResizeHandler from "@/hooks/useResizeHandler"
-import { SCREEN_SIZE } from "@/styles/theme/screenSize"
 import { Search, Square } from "lucide-react"
-import { useParams } from "next/navigation"
 import MediaTab from "../../medias/_components/MediaTab"
-import ResourceTable from "./resourceForm/ResourceTable"
-import ResourceTableDesktop from "./resourceForm/ResourceTableDesktop"
+import ResourceFormWrapper from "./resourceForm/ResourceFormWrapper"
 
-export default function ResourceForm() {
-  const windowWidth = useResizeHandler()
-  const { id } = useParams()
-
-  const { data } = useGetResources(Number(id), { size: 10 })
-  console.log("data", data?.content)
-
+export default function ResourceFormContainer() {
   return (
     <>
       <MobileTab step={2} setStep={() => {}} />
@@ -59,12 +48,13 @@ export default function ResourceForm() {
                 <Filter filters={resourceListFilters} />
               </article>
             </article>
-            {windowWidth !== 0 &&
+            {/* {windowWidth !== 0 &&
               (windowWidth > SCREEN_SIZE.md ? (
                 <ResourceTableDesktop resources={data?.content} />
               ) : (
                 <ResourceTable resources={data?.content} />
-              ))}
+              ))} */}
+            <ResourceFormWrapper />
           </section>
         </section>
         <SideBar step={2} setStep={() => {}} />

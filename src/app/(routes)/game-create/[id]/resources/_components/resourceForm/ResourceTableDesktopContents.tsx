@@ -5,19 +5,27 @@ import { cn } from "@/utils/cn"
 import { getYoutubeThumbnail } from "@/utils/getYoutubeThumbnail"
 import { Square, SquarePen, Trash2 } from "lucide-react"
 import Image from "next/image"
-import { useState } from "react"
-import ResourceDeleteModal from "./ResourceDeleteModal"
+import { Dispatch, SetStateAction } from "react"
 import ImageEditModal from "./ImageEditModal"
+import ResourceDeleteModal from "./ResourceDeleteModal"
 import YoutubeEditModal from "./YoutubeEditModal"
 
 interface Params {
   resource: GameResourceResponse
   indexNum: number
   tableBaseClassName?: string
+  isOpenEditState: [boolean, Dispatch<SetStateAction<boolean>>]
+  isOpenDeleteState: [boolean, Dispatch<SetStateAction<boolean>>]
 }
-export default function ResourceTableDesktopContents({ resource, indexNum, tableBaseClassName }: Params) {
-  const [isOpenEditModal, setIsOpenEditModal] = useState<boolean>(false)
-  const [isOpenDeleteModal, setIsOpenDeleteModal] = useState<boolean>(false)
+export default function ResourceTableDesktopContents({
+  resource,
+  indexNum,
+  tableBaseClassName,
+  isOpenEditState,
+  isOpenDeleteState
+}: Params) {
+  const [isOpenEditModal, setIsOpenEditModal] = isOpenEditState
+  const [isOpenDeleteModal, setIsOpenDeleteModal] = isOpenDeleteState
 
   const handleDelete = () => {
     console.log("단일삭제", resource.resourceId)
@@ -68,10 +76,15 @@ export default function ResourceTableDesktopContents({ resource, indexNum, table
         </div>
       </div>
       <div className="col-span-3 flex flex-wrap items-center gap-[8px] px-[16px]">
-        <button className="h-[40px] w-[40px] rounded-[4px] bg-gray-10 p-[8px]" onClick={() => setIsOpenEditModal(true)}>
+        <button
+          type="button"
+          className="h-[40px] w-[40px] rounded-[4px] bg-gray-10 p-[8px]"
+          onClick={() => setIsOpenEditModal(true)}
+        >
           <SquarePen />
         </button>
         <button
+          type="button"
           className="h-[40px] w-[40px] rounded-[4px] bg-gray-10 p-[8px]"
           onClick={() => setIsOpenDeleteModal(true)}
         >
@@ -81,17 +94,9 @@ export default function ResourceTableDesktopContents({ resource, indexNum, table
       {isOpenDeleteModal && <ResourceDeleteModal onClick={handleDelete} onClose={() => setIsOpenDeleteModal(false)} />}
       {isOpenEditModal &&
         (resource.type === GameResourceResponseType.IMAGE ? (
-          <ImageEditModal
-            onClose={() => setIsOpenEditModal(false)}
-            onSave={() => console.log("저장")}
-            onDelete={() => console.log("식제")}
-          />
+          <ImageEditModal onClose={() => setIsOpenEditModal(false)} onSave={() => console.log("저장")} />
         ) : (
-          <YoutubeEditModal
-            onClose={() => setIsOpenEditModal(false)}
-            onSave={() => console.log("저장")}
-            onDelete={() => console.log("식제")}
-          />
+          <YoutubeEditModal onClose={() => setIsOpenEditModal(false)} onSave={() => console.log("저장")} />
         ))}
     </section>
   )
