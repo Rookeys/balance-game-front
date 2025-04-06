@@ -1,10 +1,16 @@
+import {
+  getGetResourcesQueryKey,
+  useDeleteResource
+} from "@/api/orval/client/game-resource-controller/game-resource-controller"
 import { GameResourceResponse } from "@/api/orval/model/gameResourceResponse"
 import { GameResourceResponseType } from "@/api/orval/model/gameResourceResponseType"
 import ProgressBar from "@/components/ProgressBar"
 import { cn } from "@/utils/cn"
 import { getYoutubeThumbnail } from "@/utils/getYoutubeThumbnail"
+import { useQueryClient } from "@tanstack/react-query"
 import { Square, SquarePen, Trash2 } from "lucide-react"
 import Image from "next/image"
+import { useParams } from "next/navigation"
 import { Dispatch, SetStateAction } from "react"
 import ImageEditModal from "./ImageEditModal"
 import ResourceDeleteModal from "./ResourceDeleteModal"
@@ -26,11 +32,17 @@ export default function ResourceTableDesktopContents({
   isOpenDeleteState,
   onSave
 }: Params) {
+  const { id } = useParams()
   const [isOpenEditModal, setIsOpenEditModal] = isOpenEditState
   const [isOpenDeleteModal, setIsOpenDeleteModal] = isOpenDeleteState
 
-  const handleDelete = () => {
-    console.log("단일삭제", resource.resourceId)
+  const queryClient = useQueryClient()
+
+  const { mutateAsync } = useDeleteResource()
+
+  const handleDelete = async () => {
+    await mutateAsync({ gameId: Number(id), resourceId: Number(resource.resourceId) })
+    await queryClient.invalidateQueries({ queryKey: getGetResourcesQueryKey(Number(id)) })
   }
 
   return (
