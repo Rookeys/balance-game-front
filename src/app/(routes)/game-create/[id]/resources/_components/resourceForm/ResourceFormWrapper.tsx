@@ -7,11 +7,14 @@ import { keepPreviousData } from "@tanstack/react-query"
 import { Square } from "lucide-react"
 import { useParams, useRouter, useSearchParams } from "next/navigation"
 import ResourceForm from "./ResourceForm"
+import useResizeHandler from "@/hooks/useResizeHandler"
+import { SCREEN_SIZE } from "@/styles/theme/screenSize"
 
 export default function ResourceFormWrapper() {
   const { id } = useParams()
 
   const searchParams = useSearchParams()
+  const windowWidth = useResizeHandler()
 
   const pageParam = searchParams.get("page")
 
@@ -69,7 +72,12 @@ export default function ResourceFormWrapper() {
         ))}
       </article>
       {data?.totalPages && (
-        <Pagination currentPage={page} totalPages={data?.totalPages} onPageChange={handlePageChange} />
+        <Pagination
+          currentPage={page}
+          totalPages={data?.totalPages}
+          onPageChange={handlePageChange}
+          pageRangeDisplayed={windowWidth > SCREEN_SIZE.md ? 10 : 5}
+        />
       )}
     </>
   )
