@@ -42,10 +42,10 @@ export default function ResourceTableDesktopContents({
   const { isSelected, toggleSelectedResourceId } = useSelectedResourceIdStore()
   const isChecked = isSelected(resource.resourceId as number)
 
-  const { mutateAsync } = useDeleteResource()
+  const { mutateAsync: deleteResource } = useDeleteResource()
 
   const handleDelete = async () => {
-    await mutateAsync({ gameId: Number(id), resourceId: Number(resource.resourceId) })
+    await deleteResource({ gameId: Number(id), resourceId: Number(resource.resourceId) })
     await queryClient.invalidateQueries({ queryKey: getGetResourcesUsingPageQueryKey(Number(id)) })
   }
 

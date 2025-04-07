@@ -48,10 +48,6 @@ export default function ResourceForm({ resource, indexNum, tableBaseClassName }:
 
   const { mutateAsync: UpdateImageResource } = useUpdateResource()
 
-  // const handleDelete = () => {
-  //   console.log("단일삭제", resource.resourceId)
-  // }
-
   const { handleSubmit, setValue } = formMethods
 
   const onSubmit = async (data: EditResourceType) => {

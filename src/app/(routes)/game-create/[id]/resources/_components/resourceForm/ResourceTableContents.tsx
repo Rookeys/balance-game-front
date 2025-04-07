@@ -11,6 +11,12 @@ import ResourceDeleteModal from "./ResourceDeleteModal"
 import ImageEditModal from "./ImageEditModal"
 import YoutubeEditModal from "./YoutubeEditModal"
 import { useSelectedResourceIdStore } from "@/store/selectedResourceId"
+import {
+  getGetResourcesUsingPageQueryKey,
+  useDeleteResource
+} from "@/api/orval/client/game-resource-controller/game-resource-controller"
+import { useQueryClient } from "@tanstack/react-query"
+import { useParams } from "next/navigation"
 
 const editItems = [
   { value: "edit", label: "수정" },
@@ -29,11 +35,19 @@ export default function ResourceTableContents({ resource, isOpenEditState, isOpe
   const [isOpenEditModal, setIsOpenEditModal] = isOpenEditState
   const [isOpenDeleteModal, setIsOpenDeleteModal] = isOpenDeleteState
 
+  const { id } = useParams()
+
+  const queryClient = useQueryClient()
+
   const { isSelected, toggleSelectedResourceId } = useSelectedResourceIdStore()
+
   const isChecked = isSelected(resource.resourceId as number)
 
-  const handleDelete = () => {
-    console.log("단일삭제", resource.resourceId)
+  const { mutateAsync: deleteResource } = useDeleteResource()
+
+  const handleDelete = async () => {
+    await deleteResource({ gameId: Number(id), resourceId: Number(resource.resourceId) })
+    await queryClient.invalidateQueries({ queryKey: getGetResourcesUsingPageQueryKey(Number(id)) })
   }
 
   const handleClick = (value: "edit" | "delete") => {

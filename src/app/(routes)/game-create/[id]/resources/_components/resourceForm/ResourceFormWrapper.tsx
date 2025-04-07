@@ -9,6 +9,7 @@ import { cn } from "@/utils/cn"
 import { Square, SquareCheck } from "lucide-react"
 import { useRouter, useSearchParams } from "next/navigation"
 import ResourceForm from "./ResourceForm"
+import { handleSelectAllToggle } from "@/app/(routes)/game-create/[id]/resources/utils/selectAllResource"
 
 export default function ResourceFormWrapper() {
   const searchParams = useSearchParams()
@@ -22,19 +23,7 @@ export default function ResourceFormWrapper() {
     router.push(`?${newSearchParams.toString()}`, { scroll: false })
   }
 
-  // Todo 중복코드 개선필요
-  const { setSelectedResourceIds, clearSelectedResourceIds, isAllSelected } = useSelectedResourceIdStore()
-
-  const handleToggleAll = () => {
-    const resourceList = data?.content ?? []
-
-    if (isAllSelected(resourceList.length)) {
-      clearSelectedResourceIds()
-    } else {
-      const allIds = resourceList.map((resource) => resource.resourceId)
-      setSelectedResourceIds(allIds as number[])
-    }
-  }
+  const { isAllSelected } = useSelectedResourceIdStore()
 
   const tableBaseClassName = "rounded-[8px] hidden md:grid md:grid-cols-[repeat(20,minmax(0,1fr))]"
 
@@ -43,7 +32,10 @@ export default function ResourceFormWrapper() {
       <article className="md:rounded-[16px] md:border md:px-[16px] md:py-[20px]">
         {/* Header */}
         <div className={cn("h-[80px] overflow-hidden", tableBaseClassName)}>
-          <button className="col-span-1 flex items-center justify-center bg-gray-10" onClick={handleToggleAll}>
+          <button
+            className="col-span-1 flex items-center justify-center bg-gray-10"
+            onClick={() => handleSelectAllToggle(data?.content)}
+          >
             {isAllSelected(data?.content?.length ?? 0) ? <SquareCheck /> : <Square />}
           </button>
           <div className="col-span-1 flex items-center justify-center bg-blue-10">

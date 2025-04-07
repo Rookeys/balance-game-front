@@ -19,6 +19,7 @@ import {
   useDeleteSelectResources
 } from "@/api/orval/client/game-resource-controller/game-resource-controller"
 import { useQueryClient } from "@tanstack/react-query"
+import { handleSelectAllToggle } from "@/app/(routes)/game-create/[id]/resources/utils/selectAllResource"
 
 export default function ResourceFormContainer() {
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState<boolean>(false)
@@ -35,19 +36,7 @@ export default function ResourceFormContainer() {
 
   const { mutateAsync: deleteSelectedAll } = useDeleteSelectResources()
 
-  const { selectedResourceIds, setSelectedResourceIds, clearSelectedResourceIds, isAllSelected } =
-    useSelectedResourceIdStore()
-
-  const handleToggleAll = () => {
-    const resourceList = data?.content ?? []
-
-    if (isAllSelected(resourceList.length)) {
-      clearSelectedResourceIds()
-    } else {
-      const allIds = resourceList.map((resource) => resource.resourceId)
-      setSelectedResourceIds(allIds as number[])
-    }
-  }
+  const { selectedResourceIds, clearSelectedResourceIds, isAllSelected } = useSelectedResourceIdStore()
 
   const handleSearch = (keyword: string) => {
     const newSearchParams = new URLSearchParams(searchParams.toString())
@@ -94,7 +83,7 @@ export default function ResourceFormContainer() {
               />
               <article className="flex items-center gap-[12px]">
                 <div className="flex items-center gap-[4px]">
-                  <button className="md:hidden" onClick={handleToggleAll}>
+                  <button className="md:hidden" onClick={() => handleSelectAllToggle(data?.content)}>
                     {isAllSelected(data?.content?.length ?? 0) ? <SquareCheck /> : <Square />}
                   </button>
                   <p>총{selectedResourceIds.length > 0 ? selectedResourceIds.length : data?.content?.length || 0}개</p>
