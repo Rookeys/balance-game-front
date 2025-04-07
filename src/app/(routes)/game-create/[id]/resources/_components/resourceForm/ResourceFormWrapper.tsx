@@ -1,14 +1,15 @@
 "use client"
 
 import { useGetResourcesUsingPage } from "@/api/orval/client/game-resource-controller/game-resource-controller"
+import { GetResourcesUsingPageSortType } from "@/api/orval/model/getResourcesUsingPageSortType"
 import { Pagination } from "@/components/Pagination"
+import useResizeHandler from "@/hooks/useResizeHandler"
+import { SCREEN_SIZE } from "@/styles/theme/screenSize"
 import { cn } from "@/utils/cn"
 import { keepPreviousData } from "@tanstack/react-query"
 import { Square } from "lucide-react"
 import { useParams, useRouter, useSearchParams } from "next/navigation"
 import ResourceForm from "./ResourceForm"
-import useResizeHandler from "@/hooks/useResizeHandler"
-import { SCREEN_SIZE } from "@/styles/theme/screenSize"
 
 export default function ResourceFormWrapper() {
   const { id } = useParams()
@@ -18,12 +19,13 @@ export default function ResourceFormWrapper() {
 
   const pageParam = searchParams.get("page") || 1
   const keywordParam = searchParams.get("keyword") || ""
+  const sortParam = searchParams.get("sort") || ""
 
   const page = Number(pageParam)
 
   const { data } = useGetResourcesUsingPage(
     Number(id),
-    { page: page, size: 10, title: keywordParam },
+    { page: page, size: 10, title: keywordParam, sortType: sortParam as GetResourcesUsingPageSortType },
     { query: { placeholderData: keepPreviousData } }
   )
 
