@@ -13,6 +13,8 @@ interface Params {
   url?: string
   type?: GamePlayResourceResponseType
   title?: string
+  start?: number
+  end?: number
   selectedId: string | undefined
   handleSelectItem: (id: string) => void
 }
@@ -21,6 +23,8 @@ export default function SelectItemBox({
   url = "",
   type = GamePlayResourceResponseType.IMAGE,
   title,
+  start,
+  end,
   selectedId,
   handleSelectItem
 }: Params) {
@@ -76,7 +80,7 @@ export default function SelectItemBox({
       onAnimationComplete={handleAnimationComplete}
     >
       <div className="relative">
-        <YoutubeRatio url={url} ratio={4 / 3} />
+        <YoutubeRatio url={url} ratio={4 / 3} start={start} end={end} />
         {title && (
           <article className="pointer-events-none absolute start-[50%] top-[50%] max-w-full translate-x-[-50%] translate-y-[-50%] rounded-xsm bg-dark/50 px-4 py-2">
             <p className="break-words text-white">{title}</p>

@@ -84,7 +84,7 @@ export default function ResourceFormContainer() {
               <article className="flex items-center gap-[12px]">
                 <div className="flex items-center gap-[4px]">
                   <button className="md:hidden" onClick={() => handleSelectAllToggle(data?.content)}>
-                    {isAllSelected(data?.content?.length ?? 0) ? <SquareCheck /> : <Square />}
+                    {isAllSelected(data?.content ?? []) ? <SquareCheck /> : <Square />}
                   </button>
                   <p>총{selectedResourceIds.length > 0 ? selectedResourceIds.length : data?.content?.length || 0}개</p>
                 </div>

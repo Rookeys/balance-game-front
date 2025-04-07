@@ -36,7 +36,7 @@ export default function ResourceFormWrapper() {
             className="col-span-1 flex items-center justify-center bg-gray-10"
             onClick={() => handleSelectAllToggle(data?.content)}
           >
-            {isAllSelected(data?.content?.length ?? 0) ? <SquareCheck /> : <Square />}
+            {isAllSelected(data?.content ?? []) ? <SquareCheck /> : <Square />}
           </button>
           <div className="col-span-1 flex items-center justify-center bg-blue-10">
             <p>No</p>

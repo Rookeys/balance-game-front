@@ -1,12 +1,16 @@
 import { useSelectedResourceIdStore } from "@/store/selectedResourceId"
 
 export const handleSelectAllToggle = (resources: { resourceId?: number }[] = []) => {
-  const { setSelectedResourceIds, clearSelectedResourceIds, isAllSelected } = useSelectedResourceIdStore.getState()
+  const { setSelectedResourceIds, isAllSelected } = useSelectedResourceIdStore.getState()
+  const currentSelected = useSelectedResourceIdStore.getState().selectedResourceIds
+  const pageIds = resources.map((r) => r.resourceId).filter((id): id is number => id !== undefined)
 
-  if (isAllSelected(resources.length)) {
-    clearSelectedResourceIds()
+  if (isAllSelected(resources)) {
+    const updated = currentSelected.filter((id) => !pageIds.includes(id))
+    setSelectedResourceIds(updated)
+    // clearSelectedResourceIds()
   } else {
-    const allIds = resources.map((r) => r.resourceId).filter((id): id is number => id !== undefined) // 타입 가드로 undefined 제거
-    setSelectedResourceIds(allIds)
+    const merged = Array.from(new Set([...currentSelected, ...pageIds]))
+    setSelectedResourceIds(merged)
   }
 }

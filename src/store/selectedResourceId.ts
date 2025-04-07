@@ -6,7 +6,7 @@ type SelectedResourceIdStore = {
   toggleSelectedResourceId: (id: number) => void
   clearSelectedResourceIds: () => void
   isSelected: (id: number) => boolean
-  isAllSelected: (totalCount: number) => boolean
+  isAllSelected: (resources: { resourceId?: number }[]) => boolean
 }
 
 export const useSelectedResourceIdStore = create<SelectedResourceIdStore>((set, get) => ({
@@ -27,7 +27,10 @@ export const useSelectedResourceIdStore = create<SelectedResourceIdStore>((set, 
     return get().selectedResourceIds.includes(id)
   },
 
-  isAllSelected: (totalCount) => {
-    return get().selectedResourceIds.length === totalCount && totalCount > 0
+  isAllSelected: (resources) => {
+    const selectedIds = get().selectedResourceIds
+    const pageIds = resources?.map((r) => r.resourceId).filter((id): id is number => id !== undefined)
+
+    return pageIds.length > 0 && pageIds.every((id) => selectedIds.includes(id))
   }
 }))

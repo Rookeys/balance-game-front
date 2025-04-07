@@ -85,6 +85,8 @@ export default function GamePlayPageClient({ playId }: Params) {
           url={gamePlayData?.leftResource?.content}
           title={gamePlayData?.leftResource?.title}
           type={gamePlayData?.leftResource?.type}
+          start={gamePlayData?.leftResource?.startSec}
+          end={gamePlayData?.leftResource?.endSec}
           selectedId={selectedId}
           handleSelectItem={handleSelectItem}
         />
@@ -96,6 +98,8 @@ export default function GamePlayPageClient({ playId }: Params) {
           url={gamePlayData?.rightResource?.content}
           title={gamePlayData?.rightResource?.title}
           type={gamePlayData?.rightResource?.type}
+          start={gamePlayData?.rightResource?.startSec}
+          end={gamePlayData?.rightResource?.endSec}
           selectedId={selectedId}
           handleSelectItem={handleSelectItem}
         />
