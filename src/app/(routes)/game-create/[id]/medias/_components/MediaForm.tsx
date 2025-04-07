@@ -5,8 +5,13 @@ import { YoutubeUploadForm } from "./YoutubeUploadForm"
 import MobileTab from "@/components/form/gameRoom/_components/MobileTab"
 import MediaTab from "./MediaTab"
 import BottomBar from "@/components/form/gameRoom/_components/BottomBar"
+import { useGetCountResourcesInGames } from "@/api/orval/client/game-resource-controller/game-resource-controller"
+import { useParams } from "next/navigation"
+import { getMaxRound } from "@/utils/getMaxRound"
 
 export default function MediaForm() {
+  const { id } = useParams()
+  const { data } = useGetCountResourcesInGames(Number(id))
   return (
     <>
       <MobileTab step={2} setStep={() => {}} />
@@ -25,7 +30,7 @@ export default function MediaForm() {
               </p>
             </article>
             <p className="rounded-[8px] bg-gray-10 px-[16px] py-[12px]">
-              업로드한 콘텐츠 n개, 4강까지 플레이 가능해요.
+              업로드한 콘텐츠 {data}개, {getMaxRound(data)}강까지 플레이 가능해요.
             </p>
           </div>
           <ImageUploadForm />

@@ -16,10 +16,12 @@ import ResourceDeleteModal from "./resourceForm/ResourceDeleteModal"
 import { toast } from "sonner"
 import {
   getGetResourcesUsingPageQueryKey,
-  useDeleteSelectResources
+  useDeleteSelectResources,
+  useGetCountResourcesInGames
 } from "@/api/orval/client/game-resource-controller/game-resource-controller"
 import { useQueryClient } from "@tanstack/react-query"
 import { handleSelectAllToggle } from "@/app/(routes)/game-create/[id]/resources/utils/selectAllResource"
+import { getMaxRound } from "@/utils/getMaxRound"
 
 export default function ResourceFormContainer() {
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState<boolean>(false)
@@ -37,6 +39,8 @@ export default function ResourceFormContainer() {
   const { mutateAsync: deleteSelectedAll } = useDeleteSelectResources()
 
   const { selectedResourceIds, clearSelectedResourceIds, isAllSelected } = useSelectedResourceIdStore()
+
+  const { data: resourceNumbers } = useGetCountResourcesInGames(Number(id))
 
   const handleSearch = (keyword: string) => {
     const newSearchParams = new URLSearchParams(searchParams.toString())
@@ -70,7 +74,7 @@ export default function ResourceFormContainer() {
               </p>
             </article>
             <p className="rounded-[8px] bg-gray-10 px-[16px] py-[12px]">
-              업로드한 콘텐츠 n개, 4강까지 플레이 가능해요.
+              업로드한 콘텐츠 {resourceNumbers}개, {getMaxRound(resourceNumbers)}강까지 플레이 가능해요.
             </p>
           </div>
           <section className="flex flex-col gap-[12px]">
