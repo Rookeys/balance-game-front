@@ -27,37 +27,39 @@ export function Pagination({ currentPage, totalPages, onPageChange, pageRangeDis
   const pages = Array.from({ length: end - start + 1 }, (_, i) => start + i)
 
   return (
-    <div className="mt-6 flex items-center justify-center gap-2">
-      <button
-        onClick={() => onPageChange(currentPage - 1)}
-        disabled={currentPage === 1}
-        className="flex h-[40px] w-[40px] items-center justify-center rounded-[4px] text-[14px] disabled:opacity-50"
-      >
-        <ChevronLeft size={24} />
-      </button>
+    <section className="mt-[28px] flex w-full items-center justify-center gap-[8px]">
+      <article className="flex max-w-[580px] items-center justify-between gap-[8px]">
+        <button
+          onClick={() => onPageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+          className="flex h-[36px] w-[36px] items-center justify-center rounded-[4px] text-[14px] disabled:opacity-50"
+        >
+          <ChevronLeft size={24} />
+        </button>
 
-      <div className="flex items-center gap-[8px]">
-        {pages.map((page) => (
-          <button
-            key={page}
-            onClick={() => onPageChange(page)}
-            className={cn(
-              "h-[40px] w-[40px] rounded-[4px] border text-[14px]",
-              currentPage === page ? "border-black bg-black text-white" : "hover:bg-gray-100"
-            )}
-          >
-            {page}
-          </button>
-        ))}
-      </div>
+        <div className="flex items-center justify-between gap-[8px]">
+          {pages.map((page) => (
+            <button
+              key={page}
+              onClick={() => onPageChange(page)}
+              className={cn(
+                "h-[36px] w-[36px] rounded-[4px] border text-[14px]",
+                currentPage === page ? "border-black bg-black text-white" : "hover:bg-gray-100"
+              )}
+            >
+              {page}
+            </button>
+          ))}
+        </div>
 
-      <button
-        onClick={() => onPageChange(currentPage + 1)}
-        disabled={currentPage === totalPages}
-        className="flex h-[40px] w-[40px] items-center justify-center rounded-[4px] text-[14px] disabled:opacity-50"
-      >
-        <ChevronRight size={24} />
-      </button>
-    </div>
+        <button
+          onClick={() => onPageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
+          className="flex h-[36px] w-[36px] items-center justify-center rounded-[4px] text-[14px] disabled:opacity-50"
+        >
+          <ChevronRight size={24} />
+        </button>
+      </article>
+    </section>
   )
 }

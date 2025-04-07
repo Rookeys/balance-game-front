@@ -16,13 +16,14 @@ export default function ResourceFormWrapper() {
   const searchParams = useSearchParams()
   const windowWidth = useResizeHandler()
 
-  const pageParam = searchParams.get("page")
+  const pageParam = searchParams.get("page") || 1
+  const keywordParam = searchParams.get("keyword") || ""
 
   const page = Number(pageParam)
 
   const { data } = useGetResourcesUsingPage(
     Number(id),
-    { page: page, size: 10 },
+    { page: page, size: 10, title: keywordParam },
     { query: { placeholderData: keepPreviousData } }
   )
 

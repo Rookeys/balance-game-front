@@ -8,8 +8,20 @@ import { resourceListFilters } from "@/constants/filters"
 import { Search, Square } from "lucide-react"
 import MediaTab from "../../medias/_components/MediaTab"
 import ResourceFormWrapper from "./resourceForm/ResourceFormWrapper"
+import { useRouter, useSearchParams } from "next/navigation"
 
 export default function ResourceFormContainer() {
+  const searchParams = useSearchParams()
+
+  const router = useRouter()
+
+  const handleSearch = (keyword: string) => {
+    const newSearchParams = new URLSearchParams(searchParams.toString())
+    newSearchParams.set("keyword", keyword.toString())
+    newSearchParams.delete("page")
+    router.push(`?${newSearchParams.toString()}`, { scroll: false })
+  }
+
   return (
     <>
       <MobileTab step={2} setStep={() => {}} />
@@ -37,11 +49,13 @@ export default function ResourceFormContainer() {
                 placeholder="이름으로 콘텐츠 찾기"
                 Icon={Search}
                 className="lg:max-w-[340px]"
-                onSearch={(e) => console.log("test", e)}
+                onSearch={handleSearch}
               />
               <article className="flex items-center gap-[12px]">
                 <div className="flex items-center gap-[4px]">
-                  <Square />
+                  <button className="md:hidden">
+                    <Square />
+                  </button>
                   <p>총00개</p>
                 </div>
                 <button className="h-full rounded-[4px] border px-[12px]">선택삭제</button>
