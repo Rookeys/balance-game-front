@@ -1,18 +1,37 @@
 "use client"
 
 import { useGetResourcesUsingPage } from "@/api/orval/client/game-resource-controller/game-resource-controller"
+import { Pagination } from "@/components/Pagination"
 import { cn } from "@/utils/cn"
+import { keepPreviousData } from "@tanstack/react-query"
 import { Square } from "lucide-react"
-import { useParams } from "next/navigation"
+import { useParams, useRouter, useSearchParams } from "next/navigation"
 import ResourceForm from "./ResourceForm"
 
 export default function ResourceFormWrapper() {
   const { id } = useParams()
 
-  const { data } = useGetResourcesUsingPage(Number(id), { size: 10 })
-  // console.log("data", data?.content)
+  const searchParams = useSearchParams()
+
+  const pageParam = searchParams.get("page")
+
+  const page = Number(pageParam)
+
+  const { data } = useGetResourcesUsingPage(
+    Number(id),
+    { page: page, size: 10 },
+    { query: { placeholderData: keepPreviousData } }
+  )
+
+  const router = useRouter()
 
   const tableBaseClassName = "rounded-[8px] hidden md:grid md:grid-cols-[repeat(20,minmax(0,1fr))]"
+
+  const handlePageChange = (newPage: number) => {
+    const newSearchParams = new URLSearchParams(searchParams.toString())
+    newSearchParams.set("page", newPage.toString())
+    router.push(`?${newSearchParams.toString()}`, { scroll: false })
+  }
 
   return (
     <>
@@ -49,6 +68,9 @@ export default function ResourceFormWrapper() {
           />
         ))}
       </article>
+      {data?.totalPages && (
+        <Pagination currentPage={page} totalPages={data?.totalPages} onPageChange={handlePageChange} />
+      )}
     </>
   )
 }
