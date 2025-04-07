@@ -1,37 +1,20 @@
 "use client"
 
-import { useGetResourcesUsingPage } from "@/api/orval/client/game-resource-controller/game-resource-controller"
-import { GetResourcesUsingPageSortType } from "@/api/orval/model/getResourcesUsingPageSortType"
+import { useGetResourceList } from "@/app/(routes)/game-create/[id]/resources/hooks/useGetResourceList"
 import { Pagination } from "@/components/Pagination"
 import useResizeHandler from "@/hooks/useResizeHandler"
+import { useSelectedResourceIdStore } from "@/store/selectedResourceId"
 import { SCREEN_SIZE } from "@/styles/theme/screenSize"
 import { cn } from "@/utils/cn"
-import { keepPreviousData } from "@tanstack/react-query"
-import { Square } from "lucide-react"
-import { useParams, useRouter, useSearchParams } from "next/navigation"
+import { Square, SquareCheck } from "lucide-react"
+import { useRouter, useSearchParams } from "next/navigation"
 import ResourceForm from "./ResourceForm"
 
 export default function ResourceFormWrapper() {
-  const { id } = useParams()
-
   const searchParams = useSearchParams()
   const windowWidth = useResizeHandler()
-
-  const pageParam = searchParams.get("page") || 1
-  const keywordParam = searchParams.get("keyword") || ""
-  const sortParam = searchParams.get("sort") || ""
-
-  const page = Number(pageParam)
-
-  const { data } = useGetResourcesUsingPage(
-    Number(id),
-    { page: page, size: 10, title: keywordParam, sortType: sortParam as GetResourcesUsingPageSortType },
-    { query: { placeholderData: keepPreviousData } }
-  )
-
   const router = useRouter()
-
-  const tableBaseClassName = "rounded-[8px] hidden md:grid md:grid-cols-[repeat(20,minmax(0,1fr))]"
+  const { data, page } = useGetResourceList()
 
   const handlePageChange = (newPage: number) => {
     const newSearchParams = new URLSearchParams(searchParams.toString())
@@ -39,14 +22,30 @@ export default function ResourceFormWrapper() {
     router.push(`?${newSearchParams.toString()}`, { scroll: false })
   }
 
+  // Todo 중복코드 개선필요
+  const { setSelectedResourceIds, clearSelectedResourceIds, isAllSelected } = useSelectedResourceIdStore()
+
+  const handleToggleAll = () => {
+    const resourceList = data?.content ?? []
+
+    if (isAllSelected(resourceList.length)) {
+      clearSelectedResourceIds()
+    } else {
+      const allIds = resourceList.map((resource) => resource.resourceId)
+      setSelectedResourceIds(allIds as number[])
+    }
+  }
+
+  const tableBaseClassName = "rounded-[8px] hidden md:grid md:grid-cols-[repeat(20,minmax(0,1fr))]"
+
   return (
     <>
       <article className="md:rounded-[16px] md:border md:px-[16px] md:py-[20px]">
         {/* Header */}
         <div className={cn("h-[80px] overflow-hidden", tableBaseClassName)}>
-          <div className="col-span-1 flex items-center justify-center bg-gray-10">
-            <Square />
-          </div>
+          <button className="col-span-1 flex items-center justify-center bg-gray-10" onClick={handleToggleAll}>
+            {isAllSelected(data?.content?.length ?? 0) ? <SquareCheck /> : <Square />}
+          </button>
           <div className="col-span-1 flex items-center justify-center bg-blue-10">
             <p>No</p>
           </div>
@@ -70,7 +69,7 @@ export default function ResourceFormWrapper() {
             key={resource.resourceId}
             resource={resource}
             tableBaseClassName={tableBaseClassName}
-            indexNum={index + 1}
+            indexNum={index + 1 + (page - 1) * 10}
           />
         ))}
       </article>

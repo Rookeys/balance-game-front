@@ -5,10 +5,11 @@ import {
 import { GameResourceResponse } from "@/api/orval/model/gameResourceResponse"
 import { GameResourceResponseType } from "@/api/orval/model/gameResourceResponseType"
 import ProgressBar from "@/components/ProgressBar"
+import { useSelectedResourceIdStore } from "@/store/selectedResourceId"
 import { cn } from "@/utils/cn"
 import { getYoutubeThumbnail } from "@/utils/getYoutubeThumbnail"
 import { useQueryClient } from "@tanstack/react-query"
-import { Square, SquarePen, Trash2 } from "lucide-react"
+import { Square, SquareCheck, SquarePen, Trash2 } from "lucide-react"
 import Image from "next/image"
 import { useParams } from "next/navigation"
 import { Dispatch, SetStateAction } from "react"
@@ -38,6 +39,9 @@ export default function ResourceTableDesktopContents({
 
   const queryClient = useQueryClient()
 
+  const { isSelected, toggleSelectedResourceId } = useSelectedResourceIdStore()
+  const isChecked = isSelected(resource.resourceId as number)
+
   const { mutateAsync } = useDeleteResource()
 
   const handleDelete = async () => {
@@ -47,9 +51,12 @@ export default function ResourceTableDesktopContents({
 
   return (
     <section className={cn("h-[96px]", tableBaseClassName)} key={resource.resourceId}>
-      <div className="col-span-1 flex items-center justify-center">
-        <Square />
-      </div>
+      <button
+        className="col-span-1 flex items-center justify-center"
+        onClick={() => toggleSelectedResourceId(resource.resourceId as number)}
+      >
+        {isChecked ? <SquareCheck /> : <Square />}
+      </button>
       <div className="col-span-1 flex items-center justify-center">
         <p>{indexNum}</p>
       </div>

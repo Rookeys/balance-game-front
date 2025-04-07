@@ -5,21 +5,62 @@ import MobileTab from "@/components/form/gameRoom/_components/MobileTab"
 import SideBar from "@/components/form/gameRoom/_components/SideBar"
 import SearchInput from "@/components/SearchInput"
 import { resourceListFilters } from "@/constants/filters"
-import { Search, Square } from "lucide-react"
+import { Search, Square, SquareCheck } from "lucide-react"
 import MediaTab from "../../medias/_components/MediaTab"
 import ResourceFormWrapper from "./resourceForm/ResourceFormWrapper"
-import { useRouter, useSearchParams } from "next/navigation"
+import { useParams, useRouter, useSearchParams } from "next/navigation"
+import { useGetResourceList } from "@/app/(routes)/game-create/[id]/resources/hooks/useGetResourceList"
+import { useSelectedResourceIdStore } from "@/store/selectedResourceId"
+import { useState } from "react"
+import ResourceDeleteModal from "./resourceForm/ResourceDeleteModal"
+import { toast } from "sonner"
+import {
+  getGetResourcesUsingPageQueryKey,
+  useDeleteSelectResources
+} from "@/api/orval/client/game-resource-controller/game-resource-controller"
+import { useQueryClient } from "@tanstack/react-query"
 
 export default function ResourceFormContainer() {
+  const [isOpenDeleteModal, setIsOpenDeleteModal] = useState<boolean>(false)
+
   const searchParams = useSearchParams()
 
   const router = useRouter()
+
+  const { id } = useParams()
+
+  const { data } = useGetResourceList()
+
+  const queryClient = useQueryClient()
+
+  const { mutateAsync: deleteSelectedAll } = useDeleteSelectResources()
+
+  const { selectedResourceIds, setSelectedResourceIds, clearSelectedResourceIds, isAllSelected } =
+    useSelectedResourceIdStore()
+
+  const handleToggleAll = () => {
+    const resourceList = data?.content ?? []
+
+    if (isAllSelected(resourceList.length)) {
+      clearSelectedResourceIds()
+    } else {
+      const allIds = resourceList.map((resource) => resource.resourceId)
+      setSelectedResourceIds(allIds as number[])
+    }
+  }
 
   const handleSearch = (keyword: string) => {
     const newSearchParams = new URLSearchParams(searchParams.toString())
     newSearchParams.set("keyword", keyword.toString())
     newSearchParams.delete("page")
     router.push(`?${newSearchParams.toString()}`, { scroll: false })
+  }
+
+  const handleAllDelete = async () => {
+    await deleteSelectedAll({ gameId: Number(id), data: { list: selectedResourceIds } })
+    await queryClient.invalidateQueries({ queryKey: getGetResourcesUsingPageQueryKey(Number(id)) })
+    clearSelectedResourceIds()
+    setIsOpenDeleteModal(false)
   }
 
   return (
@@ -53,12 +94,23 @@ export default function ResourceFormContainer() {
               />
               <article className="flex items-center gap-[12px]">
                 <div className="flex items-center gap-[4px]">
-                  <button className="md:hidden">
-                    <Square />
+                  <button className="md:hidden" onClick={handleToggleAll}>
+                    {isAllSelected(data?.content?.length ?? 0) ? <SquareCheck /> : <Square />}
                   </button>
-                  <p>총00개</p>
+                  <p>총{selectedResourceIds.length > 0 ? selectedResourceIds.length : data?.content?.length || 0}개</p>
                 </div>
-                <button className="h-full rounded-[4px] border px-[12px]">선택삭제</button>
+                <button
+                  className="h-full rounded-[4px] border px-[12px]"
+                  onClick={() => {
+                    if (selectedResourceIds.length === 0) {
+                      toast.warning("선택된 콘텐츠가 없어요")
+                    } else {
+                      setIsOpenDeleteModal(true)
+                    }
+                  }}
+                >
+                  선택삭제
+                </button>
                 <Filter filters={resourceListFilters} />
               </article>
             </article>
@@ -73,6 +125,9 @@ export default function ResourceFormContainer() {
         </section>
         <SideBar step={2} setStep={() => {}} />
       </section>
+      {isOpenDeleteModal && (
+        <ResourceDeleteModal onClick={handleAllDelete} onClose={() => setIsOpenDeleteModal(false)} />
+      )}
     </>
   )
 }

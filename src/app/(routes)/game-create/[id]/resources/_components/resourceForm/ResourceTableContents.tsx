@@ -4,12 +4,13 @@ import { GameResourceResponseType } from "@/api/orval/model/gameResourceResponse
 import { Button } from "@/components/Button"
 import ProgressBar from "@/components/ProgressBar"
 import { getYoutubeThumbnail } from "@/utils/getYoutubeThumbnail"
-import { EllipsisVertical } from "lucide-react"
+import { EllipsisVertical, Square, SquareCheck } from "lucide-react"
 import Image from "next/image"
 import { Dispatch, SetStateAction, useState } from "react"
 import ResourceDeleteModal from "./ResourceDeleteModal"
 import ImageEditModal from "./ImageEditModal"
 import YoutubeEditModal from "./YoutubeEditModal"
+import { useSelectedResourceIdStore } from "@/store/selectedResourceId"
 
 const editItems = [
   { value: "edit", label: "수정" },
@@ -27,6 +28,9 @@ export default function ResourceTableContents({ resource, isOpenEditState, isOpe
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [isOpenEditModal, setIsOpenEditModal] = isOpenEditState
   const [isOpenDeleteModal, setIsOpenDeleteModal] = isOpenDeleteState
+
+  const { isSelected, toggleSelectedResourceId } = useSelectedResourceIdStore()
+  const isChecked = isSelected(resource.resourceId as number)
 
   const handleDelete = () => {
     console.log("단일삭제", resource.resourceId)
@@ -53,6 +57,12 @@ export default function ResourceTableContents({ resource, isOpenEditState, isOpe
           alt="thumbnail"
           className="rounded-[8px]"
         />
+        <button
+          className="absolute start-[4px] top-[4px]"
+          onClick={() => toggleSelectedResourceId(resource.resourceId as number)}
+        >
+          {isChecked ? <SquareCheck /> : <Square />}
+        </button>
       </div>
       <article className="flex flex-1 flex-col gap-[12px]">
         <p className="w-fit rounded-[4px] bg-gray-10 px-[8px] py-[4px]">
