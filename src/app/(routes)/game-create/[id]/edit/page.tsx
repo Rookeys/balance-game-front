@@ -1,4 +1,4 @@
-import { prefetchGetGameStatus } from "@/api/orval/server/game-room-controller/game-room-controller"
+import { prefetchGetMyGameStatus } from "@/api/orval/server/user-profile-controller/user-profile-controller"
 import GameForm from "@/components/form/gameRoom/GameForm"
 import { log } from "@/utils/log"
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query"
@@ -17,7 +17,7 @@ export default async function GameEditPage({ params }: GameEditPageProps) {
 
   const queryClient = new QueryClient()
   try {
-    await prefetchGetGameStatus(queryClient, Number(id))
+    await prefetchGetMyGameStatus(queryClient, Number(id))
   } catch (error) {
     log("error", error)
     notFound()

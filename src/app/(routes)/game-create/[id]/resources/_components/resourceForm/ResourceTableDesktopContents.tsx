@@ -1,5 +1,5 @@
 import {
-  getGetResourcesQueryKey,
+  getGetResourcesUsingPageQueryKey,
   useDeleteResource
 } from "@/api/orval/client/game-resource-controller/game-resource-controller"
 import { GameResourceResponse } from "@/api/orval/model/gameResourceResponse"
@@ -42,7 +42,7 @@ export default function ResourceTableDesktopContents({
 
   const handleDelete = async () => {
     await mutateAsync({ gameId: Number(id), resourceId: Number(resource.resourceId) })
-    await queryClient.invalidateQueries({ queryKey: getGetResourcesQueryKey(Number(id)) })
+    await queryClient.invalidateQueries({ queryKey: getGetResourcesUsingPageQueryKey(Number(id)) })
   }
 
   return (

@@ -1,14 +1,14 @@
 "use client"
+import { useSaveGame, useUpdateGameStatus } from "@/api/orval/client/game-room-controller/game-room-controller"
 import {
-  getGetGameStatusQueryKey,
-  useGetGameStatus,
-  useSaveGame,
-  useUpdateGameStatus
-} from "@/api/orval/client/game-room-controller/game-room-controller"
+  getGetMyGameStatusQueryKey,
+  useGetMyGameStatus
+} from "@/api/orval/client/user-profile-controller/user-profile-controller"
 import { GameRequest } from "@/api/orval/model/gameRequest"
 import { GameRequestAccessType } from "@/api/orval/model/gameRequestAccessType"
 import { useAsyncRoutePush } from "@/hooks/useAsyncRoutePush"
-import { postGameSchema } from "@/validations/gameSchema"
+import { useNavigationStore } from "@/store/isGuardEnabled"
+import { postGameSchema, PostGameType } from "@/validations/gameSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useQueryClient } from "@tanstack/react-query"
 import dynamic from "next/dynamic"
@@ -16,10 +16,9 @@ import { useParams } from "next/navigation"
 import { useEffect, useState } from "react"
 import { FieldErrors, FormProvider, useForm } from "react-hook-form"
 import { toast } from "sonner"
+import BottomBar from "./_components/BottomBar"
 import MobileTab from "./_components/MobileTab"
 import SideBar from "./_components/SideBar"
-import { useNavigationStore } from "@/store/isGuardEnabled"
-import BottomBar from "./_components/BottomBar"
 
 const GameInformationForm = dynamic(() => import("./_components/GameInformationForm"))
 const GameAccessForm = dynamic(() => import("./_components/GameAccessForm"))
@@ -31,9 +30,9 @@ export default function GameForm() {
 
   const queryClient = useQueryClient()
 
-  const { data } = useGetGameStatus(Number(id), { query: { enabled: !!id } })
+  const { data } = useGetMyGameStatus(Number(id), { query: { enabled: !!id } })
 
-  const formMethods = useForm<GameRequest>({
+  const formMethods = useForm<PostGameType>({
     values: {
       title: data?.title ?? "",
       existsBlind: false,
@@ -64,13 +63,13 @@ export default function GameForm() {
   const { mutateAsync: CreateGame } = useSaveGame()
   const { mutateAsync: UpdateGame } = useUpdateGameStatus()
 
-  const onSubmit = async (data: GameRequest) => {
+  const onSubmit = async (data: PostGameType) => {
     try {
       console.log("data", data)
       setIsGuardEnabled(false)
       if (id) {
         await UpdateGame({ gameId: Number(id), data })
-        queryClient.invalidateQueries({ queryKey: getGetGameStatusQueryKey(Number(id)) })
+        queryClient.invalidateQueries({ queryKey: getGetMyGameStatusQueryKey(Number(id)) })
         await asyncPush(`/game-create/${id}/medias`)
       } else {
         const res = await CreateGame({ data })

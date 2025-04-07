@@ -39,6 +39,12 @@ module.exports = {
               useQuery: true,
               useInfinite: false
             }
+          },
+          getResourcesUsingPage: {
+            query: {
+              useQuery: true,
+              useInfinite: false
+            }
           }
         }
       },

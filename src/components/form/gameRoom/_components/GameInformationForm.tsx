@@ -15,13 +15,15 @@ export default function GameInformationForm() {
   const selectedCategories = watch("categories")
 
   const handleCategoryChange = (category: CategoryType) => {
-    let newCategories = [...selectedCategories]
-    if (newCategories.includes(category)) {
-      newCategories = newCategories.filter((c) => c !== category)
-    } else if (newCategories.length < 2) {
-      newCategories.push(category)
+    if (!!selectedCategories) {
+      let newCategories = [...selectedCategories]
+      if (newCategories.includes(category)) {
+        newCategories = newCategories.filter((c) => c !== category)
+      } else if (newCategories.length < 2) {
+        newCategories.push(category)
+      }
+      setValue("categories", newCategories)
     }
-    setValue("categories", newCategories)
   }
 
   return (
@@ -81,7 +83,7 @@ export default function GameInformationForm() {
               variant="custom"
               className={cn(
                 "rounded-[4px] px-[8px] py-[4px]",
-                selectedCategories.includes(category) ? "bg-blue-50 text-white" : "bg-gray-30"
+                selectedCategories?.includes(category) ? "bg-blue-50 text-white" : "bg-gray-30"
               )}
               onClick={() => handleCategoryChange(category as CategoryType)}
             >

@@ -1,6 +1,6 @@
 "use client"
 
-import { useGetResources } from "@/api/orval/client/game-resource-controller/game-resource-controller"
+import { useGetResourcesUsingPage } from "@/api/orval/client/game-resource-controller/game-resource-controller"
 import { cn } from "@/utils/cn"
 import { Square } from "lucide-react"
 import { useParams } from "next/navigation"
@@ -9,7 +9,7 @@ import ResourceForm from "./ResourceForm"
 export default function ResourceFormWrapper() {
   const { id } = useParams()
 
-  const { data } = useGetResources(Number(id), { size: 10 })
+  const { data } = useGetResourcesUsingPage(Number(id), { size: 10 })
   // console.log("data", data?.content)
 
   const tableBaseClassName = "rounded-[8px] hidden md:grid md:grid-cols-[repeat(20,minmax(0,1fr))]"

@@ -1,6 +1,6 @@
-import type { GetResourcesSortType } from "./getResourcesSortType"
+import type { GetResourcesUsingCursorIdSortType } from "./getResourcesUsingCursorIdSortType"
 
-export type GetResourcesParams = {
+export type GetResourcesUsingCursorIdParams = {
   /**
    * 커서 ID (페이징 처리용)
    */
@@ -16,5 +16,5 @@ export type GetResourcesParams = {
   /**
    * 정렬 방식
    */
-  sortType?: GetResourcesSortType
+  sortType?: GetResourcesUsingCursorIdSortType
 }

@@ -1,6 +1,6 @@
 "use client"
 import {
-  getGetResourcesQueryKey,
+  getGetResourcesUsingPageQueryKey,
   useDeleteResource
 } from "@/api/orval/client/game-resource-controller/game-resource-controller"
 import { Button } from "@/components/Button"
@@ -29,7 +29,7 @@ export default function FormAction({ resourceId, name = "", disabled }: Params) 
 
   const handleDelete = async () => {
     await deleteResource({ gameId: Number(id), resourceId })
-    queryClient.invalidateQueries({ queryKey: getGetResourcesQueryKey(Number(id)) })
+    queryClient.invalidateQueries({ queryKey: getGetResourcesUsingPageQueryKey(Number(id)) })
   }
 
   return (

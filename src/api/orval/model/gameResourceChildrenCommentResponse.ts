@@ -11,5 +11,8 @@ export interface GameResourceChildrenCommentResponse {
   updatedDateTime?: string
   /** 좋아요 총합 */
   like?: number
-  liked?: boolean
+  /** 좋아요 클릭 유무 */
+  existsLiked?: boolean
+  /** 작성자 본인 확인 */
+  existsWriter?: boolean
 }

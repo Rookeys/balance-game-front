@@ -5,7 +5,7 @@ export interface GameRequest {
   /** 방 제목 */
   title: string
   /** 방 설명 */
-  description?: string
+  description: string
   /** 익명 여부 */
   existsNamePrivate: boolean
   /** 썸네일 블라인드 여부 */
@@ -14,6 +14,10 @@ export interface GameRequest {
   accessType: GameRequestAccessType
   /** 초대 코드 */
   inviteCode?: string
-  /** 카테고리 설정 */
-  categories: GameRequestCategoriesItem[]
+  /**
+   * 카테고리 설정
+   * @minItems 1
+   * @maxItems 2147483647
+   */
+  categories?: GameRequestCategoriesItem[]
 }

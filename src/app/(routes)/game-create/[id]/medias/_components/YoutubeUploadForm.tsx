@@ -1,6 +1,6 @@
 "use client"
 
-import { getGetResourcesQueryKey } from "@/api/orval/client/game-resource-controller/game-resource-controller"
+import { getGetResourcesUsingPageQueryKey } from "@/api/orval/client/game-resource-controller/game-resource-controller"
 import { useSaveLink } from "@/api/orval/client/media-link-controller/media-link-controller"
 import { LinkRequest } from "@/api/orval/model/linkRequest"
 import { Button } from "@/components/Button"
@@ -46,7 +46,7 @@ export function YoutubeUploadForm() {
   const onSubmit = async (data: LinkRequest) => {
     try {
       await mutateAsync({ gameId: Number(id), data })
-      await queryClient.invalidateQueries({ queryKey: getGetResourcesQueryKey(Number(id)) })
+      await queryClient.invalidateQueries({ queryKey: getGetResourcesUsingPageQueryKey(Number(id)) })
       reset()
     } catch (error) {
       log(error)

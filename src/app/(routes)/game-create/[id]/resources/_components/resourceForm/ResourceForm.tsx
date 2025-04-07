@@ -1,7 +1,7 @@
 "use client"
 
 import {
-  getGetResourcesQueryKey,
+  getGetResourcesUsingPageQueryKey,
   useUpdateResource
 } from "@/api/orval/client/game-resource-controller/game-resource-controller"
 import { useGetPreSignedUrl } from "@/api/orval/client/presigned-url-controller/presigned-url-controller"
@@ -82,7 +82,7 @@ export default function ResourceForm({ resource, indexNum, tableBaseClassName }:
         resourceId: Number(resource.resourceId),
         data: putGameResourceRequest
       })
-      await queryClient.invalidateQueries({ queryKey: getGetResourcesQueryKey(Number(id)) })
+      await queryClient.invalidateQueries({ queryKey: getGetResourcesUsingPageQueryKey(Number(id)) })
       setValue("newImage", [], { shouldValidate: true })
     } catch (error) {
       log(error)
