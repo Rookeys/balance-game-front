@@ -16,6 +16,7 @@ import { Dispatch, SetStateAction } from "react"
 import ImageEditModal from "./ImageEditModal"
 import ResourceDeleteModal from "./ResourceDeleteModal"
 import YoutubeEditModal from "./YoutubeEditModal"
+import { calculateWinRate } from "@/utils/calculateWinRate"
 
 interface Params {
   resource: GameResourceResponse
@@ -87,11 +88,11 @@ export default function ResourceTableDesktopContents({
       <div className="col-span-5 flex items-center px-[16px]">
         <div className="flex w-full flex-col">
           <ProgressBar
-            percent={Number((((resource.winningNums || 0) / (resource.totalPlayNums || 1)) * 100).toFixed(2))}
+            percent={Number(calculateWinRate(resource.winningNums, resource.totalPlayNums))}
             needIndicator={false}
           />
           <div className="flex items-center justify-between">
-            <p>{(((resource.winningNums || 0) / (resource.totalPlayNums || 1)) * 100).toFixed(2)} %</p>
+            <p>{calculateWinRate(resource.winningNums, resource.totalPlayNums)}%</p>
             <p>{resource.winningNums}번 우승</p>
           </div>
         </div>

@@ -17,6 +17,7 @@ import {
 } from "@/api/orval/client/game-resource-controller/game-resource-controller"
 import { useQueryClient } from "@tanstack/react-query"
 import { useParams } from "next/navigation"
+import { calculateWinRate } from "@/utils/calculateWinRate"
 
 const editItems = [
   { value: "edit", label: "수정" },
@@ -85,11 +86,11 @@ export default function ResourceTableContents({ resource, isOpenEditState, isOpe
         <p className="line-clamp-1">{resource.title || "\u00A0"}</p>
         <div className="flex flex-col">
           <ProgressBar
-            percent={Number((((resource.winningNums || 0) / (resource.totalPlayNums || 1)) * 100).toFixed(2))}
+            percent={Number(calculateWinRate(resource.winningNums, resource.totalPlayNums))}
             needIndicator={false}
           />
           <div className="flex items-center justify-between">
-            <p>{(((resource.winningNums || 0) / (resource.totalPlayNums || 1)) * 100).toFixed(2)} %</p>
+            <p>{calculateWinRate(resource.winningNums, resource.totalPlayNums)}%</p>
             <p>{resource.winningNums}번 우승</p>
           </div>
         </div>
