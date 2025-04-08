@@ -94,7 +94,7 @@ export default function ResourceForm({ resource, indexNum, tableBaseClassName }:
     <FormProvider {...formMethods}>
       <form onSubmit={handleSubmit(onSubmit)}>
         {windowWidth !== 0 &&
-          (windowWidth > SCREEN_SIZE.md ? (
+          (windowWidth > SCREEN_SIZE.lg ? (
             <ResourceTableDesktopContents
               resource={resource}
               indexNum={indexNum}

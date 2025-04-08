@@ -1,6 +1,7 @@
 "use client"
 
 import { Button } from "@/components/Button"
+import { cn } from "@/utils/cn"
 import { ChevronDown } from "lucide-react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { useState } from "react"
@@ -13,9 +14,10 @@ type FilterOption = {
 interface Params {
   filters: FilterOption[]
   defaultLabel?: string
+  className?: string
 }
 
-export default function Filter({ filters, defaultLabel = "최신순" }: Params) {
+export default function Filter({ filters, defaultLabel = "최신순", className }: Params) {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const searchParams = useSearchParams()
   const sort = searchParams.get("sort")
@@ -31,7 +33,7 @@ export default function Filter({ filters, defaultLabel = "최신순" }: Params) 
   const selectedFilter = filters.find((filter) => filter.value === sort)?.label || defaultLabel
 
   return (
-    <section className="relative z-10 h-[40px] w-[124px]">
+    <section className={cn("relative z-10 h-[40px] w-[124px]", className)}>
       <Button
         variant="custom"
         className="flex h-full w-full justify-between gap-[8px] rounded-[4px] border px-[12px] py-[8px]"

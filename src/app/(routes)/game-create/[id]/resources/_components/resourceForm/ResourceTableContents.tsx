@@ -79,7 +79,7 @@ export default function ResourceTableContents({ resource, isOpenEditState, isOpe
           {isChecked ? <SquareCheck /> : <Square />}
         </button>
       </div>
-      <article className="flex flex-1 flex-col gap-[12px]">
+      <article className="flex w-full flex-col gap-[12px]">
         <p className="w-fit rounded-[4px] bg-gray-10 px-[8px] py-[4px]">
           {resource.type === GameResourceResponseType.IMAGE ? "이미지" : "동영상"}
         </p>
