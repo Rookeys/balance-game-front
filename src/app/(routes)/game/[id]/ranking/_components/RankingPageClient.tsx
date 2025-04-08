@@ -9,7 +9,7 @@ import { Search } from "lucide-react"
 import DesktopResources from "./DesktopResources"
 import RankingResourceCard from "./RankingResourceCard"
 import TabletResources from "./TabletResources"
-import PlayNowSideBar from "./PlayNowSideBar"
+import PlayNowSideBar from "@/components/sidebar/PlayNowSideBar"
 
 export default function RankingPageClient() {
   const windowWidth = useResizeHandler()
