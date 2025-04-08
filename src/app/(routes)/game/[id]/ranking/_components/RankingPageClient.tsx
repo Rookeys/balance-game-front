@@ -1,7 +1,6 @@
 "use client"
 
 import Filter from "@/components/Filter"
-import SideBar from "@/components/form/gameRoom/_components/SideBar"
 import SearchInput from "@/components/SearchInput"
 import { resourceListFilters } from "@/constants/filters"
 import useResizeHandler from "@/hooks/useResizeHandler"
@@ -10,6 +9,7 @@ import { Search } from "lucide-react"
 import DesktopResources from "./DesktopResources"
 import RankingResourceCard from "./RankingResourceCard"
 import TabletResources from "./TabletResources"
+import PlayNowSideBar from "./PlayNowSideBar"
 
 export default function RankingPageClient() {
   const windowWidth = useResizeHandler()
@@ -19,7 +19,7 @@ export default function RankingPageClient() {
       <section className="flex w-full flex-col gap-[28px] md:gap-[40px]">
         <p>월드컵 랭킹 🏆</p>
         <article className="flex flex-col gap-[24px] rounded-[16px] bg-slate-100 py-[40px] md:gap-[40px]">
-          <p className="mx-auto rounded-[12px] border p-[20px]">
+          <p className="mx-auto w-full max-w-[343px] rounded-[12px] border p-[20px] md:max-w-[440px] lg:max-w-[528px]">
             타이틀이 들어가는 영역입니다. 최대 50자까지 작성합니다. 최대 50자까지 작성을 합니다.
           </p>
           <section className="flex items-center justify-center gap-[24px]">
@@ -63,7 +63,7 @@ export default function RankingPageClient() {
         </article>
         {windowWidth !== 0 && (windowWidth > SCREEN_SIZE.lg ? <DesktopResources /> : <TabletResources />)}
       </section>
-      <SideBar step={1} setStep={() => {}} />
+      <PlayNowSideBar />
     </section>
   )
 }
