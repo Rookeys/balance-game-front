@@ -1,8 +1,8 @@
 "use client"
 
+import CommentSocialAction from "@/components/comment/CommentSocialAction"
 import { ThumbsUp } from "lucide-react"
 import Image from "next/image"
-import CommentSocialAction from "./CommentSocialAction"
 
 export default function ReplyItem() {
   return (

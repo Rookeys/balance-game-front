@@ -4,7 +4,8 @@ import Filter from "@/components/Filter"
 import InputText from "@/components/form/inputText/InputText"
 import PlayNowAndRankingSideBar from "@/components/sidebar/PlayNowAndRankingSideBar"
 import { commentListFilters } from "@/constants/filters"
-import CommentItem from "./CommentItem"
+
+import CommentItem from "@/components/comment/CommentItem"
 import GameInformation from "./GameInformation"
 
 export default function CommentPageClient() {
