@@ -1,10 +1,9 @@
 "use client"
 import { GameListResponseCategoriesItem } from "@/api/orval/model/gameListResponseCategoriesItem"
-import { Button } from "@/components/Button"
 import GameReportModal from "@/components/GameReportModal"
+import MoreButton, { MoreAction } from "@/components/MoreButton"
 import { cn } from "@/utils/cn"
 import { share, ShareAPIRequest } from "@/utils/share"
-import { EllipsisVertical } from "lucide-react"
 import { useState } from "react"
 
 interface Params {
@@ -14,7 +13,6 @@ interface Params {
 }
 
 export default function SocialActionSection({ id, title, categories }: Params) {
-  const [isOpen, setIsOpen] = useState<boolean>(false)
   const [reportModal, setReportModal] = useState<boolean>(false)
 
   const handleShare = async () => {
@@ -26,13 +24,17 @@ export default function SocialActionSection({ id, title, categories }: Params) {
     share(shareData)
   }
 
+  const actions: MoreAction[] = [
+    { label: "공유하기", onClick: handleShare },
+    { label: "신고하기", onClick: () => setReportModal(true) }
+  ]
+
   return (
     <article
       className={cn(
         "relative flex h-[32px] items-center justify-between",
         categories && categories.length > 0 ? "justify-between" : "justify-end"
       )}
-      onClick={(e) => e.preventDefault()}
     >
       {categories && categories?.length > 0 && (
         <article className="flex gap-[4px]">
@@ -43,29 +45,10 @@ export default function SocialActionSection({ id, title, categories }: Params) {
           ))}
         </article>
       )}
-      <EllipsisVertical
-        size={24}
-        onClick={() => {
-          setIsOpen((prev) => !prev)
-        }}
-      />
-      {isOpen && (
-        <section className="absolute end-0 top-[32px] flex flex-col rounded-[8px] border bg-white">
-          <Button variant="custom" className="px-[24px] py-[20px]" onClick={handleShare}>
-            <p>공유하기</p>
-          </Button>
-          <Button
-            variant="custom"
-            className="px-[24px] py-[20px]"
-            onClick={() => {
-              setReportModal(true)
-            }}
-          >
-            <p>신고하기</p>
-          </Button>
-        </section>
-      )}
-      {reportModal && <GameReportModal id={id?.toString()} onClose={() => setReportModal(false)} />}
+      <div onClick={(e) => e.preventDefault()}>
+        <MoreButton actions={actions} />
+        {reportModal && <GameReportModal id={id?.toString()} onClose={() => setReportModal(false)} />}
+      </div>
     </article>
   )
 }

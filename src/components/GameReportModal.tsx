@@ -37,8 +37,7 @@ export default function GameReportModal({ id, onClose, overlayClose }: Params) {
   })
 
   const onSubmit = async (data: FieldValues) => {
-    console.log(`${id}신고`)
-    console.log(data)
+    alert(`${id}신고 ${JSON.stringify(data)}`)
   }
 
   return (
