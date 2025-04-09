@@ -8,18 +8,19 @@ interface Params {
   url: string
   start?: number
   end?: number
+  ratio?: number
 }
-export default function YoutubeThumbnailBoxWithHover({ url, start, end }: Params) {
+export default function YoutubeThumbnailBoxWithHover({ url, start, end, ratio }: Params) {
   const [hover, setHover] = useState<boolean>(false)
 
   return (
     <div className="relative h-full min-h-[120px] w-full bg-blue-10" onMouseEnter={() => setHover(true)}>
       {hover ? (
-        <YoutubeRatio url={url} ratio={4 / 3} start={start} end={end} />
+        <YoutubeRatio url={url} ratio={ratio} start={start} end={end} />
       ) : (
         <ImageRatio
           src={getYoutubeThumbnail(url)}
-          ratio={4 / 3}
+          ratio={ratio}
           alt="Video Thumbnail"
           className="cursor-pointer object-contain"
           fill

@@ -35,7 +35,7 @@ export default function MoreButton({ actions }: Params) {
     <div ref={wrapperRef} className="relative">
       <EllipsisVertical size={24} className="cursor-pointer" onClick={() => setIsOpen((prev) => !prev)} />
       {isOpen && (
-        <div className="absolute end-0 top-[28px] w-[124px] divide-y rounded-[8px] border bg-white px-[8px]">
+        <div className="absolute end-0 top-[28px] z-[20] w-[124px] divide-y rounded-[8px] border bg-white px-[8px]">
           {actions.map((action, index) => (
             <Button
               key={index}
