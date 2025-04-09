@@ -41,7 +41,7 @@ export default function CategoryGameList() {
   if (isLoading) return <section className="h-[100vh] bg-red-50" />
 
   return (
-    <section className="relative grid grid-cols-2 gap-x-[20px] gap-y-[20px] md:grid-cols-4 md:gap-y-[40px]">
+    <section className="relative grid w-full grid-cols-2 gap-x-[16px] gap-y-[16px] md:grid-cols-4 md:gap-x-[24px] md:gap-y-[40px]">
       {data?.pages?.map((page) =>
         page.content?.map((game, index) => <GameThumbnailSimpleCard key={index} fixedSize={false} {...game} />)
       )}

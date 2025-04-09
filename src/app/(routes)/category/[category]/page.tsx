@@ -22,13 +22,15 @@ export default async function CategoryGame({ params }: CategoryGameProps) {
   }
 
   return (
-    <section className="mt-[20px] flex flex-col gap-[12px] md:mt-[40px]">
-      <article className="flex items-center justify-between">
-        <Title />
-        <Filter filters={gameListFilters} />
-      </article>
-      <CategoryGameList />
-      <ScrollTopButton />
+    <section className="mt-[20px] flex flex-col items-center md:mt-[40px]">
+      <section className="flex w-full max-w-[1200px] flex-col gap-[12px]">
+        <article className="flex items-center justify-between">
+          <Title />
+          <Filter filters={gameListFilters} />
+        </article>
+        <CategoryGameList />
+        <ScrollTopButton />
+      </section>
     </section>
   )
 }
