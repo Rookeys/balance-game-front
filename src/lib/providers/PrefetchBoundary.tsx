@@ -12,8 +12,10 @@ export async function PrefetchBoundary({ prefetchActions, queryClient, children,
   // const queryClient = new QueryClient()
   try {
     if (Array.isArray(prefetchActions)) {
+      // await sleep(5000)
       await Promise.all(prefetchActions.map((prefetchAction) => prefetchAction))
     } else {
+      // await sleep(5000)
       await prefetchActions
     }
   } catch (error) {

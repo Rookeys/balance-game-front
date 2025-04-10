@@ -13,7 +13,7 @@ interface CreatorProps extends BaseProps {
 
 interface CategoryProps extends BaseProps {
   type: "category"
-  items: string[]
+  items?: string[]
 }
 
 type Props = CreatorProps | CategoryProps
@@ -44,7 +44,7 @@ export default function InfoCard(props: Props) {
     <div className="flex w-full flex-col gap-[12px] rounded-[12px] border p-[16px]">
       <p>{props.title}</p>
       <div className="flex items-center gap-[12px]">
-        {props.items.map((item, idx) => (
+        {props.items?.map((item, idx) => (
           <p key={idx} className="rounded-[4px] bg-gray-10 px-[8px] py-[4px]">
             {item}
           </p>
