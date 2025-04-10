@@ -32,7 +32,7 @@ export default function YoutubeEditModal({ onClose, onSave, overlayClose }: Para
         </article>
         <article className="flex flex-col gap-[24px] pb-[24px] pt-[20px]">
           <div className="flex flex-col gap-[12px]">
-            <div
+            <figure
               className={cn("relative aspect-[16/9] w-full")}
               // className={cn("relative aspect-[16/9] w-full", watch('url') && 'bg-black')}
             >
@@ -53,7 +53,7 @@ export default function YoutubeEditModal({ onClose, onSave, overlayClose }: Para
                   </div>
                 </div>
               )}
-            </div>
+            </figure>
           </div>
         </article>
         <article className="mb-[40px] flex flex-col gap-[12px]">

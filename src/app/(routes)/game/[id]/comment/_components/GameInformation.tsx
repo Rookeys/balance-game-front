@@ -6,9 +6,9 @@ import MobilePlayNowButton from "./MobilePlayNowButton"
 export default function GameInformation() {
   return (
     <section className="flex w-full flex-col gap-[28px] md:flex-row md:gap-[24px]">
-      <div className="relative aspect-[5/4] h-fit w-full flex-shrink-0 md:max-w-[50%] lg:max-w-[40%]">
+      <figure className="relative aspect-[5/4] h-fit w-full flex-shrink-0 md:max-w-[50%] lg:max-w-[40%]">
         <Image src={"/images/Rookeys.png"} alt="logo" fill className="rounded-[8px] object-cover" />
-      </div>
+      </figure>
       <section className="flex w-full flex-col gap-[12px] md:gap-[24px] lg:gap-[40px]">
         <article className="flex items-center gap-[12px]">
           <p className="rounded-[8px] bg-gray-10 px-[16px] py-[8px]">카테고리</p>

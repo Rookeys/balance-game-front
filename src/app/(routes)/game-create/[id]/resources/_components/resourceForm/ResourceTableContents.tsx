@@ -61,7 +61,7 @@ export default function ResourceTableContents({ resource, isOpenEditState, isOpe
 
   return (
     <section className="flex gap-[12px] py-[16px]">
-      <div className="relative my-auto h-[100px] w-[120px]">
+      <figure className="relative my-auto h-[100px] w-[120px]">
         <Image
           src={
             resource?.type === GameResourceResponseType.LINK
@@ -78,7 +78,7 @@ export default function ResourceTableContents({ resource, isOpenEditState, isOpe
         >
           {isChecked ? <SquareCheck /> : <Square />}
         </button>
-      </div>
+      </figure>
       <article className="flex w-full flex-col gap-[12px]">
         <p className="w-fit rounded-[4px] bg-gray-10 px-[8px] py-[4px]">
           {resource.type === GameResourceResponseType.IMAGE ? "이미지" : "동영상"}

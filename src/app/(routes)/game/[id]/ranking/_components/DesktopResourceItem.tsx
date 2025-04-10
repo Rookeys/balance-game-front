@@ -12,9 +12,9 @@ export default function DesktopResourceItem() {
         <p>n</p>
       </div>
       <div className="center flex w-[112px] flex-shrink-0 items-center px-[16px]">
-        <div className="relative h-[64px] w-[80px]">
+        <figure className="relative h-[64px] w-[80px]">
           <Image src={"/images/Rookeys.png"} alt="" fill />
-        </div>
+        </figure>
       </div>
       <div className="flex w-full items-center px-[16px]">
         <p className="line-clamp-1">리소스이름리소스이름리소스이름리소스이름리소스이름리소스이름리소스이름리소스이름</p>

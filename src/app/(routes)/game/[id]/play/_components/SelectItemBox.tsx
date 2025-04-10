@@ -48,7 +48,7 @@ export default function SelectItemBox({
         }}
         onAnimationComplete={handleAnimationComplete}
       >
-        <div className="relative">
+        <figure className="relative">
           <ImageRatio
             src={url}
             alt={`${title}-thumbnail`}
@@ -62,7 +62,7 @@ export default function SelectItemBox({
               <p className="break-words text-white">{title}</p>
             </article>
           )}
-        </div>
+        </figure>
         <Button className="w-full cursor-default bg-primary-10 text-md opacity-0">선택하는 버튼</Button>
       </motion.div>
     )

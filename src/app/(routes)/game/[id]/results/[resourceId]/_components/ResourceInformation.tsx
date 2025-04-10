@@ -9,13 +9,13 @@ import Image from "next/image"
 export default function ResourceInformation() {
   return (
     <section className="flex w-full flex-col gap-[12px] md:flex-row md:gap-[24px]">
-      <section className="relative aspect-[5/4] h-fit w-full flex-shrink-0 md:max-w-[50%] lg:max-w-[40%]">
+      <figure className="relative aspect-[5/4] h-fit w-full flex-shrink-0 md:max-w-[50%] lg:max-w-[40%]">
         <Image src={"/images/Rookeys.png"} alt="logo" fill className="rounded-[8px] object-cover" />
-      </section>
+      </figure>
       <section className="flex w-full gap-[16px] md:flex-col md:gap-[24px] lg:gap-[40px]">
-        <div className="relative h-[80px] w-[80px] flex-shrink-0 lg:h-[100px] lg:w-[100px]">
+        <figure className="relative h-[80px] w-[80px] flex-shrink-0 lg:h-[100px] lg:w-[100px]">
           <Image src={"/images/Rookeys.png"} fill alt="" />
-        </div>
+        </figure>
         <article className="flex w-full flex-col gap-[12px]">
           <p>리소스이름리소스이름리소스이름리소스이름</p>
           <div className="flex w-full flex-col">

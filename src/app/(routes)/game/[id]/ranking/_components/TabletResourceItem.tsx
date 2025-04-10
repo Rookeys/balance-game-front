@@ -9,9 +9,9 @@ export default function TabletResourceItem() {
     <section className="flex items-center gap-[12px] py-[16px]">
       <article className="flex h-full items-center">
         <p className="flex h-full items-center justify-center p-[8px] sm:p-[16px] md:w-[56px]">n</p>
-        <div className="relative my-auto h-[100px] w-[120px]">
+        <figure className="relative my-auto h-[100px] w-[120px]">
           <Image src={"/images/Rookeys.png"} fill alt="thumbnail" className="rounded-[8px]" />
-        </div>
+        </figure>
       </article>
       <article className="flex w-full flex-col gap-[12px]">
         {/* <p className="line-clamp-2">{"리소스 이름" || "\u00A0"}</p> */}

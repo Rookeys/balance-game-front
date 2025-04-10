@@ -16,7 +16,7 @@ export default function YoutubeThumbnailBoxWithModal({ url, start, end }: Params
 
   return (
     <>
-      <div className="relative h-full min-h-[120px] w-full bg-blue-10" onClick={() => setIsOpen(true)}>
+      <figure className="relative h-full min-h-[120px] w-full bg-blue-10" onClick={() => setIsOpen(true)}>
         <Image
           src={getYoutubeThumbnail(url)}
           alt="Video Thumbnail"
@@ -27,7 +27,7 @@ export default function YoutubeThumbnailBoxWithModal({ url, start, end }: Params
           unoptimized
           // loader={({ src }) => src}
         />
-      </div>
+      </figure>
       {isOpen && <YoutubeModal url={url} onClose={() => setIsOpen(false)} overlayClose start={start} end={end} />}
     </>
   )

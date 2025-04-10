@@ -9,9 +9,9 @@ export default async function MyPage() {
         <article className="rounded-[12px] bg-gray-10 px-[16px] py-[20px] md:px-[40px] md:py-[40px]">
           <article className="flex flex-col gap-[12px]">
             <div className="flex items-start justify-between">
-              <div className="relative h-[60px] w-[60px] flex-shrink-0 md:h-[80px] md:w-[80px]">
+              <figure className="relative h-[60px] w-[60px] flex-shrink-0 md:h-[80px] md:w-[80px]">
                 <Image src={"/images/Rookeys.png"} alt="" fill />
-              </div>
+              </figure>
               <Button className="bg-black text-white">프로필 수정</Button>
             </div>
             <div>

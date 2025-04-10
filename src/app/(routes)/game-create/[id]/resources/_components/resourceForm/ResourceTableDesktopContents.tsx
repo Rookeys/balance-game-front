@@ -67,7 +67,7 @@ export default function ResourceTableDesktopContents({
         </p>
       </div>
       <div className="col-span-3 flex items-center px-[16px] py-[16px]">
-        <div className="relative h-full w-full rounded-[8px]">
+        <figure className="relative h-full w-full rounded-[8px]">
           <Image
             src={
               resource?.type === GameResourceResponseType.LINK
@@ -80,7 +80,7 @@ export default function ResourceTableDesktopContents({
             fill
             className="mx-auto rounded-[8px]"
           />
-        </div>
+        </figure>
       </div>
       <div className="col-span-5 flex items-center px-[16px]">
         <p>{resource.title}</p>

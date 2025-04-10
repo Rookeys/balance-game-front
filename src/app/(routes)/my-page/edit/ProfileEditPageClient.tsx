@@ -11,12 +11,12 @@ export default function ProfileEditPageClient() {
   const [isOpenResignModal, setIsOpenResignModal] = useState<boolean>(false)
   return (
     <>
-      <div className="relative h-[60px] w-[60px] flex-shrink-0 md:h-[80px] md:w-[80px]">
+      <figure className="relative h-[60px] w-[60px] flex-shrink-0 md:h-[80px] md:w-[80px]">
         <Image src={"/images/Rookeys.png"} alt="" fill className="rounded-full" />
         <div className="absolute bottom-0 end-0 rounded-full border bg-white p-[6px]">
           <Camera size={16} />
         </div>
-      </div>
+      </figure>
       <article className="flex flex-col gap-[4px]">
         <p>닉네임</p>
         <InputText
