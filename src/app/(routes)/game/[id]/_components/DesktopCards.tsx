@@ -1,8 +1,8 @@
 "use client"
 import { useGetGameStatus } from "@/api/orval/client/main-page-controller/main-page-controller"
-import InfoCard from "./InforCard"
-import StatCard from "./StatCard"
 import { useParams } from "next/navigation"
+import InfoCard from "./InforCard"
+import LinkCard from "./LinkCard"
 
 export default function DesktopCards() {
   const { id } = useParams()
@@ -20,8 +20,8 @@ export default function DesktopCards() {
         />
       </div>
       <div className="flex items-center gap-[24px]">
-        <StatCard title="전체댓글" image="/images/Rookeys.png" alt="comment-image" />
-        <StatCard title="랭킹" image="/images/Rookeys.png" alt="ranking-image" />
+        <LinkCard href={`/game/${id}/comment`} title="전체댓글" image="/images/Rookeys.png" alt="comment-image" />
+        <LinkCard href={`/game/${id}/ranking`} title="랭킹" image="/images/Rookeys.png" alt="ranking-image" />
       </div>
     </article>
   )
