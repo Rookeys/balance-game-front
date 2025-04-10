@@ -8,9 +8,9 @@ export default function GameDetailBottomBar() {
   return (
     <BottomBarWrapper>
       <article className="flex items-center gap-[12px]">
-        <div className="flex h-[48px] w-[48px] flex-shrink-0 items-center justify-center rounded-[8px] border">
+        <button className="flex h-[48px] w-[48px] flex-shrink-0 items-center justify-center rounded-[8px] border">
           <Share />
-        </div>
+        </button>
         <Button type="button" className="h-full w-full bg-black text-white">
           플레이 하기
         </Button>
