@@ -5,7 +5,7 @@ import SideBarWrapper from "@/components/SideBarWrapper"
 
 export default function PlayOtherGameAndRankingSideBar() {
   return (
-    <SideBarWrapper className="flex flex-col gap-[24px]">
+    <SideBarWrapper>
       <div className="flex flex-col items-center gap-[20px] rounded-[20px] border px-[16px] py-[20px]">
         <PlayOtherGame />
       </div>

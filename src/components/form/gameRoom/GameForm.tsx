@@ -16,9 +16,9 @@ import { useParams } from "next/navigation"
 import { useEffect, useState } from "react"
 import { FieldErrors, FormProvider, useForm } from "react-hook-form"
 import { toast } from "sonner"
-import BottomBar from "./_components/BottomBar"
-import MobileTab from "./_components/MobileTab"
-import SideBar from "./_components/SideBar"
+import GameFormBottomBar from "./_components/GameFormBottomBar"
+import GameFormMobileTab from "./_components/GameFormMobileTab"
+import GameFormSideBar from "./_components/GameFormSideBar"
 
 const GameInformationForm = dynamic(() => import("./_components/GameInformationForm"))
 const GameAccessForm = dynamic(() => import("./_components/GameAccessForm"))
@@ -90,15 +90,15 @@ export default function GameForm() {
 
   return (
     <FormProvider {...formMethods}>
-      <MobileTab step={step} setStep={setStep} />
+      <GameFormMobileTab step={step} setStep={setStep} />
       <form
         className="flex w-full max-w-[1200px] justify-center gap-[24px] px-[16px] lg:px-0"
         onSubmit={handleSubmit(onSubmit, errorHandle)}
       >
         {step === 1 && <GameInformationForm />}
         {step === 2 && <GameAccessForm />}
-        <SideBar step={step} setStep={setStep} />
-        <BottomBar step={step} setStep={setStep} />
+        <GameFormSideBar step={step} setStep={setStep} />
+        <GameFormBottomBar step={step} setStep={setStep} />
       </form>
     </FormProvider>
   )

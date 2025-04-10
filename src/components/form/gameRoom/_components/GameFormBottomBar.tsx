@@ -1,3 +1,4 @@
+import BottomBarWrapper from "@/components/BottomBarWrapper"
 import { Button } from "@/components/Button"
 import ProgressBar from "@/components/ProgressBar"
 import { usePathname } from "next/navigation"
@@ -8,11 +9,11 @@ interface Params {
   setStep: Dispatch<SetStateAction<1 | 2>>
 }
 
-export default function BottomBar({ step, setStep }: Params) {
+export default function GameFormBottomBar({ step, setStep }: Params) {
   const pathname = usePathname()
   const percent = !pathname.includes("new") ? 100 : step === 1 ? 0 : 33
   return (
-    <section className="fixed bottom-0 z-10 flex w-full flex-col gap-[12px] bg-white px-[16px] pb-[20px] pt-[12px] md:hidden">
+    <BottomBarWrapper>
       <div className="flex items-center gap-[12px]">
         <ProgressBar percent={percent} />
         <p className="rounded-[100px] bg-gray-10 px-[12px] py-[4px]">{percent}%</p>
@@ -33,6 +34,6 @@ export default function BottomBar({ step, setStep }: Params) {
       >
         {step === 1 ? "다음" : "만들기"}
       </Button>
-    </section>
+    </BottomBarWrapper>
   )
 }

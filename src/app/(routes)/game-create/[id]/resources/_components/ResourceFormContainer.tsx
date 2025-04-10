@@ -1,27 +1,27 @@
 "use client"
 
-import Filter from "@/components/Filter"
-import MobileTab from "@/components/form/gameRoom/_components/MobileTab"
-import SideBar from "@/components/form/gameRoom/_components/SideBar"
-import SearchInput from "@/components/SearchInput"
-import { resourceListFilters } from "@/constants/filters"
-import { Search, Square, SquareCheck } from "lucide-react"
-import MediaTab from "../../medias/_components/MediaTab"
-import ResourceFormWrapper from "./resourceForm/ResourceFormWrapper"
-import { useParams, useRouter, useSearchParams } from "next/navigation"
-import { useGetResourceList } from "@/app/(routes)/game-create/[id]/resources/hooks/useGetResourceList"
-import { useSelectedResourceIdStore } from "@/store/selectedResourceId"
-import { useState } from "react"
-import ResourceDeleteModal from "./resourceForm/ResourceDeleteModal"
-import { toast } from "sonner"
 import {
   getGetResourcesUsingPageQueryKey,
   useDeleteSelectResources,
   useGetCountResourcesInGames
 } from "@/api/orval/client/game-resource-controller/game-resource-controller"
-import { useQueryClient } from "@tanstack/react-query"
+import { useGetResourceList } from "@/app/(routes)/game-create/[id]/resources/hooks/useGetResourceList"
 import { handleSelectAllToggle } from "@/app/(routes)/game-create/[id]/resources/utils/selectAllResource"
+import Filter from "@/components/Filter"
+import GameFormMobileTab from "@/components/form/gameRoom/_components/GameFormMobileTab"
+import SearchInput from "@/components/SearchInput"
+import { resourceListFilters } from "@/constants/filters"
+import { useSelectedResourceIdStore } from "@/store/selectedResourceId"
 import { getMaxRound } from "@/utils/getMaxRound"
+import { useQueryClient } from "@tanstack/react-query"
+import { Search, Square, SquareCheck } from "lucide-react"
+import { useParams, useRouter, useSearchParams } from "next/navigation"
+import { useState } from "react"
+import { toast } from "sonner"
+import MediaTab from "../../medias/_components/MediaTab"
+import ResourceDeleteModal from "./resourceForm/ResourceDeleteModal"
+import ResourceFormWrapper from "./resourceForm/ResourceFormWrapper"
+import GameFormSideBar from "@/components/form/gameRoom/_components/GameFormSideBar"
 
 export default function ResourceFormContainer() {
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState<boolean>(false)
@@ -58,7 +58,7 @@ export default function ResourceFormContainer() {
 
   return (
     <>
-      <MobileTab step={2} setStep={() => {}} />
+      <GameFormMobileTab step={2} setStep={() => {}} />
       <section className="flex w-full max-w-[1200px] justify-center gap-[24px] px-[16px] lg:px-0">
         <section className="flex w-full flex-col gap-[40px]">
           <MediaTab />
@@ -116,7 +116,7 @@ export default function ResourceFormContainer() {
             <ResourceFormWrapper />
           </section>
         </section>
-        <SideBar step={2} setStep={() => {}} />
+        <GameFormSideBar step={2} setStep={() => {}} />
       </section>
       {isOpenDeleteModal && (
         <ResourceDeleteModal onClick={handleAllDelete} onClose={() => setIsOpenDeleteModal(false)} />

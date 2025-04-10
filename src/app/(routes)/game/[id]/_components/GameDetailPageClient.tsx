@@ -8,6 +8,7 @@ import { getMaxRound } from "@/utils/getMaxRound"
 import { useParams } from "next/navigation"
 import DesktopCards from "./DesktopCards"
 import DesktopPlayButton from "./DesktopPlayButton"
+import GameDetailBottomBar from "./GameDetailBottomBar"
 import TabletCards from "./TabletCards"
 import TabletPlayButton from "./TabletPlayButton"
 
@@ -41,6 +42,7 @@ export default function GameDetailPageClient() {
       </section>
       <TabletCards />
       <TabletPlayButton />
+      <GameDetailBottomBar />
     </>
   )
 }
