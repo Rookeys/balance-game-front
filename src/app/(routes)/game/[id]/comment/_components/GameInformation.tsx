@@ -2,27 +2,32 @@
 
 import Image from "next/image"
 import MobilePlayNowButton from "./MobilePlayNowButton"
+import { useParams } from "next/navigation"
+import { useGetGameStatus } from "@/api/orval/client/main-page-controller/main-page-controller"
+import ResourceItem from "@/components/ResourceItem"
 
 export default function GameInformation() {
+  const { id } = useParams()
+  const { data } = useGetGameStatus(Number(id))
   return (
     <section className="flex w-full flex-col gap-[28px] md:flex-row md:gap-[24px]">
       <figure className="relative aspect-[5/4] h-fit w-full flex-shrink-0 md:max-w-[50%] lg:max-w-[40%]">
-        <Image src={"/images/Rookeys.png"} alt="logo" fill className="rounded-[8px] object-cover" />
+        <ResourceItem {...data?.leftSelection} ratio={5 / 4} />
       </figure>
       <section className="flex w-full flex-col gap-[12px] md:gap-[24px] lg:gap-[40px]">
         <article className="flex items-center gap-[12px]">
-          <p className="rounded-[8px] bg-gray-10 px-[16px] py-[8px]">카테고리</p>
-          <p className="rounded-[8px] bg-gray-10 px-[16px] py-[8px]">카테고리</p>
+          {data?.categories?.map((category, i) => (
+            <p key={`${category}-${i}`} className="rounded-[8px] bg-gray-10 px-[16px] py-[8px]">
+              {category}
+            </p>
+          ))}
         </article>
         <article className="flex flex-col gap-[12px]">
-          <p>타이틀이 들어가는 영역입니다. 최대 50자까지 작성합니다. 최대 50자까지 작성을 합니다.</p>
-          <p>
-            간단한 설명이 들어가는 영역입니다. 최대 2줄까지 작성합니다. 설명이 들어가는 영역입니다. 설명이 들어가는
-            영역입니다. 설명이
-          </p>
+          <p>{data?.title}</p>
+          <p>{data?.description}</p>
           <div className="flex items-center gap-[4px]">
             <Image
-              src={"/images/Rookeys.png"}
+              src={data?.userResponse?.profileImageUrl ?? "/images/Rookeys.png"}
               width={40}
               height={40}
               className="rounded-full"
@@ -30,7 +35,7 @@ export default function GameInformation() {
               placeholder="blur"
               blurDataURL="data:image/jepg;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mO88B8AAqUB0Y/H4mkAAAAASUVORK5CYII="
             />
-            <p className="line-clamp-1">닉네임이 들어갈 영역입니다</p>
+            <p className="line-clamp-1">{data?.userResponse?.nickname}</p>
           </div>
         </article>
       </section>
