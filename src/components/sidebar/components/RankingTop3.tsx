@@ -41,8 +41,8 @@ const RankingCard = ({ index, ...props }: RankingCardProps) => {
         />
       </div>
       <article className="flex w-full flex-col gap-[4px]">
-        {/* <p className="line-clamp-1">{"리소스 이름" || "\u00A0"}</p> */}
-        <p className="line-clamp-1">{props?.title}</p>
+        {/* <p className="line-clamp-1">{props?.title || "\u00A0"}</p> */}
+        <p className="line-clamp-1">{props?.title || "\u00A0"}</p>
         <p>승률 {calculateWinRate(props.winningNums, props.totalPlayNums)}%</p>
       </article>
     </section>

@@ -1,6 +1,6 @@
 "use client"
 
-import MobileTabBar, { MobileTabBarItem } from "@/components/MobileTabBar"
+import TabBar, { TabBarItem } from "@/components/TabBar"
 import { usePathname } from "next/navigation"
 import { Dispatch, SetStateAction, useMemo } from "react"
 import { toast } from "sonner"
@@ -14,7 +14,7 @@ export default function GameFormMobileTab({ step, setStep }: Params) {
   const pathname = usePathname()
   const isNewPage = pathname.includes("new")
 
-  const items: MobileTabBarItem[] = useMemo(
+  const items: TabBarItem[] = useMemo(
     () => [
       {
         value: "info",
@@ -41,7 +41,7 @@ export default function GameFormMobileTab({ step, setStep }: Params) {
     [isNewPage, setStep]
   )
 
-  const activeValue = step === 1 ? "info" : "public"
+  const currentValue = step === 1 ? "info" : "public"
 
-  return <MobileTabBar items={items} activeValue={activeValue} className="mb-[20px]" />
+  return <TabBar items={items} currentValue={currentValue} className="mb-[20px] md:hidden" />
 }

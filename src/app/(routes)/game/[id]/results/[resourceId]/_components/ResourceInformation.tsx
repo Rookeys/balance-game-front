@@ -1,28 +1,38 @@
 "use client"
 
+import { useGetResource } from "@/api/orval/client/game-resource-controller/game-resource-controller"
 import { Button } from "@/components/Button"
 import ProgressBar from "@/components/ProgressBar"
+import ResourceItem from "@/components/ResourceItem"
 import { calculateWinRate } from "@/utils/calculateWinRate"
 import { Share } from "lucide-react"
 import Image from "next/image"
+import { useParams } from "next/navigation"
 
 export default function ResourceInformation() {
+  const { id, resourceId } = useParams()
+
+  const { data: resourceData } = useGetResource(Number(id), Number(resourceId))
+
   return (
     <section className="flex w-full flex-col gap-[12px] md:flex-row md:gap-[24px]">
       <figure className="relative aspect-[5/4] h-fit w-full flex-shrink-0 md:max-w-[50%] lg:max-w-[40%]">
-        <Image src={"/images/Rookeys.png"} alt="logo" fill className="rounded-[8px] object-cover" />
+        <ResourceItem {...resourceData} ratio={5 / 4} />
       </figure>
       <section className="flex w-full gap-[16px] md:flex-col md:gap-[24px] lg:gap-[40px]">
         <figure className="relative h-[80px] w-[80px] flex-shrink-0 lg:h-[100px] lg:w-[100px]">
           <Image src={"/images/Rookeys.png"} fill alt="" />
         </figure>
         <article className="flex w-full flex-col gap-[12px]">
-          <p>리소스이름리소스이름리소스이름리소스이름</p>
+          <p>{resourceData?.title}</p>
           <div className="flex w-full flex-col">
-            <ProgressBar percent={Number(calculateWinRate(1, 20))} needIndicator={false} />
+            <ProgressBar
+              percent={Number(calculateWinRate(resourceData?.winningNums, resourceData?.totalPlayNums))}
+              needIndicator={false}
+            />
             <div className="flex items-center justify-between">
-              <p>{calculateWinRate(1, 20)}%</p>
-              <p>{1}번 우승</p>
+              <p>{calculateWinRate(resourceData?.winningNums, resourceData?.totalPlayNums)}%</p>
+              <p>{resourceData?.winningNums}번 우승</p>
             </div>
           </div>
         </article>
