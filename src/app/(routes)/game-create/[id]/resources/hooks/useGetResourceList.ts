@@ -8,11 +8,9 @@ export function useGetResourceList() {
   const { id } = useParams()
   const searchParams = useSearchParams()
 
-  const pageParam = searchParams.get("page") || 1
+  const page = Number(searchParams.get("page")) || 1
   const keywordParam = searchParams.get("keyword") || ""
   const sortParam = searchParams.get("sort") || ""
-
-  const page = Number(pageParam)
 
   const queryParams = {
     page,

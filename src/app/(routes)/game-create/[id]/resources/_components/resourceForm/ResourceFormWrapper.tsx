@@ -65,7 +65,7 @@ export default function ResourceFormWrapper() {
           />
         ))}
       </article>
-      {data?.totalPages && (
+      {!!data?.totalPages && (
         <Pagination
           currentPage={page}
           totalPages={data?.totalPages}

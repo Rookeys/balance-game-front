@@ -3,9 +3,9 @@ import Image from "next/image"
 
 interface Params {
   rank: number
-  name: string
+  name?: string
   winRate: string
-  wins: number
+  wins?: number
   src?: string
   iconSrc?: string
   maxWidth?: string
@@ -25,7 +25,9 @@ export default function RankingResourceCard({ rank, name, winRate, wins, src, ic
           <Image src={src ?? "/"} alt="/" fill />
         </figure>
         <div className="px-[16px] py-[8px] md:py-[12px]">
-          <p className="line-clamp-2 break-words">{name}</p>
+          <p className="line-clamp-2 break-words text-center">
+            {rank}등 {name}
+          </p>
         </div>
         <div className="w-full rounded-[8px] border px-[16px] py-[8px] text-center">
           <p>승률 {winRate}%</p>
