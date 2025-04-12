@@ -7,7 +7,7 @@ import { GetParentCommentsByGameResource1SortType } from "@/api/orval/model/getP
 import CommentItem from "@/components/comment/CommentItem"
 import ReplyItem from "@/components/comment/ReplyItem"
 import Filter from "@/components/Filter"
-import Textarea from "@/components/form/textarea/Textarea"
+import TextareaWithSubmit from "@/components/form/textarea/TextareaWithSubmit"
 import TabBar, { TabBarItem } from "@/components/TabBar"
 import { commentListFilters } from "@/constants/filters"
 import { useParams, useRouter, useSearchParams } from "next/navigation"
@@ -122,7 +122,13 @@ export default function GameResultPageClient() {
               <p>전체댓글 {commentData?.pages?.[0]?.totalElements ?? 0}</p>
               <Filter filters={commentListFilters} />
             </article>
-            <Textarea id="test" rows={3} disableEnter />
+            <TextareaWithSubmit
+              id="test"
+              disableEnter
+              maxLength={500}
+              inputClassName="!min-h-[100px]"
+              placeholder="해당 콘텐츠와 관련된 댓글을 작성해 주세요."
+            />
             {/* * 추 후 게임방 댓글에도 reply 가 생길 예정이지만, 아직은 리소스 댓글에만 추가되어 있으므로 tab === "resource" 로직이 들어있음 */}
             {(commentData?.pages ?? []).flatMap(
               (page) =>
