@@ -67,10 +67,7 @@ export default function CommentPageClient() {
             (page) => page.content?.map((comment) => <ReplyItem key={comment.commentId} {...comment} />) ?? []
           )}
           {!isFetchingNextPage && (
-            <div
-              ref={ref}
-              className="pointer-events-none absolute bottom-[200px] h-[4px] w-full bg-red-50 opacity-100"
-            />
+            <div ref={ref} className="pointer-events-none absolute bottom-[200px] h-[4px] w-full opacity-0" />
           )}
         </div>
       </section>
