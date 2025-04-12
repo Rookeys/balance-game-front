@@ -9,7 +9,6 @@ type Props = {
 }
 
 export async function PrefetchBoundary({ prefetchActions, queryClient, children, onError }: Props) {
-  // const queryClient = new QueryClient()
   try {
     if (Array.isArray(prefetchActions)) {
       // await sleep(5000)

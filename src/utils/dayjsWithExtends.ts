@@ -14,5 +14,5 @@ export const convertUtcToKoreaDate = (utcDate?: string | Date) => {
 
 export const convertUtcToKoreaDaTime = (utcDate?: string | Date) => {
   if (!utcDate) return ""
-  return dayjsWithExtends.utc(utcDate).tz("Asia/Seoul").format("YYYY.MM.DD-HH:mm")
+  return dayjsWithExtends.utc(utcDate).tz("Asia/Seoul").format("YYYY.MM.DD HH:mm")
 }
