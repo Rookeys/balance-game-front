@@ -1,7 +1,7 @@
 import { z } from "zod"
 
 export const postRoundSchema = z.object({
-  roundNumber: z.string({
+  roundNumber: z.number({
     required_error: "라운드값은 필수입니다."
   }),
   inviteCode: z.string().optional()

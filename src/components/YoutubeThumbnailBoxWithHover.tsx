@@ -1,6 +1,6 @@
 "use client"
 import { getYoutubeThumbnail } from "@/utils/getYoutubeThumbnail"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import ImageRatio from "./ImageRatio"
 import YoutubeRatio from "./YoutubeRatio"
 import ButtonYoutubePlay from "@/icons/Button_youtubePlay"
@@ -10,10 +10,17 @@ interface Params {
   start?: number
   end?: number
   ratio?: number
+  noDelay?: boolean
 }
-export default function YoutubeThumbnailBoxWithHover({ url, start, end, ratio }: Params) {
+export default function YoutubeThumbnailBoxWithHover({ url, start, end, ratio, noDelay = false }: Params) {
   const [hover, setHover] = useState<boolean>(false)
   const [ready, setReady] = useState<boolean>(false)
+
+  useEffect(() => {
+    if (noDelay) {
+      setHover(true)
+    }
+  }, [noDelay])
 
   return (
     <figure

@@ -5,7 +5,7 @@ import YouTube from "react-youtube"
 
 interface Params {
   ratio?: number
-  url: string
+  url?: string
   start?: number
   end?: number
   ready?: boolean

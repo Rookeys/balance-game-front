@@ -1,8 +1,9 @@
 "use client"
 
 import { Button } from "@/components/Button"
+import { useClickOutside } from "@/hooks/useClickOutside"
 import { EllipsisVertical } from "lucide-react"
-import { useEffect, useRef, useState } from "react"
+import { useRef, useState } from "react"
 
 export interface MoreAction {
   label: string
@@ -17,19 +18,7 @@ export default function MoreButton({ actions }: Params) {
   const [isOpen, setIsOpen] = useState(false)
   const wrapperRef = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
-      if (wrapperRef.current && !wrapperRef.current.contains(event.target as Node)) {
-        setIsOpen(false)
-      }
-    }
-    document.addEventListener("click", handleClickOutside)
-    document.addEventListener("touchstart", handleClickOutside)
-    return () => {
-      document.removeEventListener("click", handleClickOutside)
-      document.removeEventListener("touchstart", handleClickOutside)
-    }
-  }, [])
+  useClickOutside(wrapperRef, () => setIsOpen(false))
 
   return (
     <div ref={wrapperRef} className="relative">

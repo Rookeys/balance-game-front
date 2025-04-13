@@ -34,14 +34,12 @@ export default async function Game({ params }: GamePlayPageProps) {
     ])
 
     if (isSameGameId && existingPlayId) {
-      // Todo 게임하기 or 이어하기 설정, 완료 시 쿠키삭제
       return (
         <HydrationBoundary state={dehydrate(queryClient)}>
           <GamePlayPageClient playId={Number(existingPlayId.value)} />
         </HydrationBoundary>
       )
     } else {
-      // Todo 일부공개 시 inviteCode 넣는 로직
       return (
         <HydrationBoundary state={dehydrate(queryClient)}>
           <NewGamePageClient />

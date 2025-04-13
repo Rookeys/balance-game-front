@@ -1,18 +1,22 @@
+import { cn } from "@/utils/cn"
+
 interface Params {
   backgroundColor?: string
   barColor?: string
   percent: number
   needIndicator?: boolean
+  className?: string
 }
 
 export default function ProgressBar({
   backgroundColor = "#F5F5F5",
   barColor = "#000000",
   percent,
-  needIndicator = true
+  needIndicator = true,
+  className
 }: Params) {
   return (
-    <div className="relative h-[12px] w-full rounded-full bg-[#F5F5F5]" style={{ backgroundColor }}>
+    <div className={cn("relative h-[12px] w-full rounded-full bg-[#F5F5F5]", className)} style={{ backgroundColor }}>
       <div className="h-[12px] rounded-full bg-black" style={{ width: `${percent}%`, backgroundColor: barColor }} />
       {needIndicator && (
         <div
