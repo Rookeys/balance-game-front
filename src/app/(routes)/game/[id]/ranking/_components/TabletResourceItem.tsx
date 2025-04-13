@@ -25,6 +25,7 @@ export default function TabletResourceItem({ index, ...props }: Params) {
         </figure>
       </article>
       <article className="flex w-full flex-col gap-[12px]">
+        {/* \u00A0 = 공백 */}
         {/* <p className="line-clamp-2">{"리소스 이름" || "\u00A0"}</p> */}
         <p className="line-clamp-2">{props.title}</p>
         <div className="flex flex-col">

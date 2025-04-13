@@ -29,7 +29,7 @@ export default function GameDetailPageClient() {
     <>
       <section className="flex w-full max-w-[1200px] flex-col gap-[12px] md:flex-row md:gap-[24px]">
         <div className="relative aspect-[5/4] h-fit w-full md:max-w-[50%]">
-          <ResourceItem {...gameDetailData?.leftSelection} ratio={5 / 4} />
+          <ResourceItem {...gameDetailData?.leftSelection} ratio={5 / 4} noDelay />
         </div>
         <section className="flex w-full flex-col gap-[28px] md:max-w-[50%] md:gap-[40px]">
           <article className="flex items-center gap-[12px]">

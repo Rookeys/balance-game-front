@@ -17,7 +17,7 @@ export default function ResourceInformation() {
   return (
     <section className="flex w-full flex-col gap-[12px] md:flex-row md:gap-[24px]">
       <figure className="relative aspect-[5/4] h-fit w-full flex-shrink-0 md:max-w-[50%] lg:max-w-[40%]">
-        <ResourceItem {...resourceData} ratio={5 / 4} />
+        <ResourceItem {...resourceData} ratio={5 / 4} noDelay />
       </figure>
       <section className="flex w-full gap-[16px] md:flex-col md:gap-[24px] lg:gap-[40px]">
         <figure className="relative h-[80px] w-[80px] flex-shrink-0 lg:h-[100px] lg:w-[100px]">
