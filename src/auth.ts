@@ -31,6 +31,7 @@ export const authOptions: AuthOptions = {
       try {
         if (trigger === "update" && session.nickname) {
           token.nickname = session.nickname
+          token.image = session.image
         }
 
         if (account && user) {

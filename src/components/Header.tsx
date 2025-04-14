@@ -40,15 +40,15 @@ export default function Header() {
         <ThemeToggle />
         <BlindToggle />
         {session ? (
-          <Link href={"/my-page"} aria-label="my-page">
+          <Link href="/my-page" aria-label="my-page">
             <Image
-              className="rounded-full object-contain"
+              className="h-[40px] w-[40px] rounded-full object-cover"
               src={session?.user?.image ?? "/images/Rookeys.png"}
               alt="profile-image"
               width={40}
               height={40}
               placeholder="blur"
-              blurDataURL="data:image/jepg;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mO88B8AAqUB0Y/H4mkAAAAASUVORK5CYII="
+              blurDataURL="data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mO88B8AAqUB0Y/H4mkAAAAASUVORK5CYII="
             />
           </Link>
         ) : (

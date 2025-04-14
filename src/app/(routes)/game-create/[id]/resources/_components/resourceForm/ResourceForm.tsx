@@ -44,9 +44,9 @@ export default function ResourceForm({ resource, indexNum, tableBaseClassName }:
     resolver: zodResolver(putGameImageResourceSchema)
   })
 
-  const { mutateAsync: RequestPresignedUrl } = useGetPreSignedUrl()
+  const { mutateAsync: requestPresignedUrl } = useGetPreSignedUrl()
 
-  const { mutateAsync: UpdateImageResource } = useUpdateResource()
+  const { mutateAsync: updateImageResource } = useUpdateResource()
 
   const { handleSubmit, setValue } = formMethods
 
@@ -54,7 +54,7 @@ export default function ResourceForm({ resource, indexNum, tableBaseClassName }:
     try {
       let imageURL = null
       if (data.newImage && data.newImage.length > 0) {
-        const presignedUrl = (await RequestPresignedUrl({ data: { prefix: "image", length: 1 } }))[0] // 해당 폼에서는 무조건 1임
+        const presignedUrl = (await requestPresignedUrl({ data: { prefix: "image", length: 1 } }))[0] // 해당 폼에서는 무조건 1임
 
         await axios.put(presignedUrl, data.newImage[0], {
           headers: {
@@ -73,7 +73,7 @@ export default function ResourceForm({ resource, indexNum, tableBaseClassName }:
         ...data,
         content: imageURL ? imageURL : data.content
       } satisfies GameResourceRequest
-      await UpdateImageResource({
+      await updateImageResource({
         gameId: Number(id),
         resourceId: Number(resource.resourceId),
         data: putGameResourceRequest

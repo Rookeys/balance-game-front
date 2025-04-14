@@ -28,7 +28,7 @@ export default function MoreButton({ actions }: Params) {
           {actions.map((action, index) => (
             <Button
               key={index}
-              className="px-[24px] py-[20px]"
+              className="w-full px-[24px] py-[20px]"
               onClick={() => {
                 action.onClick()
                 setIsOpen(false)

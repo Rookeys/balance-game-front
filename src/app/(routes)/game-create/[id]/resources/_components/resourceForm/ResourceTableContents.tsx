@@ -1,28 +1,23 @@
 "use client"
-import { GameResourceResponse } from "@/api/orval/model/gameResourceResponse"
-import { GameResourceResponseType } from "@/api/orval/model/gameResourceResponseType"
-import { Button } from "@/components/Button"
-import ProgressBar from "@/components/ProgressBar"
-import { getYoutubeThumbnail } from "@/utils/getYoutubeThumbnail"
-import { EllipsisVertical, Square, SquareCheck } from "lucide-react"
-import Image from "next/image"
-import { Dispatch, SetStateAction, useState } from "react"
-import ResourceDeleteModal from "./ResourceDeleteModal"
-import ImageEditModal from "./ImageEditModal"
-import YoutubeEditModal from "./YoutubeEditModal"
-import { useSelectedResourceIdStore } from "@/store/selectedResourceId"
 import {
   getGetResourcesUsingPageQueryKey,
   useDeleteResource
 } from "@/api/orval/client/game-resource-controller/game-resource-controller"
-import { useQueryClient } from "@tanstack/react-query"
-import { useParams } from "next/navigation"
+import { GameResourceResponse } from "@/api/orval/model/gameResourceResponse"
+import { GameResourceResponseType } from "@/api/orval/model/gameResourceResponseType"
+import MoreButton, { MoreAction } from "@/components/MoreButton"
+import ProgressBar from "@/components/ProgressBar"
+import { useSelectedResourceIdStore } from "@/store/selectedResourceId"
 import { calculateWinRate } from "@/utils/calculateWinRate"
-
-const editItems = [
-  { value: "edit", label: "수정" },
-  { value: "delete", label: "삭제" }
-]
+import { getYoutubeThumbnail } from "@/utils/getYoutubeThumbnail"
+import { useQueryClient } from "@tanstack/react-query"
+import { Square, SquareCheck } from "lucide-react"
+import Image from "next/image"
+import { useParams } from "next/navigation"
+import { Dispatch, SetStateAction } from "react"
+import ImageEditModal from "./ImageEditModal"
+import ResourceDeleteModal from "./ResourceDeleteModal"
+import YoutubeEditModal from "./YoutubeEditModal"
 
 interface Params {
   resource: GameResourceResponse
@@ -32,7 +27,6 @@ interface Params {
 }
 
 export default function ResourceTableContents({ resource, isOpenEditState, isOpenDeleteState, onSave }: Params) {
-  const [isOpen, setIsOpen] = useState<boolean>(false)
   const [isOpenEditModal, setIsOpenEditModal] = isOpenEditState
   const [isOpenDeleteModal, setIsOpenDeleteModal] = isOpenDeleteState
 
@@ -51,13 +45,16 @@ export default function ResourceTableContents({ resource, isOpenEditState, isOpe
     await queryClient.invalidateQueries({ queryKey: getGetResourcesUsingPageQueryKey(Number(id)) })
   }
 
-  const handleClick = (value: "edit" | "delete") => {
-    if (value === "edit") {
-      setIsOpenEditModal(true)
-    } else {
-      setIsOpenDeleteModal(true)
+  const moreActions: MoreAction[] = [
+    {
+      label: "수정",
+      onClick: () => setIsOpenEditModal(true)
+    },
+    {
+      label: "삭제",
+      onClick: () => setIsOpenDeleteModal(true)
     }
-  }
+  ]
 
   return (
     <section className="flex gap-[12px] py-[16px]">
@@ -96,7 +93,8 @@ export default function ResourceTableContents({ resource, isOpenEditState, isOpe
         </div>
       </article>
       <div className="relative flex items-start">
-        <button
+        <MoreButton actions={moreActions} />
+        {/* <button
           type="button"
           onClick={() => {
             setIsOpen((prev) => !prev)
@@ -120,7 +118,7 @@ export default function ResourceTableContents({ resource, isOpenEditState, isOpe
               </Button>
             ))}
           </section>
-        )}
+        )} */}
       </div>
       {isOpenDeleteModal && <ResourceDeleteModal onClick={handleDelete} onClose={() => setIsOpenDeleteModal(false)} />}
       {isOpenEditModal &&
