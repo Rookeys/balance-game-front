@@ -1,9 +1,13 @@
 "use client"
 
-import { useGetResultRanking } from "@/api/orval/client/game-results-controller/game-results-controller"
+import {
+  useGetResultRanking,
+  useGetResultRankingUsingPage
+} from "@/api/orval/client/game-results-controller/game-results-controller"
 import { useGetGameStatus } from "@/api/orval/client/main-page-controller/main-page-controller"
 import { GetResultRankingSortType } from "@/api/orval/model/getResultRankingSortType"
 import Filter from "@/components/Filter"
+import { Pagination } from "@/components/Pagination"
 import SearchInput from "@/components/SearchInput"
 import PlayNowSideBar from "@/components/sidebar/PlayNowSideBar"
 import { resourceListFilters } from "@/constants/filters"
@@ -16,7 +20,6 @@ import { useParams, useRouter, useSearchParams } from "next/navigation"
 import DesktopResources from "./DesktopResources"
 import RankingResourceCard from "./RankingResourceCard"
 import TabletResources from "./TabletResources"
-import { Pagination } from "@/components/Pagination"
 
 export default function RankingPageClient() {
   const windowWidth = useResizeHandler()
@@ -26,14 +29,14 @@ export default function RankingPageClient() {
 
   const sort = searchParams.get("sort") || GetResultRankingSortType.WIN_RATE_DESC
   const keyword = searchParams.get("keyword") || ""
+  const page = Number(searchParams.get("page")) || 1
 
-  const { data: resources } = useGetResultRanking(Number(id), {
+  const { data: resources } = useGetResultRankingUsingPage(Number(id), {
     sortType: sort as GetResultRankingSortType,
     title: keyword,
-    size: 10
+    size: 10,
+    page
   })
-
-  const page = Number(searchParams.get("page")) || 1
 
   const handlePageChange = (newPage: number) => {
     const newSearchParams = new URLSearchParams(searchParams.toString())

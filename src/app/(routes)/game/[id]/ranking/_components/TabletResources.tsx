@@ -1,6 +1,6 @@
 "use client"
 
-import { useGetResultRanking } from "@/api/orval/client/game-results-controller/game-results-controller"
+import { useGetResultRankingUsingPage } from "@/api/orval/client/game-results-controller/game-results-controller"
 import { GetResultRankingSortType } from "@/api/orval/model/getResultRankingSortType"
 import { useParams, useSearchParams } from "next/navigation"
 import TabletResourceItem from "./TabletResourceItem"
@@ -10,12 +10,13 @@ export default function TabletResources() {
   const searchParams = useSearchParams()
   const sort = searchParams.get("sort") || GetResultRankingSortType.WIN_RATE_DESC
   const keyword = searchParams.get("keyword") || ""
-  // const page = Number(searchParams.get("page")) || 1
+  const page = Number(searchParams.get("page")) || 1
 
-  const { data: resources } = useGetResultRanking(Number(id), {
+  const { data: resources } = useGetResultRankingUsingPage(Number(id), {
     sortType: sort as GetResultRankingSortType,
     title: keyword,
-    size: 10
+    size: 10,
+    page
   })
 
   return (
