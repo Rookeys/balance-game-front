@@ -16,7 +16,7 @@ import ReplyItem from "./ReplyItem"
 export default function CommentItem(props: GameResourceParentCommentResponse) {
   const [isOpenReply, setIsOpenReply] = useState<boolean>(false)
 
-  const { resourceId } = useParams()
+  const { id, resourceId } = useParams()
 
   const {
     data: replyData,
@@ -24,7 +24,7 @@ export default function CommentItem(props: GameResourceParentCommentResponse) {
     // fetchNextPage,
     // hasNextPage,
     // isFetchingNextPage
-  } = useGetChildrenCommentsByGameResourceInfinite(Number(resourceId), props.commentId!, undefined, {
+  } = useGetChildrenCommentsByGameResourceInfinite(Number(id), Number(resourceId), props.commentId!, undefined, {
     query: {
       initialPageParam: undefined,
       getNextPageParam: (lastPage) => {

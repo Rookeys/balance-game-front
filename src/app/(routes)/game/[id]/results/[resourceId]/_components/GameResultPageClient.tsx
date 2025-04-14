@@ -1,9 +1,9 @@
 "use client"
-import { useGetParentCommentsByGameResource1Infinite } from "@/api/orval/client/game-resource-comments-controller/game-resource-comments-controller"
+import { useGetParentCommentsByGameResourceInfinite } from "@/api/orval/client/game-resource-comments-controller/game-resource-comments-controller"
 import { useGetResource } from "@/api/orval/client/game-resource-controller/game-resource-controller"
-import { useGetParentCommentsByGameResourceInfinite } from "@/api/orval/client/game-result-comments-controller/game-result-comments-controller"
-import { GetChildrenCommentsByGameResourceSortType } from "@/api/orval/model/getChildrenCommentsByGameResourceSortType"
-import { GetParentCommentsByGameResource1SortType } from "@/api/orval/model/getParentCommentsByGameResource1SortType"
+import { useGetCommentsByGameResultInfinite } from "@/api/orval/client/game-result-comments-controller/game-result-comments-controller"
+import { GetCommentsByGameResultSortType } from "@/api/orval/model/getCommentsByGameResultSortType"
+import { GetParentCommentsByGameResourceSortType } from "@/api/orval/model/getParentCommentsByGameResourceSortType"
 import CommentItem from "@/components/comment/CommentItem"
 import ReplyItem from "@/components/comment/ReplyItem"
 import Filter from "@/components/Filter"
@@ -34,9 +34,9 @@ export default function GameResultPageClient() {
     fetchNextPage: fetchNextPageGame,
     hasNextPage: hasNextPageGame,
     isFetchingNextPage: isFetchingNextPageGame
-  } = useGetParentCommentsByGameResourceInfinite(
+  } = useGetCommentsByGameResultInfinite(
     Number(id),
-    { sortType: sort as GetChildrenCommentsByGameResourceSortType },
+    { sortType: sort as GetCommentsByGameResultSortType },
     {
       query: {
         initialPageParam: undefined,
@@ -55,9 +55,10 @@ export default function GameResultPageClient() {
     fetchNextPage: fetchNextPageResource,
     hasNextPage: hasNextPageResource,
     isFetchingNextPage: isFetchingNextPageResource
-  } = useGetParentCommentsByGameResource1Infinite(
+  } = useGetParentCommentsByGameResourceInfinite(
+    Number(id),
     Number(resourceId),
-    { sortType: sort as GetParentCommentsByGameResource1SortType },
+    { sortType: sort as GetParentCommentsByGameResourceSortType },
     {
       query: {
         initialPageParam: undefined,

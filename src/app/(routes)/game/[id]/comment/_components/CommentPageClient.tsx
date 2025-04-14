@@ -4,8 +4,8 @@ import Filter from "@/components/Filter"
 import PlayNowAndRankingSideBar from "@/components/sidebar/PlayNowAndRankingSideBar"
 import { commentListFilters } from "@/constants/filters"
 
-import { useGetParentCommentsByGameResourceInfinite } from "@/api/orval/client/game-result-comments-controller/game-result-comments-controller"
-import { GetChildrenCommentsByGameResourceSortType } from "@/api/orval/model/getChildrenCommentsByGameResourceSortType"
+import { useGetCommentsByGameResultInfinite } from "@/api/orval/client/game-result-comments-controller/game-result-comments-controller"
+import { GetCommentsByGameResultSortType } from "@/api/orval/model/getCommentsByGameResultSortType"
 import ReplyItem from "@/components/comment/ReplyItem"
 import TextareaWithSubmit from "@/components/form/textarea/TextareaWithSubmit"
 import { useParams, useSearchParams } from "next/navigation"
@@ -17,24 +17,21 @@ export default function CommentPageClient() {
   const { id } = useParams()
   const searchParams = useSearchParams()
 
-  const tab = searchParams.get("tab") ?? "all"
   const sort = searchParams.get("sort") ?? "RECENT"
 
-  const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    useGetParentCommentsByGameResourceInfinite(
-      Number(id),
-      { sortType: sort as GetChildrenCommentsByGameResourceSortType },
-      {
-        query: {
-          initialPageParam: undefined,
-          getNextPageParam: (lastPage) => {
-            const lastItem = lastPage.content?.[lastPage.content.length - 1]
-            return lastPage.hasNext ? lastItem?.commentId : undefined
-          },
-          enabled: tab === "all"
+  const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } = useGetCommentsByGameResultInfinite(
+    Number(id),
+    { sortType: sort as GetCommentsByGameResultSortType },
+    {
+      query: {
+        initialPageParam: undefined,
+        getNextPageParam: (lastPage) => {
+          const lastItem = lastPage.content?.[lastPage.content.length - 1]
+          return lastPage.hasNext ? lastItem?.commentId : undefined
         }
       }
-    )
+    }
+  )
 
   const { ref, inView } = useInView({
     threshold: 1

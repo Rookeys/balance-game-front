@@ -45,6 +45,12 @@ module.exports = {
               useQuery: true,
               useInfinite: false
             }
+          },
+          getResultRankingUsingPage: {
+            query: {
+              useQuery: true,
+              useInfinite: false
+            }
           }
         }
       },

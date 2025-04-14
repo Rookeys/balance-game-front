@@ -1,6 +1,6 @@
-import type { GetParentCommentsByGameResource1SortType } from "./getParentCommentsByGameResource1SortType"
+import type { GetCommentsByGameResultSortType } from "./getCommentsByGameResultSortType"
 
-export type GetParentCommentsByGameResource1Params = {
+export type GetCommentsByGameResultParams = {
   /**
    * 커서 ID (페이징 처리용)
    */
@@ -16,5 +16,5 @@ export type GetParentCommentsByGameResource1Params = {
   /**
    * 정렬 방식
    */
-  sortType?: GetParentCommentsByGameResource1SortType
+  sortType?: GetCommentsByGameResultSortType
 }
