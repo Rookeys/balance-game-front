@@ -14,20 +14,25 @@ type FilterOption = {
 interface Params {
   filters: FilterOption[]
   defaultLabel?: string
+  onClick?: (sort: string) => void
   className?: string
 }
 
-export default function Filter({ filters, defaultLabel = "최신순", className }: Params) {
+export default function Filter({ filters, defaultLabel = "최신순", onClick, className }: Params) {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const searchParams = useSearchParams()
   const sort = searchParams.get("sort")
   const router = useRouter()
 
   const handleFilter = (sort: string) => {
-    const params = new URLSearchParams(searchParams)
-    params.set("sort", sort)
+    if (onClick) {
+      onClick(sort)
+    } else {
+      const params = new URLSearchParams(searchParams)
+      params.set("sort", sort)
 
-    router.replace(`?${params.toString()}`, { scroll: false })
+      router.replace(`?${params.toString()}`, { scroll: false })
+    }
   }
 
   const selectedFilter = filters.find((filter) => filter.value === sort)?.label || defaultLabel

@@ -7,10 +7,13 @@ import ResourceItem from "@/components/ResourceItem"
 import { calculateWinRate } from "@/utils/calculateWinRate"
 import { Share } from "lucide-react"
 import Image from "next/image"
-import { useParams } from "next/navigation"
+import { useParams, useSearchParams } from "next/navigation"
 
 export default function ResourceInformation() {
   const { id, resourceId } = useParams()
+  const searchParams = useSearchParams()
+
+  const played = searchParams.get("played")
 
   const { data: resourceData } = useGetResource(Number(id), Number(resourceId))
 
@@ -40,7 +43,7 @@ export default function ResourceInformation() {
           <button className="flex-shrink-0 rounded-[8px] border p-[12px]">
             <Share />
           </button>
-          <Button className="w-full bg-gray-10">다시하기</Button>
+          <Button className="w-full bg-gray-10">{played ? "다시하기" : "플레이하기"}</Button>
         </article>
       </section>
     </section>

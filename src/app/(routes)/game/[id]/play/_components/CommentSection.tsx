@@ -9,7 +9,7 @@ import Filter from "@/components/Filter"
 import TextareaWithSubmit from "@/components/form/textarea/TextareaWithSubmit"
 import TabBar, { TabBarItem } from "@/components/TabBar"
 import { commentListFilters } from "@/constants/filters"
-import { useParams, useSearchParams } from "next/navigation"
+import { useParams } from "next/navigation"
 import { useEffect, useState } from "react"
 import { useInView } from "react-intersection-observer"
 
@@ -21,9 +21,7 @@ export default function CommentSection({ playId }: Params) {
   const { id } = useParams()
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [commentTarget, setCommentTarget] = useState<1 | 2>(1)
-  const searchParams = useSearchParams()
-  const sort = searchParams.get("sort")
-  // const [sort, setSort] = useState<GetParentCommentsByGameResourceSortType>()
+  const [sort, setSort] = useState<GetParentCommentsByGameResourceSortType>()
 
   const { data: gamePlayData } = useContinuePlayRoom(Number(id), playId)
 
@@ -57,9 +55,6 @@ export default function CommentSection({ playId }: Params) {
     }
   }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage])
 
-  // items: TabBarItem[]
-  //   currentValue: string
-
   const tabItems: TabBarItem[] = [
     {
       value: 1,
@@ -81,7 +76,10 @@ export default function CommentSection({ playId }: Params) {
           {isLoading && <section className="h-[100vh] w-full bg-red-50" />}
           <article className="flex items-center justify-between">
             <p>전체댓글 {data?.pages?.[0]?.totalElements ?? 0}</p>
-            <Filter filters={commentListFilters} />
+            <Filter
+              filters={commentListFilters}
+              onClick={(sort) => setSort(sort as GetParentCommentsByGameResourceSortType)}
+            />
           </article>
           <TextareaWithSubmit
             id="test"

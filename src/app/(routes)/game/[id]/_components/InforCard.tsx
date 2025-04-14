@@ -28,7 +28,7 @@ export default function InfoCard(props: Props) {
             src={props.creatorProfile}
             width={40}
             height={40}
-            className="rounded-full"
+            className="h-[40px] w-[40px] rounded-full"
             alt="creator-image"
             placeholder="blur"
             blurDataURL="data:image/jepg;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mO88B8AAqUB0Y/H4mkAAAAASUVORK5CYII="

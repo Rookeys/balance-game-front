@@ -17,5 +17,13 @@ export const GameResponseCategoriesItem = {
   DRAMA: "DRAMA",
   ROMANCE: "ROMANCE",
   CRIME: "CRIME",
-  SURVIVAL: "SURVIVAL"
+  SURVIVAL: "SURVIVAL",
+  EVERYDAY: "EVERYDAY",
+  FOOD: "FOOD",
+  LOVE: "LOVE",
+  SONG: "SONG",
+  CELEBRITY: "CELEBRITY",
+  ANIMAL: "ANIMAL",
+  ANIME: "ANIME",
+  ETC: "ETC"
 } as const

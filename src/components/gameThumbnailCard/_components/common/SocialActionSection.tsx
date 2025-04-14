@@ -32,7 +32,7 @@ export default function SocialActionSection({ id, title, categories, isMine }: P
 
   const actions: MoreAction[] = isMine
     ? [
-        { label: "수정하기", onClick: () => router.push(`/game-create/${id}/medias`) },
+        { label: "수정하기", onClick: () => router.push(`/game-create/${id}/edit`) },
         { label: "삭제하기", onClick: () => setIsOpenDeleteModal(true) }
       ]
     : [
