@@ -10,13 +10,13 @@ export const gameListFilters = [
 export const resourceListFilters = [
   { value: GetResourcesUsingPageSortType.RESENT, label: "최신순" },
   { value: GetResourcesUsingPageSortType.OLD, label: "등록순" },
-  { value: GetResourcesUsingPageSortType.WIN_RATE_DESC, label: "승률 높" },
-  { value: GetResourcesUsingPageSortType.WIN_RATE_ASC, label: "승률 낮" }
+  { value: GetResourcesUsingPageSortType.WIN_RATE_DESC, label: "승률 높" }
+  // { value: GetResourcesUsingPageSortType.WIN_RATE_ASC, label: "승률 낮" }
 ]
 
 export const commentListFilters = [
   { value: GetParentCommentsByGameResourceSortType.RECENT, label: "최신순" },
   { value: GetParentCommentsByGameResourceSortType.OLD, label: "등록순" },
-  { value: GetParentCommentsByGameResourceSortType.LIKE_DESC, label: "좋아요 높" },
-  { value: GetParentCommentsByGameResourceSortType.LIKE_ASC, label: "좋아요 낮" }
+  { value: GetParentCommentsByGameResourceSortType.LIKE_DESC, label: "좋아요 높" }
+  // { value: GetParentCommentsByGameResourceSortType.LIKE_ASC, label: "좋아요 낮" }
 ]

@@ -3,13 +3,9 @@
 import MoreButton, { MoreAction } from "@/components/MoreButton"
 
 export default function CommentSocialAction() {
-  const onEdit = () => {
-    alert("onEdit 실행")
-  }
-
-  const onShare = () => {
-    alert("onShare 실행")
-  }
+  // const onEdit = () => {
+  //   alert("onEdit 실행")
+  // }
 
   const onDelete = () => {
     alert("onDelete 실행")
@@ -19,14 +15,10 @@ export default function CommentSocialAction() {
 
   const actions: MoreAction[] = isMine
     ? [
-        { label: "수정하기", onClick: onEdit },
-        { label: "공유하기", onClick: onShare },
+        // { label: "수정하기", onClick: onEdit },
         { label: "삭제하기", onClick: onDelete }
       ]
-    : [
-        { label: "공유하기", onClick: onShare },
-        { label: "신고하기", onClick: onDelete }
-      ]
+    : [{ label: "신고하기", onClick: onDelete }]
 
   return (
     <>

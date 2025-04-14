@@ -3,14 +3,14 @@
 import { cn } from "@/utils/cn"
 
 export interface TabBarItem {
-  value: string
+  value: string | number
   label: string
   onClick: () => void
 }
 
 interface TabBarProps {
   items: TabBarItem[]
-  currentValue: string
+  currentValue: string | number
   className?: string
 }
 
