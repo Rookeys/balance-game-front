@@ -4,16 +4,22 @@ import GameReportModal from "@/components/GameReportModal"
 import MoreButton, { MoreAction } from "@/components/MoreButton"
 import { cn } from "@/utils/cn"
 import { share, ShareAPIRequest } from "@/utils/share"
+import { useRouter } from "next/navigation"
 import { useState } from "react"
+import GameDeleteModal from "./GameDeleteModal"
 
 interface Params {
   id?: number
   title?: string
   categories?: GameListResponseCategoriesItem[]
+  isMine?: boolean
 }
 
-export default function SocialActionSection({ id, title, categories }: Params) {
-  const [reportModal, setReportModal] = useState<boolean>(false)
+export default function SocialActionSection({ id, title, categories, isMine }: Params) {
+  const [isOpenReportModal, setIsOpenReportModal] = useState<boolean>(false)
+  const [isOpenDeleteModal, setIsOpenDeleteModal] = useState<boolean>(false)
+
+  const router = useRouter()
 
   const handleShare = async () => {
     const shareData: ShareAPIRequest = {
@@ -24,10 +30,15 @@ export default function SocialActionSection({ id, title, categories }: Params) {
     share(shareData)
   }
 
-  const actions: MoreAction[] = [
-    { label: "공유하기", onClick: handleShare },
-    { label: "신고하기", onClick: () => setReportModal(true) }
-  ]
+  const actions: MoreAction[] = isMine
+    ? [
+        { label: "수정하기", onClick: () => router.push(`/game-create/${id}/medias`) },
+        { label: "삭제하기", onClick: () => setIsOpenDeleteModal(true) }
+      ]
+    : [
+        { label: "공유하기", onClick: handleShare },
+        { label: "신고하기", onClick: () => setIsOpenReportModal(true) }
+      ]
 
   return (
     <article
@@ -47,7 +58,8 @@ export default function SocialActionSection({ id, title, categories }: Params) {
       )}
       <div onClick={(e) => e.preventDefault()}>
         <MoreButton actions={actions} />
-        {reportModal && <GameReportModal id={id?.toString()} onClose={() => setReportModal(false)} />}
+        {isOpenReportModal && <GameReportModal id={id?.toString()} onClose={() => setIsOpenReportModal(false)} />}
+        {isOpenDeleteModal && <GameDeleteModal id={Number(id)} onClose={() => setIsOpenDeleteModal(false)} />}
       </div>
     </article>
   )

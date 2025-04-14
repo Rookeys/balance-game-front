@@ -27,8 +27,12 @@ export const authOptions: AuthOptions = {
     // authorized: async ({ auth }) => {
     //   return !!auth
     // },
-    async jwt({ token, account, user }) {
+    async jwt({ token, account, user, trigger, session }) {
       try {
+        if (trigger === "update" && session.nickname) {
+          token.nickname = session.nickname
+        }
+
         if (account && user) {
           try {
             const { data } = await axios.post<LoginResponse>(`${process.env.NEXT_PUBLIC_API_ROOT}/api/v1/users/login`, {

@@ -1,16 +1,36 @@
 "use client"
 
+import { useUpdateProfile } from "@/api/orval/client/user-profile-controller/user-profile-controller"
+import { UserRequest } from "@/api/orval/model/userRequest"
 import { Button } from "@/components/Button"
 import InputText from "@/components/form/inputText/InputText"
-import { Camera, CircleCheck } from "lucide-react"
+import { Camera } from "lucide-react"
+import { useSession } from "next-auth/react"
 import Image from "next/image"
 import { useState } from "react"
+import { FormProvider, useForm } from "react-hook-form"
 import ResignModal from "./ResignModal"
-import { useSession } from "next-auth/react"
 
 export default function ProfileEditPageClient() {
   const [isOpenResignModal, setIsOpenResignModal] = useState<boolean>(false)
-  const { data: session } = useSession()
+  const { data: session, update } = useSession()
+
+  const { mutateAsync: editProfile } = useUpdateProfile()
+  const formMethods = useForm<UserRequest>({
+    values: {
+      nickname: session?.user.nickname ?? ""
+    }
+  })
+
+  const { watch, setValue, handleSubmit } = formMethods
+
+  const onSubmit = async (data: UserRequest) => {
+    await editProfile({ data })
+    await update({
+      nickname: data.nickname
+    })
+  }
+
   return (
     <>
       <figure className="relative h-[60px] w-[60px] flex-shrink-0 md:h-[80px] md:w-[80px]">
@@ -19,25 +39,27 @@ export default function ProfileEditPageClient() {
           <Camera size={16} />
         </div>
       </figure>
-      <article className="flex flex-col gap-[4px]">
-        <p>닉네임</p>
-        <InputText
-          id="test"
-          SubDescription={
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-[4px]">
-                <CircleCheck fill="#000000" stroke="#FFFFFF" />
-                <p>사용 가능한 닉네임이에요.</p>
-              </div>
-              <p className="self-start">
-                0/12
-                {/* {watch("test")?.toString().length ?? 0}/{10} */}
-              </p>
-            </div>
-          }
-        />
-      </article>
-      <Button className="self-end bg-black px-[20px] py-[12px] text-white md:px-[28px]">저장</Button>
+      <FormProvider {...formMethods}>
+        <form className="flex flex-col gap-[4px]" onSubmit={handleSubmit(onSubmit)}>
+          <p>닉네임</p>
+          <InputText
+            id="nickname"
+            value={watch("nickname")}
+            onChange={(e) => {
+              if (e.target.value.length <= 10) {
+                setValue("nickname", e.target.value, { shouldValidate: true, shouldDirty: true })
+              }
+            }}
+            maxLength={10}
+          />
+          <Button
+            type="submit"
+            className="mt-[24px] self-end bg-black px-[20px] py-[12px] text-white md:mt-[36px] md:px-[28px]"
+          >
+            저장
+          </Button>
+        </form>
+      </FormProvider>
       <Button className="self-start px-[12px] py-[12px]" onClick={() => setIsOpenResignModal((prev) => !prev)}>
         회원탈퇴
       </Button>

@@ -11,9 +11,10 @@ import TitleSection from "./_components/common/TitleSection"
 interface Params extends GameListResponse {
   tag?: string
   fixedSize?: boolean
+  isMine?: boolean
 }
 
-export default function GameThumbnailSimpleCard({ tag, fixedSize = true, ...props }: Params) {
+export default function GameThumbnailSimpleCard({ tag, fixedSize = true, isMine = false, ...props }: Params) {
   const { roomId, leftSelection, title, description, categories, userResponse, totalPlayNums, existsBlind } = props
 
   return (
@@ -31,7 +32,7 @@ export default function GameThumbnailSimpleCard({ tag, fixedSize = true, ...prop
         isBlind={existsBlind}
         totalPlayNums={totalPlayNums}
       />
-      <SocialActionSection id={roomId} title={title} categories={categories} />
+      <SocialActionSection id={roomId} title={title} categories={categories} isMine={isMine} />
       <TitleSection title={title} description={description} />
       <MetaInfoSection creatorNickname={userResponse?.nickname} creatorImage={userResponse?.profileImageUrl} />
     </Link>

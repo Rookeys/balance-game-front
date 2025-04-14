@@ -31,7 +31,9 @@ export default function MyCreatedGameList() {
     <article className="relative grid w-full grid-cols-2 gap-x-[16px] gap-y-[16px] md:grid-cols-4 md:gap-x-[24px] md:gap-y-[40px]">
       {(data?.pages ?? []).flatMap(
         (page) =>
-          page.content?.map((game) => <GameThumbnailSimpleCard key={game.roomId} fixedSize={false} {...game} />) ?? []
+          page.content?.map((game) => (
+            <GameThumbnailSimpleCard key={game.roomId} fixedSize={false} isMine {...game} />
+          )) ?? []
       )}
       {!isFetchingNextPage && (
         <div ref={ref} className="pointer-events-none absolute bottom-[200px] h-[4px] w-full opacity-0" />

@@ -65,7 +65,10 @@ export default function ImageEditModal({ onClose, onSave, overlayClose }: Params
           <Button
             type="button"
             className="w-fit rounded-[12px] bg-dark-20 px-[28px] py-[12px] text-white hover:bg-dark-30"
-            onClick={() => setValue("content", "", { shouldValidate: true })}
+            onClick={() => {
+              setValue("content", "", { shouldValidate: true })
+              setValue("newImage", undefined, { shouldValidate: true })
+            }}
           >
             이미지 삭제
           </Button>
