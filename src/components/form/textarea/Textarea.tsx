@@ -41,7 +41,17 @@ const Textarea: React.FC<Params> = ({
           inputClassName
         )}
         value={value}
-        onChange={onChange}
+        onChange={(e) => {
+          if (onChange) {
+            if (!!maxLength) {
+              if (e.target.value.length <= maxLength) {
+                onChange(e)
+              }
+            } else {
+              onChange(e)
+            }
+          }
+        }}
         required={required}
         aria-invalid={!!errorMessage}
         aria-label={ariaLabel}

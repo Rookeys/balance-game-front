@@ -43,9 +43,7 @@ export default function GameInformationForm() {
           id="title"
           value={watch("title")}
           onChange={(e) => {
-            if (e.target.value.length <= 50) {
-              setValue("title", e.target.value, { shouldValidate: true, shouldDirty: true })
-            }
+            setValue("title", e.target.value, { shouldValidate: true, shouldDirty: true })
           }}
           placeholder="제목을 입력해주세요"
           label="제목"
@@ -59,9 +57,7 @@ export default function GameInformationForm() {
           id="description"
           value={watch("description")}
           onChange={(e) => {
-            if (e.target.value.length <= 100) {
-              setValue("description", e.target.value, { shouldValidate: true, shouldDirty: true })
-            }
+            setValue("description", e.target.value, { shouldValidate: true, shouldDirty: true })
           }}
           placeholder="설명을 입력해주세요"
           label="설명"

@@ -9,10 +9,17 @@ import ResourceItem from "@/components/ResourceItem"
 export default function GameInformation() {
   const { id } = useParams()
   const { data } = useGetGameStatus(Number(id))
+
   return (
     <section className="flex w-full flex-col gap-[28px] md:flex-row md:gap-[24px]">
       <figure className="relative aspect-[5/4] h-fit w-full flex-shrink-0 md:max-w-[50%] lg:max-w-[40%]">
-        <ResourceItem {...data?.leftSelection} ratio={5 / 4} noDelay />
+        <ResourceItem
+          {...data?.leftSelection}
+          ratio={5 / 4}
+          start={data?.leftSelection?.startSec}
+          end={data?.leftSelection?.endSec}
+          noDelay
+        />
       </figure>
       <section className="flex w-full flex-col gap-[12px] md:gap-[24px] lg:gap-[40px]">
         <article className="flex items-center gap-[12px]">

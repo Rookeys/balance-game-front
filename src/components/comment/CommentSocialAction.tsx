@@ -11,6 +11,10 @@ export default function CommentSocialAction() {
     alert("onDelete 실행")
   }
 
+  const onReport = () => {
+    alert("onReport 실행")
+  }
+
   const isMine = false
 
   const actions: MoreAction[] = isMine
@@ -18,7 +22,7 @@ export default function CommentSocialAction() {
         // { label: "수정하기", onClick: onEdit },
         { label: "삭제하기", onClick: onDelete }
       ]
-    : [{ label: "신고하기", onClick: onDelete }]
+    : [{ label: "신고하기", onClick: onReport }]
 
   return (
     <>

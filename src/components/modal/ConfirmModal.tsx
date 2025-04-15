@@ -7,8 +7,9 @@ import { cn } from "@/utils/cn"
 interface Params {
   title?: string
   description?: string
-  onClose?: () => void
   onClick?: () => void
+  onClose?: () => void
+  disabled?: boolean
   overlayClose?: boolean
   className?: string
 }
@@ -18,6 +19,7 @@ export default function ConfirmModal({
   description,
   onClick,
   onClose,
+  disabled,
   overlayClose = false,
   className
 }: Params) {
@@ -48,6 +50,7 @@ export default function ConfirmModal({
             type="button"
             className="w-full rounded-[12px] bg-blue-40 px-[28px] py-[12px] text-white hover:bg-blue-50"
             onClick={onClick}
+            disabled={disabled}
           >
             확인
           </Button>

@@ -1,10 +1,10 @@
 import { GameRequest } from "@/api/orval/model/gameRequest"
-import { InputLabel } from "@/components/form/_components/InputLabel"
-import { Controller, useFormContext } from "react-hook-form"
-import SelectButton from "./SelectButton"
 import { GameRequestAccessType } from "@/api/orval/model/gameRequestAccessType"
+import { InputLabel } from "@/components/form/_components/InputLabel"
 import InputText from "@/components/form/inputText/InputText"
 import { CircleAlert } from "lucide-react"
+import { Controller, useFormContext } from "react-hook-form"
+import SelectButton from "./SelectButton"
 
 export default function GameAccessForm() {
   const { watch, setValue, control } = useFormContext<GameRequest>()
@@ -99,9 +99,7 @@ export default function GameAccessForm() {
                   id="inviteCode"
                   value={watch("inviteCode")}
                   onChange={(e) => {
-                    if (e.target.value.length <= 10) {
-                      setValue("inviteCode", e.target.value, { shouldValidate: true, shouldDirty: true })
-                    }
+                    setValue("inviteCode", e.target.value, { shouldValidate: true, shouldDirty: true })
                   }}
                   placeholder="초대 코드를 생성해 주세요"
                   maxLength={10}

@@ -36,7 +36,7 @@ const TextareaWithSubmit: React.FC<Params> = ({
   ...rest
 }) => {
   return (
-    <section className={cn("relative inline-flex flex-col gap-[4px]", className)}>
+    <section className={cn("relative flex w-full flex-col gap-[4px]", className)}>
       {label && <InputLabel id={id} label={label} required={required} className={labelClassName} />}
       <TextareaAutosize
         id={id}
@@ -46,7 +46,18 @@ const TextareaWithSubmit: React.FC<Params> = ({
         )}
         value={value}
         cacheMeasurements
-        onChange={onChange}
+        // onChange={onChange}
+        onChange={(e) => {
+          if (onChange) {
+            if (!!maxLength) {
+              if (e.target.value.length <= maxLength) {
+                onChange(e)
+              }
+            } else {
+              onChange(e)
+            }
+          }
+        }}
         required={required}
         aria-invalid={!!errorMessage}
         aria-label={ariaLabel}

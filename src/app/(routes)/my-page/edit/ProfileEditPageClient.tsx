@@ -113,9 +113,7 @@ export default function ProfileEditPageClient() {
             id="nickname"
             value={watch("nickname")}
             onChange={(e) => {
-              if (e.target.value.length <= 10) {
-                setValue("nickname", e.target.value, { shouldValidate: true, shouldDirty: true })
-              }
+              setValue("nickname", e.target.value, { shouldValidate: true, shouldDirty: true })
             }}
             maxLength={10}
           />

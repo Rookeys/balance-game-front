@@ -7,10 +7,10 @@ import { commentListFilters } from "@/constants/filters"
 import { useGetCommentsByGameResultInfinite } from "@/api/orval/client/game-result-comments-controller/game-result-comments-controller"
 import { GetCommentsByGameResultSortType } from "@/api/orval/model/getCommentsByGameResultSortType"
 import ReplyItem from "@/components/comment/ReplyItem"
-import TextareaWithSubmit from "@/components/form/textarea/TextareaWithSubmit"
 import { useParams, useSearchParams } from "next/navigation"
 import { useEffect } from "react"
 import { useInView } from "react-intersection-observer"
+import GameCommentForm from "./GameCommentForm"
 import GameInformation from "./GameInformation"
 
 export default function CommentPageClient() {
@@ -53,13 +53,7 @@ export default function CommentPageClient() {
             <p>전체댓글 {data?.pages?.[0]?.totalElements ?? 0}</p>
             <Filter filters={commentListFilters} />
           </article>
-          <TextareaWithSubmit
-            id="test"
-            disableEnter
-            maxLength={500}
-            inputClassName="!min-h-[100px]"
-            placeholder="해당 콘텐츠와 관련된 댓글을 작성해 주세요."
-          />
+          <GameCommentForm />
           {(data?.pages ?? []).flatMap(
             (page) => page.content?.map((comment) => <ReplyItem key={comment.commentId} {...comment} />) ?? []
           )}
