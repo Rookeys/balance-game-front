@@ -2,7 +2,7 @@
 
 import { useGetChildrenCommentsByGameResourceInfinite } from "@/api/orval/client/game-resource-comments-controller/game-resource-comments-controller"
 import { GameResourceParentCommentResponse } from "@/api/orval/model/gameResourceParentCommentResponse"
-import TextareaWithSubmit from "@/components/form/textarea/TextareaWithSubmit"
+import ResourceCommentAndReplyForm from "@/app/(routes)/game/[id]/results/[resourceId]/_components/ResourceCommentAndReplyForm"
 import { convertUtcToKoreaDaTime } from "@/utils/dayjsWithExtends"
 import { ChevronDownIcon, ChevronUpIcon, MessageSquare, ThumbsUp } from "lucide-react"
 import Image from "next/image"
@@ -69,13 +69,14 @@ export default function CommentItem(props: GameResourceParentCommentResponse) {
       </div>
       {isOpenReply && (
         <section className="ms-[48px] flex flex-col gap-[20px]">
-          <TextareaWithSubmit
+          {/* <TextareaWithSubmit
             id="test"
             disableEnter
             maxLength={500}
             inputClassName="!min-h-[100px]"
             placeholder="해당 콘텐츠와 관련된 댓글을 작성해 주세요."
-          />
+          /> */}
+          <ResourceCommentAndReplyForm parentId={props.commentId} />
           {isLoading && <section className="h-[100vh] w-full bg-red-50" />}
           {(replyData?.pages ?? []).flatMap(
             (page) => page.content?.map((reply) => <ReplyItem key={reply.commentId} {...reply} />) ?? []

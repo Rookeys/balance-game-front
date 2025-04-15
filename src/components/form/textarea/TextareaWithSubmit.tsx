@@ -33,6 +33,7 @@ const TextareaWithSubmit: React.FC<Params> = ({
   labelClassName,
   maxLength,
   disableEnter = false,
+  disabled,
   ...rest
 }) => {
   return (
@@ -74,7 +75,7 @@ const TextareaWithSubmit: React.FC<Params> = ({
             {value?.toString().length ?? 0}/{maxLength}
           </p>
         )}
-        <Button className="bg-gray-10 px-[12px] py-[8px] md:px-[20px] md:py-[12px]" type="submit">
+        <Button className="bg-gray-10 px-[12px] py-[8px] md:px-[20px] md:py-[12px]" type="submit" disabled={disabled}>
           등록
         </Button>
       </article>
