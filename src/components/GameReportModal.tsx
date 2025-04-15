@@ -4,6 +4,7 @@ import { XIcon } from "lucide-react"
 import { FieldValues, useForm } from "react-hook-form"
 import { Button } from "./Button"
 import ModalWrapper from "./modal/ModalWrapper"
+import { sleep } from "@/utils/sleep"
 
 interface Params {
   id?: string
@@ -27,7 +28,11 @@ interface ReportFormData {
 }
 
 export default function GameReportModal({ id, onClose, overlayClose }: Params) {
-  const { handleSubmit, register } = useForm<ReportFormData>({
+  const {
+    handleSubmit,
+    register,
+    formState: { isSubmitting }
+  } = useForm<ReportFormData>({
     defaultValues: {
       obscenity: false,
       disgust: false,
@@ -37,6 +42,7 @@ export default function GameReportModal({ id, onClose, overlayClose }: Params) {
   })
 
   const onSubmit = async (data: FieldValues) => {
+    await sleep(2000)
     alert(`${id}신고 ${JSON.stringify(data)}`)
   }
 
@@ -64,7 +70,7 @@ export default function GameReportModal({ id, onClose, overlayClose }: Params) {
               ))}
             </article>
             <p>운영 방침에 따라 신고 사유에 해당하는지 검토 후 처리 예정입니다.</p>
-            <Button className="mt-[16px] bg-black text-white" type="submit" onClick={(e) => e.stopPropagation()}>
+            <Button className="mt-[16px] bg-black text-white" type="submit" disabled={isSubmitting}>
               신고하기
             </Button>
           </section>

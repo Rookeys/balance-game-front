@@ -17,7 +17,11 @@ interface Params {
 }
 
 export default function ImageEditModal({ onClose, onSave, overlayClose }: Params) {
-  const { watch, setValue } = useFormContext<EditResourceType>()
+  const {
+    watch,
+    setValue,
+    formState: { isSubmitting }
+  } = useFormContext<EditResourceType>()
 
   return (
     <ModalWrapper overlayClose={overlayClose} onClose={onClose}>
@@ -74,8 +78,9 @@ export default function ImageEditModal({ onClose, onSave, overlayClose }: Params
           </Button>
           <Button
             type="button"
-            className="w-fit rounded-[12px] bg-blue-40 px-[28px] py-[12px] text-white hover:bg-blue-50"
+            className="w-fit rounded-[12px] bg-blue-40 px-[28px] py-[12px] text-white hover:bg-blue-50 disabled:bg-gray-50"
             onClick={onSave}
+            disabled={isSubmitting}
           >
             확인
           </Button>

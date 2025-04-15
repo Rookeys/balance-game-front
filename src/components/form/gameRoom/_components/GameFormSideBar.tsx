@@ -19,6 +19,10 @@ export default function GameFormSideBar({ step, setStep }: Params) {
   const isNewPage = pathname.includes("new")
   const percent = !isNewPage ? 100 : step === 1 ? 0 : 33
 
+  // const {
+  //   formState: { isSubmitting }
+  // } = useFormContext()
+
   return (
     <SideBarWrapper
     // containerClassName="min-h-screen"
@@ -58,6 +62,7 @@ export default function GameFormSideBar({ step, setStep }: Params) {
         key={`${step}-button`}
         className="bg-black text-white"
         type={step === 1 ? "button" : "submit"}
+        // disabled={isSubmitting}
         onClick={() => {
           if (step === 1) {
             setStep(2)
