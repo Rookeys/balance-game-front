@@ -1,20 +1,19 @@
 "use client"
-import GameFormSideBar from "@/components/form/gameRoom/_components/GameFormSideBar"
-import { ImageUploadForm } from "./ImageUploadForm"
-import { YoutubeUploadForm } from "./YoutubeUploadForm"
-import MediaTab from "./MediaTab"
-import GameFormBottomBar from "@/components/form/gameRoom/_components/GameFormBottomBar"
 import { useGetCountResourcesInGames } from "@/api/orval/client/game-resource-controller/game-resource-controller"
-import { useParams } from "next/navigation"
+import GameFormBottomBar from "@/components/form/gameRoom/_components/GameFormBottomBar"
+import GameFormSideBar from "@/components/form/gameRoom/_components/GameFormSideBar"
 import { getMaxRound } from "@/utils/getMaxRound"
-import GameFormMobileTab from "@/components/form/gameRoom/_components/GameFormMobileTab"
+import { useParams } from "next/navigation"
+import { ImageUploadForm } from "./ImageUploadForm"
+import MediaTab from "./MediaTab"
+import { YoutubeUploadForm } from "./YoutubeUploadForm"
 
 export default function MediaForm() {
   const { id } = useParams()
   const { data } = useGetCountResourcesInGames(Number(id))
   return (
     <>
-      <GameFormMobileTab step={2} setStep={() => {}} />
+      {/* <GameFormMobileTab step={2} setStep={() => {}} /> */}
       <section className="flex w-full max-w-[1200px] justify-center gap-[24px] px-[16px] lg:px-0">
         <section className="flex w-full flex-col gap-[40px]">
           <MediaTab />

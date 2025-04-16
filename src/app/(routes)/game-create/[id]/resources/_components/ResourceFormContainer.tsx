@@ -8,7 +8,7 @@ import {
 import { useGetResourceList } from "@/app/(routes)/game-create/[id]/resources/hooks/useGetResourceList"
 import { handleSelectAllToggle } from "@/app/(routes)/game-create/[id]/resources/utils/selectAllResource"
 import Filter from "@/components/Filter"
-import GameFormMobileTab from "@/components/form/gameRoom/_components/GameFormMobileTab"
+import GameFormSideBar from "@/components/form/gameRoom/_components/GameFormSideBar"
 import SearchInput from "@/components/SearchInput"
 import { resourceListFilters } from "@/constants/filters"
 import { useSelectedResourceIdStore } from "@/store/selectedResourceId"
@@ -21,7 +21,6 @@ import { toast } from "sonner"
 import MediaTab from "../../medias/_components/MediaTab"
 import ResourceDeleteModal from "./resourceForm/ResourceDeleteModal"
 import ResourceFormWrapper from "./resourceForm/ResourceFormWrapper"
-import GameFormSideBar from "@/components/form/gameRoom/_components/GameFormSideBar"
 
 export default function ResourceFormContainer() {
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState<boolean>(false)
@@ -58,7 +57,7 @@ export default function ResourceFormContainer() {
 
   return (
     <>
-      <GameFormMobileTab step={2} setStep={() => {}} />
+      {/* <GameFormMobileTab step={2} setStep={() => {}} /> */}
       <section className="flex w-full max-w-[1200px] justify-center gap-[24px] px-[16px] lg:px-0">
         <section className="flex w-full flex-col gap-[40px]">
           <MediaTab />
@@ -90,7 +89,11 @@ export default function ResourceFormContainer() {
                   <button className="lg:hidden" onClick={() => handleSelectAllToggle(data?.content)}>
                     {isAllSelected(data?.content ?? []) ? <SquareCheck /> : <Square />}
                   </button>
-                  <p>총{selectedResourceIds.length > 0 ? selectedResourceIds.length : data?.content?.length || 0}개</p>
+                  <p>
+                    {selectedResourceIds.length > 0
+                      ? `선택 ${selectedResourceIds.length}개`
+                      : `총 ${data?.totalElements || 0}개`}
+                  </p>
                 </div>
                 <button
                   className="h-full rounded-[4px] border px-[12px]"

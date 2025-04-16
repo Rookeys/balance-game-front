@@ -20,9 +20,10 @@ export const authOptions: AuthOptions = {
     signIn: "/sign-in",
     signOut: "/sign-out"
   },
-  // session: {
-  //   maxAge: 60 * 10
-  // },
+  session: {
+    strategy: "jwt"
+    // maxAge: 60 * 60 * 24 * 30
+  },
   callbacks: {
     // authorized: async ({ auth }) => {
     //   return !!auth
@@ -104,7 +105,9 @@ export const authOptions: AuthOptions = {
           }
         }
 
-        if (Date.now() < token.access_token_expires_at) {
+        const EXPIRY_BUFFER_MS = 60 * 1000
+
+        if (Date.now() < token.access_token_expires_at - EXPIRY_BUFFER_MS) {
           return token
         } else {
           const {

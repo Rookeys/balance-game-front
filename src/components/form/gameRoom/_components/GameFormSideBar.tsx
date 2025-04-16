@@ -12,9 +12,10 @@ import { toast } from "sonner"
 interface Params {
   step: 1 | 2
   setStep: Dispatch<SetStateAction<1 | 2>>
+  disabled?: boolean
 }
 
-export default function GameFormSideBar({ step, setStep }: Params) {
+export default function GameFormSideBar({ step, setStep, disabled }: Params) {
   const pathname = usePathname()
   const isNewPage = pathname.includes("new")
   const percent = !isNewPage ? 100 : step === 1 ? 0 : 33
@@ -62,7 +63,7 @@ export default function GameFormSideBar({ step, setStep }: Params) {
         key={`${step}-button`}
         className="bg-black text-white"
         type={step === 1 ? "button" : "submit"}
-        // disabled={isSubmitting}
+        disabled={disabled}
         onClick={() => {
           if (step === 1) {
             setStep(2)
