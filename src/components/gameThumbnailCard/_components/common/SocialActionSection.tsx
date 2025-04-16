@@ -1,7 +1,7 @@
 "use client"
 import { GameListResponseCategoriesItem } from "@/api/orval/model/gameListResponseCategoriesItem"
 import GameReportModal from "@/components/GameReportModal"
-import MoreButton, { MoreAction } from "@/components/MoreButton"
+import MoreButton, { MoreItem } from "@/components/MoreButton"
 import { cn } from "@/utils/cn"
 import { share, ShareAPIRequest } from "@/utils/share"
 import { useRouter } from "next/navigation"
@@ -30,7 +30,7 @@ export default function SocialActionSection({ id, title, categories, isMine }: P
     share(shareData)
   }
 
-  const actions: MoreAction[] = isMine
+  const moreItems: MoreItem[] = isMine
     ? [
         { label: "수정하기", onClick: () => router.push(`/game-create/${id}/edit`) },
         { label: "삭제하기", onClick: () => setIsOpenDeleteModal(true) }
@@ -57,7 +57,7 @@ export default function SocialActionSection({ id, title, categories, isMine }: P
         </article>
       )}
       <div onClick={(e) => e.preventDefault()}>
-        <MoreButton actions={actions} />
+        <MoreButton items={moreItems} />
         {isOpenReportModal && <GameReportModal id={id?.toString()} onClose={() => setIsOpenReportModal(false)} />}
         {isOpenDeleteModal && <GameDeleteModal id={Number(id)} onClose={() => setIsOpenDeleteModal(false)} />}
       </div>

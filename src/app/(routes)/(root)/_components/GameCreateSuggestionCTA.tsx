@@ -6,7 +6,7 @@ import Link from "next/link"
 export default function GameCreateSuggestionCTA() {
   const { data: session } = useSession()
   return (
-    <section className="flex w-full max-w-[1200px] flex-col items-center gap-[40px] bg-gray-30 py-[60px] md:py-[80px]">
+    <section className="flex w-full max-w-[1200px] flex-col items-center gap-[40px] py-[60px] md:py-[80px]">
       <article className="flex flex-col gap-[12px] text-center">
         <p className="text-[32px]">끌리는 이상형 월드컵을 발견하지 못하셨나요? 👀</p>
         <p>

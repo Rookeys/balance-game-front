@@ -19,7 +19,7 @@ export default async function RootPage() {
   return (
     <section className="flex flex-col items-center gap-[40px]">
       <Banner />
-      <section className="flex w-full flex-col items-center gap-[60px] bg-red-10 px-[16px] md:gap-[80px] md:px-[24px] lg:px-[120px]">
+      <section className="flex w-full flex-col items-center gap-[60px] px-[16px] md:gap-[80px] md:px-[24px] lg:px-[120px]">
         <SearchAndCategory />
         <Suspense fallback={<SkeletonList title="주간 인기 월드컵 TOP 10" titleIcon="💥" />}>
           <PrefetchBoundary

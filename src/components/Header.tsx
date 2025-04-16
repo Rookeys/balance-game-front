@@ -1,15 +1,37 @@
 "use client"
+import { useSessionStore } from "@/store/session"
 import { SquarePlus } from "lucide-react"
-import { useSession } from "next-auth/react"
+import { signOut, useSession } from "next-auth/react"
 import Image from "next/image"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import BlindToggle from "./BlindToggle"
 import { Button } from "./Button"
 import Logo from "./Logo"
+import MoreButton, { MoreItem } from "./MoreButton"
 import ThemeToggle from "./ThemeToggle"
 
 export default function Header() {
   const { data: session } = useSession()
+  const clearSession = useSessionStore((state) => state.clearSession)
+
+  const router = useRouter()
+
+  const moreItems: MoreItem[] = [
+    {
+      label: "마이페이지",
+      onClick: () => {
+        router.push("/my-page")
+      }
+    },
+    {
+      label: "로그아웃",
+      onClick: () => {
+        clearSession()
+        signOut({ callbackUrl: "/" })
+      }
+    }
+  ]
 
   return (
     <header className="flex h-[64px] items-center justify-between border-b border-gray-20 bg-light px-[12px] py-[8px] dark:border-gray-70 dark:bg-dark-night">
@@ -40,17 +62,21 @@ export default function Header() {
         <ThemeToggle />
         <BlindToggle />
         {session ? (
-          <Link href="/my-page" aria-label="my-page">
-            <Image
-              className="h-[40px] w-[40px] rounded-full object-cover"
-              src={session?.user?.image ?? "/images/Rookeys.png"}
-              alt="profile-image"
-              width={40}
-              height={40}
-              placeholder="blur"
-              blurDataURL="data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mO88B8AAqUB0Y/H4mkAAAAASUVORK5CYII="
-            />
-          </Link>
+          <MoreButton
+            items={moreItems}
+            ButtonUI={
+              <Image
+                className="h-[40px] w-[40px] rounded-full object-cover"
+                src={session?.user?.image ?? "/images/Rookeys.png"}
+                alt="profile-image"
+                width={40}
+                height={40}
+                placeholder="blur"
+                blurDataURL="data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mO88B8AAqUB0Y/H4mkAAAAASUVORK5CYII="
+              />
+            }
+            className="top-[40px] w-[140px]"
+          />
         ) : (
           <Button asChild className="rounded-[100px] bg-black text-white">
             <Link href={"/sign-in"} aria-label="sign-in">

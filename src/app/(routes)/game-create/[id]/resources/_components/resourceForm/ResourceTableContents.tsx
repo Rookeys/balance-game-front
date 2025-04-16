@@ -6,7 +6,7 @@ import {
 } from "@/api/orval/client/game-resource-controller/game-resource-controller"
 import { GameResourceResponse } from "@/api/orval/model/gameResourceResponse"
 import { GameResourceResponseType } from "@/api/orval/model/gameResourceResponseType"
-import MoreButton, { MoreAction } from "@/components/MoreButton"
+import MoreButton, { MoreItem } from "@/components/MoreButton"
 import ProgressBar from "@/components/ProgressBar"
 import { useSelectedResourceIdStore } from "@/store/selectedResourceId"
 import { calculateWinRate } from "@/utils/calculateWinRate"
@@ -50,7 +50,7 @@ export default function ResourceTableContents({ resource, isOpenEditState, isOpe
     ])
   }
 
-  const moreActions: MoreAction[] = [
+  const moreItems: MoreItem[] = [
     {
       label: "수정",
       onClick: () => setIsOpenEditModal(true)
@@ -98,7 +98,7 @@ export default function ResourceTableContents({ resource, isOpenEditState, isOpe
         </div>
       </article>
       <div className="relative flex items-start">
-        <MoreButton actions={moreActions} />
+        <MoreButton items={moreItems} />
         {/* <button
           type="button"
           onClick={() => {

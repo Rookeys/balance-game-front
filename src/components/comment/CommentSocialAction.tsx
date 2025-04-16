@@ -1,6 +1,6 @@
 "use client"
 
-import MoreButton, { MoreAction } from "@/components/MoreButton"
+import MoreButton, { MoreItem } from "@/components/MoreButton"
 
 export default function CommentSocialAction() {
   // const onEdit = () => {
@@ -17,7 +17,7 @@ export default function CommentSocialAction() {
 
   const isMine = false
 
-  const actions: MoreAction[] = isMine
+  const moreItems: MoreItem[] = isMine
     ? [
         // { label: "수정하기", onClick: onEdit },
         { label: "삭제하기", onClick: onDelete }
@@ -26,7 +26,7 @@ export default function CommentSocialAction() {
 
   return (
     <>
-      <MoreButton actions={actions} />
+      <MoreButton items={moreItems} />
     </>
   )
 }

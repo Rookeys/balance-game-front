@@ -2,19 +2,22 @@
 
 import { Button } from "@/components/Button"
 import { useClickOutside } from "@/hooks/useClickOutside"
+import { cn } from "@/utils/cn"
 import { EllipsisVertical } from "lucide-react"
-import { useRef, useState } from "react"
+import { ReactNode, useRef, useState } from "react"
 
-export interface MoreAction {
+export interface MoreItem {
   label: string
   onClick: () => void
 }
 
 interface Params {
-  actions: MoreAction[]
+  items: MoreItem[]
+  ButtonUI?: ReactNode
+  className?: string
 }
 
-export default function MoreButton({ actions }: Params) {
+export default function MoreButton({ items, ButtonUI, className }: Params) {
   const [isOpen, setIsOpen] = useState(false)
   const wrapperRef = useRef<HTMLDivElement>(null)
 
@@ -22,10 +25,21 @@ export default function MoreButton({ actions }: Params) {
 
   return (
     <div ref={wrapperRef} className="relative">
-      <EllipsisVertical size={24} className="cursor-pointer" onClick={() => setIsOpen((prev) => !prev)} />
+      {ButtonUI ? (
+        <section className="cursor-pointer" onClick={() => setIsOpen((prev) => !prev)}>
+          {ButtonUI}
+        </section>
+      ) : (
+        <EllipsisVertical size={24} className="cursor-pointer" onClick={() => setIsOpen((prev) => !prev)} />
+      )}
       {isOpen && (
-        <div className="absolute end-0 top-[28px] z-[20] w-[124px] divide-y rounded-[8px] border bg-white px-[8px]">
-          {actions.map((action, index) => (
+        <div
+          className={cn(
+            "absolute end-0 top-[28px] z-[20] w-[124px] divide-y rounded-[8px] border bg-white px-[8px]",
+            className
+          )}
+        >
+          {items.map((action, index) => (
             <Button
               key={index}
               className="w-full px-[24px] py-[20px]"

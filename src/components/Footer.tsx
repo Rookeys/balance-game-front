@@ -2,7 +2,7 @@ import Logo from "./Logo"
 
 export default function Footer() {
   return (
-    <section className="mt-[60px] flex flex-col justify-between gap-[48px] border-t border-t-red px-[16px] py-[48px] md:mt-[80px] md:gap-0 md:px-[24px] lg:px-[120px]">
+    <section className="mt-[60px] flex flex-col justify-between gap-[48px] border-t px-[16px] py-[48px] md:mt-[80px] md:gap-0 md:px-[24px] lg:px-[120px]">
       <section className="flex flex-col justify-between gap-[48px] md:flex-row md:gap-0">
         <article className="relative">
           <Logo size={40} />
