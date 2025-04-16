@@ -48,6 +48,7 @@ export default function GameForm() {
 
   const {
     handleSubmit,
+    watch,
     formState: { isDirty, isSubmitting }
   } = formMethods
 
@@ -115,6 +116,8 @@ export default function GameForm() {
     }
   ]
 
+  const isStep1Complete = !!watch("title") && !!watch("description") && watch("categories")?.length > 0
+
   return (
     <FormProvider {...formMethods}>
       <TabBar items={tabItems} currentValue={"월드컵 소개"} className="md:hidden" />
@@ -127,8 +130,14 @@ export default function GameForm() {
           {step === 1 && <GameInformationForm />}
           {step === 2 && <GameAccessForm />}
         </section>
-        <GameFormSideBar step={step} setStep={setStep} disabled={isSubmitting} />
-        <GameFormBottomBar step={step} setStep={setStep} disabled={isSubmitting} />
+        <GameFormSideBar
+          step={step}
+          setStep={setStep}
+          percent={isStep1Complete ? 33 : 0}
+          isStep1Complete={isStep1Complete}
+          disabled={isSubmitting}
+        />
+        <GameFormBottomBar step={step} setStep={setStep} percent={isStep1Complete ? 33 : 0} disabled={isSubmitting} />
       </form>
     </FormProvider>
   )

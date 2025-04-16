@@ -1,6 +1,7 @@
 "use client"
 
 import {
+  getGetCountResourcesInGamesQueryKey,
   getGetResourcesUsingPageQueryKey,
   useDeleteSelectResources,
   useGetCountResourcesInGames
@@ -10,6 +11,7 @@ import { handleSelectAllToggle } from "@/app/(routes)/game-create/[id]/resources
 import Filter from "@/components/Filter"
 import GameFormSideBar from "@/components/form/gameRoom/_components/GameFormSideBar"
 import SearchInput from "@/components/SearchInput"
+import StepTab, { StepTabItem } from "@/components/StepTab"
 import { resourceListFilters } from "@/constants/filters"
 import { useSelectedResourceIdStore } from "@/store/selectedResourceId"
 import { getMaxRound } from "@/utils/getMaxRound"
@@ -18,7 +20,6 @@ import { Search, Square, SquareCheck } from "lucide-react"
 import { useParams, useRouter, useSearchParams } from "next/navigation"
 import { useState } from "react"
 import { toast } from "sonner"
-import MediaTab from "../../medias/_components/MediaTab"
 import ResourceDeleteModal from "./resourceForm/ResourceDeleteModal"
 import ResourceFormWrapper from "./resourceForm/ResourceFormWrapper"
 
@@ -50,17 +51,41 @@ export default function ResourceFormContainer() {
 
   const handleAllDelete = async () => {
     await deleteSelectedAll({ gameId: Number(id), data: { list: selectedResourceIds } })
-    await queryClient.invalidateQueries({ queryKey: getGetResourcesUsingPageQueryKey(Number(id)) })
+    // await queryClient.invalidateQueries({ queryKey: getGetResourcesUsingPageQueryKey(Number(id)) })
+
+    await Promise.all([
+      queryClient.invalidateQueries({ queryKey: getGetResourcesUsingPageQueryKey(Number(id)) }),
+      queryClient.invalidateQueries({ queryKey: getGetCountResourcesInGamesQueryKey(Number(id)) })
+    ])
+
     clearSelectedResourceIds()
     setIsOpenDeleteModal(false)
   }
+
+  const stepItems: StepTabItem[] = [
+    {
+      label: "업로드",
+      value: 1,
+      onClick: () => {
+        router.push(`/game-create/${id}/medias`)
+      }
+    },
+    {
+      label: "편집",
+      value: 2,
+      onClick: () => {}
+    }
+  ]
 
   return (
     <>
       {/* <GameFormMobileTab step={2} setStep={() => {}} /> */}
       <section className="flex w-full max-w-[1200px] justify-center gap-[24px] px-[16px] lg:px-0">
         <section className="flex w-full flex-col gap-[40px]">
-          <MediaTab />
+          <section className="flex w-full flex-col md:gap-[40px]">
+            <StepTab items={stepItems} currentValue={2} />
+          </section>
+          {/* <MediaTab /> */}
           <div className="flex flex-col gap-[20px]">
             <article className="flex flex-col gap-[4px]">
               <div className="flex gap-[4px]">
@@ -119,7 +144,7 @@ export default function ResourceFormContainer() {
             <ResourceFormWrapper />
           </section>
         </section>
-        <GameFormSideBar step={2} setStep={() => {}} />
+        <GameFormSideBar step={2} isStep1Complete percent={resourceNumbers && resourceNumbers >= 2 ? 100 : 66} />
       </section>
       {isOpenDeleteModal && (
         <ResourceDeleteModal onClick={handleAllDelete} onClose={() => setIsOpenDeleteModal(false)} />

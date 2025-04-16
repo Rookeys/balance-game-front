@@ -1,5 +1,6 @@
 "use client"
 import {
+  getGetCountResourcesInGamesQueryKey,
   getGetResourcesUsingPageQueryKey,
   useDeleteResource
 } from "@/api/orval/client/game-resource-controller/game-resource-controller"
@@ -42,7 +43,11 @@ export default function ResourceTableContents({ resource, isOpenEditState, isOpe
 
   const handleDelete = async () => {
     await deleteResource({ gameId: Number(id), resourceId: Number(resource.resourceId) })
-    await queryClient.invalidateQueries({ queryKey: getGetResourcesUsingPageQueryKey(Number(id)) })
+
+    await Promise.all([
+      queryClient.invalidateQueries({ queryKey: getGetResourcesUsingPageQueryKey(Number(id)) }),
+      queryClient.invalidateQueries({ queryKey: getGetCountResourcesInGamesQueryKey(Number(id)) })
+    ])
   }
 
   const moreActions: MoreAction[] = [

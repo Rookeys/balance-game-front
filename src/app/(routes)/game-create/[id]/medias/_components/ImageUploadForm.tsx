@@ -1,5 +1,8 @@
 "use client"
-import { getGetResourcesUsingPageQueryKey } from "@/api/orval/client/game-resource-controller/game-resource-controller"
+import {
+  getGetCountResourcesInGamesQueryKey,
+  getGetResourcesUsingPageQueryKey
+} from "@/api/orval/client/game-resource-controller/game-resource-controller"
 import { useSaveImageForGame } from "@/api/orval/client/image-controller/image-controller"
 import { useGetPreSignedUrl } from "@/api/orval/client/presigned-url-controller/presigned-url-controller"
 import { Button } from "@/components/Button"
@@ -58,7 +61,10 @@ export function ImageUploadForm() {
 
       await SaveImageResources({ gameId: Number(id), data: { urls: baseUrls } })
 
-      await queryClient.invalidateQueries({ queryKey: getGetResourcesUsingPageQueryKey(Number(id)) })
+      await Promise.all([
+        queryClient.invalidateQueries({ queryKey: getGetResourcesUsingPageQueryKey(Number(id)) }),
+        queryClient.invalidateQueries({ queryKey: getGetCountResourcesInGamesQueryKey(Number(id)) })
+      ])
 
       reset()
     } catch (error) {

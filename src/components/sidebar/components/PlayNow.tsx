@@ -5,7 +5,7 @@ import { useParams } from "next/navigation"
 export default function PlayNow() {
   const { id } = useParams()
   return (
-    <>
+    <section className="flex flex-col items-center gap-[20px] rounded-[20px] border px-[16px] py-[20px]">
       <Image src={"/images/Rookeys.png"} width={80} height={80} alt="" />
       <p>이 콘텐츠가 왜 인기 있는지 궁금하다면? 지금 바로 플레이해 보세요!</p>
       <Link
@@ -15,6 +15,6 @@ export default function PlayNow() {
         플레이하기
       </Link>
       {/* <Button className="bg-black text-white">플레이하기</Button> */}
-    </>
+    </section>
   )
 }

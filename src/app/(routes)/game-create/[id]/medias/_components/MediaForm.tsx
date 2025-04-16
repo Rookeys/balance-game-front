@@ -2,21 +2,40 @@
 import { useGetCountResourcesInGames } from "@/api/orval/client/game-resource-controller/game-resource-controller"
 import GameFormBottomBar from "@/components/form/gameRoom/_components/GameFormBottomBar"
 import GameFormSideBar from "@/components/form/gameRoom/_components/GameFormSideBar"
+import StepTab, { StepTabItem } from "@/components/StepTab"
 import { getMaxRound } from "@/utils/getMaxRound"
-import { useParams } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 import { ImageUploadForm } from "./ImageUploadForm"
-import MediaTab from "./MediaTab"
 import { YoutubeUploadForm } from "./YoutubeUploadForm"
 
 export default function MediaForm() {
   const { id } = useParams()
-  const { data } = useGetCountResourcesInGames(Number(id))
+  const { data: resourceNumbers } = useGetCountResourcesInGames(Number(id))
+  const router = useRouter()
+
+  const stepItems: StepTabItem[] = [
+    {
+      label: "업로드",
+      value: 1,
+      onClick: () => {}
+    },
+    {
+      label: "편집",
+      value: 2,
+      onClick: () => {
+        router.push(`/game-create/${id}/resources`)
+      }
+    }
+  ]
   return (
     <>
       {/* <GameFormMobileTab step={2} setStep={() => {}} /> */}
       <section className="flex w-full max-w-[1200px] justify-center gap-[24px] px-[16px] lg:px-0">
         <section className="flex w-full flex-col gap-[40px]">
-          <MediaTab />
+          {/* <MediaTab /> */}
+          <section className="flex w-full flex-col md:gap-[40px]">
+            <StepTab items={stepItems} currentValue={1} />
+          </section>
           <div className="flex flex-col gap-[20px]">
             <article className="flex flex-col gap-[4px]">
               <div className="flex gap-[4px]">
@@ -29,13 +48,13 @@ export default function MediaForm() {
               </p>
             </article>
             <p className="rounded-[8px] bg-gray-10 px-[16px] py-[12px]">
-              업로드한 콘텐츠 {data}개, {getMaxRound(data)}강까지 플레이 가능해요.
+              업로드한 콘텐츠 {resourceNumbers}개, {getMaxRound(resourceNumbers)}강까지 플레이 가능해요.
             </p>
           </div>
           <ImageUploadForm />
           <YoutubeUploadForm />
         </section>
-        <GameFormSideBar step={2} setStep={() => {}} />
+        <GameFormSideBar step={2} isStep1Complete percent={resourceNumbers && resourceNumbers >= 2 ? 100 : 66} />
       </section>
       <GameFormBottomBar step={2} setStep={() => {}} />
     </>

@@ -1,18 +1,16 @@
 import BottomBarWrapper from "@/components/BottomBarWrapper"
 import { Button } from "@/components/Button"
 import ProgressBar from "@/components/ProgressBar"
-import { usePathname } from "next/navigation"
 import { Dispatch, SetStateAction } from "react"
 
 interface Params {
   step: 1 | 2
   setStep: Dispatch<SetStateAction<1 | 2>>
+  percent?: number
   disabled?: boolean
 }
 
-export default function GameFormBottomBar({ step, setStep, disabled }: Params) {
-  const pathname = usePathname()
-  const percent = !pathname.includes("new") ? 100 : step === 1 ? 0 : 33
+export default function GameFormBottomBar({ step, setStep, percent = 0, disabled }: Params) {
   return (
     <BottomBarWrapper>
       <div className="flex items-center gap-[12px]">

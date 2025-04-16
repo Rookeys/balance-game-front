@@ -1,4 +1,5 @@
 import {
+  getGetCountResourcesInGamesQueryKey,
   getGetResourcesUsingPageQueryKey,
   useDeleteResource
 } from "@/api/orval/client/game-resource-controller/game-resource-controller"
@@ -6,6 +7,7 @@ import { GameResourceResponse } from "@/api/orval/model/gameResourceResponse"
 import { GameResourceResponseType } from "@/api/orval/model/gameResourceResponseType"
 import ProgressBar from "@/components/ProgressBar"
 import { useSelectedResourceIdStore } from "@/store/selectedResourceId"
+import { calculateWinRate } from "@/utils/calculateWinRate"
 import { cn } from "@/utils/cn"
 import { getYoutubeThumbnail } from "@/utils/getYoutubeThumbnail"
 import { useQueryClient } from "@tanstack/react-query"
@@ -16,7 +18,6 @@ import { Dispatch, SetStateAction } from "react"
 import ImageEditModal from "./ImageEditModal"
 import ResourceDeleteModal from "./ResourceDeleteModal"
 import YoutubeEditModal from "./YoutubeEditModal"
-import { calculateWinRate } from "@/utils/calculateWinRate"
 
 interface Params {
   resource: GameResourceResponse
@@ -47,7 +48,11 @@ export default function ResourceTableDesktopContents({
 
   const handleDelete = async () => {
     await deleteResource({ gameId: Number(id), resourceId: Number(resource.resourceId) })
-    await queryClient.invalidateQueries({ queryKey: getGetResourcesUsingPageQueryKey(Number(id)) })
+
+    await Promise.all([
+      queryClient.invalidateQueries({ queryKey: getGetResourcesUsingPageQueryKey(Number(id)) }),
+      queryClient.invalidateQueries({ queryKey: getGetCountResourcesInGamesQueryKey(Number(id)) })
+    ])
   }
 
   return (
