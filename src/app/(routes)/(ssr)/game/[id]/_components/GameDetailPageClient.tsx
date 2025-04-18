@@ -3,7 +3,7 @@
 import { useGetGameStatus } from "@/api/orval/client/main-page-controller/main-page-controller"
 // import { dayjsWithExtends as dayjs } from "@/utils/dayjsWithExtends"
 import { useGetGameDetails } from "@/api/orval/client/game-play-controller/game-play-controller"
-import SelectRoundModal from "@/app/(routes)/game/[id]/play/_components/selectRoundModal/index"
+import SelectRoundModal from "@/app/(routes)/(ssr)/game/[id]/play/_components/selectRoundModal/index"
 import ResourceItem from "@/components/ResourceItem"
 import { convertUtcToKoreaDate } from "@/utils/dayjsWithExtends"
 import { getMaxRound } from "@/utils/getMaxRound"

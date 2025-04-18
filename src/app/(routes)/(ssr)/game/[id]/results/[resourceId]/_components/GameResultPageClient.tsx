@@ -4,7 +4,7 @@ import { useGetResource } from "@/api/orval/client/game-resource-controller/game
 import { useGetCommentsByGameResultInfinite } from "@/api/orval/client/game-result-comments-controller/game-result-comments-controller"
 import { GetCommentsByGameResultSortType } from "@/api/orval/model/getCommentsByGameResultSortType"
 import { GetParentCommentsByGameResourceSortType } from "@/api/orval/model/getParentCommentsByGameResourceSortType"
-import GameCommentForm from "@/app/(routes)/game/[id]/comment/_components/GameCommentForm"
+import GameCommentForm from "@/app/(routes)/(ssr)/game/[id]/comment/_components/GameCommentForm"
 import CommentItem from "@/components/comment/CommentItem"
 import ReplyItem from "@/components/comment/ReplyItem"
 import Filter from "@/components/Filter"
