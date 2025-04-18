@@ -11,6 +11,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      AUTH_SECRET: ${{ secrets.AUTH_SECRET }}
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
