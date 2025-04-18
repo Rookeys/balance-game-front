@@ -1,6 +1,8 @@
 import KakaoLoginButton from "@/components/KakaoLoginButton"
 import Image from "next/image"
 
+export const dynamic = "force-static"
+
 export default function SignIn() {
   return (
     <section className="my-[25vh] flex justify-center">

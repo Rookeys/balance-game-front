@@ -2,7 +2,7 @@ import { prefetchGetGameStatus } from "@/api/orval/server/main-page-controller/m
 import { PrefetchBoundary } from "@/lib/providers/PrefetchBoundary"
 import { QueryClient } from "@tanstack/react-query"
 import { notFound } from "next/navigation"
-import GameDetailPageClient from "./_components/GameDetailPageClient"
+import GameDetailPageClient from "../_components/GameDetailPageClient"
 
 interface Params {
   id: string
@@ -11,6 +11,10 @@ interface Params {
 interface GameDetailPageProps {
   params: Promise<Params>
 }
+
+export const revalidate = 60
+
+export const dynamic = "force-static"
 
 export default async function GameDetailPage({ params }: GameDetailPageProps) {
   const { id } = await params
