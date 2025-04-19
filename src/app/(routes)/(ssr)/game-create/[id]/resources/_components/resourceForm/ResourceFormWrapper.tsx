@@ -1,6 +1,6 @@
 "use client"
 
-import { useGetResourceList } from "@/app/(routes)/game-create/[id]/resources/hooks/useGetResourceList"
+import { useGetResourceList } from "@/app/(routes)/(ssr)/game-create/[id]/resources/hooks/useGetResourceList"
 import { Pagination } from "@/components/Pagination"
 import useResizeHandler from "@/hooks/useResizeHandler"
 import { useSelectedResourceIdStore } from "@/store/selectedResourceId"
@@ -9,7 +9,7 @@ import { cn } from "@/utils/cn"
 import { Square, SquareCheck } from "lucide-react"
 import { useRouter, useSearchParams } from "next/navigation"
 import ResourceForm from "./ResourceForm"
-import { handleSelectAllToggle } from "@/app/(routes)/game-create/[id]/resources/utils/selectAllResource"
+import { handleSelectAllToggle } from "@/app/(routes)/(ssr)/game-create/[id]/resources/utils/selectAllResource"
 
 export default function ResourceFormWrapper() {
   const searchParams = useSearchParams()

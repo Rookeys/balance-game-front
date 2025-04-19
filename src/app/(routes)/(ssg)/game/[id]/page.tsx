@@ -2,7 +2,7 @@ import { prefetchGetGameStatus } from "@/api/orval/server/main-page-controller/m
 import { PrefetchBoundary } from "@/lib/providers/PrefetchBoundary"
 import { QueryClient } from "@tanstack/react-query"
 import { notFound } from "next/navigation"
-import GameDetailPageClient from "../_components/GameDetailPageClient"
+import GameDetailPageClient from "../../../(ssr)/game/[id]/_components/GameDetailPageClient"
 
 interface Params {
   id: string

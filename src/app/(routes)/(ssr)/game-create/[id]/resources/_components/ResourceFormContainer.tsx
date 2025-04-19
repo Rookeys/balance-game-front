@@ -6,8 +6,8 @@ import {
   useDeleteSelectResources,
   useGetCountResourcesInGames
 } from "@/api/orval/client/game-resource-controller/game-resource-controller"
-import { useGetResourceList } from "@/app/(routes)/game-create/[id]/resources/hooks/useGetResourceList"
-import { handleSelectAllToggle } from "@/app/(routes)/game-create/[id]/resources/utils/selectAllResource"
+import { useGetResourceList } from "@/app/(routes)/(ssr)/game-create/[id]/resources/hooks/useGetResourceList"
+import { handleSelectAllToggle } from "@/app/(routes)/(ssr)/game-create/[id]/resources/utils/selectAllResource"
 import Filter from "@/components/Filter"
 import GameFormSideBar from "@/components/form/gameRoom/_components/GameFormSideBar"
 import SearchInput from "@/components/SearchInput"
