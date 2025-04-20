@@ -66,6 +66,6 @@ SSG 5분
 댓글: CSR
 
 리소스 페이지 (우승 페이지)
-리소스 정보 (SSG? fetch-cache?)
+리소스 정보 (fetch-cache)
 3등까지의 랭킹: 5분 (fetch-cache)
 댓글: CSR
