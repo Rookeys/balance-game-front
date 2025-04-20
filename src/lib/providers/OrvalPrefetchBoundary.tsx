@@ -8,7 +8,7 @@ type Props = {
   onError?: () => void
 }
 
-export async function PrefetchBoundary({ prefetchActions, queryClient, children, onError }: Props) {
+export async function OrvalPrefetchBoundary({ prefetchActions, queryClient, children, onError }: Props) {
   try {
     if (Array.isArray(prefetchActions)) {
       // await sleep(5000)

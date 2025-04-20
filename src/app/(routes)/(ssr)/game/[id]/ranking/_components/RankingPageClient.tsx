@@ -32,7 +32,7 @@ export default function RankingPageClient() {
   const page = Number(searchParams.get("page")) || 1
 
   const { data: resources } = useGetResultRankingUsingPage(Number(id), {
-    sortType: sort as GetResultRankingSortType,
+    sortType: (sort || GetResultRankingSortType.WIN_RATE_DESC) as GetResultRankingSortType,
     title: keyword,
     size: 10,
     page

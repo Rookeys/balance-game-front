@@ -1,6 +1,6 @@
 "use client"
 import { isServer, QueryClient, QueryClientProvider } from "@tanstack/react-query"
-
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 // ? https://tanstack.com/query/latest/docs/framework/react/guides/advanced-ssr#initial-setup
 
 function makeQueryClient() {
@@ -36,7 +36,7 @@ export default function ReactQueryProvider({ children }: { children: React.React
   return (
     <QueryClientProvider client={queryClient}>
       {children}
-      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   )
 }
