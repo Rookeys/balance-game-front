@@ -83,7 +83,7 @@ export default function ProfileEditPageClient() {
       <label className="relative h-[60px] w-[60px] flex-shrink-0 cursor-pointer md:h-[80px] md:w-[80px]">
         {/* <Image src={URL.createObjectURL(watch("newImage")[0])} alt="" fill className="rounded-full object-cover" /> */}
         <Image
-          src={newImage ? URL.createObjectURL(newImage) : (session?.user?.image ?? "/images/Rookeys.png")}
+          src={newImage ? URL.createObjectURL(newImage) : session?.user?.image || "/images/Rookeys.png"}
           alt="user-profile"
           fill
           className="rounded-full object-cover"
