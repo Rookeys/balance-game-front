@@ -12,6 +12,7 @@ import Image from "next/image"
 import { useState } from "react"
 import { FormProvider, useForm } from "react-hook-form"
 import ResignModal from "./ResignModal"
+import { useResign } from "@/api/orval/client/user-management-controller/user-management-controller"
 
 export type EditProfileType = UserRequest & { newImage?: File[] | null }
 
@@ -23,6 +24,8 @@ export default function ProfileEditPageClient() {
   const { mutateAsync: editProfile } = useUpdateProfile()
 
   const { mutateAsync: RequestPresignedUrl } = useGetPreSignedUrl()
+
+  const { mutateAsync: requestResign } = useResign()
 
   const formMethods = useForm<EditProfileType>({
     values: {
@@ -38,6 +41,7 @@ export default function ProfileEditPageClient() {
   } = formMethods
 
   const onSubmit = async (data: EditProfileType) => {
+    // #region 프로필 수정 관련 로직
     let newImageURL = null
     if (data.newImage && data.newImage.length > 0) {
       const presignedUrl = (await RequestPresignedUrl({ data: { prefix: "image", length: 1 } }))[0] // 해당 폼에서는 무조건 1임
@@ -67,10 +71,17 @@ export default function ProfileEditPageClient() {
     })
 
     setValue("newImage", [], { shouldValidate: true })
+    // #endregion 프로필 수정 관련 로직
   }
 
   const newImageData = watch("newImage")
   const newImage = newImageData?.length && newImageData?.length > 0 ? newImageData[0] : ""
+
+  const handleResign = async () => {
+    // #region 회원탈퇴 관련 로직
+    await requestResign()
+    // #endregion 회원탈퇴 관련 로직
+  }
 
   return (
     <>
@@ -129,7 +140,7 @@ export default function ProfileEditPageClient() {
       <Button className="self-start px-[12px] py-[12px]" onClick={() => setIsOpenResignModal((prev) => !prev)}>
         회원탈퇴
       </Button>
-      {isOpenResignModal && <ResignModal onClick={() => alert("확인")} onClose={() => setIsOpenResignModal(false)} />}
+      {isOpenResignModal && <ResignModal onClick={handleResign} onClose={() => setIsOpenResignModal(false)} />}
     </>
   )
 }
