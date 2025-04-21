@@ -1,8 +1,11 @@
 "use client"
 
 import MoreButton, { MoreItem } from "@/components/MoreButton"
+import { requireLogin } from "@/utils/requireLogin"
+import { useSession } from "next-auth/react"
 
 export default function CommentSocialAction() {
+  const { data: session } = useSession()
   // const onEdit = () => {
   //   alert("onEdit 실행")
   // }
@@ -12,6 +15,9 @@ export default function CommentSocialAction() {
   }
 
   const onReport = () => {
+    if (!requireLogin(session)) {
+      return
+    }
     alert("onReport 실행")
   }
 
