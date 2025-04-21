@@ -13,6 +13,7 @@ import { NavigationGuardProvider } from "next-navigation-guard"
 import { ThemeProvider } from "next-themes"
 import { cookies } from "next/headers"
 import { MoneygraphyRounded } from "./fonts"
+import LoginConfirmModal from "@/components/modal/LoginConfirmModal"
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -41,6 +42,7 @@ export default async function RootLayout({
                   {/* <HeaderSSG /> */}
                   {children}
                   {/* <Footer /> */}
+                  <LoginConfirmModal />
                   <ToasterWithTheme />
                 </ThemeProvider>
                 <RouterPreventer />
