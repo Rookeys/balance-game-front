@@ -20,7 +20,7 @@ export default function ProfileSection() {
       </motion.button> */}
       <div className="flex items-start justify-between">
         <figure className="relative h-[60px] w-[60px] flex-shrink-0 md:h-[80px] md:w-[80px]">
-          <Image src={session?.user.image ?? "/images/Rookeys.png"} alt="" fill />
+          <Image src={session?.user.image || "/images/Rookeys.png"} alt="" fill />
         </figure>
         <Link
           className="inline-flex items-center justify-center rounded-[12px] bg-black px-[16px] py-[8px] text-white"

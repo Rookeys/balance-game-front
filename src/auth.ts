@@ -4,6 +4,7 @@ import { LoginResponse } from "@/api/orval/model/loginResponse"
 import axios from "axios"
 import { AuthOptions, type Session } from "next-auth"
 import type { JWT } from "next-auth/jwt"
+import CredentialsProvider from "next-auth/providers/credentials"
 import KakaoProvider from "next-auth/providers/kakao"
 import { SignUpRequest } from "./api/orval/model/signUpRequest"
 import { SignUpRequestLoginType } from "./api/orval/model/signUpRequestLoginType"
@@ -14,6 +15,30 @@ export const authOptions: AuthOptions = {
     KakaoProvider({
       clientId: process.env.KAKAO_CLIENT_ID as string,
       clientSecret: process.env.KAKAO_CLIENT_SECRET as string
+    }),
+    CredentialsProvider({
+      name: "Demo Login",
+      credentials: {
+        accessToken: { type: "text" },
+        refreshToken: { type: "text" },
+        accessTokenExpiresAt: { type: "text" },
+        refreshTokenExpiresAt: { type: "text" },
+        nickname: { type: "text" },
+        image: { type: "text" }
+      },
+      async authorize(credentials) {
+        if (!credentials) return null
+
+        return {
+          id: "demo-user",
+          accessToken: credentials.accessToken,
+          refreshToken: credentials.refreshToken,
+          accessTokenExpiresAt: credentials.accessTokenExpiresAt,
+          refreshTokenExpiresAt: credentials.refreshTokenExpiresAt,
+          nickname: credentials.nickname,
+          image: credentials.image
+        }
+      }
     })
   ],
   pages: {
@@ -33,6 +58,19 @@ export const authOptions: AuthOptions = {
         if (trigger === "update" && session.nickname) {
           token.nickname = session.nickname
           token.image = session.image
+        }
+
+        // demo 로그인 처리
+        if (account?.type === "credentials" && user) {
+          return {
+            ...token,
+            access_token: (user as any).accessToken,
+            refresh_token: (user as any).refreshToken,
+            access_token_expires_at: Date.now() + Number((user as any).accessTokenExpiresAt) * 1000,
+            refresh_token_expires_at: Date.now() + Number((user as any).refreshTokenExpiresAt) * 1000,
+            nickname: (user as any).nickname,
+            image: (user as any).image
+          }
         }
 
         if (account && user) {
