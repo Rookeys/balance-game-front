@@ -2,7 +2,7 @@
 
 import { useGetChildrenCommentsByGameResourceInfinite } from "@/api/orval/client/game-resource-comments-controller/game-resource-comments-controller"
 import { GameResourceParentCommentResponse } from "@/api/orval/model/gameResourceParentCommentResponse"
-import ResourceCommentAndReplyForm from "@/app/(routes)/game/[id]/results/[resourceId]/_components/ResourceCommentAndReplyForm"
+import ResourceCommentAndReplyForm from "@/app/(routes)/(ssr)/game/[id]/results/[resourceId]/_components/ResourceCommentAndReplyForm"
 import { convertUtcToKoreaDaTime } from "@/utils/dayjsWithExtends"
 import { ChevronDownIcon, ChevronUpIcon, MessageSquare, ThumbsUp } from "lucide-react"
 import Image from "next/image"

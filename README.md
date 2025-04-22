@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 캐싱전략 내용
 
-## Getting Started
+SSG 를 사용 시 useSession 훅에서 데이터를 가져올 수 없으므로 세션 데이터가 필요한 컴포넌트인 Header 컴포넌트를
+Header 와 HeaderSSG 컴포넌트로 분리하여 각각 useSession, getSession 으로 분리하고 layout.tsx 에 각각 적용하였음.
 
-First, run the development server:
+SSR 사용 케이스 : orval 에서 사용한 server 기반 react-query prefetch 를 사용<br />
+SSG, ISR 사용 케이스 : NextJS 의 HTML 캐싱전략을 사용하고, 갱신 필요 시 revalidate 값 설정이나 on-demand revalidation 사용
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+fetch-cache 사용 케이스 : 페이지에 대한 HTML 이 아닌 각 API 에 대한 캐싱을 사용하는 경우 fetchBoundary 사용
+
+> - orval prefetch 가 필요한가에 대한 고민 중.
+
+```TS
+// fetch-cache 가 필요한 경우 예시
+<FetchPrefetchBoundary
+  prefetchActions={fetch(
+    `${process.env.NEXT_PUBLIC_API_ROOT}/api/v1/games/list?${qs.stringify({
+      size: 10,
+      sortType: GetMainGameListSortType.MONTH
+    })}`,
+    {
+      cache: "force-cache",
+      next: { revalidate: 60 }
+    }
+  )}
+  queryKey={getGetMainGameListQueryKey({
+    size: 10,
+    sortType: GetMainGameListSortType.MONTH
+  })}
+  queryClient={queryClient}
+  onError={notFound}
+>
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+```TS
+// fetch-cache 필요하지 않은 경우 예시
+<PrefetchBoundary
+  prefetchActions={prefetchGetGameStatus(queryClient, Number(id))}
+  queryClient={queryClient}
+  onError={notFound}
+>
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 메인페이지 (fetch-cache)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+주간 인기 월드컵 5분
+최근 등록된 이상형 월드컵 10초
+월간 인기 월드컵 5분
 
-## Learn More
+검색결과: CSR
 
-To learn more about Next.js, take a look at the following resources:
+## 월드컵 상세 페이지 (POST, PUT, DELETE 요청 시 on-demand revalidate)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+SSG 5분
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 월드컵 랭킹 페이지
 
-## Deploy on Vercel
+월드컵 디테일 데이터(타이틀) - 5분
+3등까지의 랭킹: 5분 (fetch-cache)
+랭킹: CSR - ISR 5분이랑 고민중
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 댓글 페이지
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+디테일 정보: 5분 (fetch-cache)
+3등까지의 랭킹: 5분 (fetch-cache)
+댓글: CSR
+
+리소스 페이지 (우승 페이지)
+리소스 정보 (fetch-cache)
+3등까지의 랭킹: 5분 (fetch-cache)
+댓글: CSR

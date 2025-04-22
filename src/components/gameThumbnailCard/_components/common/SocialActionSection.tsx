@@ -7,6 +7,8 @@ import { share, ShareAPIRequest } from "@/utils/share"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import GameDeleteModal from "./GameDeleteModal"
+import { useSession } from "next-auth/react"
+import { requireLogin } from "@/utils/requireLogin"
 
 interface Params {
   id?: number
@@ -16,6 +18,8 @@ interface Params {
 }
 
 export default function SocialActionSection({ id, title, categories, isMine }: Params) {
+  const { data: session } = useSession()
+
   const [isOpenReportModal, setIsOpenReportModal] = useState<boolean>(false)
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState<boolean>(false)
 
@@ -30,6 +34,13 @@ export default function SocialActionSection({ id, title, categories, isMine }: P
     share(shareData)
   }
 
+  const handleReport = async () => {
+    if (!requireLogin(session)) {
+      return
+    }
+    setIsOpenReportModal(true)
+  }
+
   const moreItems: MoreItem[] = isMine
     ? [
         { label: "수정하기", onClick: () => router.push(`/game-create/${id}/edit`) },
@@ -37,7 +48,10 @@ export default function SocialActionSection({ id, title, categories, isMine }: P
       ]
     : [
         { label: "공유하기", onClick: handleShare },
-        { label: "신고하기", onClick: () => setIsOpenReportModal(true) }
+        {
+          label: "신고하기",
+          onClick: handleReport
+        }
       ]
 
   return (

@@ -47,14 +47,14 @@ export default function GameFormSideBar({ step, setStep, percent = 0, isStep1Com
 
   return (
     <SideBarWrapper>
-      <section className="flex flex-col gap-[20px] rounded-[40px] border px-[16px] py-[32px]">
+      <section className="flex flex-col gap-[20px] rounded-[20px] border px-[16px] py-[32px]">
         <article className="flex items-center justify-between">
           <p>월드컵 완성까지</p>
           <p className="rounded-[100px] bg-gray-10 px-[12px] py-[4px]">{percent}%</p>
         </article>
         <ProgressBar percent={percent} />
       </section>
-      <section className="flex flex-col rounded-[40px] border px-[16px] py-[20px]">
+      <section className="flex flex-col rounded-[20px] border px-[16px] py-[20px]">
         <p className="py-[12px]">기본설정</p>
         <button type="button" className="flex items-center justify-between py-[12px]" onClick={() => handleStep(1)}>
           <p>월드컵 정보</p>
