@@ -40,15 +40,18 @@ clientInstance.interceptors.response.use(
     const originalRequest = error.config
     if (error.response?.status === 401 && !originalRequest._retry) {
       console.error("Unauthorized: 액세스 토큰이 만료되었거나 유효하지 않습니다.")
+      let session = null
       try {
-        const session = await getSession()
+        session = await getSession()
         const { accessToken: newAccessToken } = await refreshAccessToken(session?.refresh_token as string)
         originalRequest.headers["Authorization"] = `Bearer ${newAccessToken}`
         originalRequest._retry = true
         return clientInstance(originalRequest)
       } catch (error) {
         log("error", error)
-        window.location.href = "/sign-out"
+        if (session) {
+          window.location.href = "/sign-out"
+        }
       }
     }
     return Promise.reject(error)

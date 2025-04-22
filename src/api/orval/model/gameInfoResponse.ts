@@ -1,7 +1,7 @@
 import type { GameInfoResponseAccessType } from "./gameInfoResponseAccessType"
 
 export interface GameInfoResponse {
-  /** 리소스 제목 */
+  /** 게임 제목 */
   title?: string
   /** 설명 */
   description?: string

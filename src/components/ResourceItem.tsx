@@ -8,6 +8,8 @@ interface Params {
   content?: string
   start?: number
   end?: number
+  ratio?: number
+  noDelay?: boolean
 }
 
 export default function ResourceItem({
@@ -15,13 +17,17 @@ export default function ResourceItem({
   type = GameResourceResponseType.IMAGE,
   content = "",
   start,
-  end
+  end,
+  ratio,
+  noDelay
 }: Params) {
   if (type === GameResourceResponseType.IMAGE) {
-    return <ImageRatio src={content} alt={`${title}-thumbnail`} ratio={4 / 3} fill className="cursor-pointer" />
+    return <ImageRatio src={content} alt={`${title}-thumbnail`} ratio={ratio ?? 5 / 4} fill />
   }
   if (type === GameResourceResponseType.LINK) {
     // return <YoutubeRatio url={content} ratio={4 / 3} />
-    return <YoutubeThumbnailBoxWithHover url={content} start={start} end={end} />
+    return (
+      <YoutubeThumbnailBoxWithHover url={content} start={start} end={end} ratio={ratio ?? 16 / 9} noDelay={noDelay} />
+    )
   }
 }

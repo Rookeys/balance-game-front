@@ -1,0 +1,24 @@
+"use client"
+
+import BottomBarWrapper from "@/components/BottomBarWrapper"
+import { Button } from "@/components/Button"
+import { Share } from "lucide-react"
+
+interface Params {
+  onClick?: () => void
+}
+
+export default function GameDetailBottomBar({ onClick }: Params) {
+  return (
+    <BottomBarWrapper>
+      <article className="flex items-center gap-[12px]">
+        <button className="flex h-[48px] w-[48px] flex-shrink-0 items-center justify-center rounded-[8px] border">
+          <Share />
+        </button>
+        <Button type="button" className="h-full w-full bg-black text-white" onClick={onClick}>
+          플레이 하기
+        </Button>
+      </article>
+    </BottomBarWrapper>
+  )
+}

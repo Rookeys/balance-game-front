@@ -1,0 +1,58 @@
+"use client"
+
+import { Button } from "@/components/Button"
+import { useClickOutside } from "@/hooks/useClickOutside"
+import { cn } from "@/utils/cn"
+import { EllipsisVertical } from "lucide-react"
+import { ReactNode, useRef, useState } from "react"
+
+export interface MoreItem {
+  label: string
+  onClick: () => void
+}
+
+interface Params {
+  items: MoreItem[]
+  ButtonUI?: ReactNode
+  className?: string
+}
+
+export default function MoreButton({ items, ButtonUI, className }: Params) {
+  const [isOpen, setIsOpen] = useState(false)
+  const wrapperRef = useRef<HTMLDivElement>(null)
+
+  useClickOutside(wrapperRef, () => setIsOpen(false))
+
+  return (
+    <div ref={wrapperRef} className="relative">
+      {ButtonUI ? (
+        <section className="cursor-pointer" onClick={() => setIsOpen((prev) => !prev)}>
+          {ButtonUI}
+        </section>
+      ) : (
+        <EllipsisVertical size={24} className="cursor-pointer" onClick={() => setIsOpen((prev) => !prev)} />
+      )}
+      {isOpen && (
+        <div
+          className={cn(
+            "absolute end-0 top-[28px] z-[20] w-[124px] divide-y rounded-[8px] border bg-white px-[8px]",
+            className
+          )}
+        >
+          {items.map((action, index) => (
+            <Button
+              key={index}
+              className="w-full px-[24px] py-[20px]"
+              onClick={() => {
+                action.onClick()
+                setIsOpen(false)
+              }}
+            >
+              {action.label}
+            </Button>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}

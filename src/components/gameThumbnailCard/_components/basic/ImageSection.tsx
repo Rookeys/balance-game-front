@@ -1,16 +1,26 @@
+"use client"
+import { Button } from "@/components/Button"
+import { CookieContext } from "@/lib/providers/CookieProvider"
+import { cn } from "@/utils/cn"
+import { Eye, EyeClosed, Play } from "lucide-react"
 import Image from "next/image"
+import { useContext, useState } from "react"
 
 interface Params {
   src?: string
   index: number
+  isBlind?: boolean
+  totalPlayNums?: number
 }
 
-export default function ImageSection({ src, index }: Params) {
+export default function ImageSection({ src, index, isBlind = false, totalPlayNums }: Params) {
+  const [blur, setBlur] = useState<boolean>(isBlind)
+  const { noBlind } = useContext(CookieContext)
   return (
     <article className="relative h-[218px] overflow-hidden rounded-[12px] bg-gray-10 md:h-[308px]">
       <Image
         src={src ?? "/"}
-        className="object-contain object-center"
+        className={cn("object-contain object-center", !noBlind && blur && "brightness-40 saturate-75 blur-2xl")}
         // className="object-cover object-center"
         alt="Game-Thumbnail"
         fill
@@ -18,9 +28,26 @@ export default function ImageSection({ src, index }: Params) {
         placeholder="blur"
         blurDataURL="data:image/jepg;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mO88B8AAqUB0Y/H4mkAAAAASUVORK5CYII="
       />
+      <div className="absolute bottom-[8px] start-[12px] rounded-[4px] bg-black/40 p-[4px] text-white">
+        <div className="flex items-center">
+          <Play size={24} />
+          <p>{totalPlayNums}</p>
+        </div>
+      </div>
       <div className="absolute start-0 top-0 rounded-br-[12px] rounded-tl-[12px] bg-gray-50 px-[16px] py-[4px]">
         {index + 1}
       </div>
+      {!noBlind && isBlind && (
+        <Button
+          className="absolute end-[12px] top-[12px] rounded-[4px] bg-gray-50 px-[8px] py-[4px]"
+          onClick={(e) => {
+            e.preventDefault()
+            setBlur((prev) => !prev)
+          }}
+        >
+          {blur ? <EyeClosed /> : <Eye />}
+        </Button>
+      )}
     </article>
   )
 }

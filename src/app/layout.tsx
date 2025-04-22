@@ -1,15 +1,19 @@
 import { authOptions } from "@/auth"
-import Header from "@/components/Header"
+import RouterPreventer from "@/components/RouterPreventer"
 import ToasterWithTheme from "@/components/ToasterWithTheme"
 import AuthProvider from "@/lib/providers/AuthProvider"
+import CookieProvider from "@/lib/providers/CookieProvider"
 import ReactQueryProvider from "@/lib/providers/ReactQueryProvider"
 import "@/styles/globals.css"
 import "@/styles/reset.css"
+import { parseBoolean } from "@/utils/parseBoolean"
 import type { Metadata } from "next"
 import { getServerSession } from "next-auth"
+import { NavigationGuardProvider } from "next-navigation-guard"
 import { ThemeProvider } from "next-themes"
+import { cookies } from "next/headers"
 import { MoneygraphyRounded } from "./fonts"
-import Footer from "@/components/Footer"
+import LoginConfirmModal from "@/components/modal/LoginConfirmModal"
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -22,19 +26,28 @@ export default async function RootLayout({
   children: React.ReactNode
 }>) {
   const session = await getServerSession(authOptions)
+  const cookieStore = await cookies()
+  const noBlind = parseBoolean(cookieStore.get("noBlind")?.value)
 
   return (
     <html lang="ko" suppressHydrationWarning>
       <body className={`${MoneygraphyRounded.className} text-dark antialiased dark:text-light`}>
         <AuthProvider session={session}>
           <ReactQueryProvider>
-            <ThemeProvider>
-              <div id="portal" />
-              <Header />
-              {children}
-              <Footer />
-              <ToasterWithTheme />
-            </ThemeProvider>
+            <CookieProvider noBlind={noBlind}>
+              <NavigationGuardProvider>
+                <ThemeProvider>
+                  <div id="portal" />
+                  {/* <Header /> */}
+                  {/* <HeaderSSG /> */}
+                  {children}
+                  {/* <Footer /> */}
+                  <LoginConfirmModal />
+                  <ToasterWithTheme />
+                </ThemeProvider>
+                <RouterPreventer />
+              </NavigationGuardProvider>
+            </CookieProvider>
           </ReactQueryProvider>
         </AuthProvider>
       </body>

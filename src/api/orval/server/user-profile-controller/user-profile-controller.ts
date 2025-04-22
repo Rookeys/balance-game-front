@@ -10,7 +10,13 @@ import type {
   UseQueryOptions,
   UseQueryResult
 } from "@tanstack/react-query"
-import type { CustomPageImplGameListResponse, GetMyGameListParams, UserRequest, UserResponse } from "../../model"
+import type {
+  CustomPageImplGameListResponse,
+  GameResponse,
+  GetMyGameListParams,
+  UserRequest,
+  UserResponse
+} from "../../model"
 import { customServerInstance } from "../../../serverInstance"
 import type { ErrorType, BodyType } from "../../../serverInstance"
 
@@ -242,6 +248,142 @@ export const prefetchGetMyGameList = async <
   }
 ): Promise<QueryClient> => {
   const queryOptions = getGetMyGameListQueryOptions(params, options)
+
+  await queryClient.prefetchQuery(queryOptions)
+
+  return queryClient
+}
+
+/**
+ * 내 게임방의 설정을 확인함.
+ * @summary 내가 만든 게임방 정보 확인 API
+ */
+export const getMyGameStatus = (
+  gameId: number,
+  options?: SecondParameter<typeof customServerInstance>,
+  signal?: AbortSignal
+) => {
+  return customServerInstance<GameResponse>(
+    { url: `/api/v1/users/games/${encodeURIComponent(String(gameId))}`, method: "GET", signal },
+    options
+  )
+}
+
+export const getGetMyGameStatusQueryKey = (gameId: number) => {
+  return [`/api/v1/users/games/${gameId}`] as const
+}
+
+export const getGetMyGameStatusQueryOptions = <
+  TData = Awaited<ReturnType<typeof getMyGameStatus>>,
+  TError = ErrorType<GameResponse>
+>(
+  gameId: number,
+  options?: {
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getMyGameStatus>>, TError, TData>>
+    request?: SecondParameter<typeof customServerInstance>
+  }
+) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {}
+
+  const queryKey = queryOptions?.queryKey ?? getGetMyGameStatusQueryKey(gameId)
+
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getMyGameStatus>>> = ({ signal }) =>
+    getMyGameStatus(gameId, requestOptions, signal)
+
+  return { queryKey, queryFn, enabled: !!gameId, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof getMyGameStatus>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetMyGameStatusQueryResult = NonNullable<Awaited<ReturnType<typeof getMyGameStatus>>>
+export type GetMyGameStatusQueryError = ErrorType<GameResponse>
+
+export function useGetMyGameStatus<
+  TData = Awaited<ReturnType<typeof getMyGameStatus>>,
+  TError = ErrorType<GameResponse>
+>(
+  gameId: number,
+  options: {
+    query: Partial<UseQueryOptions<Awaited<ReturnType<typeof getMyGameStatus>>, TError, TData>> &
+      Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getMyGameStatus>>,
+          TError,
+          Awaited<ReturnType<typeof getMyGameStatus>>
+        >,
+        "initialData"
+      >
+    request?: SecondParameter<typeof customServerInstance>
+  }
+): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetMyGameStatus<
+  TData = Awaited<ReturnType<typeof getMyGameStatus>>,
+  TError = ErrorType<GameResponse>
+>(
+  gameId: number,
+  options?: {
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getMyGameStatus>>, TError, TData>> &
+      Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getMyGameStatus>>,
+          TError,
+          Awaited<ReturnType<typeof getMyGameStatus>>
+        >,
+        "initialData"
+      >
+    request?: SecondParameter<typeof customServerInstance>
+  }
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetMyGameStatus<
+  TData = Awaited<ReturnType<typeof getMyGameStatus>>,
+  TError = ErrorType<GameResponse>
+>(
+  gameId: number,
+  options?: {
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getMyGameStatus>>, TError, TData>>
+    request?: SecondParameter<typeof customServerInstance>
+  }
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary 내가 만든 게임방 정보 확인 API
+ */
+
+export function useGetMyGameStatus<
+  TData = Awaited<ReturnType<typeof getMyGameStatus>>,
+  TError = ErrorType<GameResponse>
+>(
+  gameId: number,
+  options?: {
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getMyGameStatus>>, TError, TData>>
+    request?: SecondParameter<typeof customServerInstance>
+  }
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+  const queryOptions = getGetMyGameStatusQueryOptions(gameId, options)
+
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+
+  query.queryKey = queryOptions.queryKey
+
+  return query
+}
+
+/**
+ * @summary 내가 만든 게임방 정보 확인 API
+ */
+export const prefetchGetMyGameStatus = async <
+  TData = Awaited<ReturnType<typeof getMyGameStatus>>,
+  TError = ErrorType<GameResponse>
+>(
+  queryClient: QueryClient,
+  gameId: number,
+  options?: {
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getMyGameStatus>>, TError, TData>>
+    request?: SecondParameter<typeof customServerInstance>
+  }
+): Promise<QueryClient> => {
+  const queryOptions = getGetMyGameStatusQueryOptions(gameId, options)
 
   await queryClient.prefetchQuery(queryOptions)
 

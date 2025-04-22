@@ -3,8 +3,8 @@ export type GetParentCommentsByGameResourceSortType =
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const GetParentCommentsByGameResourceSortType = {
-  likeAsc: "likeAsc",
-  likeDesc: "likeDesc",
-  old: "old",
-  resent: "resent"
+  LIKE_ASC: "LIKE_ASC",
+  LIKE_DESC: "LIKE_DESC",
+  OLD: "OLD",
+  RECENT: "RECENT"
 } as const

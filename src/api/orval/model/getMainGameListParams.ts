@@ -11,7 +11,7 @@ export type GetMainGameListParams = {
    */
   size?: number
   /**
-   * 검색할 리소스 제목
+   * 검색할 내용
    */
   title?: string
   /**

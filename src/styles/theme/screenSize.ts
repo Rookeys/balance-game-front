@@ -9,7 +9,7 @@ export const SCREEN_SIZE = {
   // ["2xl"]: "1536px",
   // ["3xl"]: "1920px",
   // ["4xl"]: "2440px"
-  sm: "375px",
-  md: "768px",
-  lg: "1440px"
+  sm: 375,
+  md: 768,
+  lg: 1440
 }
