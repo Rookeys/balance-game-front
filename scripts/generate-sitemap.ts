@@ -8,21 +8,21 @@ async function generateSitemap() {
 
   sitemap.pipe(writeStream)
 
-  // ✅ 1. 고정 페이지 추가
+  // 루트 페이지 sitemap
   sitemap.write({ url: "/", changefreq: "daily", priority: 1.0 })
 
-  // ✅ 2. 게임 리스트 가져오기 (예: API 요청)
-  // const res = await fetch("https://api.zznpk.com/games")
+  // Todo 백엔드 uuid 작업 완료 후 진행
+  // 게임 리스트 가져오기
+  // const res = await fetch("")
   // const games = await res.json()
-  const games = ["2", "3", "6"] // 예시
 
-  games.forEach((game) => {
-    sitemap.write({
-      url: `/game/${game}`,
-      changefreq: "weekly",
-      priority: 0.8
-    })
-  })
+  // games.forEach((game) => {
+  //   sitemap.write({
+  //     url: `/game/${game}`,
+  //     changefreq: "weekly",
+  //     priority: 0.8
+  //   })
+  // })
 
   sitemap.end()
   await streamToPromise(sitemap)
