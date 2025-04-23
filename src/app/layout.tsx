@@ -16,8 +16,25 @@ import { MoneygraphyRounded } from "./fonts"
 import LoginConfirmModal from "@/components/modal/LoginConfirmModal"
 
 export const metadata: Metadata = {
-  title: "짜릿한 선택! 짱픽!",
-  description: "당신의 이상형 월드컵을 만들고, 즐기세요! 짜릿한 선택 짱픽!"
+  title: {
+    default: "짜릿한 선택! 짱픽!",
+    template: "짱픽 | %s"
+  },
+  description: "당신의 이상형 월드컵을 만들고, 즐기세요! 짜릿한 선택 짱픽!",
+  openGraph: {
+    siteName: "짜릿한 선택! 짱픽!",
+    title: "짜릿한 선택! 짱픽!",
+    type: "website",
+    description: "당신의 이상형 월드컵을 만들고, 즐기세요! 짜릿한 선택 짱픽!",
+    images: [
+      {
+        url: "/images/zznpk_og_image.png",
+        alt: "Zznpk OG IMAGE"
+      }
+    ],
+    url: "https://zznpk.com"
+  },
+  metadataBase: new URL("https://zznpk.com")
 }
 
 export default async function RootLayout({
