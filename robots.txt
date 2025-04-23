@@ -1,0 +1,16 @@
+User-agent: *
+Disallow: /category
+Disallow: /game/*/comment
+Disallow: /game/*/play
+Disallow: /game/*/ranking
+Disallow: /game/*/results
+Disallow: /game-create
+Disallow: /my-page
+Disallow: /search
+Disallow: /sign-in
+Disallow: /sign-out
+
+Allow: /
+Allow: /game/*
+
+Sitemap: https://zznpk.com/sitemap.xml
