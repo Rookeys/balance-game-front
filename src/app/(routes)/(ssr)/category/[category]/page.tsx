@@ -5,6 +5,14 @@ import { notFound } from "next/navigation"
 import CategoryGameList from "./_components/CategoryGameList"
 import Title from "./_components/Title"
 import { gameListFilters } from "@/constants/filters"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+  robots: {
+    index: false,
+    follow: false
+  }
+}
 
 interface Params {
   category: string

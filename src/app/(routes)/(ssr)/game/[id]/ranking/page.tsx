@@ -9,6 +9,14 @@ import { QueryClient } from "@tanstack/react-query"
 import { notFound } from "next/navigation"
 import qs from "qs"
 import RankingPageClient from "./_components/RankingPageClient"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+  robots: {
+    index: false,
+    follow: false
+  }
+}
 
 interface Params {
   id: string
