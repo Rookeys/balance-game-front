@@ -4,7 +4,7 @@ import { SitemapStream, streamToPromise } from "sitemap"
 async function generateSitemap() {
   const hostname = "https://zznpk.com"
   const sitemap = new SitemapStream({ hostname })
-  const writeStream = createWriteStream("public/sitemap.xml")
+  const writeStream = createWriteStream("src/app/sitemap.xml")
 
   sitemap.pipe(writeStream)
 
