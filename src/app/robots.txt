@@ -9,8 +9,14 @@ Disallow: /my-page
 Disallow: /search
 Disallow: /sign-in
 Disallow: /sign-out
+Disallow: /game/
+Disallow: /index.php
+Disallow: /vod/
+Disallow: /vod/*/play
+Disallow: /vod/*/type
+Disallow: /vod/*/page
+Disallow: /vod/*/results
 
 Allow: /
-Allow: /game/
 
 Sitemap: https://zznpk.com/sitemap.xml
