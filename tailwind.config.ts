@@ -156,7 +156,9 @@ const config = {
         }
       },
       fontFamily: {
-        "moneygraphy-rounded": ["var(--font-moneygraphy-rounded)"]
+        pretendard: ["var(--font-pretendard)"],
+        "sb-aggro-medium": ["var(--font-sb-aggro-medium)"]
+        // "moneygraphy-rounded": ["var(--font-moneygraphy-rounded)"],
       }
     }
   },

@@ -15,7 +15,10 @@
 
 body {
   background: var(--background);
-  font-family: var(--font-moneygraphy-rounded), sans-serif;
+  /* font-family: var(--font-moneygraphy-rounded), sans-serif; */
+  font-family:
+    var(--font-pretendard),
+    var(--font-sb-aggro-medium) sans-serif;
 }
 
 @layer utilities {

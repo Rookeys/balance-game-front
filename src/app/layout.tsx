@@ -1,4 +1,5 @@
 import { authOptions } from "@/auth"
+import LoginConfirmModal from "@/components/modal/LoginConfirmModal"
 import RouterPreventer from "@/components/RouterPreventer"
 import ToasterWithTheme from "@/components/ToasterWithTheme"
 import AuthProvider from "@/lib/providers/AuthProvider"
@@ -6,14 +7,14 @@ import CookieProvider from "@/lib/providers/CookieProvider"
 import ReactQueryProvider from "@/lib/providers/ReactQueryProvider"
 import "@/styles/globals.css"
 import "@/styles/reset.css"
+import { cn } from "@/utils/cn"
 import { parseBoolean } from "@/utils/parseBoolean"
 import type { Metadata } from "next"
 import { getServerSession } from "next-auth"
 import { NavigationGuardProvider } from "next-navigation-guard"
 import { ThemeProvider } from "next-themes"
 import { cookies } from "next/headers"
-import { MoneygraphyRounded } from "./fonts"
-import LoginConfirmModal from "@/components/modal/LoginConfirmModal"
+import { PretendardVariable, SBAggroMedium } from "./fonts"
 
 export const metadata: Metadata = {
   title: {
@@ -52,7 +53,9 @@ export default async function RootLayout({
 
   return (
     <html lang="ko" suppressHydrationWarning>
-      <body className={`${MoneygraphyRounded.className} text-dark antialiased dark:text-light`}>
+      <body
+        className={cn(PretendardVariable.variable, SBAggroMedium.variable, "text-dark antialiased dark:text-light")}
+      >
         <AuthProvider session={session}>
           <ReactQueryProvider>
             <CookieProvider noBlind={noBlind}>

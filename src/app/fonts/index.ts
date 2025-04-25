@@ -1,10 +1,16 @@
 import localFont from "next/font/local"
 
-// 토스 글꼴 지원이 default, bold 만 지원됨.
-// 추 후 여러 weight 가 필요하면 다른 글꼴 사용하기 (우선 400 ~ 700 으로 냅두기)
-export const MoneygraphyRounded = localFont({
-  src: "../../../public/fonts/Moneygraphy-Rounded.woff",
-  variable: "--font-moneygraphy-rounded",
+export const PretendardVariable = localFont({
+  src: "../../../public/fonts/PretendardVariable.woff2",
+  variable: "--font-pretendard",
   weight: "400 500 600 700",
+  display: "swap"
+})
+
+export const SBAggroMedium = localFont({
+  // src: "../../../public/fonts/continuous.woff",
+  src: "../../../public/fonts/SB-Aggro-Medium.woff2",
+  variable: "--font-sb-aggro-medium",
+  weight: "500",
   display: "swap"
 })
