@@ -11,11 +11,9 @@ Disallow: /sign-in
 Disallow: /sign-out
 Disallow: /game/
 Disallow: /index.php
-Disallow: /vod/
-Disallow: /vod/*/play
-Disallow: /vod/*/type
-Disallow: /vod/*/page
-Disallow: /vod/*/results
+Disallow: /index.php/*
+Disallow: /vod
+Disallow: /vod/*
 
 Allow: /
 
