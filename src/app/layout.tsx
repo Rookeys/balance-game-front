@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     shortcut: "/favicon.ico"
   },
   openGraph: {
-    siteName: "짜릿한 선택! 짱픽!",
+    siteName: "짱픽",
     title: "짜릿한 선택! 짱픽!",
     type: "website",
     description: "당신의 이상형 월드컵을 만들고, 즐기세요! 짜릿한 선택 짱픽!",
