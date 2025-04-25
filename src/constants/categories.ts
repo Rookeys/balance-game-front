@@ -26,6 +26,5 @@ export const categories: SelectOptionType[] = [
   { id: Categories.SF, value: Categories.SF, label: "SF" },
   { id: Categories.DRAMA, value: Categories.DRAMA, label: "드라마" },
   { id: Categories.ROMANCE, value: Categories.ROMANCE, label: "로맨스" },
-  { id: Categories.CRIME, value: Categories.CRIME, label: "범죄" },
   { id: Categories.SURVIVAL, value: Categories.SURVIVAL, label: "서바이벌" }
 ]
