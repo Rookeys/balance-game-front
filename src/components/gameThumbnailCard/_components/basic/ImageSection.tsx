@@ -21,7 +21,10 @@ export default function ImageSection({ src, index, isBlind = false, totalPlayNum
     <article className="relative h-[218px] overflow-hidden rounded-[12px] bg-gray-100 md:h-[308px]">
       <Image
         src={src ?? "/"}
-        className={cn("object-cover object-center", !noBlind && blur && "brightness-40 saturate-75 blur-2xl")}
+        className={cn(
+          "object-cover object-center transition-transform duration-300 group-hover:scale-110",
+          !noBlind && blur && "brightness-40 saturate-75 blur-2xl"
+        )}
         // className="object-cover object-center"
         alt="Game-Thumbnail"
         fill
