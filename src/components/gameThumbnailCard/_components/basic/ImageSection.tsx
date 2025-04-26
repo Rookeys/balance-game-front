@@ -45,13 +45,13 @@ export default function ImageSection({ src, index, isBlind = false, totalPlayNum
       </div>
       {!noBlind && isBlind && (
         <Button
-          className="absolute end-[12px] top-[12px] rounded-[4px] bg-gray-50 px-[8px] py-[4px]"
+          className="absolute end-[12px] top-[12px] rounded-[4px] bg-transparent px-[8px] py-[4px] text-label-medium"
           onClick={(e) => {
             e.preventDefault()
             setBlur((prev) => !prev)
           }}
         >
-          {blur ? <EyeClosed /> : <Eye />}
+          {blur ? <EyeClosed stroke={COLORS.WHITE} /> : <Eye stroke={COLORS.WHITE} />}
         </Button>
       )}
     </article>

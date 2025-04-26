@@ -140,7 +140,7 @@ export function YoutubeUploadForm() {
               <p>부적절하거나 불쾌감을 주는 콘텐츠는 삭제될 수 있어요.</p>
             </div>
           </div>
-          <Button type="submit" disabled={isSubmitting} className="bg-primary-normal">
+          <Button type="submit" disabled={isSubmitting} className="bg-primary-normal hover:bg-primary-hover">
             저장
           </Button>
         </div>

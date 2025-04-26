@@ -82,7 +82,7 @@ export default function Header() {
           />
         ) : (
           <Button
-            className="rounded-[8px] bg-primary-normal text-label-bold text-white"
+            className="rounded-[8px] bg-primary-normal text-label-bold text-white hover:bg-primary-hover"
             onClick={() => setIsOpen(true)}
           >
             로그인
