@@ -22,13 +22,12 @@ export const metadata: Metadata = {
     template: "짱픽 | %s"
   },
   description: "당신의 이상형 월드컵 게임을 만들고, 즐기세요! 짜릿한 선택 짱픽!",
-  icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico"
-  },
   openGraph: {
     siteName: "짱픽",
-    title: "짜릿한 선택! 짱픽!",
+    title: {
+      default: "짱픽",
+      template: "짱픽 | %s"
+    },
     type: "website",
     description: "당신의 이상형 월드컵을 만들고, 즐기세요! 짜릿한 선택 짱픽!",
     images: [
