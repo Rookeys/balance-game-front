@@ -56,7 +56,7 @@ export default function DemoLoginForm() {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="rounded w-full rounded-[12px] bg-blue-50 px-[16px] py-[8px] text-white hover:bg-blue-600 disabled:bg-gray-400"
+        className="rounded transition-color-custom w-full rounded-[12px] bg-blue-50 px-[16px] py-[8px] text-white hover:bg-blue-600 disabled:bg-gray-400"
       >
         {isSubmitting ? "로그인 중..." : "관리자 로그인"}
       </button>

@@ -12,8 +12,10 @@ export default function BlindToggle() {
       onClick={async () => {
         await setBlindCookie(!noBlind)
       }}
+      variant="custom"
+      className="rounded-[1000px] border border-line-normal p-[8px] text-label-normal"
     >
-      {!noBlind ? <EyeClosed /> : <Eye />}
+      {!noBlind ? <EyeClosed size={24} /> : <Eye size={24} />}
     </Button>
   )
 }

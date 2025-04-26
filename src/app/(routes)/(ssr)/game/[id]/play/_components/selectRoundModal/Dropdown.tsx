@@ -63,7 +63,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
                 setIsOpen(false)
               }}
               className={cn(
-                "cursor-pointer px-[12px] py-[12px] text-start hover:bg-blue-100"
+                "transition-color-custom cursor-pointer px-[12px] py-[12px] text-start hover:bg-blue-100"
                 // option.value === value && "bg-blue-10"
               )}
             >

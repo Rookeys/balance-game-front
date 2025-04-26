@@ -43,7 +43,7 @@ export function Pagination({ currentPage, totalPages, onPageChange, pageRangeDis
               key={page}
               onClick={() => onPageChange(page)}
               className={cn(
-                "h-[36px] w-[36px] rounded-[4px] border text-[14px]",
+                "transition-color-custom h-[36px] w-[36px] rounded-[4px] border text-[14px]",
                 currentPage === page ? "border-black bg-black text-white" : "hover:bg-gray-100"
               )}
             >

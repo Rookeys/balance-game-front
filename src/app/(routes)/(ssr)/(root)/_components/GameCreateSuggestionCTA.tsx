@@ -14,7 +14,10 @@ export default function GameCreateSuggestionCTA() {
         </p>
       </article>
       <article>
-        <Button className="bg-primary-normal px-[28px] py-[12px] text-white hover:bg-primary-hover" asChild>
+        <Button
+          className="transition-color-custom bg-primary-normal px-[28px] py-[12px] text-white hover:bg-primary-hover"
+          asChild
+        >
           <Link href={session ? "/game-create/new" : "/sign-in"}>{session ? "만들러 가기" : "로그인하러 가기"}</Link>
         </Button>
       </article>

@@ -42,7 +42,7 @@ export default function MoreButton({ items, ButtonUI, className }: Params) {
           {items.map((action, index) => (
             <Button
               key={index}
-              className="rounded-none w-full px-[24px] py-[12px] hover:bg-fill-normal"
+              className="rounded-none transition-color-custom w-full px-[24px] py-[12px] hover:bg-fill-normal"
               onClick={() => {
                 action.onClick()
                 setIsOpen(false)

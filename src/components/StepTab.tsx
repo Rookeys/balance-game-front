@@ -23,7 +23,7 @@ export default function StepTab({ items, currentValue, className }: StepTabProps
           type="button"
           onClick={item.onClick}
           className={cn(
-            "w-full rounded-[12px] py-[8px] transition-colors",
+            "transition-color-customs w-full rounded-[12px] py-[8px]",
             currentValue === item.value ? "bg-white" : "bg-transparent"
           )}
         >

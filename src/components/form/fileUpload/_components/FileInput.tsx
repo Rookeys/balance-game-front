@@ -14,7 +14,7 @@ export const FileInput = ({ className, children, rounded = true, ...props }: Par
   return (
     <div {...props} className={cn("relative w-full", isLimit ? "cursor-not-allowed opacity-50" : "cursor-pointer")}>
       <div
-        className={cn("w-full transition-colors duration-300 ease-in-out", className, rounded && "rounded-lg")}
+        className={cn("transition-color-customs w-full duration-300 ease-in-out", className, rounded && "rounded-lg")}
         {...rootProps}
       >
         {children}

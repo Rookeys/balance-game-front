@@ -5,13 +5,12 @@ import { signOut, useSession } from "next-auth/react"
 import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+import { useState } from "react"
 import BlindToggle from "./BlindToggle"
 import { Button } from "./Button"
 import Logo from "./Logo"
 import MoreButton, { MoreItem } from "./MoreButton"
-import ThemeToggle from "./ThemeToggle"
 import SignInModal from "./SignInModal"
-import { useState } from "react"
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -37,7 +36,7 @@ export default function Header() {
   ]
 
   return (
-    <header className="flex h-[64px] items-center justify-between border-b border-gray-200 bg-white px-[12px] py-[8px]">
+    <header className="flex h-[64px] items-center justify-between border-b border-gray-200 bg-white px-[12px] py-[8px] dark:bg-gray-700">
       <section className="flex items-center gap-[40px]">
         <Link href={"/"} className="flex-shrink-0">
           <Logo />
@@ -62,14 +61,14 @@ export default function Header() {
             </Link>
           </>
         )}
-        <ThemeToggle />
+        {/* <ThemeToggle /> */}
         <BlindToggle />
         {session ? (
           <MoreButton
             items={moreItems}
             ButtonUI={
               <Image
-                className="h-[40px] w-[40px] rounded-full object-cover"
+                className="transition-color-custom h-[40px] w-[40px] rounded-full object-cover"
                 src={session?.user?.image || "/images/Rookeys.png"}
                 alt="profile-image"
                 width={40}
@@ -82,7 +81,7 @@ export default function Header() {
           />
         ) : (
           <Button
-            className="rounded-[8px] bg-primary-normal text-label-bold text-white hover:bg-primary-hover"
+            className="transition-color-custom rounded-[8px] bg-primary-normal text-label-bold text-white hover:bg-primary-hover"
             onClick={() => setIsOpen(true)}
           >
             로그인

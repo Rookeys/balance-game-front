@@ -12,9 +12,8 @@ import BlindToggle from "./BlindToggle"
 import { Button } from "./Button"
 import Logo from "./Logo"
 import MoreButton, { MoreItem } from "./MoreButton"
-import ThemeToggle from "./ThemeToggle"
-import Skeleton from "./Skeleton"
 import SignInModal from "./SignInModal"
+import Skeleton from "./Skeleton"
 
 export default function HeaderSSG() {
   const [session, setSession] = useState<Session | null>(null)
@@ -49,7 +48,7 @@ export default function HeaderSSG() {
   ]
 
   return (
-    <header className="flex h-[64px] items-center justify-between border-b border-gray-200 bg-white px-[12px] py-[8px] dark:border-gray-700">
+    <header className="flex h-[64px] items-center justify-between border-b border-gray-200 bg-white px-[12px] py-[8px] dark:bg-gray-700">
       <section className="flex items-center gap-[40px]">
         <Link href={"/"} className="flex-shrink-0">
           <Logo />
@@ -82,7 +81,7 @@ export default function HeaderSSG() {
                 </Link>
               </>
             )}
-            <ThemeToggle />
+            {/* <ThemeToggle /> */}
             <BlindToggle />
             {session ? (
               <MoreButton
@@ -102,7 +101,7 @@ export default function HeaderSSG() {
               />
             ) : (
               <Button
-                className="rounded-[8px] bg-primary-normal text-label-bold text-white hover:bg-primary-hover"
+                className="transition-color-custom rounded-[8px] bg-primary-normal text-label-bold text-white hover:bg-primary-hover"
                 onClick={() => setIsOpen(true)}
               >
                 로그인

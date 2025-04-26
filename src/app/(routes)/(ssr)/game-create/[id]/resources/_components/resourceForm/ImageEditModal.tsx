@@ -68,7 +68,7 @@ export default function ImageEditModal({ onClose, onSave, overlayClose }: Params
         <article className="flex items-center justify-between gap-[12px] pb-[40px]">
           <Button
             type="button"
-            className="w-fit rounded-[12px] bg-red-500 px-[28px] py-[12px] text-white hover:bg-red-600"
+            className="transition-color-custom w-fit rounded-[12px] bg-red-500 px-[28px] py-[12px] text-white hover:bg-red-600"
             onClick={() => {
               setValue("content", "", { shouldValidate: true })
               setValue("newImage", undefined, { shouldValidate: true })
@@ -78,7 +78,7 @@ export default function ImageEditModal({ onClose, onSave, overlayClose }: Params
           </Button>
           <Button
             type="button"
-            className="bg-blue-40 w-fit rounded-[12px] px-[28px] py-[12px] text-white hover:bg-blue-50 disabled:bg-gray-50"
+            className="bg-blue-40 transition-color-custom w-fit rounded-[12px] px-[28px] py-[12px] text-white hover:bg-blue-50 disabled:bg-gray-50"
             onClick={onSave}
             disabled={isSubmitting}
           >
