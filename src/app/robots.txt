@@ -1,5 +1,5 @@
 User-agent: *
-Disallow: /category
+Disallow: /category/*
 Disallow: /game/*/comment
 Disallow: /game/*/play
 Disallow: /game/*/ranking
@@ -9,11 +9,11 @@ Disallow: /my-page
 Disallow: /search
 Disallow: /sign-in
 Disallow: /sign-out
-Disallow: /game/
 Disallow: /index.php
 Disallow: /index.php/*
 Disallow: /vod
 Disallow: /vod/*
+Disallow: /game/*
 
 Allow: /
 
