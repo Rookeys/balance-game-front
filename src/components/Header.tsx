@@ -10,8 +10,11 @@ import { Button } from "./Button"
 import Logo from "./Logo"
 import MoreButton, { MoreItem } from "./MoreButton"
 import ThemeToggle from "./ThemeToggle"
+import SignInModal from "./SignInModal"
+import { useState } from "react"
 
 export default function Header() {
+  const [isOpen, setIsOpen] = useState<boolean>(false)
   const { data: session } = useSession()
   const clearSession = useSessionStore((state) => state.clearSession)
 
@@ -78,13 +81,12 @@ export default function Header() {
             className="top-[40px] w-[140px]"
           />
         ) : (
-          <Button asChild className="rounded-[100px] bg-black text-white">
-            <Link href={"/sign-in"} aria-label="sign-in">
-              로그인하기
-            </Link>
+          <Button className="rounded-[100px] bg-black text-white" onClick={() => setIsOpen(true)}>
+            로그인
           </Button>
         )}
       </section>
+      {isOpen && <SignInModal onClose={() => setIsOpen(false)} />}
     </header>
   )
 }

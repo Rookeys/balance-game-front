@@ -101,7 +101,7 @@ export default function HeaderSSG() {
             ) : (
               <Button asChild className="rounded-[100px] bg-black text-white">
                 <Link href={"/sign-in"} aria-label="sign-in">
-                  로그인하기
+                  로그인
                 </Link>
               </Button>
             )}

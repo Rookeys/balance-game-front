@@ -8,23 +8,23 @@ import { useState } from "react"
 export default function SignInPageClient() {
   const [clickCount, setClickCount] = useState<number>(0)
   return (
-    <article className="flex w-full max-w-[500px] flex-col gap-[24px] rounded-[16px] px-[16px] py-[36px]">
+    <article className="w-full max-w-[400px] rounded-[16px] px-[16px] py-[20px]">
       <Image
-        src={"/images/Rookeys.png"}
+        src={"/images/zznpk_logo.png"}
         alt="logo"
         width={120}
         height={120}
         className="mx-auto"
         onClick={() => setClickCount((prev) => prev + 1)}
       />
-      <div className="flex flex-col items-center gap-[16px]">
-        <p>서비스명에 오신 것을 환영합니다!</p>
-        <div className="text-center">
-          <p>간단히 설명이 들어가는 영역입니다.</p>
-          <p>최대 2줄까지 작성합니다.</p>
+      <div className="mb-[40px] mt-[24px] flex flex-col items-center gap-[16px]">
+        <p className="font-sb-aggro-medium text-heading-3">짱픽에 오신 것을 환영합니다!</p>
+        <div className="text-center text-body-regular">
+          <p>선택을 더 짜릿하게!</p>
+          <p>짱픽에서 이상형 월드컵을 시작해 보세요.</p>
         </div>
       </div>
-      <KakaoLoginButton className="mx-auto mt-[16px] w-full max-w-[340px]" />
+      <KakaoLoginButton className="mx-auto w-full" />
       {clickCount >= 5 && <DemoLoginForm />}
     </article>
   )

@@ -45,7 +45,7 @@ export default function DemoLoginForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-[8px]">
+    <form onSubmit={handleSubmit(onSubmit)} className="mt-[16px] flex flex-col gap-[8px]">
       <input
         type="password"
         placeholder="관리자 암호 입력"
