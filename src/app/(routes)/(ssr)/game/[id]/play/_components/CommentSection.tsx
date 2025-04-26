@@ -96,7 +96,7 @@ export default function CommentSection({ playId }: Params) {
           )}
         </article>
       ) : (
-        <Button className="self-end bg-gray-10" onClick={() => setIsOpen(true)}>
+        <Button className="self-end bg-gray-100" onClick={() => setIsOpen(true)}>
           댓글 보기
         </Button>
       )}

@@ -16,9 +16,12 @@ const customTWMerge = extendTailwindMerge({
         "text-label-regular",
         "text-label-medium",
         "text-label-bold",
-        "text-caption-regular",
-        "text-caption-medium",
-        "text-caption-bold"
+        "text-caption1-regular",
+        "text-caption1-medium",
+        "text-caption1-bold",
+        "text-caption2-regular",
+        "text-caption2-medium",
+        "text-caption2-bold"
       ]
     }
   }

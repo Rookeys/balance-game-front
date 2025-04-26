@@ -34,7 +34,7 @@ export default function SelectItemBox({ selectedId, handleSelectItem, ...props }
         onAnimationComplete={handleAnimationComplete}
       >
         <div
-          className="relative cursor-pointer rounded-[12px] bg-gray-10 px-[6px] pt-[6px]"
+          className="relative cursor-pointer rounded-[12px] bg-gray-100 px-[6px] pt-[6px]"
           onClick={() => handleSelectItem(props.resourceId)}
         >
           <ImageRatio src={props.content ?? "/"} alt={`${props.title}-thumbnail`} ratio={5 / 4} fill />
@@ -63,7 +63,7 @@ export default function SelectItemBox({ selectedId, handleSelectItem, ...props }
       }}
       onAnimationComplete={handleAnimationComplete}
     >
-      <div className="relative rounded-[12px] bg-gray-10 px-[6px] pt-[6px]">
+      <div className="relative rounded-[12px] bg-gray-100 px-[6px] pt-[6px]">
         <ResourceItem {...props} ratio={5 / 4} start={props.startSec} end={props.endSec} noDelay />
         {/* {props.title && (
           <article className="pointer-events-none absolute start-[50%] top-[50%] z-10 max-w-full translate-x-[-50%] translate-y-[-50%] rounded-[8px] bg-dark/50 px-4 py-2">

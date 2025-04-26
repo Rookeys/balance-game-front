@@ -39,10 +39,10 @@ export default function GameDetailPageClient() {
         </div>
         <section className="flex w-full flex-col gap-[28px] md:max-w-[50%] md:gap-[40px]">
           <article className="flex items-center gap-[12px]">
-            <p className="rounded-[8px] bg-gray-10 px-[16px] py-[8px]">
+            <p className="rounded-[8px] bg-gray-100 px-[16px] py-[8px]">
               {gameDetailData?.totalResourceNums}개의 콘텐츠
             </p>
-            <p className="rounded-[8px] bg-gray-10 px-[16px] py-[8px]">
+            <p className="rounded-[8px] bg-gray-100 px-[16px] py-[8px]">
               {getMaxRound(gameDetailData?.totalResourceNums)}강까지 플레이 가능
             </p>
           </article>

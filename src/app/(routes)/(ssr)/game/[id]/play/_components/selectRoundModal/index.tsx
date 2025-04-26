@@ -17,10 +17,7 @@ export default function SelectRoundModal({ onClose, overlayClose = false, classN
   return (
     <ModalWrapper onClose={onClose} overlayClose={overlayClose}>
       <section
-        className={cn(
-          "z-[999] mx-[16px] w-full max-w-[520px] rounded-[16px] bg-white p-[16px] text-center dark:border dark:border-gray-70 dark:bg-night",
-          className
-        )}
+        className={cn("z-[999] mx-[16px] w-full max-w-[520px] rounded-[16px] bg-white p-[16px] text-center", className)}
       >
         <article className="flex items-center justify-between">
           <div className="h-[24px] w-[24px]" />

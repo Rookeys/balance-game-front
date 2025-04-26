@@ -27,7 +27,7 @@ export default function ImageEditModal({ onClose, onSave, overlayClose }: Params
     <ModalWrapper overlayClose={overlayClose} onClose={onClose}>
       <section
         className={cn(
-          "z-[999] mx-[16px] w-full max-w-[500px] rounded-[16px] bg-white p-[16px] text-center dark:border dark:border-gray-70 dark:bg-night"
+          "z-[999] mx-[16px] w-full max-w-[500px] rounded-[16px] bg-white p-[16px] text-center dark:border-gray-700"
         )}
       >
         <article className="flex items-center justify-between">
@@ -52,8 +52,8 @@ export default function ImageEditModal({ onClose, onSave, overlayClose }: Params
                 maxFiles={1}
               />
             )}
-            <div className="flex gap-[4px] text-gray-30">
-              <CircleAlert className="flex-shrink-0 fill-gray-30 text-white" />
+            <div className="text-gray-30 flex gap-[4px]">
+              <CircleAlert className="fill-gray-30 flex-shrink-0 text-white" />
               <p className="text-[14px]">JPEG, JPG, PNG 형식을 지원하며 이미지 당 최대 4MB까지 업로드할 수 있어요.</p>
             </div>
           </div>
@@ -68,7 +68,7 @@ export default function ImageEditModal({ onClose, onSave, overlayClose }: Params
         <article className="flex items-center justify-between gap-[12px] pb-[40px]">
           <Button
             type="button"
-            className="w-fit rounded-[12px] bg-dark-20 px-[28px] py-[12px] text-white hover:bg-dark-30"
+            className="w-fit rounded-[12px] bg-red-500 px-[28px] py-[12px] text-white hover:bg-red-600"
             onClick={() => {
               setValue("content", "", { shouldValidate: true })
               setValue("newImage", undefined, { shouldValidate: true })
@@ -78,7 +78,7 @@ export default function ImageEditModal({ onClose, onSave, overlayClose }: Params
           </Button>
           <Button
             type="button"
-            className="w-fit rounded-[12px] bg-blue-40 px-[28px] py-[12px] text-white hover:bg-blue-50 disabled:bg-gray-50"
+            className="bg-blue-40 w-fit rounded-[12px] px-[28px] py-[12px] text-white hover:bg-blue-50 disabled:bg-gray-50"
             onClick={onSave}
             disabled={isSubmitting}
           >

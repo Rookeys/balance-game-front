@@ -15,7 +15,7 @@ export default function GameFormBottomBar({ step, setStep, percent = 0, disabled
     <BottomBarWrapper>
       <div className="flex items-center gap-[12px]">
         <ProgressBar percent={percent} />
-        <p className="rounded-[100px] bg-gray-10 px-[12px] py-[4px]">{percent}%</p>
+        <p className="rounded-[100px] bg-gray-100 px-[12px] py-[4px]">{percent}%</p>
       </div>
       <Button
         key={`${step}-button`}

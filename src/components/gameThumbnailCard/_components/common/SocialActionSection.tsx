@@ -64,7 +64,7 @@ export default function SocialActionSection({ id, title, categories, isMine }: P
       {categories && categories?.length > 0 && (
         <article className="flex gap-[4px]">
           {categories.map((category, i) => (
-            <p className="rounded-[4px] bg-gray-30 px-[8px] py-[4px]" key={`${category}-${i}`}>
+            <p className="rounded-[4px] bg-gray-300 px-[8px] py-[4px]" key={`${category}-${i}`}>
               {category}
             </p>
           ))}

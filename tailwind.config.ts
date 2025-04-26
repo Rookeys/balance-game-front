@@ -1,6 +1,6 @@
-import { FONT_SIZE } from "./src/styles/theme/fontSize"
-import { BORDER_RADIUS } from "./src/styles/theme/borderRadius"
 import { COLORS } from "./src/styles/theme/colors"
+import { BORDER_RADIUS } from "./src/styles/theme/borderRadius"
+import { FONT_SIZE } from "./src/styles/theme/fontSize"
 import { FONT_WEIGHT } from "./src/styles/theme/fontWeight"
 import { SCREEN_SIZE } from "./src/styles/theme/screenSize"
 
@@ -21,154 +21,56 @@ const config = {
     borderRadius: BORDER_RADIUS,
     fontWeight: FONT_WEIGHT,
     fontSize: FONT_SIZE,
-    // fontSize: {
-    //   "heading-1": ["28px", { fontWeight: 500, lineHeight: "1.4", letterSpacing: "-0.2" }],
-    //   "heading-2": ["24px", { fontWeight: 500, lineHeight: "1.4", letterSpacing: "-0.2" }],
-    //   "heading-3": ["22px", { fontWeight: 500, lineHeight: "1.4", letterSpacing: "-0.2" }],
-    //   "heading-4": ["20px", { fontWeight: 500, lineHeight: "1.4", letterSpacing: "-0.2" }],
-    //   "heading-5": ["18px", { fontWeight: 500, lineHeight: "1.4", letterSpacing: "-0.2" }],
-    //   "body-regular": ["16px", { fontWeight: 400, lineHeight: "1.5", letterSpacing: "0" }],
-    //   "body-medium": ["16px", { fontWeight: 500, lineHeight: "1.5", letterSpacing: "0" }],
-    //   "body-bold": ["16px", { fontWeight: 700, lineHeight: "1.5", letterSpacing: "0" }],
-    //   "label-regular": ["14px", { fontWeight: 400, lineHeight: "1.4", letterSpacing: "0" }],
-    //   "label-medium": ["14px", { fontWeight: 500, lineHeight: "1.4", letterSpacing: "0" }],
-    //   "label-bold": ["14px", { fontWeight: 700, lineHeight: "1.4", letterSpacing: "0" }],
-    //   "caption-regular": ["12px", { fontWeight: 400, lineHeight: "1.3", letterSpacing: "0" }],
-    //   "caption-medium": ["12px", { fontWeight: 500, lineHeight: "1.3", letterSpacing: "0" }],
-    //   "caption-bold": ["12px", { fontWeight: 700, lineHeight: "1.3", letterSpacing: "0" }]
-    // },
     extend: {
       // 기본 tailwindCss 색상 필요없으면 주석
       colors: {
         primary: {
-          DEFAULT: COLORS.PRIMARY,
-          10: COLORS.PRIMARY_10,
-          20: COLORS.PRIMARY_20,
-          30: COLORS.PRIMARY_30,
-          40: COLORS.PRIMARY_40,
-          50: COLORS.PRIMARY_50,
-          60: COLORS.PRIMARY_60,
-          70: COLORS.PRIMARY_70,
-          80: COLORS.PRIMARY_80,
-          90: COLORS.PRIMARY_90
+          DEFAULT: COLORS.CYAN_500,
+          normal: COLORS.CYAN_500,
+          hover: COLORS.CYAN_600,
+          "on-primary": COLORS.CYAN_700
         },
         secondary: {
-          DEFAULT: COLORS.SECONDARY,
-          10: COLORS.SECONDARY_10,
-          20: COLORS.SECONDARY_20,
-          30: COLORS.SECONDARY_30,
-          40: COLORS.SECONDARY_40,
-          50: COLORS.SECONDARY_50,
-          60: COLORS.SECONDARY_60,
-          70: COLORS.SECONDARY_70,
-          80: COLORS.SECONDARY_80,
-          90: COLORS.SECONDARY_90
+          DEFAULT: COLORS.VIOLET_400,
+          normal: COLORS.VIOLET_400,
+          "alternative-hover": COLORS.VIOLET_100,
+          "on-secondary": COLORS.VIOLET_900
         },
-        dark: {
-          DEFAULT: COLORS.DARK,
-          10: COLORS.DARK_10,
-          20: COLORS.DARK_20,
-          30: COLORS.DARK_30,
-          40: COLORS.DARK_40,
-          50: COLORS.DARK_50,
-          60: COLORS.DARK_60,
-          70: COLORS.DARK_70,
-          80: COLORS.DARK_80,
-          90: COLORS.DARK_90
+        label: {
+          normal: COLORS.NEUTRAL_900,
+          strong: COLORS.BLACK,
+          neutral: COLORS.NEUTRAL_700,
+          alternative: COLORS.NEUTRAL_600,
+          disable: COLORS.NEUTRAL_500
         },
-        gray: {
-          DEFAULT: COLORS.GRAY,
-          10: COLORS.GRAY_10,
-          20: COLORS.GRAY_20,
-          30: COLORS.GRAY_30,
-          40: COLORS.GRAY_40,
-          50: COLORS.GRAY_50,
-          60: COLORS.GRAY_60,
-          70: COLORS.GRAY_70,
-          80: COLORS.GRAY_80,
-          90: COLORS.GRAY_90
+        background: {
+          DEFAULT: COLORS.WHITE
         },
-        purple: {
-          DEFAULT: COLORS.PURPLE,
-          10: COLORS.PURPLE_10,
-          20: COLORS.PURPLE_20,
-          30: COLORS.PURPLE_30,
-          40: COLORS.PURPLE_40,
-          50: COLORS.PURPLE_50,
-          60: COLORS.PURPLE_60,
-          70: COLORS.PURPLE_70,
-          80: COLORS.PURPLE_80,
-          90: COLORS.PURPLE_90
+        line: {
+          normal: COLORS.NEUTRAL_300,
+          neutral: COLORS.NEUTRAL_200
         },
-        pink: {
-          DEFAULT: COLORS.PINK,
-          10: COLORS.PINK_10,
-          20: COLORS.PINK_20,
-          30: COLORS.PINK_30,
-          40: COLORS.PINK_40,
-          50: COLORS.PINK_50,
-          60: COLORS.PINK_60,
-          70: COLORS.PINK_70,
-          80: COLORS.PINK_80,
-          90: COLORS.PINK_90
+        fill: {
+          normal: COLORS.NEUTRAL_50,
+          strong: COLORS.NEUTRAL_100
         },
-        yellow: {
-          DEFAULT: COLORS.YELLOW,
-          10: COLORS.YELLOW_10,
-          20: COLORS.YELLOW_20,
-          30: COLORS.YELLOW_30,
-          40: COLORS.YELLOW_40,
-          50: COLORS.YELLOW_50,
-          60: COLORS.YELLOW_60,
-          70: COLORS.YELLOW_70,
-          80: COLORS.YELLOW_80,
-          90: COLORS.YELLOW_90
+        status: {
+          positive: "#00BF40",
+          negative: "#FF4242"
         },
-        red: {
-          DEFAULT: COLORS.RED,
-          10: COLORS.RED_10,
-          20: COLORS.RED_20,
-          30: COLORS.RED_30,
-          40: COLORS.RED_40,
-          50: COLORS.RED_50,
-          60: COLORS.RED_60,
-          70: COLORS.RED_70,
-          80: COLORS.RED_80,
-          90: COLORS.RED_90
+        accent: {
+          normal: COLORS.PINK_500,
+          alternative: COLORS.PINK_50,
+          "on-accent": COLORS.PINK_800
         },
-        blue: {
-          DEFAULT: COLORS.BLUE,
-          10: COLORS.BLUE_10,
-          20: COLORS.BLUE_20,
-          30: COLORS.BLUE_30,
-          40: COLORS.BLUE_40,
-          50: COLORS.BLUE_50,
-          60: COLORS.BLUE_60,
-          70: COLORS.BLUE_70,
-          80: COLORS.BLUE_80,
-          90: COLORS.BLUE_90
+        dimmer: {
+          normal: "#17171980",
+          strong: "#171719CC"
         },
-        green: {
-          DEFAULT: COLORS.GREEN,
-          10: COLORS.GREEN_10,
-          20: COLORS.GREEN_20,
-          30: COLORS.GREEN_30,
-          40: COLORS.GREEN_40,
-          50: COLORS.GREEN_50,
-          60: COLORS.GREEN_60,
-          70: COLORS.GREEN_70,
-          80: COLORS.GREEN_80,
-          90: COLORS.GREEN_90
-        },
-        light: COLORS.LIGHT,
-        white: COLORS.WHITE,
-        black: COLORS.BLACK,
-        night: COLORS.NIGHT,
-        "dark-night": COLORS.DARK_NIGHT,
         kakao: {
-          container: "#FEE500",
-          symbol: "#000000",
-          label: "#000000D9"
+          container: COLORS.KAKAO_CONTAINER,
+          symbol: COLORS.KAKAO_SYMBOL,
+          label: COLORS.KAKAO_LABEL
         }
       },
       fontFamily: {

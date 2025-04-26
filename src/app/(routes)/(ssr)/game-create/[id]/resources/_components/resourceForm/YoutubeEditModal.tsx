@@ -26,7 +26,7 @@ export default function YoutubeEditModal({ onClose, onSave, overlayClose }: Para
     <ModalWrapper overlayClose={overlayClose} onClose={onClose}>
       <section
         className={cn(
-          "z-[999] mx-[16px] w-full max-w-[500px] rounded-[16px] bg-white p-[16px] text-center dark:border dark:border-gray-70 dark:bg-night"
+          "dark:border-gray-70 dark:bg-night z-[999] mx-[16px] w-full max-w-[500px] rounded-[16px] bg-white p-[16px] text-center dark:border"
         )}
       >
         <article className="flex items-center justify-between">
@@ -50,8 +50,8 @@ export default function YoutubeEditModal({ onClose, onSave, overlayClose }: Para
                 />
               ) : (
                 <div className="relative h-full w-full overflow-hidden rounded-[12px] bg-black">
-                  <div className="flex h-full flex-col items-center justify-center gap-[12px] bg-gray-10">
-                    <div className="h-[60px] w-[60px] bg-red-10 md:h-[100px] md:w-[100px]" />
+                  <div className="flex h-full flex-col items-center justify-center gap-[12px] bg-gray-100">
+                    <div className="bg-red-10 h-[60px] w-[60px] md:h-[100px] md:w-[100px]" />
                     <p>유튜브 링크를 추가해 주세요</p>
                     <p>아래 입력란에 유튜브 링크를 넣고 동영상을 추가해 보세요.</p>
                   </div>
@@ -98,8 +98,8 @@ export default function YoutubeEditModal({ onClose, onSave, overlayClose }: Para
               }}
             />
           </article>
-          <div className="flex gap-[4px] text-start text-gray-30">
-            <CircleAlert className="flex-shrink-0 fill-gray-30 text-white" />
+          <div className="text-gray-30 flex gap-[4px] text-start">
+            <CircleAlert className="fill-gray-30 flex-shrink-0 text-white" />
             <p className="text-[14px]">
               시작/종료 시간은 선택 사항이에요. 설정하면 해당 구간이 반복 재생되므로, 하이라이트 설정을 권장해요.
             </p>
@@ -118,14 +118,14 @@ export default function YoutubeEditModal({ onClose, onSave, overlayClose }: Para
         <article className="flex items-center justify-between gap-[12px] pb-[40px]">
           <Button
             type="button"
-            className="w-fit rounded-[12px] bg-dark-20 px-[28px] py-[12px] text-white hover:bg-dark-30"
+            className="w-fit rounded-[12px] bg-red-500 px-[28px] py-[12px] text-white hover:bg-red-600"
             onClick={() => setValue("content", "", { shouldValidate: true })}
           >
             동영상 삭제
           </Button>
           <Button
             type="button"
-            className="w-fit rounded-[12px] bg-blue-40 px-[28px] py-[12px] text-white hover:bg-blue-50 disabled:bg-gray-50"
+            className="bg-blue-40 w-fit rounded-[12px] px-[28px] py-[12px] text-white hover:bg-blue-50 disabled:bg-gray-50"
             onClick={onSave}
             disabled={isSubmitting}
           >

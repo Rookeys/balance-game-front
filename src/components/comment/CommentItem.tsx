@@ -44,7 +44,7 @@ export default function CommentItem(props: GameResourceParentCommentResponse) {
             <div className="flex items-center gap-[8px]">
               <p>{props.nickname}</p>
               {props.existsWriter && (
-                <div className="flex-shrink-0 self-start rounded-full bg-gray-10 px-[8px] py-[2px]">제작자</div>
+                <div className="flex-shrink-0 self-start rounded-full bg-gray-100 px-[8px] py-[2px]">제작자</div>
               )}
             </div>
             <p className="font-[12px] text-gray-500">{convertUtcToKoreaDaTime(props.createdDateTime)}</p>

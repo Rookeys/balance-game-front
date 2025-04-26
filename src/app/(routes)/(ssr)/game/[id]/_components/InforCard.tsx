@@ -45,7 +45,7 @@ export default function InfoCard(props: Props) {
       <p>{props.title}</p>
       <div className="flex items-center gap-[12px]">
         {props.items?.map((item, idx) => (
-          <p key={idx} className="rounded-[4px] bg-gray-10 px-[8px] py-[4px]">
+          <p key={idx} className="rounded-[4px] bg-gray-100 px-[8px] py-[4px]">
             {item}
           </p>
         ))}

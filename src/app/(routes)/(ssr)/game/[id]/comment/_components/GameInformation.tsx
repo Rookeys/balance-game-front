@@ -24,7 +24,7 @@ export default function GameInformation() {
       <section className="flex w-full flex-col gap-[12px] md:gap-[24px] lg:gap-[40px]">
         <article className="flex items-center gap-[12px]">
           {data?.categories?.map((category, i) => (
-            <p key={`${category}-${i}`} className="rounded-[8px] bg-gray-10 px-[16px] py-[8px]">
+            <p key={`${category}-${i}`} className="rounded-[8px] bg-gray-100 px-[16px] py-[8px]">
               {category}
             </p>
           ))}

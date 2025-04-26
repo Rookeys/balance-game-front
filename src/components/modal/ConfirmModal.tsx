@@ -27,7 +27,7 @@ export default function ConfirmModal({
     <ModalWrapper onClose={onClose} overlayClose={overlayClose}>
       <section
         className={cn(
-          "z-[999] mx-[16px] w-full max-w-[400px] rounded-[16px] bg-white p-[16px] text-center dark:border dark:border-gray-70 dark:bg-night",
+          "dark:border-gray-70 dark:bg-night z-[999] mx-[16px] w-full max-w-[400px] rounded-[16px] bg-white p-[16px] text-center dark:border",
           className
         )}
       >
@@ -41,14 +41,14 @@ export default function ConfirmModal({
         <article className="flex items-center justify-between gap-[12px] pb-[40px]">
           <Button
             type="button"
-            className="w-full rounded-[12px] bg-dark-20 px-[28px] py-[12px] text-white hover:bg-dark-30"
+            className="w-full rounded-[12px] bg-red-500 px-[28px] py-[12px] text-white"
             onClick={onClose}
           >
             취소
           </Button>
           <Button
             type="button"
-            className="w-full rounded-[12px] bg-blue-40 px-[28px] py-[12px] text-white hover:bg-blue-50"
+            className="w-full rounded-[12px] bg-blue-400 px-[28px] py-[12px] text-white"
             onClick={onClick}
             disabled={disabled}
           >

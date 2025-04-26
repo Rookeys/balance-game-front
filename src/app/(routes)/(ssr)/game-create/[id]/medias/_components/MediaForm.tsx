@@ -47,7 +47,7 @@ export default function MediaForm() {
                 만들어보세요!
               </p>
             </article>
-            <p className="rounded-[8px] bg-gray-10 px-[16px] py-[12px]">
+            <p className="rounded-[8px] bg-gray-100 px-[16px] py-[12px]">
               업로드한 콘텐츠 {resourceNumbers}개, {getMaxRound(resourceNumbers)}강까지 플레이 가능해요.
             </p>
           </div>

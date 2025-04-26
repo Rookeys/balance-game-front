@@ -16,10 +16,10 @@ export default function RankingTop3() {
     <section className="flex flex-col rounded-[20px] border px-[16px] py-[20px]">
       <p className="mb-[20px]">콘텐츠 랭킹 TOP 3 🏆</p>
       {data?.content?.map((resource, index) => <RankingCard key={resource.resourceId} {...resource} index={index} />)}
-      <Link href={`/game/${id}/ranking`} className="mx-auto w-fit rounded-[12px] bg-gray-10 px-[20px] py-[12px]">
+      <Link href={`/game/${id}/ranking`} className="mx-auto w-fit rounded-[12px] bg-gray-100 px-[20px] py-[12px]">
         랭킹 보러가기
       </Link>
-      {/* <Button className="mx-auto w-fit bg-gray-10 px-[20px] py-[12px]">랭킹 보러가기</Button> */}
+      {/* <Button className="mx-auto w-fit bg-gray-100 px-[20px] py-[12px]">랭킹 보러가기</Button> */}
     </section>
   )
 }

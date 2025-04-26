@@ -36,10 +36,7 @@ const Textarea: React.FC<Params> = ({
       {label && <InputLabel id={id} label={label} required={required} className={labelClassName} />}
       <textarea
         id={id}
-        className={cn(
-          "w-full resize-none rounded-[12px] border-[2px] px-[16px] py-[16px] dark:border-gray dark:bg-dark-30",
-          inputClassName
-        )}
+        className={cn("w-full resize-none rounded-[12px] border-[2px] px-[16px] py-[16px]", inputClassName)}
         value={value}
         onChange={(e) => {
           if (onChange) {

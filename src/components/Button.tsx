@@ -16,7 +16,7 @@ export const Button: React.FC<ButtonProps> = ({
   ...props
 }) => {
   const Comp = asChild ? Slot : "button"
-  const baseClassName = "inline-flex items-center justify-center disabled:bg-gray"
+  const baseClassName = "inline-flex items-center justify-center disabled:bg-gray-500"
   const variantClassName = variant === "basic" ? "px-[16px] py-[8px] rounded-[12px]" : ""
 
   return (

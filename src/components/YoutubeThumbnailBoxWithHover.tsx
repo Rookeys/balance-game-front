@@ -24,7 +24,7 @@ export default function YoutubeThumbnailBoxWithHover({ url, start, end, ratio, n
 
   return (
     <figure
-      className="relative h-full min-h-[120px] w-full overflow-hidden rounded-[12px] bg-gray-10"
+      className="relative h-full min-h-[120px] w-full overflow-hidden rounded-[12px] bg-gray-100"
       onMouseEnter={() => setHover(true)}
       // style={{
       //   backgroundImage: `url(${getYoutubeThumbnail(url)})`,

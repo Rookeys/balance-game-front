@@ -67,7 +67,7 @@ export default function ResourceTableDesktopContents({
         <p>{indexNum}</p>
       </div>
       <div className="col-span-2 flex items-center justify-center">
-        <p className="rounded-[4px] bg-gray-10 px-[8px] py-[4px]">
+        <p className="rounded-[4px] bg-gray-100 px-[8px] py-[4px]">
           {resource.type === GameResourceResponseType.IMAGE ? "이미지" : "동영상"}
         </p>
       </div>
@@ -105,14 +105,14 @@ export default function ResourceTableDesktopContents({
       <div className="col-span-3 flex flex-wrap items-center gap-[8px] px-[16px]">
         <button
           type="button"
-          className="h-[40px] w-[40px] rounded-[4px] bg-gray-10 p-[8px]"
+          className="h-[40px] w-[40px] rounded-[4px] bg-gray-100 p-[8px]"
           onClick={() => setIsOpenEditModal(true)}
         >
           <SquarePen />
         </button>
         <button
           type="button"
-          className="h-[40px] w-[40px] rounded-[4px] bg-gray-10 p-[8px]"
+          className="h-[40px] w-[40px] rounded-[4px] bg-gray-100 p-[8px]"
           onClick={() => setIsOpenDeleteModal(true)}
         >
           <Trash2 />

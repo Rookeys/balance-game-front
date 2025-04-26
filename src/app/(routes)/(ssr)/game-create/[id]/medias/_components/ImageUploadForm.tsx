@@ -92,11 +92,7 @@ export function ImageUploadForm() {
           {watch("inviteCode")?.toString().length ?? 0}/{10}
         </p>
       </div>
-      <Button
-        type="submit"
-        disabled={isSubmitting}
-        className="self-end bg-primary text-light hover:bg-primary-60 dark:bg-primary-70 dark:hover:bg-primary-80"
-      >
+      <Button type="submit" disabled={isSubmitting} className="self-end bg-primary-normal">
         저장
       </Button>
     </form>

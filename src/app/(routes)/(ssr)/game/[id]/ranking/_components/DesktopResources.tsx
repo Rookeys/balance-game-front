@@ -22,7 +22,7 @@ export default function DesktopResources() {
   return (
     <article className="flex flex-col rounded-[16px] border px-[16px] py-[20px]">
       {/* Header */}
-      <div className={cn("flex h-[74px] overflow-hidden rounded-[8px] bg-gray-10")}>
+      <div className={cn("flex h-[74px] overflow-hidden rounded-[8px] bg-gray-100")}>
         <div className="flex w-[64px] flex-shrink-0 items-center justify-center">
           <p>순위</p>
         </div>

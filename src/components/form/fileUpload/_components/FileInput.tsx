@@ -25,7 +25,7 @@ export const FileInput = ({ className, children, rounded = true, ...props }: Par
               rounded && "rounded-lg"
             )}
           >
-            <p className="font-medium text-blue">여기에 업로드 하세요 🚀</p>
+            <p className="font-medium text-blue-500">여기에 업로드 하세요 🚀</p>
           </div>
         )}
       </div>

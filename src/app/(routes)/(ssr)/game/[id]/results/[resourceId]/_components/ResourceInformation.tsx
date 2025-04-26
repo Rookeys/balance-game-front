@@ -43,7 +43,7 @@ export default function ResourceInformation() {
           <button className="flex-shrink-0 rounded-[8px] border p-[12px]">
             <Share />
           </button>
-          <Button className="w-full bg-gray-10">{played ? "다시하기" : "플레이하기"}</Button>
+          <Button className="w-full bg-gray-100">{played ? "다시하기" : "플레이하기"}</Button>
         </article>
       </section>
     </section>

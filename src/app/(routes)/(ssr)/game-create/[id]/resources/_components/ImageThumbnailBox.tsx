@@ -13,7 +13,7 @@ export default function ImageThumbnailBox({ url }: Params) {
 
   return (
     <>
-      <figure className="relative h-full min-h-[120px] w-full bg-blue-10" onClick={() => setIsOpen(true)}>
+      <figure className="relative h-full min-h-[120px] w-full bg-blue-100" onClick={() => setIsOpen(true)}>
         <Image src={url ?? "/"} alt="Image thumbnail" className="cursor-pointer object-contain" fill sizes="120px" />
       </figure>
       {isOpen && <ImageModal url={url} onClose={() => setIsOpen(false)} />}

@@ -17,7 +17,7 @@ export default function ImageSection({ src, tag, isBlind = false, totalPlayNums 
   const [blur, setBlur] = useState<boolean>(isBlind)
   const { noBlind } = useContext(CookieContext)
   return (
-    <article className="relative h-[146px] overflow-hidden rounded-[12px] bg-red-10 md:h-[226px]">
+    <article className="relative h-[146px] overflow-hidden rounded-[12px] bg-red-100 md:h-[226px]">
       <Image
         src={src ?? "/"}
         className={cn("object-contain object-center", !noBlind && blur && "brightness-40 saturate-75 blur-2xl")}

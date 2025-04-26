@@ -20,7 +20,7 @@ export default function ThemeToggle() {
   return (
     <Toggle.Root onPressedChange={() => setTheme(theme === "dark" ? "light" : "dark")} aria-label="Theme Toggle">
       <div
-        className={`flex h-[40px] w-[40px] items-center justify-center rounded-full border border-gray-20 transition-all duration-300 ease-in-out dark:border-none dark:bg-dark-40 ${theme === "dark" ? "rotate-180" : "rotate-0"}`}
+        className={`flex h-[40px] w-[40px] items-center justify-center rounded-full border border-gray-200 transition-all duration-300 ease-in-out dark:border-none ${theme === "dark" ? "rotate-180" : "rotate-0"}`}
       >
         {theme === "dark" ? (
           <SunMedium className="text-yellow-70 transition-opacity duration-300 ease-in-out" size={20} />

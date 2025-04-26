@@ -8,7 +8,7 @@ export default function MobilePlayNowButton() {
   return (
     <Link
       href={`/game/${id}`}
-      className="rounded-[12px] bg-gray-10 px-[16px] py-[20px] md:hidden"
+      className="rounded-[12px] bg-gray-100 px-[16px] py-[20px] md:hidden"
       // onClick={() => router.push(`/game/${id}`)}
     >
       <div className="flex w-full items-center justify-between">

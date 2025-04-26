@@ -43,7 +43,7 @@ const FileUploadDropZone = ({
 
   return (
     <FileUploader value={value} onValueChange={onValueChange} dropzoneOptions={dropzone}>
-      <FileInput className="border-2 border-dashed border-blue" rounded={rounded}>
+      <FileInput className="border-2 border-dashed border-blue-500" rounded={rounded}>
         <div className="flex w-full flex-col items-center justify-center py-[16px]">
           <FileUploaderInformation />
         </div>

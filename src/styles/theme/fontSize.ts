@@ -10,7 +10,10 @@ export const FONT_SIZE = {
   "label-regular": ["14px", { fontWeight: 400, lineHeight: "1.4", letterSpacing: "0" }],
   "label-medium": ["14px", { fontWeight: 500, lineHeight: "1.4", letterSpacing: "0" }],
   "label-bold": ["14px", { fontWeight: 700, lineHeight: "1.4", letterSpacing: "0" }],
-  "caption-regular": ["12px", { fontWeight: 400, lineHeight: "1.3", letterSpacing: "0" }],
-  "caption-medium": ["12px", { fontWeight: 500, lineHeight: "1.3", letterSpacing: "0" }],
-  "caption-bold": ["12px", { fontWeight: 700, lineHeight: "1.3", letterSpacing: "0" }]
+  "caption1-regular": ["12px", { fontWeight: 400, lineHeight: "1.3", letterSpacing: "0" }],
+  "caption1-medium": ["12px", { fontWeight: 500, lineHeight: "1.3", letterSpacing: "0" }],
+  "caption1-bold": ["12px", { fontWeight: 700, lineHeight: "1.3", letterSpacing: "0" }],
+  "caption2-regular": ["12px", { fontWeight: 400, lineHeight: "1.3", letterSpacing: "0" }],
+  "caption2-medium": ["12px", { fontWeight: 500, lineHeight: "1.3", letterSpacing: "0" }],
+  "caption2-bold": ["12px", { fontWeight: 700, lineHeight: "1.3", letterSpacing: "0" }]
 }

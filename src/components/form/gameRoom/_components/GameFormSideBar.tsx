@@ -50,7 +50,7 @@ export default function GameFormSideBar({ step, setStep, percent = 0, isStep1Com
       <section className="flex flex-col gap-[20px] rounded-[20px] border px-[16px] py-[32px]">
         <article className="flex items-center justify-between">
           <p>월드컵 완성까지</p>
-          <p className="rounded-[100px] bg-gray-10 px-[12px] py-[4px]">{percent}%</p>
+          <p className="rounded-[100px] bg-gray-100 px-[12px] py-[4px]">{percent}%</p>
         </article>
         <ProgressBar percent={percent} />
       </section>

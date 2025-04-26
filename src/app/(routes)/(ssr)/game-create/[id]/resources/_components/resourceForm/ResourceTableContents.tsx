@@ -82,7 +82,7 @@ export default function ResourceTableContents({ resource, isOpenEditState, isOpe
         </button>
       </figure>
       <article className="flex w-full flex-col gap-[12px]">
-        <p className="w-fit rounded-[4px] bg-gray-10 px-[8px] py-[4px]">
+        <p className="w-fit rounded-[4px] bg-gray-100 px-[8px] py-[4px]">
           {resource.type === GameResourceResponseType.IMAGE ? "이미지" : "동영상"}
         </p>
         <p className="line-clamp-1">{resource.title || "\u00A0"}</p>

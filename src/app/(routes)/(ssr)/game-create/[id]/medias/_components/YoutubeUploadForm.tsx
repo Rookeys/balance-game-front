@@ -84,8 +84,8 @@ export function YoutubeUploadForm() {
               />
             </>
           ) : (
-            <div className="flex h-full flex-col items-center justify-center gap-[12px] bg-gray-10">
-              <div className="h-[60px] w-[60px] bg-red-10 md:h-[100px] md:w-[100px]" />
+            <div className="flex h-full flex-col items-center justify-center gap-[12px] bg-gray-100">
+              <div className="h-[60px] w-[60px] bg-red-100 md:h-[100px] md:w-[100px]" />
               <p>유튜브 링크를 추가해 주세요</p>
               <p>아래 입력란에 유튜브 링크를 넣고 동영상을 추가해 보세요.</p>
             </div>
@@ -140,11 +140,7 @@ export function YoutubeUploadForm() {
               <p>부적절하거나 불쾌감을 주는 콘텐츠는 삭제될 수 있어요.</p>
             </div>
           </div>
-          <Button
-            type="submit"
-            disabled={isSubmitting}
-            className="bg-primary text-light hover:bg-primary-60 dark:bg-primary-70 dark:hover:bg-primary-80"
-          >
+          <Button type="submit" disabled={isSubmitting} className="bg-primary-normal">
             저장
           </Button>
         </div>

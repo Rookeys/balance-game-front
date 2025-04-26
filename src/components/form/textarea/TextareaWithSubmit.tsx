@@ -41,10 +41,7 @@ const TextareaWithSubmit: React.FC<Params> = ({
       {label && <InputLabel id={id} label={label} required={required} className={labelClassName} />}
       <TextareaAutosize
         id={id}
-        className={cn(
-          "w-full resize-none rounded-[12px] border-[2px] px-[12px] py-[12px] pe-[80px] dark:border-gray dark:bg-dark-30",
-          inputClassName
-        )}
+        className={cn("w-full resize-none rounded-[12px] border-[2px] px-[12px] py-[12px] pe-[80px]", inputClassName)}
         value={value}
         cacheMeasurements
         // onChange={onChange}
@@ -75,7 +72,7 @@ const TextareaWithSubmit: React.FC<Params> = ({
             {value?.toString().length ?? 0}/{maxLength}
           </p>
         )}
-        <Button className="bg-gray-10 px-[12px] py-[8px] md:px-[20px] md:py-[12px]" type="submit" disabled={disabled}>
+        <Button className="bg-gray-100 px-[12px] py-[8px] md:px-[20px] md:py-[12px]" type="submit" disabled={disabled}>
           등록
         </Button>
       </article>

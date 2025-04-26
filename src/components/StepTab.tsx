@@ -16,7 +16,7 @@ interface StepTabProps {
 
 export default function StepTab({ items, currentValue, className }: StepTabProps) {
   return (
-    <section className={cn("my-[20px] flex w-full max-w-[484px] rounded-[12px] bg-gray-10 p-[4px]", className)}>
+    <section className={cn("my-[20px] flex w-full max-w-[484px] rounded-[12px] bg-gray-100 p-[4px]", className)}>
       {items.map((item) => (
         <button
           key={item.value}

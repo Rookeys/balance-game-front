@@ -34,10 +34,7 @@ const InputText: React.FC<Params> = ({
       {label && <InputLabel id={id} label={label} required={required} className={labelClassName} />}
       <input
         id={id}
-        className={cn(
-          "w-full rounded-[12px] border-[2px] px-[16px] py-[16px] dark:border-gray dark:bg-dark-30",
-          inputClassName
-        )}
+        className={cn("w-full rounded-[12px] border-[2px] px-[16px] py-[16px]", inputClassName)}
         value={value}
         onChange={onChange}
         required={required}
