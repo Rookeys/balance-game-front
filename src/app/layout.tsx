@@ -53,9 +53,7 @@ export default async function RootLayout({
 
   return (
     <html lang="ko" suppressHydrationWarning>
-      <body
-        className={cn(PretendardVariable.variable, SBAggroMedium.variable, "text-dark dark:text-light antialiased")}
-      >
+      <body className={cn(PretendardVariable.variable, SBAggroMedium.variable, "text-label-normal antialiased")}>
         <AuthProvider session={session}>
           <ReactQueryProvider>
             <CookieProvider noBlind={noBlind}>

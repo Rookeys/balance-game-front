@@ -15,10 +15,10 @@ export default function MetaInfoSection({ creatorNickname, creatorImage }: Param
           height={24}
           className="h-[24px] w-[24px] rounded-full"
           alt="creator-image"
-          placeholder="blur"
-          blurDataURL="data:image/jepg;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mO88B8AAqUB0Y/H4mkAAAAASUVORK5CYII="
+          // placeholder="blur"
+          // blurDataURL="data:image/jepg;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mO88B8AAqUB0Y/H4mkAAAAASUVORK5CYII="
         />
-        <p className="line-clamp-1">{creatorNickname}</p>
+        <p className="line-clamp-1 text-caption1-regular text-label-neutral">{creatorNickname}</p>
       </div>
       {/* 높이 390 -> 366 */}
       {/* <div className="flex items-center">

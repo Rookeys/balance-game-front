@@ -23,7 +23,7 @@ export default function ModalWrapper({ onClose, overlayClose, children }: Params
       <div className="fixed inset-0 z-[50] flex items-center justify-center">
         {children}
         <div
-          className="fixed h-full w-full"
+          className="fixed h-full w-full bg-black/50"
           onClick={() => {
             if (overlayClose && !!onClose) onClose()
           }}

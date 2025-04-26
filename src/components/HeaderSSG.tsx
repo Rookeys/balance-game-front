@@ -14,10 +14,12 @@ import Logo from "./Logo"
 import MoreButton, { MoreItem } from "./MoreButton"
 import ThemeToggle from "./ThemeToggle"
 import Skeleton from "./Skeleton"
+import SignInModal from "./SignInModal"
 
 export default function HeaderSSG() {
   const [session, setSession] = useState<Session | null>(null)
   const [loading, setLoading] = useState(true)
+  const [isOpen, setIsOpen] = useState<boolean>(false)
 
   const clearSession = useSessionStore((state) => state.clearSession)
   const router = useRouter()
@@ -52,12 +54,12 @@ export default function HeaderSSG() {
         <Link href={"/"} className="flex-shrink-0">
           <Logo />
         </Link>
-        <Link href={"/"} aria-label="About Our Service" className="hidden lg:block">
+        {/* <Link href={"/"} aria-label="About Our Service" className="hidden lg:block">
           서비스 소개
         </Link>
         <Link href={"/"} aria-label="Contact us" className="hidden lg:block">
           문의하기
-        </Link>
+        </Link> */}
       </section>
       <section className="flex items-center gap-[12px] md:gap-[20px]">
         {loading ? (
@@ -70,7 +72,7 @@ export default function HeaderSSG() {
           <>
             {session && (
               <>
-                <Button asChild className="hidden rounded-[100px] bg-black text-white md:inline-flex">
+                <Button asChild className="hidden rounded-[8px] bg-fill-normal text-black md:inline-flex">
                   <Link href={"/game-create/new"} aria-label="game-create">
                     월드컵 만들기
                   </Link>
@@ -99,15 +101,17 @@ export default function HeaderSSG() {
                 className="top-[40px] w-[140px]"
               />
             ) : (
-              <Button asChild className="rounded-[100px] bg-black text-white">
-                <Link href={"/sign-in"} aria-label="sign-in">
-                  로그인
-                </Link>
+              <Button
+                className="rounded-[8px] bg-primary-normal text-label-bold text-white"
+                onClick={() => setIsOpen(true)}
+              >
+                로그인
               </Button>
             )}
           </>
         )}
       </section>
+      {isOpen && <SignInModal onClose={() => setIsOpen(false)} />}
     </header>
   )
 }

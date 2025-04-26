@@ -33,7 +33,6 @@ export default function RecentlyGames() {
     <section className="flex h-[366px] w-full max-w-[1200px] flex-col gap-[12px] md:h-[486px] lg:h-[462px]">
       <SliderTitle
         title="최근 등록된 이상형 월드컵"
-        titleIcon="✨"
         prevElId="recently-games-list-prev"
         nextElId="recently-games-list-next"
       />

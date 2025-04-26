@@ -6,7 +6,7 @@ import CardSkeleton from "./CardSkeleton"
 
 interface Params {
   title: string
-  titleIcon: string
+  titleIcon?: string
 }
 
 export default function SkeletonList({ title, titleIcon }: Params) {

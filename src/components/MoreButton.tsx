@@ -35,14 +35,14 @@ export default function MoreButton({ items, ButtonUI, className }: Params) {
       {isOpen && (
         <div
           className={cn(
-            "absolute end-0 top-[28px] z-[20] w-[124px] divide-y rounded-[8px] border bg-white px-[8px]",
+            "absolute end-0 top-[28px] z-[20] w-[124px] divide-y rounded-[4px] border bg-white px-[8px] text-label-medium text-label-normal",
             className
           )}
         >
           {items.map((action, index) => (
             <Button
               key={index}
-              className="w-full px-[24px] py-[20px]"
+              className="rounded-none w-full px-[24px] py-[20px]"
               onClick={() => {
                 action.onClick()
                 setIsOpen(false)

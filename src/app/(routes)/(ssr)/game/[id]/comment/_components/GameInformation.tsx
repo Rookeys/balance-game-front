@@ -39,8 +39,8 @@ export default function GameInformation() {
               height={40}
               className="h-[40px] w-[40px] rounded-full"
               alt="creator-image"
-              placeholder="blur"
-              blurDataURL="data:image/jepg;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mO88B8AAqUB0Y/H4mkAAAAASUVORK5CYII="
+              // placeholder="blur"
+              // blurDataURL="data:image/jepg;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mO88B8AAqUB0Y/H4mkAAAAASUVORK5CYII="
             />
             <p className="line-clamp-1">{data?.userResponse?.nickname}</p>
           </div>

@@ -37,22 +37,22 @@ export default function Header() {
   ]
 
   return (
-    <header className="flex h-[64px] items-center justify-between border-b border-gray-200 bg-white px-[12px] py-[8px] dark:border-gray-700">
+    <header className="flex h-[64px] items-center justify-between border-b border-gray-200 bg-white px-[12px] py-[8px]">
       <section className="flex items-center gap-[40px]">
         <Link href={"/"} className="flex-shrink-0">
           <Logo />
         </Link>
-        <Link href={"/"} aria-label="About Our Service" className="hidden lg:block">
+        {/* <Link href={"/"} aria-label="About Our Service" className="hidden lg:block">
           서비스 소개
         </Link>
         <Link href={"/"} aria-label="Contact us" className="hidden lg:block">
           문의하기
-        </Link>
+        </Link> */}
       </section>
       <section className="flex items-center gap-[12px] md:gap-[20px]">
         {session && (
           <>
-            <Button asChild className="hidden rounded-[100px] bg-black text-white md:inline-flex">
+            <Button asChild className="hidden rounded-[8px] bg-fill-normal text-black md:inline-flex">
               <Link href={"/game-create/new"} aria-label="game-create">
                 월드컵 만들기
               </Link>
@@ -81,7 +81,10 @@ export default function Header() {
             className="top-[40px] w-[140px]"
           />
         ) : (
-          <Button className="rounded-[100px] bg-black text-white" onClick={() => setIsOpen(true)}>
+          <Button
+            className="rounded-[8px] bg-primary-normal text-label-bold text-white"
+            onClick={() => setIsOpen(true)}
+          >
             로그인
           </Button>
         )}

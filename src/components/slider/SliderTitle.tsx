@@ -11,7 +11,7 @@ export default function SliderTitle({ title, titleIcon, prevElId, nextElId }: Pa
   return (
     <section className="flex h-[40px] items-center justify-between">
       <article className="flex items-center gap-[8px]">
-        <p>{title}</p>
+        <p className="font-sb-aggro-medium text-heading-3 text-label-normal">{title}</p>
         {titleIcon && <p>{titleIcon}</p>}
       </article>
       {prevElId && nextElId && (

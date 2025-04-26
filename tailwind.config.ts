@@ -33,8 +33,9 @@ const config = {
         secondary: {
           DEFAULT: COLORS.VIOLET_400,
           normal: COLORS.VIOLET_400,
+          alternative: COLORS.VIOLET_50,
           "alternative-hover": COLORS.VIOLET_100,
-          "on-secondary": COLORS.VIOLET_900
+          "on-primary": COLORS.VIOLET_900
         },
         label: {
           normal: COLORS.NEUTRAL_900,

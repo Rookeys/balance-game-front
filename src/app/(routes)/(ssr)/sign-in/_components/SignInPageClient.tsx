@@ -17,7 +17,7 @@ export default function SignInPageClient() {
         className="mx-auto"
         onClick={() => setClickCount((prev) => prev + 1)}
       />
-      <div className="mb-[40px] mt-[24px] flex flex-col items-center gap-[16px]">
+      <div className="mb-[40px] mt-[24px] flex flex-col items-center gap-[16px] text-label-normal">
         <p className="font-sb-aggro-medium text-heading-3">짱픽에 오신 것을 환영합니다!</p>
         <div className="text-center text-body-regular">
           <p>선택을 더 짜릿하게!</p>
