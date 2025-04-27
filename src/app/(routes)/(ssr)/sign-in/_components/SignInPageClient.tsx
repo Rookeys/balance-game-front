@@ -3,10 +3,17 @@
 import DemoLoginForm from "@/components/DemoLoginForm"
 import KakaoLoginButton from "@/components/KakaoLoginButton"
 import Image from "next/image"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 export default function SignInPageClient() {
   const [clickCount, setClickCount] = useState<number>(0)
+
+  useEffect(() => {
+    if (typeof window !== undefined) {
+      window.scrollTo(0, 0)
+    }
+  }, [])
+
   return (
     <article className="w-full max-w-[400px] rounded-[16px] px-[16px] py-[20px]">
       <Image
