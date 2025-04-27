@@ -17,7 +17,10 @@ export const Button: React.FC<ButtonProps> = ({
 }) => {
   const Comp = asChild ? Slot : "button"
   const baseClassName = "inline-flex items-center justify-center transition-color-custom"
-  const variantClassName = variant === "basic" ? "px-[16px] py-[8px] rounded-[12px] text-body-bold" : ""
+  const variantClassName =
+    variant === "basic"
+      ? "transition-color-custom rounded-[8px] bg-primary-normal px-[16px] py-[8px] text-body-bold text-white hover:bg-primary-hover disabled:bg-fill-strong disabled:text-label-disable"
+      : ""
 
   return (
     <Comp className={cn(baseClassName, variantClassName, className)} type={props.type ?? "button"} {...props}>

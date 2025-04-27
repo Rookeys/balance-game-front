@@ -2,17 +2,17 @@ import { ChevronLeft, ChevronRight } from "lucide-react"
 
 interface Params {
   title: string
-  titleIcon?: string
+  updateTime?: string
   prevElId?: string
   nextElId?: string
 }
 
-export default function SliderTitle({ title, titleIcon, prevElId, nextElId }: Params) {
+export default function SliderTitle({ title, prevElId, nextElId, updateTime }: Params) {
   return (
     <section className="flex h-[40px] items-center justify-between">
-      <article className="flex items-center gap-[8px]">
+      <article className="flex flex-col">
         <p className="font-sb-aggro-medium text-heading-3 text-label-normal">{title}</p>
-        {titleIcon && <p>{titleIcon}</p>}
+        {updateTime && <p className="text-label-regular text-label-alternative">{updateTime}전 업데이트</p>}
       </article>
       {prevElId && nextElId && (
         <article className="hidden items-center md:flex">

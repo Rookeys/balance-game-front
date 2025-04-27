@@ -13,6 +13,7 @@ export default function MonthlyTrendingGames() {
     <section className="flex h-[474px] w-full max-w-[1200px] flex-col gap-[12px] md:h-[580px] lg:h-[556px]">
       <SliderTitle
         title="월간 인기 월드컵 TOP 10"
+        updateTime="5분"
         prevElId="monthly-trending-games-list-prev"
         nextElId="monthly-trending-games-list-next"
       />

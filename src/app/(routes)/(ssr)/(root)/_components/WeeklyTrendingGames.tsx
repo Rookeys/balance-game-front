@@ -13,6 +13,7 @@ export default function WeeklyTrendingGames() {
     <section className="flex h-[474px] w-full max-w-[1200px] flex-col gap-[12px] md:h-[580px] lg:h-[556px]">
       <SliderTitle
         title="주간 인기 월드컵 TOP 10"
+        updateTime={"5분"}
         prevElId="weekly-trending-games-list-prev"
         nextElId="weekly-trending-games-list-next"
       />

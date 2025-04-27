@@ -17,7 +17,7 @@ export default async function SearchPage() {
   return (
     <section className="mt-[20px] flex flex-col items-center md:mt-[40px]">
       <SearchInputWrapper />
-      <section className="flex w-full max-w-[1200px] flex-col gap-[12px]">
+      <section className="mt-[20px] flex w-full max-w-[1200px] flex-col gap-[12px] md:mt-[40px]">
         <article className="flex items-center justify-between">
           <Title />
           <Filter filters={gameListFilters} />
