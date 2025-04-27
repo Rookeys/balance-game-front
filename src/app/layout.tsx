@@ -1,6 +1,5 @@
 import { authOptions } from "@/auth"
 import LoginConfirmModal from "@/components/modal/LoginConfirmModal"
-import RouterPreventer from "@/components/RouterPreventer"
 import ToasterWithTheme from "@/components/ToasterWithTheme"
 import AuthProvider from "@/lib/providers/AuthProvider"
 import CookieProvider from "@/lib/providers/CookieProvider"
@@ -11,7 +10,6 @@ import { cn } from "@/utils/cn"
 import { parseBoolean } from "@/utils/parseBoolean"
 import type { Metadata } from "next"
 import { getServerSession } from "next-auth"
-import { NavigationGuardProvider } from "next-navigation-guard"
 import { ThemeProvider } from "next-themes"
 import { cookies } from "next/headers"
 import { PretendardVariable, SBAggroMedium } from "./fonts"
@@ -77,18 +75,15 @@ export default async function RootLayout({
         <AuthProvider session={session}>
           <ReactQueryProvider>
             <CookieProvider noBlind={noBlind}>
-              <NavigationGuardProvider>
-                <ThemeProvider>
-                  <div id="portal" />
-                  {/* <Header /> */}
-                  {/* <HeaderSSG /> */}
-                  {children}
-                  {/* <Footer /> */}
-                  <LoginConfirmModal />
-                  <ToasterWithTheme />
-                </ThemeProvider>
-                <RouterPreventer />
-              </NavigationGuardProvider>
+              <ThemeProvider>
+                <div id="portal" />
+                {/* <Header /> */}
+                {/* <HeaderSSG /> */}
+                {children}
+                {/* <Footer /> */}
+                <LoginConfirmModal />
+                <ToasterWithTheme />
+              </ThemeProvider>
             </CookieProvider>
           </ReactQueryProvider>
         </AuthProvider>
