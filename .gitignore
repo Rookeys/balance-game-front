@@ -47,4 +47,5 @@ storybook-static
 # lint
 .eslintcache
 
-/public/sitemap.xml
+# sitemap
+sitemap.xml
