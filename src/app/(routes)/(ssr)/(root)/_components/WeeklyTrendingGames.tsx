@@ -20,7 +20,7 @@ export default function WeeklyTrendingGames() {
       <GameSliderWrapper prevElId="weekly-trending-games-list-prev" nextElId="weekly-trending-games-list-next">
         {data?.content?.map((game, index) => (
           <SwiperSlide
-            key={index}
+            key={game.roomId}
             className="ms-[16px] !w-fit last:mr-[16px] md:ms-[24px] last:md:mr-[24px] lg:mr-[24px] lg:ms-0 last:lg:mr-0"
           >
             <GameThumbnailCard index={index} {...game} />
