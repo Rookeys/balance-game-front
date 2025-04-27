@@ -6,14 +6,6 @@ const nextConfig: NextConfig = {
     unoptimized: true,
     remotePatterns: [
       {
-        protocol: "https",
-        hostname: "avatars.githubusercontent.com"
-      },
-      {
-        protocol: "https",
-        hostname: "i.ytimg.com"
-      },
-      {
         protocol: "http",
         hostname: "img1.kakaocdn.net"
       },
