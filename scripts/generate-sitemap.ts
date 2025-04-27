@@ -8,8 +8,15 @@ async function generateSitemap() {
 
   sitemap.pipe(writeStream)
 
+  const now = new Date().toISOString()
+
   // 루트 페이지 sitemap
-  sitemap.write({ url: "/", changefreq: "daily", priority: 1.0 })
+  sitemap.write({
+    url: "/",
+    changefreq: "daily",
+    priority: 1.0,
+    lastmod: now
+  })
 
   // Todo 백엔드 uuid 작업 완료 후 진행
   // 게임 리스트 가져오기
@@ -20,7 +27,8 @@ async function generateSitemap() {
   //   sitemap.write({
   //     url: `/game/${game}`,
   //     changefreq: "weekly",
-  //     priority: 0.8
+  //     priority: 0.8,
+  //     lastmod: now,
   //   })
   // })
 
