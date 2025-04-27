@@ -1,7 +1,7 @@
 "use client"
 import { useGetGameStatus } from "@/api/orval/client/main-page-controller/main-page-controller"
 import { useParams } from "next/navigation"
-import InfoCard from "./InforCard"
+import InfoCard from "./InfoCard"
 import LinkCard from "./LinkCard"
 
 export default function DesktopCards() {
