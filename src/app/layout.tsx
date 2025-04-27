@@ -15,29 +15,40 @@ import { cookies } from "next/headers"
 import { MoneygraphyRounded } from "./fonts"
 import LoginConfirmModal from "@/components/modal/LoginConfirmModal"
 
+const title = "짱픽"
+const description =
+  "이상형 월드컵을 직접 만들고 공유하세요! 짱픽에서 나만의 월드컵 게임을 제작하고 친구들과 함께 즐길 수 있습니다."
+const images = [
+  {
+    url: "/images/zznpk_og_image.png",
+    alt: "Zznpk OG IMAGE"
+  }
+]
+
 export const metadata: Metadata = {
+  metadataBase: new URL("https://zznpk.com"),
   title: {
-    default: "짱픽",
+    default: title,
     template: "짱픽 | %s"
   },
-  description: "당신의 이상형 월드컵 게임을 만들고, 즐기세요! 짜릿한 선택 짱픽!",
+  description,
+  keywords: ["이상형 월드컵", "월드컵 만들기", "이상형 게임", "짱픽", "zznpk"],
+  authors: [{ name: "짱픽 Zznpk", url: "https://zznpk.com" }],
   openGraph: {
-    siteName: "짱픽",
+    siteName: title,
     title: {
-      default: "짱픽",
+      default: title,
       template: "짱픽 | %s"
     },
     type: "website",
-    description: "당신의 이상형 월드컵을 만들고, 즐기세요! 짜릿한 선택 짱픽!",
-    images: [
-      {
-        url: "/images/zznpk_og_image.png",
-        alt: "Zznpk OG IMAGE"
-      }
-    ],
+    description,
+    images,
     url: "https://zznpk.com"
   },
-  metadataBase: new URL("https://zznpk.com")
+  twitter: {
+    title,
+    images
+  }
 }
 
 export default async function RootLayout({
@@ -51,7 +62,11 @@ export default async function RootLayout({
 
   return (
     <html lang="ko" suppressHydrationWarning>
-      <body className={`${MoneygraphyRounded.className} text-dark antialiased dark:text-light`}>
+      <head>
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+      </head>
+      <body className={`${MoneygraphyRounded.className} text-dark`}>
         <AuthProvider session={session}>
           <ReactQueryProvider>
             <CookieProvider noBlind={noBlind}>

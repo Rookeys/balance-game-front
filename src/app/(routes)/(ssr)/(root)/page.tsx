@@ -13,6 +13,14 @@ import SearchAndCategory from "./_components/SearchAndCategory"
 import SkeletonList from "./_components/SkeletonCardList"
 import SkeletonSimpleCardList from "./_components/SkeletonSimpleCardList"
 import WeeklyTrendingGames from "./_components/WeeklyTrendingGames"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+  robots: {
+    index: true,
+    follow: true
+  }
+}
 
 export default async function RootPage() {
   const queryClient = new QueryClient()
