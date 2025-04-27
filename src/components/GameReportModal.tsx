@@ -80,12 +80,16 @@ export default function GameReportModal({ id, onClose, overlayClose }: Params) {
                       </div>
                     )}
                   </div>
-                  <label htmlFor={data.id}>{data.label}</label>
+                  <label className="text-body-regular text-label-normal" htmlFor={data.id}>
+                    {data.label}
+                  </label>
                 </div>
               ))}
               {watch("etc") && <InputText className="w-full" id="etcReason" placeholder="상세 내용을 작성해 주세요." />}
             </article>
-            <p>운영 방침에 따라 신고 사유에 해당하는지 검토 후 처리 예정입니다.</p>
+            <p className="text-label-regular text-label-alternative">
+              운영 방침에 따라 신고 사유에 해당하는지 검토 후 처리 예정입니다.
+            </p>
             <Button className="mt-[16px]" type="submit" disabled={isSubmitting}>
               신고하기
             </Button>
