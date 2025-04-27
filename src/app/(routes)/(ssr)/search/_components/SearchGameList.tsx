@@ -1,6 +1,7 @@
 "use client"
 import { useGetMainGameListInfinite } from "@/api/orval/client/main-page-controller/main-page-controller"
 import { GetMainGameListSortType } from "@/api/orval/model/getMainGameListSortType"
+import GameNotFound from "@/components/GameNotFound"
 import GameThumbnailSimpleCard from "@/components/gameThumbnailCard/GameThumbnailSimpleCard"
 import { useSearchParams } from "next/navigation"
 import { useEffect } from "react"
@@ -36,6 +37,8 @@ export default function SearchGameList() {
   }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage])
 
   if (isLoading) return <section className="h-[100vh] bg-red-50" />
+
+  if (!isLoading && data?.pages[0].totalElements === 0) return <GameNotFound keyword={keyword} />
 
   return (
     <section className="relative grid grid-cols-2 gap-x-[20px] gap-y-[20px] md:grid-cols-4 md:gap-y-[40px]">

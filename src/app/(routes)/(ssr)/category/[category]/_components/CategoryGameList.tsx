@@ -2,6 +2,7 @@
 import { useGetMainGameListInfinite } from "@/api/orval/client/main-page-controller/main-page-controller"
 import { GetMainGameListCategory } from "@/api/orval/model/getMainGameListCategory"
 import { GetMainGameListSortType } from "@/api/orval/model/getMainGameListSortType"
+import GameNotFound from "@/components/GameNotFound"
 import GameThumbnailSimpleCard from "@/components/gameThumbnailCard/GameThumbnailSimpleCard"
 import { useParams, useSearchParams } from "next/navigation"
 import { useEffect } from "react"
@@ -39,6 +40,8 @@ export default function CategoryGameList() {
   }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage])
 
   if (isLoading) return <section className="h-[100vh] bg-red-50" />
+
+  if (!isLoading && data?.pages[0].totalElements === 0) return <GameNotFound keyword={formattedCategory} />
 
   return (
     <section className="relative grid w-full grid-cols-2 gap-x-[16px] gap-y-[16px] md:grid-cols-4 md:gap-x-[24px] md:gap-y-[40px]">
