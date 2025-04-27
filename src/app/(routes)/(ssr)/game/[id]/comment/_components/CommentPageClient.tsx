@@ -17,7 +17,7 @@ export default function CommentPageClient() {
   const { id } = useParams()
   const searchParams = useSearchParams()
 
-  const sort = searchParams.get("sort") ?? "RECENT"
+  const sort = searchParams.get("sort") ?? GetCommentsByGameResultSortType.RECENT
 
   const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } = useGetCommentsByGameResultInfinite(
     Number(id),

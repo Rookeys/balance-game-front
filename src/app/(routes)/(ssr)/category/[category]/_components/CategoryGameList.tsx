@@ -11,12 +11,12 @@ export default function CategoryGameList() {
   const { category } = useParams()
   const searchParams = useSearchParams()
 
-  const sort = searchParams.get("sort") as GetMainGameListSortType | undefined
+  const sort = searchParams.get("sort") ?? GetMainGameListSortType.RECENT
 
   const formattedCategory = category?.toString()?.toUpperCase() as GetMainGameListCategory | undefined
 
   const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } = useGetMainGameListInfinite(
-    { category: formattedCategory, sortType: sort },
+    { category: formattedCategory, sortType: sort as GetMainGameListSortType },
     {
       query: {
         initialPageParam: undefined,
@@ -54,15 +54,17 @@ export default function CategoryGameList() {
       {!isFetchingNextPage && (
         <div ref={ref} className="pointer-events-none absolute bottom-[200px] h-[4px] w-full opacity-0" />
       )}
-      <section>
-        {isFetchingNextPage ? (
-          <p>로딩중...</p>
-        ) : hasNextPage ? (
-          <p>-{/* 스크롤을 더 내려주세요 */}</p>
-        ) : (
-          <p>데이터가 더 이상 존재하지 않습니다.</p>
-        )}
-      </section>
+      <section>{isFetchingNextPage && <p>Loading...</p>}</section>
     </section>
   )
 }
+
+// ;<section>
+//   {isFetchingNextPage ? (
+//     <p>Loading...</p>
+//   ) : hasNextPage ? (
+//     <p>-{/* 스크롤을 더 내려주세요 */}</p>
+//   ) : (
+//     <p>데이터가 더 이상 존재하지 않습니다.</p>
+//   )}
+// </section>

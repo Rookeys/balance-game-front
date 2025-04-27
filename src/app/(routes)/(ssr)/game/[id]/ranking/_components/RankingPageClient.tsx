@@ -65,7 +65,7 @@ export default function RankingPageClient() {
   return (
     <section className="flex w-full max-w-[1200px] justify-center gap-[24px] px-[16px] lg:px-0">
       <section className="flex w-full flex-col gap-[28px] md:gap-[40px]">
-        <p>월드컵 랭킹 🏆</p>
+        <p>월드컵 랭킹</p>
         <article className="flex flex-col gap-[24px] rounded-[16px] bg-slate-100 py-[40px] md:gap-[40px]">
           <p className="mx-auto w-full max-w-[343px] rounded-[12px] border p-[20px] md:max-w-[440px] lg:max-w-[528px]">
             {gameDetail?.title}

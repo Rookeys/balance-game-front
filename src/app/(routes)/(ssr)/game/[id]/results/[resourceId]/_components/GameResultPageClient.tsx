@@ -26,8 +26,7 @@ export default function GameResultPageClient() {
   const router = useRouter()
 
   const tab = searchParams.get("tab") ?? "all"
-  const sort = searchParams.get("sort") ?? "RECENT"
-  // const sort = searchParams.get("sort") ?? GetParentCommentsByGameResource1SortType.RECENT
+  const sort = searchParams.get("sort") ?? GetCommentsByGameResultSortType.RECENT
 
   const {
     data: gameComments,

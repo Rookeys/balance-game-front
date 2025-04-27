@@ -67,7 +67,13 @@ export default async function RootLayout({
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
       </head>
-      <body className={cn(PretendardVariable.variable, SBAggroMedium.variable, "text-label-normal antialiased")}>
+      <body
+        className={cn(
+          PretendardVariable.variable,
+          SBAggroMedium.variable,
+          "font-pretendard text-label-normal antialiased"
+        )}
+      >
         <AuthProvider session={session}>
           <ReactQueryProvider>
             <CookieProvider noBlind={noBlind}>

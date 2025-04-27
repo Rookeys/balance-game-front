@@ -41,7 +41,12 @@ export default function ImageSection({ src, tag, isBlind = false, totalPlayNums 
         </div>
       </div>
       {tag && (
-        <div className="absolute start-[12px] top-[12px] rounded-[4px] bg-secondary-normal px-[8px] py-[4px] text-white">
+        <div
+          className={cn(
+            "absolute start-[12px] top-[12px] rounded-[4px] px-[8px] py-[4px] text-white",
+            tag === "HOT" ? "bg-accent-normal" : "bg-secondary-normal"
+          )}
+        >
           {tag}
         </div>
       )}

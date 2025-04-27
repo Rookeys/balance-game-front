@@ -24,7 +24,7 @@ export default function MoreButton({ items, ButtonUI, className }: Params) {
   useClickOutside(wrapperRef, () => setIsOpen(false))
 
   return (
-    <div ref={wrapperRef} className="relative">
+    <div ref={wrapperRef} className="relative text-label-medium text-label-normal">
       {ButtonUI ? (
         <section className="cursor-pointer" onClick={() => setIsOpen((prev) => !prev)}>
           {ButtonUI}
@@ -42,6 +42,7 @@ export default function MoreButton({ items, ButtonUI, className }: Params) {
           {items.map((action, index) => (
             <Button
               key={index}
+              variant="custom"
               className="rounded-none transition-color-custom w-full px-[24px] py-[12px] hover:bg-fill-normal"
               onClick={() => {
                 action.onClick()
