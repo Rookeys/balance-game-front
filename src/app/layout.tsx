@@ -31,8 +31,6 @@ export const metadata: Metadata = {
     template: "짱픽 | %s"
   },
   description,
-  keywords: ["이상형 월드컵", "월드컵 만들기", "이상형 게임", "짱픽", "zznpk"],
-  authors: [{ name: "짱픽 Zznpk", url: "https://zznpk.com" }],
   openGraph: {
     siteName: title,
     title: {
