@@ -4,6 +4,7 @@ import { GameResourceRequest } from "@/api/orval/model/gameResourceRequest"
 import { Button } from "@/components/Button"
 import InputText from "@/components/form/inputText/InputText"
 import ModalWrapper from "@/components/modal/ModalWrapper"
+import { COLORS } from "@/styles/theme/colors"
 import { cn } from "@/utils/cn"
 import { getYoutubeThumbnail } from "@/utils/getYoutubeThumbnail"
 import { CircleAlert, XIcon } from "lucide-react"
@@ -32,7 +33,7 @@ export default function YoutubeEditModal({ onClose, onSave, overlayClose }: Para
         <article className="flex items-center justify-between">
           <div className="h-[24px] w-[24px]" />
           <p>동영상 수정</p>
-          <XIcon size={24} className="cursor-pointer" onClick={onClose} />
+          <XIcon size={24} color={COLORS.NEUTRAL_700} className="cursor-pointer" onClick={onClose} />
         </article>
         <article className="flex flex-col gap-[24px] pb-[24px] pt-[20px]">
           <div className="flex flex-col gap-[12px]">

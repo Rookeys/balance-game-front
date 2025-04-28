@@ -9,6 +9,7 @@ import { CircleAlert, XIcon } from "lucide-react"
 import Image from "next/image"
 import { useFormContext } from "react-hook-form"
 import { EditResourceType } from "./ResourceForm"
+import { COLORS } from "@/styles/theme/colors"
 
 interface Params {
   onClose?: () => void
@@ -33,7 +34,7 @@ export default function ImageEditModal({ onClose, onSave, overlayClose }: Params
         <article className="flex items-center justify-between">
           <div className="h-[24px] w-[24px]" />
           <p>이미지 수정</p>
-          <XIcon size={24} className="cursor-pointer" onClick={onClose} />
+          <XIcon size={24} color={COLORS.NEUTRAL_700} className="cursor-pointer" onClick={onClose} />
         </article>
         <article className="flex flex-col gap-[24px] pb-[40px] pt-[20px]">
           <div className="flex flex-col gap-[12px]">

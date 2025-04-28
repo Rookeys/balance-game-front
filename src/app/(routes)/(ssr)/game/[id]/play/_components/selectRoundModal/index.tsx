@@ -4,6 +4,7 @@ import { XIcon } from "lucide-react"
 import RoundForm from "./RoundForm"
 import { cn } from "@/utils/cn"
 import Image from "next/image"
+import { COLORS } from "@/styles/theme/colors"
 
 interface Params {
   onClose?: () => void
@@ -22,7 +23,7 @@ export default function SelectRoundModal({ onClose, overlayClose = false, classN
         <article className="flex items-center justify-between">
           <div className="h-[24px] w-[24px]" />
           <p>라운드 선택</p>
-          <XIcon size={24} className="cursor-pointer" onClick={onClose} />
+          <XIcon size={24} color={COLORS.NEUTRAL_700} className="cursor-pointer" onClick={onClose} />
         </article>
         <article className="mt-[20px] flex flex-col gap-[24px]">
           <Image src={"/images/Rookeys.png"} alt="" width={120} height={120} className="mx-auto" />

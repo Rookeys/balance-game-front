@@ -46,6 +46,7 @@ export default function ImageSection({ src, index, isBlind = false, totalPlayNum
       {!noBlind && isBlind && (
         <Button
           className="absolute end-[12px] top-[12px] rounded-[4px] bg-transparent px-[8px] py-[4px] text-label-medium"
+          variant="custom"
           onClick={(e) => {
             e.preventDefault()
             setBlur((prev) => !prev)

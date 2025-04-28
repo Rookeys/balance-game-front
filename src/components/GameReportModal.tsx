@@ -57,11 +57,11 @@ export default function GameReportModal({ id, onClose, overlayClose }: Params) {
       >
         <form onSubmit={handleSubmit(onSubmit)}>
           <section className="flex items-center justify-end">
-            <XIcon size={24} className="cursor-pointer" onClick={onClose} />
+            <XIcon size={24} color={COLORS.NEUTRAL_700} className="cursor-pointer" onClick={onClose} />
           </section>
           <section className="flex flex-col gap-[24px] py-[20px]">
             <article className="flex flex-col gap-[4px]">
-              <p className="text-heading-3 text-label-normal">어떤 사유로 신고하시나요?</p>
+              <p className="font-sb-aggro text-heading-3 text-label-normal">어떤 사유로 신고하시나요?</p>
               <p className="text-label-regular text-label-neutral">중복 선택 가능</p>
             </article>
             <article>
