@@ -23,8 +23,11 @@ export default function Banner() {
       >
         {Array.from({ length: 5 }, (_, index) => (
           <SwiperSlide className="w-full px-[16px] md:px-[24px] lg:px-0" key={index}>
-            <section className="mx-auto flex h-full w-full max-w-[1200px] bg-red-100 pb-[112px] pt-[88px]">
-              <article>{index + 1}</article>
+            <section className="mx-auto flex h-full w-full max-w-[1200px] bg-primary-normal pb-[112px] pt-[88px]">
+              <article className="flex flex-col gap-[24px]">
+                <p className="font-sb-aggro-medium text-heading-3">짱픽 베타테스트에 오신것을 환영합니다!</p>
+                <p className="text-body-bold">현재 계속 업데이트 중입니다 (5월 중순~말 출시 예정)</p>
+              </article>
             </section>
           </SwiperSlide>
         ))}
