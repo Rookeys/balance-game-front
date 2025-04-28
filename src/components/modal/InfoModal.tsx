@@ -39,7 +39,7 @@ export default function InfoModal({
           <XIcon size={24} color={COLORS.NEUTRAL_700} className="cursor-pointer" onClick={onClose} />
         </article>
         <article className="flex flex-col gap-[16px] pb-[40px] pt-[20px]">
-          <h2 className="font-sb-aggro-medium text-heading-3 text-label-normal">{title}</h2>
+          <h2 className="font-sb-aggro-medium text-heading-4 text-label-normal md:text-heading-3">{title}</h2>
           {DescriptionUI}
         </article>
         <article className="flex items-center justify-between gap-[12px]">

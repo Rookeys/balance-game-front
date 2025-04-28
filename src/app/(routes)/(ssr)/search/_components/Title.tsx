@@ -24,7 +24,7 @@ export default function Title() {
   )
 
   return (
-    <p className="flex items-center font-sb-aggro-medium text-heading-3">
+    <p className="flex items-center font-sb-aggro-medium text-heading-4 md:text-heading-3">
       월드컵&nbsp;
       <span className="text-primary-hover">{data?.pages[0].totalElements ?? 0}</span>개
     </p>
