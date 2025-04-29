@@ -18,7 +18,7 @@ export default function MetaInfoSection({ creatorNickname, creatorImage }: Param
           // placeholder="blur"
           // blurDataURL="data:image/jepg;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mO88B8AAqUB0Y/H4mkAAAAASUVORK5CYII="
         />
-        <p className="line-clamp-1 text-caption1-regular text-label-neutral">{creatorNickname}</p>
+        <p className="line-clamp-1 text-label-regular text-label-neutral">{creatorNickname}</p>
       </div>
       {/* 높이 390 -> 366 */}
       {/* <div className="flex items-center">

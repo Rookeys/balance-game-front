@@ -40,7 +40,7 @@ export default function ImageSection({ src, index, isBlind = false, totalPlayNum
           <p>{totalPlayNums}</p>
         </div>
       </div>
-      <div className="absolute start-0 top-0 rounded-br-[12px] rounded-tl-[12px] bg-primary-normal px-[16px] py-[8px] text-body-bold text-white">
+      <div className="absolute start-0 top-0 rounded-br-[12px] rounded-tl-[12px] bg-primary-normal px-[16px] py-[8px] text-body2-bold text-white">
         {index + 1}
       </div>
       {!noBlind && isBlind && (

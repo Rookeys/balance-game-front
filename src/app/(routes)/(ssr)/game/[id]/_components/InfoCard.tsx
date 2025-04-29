@@ -23,7 +23,7 @@ export default function InfoCard(props: Props) {
     <div className="flex h-[108px] w-full flex-col gap-[12px] rounded-[12px] border p-[16px]">
       {props.type === "creator" ? (
         <>
-          <p className="text-label- text-body-bold">{props.title}</p>
+          <p className="text-label- text-body2-bold">{props.title}</p>
           <div className="flex items-center gap-[12px]">
             <Image
               src={props.creatorProfile}
@@ -37,7 +37,7 @@ export default function InfoCard(props: Props) {
         </>
       ) : (
         <>
-          <p className="text-body-bold text-label-normal">{props.title}</p>
+          <p className="text-body2-bold text-label-normal">{props.title}</p>
           <div className="flex items-center gap-[12px]">
             {props.items?.map((item, index) => <CategoryLabel key={`${item}-${index}`} text={item} />)}
           </div>

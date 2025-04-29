@@ -11,7 +11,7 @@ export default function GameCreateSuggestionCTA() {
         <p className="font-sb-aggro-medium text-heading-2 md:text-heading-1">
           끌리는 이상형 월드컵을 발견하지 못하셨나요? 👀
         </p>
-        <p className="text-body-regular text-label-neutral">
+        <p className="text-body2-regular text-label-neutral">
           {session ? "이상형 월드컵을 직접 만들어 즐겨보세요." : "로그인하고 이상형 월드컵을 직접 만들어 즐겨보세요."}
         </p>
       </article>

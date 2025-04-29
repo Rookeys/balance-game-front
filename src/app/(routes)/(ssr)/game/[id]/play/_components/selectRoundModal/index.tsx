@@ -22,7 +22,7 @@ export default function SelectRoundModal({ onClose, overlayClose = false, classN
       >
         <article className="flex items-center justify-between">
           <div className="h-[24px] w-[24px]" />
-          <p className="text-body-bold text-label-neutral">라운드 선택</p>
+          <p className="text-body2-bold text-label-neutral">라운드 선택</p>
           <XIcon size={24} color={COLORS.NEUTRAL_700} className="cursor-pointer" onClick={onClose} />
         </article>
         <article className="mt-[20px] flex flex-col gap-[24px]">

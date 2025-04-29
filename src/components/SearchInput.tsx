@@ -35,7 +35,7 @@ export default function SearchInput({ onSearch, Icon, iconProps, className, inpu
         onKeyDown={handleKeyDown}
         ref={inputRef}
         className={cn(
-          "h-full w-full rounded-[12px] border border-transparent bg-fill-normal px-[24px] py-[12px] text-body-regular outline-none placeholder:text-label-neutral focus:border-primary-normal",
+          "h-full w-full rounded-[12px] border border-transparent bg-fill-normal px-[24px] py-[12px] text-body2-regular outline-none placeholder:text-label-neutral focus:border-primary-normal",
           Icon && `ps-[48px]`,
           inputClassName
         )}

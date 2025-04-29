@@ -15,7 +15,7 @@ export default function GameCreateInfoModal() {
         <InfoModal
           title="만들기 전 유의사항을 확인해 주세요!"
           DescriptionUI={
-            <article className="flex flex-col text-body-regular text-label-normal">
+            <article className="flex flex-col text-body2-regular text-label-normal">
               <p>
                 다음 예시와 같이 운영정책을 위반하는 월드컵을 제작하는 경우 월드컵 삭제 및 제작 차단 조치될 수 있으니
                 주의해 주세요.

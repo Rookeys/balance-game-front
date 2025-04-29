@@ -52,7 +52,7 @@ export default function GameDetailPageClient() {
               {convertUtcToKoreaDate(gameDetailData?.updatedAt)}
             </p>
             <p className="font-sb-aggro-medium text-heading-5 text-label-normal">{gameDetailData?.title}</p>
-            <p className="text-body-regular text-label-normal">{gameDetailData?.description}</p>
+            <p className="text-body2-regular text-label-normal">{gameDetailData?.description}</p>
           </article>
           <DesktopCards />
           <DesktopPlayButton onClick={() => setIsOpenPlayModal(true)} />

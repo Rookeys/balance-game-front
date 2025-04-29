@@ -82,7 +82,7 @@ export default function GameReportModal({ id, onClose, overlayClose }: Params) {
                       </div>
                     )}
                   </div>
-                  <label className="text-body-regular text-label-normal" htmlFor={data.id}>
+                  <label className="text-body2-regular text-label-normal" htmlFor={data.id}>
                     {data.label}
                   </label>
                 </div>
