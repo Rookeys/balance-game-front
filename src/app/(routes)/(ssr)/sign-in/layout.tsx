@@ -1,6 +1,6 @@
 import Footer from "@/components/Footer"
 
-export default async function RootLayout({
+export default async function SignInPageLayout({
   children
 }: Readonly<{
   children: React.ReactNode

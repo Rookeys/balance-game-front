@@ -10,7 +10,7 @@ import { getServerSession } from "next-auth"
 import { NavigationGuardProvider } from "next-navigation-guard"
 import { cookies } from "next/headers"
 
-export default async function RootLayout({
+export default async function SSRLayout({
   children
 }: Readonly<{
   children: React.ReactNode

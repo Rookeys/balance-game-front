@@ -8,7 +8,7 @@ import { parseBoolean } from "@/utils/parseBoolean"
 import { NavigationGuardProvider } from "next-navigation-guard"
 import { cookies } from "next/headers"
 
-export default async function RootLayout({
+export default async function SSGLayout({
   children
 }: Readonly<{
   children: React.ReactNode
