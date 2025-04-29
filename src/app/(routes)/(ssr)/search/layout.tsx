@@ -9,7 +9,7 @@ export default async function RootLayout({
   return (
     <>
       <Header />
-      {children}
+      <section className="px-[16px] md:px-[24px]">{children}</section>
       <Footer />
     </>
   )
