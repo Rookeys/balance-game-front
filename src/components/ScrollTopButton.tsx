@@ -12,7 +12,7 @@ export default function ScrollTopButton() {
   return (
     <Button
       variant="custom"
-      className="fixed bottom-[10%] end-[24px] rounded-full border bg-white p-[16px] text-black"
+      className="fixed bottom-[24px] end-[24px] rounded-full border bg-white p-[16px] text-black"
       onClick={moveTop}
     >
       {/* <ChevronUp size={24} /> */}

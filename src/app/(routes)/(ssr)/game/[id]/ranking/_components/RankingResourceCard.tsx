@@ -22,7 +22,7 @@ export default function RankingResourceCard({ rank, name, winRate, wins, src, ic
       </figure>
       <div className="flex w-full flex-col">
         <figure className="relative aspect-[5/4] w-full">
-          <Image src={src ?? "/"} alt="/" fill />
+          <Image src={src ?? "/"} alt="/" fill className="object-contain" />
         </figure>
         <div className="px-[16px] py-[8px] md:py-[12px]">
           <p className="line-clamp-2 break-words text-center">

@@ -9,6 +9,7 @@ import { useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import GameDeleteModal from "./GameDeleteModal"
+import CategoryLabel from "@/components/CategoryLabel"
 
 interface Params {
   id?: number
@@ -64,12 +65,7 @@ export default function SocialActionSection({ id, title, categories, isMine }: P
       {categories && categories?.length > 0 && (
         <article className="flex gap-[4px]">
           {categories.map((category, i) => (
-            <p
-              className="rounded-[4px] bg-secondary-alternative px-[8px] py-[4px] text-label-medium text-secondary-on-primary"
-              key={`${category}-${i}`}
-            >
-              {category}
-            </p>
+            <CategoryLabel key={`${category}-${i}`} text={category} />
           ))}
         </article>
       )}
