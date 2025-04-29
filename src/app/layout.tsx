@@ -1,17 +1,10 @@
-import { authOptions } from "@/auth"
 import LoginConfirmModal from "@/components/modal/LoginConfirmModal"
 import ToasterWithTheme from "@/components/ToasterWithTheme"
-import AuthProvider from "@/lib/providers/AuthProvider"
-import CookieProvider from "@/lib/providers/CookieProvider"
-import ReactQueryProvider from "@/lib/providers/ReactQueryProvider"
 import "@/styles/globals.css"
 import "@/styles/reset.css"
 import { cn } from "@/utils/cn"
-import { parseBoolean } from "@/utils/parseBoolean"
 import type { Metadata } from "next"
-import { getServerSession } from "next-auth"
 import { ThemeProvider } from "next-themes"
-import { cookies } from "next/headers"
 import { PretendardVariable, SBAggroMedium } from "./fonts"
 
 const title = "짱픽"
@@ -53,10 +46,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const session = await getServerSession(authOptions)
-  const cookieStore = await cookies()
-  const noBlind = parseBoolean(cookieStore.get("noBlind")?.value)
-
   return (
     <html lang="ko" suppressHydrationWarning>
       <head>
@@ -70,21 +59,12 @@ export default async function RootLayout({
           "font-pretendard text-label-normal antialiased"
         )}
       >
-        <AuthProvider session={session}>
-          <ReactQueryProvider>
-            <CookieProvider noBlind={noBlind}>
-              <ThemeProvider>
-                <div id="portal" />
-                {/* <Header /> */}
-                {/* <HeaderSSG /> */}
-                {children}
-                {/* <Footer /> */}
-                <LoginConfirmModal />
-                <ToasterWithTheme />
-              </ThemeProvider>
-            </CookieProvider>
-          </ReactQueryProvider>
-        </AuthProvider>
+        <ThemeProvider>
+          <div id="portal" />
+          {children}
+          <LoginConfirmModal />
+          <ToasterWithTheme />
+        </ThemeProvider>
       </body>
     </html>
   )
