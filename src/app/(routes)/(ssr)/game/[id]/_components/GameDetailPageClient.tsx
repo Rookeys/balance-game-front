@@ -39,20 +39,20 @@ export default function GameDetailPageClient() {
         </div>
         <section className="flex w-full flex-col gap-[28px] md:max-w-[50%] md:gap-[40px]">
           <article className="flex items-center gap-[12px]">
-            <p className="rounded-[8px] bg-gray-100 px-[16px] py-[8px]">
+            <p className="rounded-[8px] bg-fill-normal px-[16px] py-[8px] text-label-regular text-label-normal">
               {gameDetailData?.totalResourceNums}개의 콘텐츠
             </p>
-            <p className="rounded-[8px] bg-gray-100 px-[16px] py-[8px]">
+            <p className="rounded-[8px] bg-fill-normal px-[16px] py-[8px] text-label-regular text-label-normal">
               {getMaxRound(gameDetailData?.totalResourceNums)}강까지 플레이 가능
             </p>
           </article>
           <article className="flex flex-col gap-[12px]">
-            <p>
+            <p className="text-label-regular text-label-alternative">
               출시일 {convertUtcToKoreaDate(gameDetailData?.createdAt)} / 수정일{" "}
               {convertUtcToKoreaDate(gameDetailData?.updatedAt)}
             </p>
-            <p>{gameDetailData?.title}</p>
-            <p>{gameDetailData?.description}</p>
+            <p className="font-sb-aggro-medium text-heading-5 text-label-normal">{gameDetailData?.title}</p>
+            <p className="text-body-regular text-label-normal">{gameDetailData?.description}</p>
           </article>
           <DesktopCards />
           <DesktopPlayButton onClick={() => setIsOpenPlayModal(true)} />

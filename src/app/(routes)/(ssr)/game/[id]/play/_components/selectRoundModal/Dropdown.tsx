@@ -39,12 +39,13 @@ export const Dropdown: React.FC<DropdownProps> = ({
         type="button"
         onClick={() => !disabled && setIsOpen((prev) => !prev)}
         disabled={disabled}
-        className={cn(
-          `flex w-full items-center justify-between rounded-[4px] border px-[12px] py-[8px]`,
-          isOpen ? "border-gray-400" : "border-gray-300"
-        )}
+        className={
+          "flex w-full items-center justify-between rounded-[4px] border border-line-normal px-[12px] py-[8px]"
+        }
       >
-        <span className={cn(selected ? "text-black" : "text-gray-400")}>{selected ? selected.label : placeholder}</span>
+        <span className={cn("text-label-medium", selected ? "text-label-normal" : "text-label-alternative")}>
+          {selected ? selected.label : placeholder}
+        </span>
         <ChevronDown size={24} />
       </button>
 
@@ -63,8 +64,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
                 setIsOpen(false)
               }}
               className={cn(
-                "transition-color-custom cursor-pointer px-[12px] py-[12px] text-start hover:bg-blue-100"
-                // option.value === value && "bg-blue-10"
+                "transition-color-custom mx-[12px] cursor-pointer bg-white py-[12px] text-start hover:bg-fill-normal"
               )}
             >
               {option.label}

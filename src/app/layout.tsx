@@ -20,7 +20,7 @@ const description =
 const images = [
   {
     url: "/images/zznpk_og_image.png",
-    alt: "Zznpk OG IMAGE"
+    alt: "zznpk OG IMAGE"
   }
 ]
 
