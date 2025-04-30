@@ -9,9 +9,11 @@ import Filter from "@/components/Filter"
 import TextareaWithSubmit from "@/components/form/textarea/TextareaWithSubmit"
 import TabBar, { TabBarItem } from "@/components/TabBar"
 import { commentListFilters } from "@/constants/filters"
+import { cn } from "@/utils/cn"
 import { useParams } from "next/navigation"
 import { useEffect, useState } from "react"
 import { useInView } from "react-intersection-observer"
+import { Tooltip } from "react-tooltip"
 
 interface Params {
   playId: number
@@ -96,9 +98,25 @@ export default function CommentSection({ playId }: Params) {
           )}
         </article>
       ) : (
-        <Button className="self-end bg-gray-100" onClick={() => setIsOpen(true)}>
-          댓글 보기
-        </Button>
+        <>
+          <Button data-tooltip-id={"comment-button"} className="self-end" onClick={() => setIsOpen(true)}>
+            댓글 보기
+          </Button>
+          <Tooltip
+            id={"comment-button"}
+            className={cn("!rounded-[8px] !bg-label-strong !px-[12px] !py-[8px]")}
+            isOpen={true}
+            place="left"
+          >
+            <section className="flex items-center gap-[8px]">
+              <p className="text-label-regular text-background">
+                무엇을 골라야할지 모르겠다면
+                <br />
+                댓글을 확인하고 결정해 보세요!
+              </p>
+            </section>
+          </Tooltip>
+        </>
       )}
     </>
   )

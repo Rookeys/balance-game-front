@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import ImageRatio from "./ImageRatio"
 import YoutubeRatio from "./YoutubeRatio"
 import ButtonYoutubePlay from "@/icons/Button_youtubePlay"
+import { cn } from "@/utils/cn"
 
 interface Params {
   url: string
@@ -11,8 +12,16 @@ interface Params {
   end?: number
   ratio?: number
   noDelay?: boolean
+  wrapperClassName?: string
 }
-export default function YoutubeThumbnailBoxWithHover({ url, start, end, ratio, noDelay = false }: Params) {
+export default function YoutubeThumbnailBoxWithHover({
+  url,
+  start,
+  end,
+  ratio,
+  noDelay = false,
+  wrapperClassName
+}: Params) {
   const [hover, setHover] = useState<boolean>(false)
   const [ready, setReady] = useState<boolean>(false)
 
@@ -24,7 +33,10 @@ export default function YoutubeThumbnailBoxWithHover({ url, start, end, ratio, n
 
   return (
     <figure
-      className="relative h-full min-h-[120px] w-full overflow-hidden rounded-[12px] bg-gray-100"
+      className={cn(
+        "relative h-full min-h-[120px] w-full overflow-hidden rounded-[16px] bg-fill-normal",
+        wrapperClassName
+      )}
       onMouseEnter={() => setHover(true)}
       // style={{
       //   backgroundImage: `url(${getYoutubeThumbnail(url)})`,
@@ -40,6 +52,7 @@ export default function YoutubeThumbnailBoxWithHover({ url, start, end, ratio, n
           ratio={ratio}
           alt="Video Thumbnail"
           className="cursor-pointer object-cover"
+          wrapperClassName={wrapperClassName}
           fill
           sizes="120px"
           // onClick={() => setIsOpen(true)}

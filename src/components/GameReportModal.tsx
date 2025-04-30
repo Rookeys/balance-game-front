@@ -61,7 +61,7 @@ export default function GameReportModal({ id, onClose, overlayClose }: Params) {
           </section>
           <section className="flex flex-col gap-[24px] py-[20px]">
             <article className="flex flex-col gap-[4px]">
-              <p className="font-sb-aggro text-heading-4 text-label-normal md:text-heading-3">
+              <p className="font-sb-aggro-medium text-heading-4 text-label-normal md:text-heading-3">
                 어떤 사유로 신고하시나요?
               </p>
               <p className="text-label-regular text-label-neutral">중복 선택 가능</p>

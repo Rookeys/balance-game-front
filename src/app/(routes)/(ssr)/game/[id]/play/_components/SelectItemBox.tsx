@@ -34,17 +34,25 @@ export default function SelectItemBox({ selectedId, handleSelectItem, ...props }
         onAnimationComplete={handleAnimationComplete}
       >
         <div
-          className="relative cursor-pointer rounded-[12px] bg-gray-100 px-[6px] pt-[6px]"
+          className="relative cursor-pointer rounded-[16px] bg-fill-normal"
           onClick={() => handleSelectItem(props.resourceId)}
         >
-          <ImageRatio src={props.content ?? "/"} alt={`${props.title}-thumbnail`} ratio={5 / 4} fill />
+          <ImageRatio
+            src={props.content ?? "/"}
+            alt={`${props.title}-thumbnail`}
+            ratio={5 / 4}
+            fill
+            wrapperClassName="rounded-none rounded-t-[16px]"
+          />
           {/* {props.title && (
             <article className="pointer-events-none absolute start-[50%] top-[50%] max-w-full translate-x-[-50%] translate-y-[-50%] rounded-xsm bg-dark/50 px-4 py-2">
               <p className="break-words text-white">{props.title}</p>
             </article>
           )} */}
           <article className="px-[16px] py-[12px]">
-            <p className="line-clamp-2 break-all text-center">{props.title || "\u00A0"}</p>
+            <p className="line-clamp-2 break-all text-center font-sb-aggro-medium text-heading-6 text-label-normal md:text-heading-5">
+              {props.title || "\u00A0"}
+            </p>
           </article>
         </div>
         {/* <Button className="w-full cursor-default bg-primary-10 text-md opacity-0">선택하는 버튼</Button> */}
@@ -63,15 +71,24 @@ export default function SelectItemBox({ selectedId, handleSelectItem, ...props }
       }}
       onAnimationComplete={handleAnimationComplete}
     >
-      <div className="relative rounded-[12px] bg-gray-100 px-[6px] pt-[6px]">
-        <ResourceItem {...props} ratio={5 / 4} start={props.startSec} end={props.endSec} noDelay />
+      <div className="relative rounded-[16px] bg-fill-normal">
+        <ResourceItem
+          {...props}
+          ratio={5 / 4}
+          start={props.startSec}
+          end={props.endSec}
+          wrapperClassName="rounded-none rounded-t-[16px]"
+          noDelay
+        />
         {/* {props.title && (
           <article className="pointer-events-none absolute start-[50%] top-[50%] z-10 max-w-full translate-x-[-50%] translate-y-[-50%] rounded-[8px] bg-dark/50 px-4 py-2">
             <p className="break-words text-white">{props.title}</p>
           </article>
         )} */}
         <article className="cursor-pointer px-[16px] py-[12px]" onClick={() => handleSelectItem(props.resourceId)}>
-          <p className="line-clamp-2 break-all text-center">{props.title || "\u00A0"}</p>
+          <p className="line-clamp-2 break-all text-center font-sb-aggro-medium text-heading-6 text-label-normal md:text-heading-5">
+            {props.title || "\u00A0"}
+          </p>
         </article>
       </div>
       {/* <Button className="w-full bg-primary-10 text-md" onClick={() => handleSelectItem(props.resourceId)}>
