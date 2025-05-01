@@ -12,7 +12,7 @@ export const convertUtcToKoreaDate = (utcDate?: string | Date) => {
   return dayjsWithExtends.utc(utcDate).tz("Asia/Seoul").format("YYYY.MM.DD")
 }
 
-export const convertUtcToKoreaDaTime = (utcDate?: string | Date) => {
+export const convertUtcToKoreaDayTime = (utcDate?: string | Date) => {
   if (!utcDate) return ""
-  return dayjsWithExtends.utc(utcDate).tz("Asia/Seoul").format("YYYY.MM.DD HH:mm")
+  return dayjsWithExtends.utc(utcDate).tz("Asia/Seoul").format("YYYY.MM.DD | HH:mm")
 }

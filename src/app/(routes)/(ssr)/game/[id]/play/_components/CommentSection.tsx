@@ -6,6 +6,7 @@ import { GetParentCommentsByGameResourceSortType } from "@/api/orval/model/getPa
 import { Button } from "@/components/Button"
 import CommentItem from "@/components/comment/CommentItem"
 import ResourceCommentAndReplyForm from "@/components/comment/ResourceCommentAndReplyForm"
+import CommentNotFound from "@/components/CommentNotFound"
 import Filter from "@/components/Filter"
 import TabBar, { TabBarItem } from "@/components/TabBar"
 import { commentListFilters } from "@/constants/filters"
@@ -73,6 +74,8 @@ export default function CommentSection({ playId }: Params) {
     }
   ]
 
+  const comments = (data?.pages ?? []).flatMap((page) => page.content ?? [])
+
   return (
     <>
       {isOpen ? (
@@ -87,11 +90,16 @@ export default function CommentSection({ playId }: Params) {
             />
           </article>
           <ResourceCommentAndReplyForm propResourceId={resourceId} />
-          {(data?.pages ?? []).flatMap(
+          {/* {(data?.pages ?? []).flatMap(
             (page) =>
               page.content?.map((comment) => (
                 <CommentItem key={comment.commentId} propResourceId={resourceId} {...comment} />
               )) ?? []
+          )} */}
+          {comments.length > 0 ? (
+            comments.map((comment) => <CommentItem key={comment.commentId} propResourceId={resourceId} {...comment} />)
+          ) : (
+            <CommentNotFound />
           )}
           {!isFetchingNextPage && (
             <div ref={ref} className="pointer-events-none absolute bottom-[200px] h-[4px] w-full opacity-0" />

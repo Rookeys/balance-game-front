@@ -3,7 +3,7 @@
 import { GameResourceChildrenCommentResponse } from "@/api/orval/model/gameResourceChildrenCommentResponse"
 import CommentSocialAction from "@/components/comment/CommentSocialAction"
 import { COLORS } from "@/styles/theme/colors"
-import { convertUtcToKoreaDaTime } from "@/utils/dayjsWithExtends"
+import { convertUtcToKoreaDayTime } from "@/utils/dayjsWithExtends"
 import { ThumbsUp } from "lucide-react"
 import Image from "next/image"
 
@@ -22,10 +22,14 @@ export default function ReplyItem(props: GameResourceChildrenCommentResponse) {
           <div>
             <div className="flex items-center gap-[8px]">
               <p className="text-label-medium text-label-neutral">{props.nickname}</p>
-              <div className="flex-shrink-0 self-start rounded-full bg-gray-100 px-[8px] py-[2px]">제작자</div>
+              {props.existsWriter && (
+                <div className="flex-shrink-0 self-start rounded-full bg-accent-alternative px-[8px] py-[2px] text-caption1-regular text-accent-on-accent">
+                  제작자
+                </div>
+              )}
             </div>
             <p className="text-caption1-regular text-label-alternative">
-              {convertUtcToKoreaDaTime(props.createdDateTime)}
+              {convertUtcToKoreaDayTime(props.createdDateTime)}
             </p>
           </div>
         </article>

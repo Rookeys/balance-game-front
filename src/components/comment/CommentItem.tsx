@@ -3,7 +3,7 @@
 import { useGetChildrenCommentsByGameResourceInfinite } from "@/api/orval/client/game-resource-comments-controller/game-resource-comments-controller"
 import { GameResourceParentCommentResponse } from "@/api/orval/model/gameResourceParentCommentResponse"
 import ResourceCommentAndReplyForm from "@/components/comment/ResourceCommentAndReplyForm"
-import { convertUtcToKoreaDaTime } from "@/utils/dayjsWithExtends"
+import { convertUtcToKoreaDayTime } from "@/utils/dayjsWithExtends"
 import { ChevronDownIcon, ChevronUpIcon, MessageSquare, ThumbsUp } from "lucide-react"
 import Image from "next/image"
 import { useParams } from "next/navigation"
@@ -58,11 +58,13 @@ export default function CommentItem({ propResourceId, ...props }: Params) {
             <div className="flex items-center gap-[8px]">
               <p className="text-label-medium text-label-neutral">{props.nickname}</p>
               {props.existsWriter && (
-                <div className="flex-shrink-0 self-start rounded-full bg-gray-100 px-[8px] py-[2px]">제작자</div>
+                <div className="flex-shrink-0 self-start rounded-full bg-accent-alternative px-[8px] py-[2px] text-caption1-regular text-accent-on-accent">
+                  제작자
+                </div>
               )}
             </div>
             <p className="text-caption1-regular text-label-alternative">
-              {convertUtcToKoreaDaTime(props.createdDateTime)}
+              {convertUtcToKoreaDayTime(props.createdDateTime)}
             </p>
             {/* <p className="text-sm text-gray-500">2025.03.29 22:30</p> */}
           </div>
@@ -72,19 +74,15 @@ export default function CommentItem({ propResourceId, ...props }: Params) {
         </div>
       </article>
       <p className="ms-[48px] text-label-regular text-label-normal md:text-body2-regular">{props?.comment}</p>
-      <div className="ms-[48px] flex items-center gap-[12px]">
+      <div className="ms-[48px] flex items-center gap-[12px] text-label-alternative">
         <button className="flex items-center gap-[4px]" onClick={() => alert("좋아요")}>
           <ThumbsUp size={20} color={COLORS.NEUTRAL_600} />
-          <p className="text-caption1-regular text-label-alternative md:text-label-regular">{props?.like}</p>
+          <p className="text-caption1-regular md:text-label-regular">{props?.like}</p>
         </button>
         <button className="flex items-center gap-[4px]" onClick={() => setIsOpenReply((prev) => !prev)}>
           <MessageSquare size={20} color={COLORS.NEUTRAL_600} />
-          <p className="text-caption1-regular text-label-alternative md:text-label-regular">{props?.children || 0}</p>
-          {isOpenReply ? (
-            <ChevronDownIcon size={20} color={COLORS.NEUTRAL_600} />
-          ) : (
-            <ChevronUpIcon size={20} color={COLORS.NEUTRAL_600} />
-          )}
+          <p className="text-caption1-regular md:text-label-regular">대댓글 {props?.children || 0}</p>
+          {isOpenReply ? <ChevronDownIcon size={20} /> : <ChevronUpIcon size={20} />}
         </button>
       </div>
       {isOpenReply && (
