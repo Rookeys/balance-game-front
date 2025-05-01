@@ -27,7 +27,7 @@ export default function TabBar({ items, currentValue, className }: TabBarProps) 
             currentValue === item.value && "border-b-black"
           )}
         >
-          <p className="text-body2-bold text-label-normal">{item.label}</p>
+          <p className="line-clamp-1 text-body2-bold text-label-normal">{item.label}</p>
         </button>
       ))}
     </section>
