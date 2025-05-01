@@ -32,7 +32,7 @@ export default function ResourceCommentAndReplyForm({ parentId, propResourceId }
     watch,
     handleSubmit,
     reset,
-    formState: { isSubmitting }
+    formState: { isSubmitting, isValid }
   } = useForm<GameResourceCommentRequest>({
     values: {
       comment: ""
@@ -71,7 +71,7 @@ export default function ResourceCommentAndReplyForm({ parentId, propResourceId }
         maxLength={500}
         inputClassName="!min-h-[100px]"
         placeholder="해당 콘텐츠와 관련된 댓글을 작성해 주세요."
-        disabled={isSubmitting}
+        disabled={isSubmitting || !isValid}
       />
     </form>
   )

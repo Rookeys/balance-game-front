@@ -71,11 +71,16 @@ const TextareaWithSubmit: React.FC<Params> = ({
       />
       <article className="absolute end-[12px] top-[12px] flex h-[calc(100%-24px)] flex-col justify-end">
         {maxLength && (
-          <p className="self-end text-label-regular text-label-neutral">
+          <p className="self-end text-label-regular text-label-alternative">
             {value?.toString().length ?? 0}/{maxLength}
           </p>
         )}
-        <Button className="bg-gray-100 px-[12px] py-[8px] md:px-[20px] md:py-[12px]" type="submit" disabled={disabled}>
+        <Button
+          // variant="custom"
+          className="rounded-[8px] px-[12px] py-[8px] text-label-bold md:px-[20px] md:py-[12px]"
+          type="submit"
+          disabled={disabled}
+        >
           등록
         </Button>
       </article>

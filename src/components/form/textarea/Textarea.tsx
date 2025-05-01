@@ -61,7 +61,7 @@ const Textarea: React.FC<Params> = ({
       />
       {SubDescription && SubDescription}
       {!SubDescription && maxLength && (
-        <p className="self-end text-label-regular text-label-neutral">
+        <p className="self-end text-label-regular text-label-alternative">
           {value?.toString().length ?? 0}/{maxLength}
         </p>
       )}
