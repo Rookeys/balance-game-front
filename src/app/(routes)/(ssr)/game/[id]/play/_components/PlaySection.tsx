@@ -42,7 +42,7 @@ export default function PlaySection({ playId }: Params) {
   const handleSelectItem = async (selectedResourceId?: number) => {
     if (selectedId || !selectedResourceId) return
     setSelectedId(selectedResourceId)
-    await sleep(500)
+    await sleep(1000)
 
     await mutateAsync({
       gameId: Number(id),

@@ -78,6 +78,16 @@ const config = {
         pretendard: ["var(--font-pretendard)"],
         "sb-aggro-medium": ["var(--font-sb-aggro-medium)"]
         // "moneygraphy-rounded": ["var(--font-moneygraphy-rounded)"],
+      },
+      keyframes: {
+        "border-move": {
+          "0%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
+          "100%": { backgroundPosition: "0% 50%" }
+        }
+      },
+      animation: {
+        "border-move": "border-move 3s linear infinite"
       }
     }
   },

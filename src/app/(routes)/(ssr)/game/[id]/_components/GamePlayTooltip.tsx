@@ -2,6 +2,7 @@
 
 import { useGetGameStatus } from "@/api/orval/client/main-page-controller/main-page-controller"
 import { cn } from "@/utils/cn"
+import { offset } from "@floating-ui/dom"
 import { UsersRound } from "lucide-react"
 import { motion } from "motion/react"
 import { useParams } from "next/navigation"
@@ -25,6 +26,7 @@ export default function GamePlayTooltip(props: ITooltip) {
         className={cn("!end-0 !rounded-[8px] !bg-label-strong !px-[12px] !py-[8px]", props.className)}
         isOpen={true}
         place="top-end"
+        middlewares={[offset(10)]}
         classNameArrow={cn("absolute !start-auto end-[8px]", props.classNameArrow)}
       >
         <section className="flex items-center gap-[8px]">

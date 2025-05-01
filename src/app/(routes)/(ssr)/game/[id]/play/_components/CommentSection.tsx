@@ -14,6 +14,7 @@ import { useParams } from "next/navigation"
 import { useEffect, useState } from "react"
 import { useInView } from "react-intersection-observer"
 import { Tooltip } from "react-tooltip"
+import { offset } from "@floating-ui/dom"
 
 interface Params {
   playId: number
@@ -107,6 +108,7 @@ export default function CommentSection({ playId }: Params) {
             className={cn("!rounded-[8px] !bg-label-strong !px-[12px] !py-[8px]")}
             isOpen={true}
             place="left"
+            middlewares={[offset(10)]}
           >
             <section className="flex items-center gap-[8px]">
               <p className="text-label-regular text-background">
