@@ -7,6 +7,7 @@ import {
 import { useGetGameStatus } from "@/api/orval/client/main-page-controller/main-page-controller"
 import { GetResultRankingSortType } from "@/api/orval/model/getResultRankingSortType"
 import Filter from "@/components/Filter"
+import MobilePlayNowButton from "@/components/MobilePlayNowButton"
 import { Pagination } from "@/components/Pagination"
 import SearchInput from "@/components/SearchInput"
 import PlayNowSideBar from "@/components/sidebar/PlayNowSideBar"
@@ -114,6 +115,7 @@ export default function RankingPageClient() {
             </p>
           </div>
         </article>
+        <MobilePlayNowButton text={`왜 인기 있는지 궁금하다면?\n지금 바로 플레이해 보세요!`} />
         <article className="flex flex-col-reverse items-center justify-between gap-[12px] lg:flex-row">
           <Filter filters={resourceListFilters} className="self-end lg:self-auto" defaultLabel="승률 높" />
           <SearchInput

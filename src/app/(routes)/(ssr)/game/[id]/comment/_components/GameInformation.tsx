@@ -1,10 +1,10 @@
 "use client"
 
-import Image from "next/image"
-import MobilePlayNowButton from "./MobilePlayNowButton"
-import { useParams } from "next/navigation"
 import { useGetGameStatus } from "@/api/orval/client/main-page-controller/main-page-controller"
+import MobilePlayNowButton from "@/components/MobilePlayNowButton"
 import ResourceItem from "@/components/ResourceItem"
+import Image from "next/image"
+import { useParams } from "next/navigation"
 
 export default function GameInformation() {
   const { id } = useParams()
