@@ -1,8 +1,8 @@
 import {
   getGetChildrenCommentsByGameResourceQueryKey,
+  getGetParentCommentsByGameResourceQueryKey,
   useAddResourceComment
 } from "@/api/orval/client/game-resource-comments-controller/game-resource-comments-controller"
-import { getGetCommentsByGameResultQueryKey } from "@/api/orval/client/game-result-comments-controller/game-result-comments-controller"
 import { GameResourceCommentRequest } from "@/api/orval/model/gameResourceCommentRequest"
 import TextareaWithSubmit from "@/components/form/textarea/TextareaWithSubmit"
 import { requireLogin } from "@/utils/requireLogin"
@@ -15,12 +15,15 @@ import { useForm } from "react-hook-form"
 
 interface Params {
   parentId?: number
+  propResourceId?: number
 }
 
-export default function ResourceCommentAndReplyForm({ parentId }: Params) {
+export default function ResourceCommentAndReplyForm({ parentId, propResourceId }: Params) {
   const { data: session } = useSession()
 
-  const { id, resourceId } = useParams()
+  const { id, resourceId: paramResourceId } = useParams()
+
+  const resourceId = propResourceId ?? Number(paramResourceId)
 
   const queryClient = useQueryClient()
 
@@ -40,14 +43,21 @@ export default function ResourceCommentAndReplyForm({ parentId }: Params) {
   const { mutateAsync } = useAddResourceComment()
 
   const onSubmit = async (data: GameResourceCommentRequest) => {
-    await mutateAsync({ gameId: Number(id), resourceId: Number(resourceId), data: { ...data, parentId } })
+    await mutateAsync({ gameId: Number(id), resourceId: resourceId, data: { ...data, parentId } })
     reset()
     if (parentId) {
-      await queryClient.invalidateQueries({
-        queryKey: getGetChildrenCommentsByGameResourceQueryKey(Number(id), Number(resourceId), Number(parentId))
-      })
+      await Promise.all([
+        queryClient.invalidateQueries({
+          queryKey: getGetChildrenCommentsByGameResourceQueryKey(Number(id), resourceId, Number(parentId))
+        }),
+        queryClient.invalidateQueries({
+          queryKey: getGetParentCommentsByGameResourceQueryKey(Number(id), resourceId)
+        })
+      ])
     } else {
-      await queryClient.invalidateQueries({ queryKey: getGetCommentsByGameResultQueryKey(Number(id)) })
+      await queryClient.invalidateQueries({
+        queryKey: getGetParentCommentsByGameResourceQueryKey(Number(id), resourceId)
+      })
     }
   }
   return (

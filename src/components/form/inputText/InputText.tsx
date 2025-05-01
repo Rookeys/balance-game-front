@@ -47,7 +47,7 @@ const InputText: React.FC<Params> = ({
       />
       {SubDescription && SubDescription}
       {!SubDescription && maxLength && (
-        <p className="self-end">
+        <p className="self-end text-label-regular text-label-neutral">
           {value?.toString().length ?? 0}/{maxLength}
         </p>
       )}

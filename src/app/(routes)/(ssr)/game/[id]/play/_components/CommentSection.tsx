@@ -4,17 +4,17 @@ import { useContinuePlayRoom } from "@/api/orval/client/game-play-controller/gam
 import { useGetParentCommentsByGameResourceInfinite } from "@/api/orval/client/game-resource-comments-controller/game-resource-comments-controller"
 import { GetParentCommentsByGameResourceSortType } from "@/api/orval/model/getParentCommentsByGameResourceSortType"
 import { Button } from "@/components/Button"
-import ReplyItem from "@/components/comment/ReplyItem"
+import CommentItem from "@/components/comment/CommentItem"
+import ResourceCommentAndReplyForm from "@/components/comment/ResourceCommentAndReplyForm"
 import Filter from "@/components/Filter"
-import TextareaWithSubmit from "@/components/form/textarea/TextareaWithSubmit"
 import TabBar, { TabBarItem } from "@/components/TabBar"
 import { commentListFilters } from "@/constants/filters"
 import { cn } from "@/utils/cn"
+import { offset } from "@floating-ui/dom"
 import { useParams } from "next/navigation"
 import { useEffect, useState } from "react"
 import { useInView } from "react-intersection-observer"
 import { Tooltip } from "react-tooltip"
-import { offset } from "@floating-ui/dom"
 
 interface Params {
   playId: number
@@ -28,12 +28,15 @@ export default function CommentSection({ playId }: Params) {
 
   const { data: gamePlayData } = useContinuePlayRoom(Number(id), playId)
 
+  const resourceId =
+    commentTarget === 1
+      ? Number(gamePlayData?.leftResource?.resourceId)
+      : Number(gamePlayData?.rightResource?.resourceId)
+
   const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useGetParentCommentsByGameResourceInfinite(
       Number(id),
-      commentTarget === 1
-        ? Number(gamePlayData?.leftResource?.resourceId)
-        : Number(gamePlayData?.rightResource?.resourceId),
+      resourceId,
       { sortType: sort as GetParentCommentsByGameResourceSortType },
       {
         query: {
@@ -53,7 +56,6 @@ export default function CommentSection({ playId }: Params) {
 
   useEffect(() => {
     if (inView && hasNextPage && !isFetchingNextPage) {
-      console.log("test")
       fetchNextPage()
     }
   }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage])
@@ -78,21 +80,18 @@ export default function CommentSection({ playId }: Params) {
           <TabBar currentValue={commentTarget} items={tabItems} />
           {isLoading && <section className="h-[100vh] w-full bg-red-50" />}
           <article className="flex items-center justify-between">
-            <p>전체댓글 {data?.pages?.[0]?.totalElements ?? 0}</p>
+            <p className="text-body2-bold text-label-normal">댓글 {data?.pages?.[0]?.totalElements ?? 0}</p>
             <Filter
               filters={commentListFilters}
               onClick={(sort) => setSort(sort as GetParentCommentsByGameResourceSortType)}
             />
           </article>
-          <TextareaWithSubmit
-            id="test"
-            disableEnter
-            maxLength={500}
-            inputClassName="!min-h-[100px]"
-            placeholder="해당 콘텐츠와 관련된 댓글을 작성해 주세요."
-          />
+          <ResourceCommentAndReplyForm propResourceId={resourceId} />
           {(data?.pages ?? []).flatMap(
-            (page) => page.content?.map((comment) => <ReplyItem key={comment.commentId} {...comment} />) ?? []
+            (page) =>
+              page.content?.map((comment) => (
+                <CommentItem key={comment.commentId} propResourceId={resourceId} {...comment} />
+              )) ?? []
           )}
           {!isFetchingNextPage && (
             <div ref={ref} className="pointer-events-none absolute bottom-[200px] h-[4px] w-full opacity-0" />

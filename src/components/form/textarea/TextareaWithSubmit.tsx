@@ -41,7 +41,10 @@ const TextareaWithSubmit: React.FC<Params> = ({
       {label && <InputLabel id={id} label={label} required={required} className={labelClassName} />}
       <TextareaAutosize
         id={id}
-        className={cn("w-full resize-none rounded-[12px] border-[2px] px-[12px] py-[12px] pe-[80px]", inputClassName)}
+        className={cn(
+          "w-full resize-none rounded-[12px] border-[2px] px-[12px] py-[12px] pe-[80px] text-body2-regular text-label-neutral outline-none focus:border-primary-normal",
+          inputClassName
+        )}
         value={value}
         cacheMeasurements
         // onChange={onChange}
@@ -68,7 +71,7 @@ const TextareaWithSubmit: React.FC<Params> = ({
       />
       <article className="absolute end-[12px] top-[12px] flex h-[calc(100%-24px)] flex-col justify-end">
         {maxLength && (
-          <p className="self-end">
+          <p className="self-end text-label-regular text-label-neutral">
             {value?.toString().length ?? 0}/{maxLength}
           </p>
         )}

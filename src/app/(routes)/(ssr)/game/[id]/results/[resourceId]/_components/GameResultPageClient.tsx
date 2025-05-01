@@ -14,7 +14,7 @@ import { useParams, useRouter, useSearchParams } from "next/navigation"
 import { useEffect } from "react"
 import { useInView } from "react-intersection-observer"
 import PlayOtherGameAndRankingSideBar from "./PlayOtherGameAndRankingSideBar"
-import ResourceCommentAndReplyForm from "./ResourceCommentAndReplyForm"
+import ResourceCommentAndReplyForm from "../../../../../../../../components/comment/ResourceCommentAndReplyForm"
 import ResourceInformation from "./ResourceInformation"
 
 export default function GameResultPageClient() {
