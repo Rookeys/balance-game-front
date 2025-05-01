@@ -15,7 +15,7 @@ import useResizeHandler from "@/hooks/useResizeHandler"
 import { SCREEN_SIZE } from "@/styles/theme/screenSize"
 import { calculateWinRate } from "@/utils/calculateWinRate"
 import { getThumbnailUrlByType } from "@/utils/getThumbnailUrlByType"
-import { Search } from "lucide-react"
+import { CircleAlert, Search } from "lucide-react"
 import { useParams, useRouter, useSearchParams } from "next/navigation"
 import DesktopResources from "./DesktopResources"
 import RankingResourceCard from "./RankingResourceCard"
@@ -63,48 +63,56 @@ export default function RankingPageClient() {
   }
 
   return (
-    <section className="flex w-full max-w-[1200px] justify-center gap-[24px] px-[16px] lg:px-0">
+    <section className="flex w-full max-w-[1200px] justify-center gap-[24px] px-[16px] md:px-[24px] lg:px-0">
       <section className="flex w-full flex-col gap-[28px] md:gap-[40px]">
-        <p>월드컵 랭킹</p>
-        <article className="flex flex-col gap-[24px] rounded-[16px] bg-slate-100 py-[40px] md:gap-[40px]">
-          <p className="mx-auto w-full max-w-[343px] rounded-[12px] border p-[20px] md:max-w-[440px] lg:max-w-[528px]">
-            {gameDetail?.title}
-          </p>
-          <section className="flex items-center justify-center gap-[24px]">
-            {second && (
-              <RankingResourceCard
-                rank={2}
-                name={second.title}
-                winRate={calculateWinRate(second.winningNums, second.totalPlayNums)}
-                wins={second.winningNums}
-                iconSrc={"/images/Rookeys.png"}
-                src={getThumbnailUrlByType({ type: second.type, url: second.content })}
-                className={`max-w-[180px]`}
-              />
-            )}
-            {first && (
-              <RankingResourceCard
-                rank={1}
-                name={first.title}
-                winRate={calculateWinRate(first.winningNums, first.totalPlayNums)}
-                wins={first.winningNums}
-                iconSrc={"/images/Rookeys.png"}
-                src={getThumbnailUrlByType({ type: first.type, url: first.content })}
-                className={`max-w-[200px]`}
-              />
-            )}
-            {third && (
-              <RankingResourceCard
-                rank={3}
-                name={third.title}
-                winRate={calculateWinRate(third.winningNums, third.totalPlayNums)}
-                wins={third.winningNums}
-                iconSrc={"/images/Rookeys.png"}
-                src={getThumbnailUrlByType({ type: third.type, url: third.content })}
-                className={`max-w-[180px]`}
-              />
-            )}
-          </section>
+        <article className="flex flex-col gap-[12px]">
+          <p className="font-sb-aggro-medium text-heading-4 text-label-normal md:text-heading-3">월드컵 랭킹</p>
+          <article className="mx-[-16px] flex flex-col gap-[24px] rounded-[16px] bg-gray-500 px-[16px] py-[40px] md:mx-0 md:gap-[40px]">
+            <p className="mx-auto w-full rounded-[12px] text-center font-sb-aggro-medium text-heading-5 text-background">
+              {gameDetail?.title}
+            </p>
+            <section className="flex items-center justify-center gap-[12px] lg:gap-[24px]">
+              {second && (
+                <RankingResourceCard
+                  rank={2}
+                  name={second.title}
+                  winRate={calculateWinRate(second.winningNums, second.totalPlayNums)}
+                  wins={second.winningNums}
+                  iconSrc={"/images/Rookeys.png"}
+                  src={getThumbnailUrlByType({ type: second.type, url: second.content })}
+                  className={`max-w-[180px]`}
+                />
+              )}
+              {first && (
+                <RankingResourceCard
+                  rank={1}
+                  name={first.title}
+                  winRate={calculateWinRate(first.winningNums, first.totalPlayNums)}
+                  wins={first.winningNums}
+                  iconSrc={"/images/Rookeys.png"}
+                  src={getThumbnailUrlByType({ type: first.type, url: first.content })}
+                  className={`max-w-[180px]`}
+                />
+              )}
+              {third && (
+                <RankingResourceCard
+                  rank={3}
+                  name={third.title}
+                  winRate={calculateWinRate(third.winningNums, third.totalPlayNums)}
+                  wins={third.winningNums}
+                  iconSrc={"/images/Rookeys.png"}
+                  src={getThumbnailUrlByType({ type: third.type, url: third.content })}
+                  className={`max-w-[180px]`}
+                />
+              )}
+            </section>
+          </article>
+          <div className="flex items-center gap-[4px]">
+            <CircleAlert className="fill-label-disable text-white" size={16} />
+            <p className="text-caption1-regular text-label-alternative">
+              월드컵 우승 정보 업데이트는 약 5분가량 소요될 수 있어요.
+            </p>
+          </div>
         </article>
         <article className="flex flex-col-reverse items-center justify-between gap-[12px] lg:flex-row">
           <Filter filters={resourceListFilters} className="self-end lg:self-auto" defaultLabel="승률 높" />
