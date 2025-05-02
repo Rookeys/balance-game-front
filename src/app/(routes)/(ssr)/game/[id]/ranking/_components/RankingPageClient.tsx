@@ -21,6 +21,7 @@ import { useParams, useRouter, useSearchParams } from "next/navigation"
 import DesktopResources from "./DesktopResources"
 import RankingResourceCard from "./RankingResourceCard"
 import TabletResources from "./TabletResources"
+import { COLORS } from "@/styles/theme/colors"
 
 export default function RankingPageClient() {
   const windowWidth = useResizeHandler()
@@ -116,17 +117,20 @@ export default function RankingPageClient() {
           </div>
         </article>
         <MobilePlayNowButton text={`왜 인기 있는지 궁금하다면?\n지금 바로 플레이해 보세요!`} />
-        <article className="flex flex-col-reverse items-center justify-between gap-[12px] lg:flex-row">
-          <Filter filters={resourceListFilters} className="self-end lg:self-auto" defaultLabel="승률 높" />
-          <SearchInput
-            placeholder="이름으로 콘텐츠 찾기"
-            defaultValue={keyword}
-            Icon={Search}
-            className="lg:max-w-[340px]"
-            onSearch={handleSearch}
-          />
+        <article className="flex flex-col gap-[12px]">
+          <article className="flex flex-col-reverse items-center justify-between gap-[12px] lg:flex-row">
+            <Filter filters={resourceListFilters} className="self-end lg:self-auto" defaultLabel="승률순" />
+            <SearchInput
+              placeholder="이름으로 콘텐츠 찾기"
+              defaultValue={keyword}
+              Icon={Search}
+              iconProps={{ color: COLORS.NEUTRAL_700 }}
+              className="lg:max-w-[340px]"
+              onSearch={handleSearch}
+            />
+          </article>
+          {windowWidth !== 0 && (windowWidth > SCREEN_SIZE.lg ? <DesktopResources /> : <TabletResources />)}
         </article>
-        {windowWidth !== 0 && (windowWidth > SCREEN_SIZE.lg ? <DesktopResources /> : <TabletResources />)}
         {!!resources?.totalPages && (
           <Pagination
             currentPage={page}

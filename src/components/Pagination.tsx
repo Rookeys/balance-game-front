@@ -32,7 +32,7 @@ export function Pagination({ currentPage, totalPages, onPageChange, pageRangeDis
         <button
           onClick={() => onPageChange(currentPage - 1)}
           disabled={currentPage === 1}
-          className="flex h-[36px] w-[36px] items-center justify-center rounded-[4px] text-[14px] disabled:opacity-50"
+          className="flex h-[40px] w-[40px] items-center justify-center disabled:opacity-50"
         >
           <ChevronLeft size={24} />
         </button>
@@ -43,8 +43,8 @@ export function Pagination({ currentPage, totalPages, onPageChange, pageRangeDis
               key={page}
               onClick={() => onPageChange(page)}
               className={cn(
-                "transition-color-custom h-[36px] w-[36px] rounded-[4px] border text-[14px]",
-                currentPage === page ? "border-black bg-black text-white" : "hover:bg-gray-100"
+                "transition-color-custom h-[40px] w-[40px] rounded-[8px]",
+                currentPage === page && "bg-label-strong text-label-bold text-background"
               )}
             >
               {page}
@@ -55,7 +55,7 @@ export function Pagination({ currentPage, totalPages, onPageChange, pageRangeDis
         <button
           onClick={() => onPageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
-          className="flex h-[36px] w-[36px] items-center justify-center rounded-[4px] text-[14px] disabled:opacity-50"
+          className="flex h-[40px] w-[40px] items-center justify-center disabled:opacity-50"
         >
           <ChevronRight size={24} />
         </button>

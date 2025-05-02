@@ -35,7 +35,7 @@ export default function MoreButton({ items, ButtonUI, className }: Params) {
       {isOpen && (
         <div
           className={cn(
-            "absolute end-0 top-[28px] z-[20] w-[124px] divide-y rounded-[4px] border bg-white p-[8px] text-label-medium text-label-normal",
+            "absolute end-0 top-[28px] z-[20] w-[124px] divide-y rounded-[8px] border bg-white p-[8px] text-label-medium text-label-normal",
             className
           )}
         >

@@ -48,7 +48,7 @@ export default function Filter({ filters, defaultLabel = "최신순", onClick, c
         ButtonUI={
           <Button
             variant="custom"
-            className="flex h-full w-full justify-between gap-[8px] rounded-[4px] border px-[12px] py-[8px]"
+            className="flex h-full w-full justify-between gap-[8px] rounded-[8px] border px-[12px] py-[8px]"
           >
             <p className="text-label-medium text-label-normal">{selectedFilter}</p>
             <ChevronDown />

@@ -22,6 +22,7 @@ import { useState } from "react"
 import { toast } from "sonner"
 import ResourceDeleteModal from "./resourceForm/ResourceDeleteModal"
 import ResourceFormWrapper from "./resourceForm/ResourceFormWrapper"
+import { COLORS } from "@/styles/theme/colors"
 
 export default function ResourceFormContainer() {
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState<boolean>(false)
@@ -106,6 +107,7 @@ export default function ResourceFormContainer() {
               <SearchInput
                 placeholder="이름으로 콘텐츠 찾기"
                 Icon={Search}
+                iconProps={{ color: COLORS.NEUTRAL_700 }}
                 className="lg:max-w-[340px]"
                 onSearch={handleSearch}
               />

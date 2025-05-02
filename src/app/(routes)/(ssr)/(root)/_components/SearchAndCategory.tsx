@@ -4,6 +4,7 @@ import SearchInput from "@/components/SearchInput"
 import { Search } from "lucide-react"
 import { useRouter } from "next/navigation"
 import CategorySlider from "./CategorySlider"
+import { COLORS } from "@/styles/theme/colors"
 
 export default function SearchAndCategory() {
   const router = useRouter()
@@ -20,7 +21,7 @@ export default function SearchAndCategory() {
       <div className="w-full max-w-[720px] self-center">
         <SearchInput
           Icon={Search}
-          iconProps={{ color: "#686E75" }}
+          iconProps={{ color: COLORS.NEUTRAL_700 }}
           onSearch={handleSearch}
           placeholder="제목으로 월드컵 찾기"
           inputClassName="h-[40px]"
