@@ -17,12 +17,12 @@ export default function TabletResourceItem({ index, ...props }: Params) {
         <p className="flex h-full items-center justify-center p-[8px] text-label-bold text-label-normal sm:p-[16px] md:w-[56px]">
           {index + 1}
         </p>
-        <figure className="relative my-auto h-[100px] w-[120px]">
+        <figure className="relative my-auto h-[100px] w-[120px] overflow-hidden rounded-[8px] border">
           <Image
             src={getThumbnailUrlByType({ type: props.type, url: props.content }) ?? "/images/Rookeys.png"}
             fill
             alt="thumbnail"
-            className="rounded-[8px]"
+            className="rounded-[8px] object-contain"
           />
         </figure>
       </article>

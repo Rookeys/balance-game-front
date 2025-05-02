@@ -63,7 +63,7 @@ export default function ResourceTableContents({ resource, isOpenEditState, isOpe
 
   return (
     <section className="flex gap-[12px] py-[16px]">
-      <figure className="relative my-auto h-[100px] w-[120px]">
+      <figure className="relative my-auto h-[100px] w-[120px] overflow-hidden rounded-[8px] border">
         <Image
           src={
             resource?.type === GameResourceResponseType.LINK
@@ -72,7 +72,7 @@ export default function ResourceTableContents({ resource, isOpenEditState, isOpe
           }
           fill
           alt="thumbnail"
-          className="rounded-[8px]"
+          className="rounded-[8px] object-contain"
         />
         <button
           className="absolute start-[4px] top-[4px]"

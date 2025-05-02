@@ -18,8 +18,13 @@ export default function DesktopResourceItem({ index, ...props }: Params) {
         <p>{index + 1}</p>
       </div>
       <div className="center flex w-[112px] flex-shrink-0 items-center px-[16px]">
-        <figure className="relative h-[64px] w-[80px]">
-          <Image src={getThumbnailUrlByType({ type: props.type, url: props.content })} alt="" fill />
+        <figure className="relative my-auto h-[64px] w-[80px] overflow-hidden rounded-[8px] border">
+          <Image
+            src={getThumbnailUrlByType({ type: props.type, url: props.content })}
+            alt=""
+            fill
+            className="rounded-[8px] object-contain"
+          />
         </figure>
       </div>
       <div className="flex w-full items-center px-[16px]">
