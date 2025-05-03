@@ -34,7 +34,7 @@ interface RankingCardProps extends GameResultResponse {
 const RankingCard = ({ index, ...props }: RankingCardProps) => {
   const { id } = useParams()
   return (
-    <Link href={`/game/${id}/results/${props.resourceId}`} className="flex items-center gap-[8px] py-[20px]">
+    <Link href={`/game/${id}/resources/${props.resourceId}`} className="flex items-center gap-[8px] py-[20px]">
       <p className="flex h-full items-center justify-center text-label-bold">{index + 1}</p>
       <div className="relative my-auto h-[40px] w-[50px] flex-shrink-0">
         <Image

@@ -16,7 +16,7 @@ interface Params extends GameResultResponse {
 export default function DesktopResourceItem({ index, ...props }: Params) {
   const { id } = useParams()
   return (
-    <Link href={`/game/${id}/results/${props.resourceId}`} className={cn("flex h-[96px] overflow-hidden")}>
+    <Link href={`/game/${id}/resources/${props.resourceId}`} className={cn("flex h-[96px] overflow-hidden")}>
       <div className="flex w-[64px] flex-shrink-0 items-center justify-center text-label-bold text-label-normal">
         <p>{index + 1}</p>
       </div>

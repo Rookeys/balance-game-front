@@ -3,7 +3,7 @@ Disallow: /category/*
 Disallow: /game/*/comment
 Disallow: /game/*/play
 Disallow: /game/*/ranking
-Disallow: /game/*/results
+Disallow: /game/*/resources
 Disallow: /game-create
 Disallow: /my-page
 Disallow: /search

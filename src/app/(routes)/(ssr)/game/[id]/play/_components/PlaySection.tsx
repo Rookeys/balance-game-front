@@ -54,7 +54,7 @@ export default function PlaySection({ playId }: Params) {
       // 결승전 선택 후 처리
       await removePlayIdCookie()
       if (selectedResourceId) {
-        router.replace(`/game/${id}/results/${selectedResourceId}?played=true`)
+        router.replace(`/game/${id}/resources/${selectedResourceId}?played=true`)
         return
       }
     }

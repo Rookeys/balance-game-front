@@ -15,7 +15,7 @@ interface Params extends GameResultResponse {
 export default function TabletResourceItem({ index, ...props }: Params) {
   const { id } = useParams()
   return (
-    <Link href={`/game/${id}/results/${props.resourceId}`} className="flex items-center gap-[12px] py-[16px]">
+    <Link href={`/game/${id}/resources/${props.resourceId}`} className="flex items-center gap-[12px] py-[16px]">
       <article className="flex h-full items-center">
         <p className="flex h-full items-center justify-center p-[8px] text-label-bold text-label-normal sm:p-[16px] md:w-[56px]">
           {index + 1}
