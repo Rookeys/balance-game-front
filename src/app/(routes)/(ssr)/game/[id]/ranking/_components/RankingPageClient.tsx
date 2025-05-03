@@ -69,7 +69,7 @@ export default function RankingPageClient() {
       <section className="flex w-full flex-col gap-[28px] md:gap-[40px]">
         <article className="flex flex-col gap-[12px]">
           <p className="font-sb-aggro-medium text-heading-4 text-label-normal md:text-heading-3">월드컵 랭킹</p>
-          <article className="mx-[-16px] flex flex-col gap-[24px] rounded-[16px] bg-gray-500 px-[16px] py-[40px] md:mx-0 md:gap-[40px]">
+          <article className="mx-[-16px] flex flex-col gap-[24px] bg-gray-900 px-[16px] py-[40px] md:mx-0 md:gap-[40px] md:rounded-[16px]">
             <p className="mx-auto w-full rounded-[12px] text-center font-sb-aggro-medium text-heading-5 text-background">
               {gameDetail?.title}
             </p>
