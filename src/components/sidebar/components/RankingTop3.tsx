@@ -13,12 +13,12 @@ export default function RankingTop3() {
   const { data } = useGetResultRanking(Number(id), { size: 3, sortType: GetResultRankingSortType.WIN_RATE_DESC })
 
   return (
-    <section className="flex flex-col rounded-[20px] border px-[16px] py-[20px]">
+    <section className="flex flex-col rounded-[12px] border px-[16px] py-[20px]">
       <p className="mb-[20px] font-sb-aggro-medium text-heading-5">콘텐츠 랭킹 TOP 3</p>
       {data?.content?.map((resource, index) => <RankingCard key={resource.resourceId} {...resource} index={index} />)}
       <Link
         href={`/game/${id}/ranking`}
-        className="mx-auto w-fit rounded-[12px] border border-line-normal bg-background px-[20px] py-[12px] text-label-bold"
+        className="mx-auto w-fit rounded-[8px] border border-line-normal bg-background px-[20px] py-[12px] text-label-bold"
       >
         랭킹 더보기
       </Link>

@@ -17,6 +17,7 @@ import PlayOtherGameAndRankingSideBar from "./PlayOtherGameAndRankingSideBar"
 import ResourceCommentAndReplyForm from "../../../../../../../../components/comment/ResourceCommentAndReplyForm"
 import ResourceInformation from "./ResourceInformation"
 import { CircleAlert } from "lucide-react"
+import MobilePlayNowButton from "@/components/MobilePlayNowButton"
 
 export default function GameResultPageClient() {
   const { id, resourceId } = useParams()
@@ -124,6 +125,7 @@ export default function GameResultPageClient() {
             </p>
           </div>
         </article>
+        <MobilePlayNowButton />
         <article className="flex flex-col gap-[20px]">
           <TabBar items={tabItems} currentValue={tab} />
           <div className="relative flex flex-col gap-[12px]">

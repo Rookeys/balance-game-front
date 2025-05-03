@@ -10,7 +10,7 @@ export default function PlayNow({ text = "지금 바로 플레이해 보세요!"
   const { id } = useParams()
   const router = useRouter()
   return (
-    <section className="flex flex-col items-center gap-[20px] rounded-[20px] border px-[16px] py-[20px]">
+    <section className="flex flex-col items-center gap-[20px] rounded-[12px] border px-[16px] py-[20px]">
       <Image src={"/images/Rookeys.png"} width={80} height={80} alt="" />
       <p className="whitespace-pre-line text-center font-sb-aggro-medium text-heading-5">{text}</p>
       <Button onClick={() => router.push(`/game/${id}`)} className="inline-flex items-center justify-center">
