@@ -69,7 +69,7 @@ const TextareaWithSubmit: React.FC<Params> = ({
         }}
         {...rest}
       />
-      <article className="absolute end-[12px] top-[12px] flex h-[calc(100%-24px)] flex-col justify-end">
+      <article className="absolute end-[12px] top-[12px] flex h-[calc(100%-24px)] flex-col justify-end gap-[4px]">
         {maxLength && (
           <p className="self-end text-label-regular text-label-alternative">
             {value?.toString().length ?? 0}/{maxLength}

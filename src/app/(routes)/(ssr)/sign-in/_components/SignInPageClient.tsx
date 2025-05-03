@@ -17,7 +17,7 @@ export default function SignInPageClient() {
   return (
     <article className="w-full max-w-[400px] rounded-[16px] px-[16px] py-[20px]">
       <Image
-        src={"/images/zznpk_logo.png"}
+        src={"/images/zznpk_logo_color.webp"}
         alt="logo"
         width={120}
         height={120}
