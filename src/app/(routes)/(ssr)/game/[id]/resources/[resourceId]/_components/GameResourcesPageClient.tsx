@@ -19,7 +19,7 @@ import ResourceInformation from "./ResourceInformation"
 import { CircleAlert } from "lucide-react"
 import MobilePlayNowButton from "@/components/MobilePlayNowButton"
 
-export default function GameResultPageClient() {
+export default function GameResourcesPageClient() {
   const { id, resourceId } = useParams()
   const searchParams = useSearchParams()
 

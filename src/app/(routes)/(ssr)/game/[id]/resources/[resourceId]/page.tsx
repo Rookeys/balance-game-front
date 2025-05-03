@@ -7,7 +7,7 @@ import { Metadata } from "next"
 import { notFound } from "next/navigation"
 import qs from "qs"
 import GameResourceBottomBar from "./_components/GameResourceBottomBar"
-import GameResultPageClient from "./_components/GameResultPageClient"
+import GameResourcesPageClient from "./_components/GameResourcesPageClient"
 
 export const metadata: Metadata = {
   robots: {
@@ -60,7 +60,7 @@ export default async function ResultPage({ params }: ResultPageProps) {
         queryClient={queryClient}
         onError={notFound}
       >
-        <GameResultPageClient />
+        <GameResourcesPageClient />
         <GameResourceBottomBar />
       </FetchPrefetchBoundary>
     </section>
