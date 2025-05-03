@@ -3,24 +3,24 @@
 import BottomBarWrapper from "@/components/BottomBarWrapper"
 import { Button } from "@/components/Button"
 import { Share } from "lucide-react"
-import GamePlayTooltip from "./GamePlayTooltip"
+import { useParams, useRouter, useSearchParams } from "next/navigation"
 
-interface Params {
-  onClick?: () => void
-}
+export default function GameResourceBottomBar() {
+  const { id } = useParams()
+  const searchParams = useSearchParams()
+  const played = searchParams.get("played")
 
-export default function GameDetailBottomBar({ onClick }: Params) {
+  const router = useRouter()
   return (
     <BottomBarWrapper>
       <article className="flex items-center gap-[12px]">
         <button className="flex h-[48px] w-[48px] flex-shrink-0 items-center justify-center rounded-[12px] border border-line-normal bg-background">
           <Share />
         </button>
-        <Button data-tooltip-id="play-tooltip-mobile" type="button" className="h-full w-full" onClick={onClick}>
-          플레이 하기
+        <Button type="button" className="h-full w-full" onClick={() => router.push(`/game/${id}`)}>
+          {played ? "다시하기" : "플레이 하기"}
         </Button>
       </article>
-      <GamePlayTooltip id="play-tooltip-mobile" />
     </BottomBarWrapper>
   )
 }

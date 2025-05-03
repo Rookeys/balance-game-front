@@ -7,11 +7,13 @@ import ResourceItem from "@/components/ResourceItem"
 import { calculateWinRate } from "@/utils/calculateWinRate"
 import { Share } from "lucide-react"
 import Image from "next/image"
-import { useParams, useSearchParams } from "next/navigation"
+import { useParams, useRouter, useSearchParams } from "next/navigation"
 
 export default function ResourceInformation() {
   const { id, resourceId } = useParams()
   const searchParams = useSearchParams()
+
+  const router = useRouter()
 
   const played = searchParams.get("played")
 
@@ -45,7 +47,9 @@ export default function ResourceInformation() {
           <button className="flex-shrink-0 rounded-[12px] border border-line-normal bg-background p-[12px]">
             <Share />
           </button>
-          <Button className="w-full">{played ? "다시하기" : "플레이하기"}</Button>
+          <Button className="w-full" onClick={() => router.push(`/game/${id}`)}>
+            {played ? "다시하기" : "플레이하기"}
+          </Button>
         </article>
       </section>
     </section>

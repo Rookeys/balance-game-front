@@ -43,8 +43,10 @@ export function Pagination({ currentPage, totalPages, onPageChange, pageRangeDis
               key={page}
               onClick={() => onPageChange(page)}
               className={cn(
-                "transition-color-custom h-[40px] w-[40px] rounded-[8px]",
-                currentPage === page && "bg-label-strong text-label-bold text-background"
+                "transition-color-custom h-[40px] w-[40px] rounded-[8px] border",
+                currentPage === page
+                  ? "bg-label-strong text-label-bold text-background"
+                  : "border-line-normal bg-background"
               )}
             >
               {page}

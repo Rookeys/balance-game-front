@@ -10,7 +10,7 @@ export default async function GameResultPageLayout({
     <>
       <Header />
       {children}
-      <Footer />
+      <Footer bottomBarMargin />
     </>
   )
 }

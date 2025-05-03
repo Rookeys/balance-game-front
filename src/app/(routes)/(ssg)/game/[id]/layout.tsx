@@ -10,7 +10,7 @@ export default async function GameDetailPageLayout({
     <>
       <HeaderSSG />
       {children}
-      <Footer />
+      <Footer bottomBarMargin />
     </>
   )
 }

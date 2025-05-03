@@ -3,6 +3,7 @@
 import { signIn } from "next-auth/react"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
+import { Button } from "./Button"
 
 type DemoSignInRequest = {
   secret: string
@@ -53,13 +54,9 @@ export default function DemoLoginForm() {
         className="rounded w-full rounded-[12px] border px-[16px] py-[8px]"
       />
       {errors.secret && <p className="text-[14px] text-red-500">{errors.secret.message}</p>}
-      <button
-        type="submit"
-        disabled={isSubmitting}
-        className="rounded transition-color-custom w-full rounded-[12px] bg-blue-50 px-[16px] py-[8px] text-white hover:bg-blue-600 disabled:bg-gray-400"
-      >
+      <Button type="submit" disabled={isSubmitting}>
         {isSubmitting ? "로그인 중..." : "관리자 로그인"}
-      </button>
+      </Button>
 
       {serverError && <p className="text-[14px] text-red-500">{serverError}</p>}
     </form>
