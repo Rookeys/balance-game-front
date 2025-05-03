@@ -7,9 +7,9 @@ import type { Metadata } from "next"
 import { ThemeProvider } from "next-themes"
 import { PretendardVariable, SBAggroMedium } from "./fonts"
 
-const title = "짱픽"
+const title = "짱픽 - 이상형 월드컵 커뮤니티"
 const description =
-  "이상형 월드컵을 직접 만들고 공유하세요! 짱픽에서 나만의 월드컵 게임을 제작하고 친구들과 함께 즐길 수 있습니다."
+  "짱픽은 이상형 월드컵을 직접 만들고 공유할 수 있는 커뮤니티 플랫폼입니다. 나만의 월드컵 게임을 제작하고 친구들과 함께 즐겨보세요."
 const images = [
   {
     url: "/images/zznpk_og_image.png",
