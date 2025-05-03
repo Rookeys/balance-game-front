@@ -5,14 +5,17 @@ import ProgressBar from "@/components/ProgressBar"
 import { calculateWinRate } from "@/utils/calculateWinRate"
 import { getThumbnailUrlByType } from "@/utils/getThumbnailUrlByType"
 import Image from "next/image"
+import Link from "next/link"
+import { useParams } from "next/navigation"
 
 interface Params extends GameResultResponse {
   index: number
 }
 
 export default function TabletResourceItem({ index, ...props }: Params) {
+  const { id } = useParams()
   return (
-    <section className="flex items-center gap-[12px] py-[16px]">
+    <Link href={`/game/${id}/results/${props.resourceId}`} className="flex items-center gap-[12px] py-[16px]">
       <article className="flex h-full items-center">
         <p className="flex h-full items-center justify-center p-[8px] text-label-bold text-label-normal sm:p-[16px] md:w-[56px]">
           {index + 1}
@@ -43,6 +46,6 @@ export default function TabletResourceItem({ index, ...props }: Params) {
           </div>
         </div>
       </article>
-    </section>
+    </Link>
   )
 }

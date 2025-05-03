@@ -2,6 +2,7 @@
 
 import { useGetResultRankingUsingPage } from "@/api/orval/client/game-results-controller/game-results-controller"
 import { GetResultRankingSortType } from "@/api/orval/model/getResultRankingSortType"
+import ResourceNotFound from "@/components/ResourceNotFound"
 import { cn } from "@/utils/cn"
 import { useParams, useSearchParams } from "next/navigation"
 import DesktopResourceItem from "./DesktopResourceItem"
@@ -39,9 +40,13 @@ export default function DesktopResources() {
         </div>
       </div>
       {/* Contents */}
-      {resources?.content?.map((resource, index) => (
-        <DesktopResourceItem key={resource.resourceId} index={index} {...resource} />
-      ))}
+      {resources?.content && resources.content.length > 0 ? (
+        resources.content.map((resource, index) => (
+          <DesktopResourceItem key={resource.resourceId} index={index} {...resource} />
+        ))
+      ) : (
+        <ResourceNotFound keyword={keyword} />
+      )}
     </article>
   )
 }

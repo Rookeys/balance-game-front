@@ -6,14 +6,17 @@ import { calculateWinRate } from "@/utils/calculateWinRate"
 import { cn } from "@/utils/cn"
 import { getThumbnailUrlByType } from "@/utils/getThumbnailUrlByType"
 import Image from "next/image"
+import Link from "next/link"
+import { useParams } from "next/navigation"
 
 interface Params extends GameResultResponse {
   index: number
 }
 
 export default function DesktopResourceItem({ index, ...props }: Params) {
+  const { id } = useParams()
   return (
-    <div className={cn("flex h-[96px] overflow-hidden")}>
+    <Link href={`/game/${id}/results/${props.resourceId}`} className={cn("flex h-[96px] overflow-hidden")}>
       <div className="flex w-[64px] flex-shrink-0 items-center justify-center text-label-bold text-label-normal">
         <p>{index + 1}</p>
       </div>
@@ -44,6 +47,6 @@ export default function DesktopResourceItem({ index, ...props }: Params) {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   )
 }
