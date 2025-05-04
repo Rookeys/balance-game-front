@@ -44,7 +44,7 @@ export default function CategoryGameList() {
   if (!isLoading && data?.pages[0].totalElements === 0) return <GameNotFound keyword={formattedCategory} />
 
   return (
-    <section className="relative grid w-full grid-cols-2 gap-x-[16px] gap-y-[16px] md:grid-cols-4 md:gap-x-[24px] md:gap-y-[40px]">
+    <section className="relative grid w-full grid-cols-2 gap-x-[16px] gap-y-[28px] md:grid-cols-4 md:gap-x-[24px] md:gap-y-[40px]">
       {/* {data?.pages?.map((page) =>
         page.content?.map((game, index) => <GameThumbnailSimpleCard key={index} fixedSize={false} {...game} />)
       )} */}

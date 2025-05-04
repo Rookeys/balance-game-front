@@ -26,9 +26,13 @@ export default function SelectItemBox({ selectedId, handleSelectItem, ...props }
       <motion.div
         className={cn(
           "relative w-full p-[2px]",
-          // * border 그라데이션 처리
           selected
-            ? "z-[2] rounded-[16px] before:absolute before:inset-0 before:z-[-1] before:animate-border-move before:rounded-[16px] before:border-2 before:border-transparent before:bg-[linear-gradient(90deg,#00BDDE_0%,#FFFFFF_25%,#6541F2_50%,#FFFFFF_75%,#00BDDE_100%)] before:bg-[length:300%_300%] before:content-['']"
+            ? cn(
+                "z-[2] rounded-[16px]",
+                "border-animation"
+                // * border 그라데이션 처리
+                // "before:absolute before:inset-0 before:z-[-1] before:animate-border-move before:rounded-[16px] before:border-2 before:border-transparent before:bg-[linear-gradient(90deg,#00BDDE_0%,#FFFFFF_25%,#6541F2_50%,#FFFFFF_75%,#00BDDE_100%)] before:bg-[length:300%_300%] before:content-['']"
+              )
             : "z-[1]"
         )}
         animate={{
@@ -69,13 +73,7 @@ export default function SelectItemBox({ selectedId, handleSelectItem, ...props }
 
   return (
     <motion.div
-      className={cn(
-        "relative w-full p-[2px]",
-        // * border 그라데이션 처리
-        selected
-          ? "z-[2] rounded-[16px] before:absolute before:inset-0 before:z-[-1] before:animate-border-move before:rounded-[16px] before:border-2 before:border-transparent before:bg-[linear-gradient(90deg,#00BDDE_0%,#FFFFFF_25%,#6541F2_50%,#FFFFFF_75%,#00BDDE_100%)] before:bg-[length:300%_300%] before:content-['']"
-          : "z-[1]"
-      )}
+      className={cn("relative w-full p-[2px]", selected ? cn("z-[2] rounded-[16px]", "border-animation") : "z-[1]")}
       animate={{
         // scale: !!selectedId ? (selected ? [1, 1.25, 1, 1.25, 1] : 0.8) : 1,
         scale: !!selectedId ? (selected ? 1 : 0.8) : 1,

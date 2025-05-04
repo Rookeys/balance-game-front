@@ -3,6 +3,7 @@ import { BORDER_RADIUS } from "./src/styles/theme/borderRadius"
 import { FONT_SIZE } from "./src/styles/theme/fontSize"
 import { FONT_WEIGHT } from "./src/styles/theme/fontWeight"
 import { SCREEN_SIZE } from "./src/styles/theme/screenSize"
+import plugin from "tailwindcss/plugin"
 
 const isStorybook = process.env.STORYBOOK === "true"
 
@@ -88,10 +89,34 @@ const config = {
       },
       animation: {
         "border-move": "border-move 3s linear infinite"
+      },
+      boxShadow: {
+        normal: `0px 1px 2px rgba(0, 0, 0, 0.12), 0px 0px 1px rgba(0, 0, 0, 0.08), 0px 0px 1px rgba(0, 0, 0, 0.08)`,
+        emphasize: `0px 2px 8px rgba(0, 0, 0, 0.12), 0px 1px 4px rgba(0, 0, 0, 0.08), 0px 0px 1px rgba(0, 0, 0, 0.08)`,
+        strong: `0px 6px 12px rgba(0, 0, 0, 0.12), 0px 4px 8px rgba(0, 0, 0, 0.08), 0px 0px 4px rgba(0, 0, 0, 0.08)`
       }
     }
   },
-  plugins: []
+  plugins: [
+    plugin(({ addUtilities }) => {
+      addUtilities({
+        ".border-animation": {
+          "&::before": {
+            position: "absolute",
+            inset: "0",
+            zIndex: "-1",
+            animation: "border-move 3s linear infinite",
+            borderRadius: "16px",
+            borderWidth: "2px",
+            borderColor: "transparent",
+            backgroundImage: "linear-gradient(90deg, #00BDDE 0%, #FFFFFF 25%, #6541F2 50%, #FFFFFF 75%, #00BDDE 100%)",
+            backgroundSize: "300% 300%",
+            content: '""'
+          }
+        }
+      })
+    })
+  ]
 }
 
 export default config

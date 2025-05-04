@@ -24,7 +24,7 @@ export default function SearchAndCategory() {
           iconProps={{ color: COLORS.NEUTRAL_700 }}
           onSearch={handleSearch}
           placeholder="제목으로 월드컵 찾기"
-          inputClassName="h-[40px]"
+          inputClassName="h-[48px]"
         />
       </div>
       <CategorySlider />

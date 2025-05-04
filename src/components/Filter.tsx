@@ -42,7 +42,7 @@ export default function Filter({ filters, defaultLabel = "최신순", onClick, c
   }))
 
   return (
-    <section className={cn("relative z-10 h-[40px] w-[124px]", className)}>
+    <section className={cn("relative z-10 h-[48px] w-[124px]", className)}>
       <MoreButton
         items={filterItems}
         ButtonUI={
