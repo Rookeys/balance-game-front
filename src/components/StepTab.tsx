@@ -16,7 +16,9 @@ interface StepTabProps {
 
 export default function StepTab({ items, currentValue, className }: StepTabProps) {
   return (
-    <section className={cn("my-[20px] flex w-full max-w-[484px] rounded-[12px] bg-gray-100 p-[4px]", className)}>
+    <section
+      className={cn("my-[20px] flex w-full max-w-[484px] rounded-[12px] bg-fill-normal p-[4px] md:hidden", className)}
+    >
       {items.map((item) => (
         <button
           key={item.value}
@@ -24,7 +26,9 @@ export default function StepTab({ items, currentValue, className }: StepTabProps
           onClick={item.onClick}
           className={cn(
             "transition-color-customs w-full rounded-[12px] py-[8px]",
-            currentValue === item.value ? "bg-white" : "bg-transparent"
+            currentValue === item.value
+              ? "bg-background text-label-bold text-label-normal"
+              : "bg-transparent text-label-medium text-label-neutral"
           )}
         >
           {item.label}

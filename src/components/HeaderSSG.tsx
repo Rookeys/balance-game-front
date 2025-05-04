@@ -71,7 +71,7 @@ export default function HeaderSSG() {
           <>
             {session && (
               <>
-                <Button asChild className="hidden rounded-[8px] bg-fill-normal text-black md:inline-flex">
+                <Button asChild className="hidden rounded-[8px] md:inline-flex">
                   <Link href={"/game-create/new"} aria-label="game-create">
                     월드컵 만들기
                   </Link>

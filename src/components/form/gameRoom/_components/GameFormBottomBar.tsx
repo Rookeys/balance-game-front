@@ -12,14 +12,13 @@ interface Params {
 
 export default function GameFormBottomBar({ step, setStep, percent = 0, disabled }: Params) {
   return (
-    <BottomBarWrapper>
+    <BottomBarWrapper className="h-[124px]">
       <div className="flex items-center gap-[12px]">
         <ProgressBar percent={percent} />
         <p className="rounded-[100px] bg-gray-100 px-[12px] py-[4px]">{percent}%</p>
       </div>
       <Button
         key={`${step}-button`}
-        className="bg-black text-white"
         type={step === 1 ? "button" : "submit"}
         disabled={disabled}
         onClick={() => {
@@ -28,7 +27,7 @@ export default function GameFormBottomBar({ step, setStep, percent = 0, disabled
           }
         }}
       >
-        다음
+        {step === 1 ? "다음" : "월드컵 생성"}
       </Button>
     </BottomBarWrapper>
   )

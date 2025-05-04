@@ -10,12 +10,9 @@ export default function GameAccessForm() {
   const { watch, setValue, control } = useFormContext<GameRequest>()
   return (
     <section className="flex w-full flex-col gap-[40px]">
-      <article className="flex flex-col gap-[4px]">
-        <div className="flex gap-[4px]">
-          <p>공개 여부를 설정해 주세요</p>
-          <p>🔓</p>
-        </div>
-        <p>월드컵 설정은 만든후에도 변경할 수 있어요.</p>
+      <article className="flex flex-col gap-[8px]">
+        <p className="font-sb-aggro-medium text-heading-4 md:text-heading-3">공개 여부를 설정해 주세요</p>
+        <p className="text-label-regular md:text-body2-regular">월드컵 설정은 만든후에도 변경할 수 있어요.</p>
       </article>
       <article className="flex flex-col gap-[12px]">
         <InputLabel label="제작자 공개" />
@@ -45,7 +42,7 @@ export default function GameAccessForm() {
         />
       </article>
       <article className="flex flex-col gap-[12px]">
-        <InputLabel label="썸네일 블라인드" />
+        <InputLabel label="썸네일 공개" />
         <Controller
           name="existsBlind"
           control={control}
@@ -86,14 +83,14 @@ export default function GameAccessForm() {
                 }}
                 selected={field.value === GameRequestAccessType.PUBLIC}
               />
-              <SelectButton
+              {/* <SelectButton
                 title="일부공개"
                 description="팔로워들이 확인할 수 없어요"
                 onClick={() => {
                   field.onChange(GameRequestAccessType.PROTECTED)
                 }}
                 selected={field.value === GameRequestAccessType.PROTECTED}
-              />
+              /> */}
               {watch("accessType") === GameRequestAccessType.PROTECTED && (
                 <InputText
                   id="inviteCode"
@@ -127,10 +124,10 @@ export default function GameAccessForm() {
             </div>
           )}
         />
-        <div className="flex items-center gap-[4px] text-gray-50">
-          <CircleAlert className="fill-gray-30 text-white" />
+        {/* <div className="flex items-center gap-[4px]">
+          <CircleAlert className="fill-gray-30" />
           <p>일부 공개된 게임은 부적절한 콘텐츠 확인을 위해 개발자가 검토할 수 있어요.</p>
-        </div>
+        </div> */}
       </article>
     </section>
   )

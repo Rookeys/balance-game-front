@@ -13,14 +13,17 @@ export default function SelectButton({ title, description, selected, onClick }: 
   return (
     <button
       type="button"
-      className={cn("w-full rounded-[12px] border p-[16px] text-start", selected && "bg-blue-100")}
+      className={cn(
+        "w-full rounded-[12px] border border-line-normal p-[16px] text-start",
+        selected && "border-primary-normal bg-primary-alternative"
+      )}
       onClick={onClick}
     >
       <div className="flex items-center gap-[12px]">
         <SquareDashed />
         <div className="flex flex-col items-start gap-[8px]">
-          <p>{title}</p>
-          <p>{description}</p>
+          <p className="text-label-bold md:text-body2-bold">{title}</p>
+          <p className="text-caption1-regular md:text-label-regular">{description}</p>
         </div>
       </div>
     </button>

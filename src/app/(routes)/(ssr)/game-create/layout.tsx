@@ -10,7 +10,7 @@ export default async function GameCreatePageLayout({
     <>
       <Header />
       {children}
-      <Footer />
+      <Footer className="mb-[124px] md:mb-0" />
     </>
   )
 }

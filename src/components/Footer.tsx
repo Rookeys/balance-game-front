@@ -2,15 +2,15 @@ import { cn } from "@/utils/cn"
 import Logo from "./Logo"
 
 interface Params {
-  bottomBarMargin?: boolean
+  className?: string
 }
 
-export default function Footer({ bottomBarMargin }: Params) {
+export default function Footer({ className }: Params) {
   return (
     <section
       className={cn(
         "mt-[60px] flex flex-col justify-between gap-[48px] border-t px-[16px] py-[48px] md:mt-[80px] md:gap-0 md:px-[24px] lg:px-[120px]",
-        bottomBarMargin && "mb-[80px] md:mb-0"
+        className
       )}
     >
       <section className="flex flex-col justify-between gap-[48px] md:flex-row md:gap-0">

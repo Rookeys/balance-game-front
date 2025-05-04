@@ -29,7 +29,8 @@ const config = {
           DEFAULT: COLORS.CYAN_500,
           normal: COLORS.CYAN_500,
           hover: COLORS.CYAN_600,
-          "on-primary": COLORS.CYAN_700
+          "on-primary": COLORS.CYAN_700,
+          alternative: COLORS.CYAN_0
         },
         secondary: {
           DEFAULT: COLORS.VIOLET_400,
