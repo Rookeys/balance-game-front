@@ -70,10 +70,15 @@ export default function ResourceTableDesktopContents({
         )}
       </button>
       <div className="col-span-1 flex items-center justify-center">
-        <p>{indexNum}</p>
+        <p className="text-label-bold">{indexNum}</p>
       </div>
       <div className="col-span-2 flex items-center justify-center">
-        <p className="rounded-[4px] bg-gray-100 px-[8px] py-[4px]">
+        <p
+          className={cn(
+            "w-fit rounded-[4px] px-[8px] py-[4px] text-label-medium",
+            resource.type === GameResourceResponseType.IMAGE ? "bg-secondary-alternative" : "bg-accent-alternative"
+          )}
+        >
           {resource.type === GameResourceResponseType.IMAGE ? "이미지" : "동영상"}
         </p>
       </div>
@@ -89,12 +94,12 @@ export default function ResourceTableDesktopContents({
             // width={64}
             // height={64}
             fill
-            className="mx-auto rounded-[8px]"
+            className="mx-auto rounded-[8px] object-cover"
           />
         </figure>
       </div>
       <div className="col-span-5 flex items-center px-[16px]">
-        <p>{resource.title}</p>
+        <p className="line-clamp-2 text-body2-bold">{resource.title || "\u00A0"}</p>
       </div>
       <div className="col-span-5 flex items-center px-[16px]">
         <div className="flex w-full flex-col">
@@ -102,7 +107,7 @@ export default function ResourceTableDesktopContents({
             percent={Number(calculateWinRate(resource.winningNums, resource.totalPlayNums))}
             needIndicator={false}
           />
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between text-caption1-medium text-label-neutral">
             <p>{calculateWinRate(resource.winningNums, resource.totalPlayNums)}%</p>
             <p>{resource.winningNums}번 우승</p>
           </div>

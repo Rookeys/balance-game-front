@@ -24,7 +24,9 @@ export default function DesktopResources() {
     <article className="flex flex-col">
       {/* Header */}
       <div
-        className={cn("flex h-[74px] overflow-hidden rounded-t-[12px] bg-gray-100 text-body2-bold text-label-normal")}
+        className={cn(
+          "flex h-[80px] overflow-hidden rounded-t-[12px] bg-fill-normal text-body2-bold text-label-normal"
+        )}
       >
         <div className="flex w-[64px] flex-shrink-0 items-center justify-center">
           <p>순위</p>

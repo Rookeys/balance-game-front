@@ -92,16 +92,21 @@ export default function ResourceTableContents({ resource, isOpenEditState, isOpe
         </button>
       </figure>
       <article className="flex w-full flex-col gap-[12px]">
-        <p className="w-fit rounded-[4px] bg-gray-100 px-[8px] py-[4px]">
+        <p
+          className={cn(
+            "w-fit rounded-[4px] px-[8px] py-[4px] text-label-medium",
+            resource.type === GameResourceResponseType.IMAGE ? "bg-secondary-alternative" : "bg-accent-alternative"
+          )}
+        >
           {resource.type === GameResourceResponseType.IMAGE ? "이미지" : "동영상"}
         </p>
-        <p className="line-clamp-1">{resource.title || "\u00A0"}</p>
+        <p className="line-clamp-1 text-label-bold md:text-body2-bold">{resource.title || "\u00A0"}</p>
         <div className="flex flex-col">
           <ProgressBar
             percent={Number(calculateWinRate(resource.winningNums, resource.totalPlayNums))}
             needIndicator={false}
           />
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between text-caption1-medium text-label-neutral">
             <p>{calculateWinRate(resource.winningNums, resource.totalPlayNums)}%</p>
             <p>{resource.winningNums}번 우승</p>
           </div>

@@ -33,7 +33,12 @@ export default function ResourceFormWrapper() {
     <>
       <article className="lg:rounded-[16px] lg:border lg:px-[16px] lg:py-[20px]">
         {/* Header */}
-        <div className={cn("h-[80px] bg-gray-100", tableBaseClassName)}>
+        <div
+          className={cn(
+            "flex h-[80px] overflow-hidden rounded-t-[12px] bg-fill-normal text-body2-bold text-label-normal",
+            tableBaseClassName
+          )}
+        >
           <button
             className="col-span-1 flex items-center justify-center"
             onClick={() => handleSelectAllToggle(data?.content)}
