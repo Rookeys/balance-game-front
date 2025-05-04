@@ -54,7 +54,7 @@ export default function Filter({ filters, defaultLabel = "최신순", onClick, c
             <ChevronDown />
           </Button>
         }
-        className="top-[48px]"
+        className="top-[52px]"
       />
     </section>
   )

@@ -8,17 +8,20 @@ import { GameResourceResponse } from "@/api/orval/model/gameResourceResponse"
 import { GameResourceResponseType } from "@/api/orval/model/gameResourceResponseType"
 import MoreButton, { MoreItem } from "@/components/MoreButton"
 import ProgressBar from "@/components/ProgressBar"
+import CustomCheckIcon from "@/icons/CustomCheckIcon"
 import { useSelectedResourceIdStore } from "@/store/selectedResourceId"
+import { COLORS } from "@/styles/theme/colors"
 import { calculateWinRate } from "@/utils/calculateWinRate"
 import { getYoutubeThumbnail } from "@/utils/getYoutubeThumbnail"
 import { useQueryClient } from "@tanstack/react-query"
-import { Square, SquareCheck } from "lucide-react"
+import { Square } from "lucide-react"
 import Image from "next/image"
 import { useParams } from "next/navigation"
 import { Dispatch, SetStateAction } from "react"
 import ImageEditModal from "./ImageEditModal"
 import ResourceDeleteModal from "./ResourceDeleteModal"
 import YoutubeEditModal from "./YoutubeEditModal"
+import { cn } from "@/utils/cn"
 
 interface Params {
   resource: GameResourceResponse
@@ -72,13 +75,20 @@ export default function ResourceTableContents({ resource, isOpenEditState, isOpe
           }
           fill
           alt="thumbnail"
-          className="rounded-[8px] object-contain"
+          className="rounded-[8px] object-cover"
         />
         <button
-          className="absolute start-[4px] top-[4px]"
+          className={cn(
+            "absolute start-[4px] top-[4px] rounded-[4px] bg-dimmer-neutral",
+            isChecked ? "p-[5px]" : "p-[4px]"
+          )}
           onClick={() => toggleSelectedResourceId(resource.resourceId as number)}
         >
-          {isChecked ? <SquareCheck /> : <Square />}
+          {isChecked ? (
+            <CustomCheckIcon className="rounded-[4px] bg-primary-normal p-[2px] text-white" size={14} />
+          ) : (
+            <Square color={COLORS.NEUTRAL_300} size={20} />
+          )}
         </button>
       </figure>
       <article className="flex w-full flex-col gap-[12px]">

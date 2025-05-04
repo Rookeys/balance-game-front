@@ -6,12 +6,14 @@ import {
 import { GameResourceResponse } from "@/api/orval/model/gameResourceResponse"
 import { GameResourceResponseType } from "@/api/orval/model/gameResourceResponseType"
 import ProgressBar from "@/components/ProgressBar"
+import CustomCheckIcon from "@/icons/CustomCheckIcon"
 import { useSelectedResourceIdStore } from "@/store/selectedResourceId"
+import { COLORS } from "@/styles/theme/colors"
 import { calculateWinRate } from "@/utils/calculateWinRate"
 import { cn } from "@/utils/cn"
 import { getYoutubeThumbnail } from "@/utils/getYoutubeThumbnail"
 import { useQueryClient } from "@tanstack/react-query"
-import { Square, SquareCheck, SquarePen, Trash2 } from "lucide-react"
+import { Square, SquarePen, Trash2 } from "lucide-react"
 import Image from "next/image"
 import { useParams } from "next/navigation"
 import { Dispatch, SetStateAction } from "react"
@@ -61,7 +63,11 @@ export default function ResourceTableDesktopContents({
         className="col-span-1 flex items-center justify-center"
         onClick={() => toggleSelectedResourceId(resource.resourceId as number)}
       >
-        {isChecked ? <SquareCheck /> : <Square />}
+        {isChecked ? (
+          <CustomCheckIcon className="rounded-[4px] bg-primary-normal p-[2px] text-white" size={16} />
+        ) : (
+          <Square color={COLORS.NEUTRAL_300} size={24} />
+        )}
       </button>
       <div className="col-span-1 flex items-center justify-center">
         <p>{indexNum}</p>

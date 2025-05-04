@@ -4,7 +4,7 @@ import { useGetCountResourcesInGames } from "@/api/orval/client/game-resource-co
 import { Button } from "@/components/Button"
 import ProgressBar from "@/components/ProgressBar"
 import SideBarWrapper from "@/components/SideBarWrapper"
-import CustomCircleCheck from "@/icons/CustomCircleCheck"
+import CustomCheckIcon from "@/icons/CustomCheckIcon"
 import { COLORS } from "@/styles/theme/colors"
 import { Circle } from "lucide-react"
 import { useParams, usePathname, useRouter } from "next/navigation"
@@ -62,7 +62,7 @@ export default function GameFormSideBar({ step, setStep, percent = 0, isStep1Com
         <button type="button" className="flex items-center justify-between py-[12px]" onClick={() => handleStep(1)}>
           <p className="text-body2-regular">월드컵 정보</p>
           {step === 1 || isStep1Complete ? (
-            <CustomCircleCheck className="bg-primary-normal" size={14} stroke={COLORS.WHITE} />
+            <CustomCheckIcon className="rounded-full bg-primary-normal p-[4px]" size={14} stroke={COLORS.WHITE} />
           ) : (
             <Circle stroke={COLORS.NEUTRAL_300} size={24} />
           )}
@@ -70,7 +70,7 @@ export default function GameFormSideBar({ step, setStep, percent = 0, isStep1Com
         <button type="button" className="flex items-center justify-between py-[12px]" onClick={() => handleStep(2)}>
           <p className="text-body2-regular">공개 설정</p>
           {step === 2 ? (
-            <CustomCircleCheck className="bg-primary-normal" size={14} stroke={COLORS.WHITE} />
+            <CustomCheckIcon className="rounded-full bg-primary-normal p-[4px]" size={14} stroke={COLORS.WHITE} />
           ) : (
             <Circle stroke={COLORS.NEUTRAL_300} size={24} />
           )}
@@ -90,7 +90,7 @@ export default function GameFormSideBar({ step, setStep, percent = 0, isStep1Com
         >
           <p className="text-body2-regular">콘텐츠 업로드</p>
           {isMediasPage || (resourceNumbers && resourceNumbers >= 2) ? (
-            <CustomCircleCheck className="bg-primary-normal" size={14} stroke={COLORS.WHITE} />
+            <CustomCheckIcon className="rounded-full bg-primary-normal p-[4px]" size={14} stroke={COLORS.WHITE} />
           ) : (
             <Circle stroke={COLORS.NEUTRAL_300} size={24} />
           )}
@@ -101,7 +101,7 @@ export default function GameFormSideBar({ step, setStep, percent = 0, isStep1Com
           onClick={() => {
             if (!id) {
               toast.warning("게임을 먼저 생성해 주세요.")
-            } else if (!isResourcesPage) {
+            } else {
               router.push(`/game-create/${id}/resources`)
             }
           }}
@@ -111,7 +111,7 @@ export default function GameFormSideBar({ step, setStep, percent = 0, isStep1Com
             <span className="text-label-medium text-label-alternative">(선택)</span>
           </div>
           {isResourcesPage ? (
-            <CustomCircleCheck className="bg-primary-normal" size={14} stroke={COLORS.WHITE} />
+            <CustomCheckIcon className="rounded-full bg-primary-normal p-[4px]" size={14} stroke={COLORS.WHITE} />
           ) : (
             <Circle stroke={COLORS.NEUTRAL_300} size={24} />
           )}

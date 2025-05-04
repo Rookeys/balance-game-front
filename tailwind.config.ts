@@ -68,7 +68,8 @@ const config = {
         },
         dimmer: {
           normal: "#17171980",
-          strong: "#171719CC"
+          strong: "#171719CC",
+          neutral: "#1717194D"
         },
         kakao: {
           container: COLORS.KAKAO_CONTAINER,

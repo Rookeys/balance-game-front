@@ -13,16 +13,17 @@ import GameFormSideBar from "@/components/form/gameRoom/_components/GameFormSide
 import SearchInput from "@/components/SearchInput"
 import StepTab, { StepTabItem } from "@/components/StepTab"
 import { resourceListFilters } from "@/constants/filters"
+import CustomCheckIcon from "@/icons/CustomCheckIcon"
 import { useSelectedResourceIdStore } from "@/store/selectedResourceId"
+import { COLORS } from "@/styles/theme/colors"
 import { getMaxRound } from "@/utils/getMaxRound"
 import { useQueryClient } from "@tanstack/react-query"
-import { Search, Square, SquareCheck } from "lucide-react"
+import { Search, Square } from "lucide-react"
 import { useParams, useRouter, useSearchParams } from "next/navigation"
 import { useState } from "react"
 import { toast } from "sonner"
 import ResourceDeleteModal from "./resourceForm/ResourceDeleteModal"
 import ResourceFormWrapper from "./resourceForm/ResourceFormWrapper"
-import { COLORS } from "@/styles/theme/colors"
 
 export default function ResourceFormContainer() {
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState<boolean>(false)
@@ -88,17 +89,14 @@ export default function ResourceFormContainer() {
           </section>
           {/* <MediaTab /> */}
           <div className="flex flex-col gap-[20px]">
-            <article className="flex flex-col gap-[4px]">
-              <div className="flex gap-[4px]">
-                <p>콘텐츠 편집</p>
-                <p>🎯</p>
-              </div>
-              <p>
+            <article className="flex flex-col gap-[8px]">
+              <p className="font-sb-aggro-medium text-heading-4 md:text-heading-3">콘텐츠를 편집해 보세요</p>
+              <p className="text-label-regular md:text-body2-regular">
                 업로드한 콘텐츠를 수정하거나 삭제할 수 있어요. 개성 있는 이름을 붙여 더욱 특별하게 콘텐츠를 표현해
                 보세요!
               </p>
             </article>
-            <p className="rounded-[8px] bg-gray-100 px-[16px] py-[12px]">
+            <p className="rounded-[8px] border border-primary-normal bg-primary-alternative px-[16px] py-[12px] text-label-bold text-primary-on-primary md:text-body2-bold">
               업로드한 콘텐츠 {resourceNumbers}개, {getMaxRound(resourceNumbers)}강까지 플레이 가능해요.
             </p>
           </div>
@@ -114,16 +112,20 @@ export default function ResourceFormContainer() {
               <article className="flex items-center gap-[12px]">
                 <div className="flex items-center gap-[4px]">
                   <button className="lg:hidden" onClick={() => handleSelectAllToggle(data?.content)}>
-                    {isAllSelected(data?.content ?? []) ? <SquareCheck /> : <Square />}
+                    {isAllSelected(data?.content ?? []) ? (
+                      <CustomCheckIcon className="rounded-[4px] bg-primary-normal p-[2px] text-white" size={16} />
+                    ) : (
+                      <Square color={COLORS.NEUTRAL_300} size={24} />
+                    )}
                   </button>
-                  <p>
+                  <p className="text-label-regular">
                     {selectedResourceIds.length > 0
                       ? `선택 ${selectedResourceIds.length}개`
                       : `총 ${data?.totalElements || 0}개`}
                   </p>
                 </div>
                 <button
-                  className="h-full rounded-[4px] border px-[12px]"
+                  className="h-full rounded-[4px] px-[12px] text-label-neutral"
                   onClick={() => {
                     if (selectedResourceIds.length === 0) {
                       toast.warning("선택된 콘텐츠가 없어요")
