@@ -10,6 +10,7 @@ import { Circle } from "lucide-react"
 import { useParams, usePathname, useRouter } from "next/navigation"
 import { Dispatch, SetStateAction } from "react"
 import { toast } from "sonner"
+import GameCreateTooltip from "./GameCreateTooltip"
 
 interface Params {
   step?: 1 | 2
@@ -116,8 +117,8 @@ export default function GameFormSideBar({ step, setStep, percent = 0, isStep1Com
           )}
         </button>
       </section>
-
       <Button
+        data-tooltip-id={"game-create-sidebar-button"}
         key={`${step}-button`}
         className="rounded-[12px]"
         type={step === 1 ? "button" : "submit"}
@@ -130,6 +131,7 @@ export default function GameFormSideBar({ step, setStep, percent = 0, isStep1Com
       >
         {step === 1 ? "다음" : "월드컵 생성"}
       </Button>
+      <GameCreateTooltip id="game-create-sidebar-button" classNameArrow="absolute !start-auto end-[8px]" />
     </SideBarWrapper>
   )
 }

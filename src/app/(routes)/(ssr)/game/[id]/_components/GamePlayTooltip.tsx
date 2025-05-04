@@ -25,6 +25,7 @@ export default function GamePlayTooltip(props: ITooltip) {
         id={props.id}
         className={cn("!end-0 !rounded-[8px] !bg-label-strong !px-[12px] !py-[8px]", props.className)}
         isOpen={true}
+        defaultIsOpen
         place="top-end"
         middlewares={[offset(10)]}
         classNameArrow={cn("absolute !start-auto end-[8px]", props.classNameArrow)}

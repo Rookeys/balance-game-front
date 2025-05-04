@@ -114,6 +114,7 @@ export default function CommentSection({ playId }: Params) {
             id={"comment-button"}
             className={cn("!rounded-[8px] !bg-label-strong !px-[12px] !py-[8px]")}
             isOpen={true}
+            defaultIsOpen
             place="left"
             middlewares={[offset(10)]}
           >
