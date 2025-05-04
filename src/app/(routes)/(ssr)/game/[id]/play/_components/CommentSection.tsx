@@ -107,11 +107,11 @@ export default function CommentSection({ playId }: Params) {
         </article>
       ) : (
         <>
-          <Button data-tooltip-id={"comment-button"} className="self-end" onClick={() => setIsOpen(true)}>
+          <Button data-tooltip-id="comment-button" className="self-end" onClick={() => setIsOpen(true)}>
             댓글 보기
           </Button>
           <Tooltip
-            id={"comment-button"}
+            id="comment-button"
             className={cn("!rounded-[8px] !bg-label-strong !px-[12px] !py-[8px]")}
             isOpen={true}
             defaultIsOpen

@@ -1,13 +1,14 @@
 import { GameRequest } from "@/api/orval/model/gameRequest"
 import { GameRequestAccessType } from "@/api/orval/model/gameRequestAccessType"
 import { InputLabel } from "@/components/form/_components/InputLabel"
-import InputText from "@/components/form/inputText/InputText"
-import { CircleAlert } from "lucide-react"
+import { COLORS } from "@/styles/theme/colors"
+import { CircleHelp } from "lucide-react"
 import { Controller, useFormContext } from "react-hook-form"
+import GameThumbnailSelectTooltip from "./GameThumbnailSelectTooltip"
 import SelectButton from "./SelectButton"
 
 export default function GameAccessForm() {
-  const { watch, setValue, control } = useFormContext<GameRequest>()
+  const { control } = useFormContext<GameRequest>()
   return (
     <section className="flex w-full flex-col gap-[40px]">
       <article className="flex flex-col gap-[8px]">
@@ -23,7 +24,7 @@ export default function GameAccessForm() {
             <div className="flex gap-[12px]">
               <SelectButton
                 title="공개"
-                description="팔로워들이 확인할 수 있어요"
+                description="모두가 제작자를 볼 수 있어요"
                 onClick={() => {
                   field.onChange(false)
                 }}
@@ -31,7 +32,7 @@ export default function GameAccessForm() {
               />
               <SelectButton
                 title="비공개"
-                description="팔로워들이 확인할 수 없어요"
+                description="제작자는 나만 볼 수 있어요"
                 onClick={() => {
                   field.onChange(true)
                 }}
@@ -42,7 +43,16 @@ export default function GameAccessForm() {
         />
       </article>
       <article className="flex flex-col gap-[12px]">
-        <InputLabel label="썸네일 공개" />
+        <div className="flex items-center gap-[4px]">
+          <InputLabel label="썸네일 공개" />
+          <CircleHelp
+            color={COLORS.NEUTRAL_600}
+            size={20}
+            data-tooltip-id="thumbnail-select"
+            className="outline-none"
+          />
+          <GameThumbnailSelectTooltip id="thumbnail-select" />
+        </div>
         <Controller
           name="existsBlind"
           control={control}
@@ -77,7 +87,7 @@ export default function GameAccessForm() {
             <div className="flex flex-col gap-[12px]">
               <SelectButton
                 title="공개"
-                description="팔로워들이 확인할 수 있어요"
+                description="모두가 플레이할 수 있어요"
                 onClick={() => {
                   field.onChange(GameRequestAccessType.PUBLIC)
                 }}
@@ -91,7 +101,7 @@ export default function GameAccessForm() {
                 }}
                 selected={field.value === GameRequestAccessType.PROTECTED}
               /> */}
-              {watch("accessType") === GameRequestAccessType.PROTECTED && (
+              {/* {watch("accessType") === GameRequestAccessType.PROTECTED && (
                 <InputText
                   id="inviteCode"
                   value={watch("inviteCode")}
@@ -112,10 +122,10 @@ export default function GameAccessForm() {
                     </div>
                   }
                 />
-              )}
+              )} */}
               <SelectButton
                 title="비공개"
-                description="팔로워들이 확인할 수 없어요"
+                description="나만 확인할 수 있어요"
                 onClick={() => {
                   field.onChange(GameRequestAccessType.PRIVATE)
                 }}
