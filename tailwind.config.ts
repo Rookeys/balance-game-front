@@ -104,7 +104,6 @@ const config = {
           "&::before": {
             position: "absolute",
             inset: "0",
-            zIndex: "-1",
             animation: "border-move 3s linear infinite",
             borderRadius: "16px",
             borderWidth: "2px",
