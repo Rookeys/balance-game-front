@@ -27,7 +27,9 @@ export default function ModalWrapper({ onClose, overlayClose, children }: Params
             if (overlayClose && !!onClose) onClose()
           }}
         />
-        <div className="z-[51] mx-[16px] max-h-[calc(100vh-32px)] overflow-y-auto">{children}</div>
+        <div className="z-[51] mx-[16px] flex max-h-[calc(100vh-32px)] w-full items-center justify-center overflow-y-auto">
+          {children}
+        </div>
       </div>
     </ModalPortal>
   )

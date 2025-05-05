@@ -4,7 +4,7 @@ import { SquarePlus } from "lucide-react"
 import { signOut, useSession } from "next-auth/react"
 import Image from "next/image"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { useState } from "react"
 import BlindToggle from "./BlindToggle"
 import { Button } from "./Button"
@@ -19,13 +19,19 @@ export default function Header() {
 
   const router = useRouter()
 
+  const pathname = usePathname()
+
+  const isMyPage = pathname === "/my-page"
+
   const moreItems: MoreItem[] = [
-    {
-      label: "마이페이지",
-      onClick: () => {
-        router.push("/my-page")
-      }
-    },
+    ...(!isMyPage
+      ? [
+          {
+            label: "마이페이지",
+            onClick: () => router.push("/my-page")
+          }
+        ]
+      : []),
     {
       label: "로그아웃",
       onClick: () => {

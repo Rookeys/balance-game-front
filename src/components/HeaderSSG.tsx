@@ -6,7 +6,7 @@ import { Session } from "next-auth"
 import { getSession, signOut } from "next-auth/react"
 import Image from "next/image"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import BlindToggle from "./BlindToggle"
 import { Button } from "./Button"
@@ -19,6 +19,8 @@ export default function HeaderSSG() {
   const [session, setSession] = useState<Session | null>(null)
   const [loading, setLoading] = useState(true)
   const [isOpen, setIsOpen] = useState<boolean>(false)
+
+  const pathname = usePathname()
 
   const clearSession = useSessionStore((state) => state.clearSession)
   const router = useRouter()
@@ -33,11 +35,17 @@ export default function HeaderSSG() {
     fetchSession()
   }, [])
 
+  const isMyPage = pathname === "/my-page"
+
   const moreItems: MoreItem[] = [
-    {
-      label: "마이페이지",
-      onClick: () => router.push("/my-page")
-    },
+    ...(!isMyPage
+      ? [
+          {
+            label: "마이페이지",
+            onClick: () => router.push("/my-page")
+          }
+        ]
+      : []),
     {
       label: "로그아웃",
       onClick: () => {
