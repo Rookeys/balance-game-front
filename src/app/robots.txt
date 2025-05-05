@@ -13,7 +13,6 @@ Disallow: /index.php
 Disallow: /index.php/*
 Disallow: /vod
 Disallow: /vod/*
-Disallow: /game/*
 
 Allow: /
 

@@ -29,8 +29,8 @@ export default function SocialActionSection({ id, title, categories, isMine }: P
   const handleShare = async () => {
     const shareData: ShareAPIRequest = {
       title: `짱픽에 초대합니다`,
-      text: `${title ?? ""}플레이`,
-      url: `https://github.com/kojaem/${id}`
+      text: `이상형 월드컵 ${title ?? ""}`,
+      url: `https://zznpk.com/game/${id}`
     }
     share(shareData)
   }
