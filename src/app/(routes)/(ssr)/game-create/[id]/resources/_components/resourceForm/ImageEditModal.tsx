@@ -51,7 +51,7 @@ export default function ImageEditModal({ onClose, onSave, overlayClose }: Params
                 maxFiles={1}
               />
             )}
-            <div className="flex items-center gap-[4px]">
+            <div className="flex items-start gap-[4px]">
               <CircleAlert className="flex-shrink-0 fill-label-alternative text-white" size={16} />
               <p className="text-caption1-regular text-label-alternative md:text-label-regular">
                 JPEG, JPG, PNG 형식을 지원하며 이미지 당 최대 4MB까지 업로드할 수 있어요.

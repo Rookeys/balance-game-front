@@ -32,7 +32,7 @@ export default function YoutubeEditModal({ onClose, onSave, overlayClose }: Para
       >
         <article className="flex items-center justify-between">
           <div className="h-[24px] w-[24px]" />
-          <p>동영상 수정</p>
+          <p className="text-body2-bold">동영상 수정</p>
           <XIcon size={24} color={COLORS.NEUTRAL_700} className="cursor-pointer" onClick={onClose} />
         </article>
         <article className="flex flex-col gap-[24px] pb-[24px] pt-[20px]">
@@ -46,7 +46,7 @@ export default function YoutubeEditModal({ onClose, onSave, overlayClose }: Para
                   src={getYoutubeThumbnail(watch("content"))}
                   fill
                   alt="thumbnail"
-                  className="object-contain"
+                  className="rounded-[12px] bg-black object-contain"
                   unoptimized
                 />
               ) : (
@@ -99,9 +99,9 @@ export default function YoutubeEditModal({ onClose, onSave, overlayClose }: Para
               }}
             />
           </article>
-          <div className="text-gray-30 flex gap-[4px] text-start">
-            <CircleAlert className="fill-gray-30 flex-shrink-0 text-white" />
-            <p className="text-[14px]">
+          <div className="flex items-start gap-[4px]">
+            <CircleAlert className="flex-shrink-0 fill-label-alternative text-white" size={16} />
+            <p className="text-caption1-regular text-label-alternative md:text-label-regular">
               시작/종료 시간은 선택 사항이에요. 설정하면 해당 구간이 반복 재생되므로, 하이라이트 설정을 권장해요.
             </p>
           </div>
@@ -113,23 +113,19 @@ export default function YoutubeEditModal({ onClose, onSave, overlayClose }: Para
               onChange={(e) => setValue("title", e.target.value, { shouldValidate: true })}
               maxLength={20}
               label="이름"
+              labelClassName="!text-label-regular !font-pretendard text-label-neutral"
             />
           </article>
         </article>
         <article className="flex items-center justify-between gap-[12px] pb-[40px]">
           <Button
             type="button"
-            className="transition-color-custom w-fit rounded-[12px] bg-red-500 px-[28px] py-[12px] text-white hover:bg-red-600"
+            className="w-fit rounded-[12px] bg-transparent text-label-bold text-label-normal hover:bg-transparent"
             onClick={() => setValue("content", "", { shouldValidate: true })}
           >
             동영상 삭제
           </Button>
-          <Button
-            type="button"
-            className="transition-color-custom bg-blue-40 w-fit rounded-[12px] px-[28px] py-[12px] text-white hover:bg-blue-50 disabled:bg-gray-50"
-            onClick={onSave}
-            disabled={isSubmitting}
-          >
+          <Button type="button" className="px-[28px] py-[12px]" onClick={onSave} disabled={isSubmitting}>
             확인
           </Button>
         </article>
