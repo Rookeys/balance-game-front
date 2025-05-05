@@ -22,6 +22,7 @@ import type {
   CustomPageImplGameListResponse,
   GameResponse,
   GetMyGameListParams,
+  UserReportRequest,
   UserRequest,
   UserResponse
 } from "../../model"
@@ -316,6 +317,85 @@ export const useUpdateProfile = <TError = ErrorType<string>, TContext = unknown>
   request?: SecondParameter<typeof customClientInstance>
 }): UseMutationResult<Awaited<ReturnType<typeof updateProfile>>, TError, { data: BodyType<UserRequest> }, TContext> => {
   const mutationOptions = getUpdateProfileMutationOptions(options)
+
+  return useMutation(mutationOptions)
+}
+/**
+ * 정책에 맞지 않는 유저를 신고함.
+ * @summary 유저 신고 API
+ */
+export const submitUserReport = (
+  userReportRequest: BodyType<UserReportRequest>,
+  options?: SecondParameter<typeof customClientInstance>,
+  signal?: AbortSignal
+) => {
+  return customClientInstance<boolean>(
+    {
+      url: `/api/v1/users/report`,
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      data: userReportRequest,
+      signal
+    },
+    options
+  )
+}
+
+export const getSubmitUserReportMutationOptions = <TError = ErrorType<boolean>, TContext = unknown>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof submitUserReport>>,
+    TError,
+    { data: BodyType<UserReportRequest> },
+    TContext
+  >
+  request?: SecondParameter<typeof customClientInstance>
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof submitUserReport>>,
+  TError,
+  { data: BodyType<UserReportRequest> },
+  TContext
+> => {
+  const mutationKey = ["submitUserReport"]
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation && "mutationKey" in options.mutation && options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined }
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof submitUserReport>>,
+    { data: BodyType<UserReportRequest> }
+  > = (props) => {
+    const { data } = props ?? {}
+
+    return submitUserReport(data, requestOptions)
+  }
+
+  return { mutationFn, ...mutationOptions }
+}
+
+export type SubmitUserReportMutationResult = NonNullable<Awaited<ReturnType<typeof submitUserReport>>>
+export type SubmitUserReportMutationBody = BodyType<UserReportRequest>
+export type SubmitUserReportMutationError = ErrorType<boolean>
+
+/**
+ * @summary 유저 신고 API
+ */
+export const useSubmitUserReport = <TError = ErrorType<boolean>, TContext = unknown>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof submitUserReport>>,
+    TError,
+    { data: BodyType<UserReportRequest> },
+    TContext
+  >
+  request?: SecondParameter<typeof customClientInstance>
+}): UseMutationResult<
+  Awaited<ReturnType<typeof submitUserReport>>,
+  TError,
+  { data: BodyType<UserReportRequest> },
+  TContext
+> => {
+  const mutationOptions = getSubmitUserReportMutationOptions(options)
 
   return useMutation(mutationOptions)
 }
