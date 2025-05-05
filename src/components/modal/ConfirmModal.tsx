@@ -10,6 +10,7 @@ interface Params {
   description?: string
   onClick?: () => void
   onClose?: () => void
+  okLabel?: string
   disabled?: boolean
   overlayClose?: boolean
   className?: string
@@ -20,6 +21,7 @@ export default function ConfirmModal({
   description,
   onClick,
   onClose,
+  okLabel = "확인",
   disabled,
   overlayClose = false,
   className
@@ -54,7 +56,7 @@ export default function ConfirmModal({
             onClick={onClick}
             disabled={disabled}
           >
-            확인
+            {okLabel}
           </Button>
         </article>
       </section>
