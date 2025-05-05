@@ -15,7 +15,7 @@ interface Params {
 const YoutubeRatio = ({ ratio, url, start, end, ready, onReady }: Params) => (
   <div
     className={cn(
-      "RatioContainer absolute inset-0 h-full w-full bg-gray-10 transition-opacity duration-300 dark:bg-night",
+      "RatioContainer dark:bg-night absolute inset-0 h-full w-full bg-gray-100 transition-opacity duration-300",
       ready ? "opacity-100" : "pointer-events-none opacity-0"
     )}
   >

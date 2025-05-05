@@ -42,7 +42,7 @@ export default function PlaySection({ playId }: Params) {
   const handleSelectItem = async (selectedResourceId?: number) => {
     if (selectedId || !selectedResourceId) return
     setSelectedId(selectedResourceId)
-    await sleep(500)
+    await sleep(1000)
 
     await mutateAsync({
       gameId: Number(id),
@@ -54,7 +54,7 @@ export default function PlaySection({ playId }: Params) {
       // 결승전 선택 후 처리
       await removePlayIdCookie()
       if (selectedResourceId) {
-        router.replace(`/game/${id}/results/${selectedResourceId}`)
+        router.replace(`/game/${id}/resources/${selectedResourceId}?played=true`)
         return
       }
     }

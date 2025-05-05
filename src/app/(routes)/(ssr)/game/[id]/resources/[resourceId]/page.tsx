@@ -3,10 +3,11 @@ import { getGetResultRankingQueryKey } from "@/api/orval/client/game-results-con
 import { GetResultRankingSortType } from "@/api/orval/model/getResultRankingSortType"
 import { FetchPrefetchBoundary } from "@/lib/providers/FetchPrefetchBoundary"
 import { QueryClient } from "@tanstack/react-query"
+import { Metadata } from "next"
 import { notFound } from "next/navigation"
 import qs from "qs"
-import GameResultPageClient from "./_components/GameResultPageClient"
-import { Metadata } from "next"
+import GameResourceBottomBar from "./_components/GameResourceBottomBar"
+import GameResourcesPageClient from "./_components/GameResourcesPageClient"
 
 export const metadata: Metadata = {
   robots: {
@@ -59,7 +60,8 @@ export default async function ResultPage({ params }: ResultPageProps) {
         queryClient={queryClient}
         onError={notFound}
       >
-        <GameResultPageClient />
+        <GameResourcesPageClient />
+        <GameResourceBottomBar />
       </FetchPrefetchBoundary>
     </section>
   )

@@ -20,7 +20,7 @@ export default function GameThumbnailSimpleCard({ tag, fixedSize = true, isMine 
   return (
     <Link
       href={`/game/${roomId}`}
-      className={cn("flex w-full flex-col gap-[8px]", fixedSize && "w-[182px] md:w-[282px]")}
+      className={cn("group flex w-full flex-col gap-[8px]", fixedSize && "w-[182px] md:w-[282px]")}
     >
       <ImageSection
         src={

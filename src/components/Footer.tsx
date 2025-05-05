@@ -1,8 +1,18 @@
+import { cn } from "@/utils/cn"
 import Logo from "./Logo"
 
-export default function Footer() {
+interface Params {
+  className?: string
+}
+
+export default function Footer({ className }: Params) {
   return (
-    <section className="mt-[60px] flex flex-col justify-between gap-[48px] border-t px-[16px] py-[48px] md:mt-[80px] md:gap-0 md:px-[24px] lg:px-[120px]">
+    <section
+      className={cn(
+        "mt-[60px] flex flex-col justify-between gap-[48px] border-t px-[16px] py-[48px] md:mt-[80px] md:gap-0 md:px-[24px] lg:px-[120px]",
+        className
+      )}
+    >
       <section className="flex flex-col justify-between gap-[48px] md:flex-row md:gap-0">
         <article className="relative">
           <Logo size={40} />
@@ -16,7 +26,7 @@ export default function Footer() {
           </div>
         </article>
       </section>
-      <p className="inline-block w-fit">© {new Date().getFullYear()}. Servicename. All Rights Reserved</p>
+      <p className="inline-block w-fit">© {new Date().getFullYear()}. zznpk. All Rights Reserved</p>
     </section>
   )
 }

@@ -1,7 +1,7 @@
 import Footer from "@/components/Footer"
 import HeaderSSG from "@/components/HeaderSSG"
 
-export default async function RootLayout({
+export default async function GameDetailPageLayout({
   children
 }: Readonly<{
   children: React.ReactNode
@@ -10,7 +10,7 @@ export default async function RootLayout({
     <>
       <HeaderSSG />
       {children}
-      <Footer />
+      <Footer className="mb-[80px] md:mb-0" />
     </>
   )
 }

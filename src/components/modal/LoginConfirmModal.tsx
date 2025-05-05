@@ -12,8 +12,8 @@ export default function LoginConfirmModal() {
 
   return (
     <ConfirmModal
-      title="로그인이 필요한 서비스입니다."
-      description="해당 기능은 로그인 후 이용 가능합니다. 로그인 하시겠습니까?"
+      title="로그인"
+      description={`이 기능은 로그인 후 이용할 수 있어요.\n지금 로그인할까요?`}
       onClick={() => {
         hide()
         router.push(`/sign-in?redirectUrl=${encodeURIComponent(window.location.href)}`)

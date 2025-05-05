@@ -4,10 +4,13 @@ import { useGetCountResourcesInGames } from "@/api/orval/client/game-resource-co
 import { Button } from "@/components/Button"
 import ProgressBar from "@/components/ProgressBar"
 import SideBarWrapper from "@/components/SideBarWrapper"
-import { Circle, CircleCheck } from "lucide-react"
+import CustomCheckIcon from "@/icons/CustomCheckIcon"
+import { COLORS } from "@/styles/theme/colors"
+import { Circle } from "lucide-react"
 import { useParams, usePathname, useRouter } from "next/navigation"
 import { Dispatch, SetStateAction } from "react"
 import { toast } from "sonner"
+import GameCreateTooltip from "./GameCreateTooltip"
 
 interface Params {
   step?: 1 | 2
@@ -47,29 +50,33 @@ export default function GameFormSideBar({ step, setStep, percent = 0, isStep1Com
 
   return (
     <SideBarWrapper>
-      <section className="flex flex-col gap-[20px] rounded-[20px] border px-[16px] py-[32px]">
+      <section className="flex flex-col gap-[20px] rounded-[12px] border px-[16px] py-[32px]">
         <article className="flex items-center justify-between">
-          <p>월드컵 완성까지</p>
-          <p className="rounded-[100px] bg-gray-10 px-[12px] py-[4px]">{percent}%</p>
+          <p className="font-sb-aggro-medium text-heading-5">월드컵 완성도</p>
+          <p className="rounded-[1000px] bg-fill-normal px-[12px] py-[4px] text-label-bold">{percent}%</p>
         </article>
         <ProgressBar percent={percent} />
       </section>
-      <section className="flex flex-col rounded-[20px] border px-[16px] py-[20px]">
-        <p className="py-[12px]">기본설정</p>
+      <section className="flex flex-col rounded-[12px] border px-[16px] py-[20px]">
+        <p className="py-[12px] font-sb-aggro-medium text-heading-5">기본설정</p>
         <button type="button" className="flex items-center justify-between py-[12px]" onClick={() => handleStep(1)}>
-          <p>월드컵 정보</p>
+          <p className="text-body2-regular">월드컵 정보</p>
           {step === 1 || isStep1Complete ? (
-            <CircleCheck fill="#000000" stroke="#DDDDDD" />
+            <CustomCheckIcon className="rounded-full bg-primary-normal p-[4px]" size={14} stroke={COLORS.WHITE} />
           ) : (
-            <Circle stroke="#DDDDDD" />
+            <Circle stroke={COLORS.NEUTRAL_300} size={24} />
           )}
         </button>
         <button type="button" className="flex items-center justify-between py-[12px]" onClick={() => handleStep(2)}>
-          <p>공개 설정</p>
-          {step === 2 ? <CircleCheck fill="#000000" stroke="#DDDDDD" /> : <Circle stroke="#DDDDDD" />}
+          <p className="text-body2-regular">공개 설정</p>
+          {step === 2 ? (
+            <CustomCheckIcon className="rounded-full bg-primary-normal p-[4px]" size={14} stroke={COLORS.WHITE} />
+          ) : (
+            <Circle stroke={COLORS.NEUTRAL_300} size={24} />
+          )}
         </button>
         <hr className="my-[12px]" />
-        <p className="py-[12px]">콘텐츠</p>
+        <p className="py-[12px] font-sb-aggro-medium text-heading-5">콘텐츠</p>
         <button
           type="button"
           className="flex items-center justify-between py-[12px]"
@@ -81,11 +88,11 @@ export default function GameFormSideBar({ step, setStep, percent = 0, isStep1Com
             }
           }}
         >
-          <p>콘텐츠 업로드</p>
+          <p className="text-body2-regular">콘텐츠 업로드</p>
           {isMediasPage || (resourceNumbers && resourceNumbers >= 2) ? (
-            <CircleCheck fill="#000000" stroke="#DDDDDD" />
+            <CustomCheckIcon className="rounded-full bg-primary-normal p-[4px]" size={14} stroke={COLORS.WHITE} />
           ) : (
-            <Circle stroke="#DDDDDD" />
+            <Circle stroke={COLORS.NEUTRAL_300} size={24} />
           )}
         </button>
         <button
@@ -94,22 +101,26 @@ export default function GameFormSideBar({ step, setStep, percent = 0, isStep1Com
           onClick={() => {
             if (!id) {
               toast.warning("게임을 먼저 생성해 주세요.")
-            } else if (!isResourcesPage) {
+            } else {
               router.push(`/game-create/${id}/resources`)
             }
           }}
         >
           <div className="flex items-center gap-[4px]">
-            <p>콘텐츠 편집</p>
-            <span>(선택)</span>
+            <p className="text-body2-regular">콘텐츠 편집</p>
+            <span className="text-label-medium text-label-alternative">(선택)</span>
           </div>
-          {isResourcesPage ? <CircleCheck fill="#000000" stroke="#DDDDDD" /> : <Circle stroke="#DDDDDD" />}
+          {isResourcesPage ? (
+            <CustomCheckIcon className="rounded-full bg-primary-normal p-[4px]" size={14} stroke={COLORS.WHITE} />
+          ) : (
+            <Circle stroke={COLORS.NEUTRAL_300} size={24} />
+          )}
         </button>
       </section>
-
       <Button
+        data-tooltip-id={"game-create-sidebar-button"}
         key={`${step}-button`}
-        className="bg-black text-white"
+        className="rounded-[12px]"
         type={step === 1 ? "button" : "submit"}
         disabled={disabled}
         onClick={() => {
@@ -118,8 +129,9 @@ export default function GameFormSideBar({ step, setStep, percent = 0, isStep1Com
           }
         }}
       >
-        다음
+        {step === 1 ? "다음" : "월드컵 생성"}
       </Button>
+      <GameCreateTooltip id="game-create-sidebar-button" classNameArrow="absolute !start-auto end-[8px]" />
     </SideBarWrapper>
   )
 }

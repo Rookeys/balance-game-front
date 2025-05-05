@@ -19,19 +19,19 @@ export default function ProfileSection() {
         젤리 한번에 바꾸기
       </motion.button> */}
       <div className="flex items-start justify-between">
-        <figure className="relative h-[60px] w-[60px] flex-shrink-0 md:h-[80px] md:w-[80px]">
+        <figure className="relative h-[60px] w-[60px] flex-shrink-0 overflow-hidden rounded-full md:h-[80px] md:w-[80px]">
           <Image src={session?.user.image || "/images/Rookeys.png"} alt="" fill />
         </figure>
         <Link
-          className="inline-flex items-center justify-center rounded-[12px] bg-black px-[16px] py-[8px] text-white"
+          className="inline-flex items-center justify-center rounded-[8px] bg-fill-normal px-[20px] py-[10px] text-label-bold"
           href={"/my-page/edit"}
         >
           프로필 수정
         </Link>
       </div>
       <div>
-        <p>닉네임이 들어갈 영역입니다</p>
-        <p>{session?.user.email}</p>
+        <p className="text-body2-bold">{session?.user.nickname}</p>
+        <p className="text-label-regular text-label-alternative">{session?.user.email}</p>
       </div>
     </article>
   )

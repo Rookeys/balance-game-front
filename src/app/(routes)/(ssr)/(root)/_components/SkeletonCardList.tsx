@@ -6,13 +6,13 @@ import CardSkeleton from "./CardSkeleton"
 
 interface Params {
   title: string
-  titleIcon: string
+  updateTime?: string
 }
 
-export default function SkeletonList({ title, titleIcon }: Params) {
+export default function SkeletonList({ title, updateTime }: Params) {
   return (
     <section className="flex h-[474px] w-full max-w-[1200px] flex-col gap-[12px] md:h-[580px] lg:h-[556px]">
-      <SliderTitle title={title} titleIcon={titleIcon} />
+      <SliderTitle title={title} updateTime={updateTime} />
       <GameSliderWrapper prevElId="skeleton-prev" nextElId="skeleton-next">
         {Array.from({ length: 3 }).map((_, index) => (
           <SwiperSlide

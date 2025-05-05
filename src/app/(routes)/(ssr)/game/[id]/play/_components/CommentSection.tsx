@@ -4,14 +4,18 @@ import { useContinuePlayRoom } from "@/api/orval/client/game-play-controller/gam
 import { useGetParentCommentsByGameResourceInfinite } from "@/api/orval/client/game-resource-comments-controller/game-resource-comments-controller"
 import { GetParentCommentsByGameResourceSortType } from "@/api/orval/model/getParentCommentsByGameResourceSortType"
 import { Button } from "@/components/Button"
-import ReplyItem from "@/components/comment/ReplyItem"
+import CommentItem from "@/components/comment/CommentItem"
+import ResourceCommentAndReplyForm from "@/components/comment/ResourceCommentAndReplyForm"
+import CommentNotFound from "@/components/CommentNotFound"
 import Filter from "@/components/Filter"
-import TextareaWithSubmit from "@/components/form/textarea/TextareaWithSubmit"
 import TabBar, { TabBarItem } from "@/components/TabBar"
 import { commentListFilters } from "@/constants/filters"
+import { cn } from "@/utils/cn"
+import { offset } from "@floating-ui/dom"
 import { useParams } from "next/navigation"
 import { useEffect, useState } from "react"
 import { useInView } from "react-intersection-observer"
+import { Tooltip } from "react-tooltip"
 
 interface Params {
   playId: number
@@ -25,12 +29,15 @@ export default function CommentSection({ playId }: Params) {
 
   const { data: gamePlayData } = useContinuePlayRoom(Number(id), playId)
 
+  const resourceId =
+    commentTarget === 1
+      ? Number(gamePlayData?.leftResource?.resourceId)
+      : Number(gamePlayData?.rightResource?.resourceId)
+
   const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useGetParentCommentsByGameResourceInfinite(
       Number(id),
-      commentTarget === 1
-        ? Number(gamePlayData?.leftResource?.resourceId)
-        : Number(gamePlayData?.rightResource?.resourceId),
+      resourceId,
       { sortType: sort as GetParentCommentsByGameResourceSortType },
       {
         query: {
@@ -50,7 +57,6 @@ export default function CommentSection({ playId }: Params) {
 
   useEffect(() => {
     if (inView && hasNextPage && !isFetchingNextPage) {
-      console.log("test")
       fetchNextPage()
     }
   }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage])
@@ -68,6 +74,8 @@ export default function CommentSection({ playId }: Params) {
     }
   ]
 
+  const comments = (data?.pages ?? []).flatMap((page) => page.content ?? [])
+
   return (
     <>
       {isOpen ? (
@@ -75,30 +83,50 @@ export default function CommentSection({ playId }: Params) {
           <TabBar currentValue={commentTarget} items={tabItems} />
           {isLoading && <section className="h-[100vh] w-full bg-red-50" />}
           <article className="flex items-center justify-between">
-            <p>전체댓글 {data?.pages?.[0]?.totalElements ?? 0}</p>
+            <p className="text-body2-bold text-label-normal">댓글 {data?.pages?.[0]?.totalElements ?? 0}</p>
             <Filter
               filters={commentListFilters}
               onClick={(sort) => setSort(sort as GetParentCommentsByGameResourceSortType)}
             />
           </article>
-          <TextareaWithSubmit
-            id="test"
-            disableEnter
-            maxLength={500}
-            inputClassName="!min-h-[100px]"
-            placeholder="해당 콘텐츠와 관련된 댓글을 작성해 주세요."
-          />
-          {(data?.pages ?? []).flatMap(
-            (page) => page.content?.map((comment) => <ReplyItem key={comment.commentId} {...comment} />) ?? []
+          <ResourceCommentAndReplyForm propResourceId={resourceId} />
+          {/* {(data?.pages ?? []).flatMap(
+            (page) =>
+              page.content?.map((comment) => (
+                <CommentItem key={comment.commentId} propResourceId={resourceId} {...comment} />
+              )) ?? []
+          )} */}
+          {comments.length > 0 ? (
+            comments.map((comment) => <CommentItem key={comment.commentId} propResourceId={resourceId} {...comment} />)
+          ) : (
+            <CommentNotFound />
           )}
           {!isFetchingNextPage && (
             <div ref={ref} className="pointer-events-none absolute bottom-[200px] h-[4px] w-full opacity-0" />
           )}
         </article>
       ) : (
-        <Button className="self-end bg-gray-10" onClick={() => setIsOpen(true)}>
-          댓글 보기
-        </Button>
+        <>
+          <Button data-tooltip-id="comment-button" className="self-end" onClick={() => setIsOpen(true)}>
+            댓글 보기
+          </Button>
+          <Tooltip
+            id="comment-button"
+            className={cn("!rounded-[8px] !bg-label-strong !px-[12px] !py-[8px]")}
+            isOpen={true}
+            defaultIsOpen
+            place="left"
+            middlewares={[offset(10)]}
+          >
+            <section className="flex items-center gap-[8px]">
+              <p className="text-label-regular text-background">
+                무엇을 골라야할지 모르겠다면
+                <br />
+                댓글을 확인하고 결정해 보세요!
+              </p>
+            </section>
+          </Tooltip>
+        </>
       )}
     </>
   )

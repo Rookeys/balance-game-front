@@ -1,14 +1,12 @@
 import Footer from "@/components/Footer"
-import Header from "@/components/Header"
 
-export default async function RootLayout({
+export default async function SignInPageLayout({
   children
 }: Readonly<{
   children: React.ReactNode
 }>) {
   return (
     <>
-      <Header />
       {children}
       <Footer />
     </>

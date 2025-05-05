@@ -1,21 +1,19 @@
 import { GameRequest } from "@/api/orval/model/gameRequest"
 import { GameRequestAccessType } from "@/api/orval/model/gameRequestAccessType"
 import { InputLabel } from "@/components/form/_components/InputLabel"
-import InputText from "@/components/form/inputText/InputText"
-import { CircleAlert } from "lucide-react"
+import { COLORS } from "@/styles/theme/colors"
+import { CircleHelp } from "lucide-react"
 import { Controller, useFormContext } from "react-hook-form"
+import GameThumbnailSelectTooltip from "./GameThumbnailSelectTooltip"
 import SelectButton from "./SelectButton"
 
 export default function GameAccessForm() {
-  const { watch, setValue, control } = useFormContext<GameRequest>()
+  const { control } = useFormContext<GameRequest>()
   return (
     <section className="flex w-full flex-col gap-[40px]">
-      <article className="flex flex-col gap-[4px]">
-        <div className="flex gap-[4px]">
-          <p>공개 여부를 설정해 주세요</p>
-          <p>🔓</p>
-        </div>
-        <p>월드컵 설정은 만든후에도 변경할 수 있어요.</p>
+      <article className="flex flex-col gap-[8px]">
+        <p className="font-sb-aggro-medium text-heading-4 md:text-heading-3">공개 여부를 설정해 주세요</p>
+        <p className="text-label-regular md:text-body2-regular">월드컵 설정은 만든후에도 변경할 수 있어요.</p>
       </article>
       <article className="flex flex-col gap-[12px]">
         <InputLabel label="제작자 공개" />
@@ -26,7 +24,7 @@ export default function GameAccessForm() {
             <div className="flex gap-[12px]">
               <SelectButton
                 title="공개"
-                description="팔로워들이 확인할 수 있어요"
+                description="모두가 제작자를 볼 수 있어요"
                 onClick={() => {
                   field.onChange(false)
                 }}
@@ -34,7 +32,7 @@ export default function GameAccessForm() {
               />
               <SelectButton
                 title="비공개"
-                description="팔로워들이 확인할 수 없어요"
+                description="제작자는 나만 볼 수 있어요"
                 onClick={() => {
                   field.onChange(true)
                 }}
@@ -45,7 +43,16 @@ export default function GameAccessForm() {
         />
       </article>
       <article className="flex flex-col gap-[12px]">
-        <InputLabel label="썸네일 블라인드" />
+        <div className="flex items-center gap-[4px]">
+          <InputLabel label="썸네일 공개" />
+          <CircleHelp
+            color={COLORS.NEUTRAL_600}
+            size={20}
+            data-tooltip-id="thumbnail-select"
+            className="outline-none"
+          />
+          <GameThumbnailSelectTooltip id="thumbnail-select" />
+        </div>
         <Controller
           name="existsBlind"
           control={control}
@@ -80,21 +87,21 @@ export default function GameAccessForm() {
             <div className="flex flex-col gap-[12px]">
               <SelectButton
                 title="공개"
-                description="팔로워들이 확인할 수 있어요"
+                description="모두가 플레이할 수 있어요"
                 onClick={() => {
                   field.onChange(GameRequestAccessType.PUBLIC)
                 }}
                 selected={field.value === GameRequestAccessType.PUBLIC}
               />
-              <SelectButton
+              {/* <SelectButton
                 title="일부공개"
                 description="팔로워들이 확인할 수 없어요"
                 onClick={() => {
                   field.onChange(GameRequestAccessType.PROTECTED)
                 }}
                 selected={field.value === GameRequestAccessType.PROTECTED}
-              />
-              {watch("accessType") === GameRequestAccessType.PROTECTED && (
+              /> */}
+              {/* {watch("accessType") === GameRequestAccessType.PROTECTED && (
                 <InputText
                   id="inviteCode"
                   value={watch("inviteCode")}
@@ -115,10 +122,10 @@ export default function GameAccessForm() {
                     </div>
                   }
                 />
-              )}
+              )} */}
               <SelectButton
                 title="비공개"
-                description="팔로워들이 확인할 수 없어요"
+                description="나만 확인할 수 있어요"
                 onClick={() => {
                   field.onChange(GameRequestAccessType.PRIVATE)
                 }}
@@ -127,10 +134,10 @@ export default function GameAccessForm() {
             </div>
           )}
         />
-        <div className="flex items-center gap-[4px] text-gray-50">
-          <CircleAlert className="fill-gray-30 text-white" />
+        {/* <div className="flex items-center gap-[4px]">
+          <CircleAlert className="fill-gray-30" />
           <p>일부 공개된 게임은 부적절한 콘텐츠 확인을 위해 개발자가 검토할 수 있어요.</p>
-        </div>
+        </div> */}
       </article>
     </section>
   )

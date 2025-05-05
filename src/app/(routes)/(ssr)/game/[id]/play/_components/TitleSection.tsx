@@ -20,15 +20,20 @@ export default function TitleSection({ playId }: Params) {
 
   return (
     <article className="flex flex-col items-center justify-center gap-[20px]">
-      <p className="rounded-full bg-gray-100 px-[16px] py-[4px] md:px-[20px] md:py-[8px]">
-        {gamePlayData?.currentRoundNums}/{matchCount}
+      <p className="rounded-[1000px] bg-fill-normal px-[16px] py-[4px] text-body2-bold text-label-normal">
+        <span className="text-primary-hover">
+          {gamePlayData?.currentRoundNums}
+          {"\u00A0"}
+        </span>
+        /{"\u00A0"}
+        {matchCount}
       </p>
       <ProgressBar
         percent={((gamePlayData?.currentRoundNums || 1) / matchCount) * 100}
         className="md:max-w-[472px] lg:max-w-[792px]"
         needIndicator={false}
       />
-      {gameRoomData?.title}
+      <p className="font-sb-aggro-medium text-heading-4 text-label-normal md:text-heading-3">{gameRoomData?.title}</p>
       {/* <p className="my-[8px] text-lg font-semibold">
             {gameRoomData?.title} {gamePlayData?.totalRoundNums}강 {gamePlayData?.currentRoundNums} /{" "}
             {gamePlayData?.totalRoundNums ? gamePlayData?.totalRoundNums : ""}

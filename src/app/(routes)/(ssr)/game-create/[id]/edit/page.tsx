@@ -24,7 +24,7 @@ export default async function GameEditPage({ params }: GameEditPageProps) {
   }
 
   return (
-    <section className="my-[80px] flex justify-center px-[16px]">
+    <section className="mb-[80px] flex flex-col justify-center md:mb-[120px] md:mt-[40px] md:flex-row">
       <HydrationBoundary state={dehydrate(queryClient)}>
         <GameForm />
       </HydrationBoundary>

@@ -6,6 +6,7 @@ export interface TabBarItem {
   value: string | number
   label: string
   onClick: () => void
+  disabled?: boolean
 }
 
 interface TabBarProps {
@@ -27,7 +28,7 @@ export default function TabBar({ items, currentValue, className }: TabBarProps) 
             currentValue === item.value && "border-b-black"
           )}
         >
-          <p>{item.label}</p>
+          <p className={cn("line-clamp-1 text-body2-bold", item.disabled && "text-label-alternative")}>{item.label}</p>
         </button>
       ))}
     </section>

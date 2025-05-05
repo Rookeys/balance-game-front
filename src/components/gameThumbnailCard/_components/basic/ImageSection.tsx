@@ -1,6 +1,7 @@
 "use client"
 import { Button } from "@/components/Button"
 import { CookieContext } from "@/lib/providers/CookieProvider"
+import { COLORS } from "@/styles/theme/colors"
 import { cn } from "@/utils/cn"
 import { Eye, EyeClosed, Play } from "lucide-react"
 import Image from "next/image"
@@ -17,10 +18,13 @@ export default function ImageSection({ src, index, isBlind = false, totalPlayNum
   const [blur, setBlur] = useState<boolean>(isBlind)
   const { noBlind } = useContext(CookieContext)
   return (
-    <article className="relative h-[218px] overflow-hidden rounded-[12px] bg-gray-10 md:h-[308px]">
+    <article className="relative h-[218px] overflow-hidden rounded-[12px] bg-gray-100 md:h-[308px]">
       <Image
         src={src ?? "/"}
-        className={cn("object-contain object-center", !noBlind && blur && "brightness-40 saturate-75 blur-2xl")}
+        className={cn(
+          "object-cover object-center transition-transform duration-300 group-hover:scale-110",
+          !noBlind && blur && "brightness-40 saturate-75 blur-2xl"
+        )}
         // className="object-cover object-center"
         alt="Game-Thumbnail"
         fill
@@ -28,24 +32,27 @@ export default function ImageSection({ src, index, isBlind = false, totalPlayNum
         placeholder="blur"
         blurDataURL="data:image/jepg;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mO88B8AAqUB0Y/H4mkAAAAASUVORK5CYII="
       />
-      <div className="absolute bottom-[8px] start-[12px] rounded-[4px] bg-black/40 p-[4px] text-white">
-        <div className="flex items-center">
-          <Play size={24} />
+      {/* 그라데이션 적용 */}
+      <div className="absolute top-0 h-[52px] w-full bg-gradient-to-b from-[#1515174D] from-0% via-[#15151700] via-70% to-[#15151700] to-100% md:h-[88px]" />
+      <div className="absolute bottom-[8px] start-[12px] rounded-[4px] bg-dimmer-normal p-[4px] text-label-medium text-white">
+        <div className="flex items-center gap-[4px]">
+          <Play size={16} fill={COLORS.WHITE} />
           <p>{totalPlayNums}</p>
         </div>
       </div>
-      <div className="absolute start-0 top-0 rounded-br-[12px] rounded-tl-[12px] bg-gray-50 px-[16px] py-[4px]">
+      <div className="absolute start-0 top-0 rounded-br-[12px] rounded-tl-[12px] bg-primary-normal px-[16px] py-[8px] text-body2-bold text-white">
         {index + 1}
       </div>
       {!noBlind && isBlind && (
         <Button
-          className="absolute end-[12px] top-[12px] rounded-[4px] bg-gray-50 px-[8px] py-[4px]"
+          className="absolute end-[12px] top-[12px] rounded-[4px] bg-transparent px-[8px] py-[4px] text-label-medium"
+          variant="custom"
           onClick={(e) => {
             e.preventDefault()
             setBlur((prev) => !prev)
           }}
         >
-          {blur ? <EyeClosed /> : <Eye />}
+          {blur ? <EyeClosed stroke={COLORS.WHITE} /> : <Eye stroke={COLORS.WHITE} />}
         </Button>
       )}
     </article>

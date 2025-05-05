@@ -12,7 +12,7 @@ export default function Logo({ size = 40, "aria-label": ariaLabel = "logo", onCl
       priority
       width={size}
       height={size}
-      src={"/images/Rookeys.png"}
+      src={"/images/zznpk_logo_color.webp"}
       alt="logo"
       aria-label={ariaLabel}
       onClick={onClick}

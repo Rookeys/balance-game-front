@@ -2,6 +2,7 @@
 
 import { useGetResultRankingUsingPage } from "@/api/orval/client/game-results-controller/game-results-controller"
 import { GetResultRankingSortType } from "@/api/orval/model/getResultRankingSortType"
+import ResourceNotFound from "@/components/ResourceNotFound"
 import { cn } from "@/utils/cn"
 import { useParams, useSearchParams } from "next/navigation"
 import DesktopResourceItem from "./DesktopResourceItem"
@@ -20,9 +21,13 @@ export default function DesktopResources() {
     page
   })
   return (
-    <article className="flex flex-col rounded-[16px] border px-[16px] py-[20px]">
+    <article className="flex flex-col">
       {/* Header */}
-      <div className={cn("flex h-[74px] overflow-hidden rounded-[8px] bg-gray-10")}>
+      <div
+        className={cn(
+          "flex h-[80px] overflow-hidden rounded-t-[12px] bg-fill-normal text-body2-bold text-label-normal"
+        )}
+      >
         <div className="flex w-[64px] flex-shrink-0 items-center justify-center">
           <p>순위</p>
         </div>
@@ -37,9 +42,13 @@ export default function DesktopResources() {
         </div>
       </div>
       {/* Contents */}
-      {resources?.content?.map((resource, index) => (
-        <DesktopResourceItem key={resource.resourceId} index={index} {...resource} />
-      ))}
+      {resources?.content && resources.content.length > 0 ? (
+        resources.content.map((resource, index) => (
+          <DesktopResourceItem key={resource.resourceId} index={index} {...resource} />
+        ))
+      ) : (
+        <ResourceNotFound keyword={keyword} />
+      )}
     </article>
   )
 }

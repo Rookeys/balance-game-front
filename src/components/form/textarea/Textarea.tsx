@@ -37,7 +37,7 @@ const Textarea: React.FC<Params> = ({
       <textarea
         id={id}
         className={cn(
-          "w-full resize-none rounded-[12px] border-[2px] px-[16px] py-[16px] dark:border-gray dark:bg-dark-30",
+          "w-full resize-none rounded-[12px] border border-line-normal px-[16px] py-[16px] text-label-regular outline-none placeholder:text-label-neutral focus:border-primary-normal md:text-body2-regular",
           inputClassName
         )}
         value={value}
@@ -64,7 +64,7 @@ const Textarea: React.FC<Params> = ({
       />
       {SubDescription && SubDescription}
       {!SubDescription && maxLength && (
-        <p className="self-end">
+        <p className="self-end text-label-regular text-label-alternative">
           {value?.toString().length ?? 0}/{maxLength}
         </p>
       )}

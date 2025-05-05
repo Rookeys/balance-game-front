@@ -35,11 +35,21 @@ const InputText: React.FC<Params> = ({
       <input
         id={id}
         className={cn(
-          "w-full rounded-[12px] border-[2px] px-[16px] py-[16px] dark:border-gray dark:bg-dark-30",
+          "w-full rounded-[12px] border px-[16px] py-[16px] outline-none placeholder:text-label-neutral focus:border-primary-normal",
           inputClassName
         )}
         value={value}
-        onChange={onChange}
+        onChange={(e) => {
+          if (onChange) {
+            if (!!maxLength) {
+              if (e.target.value.length <= maxLength) {
+                onChange(e)
+              }
+            } else {
+              onChange(e)
+            }
+          }
+        }}
         required={required}
         aria-invalid={!!errorMessage}
         aria-label={ariaLabel}
@@ -47,7 +57,7 @@ const InputText: React.FC<Params> = ({
       />
       {SubDescription && SubDescription}
       {!SubDescription && maxLength && (
-        <p className="self-end">
+        <p className="self-end text-label-regular text-label-alternative">
           {value?.toString().length ?? 0}/{maxLength}
         </p>
       )}

@@ -8,7 +8,7 @@ export default function Banner() {
   return (
     <div className="h-full w-full">
       <Swiper
-        className="relative h-[400px] w-full bg-gray-30"
+        className="relative h-[400px] w-full bg-gray-300"
         modules={[Pagination]}
         loop
         pagination={{
@@ -23,15 +23,18 @@ export default function Banner() {
       >
         {Array.from({ length: 5 }, (_, index) => (
           <SwiperSlide className="w-full px-[16px] md:px-[24px] lg:px-0" key={index}>
-            <section className="mx-auto flex h-full w-full max-w-[1200px] bg-red-10 pb-[112px] pt-[88px]">
-              <article>{index + 1}</article>
+            <section className="mx-auto flex h-full w-full max-w-[1200px] bg-primary-normal pb-[112px] pt-[88px]">
+              <article className="flex flex-col gap-[24px]">
+                <p className="font-sb-aggro-medium text-heading-3">짱픽 베타테스트에 오신것을 환영합니다!</p>
+                <p className="text-body2-bold">현재 계속 업데이트 중입니다 (5월 중순~말 출시 예정)</p>
+              </article>
             </section>
           </SwiperSlide>
         ))}
         <div className="relative mx-auto max-w-[1200px]">
           <div
             id="banner-slider-pagination"
-            className="absolute bottom-[40px] end-[16px] z-[1] h-[32px] min-w-[60px] whitespace-nowrap rounded-full bg-blue-10 px-[12px] py-[4px] text-center md:end-[24px] lg:end-0"
+            className="absolute bottom-[40px] end-[16px] z-[1] h-[32px] min-w-[60px] whitespace-nowrap rounded-full bg-blue-100 px-[12px] py-[4px] text-center md:end-[24px] lg:end-0"
           />
         </div>
       </Swiper>

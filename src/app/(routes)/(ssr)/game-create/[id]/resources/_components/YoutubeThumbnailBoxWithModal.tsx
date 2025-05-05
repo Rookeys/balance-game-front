@@ -16,7 +16,7 @@ export default function YoutubeThumbnailBoxWithModal({ url, start, end }: Params
 
   return (
     <>
-      <figure className="relative h-full min-h-[120px] w-full bg-blue-10" onClick={() => setIsOpen(true)}>
+      <figure className="relative h-full min-h-[120px] w-full bg-blue-100" onClick={() => setIsOpen(true)}>
         <Image
           src={getYoutubeThumbnail(url)}
           alt="Video Thumbnail"

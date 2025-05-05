@@ -4,10 +4,10 @@ import { GameResourceRequest } from "@/api/orval/model/gameResourceRequest"
 import { Button } from "@/components/Button"
 import InputText from "@/components/form/inputText/InputText"
 import ModalWrapper from "@/components/modal/ModalWrapper"
+import YoutubeThumbnailBoxWithHover from "@/components/YoutubeThumbnailBoxWithHover"
+import { COLORS } from "@/styles/theme/colors"
 import { cn } from "@/utils/cn"
-import { getYoutubeThumbnail } from "@/utils/getYoutubeThumbnail"
 import { CircleAlert, XIcon } from "lucide-react"
-import Image from "next/image"
 import { useFormContext } from "react-hook-form"
 
 interface Params {
@@ -26,13 +26,13 @@ export default function YoutubeEditModal({ onClose, onSave, overlayClose }: Para
     <ModalWrapper overlayClose={overlayClose} onClose={onClose}>
       <section
         className={cn(
-          "z-[999] mx-[16px] w-full max-w-[500px] rounded-[16px] bg-white p-[16px] text-center dark:border dark:border-gray-70 dark:bg-night"
+          "dark:border-gray-70 dark:bg-night z-[999] w-full max-w-[500px] rounded-[16px] bg-white p-[16px] text-center dark:border"
         )}
       >
         <article className="flex items-center justify-between">
           <div className="h-[24px] w-[24px]" />
-          <p>동영상 수정</p>
-          <XIcon size={24} className="cursor-pointer" onClick={onClose} />
+          <p className="text-body2-bold">동영상 수정</p>
+          <XIcon size={24} color={COLORS.NEUTRAL_700} className="cursor-pointer" onClick={onClose} />
         </article>
         <article className="flex flex-col gap-[24px] pb-[24px] pt-[20px]">
           <div className="flex flex-col gap-[12px]">
@@ -41,19 +41,22 @@ export default function YoutubeEditModal({ onClose, onSave, overlayClose }: Para
               // className={cn("relative aspect-[16/9] w-full", watch('url') && 'bg-black')}
             >
               {!!watch("content") ? (
-                <Image
-                  src={getYoutubeThumbnail(watch("content"))}
-                  fill
-                  alt="thumbnail"
-                  className="object-contain"
-                  unoptimized
+                <YoutubeThumbnailBoxWithHover
+                  url={watch("content") ?? ""}
+                  start={watch("startSec")}
+                  end={watch("endSec")}
+                  ratio={16 / 9}
+                  // noDelay={noDelay}
+                  // wrapperClassName={wrapperClassName}
                 />
               ) : (
-                <div className="relative h-full w-full overflow-hidden rounded-[12px] bg-black">
-                  <div className="flex h-full flex-col items-center justify-center gap-[12px] bg-gray-10">
-                    <div className="h-[60px] w-[60px] bg-red-10 md:h-[100px] md:w-[100px]" />
-                    <p>유튜브 링크를 추가해 주세요</p>
-                    <p>아래 입력란에 유튜브 링크를 넣고 동영상을 추가해 보세요.</p>
+                <div className="relative h-full w-full overflow-hidden rounded-[12px]">
+                  <div className="flex h-full flex-col items-center justify-center gap-[12px] bg-fill-normal">
+                    <div className="h-[60px] w-[60px] bg-red-300" />
+                    <p className="text-body2-bold md:text-body1-bold">유튜브 링크를 추가해 주세요</p>
+                    <p className="text-label-medium text-label-neutral md:text-body2-medium">
+                      아래 입력란에 유튜브 링크를 넣고 동영상을 추가해 보세요.
+                    </p>
                   </div>
                 </div>
               )}
@@ -98,9 +101,9 @@ export default function YoutubeEditModal({ onClose, onSave, overlayClose }: Para
               }}
             />
           </article>
-          <div className="flex gap-[4px] text-start text-gray-30">
-            <CircleAlert className="flex-shrink-0 fill-gray-30 text-white" />
-            <p className="text-[14px]">
+          <div className="flex items-start gap-[4px]">
+            <CircleAlert className="flex-shrink-0 fill-label-alternative text-white" size={16} />
+            <p className="text-caption1-regular text-label-alternative md:text-label-regular">
               시작/종료 시간은 선택 사항이에요. 설정하면 해당 구간이 반복 재생되므로, 하이라이트 설정을 권장해요.
             </p>
           </div>
@@ -112,23 +115,19 @@ export default function YoutubeEditModal({ onClose, onSave, overlayClose }: Para
               onChange={(e) => setValue("title", e.target.value, { shouldValidate: true })}
               maxLength={20}
               label="이름"
+              labelClassName="!text-label-regular !font-pretendard text-label-neutral"
             />
           </article>
         </article>
         <article className="flex items-center justify-between gap-[12px] pb-[40px]">
           <Button
             type="button"
-            className="w-fit rounded-[12px] bg-dark-20 px-[28px] py-[12px] text-white hover:bg-dark-30"
+            className="w-fit rounded-[12px] bg-transparent text-label-bold text-label-normal hover:bg-transparent"
             onClick={() => setValue("content", "", { shouldValidate: true })}
           >
             동영상 삭제
           </Button>
-          <Button
-            type="button"
-            className="w-fit rounded-[12px] bg-blue-40 px-[28px] py-[12px] text-white hover:bg-blue-50 disabled:bg-gray-50"
-            onClick={onSave}
-            disabled={isSubmitting}
-          >
+          <Button type="button" className="px-[28px] py-[12px]" onClick={onSave} disabled={isSubmitting}>
             확인
           </Button>
         </article>

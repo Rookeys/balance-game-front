@@ -14,10 +14,12 @@ import { useParams, useRouter, useSearchParams } from "next/navigation"
 import { useEffect } from "react"
 import { useInView } from "react-intersection-observer"
 import PlayOtherGameAndRankingSideBar from "./PlayOtherGameAndRankingSideBar"
-import ResourceCommentAndReplyForm from "./ResourceCommentAndReplyForm"
+import ResourceCommentAndReplyForm from "../../../../../../../../components/comment/ResourceCommentAndReplyForm"
 import ResourceInformation from "./ResourceInformation"
+import { CircleAlert } from "lucide-react"
+import MobilePlayNowButton from "@/components/MobilePlayNowButton"
 
-export default function GameResultPageClient() {
+export default function GameResourcesPageClient() {
   const { id, resourceId } = useParams()
   const searchParams = useSearchParams()
 
@@ -26,8 +28,7 @@ export default function GameResultPageClient() {
   const router = useRouter()
 
   const tab = searchParams.get("tab") ?? "all"
-  const sort = searchParams.get("sort") ?? "RECENT"
-  // const sort = searchParams.get("sort") ?? GetParentCommentsByGameResource1SortType.RECENT
+  const sort = searchParams.get("sort") ?? GetCommentsByGameResultSortType.RECENT
 
   const {
     data: gameComments,
@@ -115,13 +116,22 @@ export default function GameResultPageClient() {
   return (
     <section className="flex w-full max-w-[1200px] justify-center gap-[24px] px-[16px] lg:px-0">
       <section className="flex w-full flex-col gap-[28px] md:gap-[60px]">
-        <ResourceInformation />
+        <article className="flex flex-col gap-[12px]">
+          <ResourceInformation />
+          <div className="flex items-center gap-[4px]">
+            <CircleAlert className="fill-label-disable text-white" size={16} />
+            <p className="text-caption1-regular text-label-alternative">
+              월드컵 우승 정보 업데이트는 약 5분가량 소요될 수 있어요.
+            </p>
+          </div>
+        </article>
+        <MobilePlayNowButton />
         <article className="flex flex-col gap-[20px]">
           <TabBar items={tabItems} currentValue={tab} />
           <div className="relative flex flex-col gap-[12px]">
             {isLoading && <section className="h-[100vh] w-full bg-red-50" />}
             <article className="flex items-center justify-between">
-              <p>전체댓글 {commentData?.pages?.[0]?.totalElements ?? 0}</p>
+              <p className="text-body2-bold">댓글 {commentData?.pages?.[0]?.totalElements ?? 0}</p>
               <Filter filters={commentListFilters} />
             </article>
             {tab === "all" ? <GameCommentForm /> : <ResourceCommentAndReplyForm />}

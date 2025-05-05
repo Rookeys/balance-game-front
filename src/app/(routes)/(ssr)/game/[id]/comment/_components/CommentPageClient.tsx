@@ -17,7 +17,7 @@ export default function CommentPageClient() {
   const { id } = useParams()
   const searchParams = useSearchParams()
 
-  const sort = searchParams.get("sort") ?? "RECENT"
+  const sort = searchParams.get("sort") ?? GetCommentsByGameResultSortType.RECENT
 
   const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } = useGetCommentsByGameResultInfinite(
     Number(id),
@@ -50,7 +50,7 @@ export default function CommentPageClient() {
         <div className="relative flex flex-col gap-[12px]">
           {isLoading && <section className="h-[100vh] w-full bg-red-50" />}
           <article className="flex items-center justify-between">
-            <p>전체댓글 {data?.pages?.[0]?.totalElements ?? 0}</p>
+            <p className="text-body2-bold">댓글 {data?.pages?.[0]?.totalElements ?? 0}</p>
             <Filter filters={commentListFilters} />
           </article>
           <GameCommentForm />

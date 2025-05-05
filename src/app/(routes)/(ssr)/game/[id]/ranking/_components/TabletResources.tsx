@@ -4,6 +4,7 @@ import { useGetResultRankingUsingPage } from "@/api/orval/client/game-results-co
 import { GetResultRankingSortType } from "@/api/orval/model/getResultRankingSortType"
 import { useParams, useSearchParams } from "next/navigation"
 import TabletResourceItem from "./TabletResourceItem"
+import ResourceNotFound from "@/components/ResourceNotFound"
 
 export default function TabletResources() {
   const { id } = useParams()
@@ -21,9 +22,13 @@ export default function TabletResources() {
 
   return (
     <section className="flex flex-col">
-      {resources?.content?.map((resource, index) => (
-        <TabletResourceItem key={resource.resourceId} {...resource} index={index} />
-      ))}
+      {resources?.content && resources.content.length > 0 ? (
+        resources.content.map((resource, index) => (
+          <TabletResourceItem key={resource.resourceId} {...resource} index={index} />
+        ))
+      ) : (
+        <ResourceNotFound keyword={keyword} />
+      )}
     </section>
   )
 }

@@ -119,7 +119,6 @@ export default function ProfileEditPageClient() {
       </label>
       <FormProvider {...formMethods}>
         <form className="flex flex-col gap-[4px]" onSubmit={handleSubmit(onSubmit)}>
-          <p>닉네임</p>
           <InputText
             id="nickname"
             value={watch("nickname")}
@@ -127,17 +126,22 @@ export default function ProfileEditPageClient() {
               setValue("nickname", e.target.value, { shouldValidate: true, shouldDirty: true })
             }}
             maxLength={10}
+            label="닉네임"
+            labelClassName="!text-label-regular !text-label-neutral font-pretendard"
           />
           <Button
             type="submit"
-            className="mt-[24px] self-end bg-black px-[20px] py-[12px] text-white md:mt-[36px] md:px-[28px]"
+            className="mt-[28px] self-end px-[20px] py-[12px] md:mt-[40px] md:px-[28px]"
             disabled={isSubmitting}
           >
             저장
           </Button>
         </form>
       </FormProvider>
-      <Button className="self-start px-[12px] py-[12px]" onClick={() => setIsOpenResignModal((prev) => !prev)}>
+      <Button
+        className="self-start rounded-[4px] bg-transparent px-[8px] py-[4px] text-caption1-bold text-label-neutral hover:bg-transparent md:text-label-bold"
+        onClick={() => setIsOpenResignModal((prev) => !prev)}
+      >
         회원탈퇴
       </Button>
       {isOpenResignModal && <ResignModal onClick={handleResign} onClose={() => setIsOpenResignModal(false)} />}

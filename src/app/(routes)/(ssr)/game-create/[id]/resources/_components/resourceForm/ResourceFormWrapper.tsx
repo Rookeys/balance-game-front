@@ -1,21 +1,26 @@
 "use client"
 
 import { useGetResourceList } from "@/app/(routes)/(ssr)/game-create/[id]/resources/hooks/useGetResourceList"
+import { handleSelectAllToggle } from "@/app/(routes)/(ssr)/game-create/[id]/resources/utils/selectAllResource"
 import { Pagination } from "@/components/Pagination"
+import ResourceNotFound from "@/components/ResourceNotFound"
 import useResizeHandler from "@/hooks/useResizeHandler"
+import CustomCheckIcon from "@/icons/CustomCheckIcon"
 import { useSelectedResourceIdStore } from "@/store/selectedResourceId"
+import { COLORS } from "@/styles/theme/colors"
 import { SCREEN_SIZE } from "@/styles/theme/screenSize"
 import { cn } from "@/utils/cn"
-import { Square, SquareCheck } from "lucide-react"
+import { Square } from "lucide-react"
 import { useRouter, useSearchParams } from "next/navigation"
 import ResourceForm from "./ResourceForm"
-import { handleSelectAllToggle } from "@/app/(routes)/(ssr)/game-create/[id]/resources/utils/selectAllResource"
 
 export default function ResourceFormWrapper() {
   const searchParams = useSearchParams()
   const windowWidth = useResizeHandler()
   const router = useRouter()
   const { data, page } = useGetResourceList()
+
+  const keyword = searchParams.get("keyword")
 
   const handlePageChange = (newPage: number) => {
     const newSearchParams = new URLSearchParams(searchParams.toString())
@@ -31,12 +36,21 @@ export default function ResourceFormWrapper() {
     <>
       <article className="lg:rounded-[16px] lg:border lg:px-[16px] lg:py-[20px]">
         {/* Header */}
-        <div className={cn("h-[80px] bg-gray-10", tableBaseClassName)}>
+        <div
+          className={cn(
+            "flex h-[80px] overflow-hidden rounded-t-[12px] bg-fill-normal text-body2-bold text-label-normal",
+            tableBaseClassName
+          )}
+        >
           <button
             className="col-span-1 flex items-center justify-center"
             onClick={() => handleSelectAllToggle(data?.content)}
           >
-            {isAllSelected(data?.content ?? []) ? <SquareCheck /> : <Square />}
+            {isAllSelected(data?.content ?? []) ? (
+              <CustomCheckIcon className="rounded-[4px] bg-primary-normal p-[2px] text-white" size={16} />
+            ) : (
+              <Square color={COLORS.NEUTRAL_300} size={24} />
+            )}
           </button>
           <div className="col-span-1 flex items-center justify-center">
             <p>No</p>
@@ -56,14 +70,18 @@ export default function ResourceFormWrapper() {
           <div className="col-span-3 flex items-center px-[16px]" />
         </div>
         {/* Contents */}
-        {data?.content?.map((resource, index) => (
-          <ResourceForm
-            key={resource.resourceId}
-            resource={resource}
-            tableBaseClassName={tableBaseClassName}
-            indexNum={index + 1 + (page - 1) * 10}
-          />
-        ))}
+        {data?.content?.length ? (
+          data.content.map((resource, index) => (
+            <ResourceForm
+              key={resource.resourceId}
+              resource={resource}
+              tableBaseClassName={tableBaseClassName}
+              indexNum={index + 1 + (page - 1) * 10}
+            />
+          ))
+        ) : (
+          <ResourceNotFound keyword={keyword} />
+        )}
       </article>
       {!!data?.totalPages && (
         <Pagination

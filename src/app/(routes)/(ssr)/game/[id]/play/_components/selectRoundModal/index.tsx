@@ -4,6 +4,7 @@ import { XIcon } from "lucide-react"
 import RoundForm from "./RoundForm"
 import { cn } from "@/utils/cn"
 import Image from "next/image"
+import { COLORS } from "@/styles/theme/colors"
 
 interface Params {
   onClose?: () => void
@@ -16,20 +17,17 @@ interface Params {
 export default function SelectRoundModal({ onClose, overlayClose = false, className, totalItem }: Params) {
   return (
     <ModalWrapper onClose={onClose} overlayClose={overlayClose}>
-      <section
-        className={cn(
-          "z-[999] mx-[16px] w-full max-w-[520px] rounded-[16px] bg-white p-[16px] text-center dark:border dark:border-gray-70 dark:bg-night",
-          className
-        )}
-      >
+      <section className={cn("z-[999] w-full max-w-[520px] rounded-[16px] bg-white p-[16px] text-center", className)}>
         <article className="flex items-center justify-between">
           <div className="h-[24px] w-[24px]" />
-          <p>라운드 선택</p>
-          <XIcon size={24} className="cursor-pointer" onClick={onClose} />
+          <p className="text-body2-bold text-label-neutral">라운드 선택</p>
+          <XIcon size={24} color={COLORS.NEUTRAL_700} className="cursor-pointer" onClick={onClose} />
         </article>
         <article className="mt-[20px] flex flex-col gap-[24px]">
-          <Image src={"/images/Rookeys.png"} alt="" width={120} height={120} className="mx-auto" />
-          <p className="mb-[12px] mt-[8px]">라운드를 선택하고 월드컵을 시작하세요!</p>
+          <Image src={"/images/Rookeys.png"} alt="" width={100} height={100} className="mx-auto" />
+          <p className="font-sb-aggro-medium text-heading-4 text-label-normal md:text-heading-3">
+            라운드 선택하고 시작하기
+          </p>
           <RoundForm totalItem={totalItem} />
         </article>
       </section>

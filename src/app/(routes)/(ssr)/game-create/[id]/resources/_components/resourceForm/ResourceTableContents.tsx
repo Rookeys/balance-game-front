@@ -8,29 +8,38 @@ import { GameResourceResponse } from "@/api/orval/model/gameResourceResponse"
 import { GameResourceResponseType } from "@/api/orval/model/gameResourceResponseType"
 import MoreButton, { MoreItem } from "@/components/MoreButton"
 import ProgressBar from "@/components/ProgressBar"
+import CustomCheckIcon from "@/icons/CustomCheckIcon"
 import { useSelectedResourceIdStore } from "@/store/selectedResourceId"
+import { COLORS } from "@/styles/theme/colors"
 import { calculateWinRate } from "@/utils/calculateWinRate"
 import { getYoutubeThumbnail } from "@/utils/getYoutubeThumbnail"
 import { useQueryClient } from "@tanstack/react-query"
-import { Square, SquareCheck } from "lucide-react"
+import { Square } from "lucide-react"
 import Image from "next/image"
 import { useParams } from "next/navigation"
 import { Dispatch, SetStateAction } from "react"
 import ImageEditModal from "./ImageEditModal"
 import ResourceDeleteModal from "./ResourceDeleteModal"
 import YoutubeEditModal from "./YoutubeEditModal"
+import { cn } from "@/utils/cn"
 
 interface Params {
   resource: GameResourceResponse
-  isOpenEditState: [boolean, Dispatch<SetStateAction<boolean>>]
-  isOpenDeleteState: [boolean, Dispatch<SetStateAction<boolean>>]
+  isOpenEditModal: boolean
+  setIsOpenEditModal: Dispatch<SetStateAction<boolean>>
+  isOpenDeleteModal: boolean
+  setIsOpenDeleteModal: Dispatch<SetStateAction<boolean>>
   onSave?: () => void
 }
 
-export default function ResourceTableContents({ resource, isOpenEditState, isOpenDeleteState, onSave }: Params) {
-  const [isOpenEditModal, setIsOpenEditModal] = isOpenEditState
-  const [isOpenDeleteModal, setIsOpenDeleteModal] = isOpenDeleteState
-
+export default function ResourceTableContents({
+  resource,
+  isOpenEditModal,
+  setIsOpenEditModal,
+  isOpenDeleteModal,
+  setIsOpenDeleteModal,
+  onSave
+}: Params) {
   const { id } = useParams()
 
   const queryClient = useQueryClient()
@@ -39,7 +48,7 @@ export default function ResourceTableContents({ resource, isOpenEditState, isOpe
 
   const isChecked = isSelected(resource.resourceId as number)
 
-  const { mutateAsync: deleteResource } = useDeleteResource()
+  const { mutateAsync: deleteResource, isPending: isDeleting } = useDeleteResource()
 
   const handleDelete = async () => {
     await deleteResource({ gameId: Number(id), resourceId: Number(resource.resourceId) })
@@ -48,6 +57,8 @@ export default function ResourceTableContents({ resource, isOpenEditState, isOpe
       queryClient.invalidateQueries({ queryKey: getGetResourcesUsingPageQueryKey(Number(id)) }),
       queryClient.invalidateQueries({ queryKey: getGetCountResourcesInGamesQueryKey(Number(id)) })
     ])
+
+    setIsOpenDeleteModal(false)
   }
 
   const moreItems: MoreItem[] = [
@@ -63,7 +74,7 @@ export default function ResourceTableContents({ resource, isOpenEditState, isOpe
 
   return (
     <section className="flex gap-[12px] py-[16px]">
-      <figure className="relative my-auto h-[100px] w-[120px]">
+      <figure className="relative my-auto h-[100px] w-[120px] overflow-hidden rounded-[8px] border">
         <Image
           src={
             resource?.type === GameResourceResponseType.LINK
@@ -72,26 +83,38 @@ export default function ResourceTableContents({ resource, isOpenEditState, isOpe
           }
           fill
           alt="thumbnail"
-          className="rounded-[8px]"
+          className="rounded-[8px] object-cover"
         />
         <button
-          className="absolute start-[4px] top-[4px]"
+          className={cn(
+            "absolute start-[4px] top-[4px] rounded-[4px] bg-dimmer-neutral",
+            isChecked ? "p-[5px]" : "p-[4px]"
+          )}
           onClick={() => toggleSelectedResourceId(resource.resourceId as number)}
         >
-          {isChecked ? <SquareCheck /> : <Square />}
+          {isChecked ? (
+            <CustomCheckIcon className="rounded-[4px] bg-primary-normal p-[2px] text-white" size={14} />
+          ) : (
+            <Square color={COLORS.NEUTRAL_300} size={20} />
+          )}
         </button>
       </figure>
       <article className="flex w-full flex-col gap-[12px]">
-        <p className="w-fit rounded-[4px] bg-gray-10 px-[8px] py-[4px]">
+        <p
+          className={cn(
+            "w-fit rounded-[4px] px-[8px] py-[4px] text-label-medium",
+            resource.type === GameResourceResponseType.IMAGE ? "bg-secondary-alternative" : "bg-accent-alternative"
+          )}
+        >
           {resource.type === GameResourceResponseType.IMAGE ? "이미지" : "동영상"}
         </p>
-        <p className="line-clamp-1">{resource.title || "\u00A0"}</p>
+        <p className="line-clamp-1 text-label-bold md:text-body2-bold">{resource.title || "\u00A0"}</p>
         <div className="flex flex-col">
           <ProgressBar
             percent={Number(calculateWinRate(resource.winningNums, resource.totalPlayNums))}
             needIndicator={false}
           />
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between text-caption1-medium text-label-neutral">
             <p>{calculateWinRate(resource.winningNums, resource.totalPlayNums)}%</p>
             <p>{resource.winningNums}번 우승</p>
           </div>
@@ -125,7 +148,9 @@ export default function ResourceTableContents({ resource, isOpenEditState, isOpe
           </section>
         )} */}
       </div>
-      {isOpenDeleteModal && <ResourceDeleteModal onClick={handleDelete} onClose={() => setIsOpenDeleteModal(false)} />}
+      {isOpenDeleteModal && (
+        <ResourceDeleteModal onClick={handleDelete} onClose={() => setIsOpenDeleteModal(false)} disabled={isDeleting} />
+      )}
       {isOpenEditModal &&
         (resource.type === GameResourceResponseType.IMAGE ? (
           <ImageEditModal onClose={() => setIsOpenEditModal(false)} onSave={onSave} />

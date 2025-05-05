@@ -4,12 +4,23 @@ import Image, { ImageProps } from "next/image"
 
 interface Params extends ImageProps {
   ratio?: number
+  wrapperClassName?: string
 }
 
-const ImageRatio = ({ ratio, ...props }: Params) => (
-  <div className="RatioContainer flex h-full items-center justify-center rounded-[12px] dark:bg-night">
+const ImageRatio = ({ ratio, wrapperClassName, ...props }: Params) => (
+  <div
+    className={cn(
+      "RatioContainer flex h-full items-center justify-center overflow-hidden rounded-[16px]",
+      wrapperClassName
+    )}
+  >
     <AspectRatio.Root ratio={ratio}>
-      <Image {...props} src={props.src || "/"} alt={props.alt} className={cn("object-contain", props.className)} />
+      <Image
+        {...props}
+        src={props.src || "/"}
+        alt={props.alt}
+        className={cn("bg-background object-contain", props.className)}
+      />
     </AspectRatio.Root>
   </div>
 )

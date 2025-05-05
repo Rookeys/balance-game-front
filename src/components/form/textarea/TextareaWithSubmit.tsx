@@ -42,7 +42,7 @@ const TextareaWithSubmit: React.FC<Params> = ({
       <TextareaAutosize
         id={id}
         className={cn(
-          "w-full resize-none rounded-[12px] border-[2px] px-[12px] py-[12px] pe-[80px] dark:border-gray dark:bg-dark-30",
+          "w-full resize-none rounded-[12px] border-[2px] px-[12px] py-[12px] pe-[80px] text-body2-regular text-label-neutral outline-none focus:border-primary-normal",
           inputClassName
         )}
         value={value}
@@ -69,13 +69,18 @@ const TextareaWithSubmit: React.FC<Params> = ({
         }}
         {...rest}
       />
-      <article className="absolute end-[12px] top-[12px] flex h-[calc(100%-24px)] flex-col justify-end">
+      <article className="absolute end-[12px] top-[12px] flex h-[calc(100%-24px)] flex-col justify-end gap-[4px]">
         {maxLength && (
-          <p className="self-end">
+          <p className="self-end text-label-regular text-label-alternative">
             {value?.toString().length ?? 0}/{maxLength}
           </p>
         )}
-        <Button className="bg-gray-10 px-[12px] py-[8px] md:px-[20px] md:py-[12px]" type="submit" disabled={disabled}>
+        <Button
+          // variant="custom"
+          className="rounded-[8px] px-[12px] py-[8px] text-label-bold md:px-[20px] md:py-[12px]"
+          type="submit"
+          disabled={disabled}
+        >
           등록
         </Button>
       </article>

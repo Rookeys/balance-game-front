@@ -1,3 +1,4 @@
+import { COLORS } from "@/styles/theme/colors"
 import { cn } from "@/utils/cn"
 
 interface Params {
@@ -9,15 +10,15 @@ interface Params {
 }
 
 export default function ProgressBar({
-  backgroundColor = "#F5F5F5",
-  barColor = "#000000",
+  backgroundColor = COLORS.NEUTRAL_100,
+  barColor = COLORS.CYAN_500,
   percent,
   needIndicator = true,
   className
 }: Params) {
   return (
-    <div className={cn("relative h-[12px] w-full rounded-full bg-[#F5F5F5]", className)} style={{ backgroundColor }}>
-      <div className="h-[12px] rounded-full bg-black" style={{ width: `${percent}%`, backgroundColor: barColor }} />
+    <div className={cn("relative h-[12px] w-full rounded-full bg-fill-strong", className)} style={{ backgroundColor }}>
+      <div className="h-[12px] rounded-full" style={{ width: `${percent}%`, backgroundColor: barColor }} />
       {needIndicator && (
         <div
           className="absolute top-1/2 h-[16px] w-[16px] -translate-x-1/2 -translate-y-1/2 rounded-full"

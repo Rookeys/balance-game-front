@@ -14,7 +14,7 @@ import { postGameSchema, PostGameType } from "@/validations/gameSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useQueryClient } from "@tanstack/react-query"
 import dynamic from "next/dynamic"
-import { useParams } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import { FieldErrors, FormProvider, useForm } from "react-hook-form"
 import { toast } from "sonner"
@@ -29,6 +29,8 @@ export default function GameForm() {
   const [step, setStep] = useState<1 | 2>(1)
   const setIsGuardEnabled = useNavigationStore((state) => state.setIsGuard)
 
+  const router = useRouter()
+
   const queryClient = useQueryClient()
 
   const { data } = useGetMyGameStatus(Number(id), { query: { enabled: !!id } })
@@ -40,8 +42,8 @@ export default function GameForm() {
       description: data?.description ?? "",
       categories: data?.categories ?? [],
       existsNamePrivate: false,
-      accessType: data?.accessType ?? GameRequestAccessType.PUBLIC,
-      inviteCode: data?.inviteCode ?? ""
+      accessType: data?.accessType ?? GameRequestAccessType.PUBLIC
+      // inviteCode: data?.inviteCode ?? ""
     },
     resolver: zodResolver(postGameSchema)
   })
@@ -92,14 +94,22 @@ export default function GameForm() {
 
   const tabItems: TabBarItem[] = [
     {
-      label: "월드컵 소개",
-      value: "월드컵 소개",
+      label: "기본 설정",
+      value: "기본 설정",
       onClick: () => {}
     },
     {
       label: "콘텐츠",
       value: "콘텐츠",
-      onClick: () => toast.warning("먼저 게임방을 생성 해주세요")
+      // onClick: () => toast.warning("먼저 게임방을 생성 해주세요"),
+      onClick: () => {
+        if (!id) {
+          toast.warning("게임을 먼저 생성해 주세요.")
+        } else {
+          router.push(`/game-create/${id}/medias`)
+        }
+      },
+      disabled: true
     }
   ]
 
@@ -120,7 +130,7 @@ export default function GameForm() {
 
   return (
     <FormProvider {...formMethods}>
-      <TabBar items={tabItems} currentValue={"월드컵 소개"} className="md:hidden" />
+      <TabBar items={tabItems} currentValue={"기본 설정"} className="md:hidden" />
       <form
         className="flex w-full max-w-[1200px] justify-center gap-[24px] px-[16px] lg:px-0"
         onSubmit={handleSubmit(onSubmit, errorHandle)}

@@ -9,6 +9,7 @@ import { LinkRequest } from "@/api/orval/model/linkRequest"
 import { Button } from "@/components/Button"
 import InputText from "@/components/form/inputText/InputText"
 import ButtonYoutubePlay from "@/icons/Button_youtubePlay"
+import { COLORS } from "@/styles/theme/colors"
 import { getYoutubeThumbnail } from "@/utils/getYoutubeThumbnail"
 import { log } from "@/utils/log"
 import { postYoutubeMediaSchema } from "@/validations/youtubeMediaSchema"
@@ -67,7 +68,7 @@ export function YoutubeUploadForm() {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)} className="flex w-full flex-col gap-[12px]">
-        <p>유튜브 동영상 추가</p>
+        <p className="font-sb-aggro-medium text-heading-6 md:text-heading-5">유튜브 동영상 추가</p>
         <div className="relative h-[192px] overflow-hidden rounded-[12px] bg-black md:h-[265px] lg:h-[502px]">
           {watch("url") ? (
             <>
@@ -84,10 +85,12 @@ export function YoutubeUploadForm() {
               />
             </>
           ) : (
-            <div className="flex h-full flex-col items-center justify-center gap-[12px] bg-gray-10">
-              <div className="h-[60px] w-[60px] bg-red-10 md:h-[100px] md:w-[100px]" />
-              <p>유튜브 링크를 추가해 주세요</p>
-              <p>아래 입력란에 유튜브 링크를 넣고 동영상을 추가해 보세요.</p>
+            <div className="flex h-full flex-col items-center justify-center gap-[8px] bg-fill-normal md:gap-[12px]">
+              <div className="h-[60px] w-[60px] bg-blue-500 md:h-[80px] md:w-[80px]" />
+              <p className="text-body2-bold md:text-body1-bold">유튜브 링크를 추가해 주세요</p>
+              <p className="text-label-medium text-label-neutral md:text-body2-medium">
+                아래 입력란에 유튜브 링크를 넣고 동영상을 추가해 보세요.
+              </p>
             </div>
           )}
         </div>
@@ -134,16 +137,18 @@ export function YoutubeUploadForm() {
           </div>
         </article>
         <div className="flex items-start justify-between">
-          <div className="flex items-center justify-between text-gray-50">
+          <div className="flex items-center justify-between">
             <div className="flex items-center gap-[4px]">
-              <CircleAlert className="fill-gray-30 text-white" />
-              <p>부적절하거나 불쾌감을 주는 콘텐츠는 삭제될 수 있어요.</p>
+              <CircleAlert size={20} stroke={COLORS.WHITE} fill={COLORS.NEUTRAL_600} />
+              <p className="text-caption1-regular text-label-alternative md:text-label-regular">
+                부적절하거나 불쾌감을 주는 콘텐츠는 삭제될 수 있어요.
+              </p>
             </div>
           </div>
           <Button
             type="submit"
             disabled={isSubmitting}
-            className="bg-primary text-light hover:bg-primary-60 dark:bg-primary-70 dark:hover:bg-primary-80"
+            className="transition-color-custom rounded-[12px] bg-primary-normal px-[28px] py-[12px] hover:bg-primary-hover"
           >
             저장
           </Button>

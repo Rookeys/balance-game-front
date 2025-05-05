@@ -33,15 +33,17 @@ export default function InfiniteScrollClient() {
       {!isFetchingNextPage && (
         <div ref={ref} className="pointer-events-none absolute bottom-[200px] h-[4px] w-full opacity-0" />
       )}
-      <section>
-        {isFetchingNextPage ? (
-          <p>로딩중...</p>
-        ) : hasNextPage ? (
-          <p>-{/* 스크롤을 더 내려주세요 */}</p>
-        ) : (
-          <p>데이터가 더 이상 존재하지 않습니다.</p>
-        )}
-      </section>
+      <section>{isFetchingNextPage && <p>Loading...</p>}</section>
     </section>
   )
 }
+
+// ;<section>
+//   {isFetchingNextPage ? (
+//     <p>Loading...</p>
+//   ) : hasNextPage ? (
+//     <p>-{/* 스크롤을 더 내려주세요 */}</p>
+//   ) : (
+//     <p>데이터가 더 이상 존재하지 않습니다.</p>
+//   )}
+// </section>
