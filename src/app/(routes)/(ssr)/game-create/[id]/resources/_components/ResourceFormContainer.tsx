@@ -34,7 +34,7 @@ export default function ResourceFormContainer() {
 
   const { id } = useParams()
 
-  const { data } = useGetResourceList()
+  const { data, isLoading } = useGetResourceList()
 
   const queryClient = useQueryClient()
 
@@ -97,56 +97,66 @@ export default function ResourceFormContainer() {
               </p>
             </article>
             <p className="rounded-[8px] border border-primary-normal bg-primary-alternative px-[16px] py-[12px] text-label-bold text-primary-on-primary md:text-body2-bold">
-              업로드한 콘텐츠 {resourceNumbers}개, {getMaxRound(resourceNumbers)}강까지 플레이 가능해요.
+              {!isLoading ? (
+                <>
+                  업로드한 콘텐츠 {resourceNumbers}개, {getMaxRound(resourceNumbers)}강까지 플레이 가능해요.
+                </>
+              ) : (
+                <>데이터를 불러오는 중입니다..</>
+              )}
             </p>
           </div>
-          <section className="flex flex-col gap-[12px]">
-            <article className="flex flex-col justify-between gap-[12px] lg:h-[40px] lg:flex-row-reverse">
-              <SearchInput
-                placeholder="이름으로 콘텐츠 찾기"
-                Icon={Search}
-                iconProps={{ color: COLORS.NEUTRAL_700 }}
-                className="lg:max-w-[340px]"
-                onSearch={handleSearch}
-              />
-              <article className="flex items-center gap-[12px]">
-                <div className="flex items-center gap-[4px]">
-                  <button className="lg:hidden" onClick={() => handleSelectAllToggle(data?.content)}>
-                    {isAllSelected(data?.content ?? []) ? (
-                      <CustomCheckIcon className="rounded-[4px] bg-primary-normal p-[2px] text-white" size={16} />
-                    ) : (
-                      <Square color={COLORS.NEUTRAL_300} size={24} />
-                    )}
+          {!isLoading ? (
+            <section className="flex flex-col gap-[12px]">
+              <article className="flex flex-col justify-between gap-[12px] lg:h-[40px] lg:flex-row-reverse">
+                <SearchInput
+                  placeholder="이름으로 콘텐츠 찾기"
+                  Icon={Search}
+                  iconProps={{ color: COLORS.NEUTRAL_700 }}
+                  className="lg:max-w-[340px]"
+                  onSearch={handleSearch}
+                />
+                <article className="flex items-center gap-[12px]">
+                  <div className="flex items-center gap-[4px]">
+                    <button className="lg:hidden" onClick={() => handleSelectAllToggle(data?.content)}>
+                      {isAllSelected(data?.content ?? []) ? (
+                        <CustomCheckIcon className="rounded-[4px] bg-primary-normal p-[2px] text-white" size={16} />
+                      ) : (
+                        <Square color={COLORS.NEUTRAL_300} size={24} />
+                      )}
+                    </button>
+                    <p className="text-label-regular">
+                      {selectedResourceIds.length > 0
+                        ? `선택 ${selectedResourceIds.length}개`
+                        : `총 ${data?.totalElements || 0}개`}
+                    </p>
+                  </div>
+                  <button
+                    className="h-full rounded-[4px] px-[12px] text-label-neutral"
+                    onClick={() => {
+                      if (selectedResourceIds.length === 0) {
+                        toast.warning("선택된 콘텐츠가 없어요")
+                      } else {
+                        setIsOpenDeleteModal(true)
+                      }
+                    }}
+                  >
+                    선택삭제
                   </button>
-                  <p className="text-label-regular">
-                    {selectedResourceIds.length > 0
-                      ? `선택 ${selectedResourceIds.length}개`
-                      : `총 ${data?.totalElements || 0}개`}
-                  </p>
-                </div>
-                <button
-                  className="h-full rounded-[4px] px-[12px] text-label-neutral"
-                  onClick={() => {
-                    if (selectedResourceIds.length === 0) {
-                      toast.warning("선택된 콘텐츠가 없어요")
-                    } else {
-                      setIsOpenDeleteModal(true)
-                    }
-                  }}
-                >
-                  선택삭제
-                </button>
-                <Filter filters={resourceListFilters} />
+                  <Filter filters={resourceListFilters} />
+                </article>
               </article>
-            </article>
-            {/* {windowWidth !== 0 &&
+              {/* {windowWidth !== 0 &&
               (windowWidth > SCREEN_SIZE.md ? (
                 <ResourceTableDesktop resources={data?.content} />
               ) : (
                 <ResourceTable resources={data?.content} />
               ))} */}
-            <ResourceFormWrapper />
-          </section>
+              <ResourceFormWrapper />
+            </section>
+          ) : (
+            <section className="h-[100vh] bg-red-50" />
+          )}
         </section>
         <GameFormSideBar step={2} isStep1Complete percent={resourceNumbers && resourceNumbers >= 2 ? 100 : 66} />
       </section>

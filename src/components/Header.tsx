@@ -75,7 +75,7 @@ export default function Header() {
             ButtonUI={
               <Image
                 className="transition-color-custom h-[40px] w-[40px] rounded-full object-cover"
-                src={session?.user?.image || "/images/Rookeys.png"}
+                src={session?.user.image || "/images/Rookeys.png"}
                 alt="profile-image"
                 width={40}
                 height={40}

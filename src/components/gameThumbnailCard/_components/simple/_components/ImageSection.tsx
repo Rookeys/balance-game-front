@@ -20,7 +20,7 @@ export default function ImageSection({ src, tag, isBlind = false, totalPlayNums 
   return (
     <article className="relative h-[146px] overflow-hidden rounded-[12px] bg-red-100 md:h-[226px]">
       <Image
-        src={src ?? "/"}
+        src={src ?? "/images/Rookeys.png"}
         className={cn(
           "object-cover object-center transition-transform duration-300 group-hover:scale-110",
           !noBlind && blur && "brightness-40 saturate-75 blur-2xl"

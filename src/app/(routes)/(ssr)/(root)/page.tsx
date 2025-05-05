@@ -2,6 +2,7 @@ import { getGetMainGameListQueryKey } from "@/api/orval/client/main-page-control
 import { GetMainGameListSortType } from "@/api/orval/model/getMainGameListSortType"
 import { FetchPrefetchBoundary } from "@/lib/providers/FetchPrefetchBoundary"
 import { QueryClient } from "@tanstack/react-query"
+import { Metadata } from "next"
 import { notFound } from "next/navigation"
 import qs from "qs"
 import { Suspense } from "react"
@@ -13,7 +14,6 @@ import SearchAndCategory from "./_components/SearchAndCategory"
 import SkeletonList from "./_components/SkeletonCardList"
 import SkeletonSimpleCardList from "./_components/SkeletonSimpleCardList"
 import WeeklyTrendingGames from "./_components/WeeklyTrendingGames"
-import { Metadata } from "next"
 
 export const metadata: Metadata = {
   robots: {
