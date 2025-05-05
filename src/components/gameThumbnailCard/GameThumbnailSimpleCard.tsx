@@ -12,14 +12,21 @@ interface Params extends GameListResponse {
   tag?: string
   fixedSize?: boolean
   isMine?: boolean
+  linkEditPage?: boolean
 }
 
-export default function GameThumbnailSimpleCard({ tag, fixedSize = true, isMine = false, ...props }: Params) {
+export default function GameThumbnailSimpleCard({
+  tag,
+  fixedSize = true,
+  isMine = false,
+  linkEditPage = false,
+  ...props
+}: Params) {
   const { roomId, leftSelection, title, description, categories, userResponse, totalPlayNums, existsBlind } = props
 
   return (
     <Link
-      href={`/game/${roomId}`}
+      href={linkEditPage ? `/game-create/${roomId}/edit` : `/game/${roomId}`}
       className={cn("group flex w-full flex-col gap-[8px]", fixedSize && "w-[182px] md:w-[282px]")}
     >
       <ImageSection

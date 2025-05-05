@@ -47,7 +47,7 @@ export default function MyCreatedGameList() {
         {(data?.pages ?? []).flatMap(
           (page) =>
             page.content?.map((game) => (
-              <GameThumbnailSimpleCard key={game.roomId} fixedSize={false} isMine {...game} />
+              <GameThumbnailSimpleCard key={game.roomId} fixedSize={false} isMine {...game} linkEditPage />
             )) ?? []
         )}
         {!isFetchingNextPage && (
