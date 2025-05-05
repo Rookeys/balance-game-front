@@ -25,15 +25,21 @@ import { cn } from "@/utils/cn"
 
 interface Params {
   resource: GameResourceResponse
-  isOpenEditState: [boolean, Dispatch<SetStateAction<boolean>>]
-  isOpenDeleteState: [boolean, Dispatch<SetStateAction<boolean>>]
+  isOpenEditModal: boolean
+  setIsOpenEditModal: Dispatch<SetStateAction<boolean>>
+  isOpenDeleteModal: boolean
+  setIsOpenDeleteModal: Dispatch<SetStateAction<boolean>>
   onSave?: () => void
 }
 
-export default function ResourceTableContents({ resource, isOpenEditState, isOpenDeleteState, onSave }: Params) {
-  const [isOpenEditModal, setIsOpenEditModal] = isOpenEditState
-  const [isOpenDeleteModal, setIsOpenDeleteModal] = isOpenDeleteState
-
+export default function ResourceTableContents({
+  resource,
+  isOpenEditModal,
+  setIsOpenEditModal,
+  isOpenDeleteModal,
+  setIsOpenDeleteModal,
+  onSave
+}: Params) {
   const { id } = useParams()
 
   const queryClient = useQueryClient()
@@ -51,6 +57,8 @@ export default function ResourceTableContents({ resource, isOpenEditState, isOpe
       queryClient.invalidateQueries({ queryKey: getGetResourcesUsingPageQueryKey(Number(id)) }),
       queryClient.invalidateQueries({ queryKey: getGetCountResourcesInGamesQueryKey(Number(id)) })
     ])
+
+    setIsOpenDeleteModal(false)
   }
 
   const moreItems: MoreItem[] = [

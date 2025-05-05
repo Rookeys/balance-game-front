@@ -27,7 +27,7 @@ export default function YoutubeEditModal({ onClose, onSave, overlayClose }: Para
     <ModalWrapper overlayClose={overlayClose} onClose={onClose}>
       <section
         className={cn(
-          "dark:border-gray-70 dark:bg-night z-[999] mx-[16px] w-full max-w-[500px] rounded-[16px] bg-white p-[16px] text-center dark:border"
+          "dark:border-gray-70 dark:bg-night z-[999] w-full max-w-[500px] rounded-[16px] bg-white p-[16px] text-center dark:border"
         )}
       >
         <article className="flex items-center justify-between">

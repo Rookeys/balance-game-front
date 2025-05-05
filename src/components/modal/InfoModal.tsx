@@ -31,7 +31,7 @@ export default function InfoModal({
     <ModalWrapper onClose={onClose} overlayClose={overlayClose}>
       <section
         className={cn(
-          "dark:border-gray-70 dark:bg-night z-[999] mx-[16px] w-full max-w-[500px] rounded-[16px] bg-white p-[16px] dark:border",
+          "dark:border-gray-70 dark:bg-night z-[999] w-full max-w-[500px] rounded-[16px] bg-white p-[16px] dark:border",
           className
         )}
       >

@@ -25,21 +25,23 @@ interface Params {
   resource: GameResourceResponse
   indexNum: number
   tableBaseClassName?: string
-  isOpenEditState: [boolean, Dispatch<SetStateAction<boolean>>]
-  isOpenDeleteState: [boolean, Dispatch<SetStateAction<boolean>>]
+  isOpenEditModal: boolean
+  setIsOpenEditModal: Dispatch<SetStateAction<boolean>>
+  isOpenDeleteModal: boolean
+  setIsOpenDeleteModal: Dispatch<SetStateAction<boolean>>
   onSave?: () => void
 }
 export default function ResourceTableDesktopContents({
   resource,
   indexNum,
   tableBaseClassName,
-  isOpenEditState,
-  isOpenDeleteState,
+  isOpenEditModal,
+  setIsOpenEditModal,
+  isOpenDeleteModal,
+  setIsOpenDeleteModal,
   onSave
 }: Params) {
   const { id } = useParams()
-  const [isOpenEditModal, setIsOpenEditModal] = isOpenEditState
-  const [isOpenDeleteModal, setIsOpenDeleteModal] = isOpenDeleteState
 
   const queryClient = useQueryClient()
 

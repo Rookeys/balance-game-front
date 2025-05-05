@@ -34,8 +34,8 @@ export default function ResourceForm({ resource, indexNum, tableBaseClassName }:
 
   const queryClient = useQueryClient()
 
-  const isOpenEditState = useState<boolean>(false)
-  const isOpenDeleteState = useState<boolean>(false)
+  const [isOpenEditModal, setIsOpenEditModal] = useState<boolean>(false)
+  const [isOpenDeleteModal, setIsOpenDeleteModal] = useState<boolean>(false)
 
   const windowWidth = useResizeHandler()
 
@@ -80,6 +80,8 @@ export default function ResourceForm({ resource, indexNum, tableBaseClassName }:
       })
       await queryClient.invalidateQueries({ queryKey: getGetResourcesUsingPageQueryKey(Number(id)) })
       setValue("newImage", [], { shouldValidate: true })
+
+      setIsOpenEditModal(false)
     } catch (error) {
       log(error)
       toast("오류가 발생했습니다.")
@@ -99,15 +101,19 @@ export default function ResourceForm({ resource, indexNum, tableBaseClassName }:
               resource={resource}
               indexNum={indexNum}
               tableBaseClassName={tableBaseClassName}
-              isOpenEditState={isOpenEditState}
-              isOpenDeleteState={isOpenDeleteState}
+              isOpenEditModal={isOpenEditModal}
+              setIsOpenEditModal={setIsOpenEditModal}
+              setIsOpenDeleteModal={setIsOpenDeleteModal}
+              isOpenDeleteModal={isOpenDeleteModal}
               onSave={handleSave}
             />
           ) : (
             <ResourceTableContents
               resource={resource}
-              isOpenEditState={isOpenEditState}
-              isOpenDeleteState={isOpenDeleteState}
+              isOpenEditModal={isOpenEditModal}
+              setIsOpenEditModal={setIsOpenEditModal}
+              setIsOpenDeleteModal={setIsOpenDeleteModal}
+              isOpenDeleteModal={isOpenDeleteModal}
               onSave={handleSave}
             />
           ))}

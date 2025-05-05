@@ -27,13 +27,11 @@ export default function ImageEditModal({ onClose, onSave, overlayClose }: Params
   return (
     <ModalWrapper overlayClose={overlayClose} onClose={onClose}>
       <section
-        className={cn(
-          "z-[999] mx-[16px] w-full max-w-[500px] rounded-[16px] bg-white p-[16px] text-center dark:border-gray-700"
-        )}
+        className={cn("z-[999] w-full max-w-[500px] rounded-[16px] bg-white p-[16px] text-center dark:border-gray-700")}
       >
         <article className="flex items-center justify-between">
           <div className="h-[24px] w-[24px]" />
-          <p>이미지 수정</p>
+          <p className="text-body2-bold">이미지 수정</p>
           <XIcon size={24} color={COLORS.NEUTRAL_700} className="cursor-pointer" onClick={onClose} />
         </article>
         <article className="flex flex-col gap-[24px] pb-[40px] pt-[20px]">
@@ -53,9 +51,11 @@ export default function ImageEditModal({ onClose, onSave, overlayClose }: Params
                 maxFiles={1}
               />
             )}
-            <div className="text-gray-30 flex gap-[4px]">
-              <CircleAlert className="fill-gray-30 flex-shrink-0 text-white" />
-              <p className="text-[14px]">JPEG, JPG, PNG 형식을 지원하며 이미지 당 최대 4MB까지 업로드할 수 있어요.</p>
+            <div className="flex items-center gap-[4px]">
+              <CircleAlert className="flex-shrink-0 fill-label-alternative text-white" size={16} />
+              <p className="text-caption1-regular text-label-alternative md:text-label-regular">
+                JPEG, JPG, PNG 형식을 지원하며 이미지 당 최대 4MB까지 업로드할 수 있어요.
+              </p>
             </div>
           </div>
           <InputText
@@ -64,12 +64,13 @@ export default function ImageEditModal({ onClose, onSave, overlayClose }: Params
             onChange={(e) => setValue("title", e.target.value, { shouldValidate: true })}
             maxLength={20}
             label="이름"
+            labelClassName="!text-label-regular !font-pretendard text-label-neutral"
           />
         </article>
         <article className="flex items-center justify-between gap-[12px] pb-[40px]">
           <Button
             type="button"
-            className="transition-color-custom w-fit rounded-[12px] bg-red-500 px-[28px] py-[12px] text-white hover:bg-red-600"
+            className="w-fit rounded-[12px] bg-transparent text-label-bold text-label-normal hover:bg-transparent"
             onClick={() => {
               setValue("content", "", { shouldValidate: true })
               setValue("newImage", undefined, { shouldValidate: true })
@@ -77,13 +78,8 @@ export default function ImageEditModal({ onClose, onSave, overlayClose }: Params
           >
             이미지 삭제
           </Button>
-          <Button
-            type="button"
-            className="bg-blue-40 transition-color-custom w-fit rounded-[12px] px-[28px] py-[12px] text-white hover:bg-blue-50 disabled:bg-gray-50"
-            onClick={onSave}
-            disabled={isSubmitting}
-          >
-            확인
+          <Button className="px-[28px] py-[12px]" type="button" onClick={onSave} disabled={isSubmitting}>
+            저장
           </Button>
         </article>
       </section>

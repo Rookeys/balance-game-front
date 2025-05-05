@@ -21,13 +21,13 @@ export default function ModalWrapper({ onClose, overlayClose, children }: Params
   return (
     <ModalPortal>
       <div className="fixed inset-0 z-[50] flex items-center justify-center">
-        {children}
         <div
-          className="fixed h-full w-full bg-black/50"
+          className="fixed inset-0 bg-black/50"
           onClick={() => {
             if (overlayClose && !!onClose) onClose()
           }}
         />
+        <div className="z-[51] mx-[16px] max-h-[calc(100vh-32px)] overflow-y-auto">{children}</div>
       </div>
     </ModalPortal>
   )
