@@ -39,7 +39,7 @@ export default function ConfirmModal({
           <h2 className="font-sb-aggro-medium text-heading-4 text-label-normal md:text-heading-3">{title}</h2>
           <p className="whitespace-pre-line text-body2-regular">{description}</p>
         </article>
-        <article className="flex items-center justify-between gap-[12px] pb-[40px]">
+        <article className="flex items-center justify-between gap-[12px]">
           <Button
             variant="custom"
             type="button"
