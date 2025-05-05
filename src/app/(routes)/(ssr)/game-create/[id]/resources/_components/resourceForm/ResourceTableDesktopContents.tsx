@@ -48,7 +48,7 @@ export default function ResourceTableDesktopContents({
   const { isSelected, toggleSelectedResourceId } = useSelectedResourceIdStore()
   const isChecked = isSelected(resource.resourceId as number)
 
-  const { mutateAsync: deleteResource } = useDeleteResource()
+  const { mutateAsync: deleteResource, isPending: isDeleting } = useDeleteResource()
 
   const handleDelete = async () => {
     await deleteResource({ gameId: Number(id), resourceId: Number(resource.resourceId) })
@@ -131,7 +131,9 @@ export default function ResourceTableDesktopContents({
           <Trash2 />
         </button>
       </div>
-      {isOpenDeleteModal && <ResourceDeleteModal onClick={handleDelete} onClose={() => setIsOpenDeleteModal(false)} />}
+      {isOpenDeleteModal && (
+        <ResourceDeleteModal onClick={handleDelete} onClose={() => setIsOpenDeleteModal(false)} disabled={isDeleting} />
+      )}
       {isOpenEditModal &&
         (resource.type === GameResourceResponseType.IMAGE ? (
           <ImageEditModal onClose={() => setIsOpenEditModal(false)} onSave={onSave} />

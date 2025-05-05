@@ -38,7 +38,7 @@ export default function ResourceFormContainer() {
 
   const queryClient = useQueryClient()
 
-  const { mutateAsync: deleteSelectedAll } = useDeleteSelectResources()
+  const { mutateAsync: deleteSelectedAll, isPending: isDeleting } = useDeleteSelectResources()
 
   const { selectedResourceIds, clearSelectedResourceIds, isAllSelected } = useSelectedResourceIdStore()
 
@@ -51,7 +51,7 @@ export default function ResourceFormContainer() {
     router.push(`?${newSearchParams.toString()}`, { scroll: false })
   }
 
-  const handleAllDelete = async () => {
+  const handleSelectedDelete = async () => {
     await deleteSelectedAll({ gameId: Number(id), data: { list: selectedResourceIds } })
     // await queryClient.invalidateQueries({ queryKey: getGetResourcesUsingPageQueryKey(Number(id)) })
 
@@ -151,7 +151,11 @@ export default function ResourceFormContainer() {
         <GameFormSideBar step={2} isStep1Complete percent={resourceNumbers && resourceNumbers >= 2 ? 100 : 66} />
       </section>
       {isOpenDeleteModal && (
-        <ResourceDeleteModal onClick={handleAllDelete} onClose={() => setIsOpenDeleteModal(false)} />
+        <ResourceDeleteModal
+          onClick={handleSelectedDelete}
+          onClose={() => setIsOpenDeleteModal(false)}
+          disabled={isDeleting}
+        />
       )}
     </>
   )

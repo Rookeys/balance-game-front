@@ -3,6 +3,7 @@
 import { useGetResourceList } from "@/app/(routes)/(ssr)/game-create/[id]/resources/hooks/useGetResourceList"
 import { handleSelectAllToggle } from "@/app/(routes)/(ssr)/game-create/[id]/resources/utils/selectAllResource"
 import { Pagination } from "@/components/Pagination"
+import ResourceNotFound from "@/components/ResourceNotFound"
 import useResizeHandler from "@/hooks/useResizeHandler"
 import CustomCheckIcon from "@/icons/CustomCheckIcon"
 import { useSelectedResourceIdStore } from "@/store/selectedResourceId"
@@ -18,6 +19,8 @@ export default function ResourceFormWrapper() {
   const windowWidth = useResizeHandler()
   const router = useRouter()
   const { data, page } = useGetResourceList()
+
+  const keyword = searchParams.get("keyword")
 
   const handlePageChange = (newPage: number) => {
     const newSearchParams = new URLSearchParams(searchParams.toString())
@@ -67,14 +70,18 @@ export default function ResourceFormWrapper() {
           <div className="col-span-3 flex items-center px-[16px]" />
         </div>
         {/* Contents */}
-        {data?.content?.map((resource, index) => (
-          <ResourceForm
-            key={resource.resourceId}
-            resource={resource}
-            tableBaseClassName={tableBaseClassName}
-            indexNum={index + 1 + (page - 1) * 10}
-          />
-        ))}
+        {data?.content?.length ? (
+          data.content.map((resource, index) => (
+            <ResourceForm
+              key={resource.resourceId}
+              resource={resource}
+              tableBaseClassName={tableBaseClassName}
+              indexNum={index + 1 + (page - 1) * 10}
+            />
+          ))
+        ) : (
+          <ResourceNotFound keyword={keyword} />
+        )}
       </article>
       {!!data?.totalPages && (
         <Pagination

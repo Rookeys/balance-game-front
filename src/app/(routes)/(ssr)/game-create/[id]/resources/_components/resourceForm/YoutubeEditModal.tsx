@@ -4,11 +4,10 @@ import { GameResourceRequest } from "@/api/orval/model/gameResourceRequest"
 import { Button } from "@/components/Button"
 import InputText from "@/components/form/inputText/InputText"
 import ModalWrapper from "@/components/modal/ModalWrapper"
+import YoutubeThumbnailBoxWithHover from "@/components/YoutubeThumbnailBoxWithHover"
 import { COLORS } from "@/styles/theme/colors"
 import { cn } from "@/utils/cn"
-import { getYoutubeThumbnail } from "@/utils/getYoutubeThumbnail"
 import { CircleAlert, XIcon } from "lucide-react"
-import Image from "next/image"
 import { useFormContext } from "react-hook-form"
 
 interface Params {
@@ -42,19 +41,22 @@ export default function YoutubeEditModal({ onClose, onSave, overlayClose }: Para
               // className={cn("relative aspect-[16/9] w-full", watch('url') && 'bg-black')}
             >
               {!!watch("content") ? (
-                <Image
-                  src={getYoutubeThumbnail(watch("content"))}
-                  fill
-                  alt="thumbnail"
-                  className="rounded-[12px] bg-black object-contain"
-                  unoptimized
+                <YoutubeThumbnailBoxWithHover
+                  url={watch("content") ?? ""}
+                  start={watch("startSec")}
+                  end={watch("endSec")}
+                  ratio={16 / 9}
+                  // noDelay={noDelay}
+                  // wrapperClassName={wrapperClassName}
                 />
               ) : (
-                <div className="relative h-full w-full overflow-hidden rounded-[12px] bg-black">
-                  <div className="flex h-full flex-col items-center justify-center gap-[12px] bg-gray-100">
-                    <div className="bg-red-10 h-[60px] w-[60px] md:h-[100px] md:w-[100px]" />
-                    <p>유튜브 링크를 추가해 주세요</p>
-                    <p>아래 입력란에 유튜브 링크를 넣고 동영상을 추가해 보세요.</p>
+                <div className="relative h-full w-full overflow-hidden rounded-[12px]">
+                  <div className="flex h-full flex-col items-center justify-center gap-[12px] bg-fill-normal">
+                    <div className="h-[60px] w-[60px] bg-red-300" />
+                    <p className="text-body2-bold md:text-body1-bold">유튜브 링크를 추가해 주세요</p>
+                    <p className="text-label-medium text-label-neutral md:text-body2-medium">
+                      아래 입력란에 유튜브 링크를 넣고 동영상을 추가해 보세요.
+                    </p>
                   </div>
                 </div>
               )}
