@@ -1,8 +1,6 @@
 import type { GameCommentReportRequestTargetType } from "./gameCommentReportRequestTargetType"
 
 export interface GameCommentReportRequest {
-  /** 부모 ID */
-  parentId?: number
   /** 신고 타겟 ID */
   targetId: number
   /** 신고 유형 */

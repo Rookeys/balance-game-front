@@ -1,13 +1,13 @@
 "use client"
 
 import { useSubmitGameCommentsReport } from "@/api/orval/client/game-report-controller/game-report-controller"
-import { GameReportRequestTargetType } from "@/api/orval/model/gameReportRequestTargetType"
+import { GameCommentReportRequestTargetType } from "@/api/orval/model/gameCommentReportRequestTargetType"
 import { COLORS } from "@/styles/theme/colors"
 import { log } from "@/utils/log"
 import { reportCommentSchema, ReportCommentType } from "@/validations/reportSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Check, XIcon } from "lucide-react"
-import { useParams } from "next/navigation"
+import { useParams, usePathname, useSearchParams } from "next/navigation"
 import { FieldValues, useForm } from "react-hook-form"
 import { Button } from "./Button"
 import InputText from "./form/inputText/InputText"
@@ -31,6 +31,17 @@ const reportItems: { id: keyof ReportCommentType; label: string; value: string }
 export default function CommentReportModal({ id, onClose, overlayClose }: Params) {
   const { id: gameId } = useParams()
   const { mutateAsync: reportComment } = useSubmitGameCommentsReport()
+
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+
+  const isDetailPage = /^\/game\/[^/]+\/comment$/.test(pathname)
+
+  const tab = searchParams.get("tab")
+
+  console.log("isDetailPage", isDetailPage)
+
+  const isGameComment = isDetailPage || (pathname.includes("resources") && tab !== "resource")
 
   const {
     handleSubmit,
@@ -58,7 +69,9 @@ export default function CommentReportModal({ id, onClose, overlayClose }: Params
         gameId: Number(gameId),
         data: {
           targetId: Number(id),
-          targetType: GameReportRequestTargetType.RESULT_COMMENT,
+          targetType: !isGameComment
+            ? GameCommentReportRequestTargetType.RESOURCE_COMMENT
+            : GameCommentReportRequestTargetType.RESULT_COMMENT,
           reasons: selectedValues,
           etcReason: data.etcReason
         }
