@@ -19,7 +19,7 @@ export default function YoutubeModal({ url, onClose, overlayClose = false, start
         videoId={getYouTubeId(url)}
         opts={{ playerVars: { start, end } }}
         iframeClassName="w-[280px] xsm:w-[400px] lg:w-[600px] h-[300px] rounded-sm"
-        className="z-[100]"
+        className="z-[100] h-full bg-background"
       />
     </ModalWrapper>
   )

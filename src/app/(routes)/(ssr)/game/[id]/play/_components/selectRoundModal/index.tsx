@@ -17,7 +17,9 @@ interface Params {
 export default function SelectRoundModal({ onClose, overlayClose = false, className, totalItem }: Params) {
   return (
     <ModalWrapper onClose={onClose} overlayClose={overlayClose}>
-      <section className={cn("z-[999] w-full max-w-[520px] rounded-[16px] bg-white p-[16px] text-center", className)}>
+      <section
+        className={cn("z-[999] w-full max-w-[520px] rounded-[16px] bg-background p-[16px] text-center", className)}
+      >
         <article className="flex items-center justify-between">
           <div className="h-[24px] w-[24px]" />
           <p className="text-body2-bold text-label-neutral">라운드 선택</p>

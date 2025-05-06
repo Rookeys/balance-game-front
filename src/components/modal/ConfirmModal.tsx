@@ -30,7 +30,7 @@ export default function ConfirmModal({
     <ModalWrapper onClose={onClose} overlayClose={overlayClose}>
       <section
         className={cn(
-          "z-[999] w-full max-w-[380px] rounded-[16px] bg-background p-[16px] text-center dark:border",
+          "z-[999] h-full w-full max-w-[380px] rounded-[16px] bg-background p-[16px] text-center",
           className
         )}
       >

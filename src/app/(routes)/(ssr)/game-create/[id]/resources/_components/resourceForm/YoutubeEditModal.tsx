@@ -24,11 +24,7 @@ export default function YoutubeEditModal({ onClose, onSave, overlayClose }: Para
   } = useFormContext<GameResourceRequest>()
   return (
     <ModalWrapper overlayClose={overlayClose} onClose={onClose}>
-      <section
-        className={cn(
-          "dark:border-gray-70 dark:bg-night z-[999] w-full max-w-[500px] rounded-[16px] bg-white p-[16px] text-center dark:border"
-        )}
-      >
+      <section className={cn("z-[999] h-full w-full max-w-[500px] rounded-[16px] bg-background p-[16px] text-center")}>
         <article className="flex items-center justify-between">
           <div className="h-[24px] w-[24px]" />
           <p className="text-body2-bold">동영상 수정</p>

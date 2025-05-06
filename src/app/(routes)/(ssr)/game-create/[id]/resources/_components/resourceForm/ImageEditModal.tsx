@@ -26,9 +26,7 @@ export default function ImageEditModal({ onClose, onSave, overlayClose }: Params
 
   return (
     <ModalWrapper overlayClose={overlayClose} onClose={onClose}>
-      <section
-        className={cn("z-[999] w-full max-w-[500px] rounded-[16px] bg-white p-[16px] text-center dark:border-gray-700")}
-      >
+      <section className={cn("z-[999] h-full w-full max-w-[500px] rounded-[16px] bg-background p-[16px] text-center")}>
         <article className="flex items-center justify-between">
           <div className="h-[24px] w-[24px]" />
           <p className="text-body2-bold">이미지 수정</p>
