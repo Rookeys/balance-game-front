@@ -27,7 +27,12 @@ export default function Banner() {
               <article className="flex flex-col gap-[24px]">
                 <p className="font-sb-aggro-medium text-heading-3">짱픽 베타테스트에 오신것을 환영합니다!</p>
                 <p className="text-body2-bold">
-                  현재 계속 업데이트 중입니다. 따라서 데이터들은 주기적으로 초기화를 진행중입니다. 양해 부탁드립니다.
+                  현재 계속 업데이트 중입니다.
+                  <br />
+                  <br />
+                  따라서 데이터들은 주기적으로 초기화를 진행중입니다. 양해 부탁드립니다.
+                  <br />
+                  <br />
                   (5월 중순~말 정식출시 예정)
                 </p>
               </article>

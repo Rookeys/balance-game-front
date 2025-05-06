@@ -16,7 +16,7 @@ interface Params {
 
 export default function SelectRoundModal({ onClose, overlayClose = false, className, totalItem }: Params) {
   return (
-    <ModalWrapper onClose={onClose} overlayClose={overlayClose}>
+    <ModalWrapper onClose={onClose} overlayClose={overlayClose} className="overflow-visible">
       <section
         className={cn("z-[999] w-full max-w-[520px] rounded-[16px] bg-background p-[16px] text-center", className)}
       >

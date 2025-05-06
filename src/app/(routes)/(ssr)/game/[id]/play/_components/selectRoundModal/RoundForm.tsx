@@ -57,13 +57,13 @@ export default function RoundForm({ totalItem }: Params) {
         )}
       />
       {/* <Dropdown options={generateRounds(totalItem)} onChange={(e) => console.log("e", e)} /> */}
-      <article className={cn("mt-[16px] flex", watch("roundNumber") ? "justify-between" : "justify-end")}>
+      <article className={cn("mt-[16px] flex gap-[12px]", watch("roundNumber") ? "justify-between" : "justify-end")}>
         {watch("roundNumber") && (
-          <p className="text-label-regular text-label-alternative">
+          <p className="text-start text-label-regular text-label-alternative">
             총 {totalItem}개의 콘텐츠 중 랜덤 콘텐츠 {watch("roundNumber")}개가 대결할 거예요.
           </p>
         )}
-        <Button className="px-[28px] py-[12px]" disabled={isSubmitting} type="submit">
+        <Button className="flex-shrink-0 px-[28px] py-[12px]" disabled={isSubmitting} type="submit">
           시작
         </Button>
       </article>
