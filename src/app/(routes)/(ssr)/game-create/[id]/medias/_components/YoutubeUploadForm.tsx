@@ -71,19 +71,18 @@ export function YoutubeUploadForm() {
         <p className="font-sb-aggro-medium text-heading-6 md:text-heading-5">유튜브 동영상 추가</p>
         <div className="relative h-[192px] overflow-hidden rounded-[12px] bg-black md:h-[265px] lg:h-[502px]">
           {watch("url") ? (
-            <>
+            <div onClick={() => setIsOpen(true)}>
               <ButtonYoutubePlay />
               <Image
                 src={getYoutubeThumbnail(watch("url"))}
                 alt="Video Thumbnail"
                 fill
-                onClick={() => setIsOpen(true)}
                 unoptimized
                 // loader={({ src }) => src}
                 // sizes="(max-width: 640px) 90vw, 300px"
                 className="mx-auto object-contain"
               />
-            </>
+            </div>
           ) : (
             <div className="flex h-full flex-col items-center justify-center gap-[8px] bg-fill-normal md:gap-[12px]">
               <div className="h-[60px] w-[60px] bg-blue-500 md:h-[80px] md:w-[80px]" />
