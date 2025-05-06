@@ -115,7 +115,7 @@ export const useUpdateResourceComment = <TError = ErrorType<boolean>, TContext =
  * 해당 댓글을 삭제할 수 있다.
  * @summary 게임 리소스 댓글 삭제 API
  */
-export const deleteResourceComment1 = (
+export const deleteResourceComment = (
   gameId: number,
   resourceId: number,
   commentId: number,
@@ -130,21 +130,21 @@ export const deleteResourceComment1 = (
   )
 }
 
-export const getDeleteResourceComment1MutationOptions = <TError = ErrorType<boolean>, TContext = unknown>(options?: {
+export const getDeleteResourceCommentMutationOptions = <TError = ErrorType<boolean>, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<
-    Awaited<ReturnType<typeof deleteResourceComment1>>,
+    Awaited<ReturnType<typeof deleteResourceComment>>,
     TError,
     { gameId: number; resourceId: number; commentId: number },
     TContext
   >
   request?: SecondParameter<typeof customClientInstance>
 }): UseMutationOptions<
-  Awaited<ReturnType<typeof deleteResourceComment1>>,
+  Awaited<ReturnType<typeof deleteResourceComment>>,
   TError,
   { gameId: number; resourceId: number; commentId: number },
   TContext
 > => {
-  const mutationKey = ["deleteResourceComment1"]
+  const mutationKey = ["deleteResourceComment"]
   const { mutation: mutationOptions, request: requestOptions } = options
     ? options.mutation && "mutationKey" in options.mutation && options.mutation.mutationKey
       ? options
@@ -152,39 +152,39 @@ export const getDeleteResourceComment1MutationOptions = <TError = ErrorType<bool
     : { mutation: { mutationKey }, request: undefined }
 
   const mutationFn: MutationFunction<
-    Awaited<ReturnType<typeof deleteResourceComment1>>,
+    Awaited<ReturnType<typeof deleteResourceComment>>,
     { gameId: number; resourceId: number; commentId: number }
   > = (props) => {
     const { gameId, resourceId, commentId } = props ?? {}
 
-    return deleteResourceComment1(gameId, resourceId, commentId, requestOptions)
+    return deleteResourceComment(gameId, resourceId, commentId, requestOptions)
   }
 
   return { mutationFn, ...mutationOptions }
 }
 
-export type DeleteResourceComment1MutationResult = NonNullable<Awaited<ReturnType<typeof deleteResourceComment1>>>
+export type DeleteResourceCommentMutationResult = NonNullable<Awaited<ReturnType<typeof deleteResourceComment>>>
 
-export type DeleteResourceComment1MutationError = ErrorType<boolean>
+export type DeleteResourceCommentMutationError = ErrorType<boolean>
 
 /**
  * @summary 게임 리소스 댓글 삭제 API
  */
-export const useDeleteResourceComment1 = <TError = ErrorType<boolean>, TContext = unknown>(options?: {
+export const useDeleteResourceComment = <TError = ErrorType<boolean>, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<
-    Awaited<ReturnType<typeof deleteResourceComment1>>,
+    Awaited<ReturnType<typeof deleteResourceComment>>,
     TError,
     { gameId: number; resourceId: number; commentId: number },
     TContext
   >
   request?: SecondParameter<typeof customClientInstance>
 }): UseMutationResult<
-  Awaited<ReturnType<typeof deleteResourceComment1>>,
+  Awaited<ReturnType<typeof deleteResourceComment>>,
   TError,
   { gameId: number; resourceId: number; commentId: number },
   TContext
 > => {
-  const mutationOptions = getDeleteResourceComment1MutationOptions(options)
+  const mutationOptions = getDeleteResourceCommentMutationOptions(options)
 
   return useMutation(mutationOptions)
 }
