@@ -42,7 +42,7 @@ export default function GameThumbnailSimpleCard({ tag, fixedSize = true, linkEdi
         isBlind={existsBlind}
         totalPlayNums={totalPlayNums}
       />
-      <SocialActionSection id={roomId} title={title} categories={categories} isMine={existsMine} />
+      <SocialActionSection id={roomId} title={title} categories={categories} isMine={linkEditPage || existsMine} />
       <TitleSection title={title} description={description} />
       <MetaInfoSection creatorNickname={userResponse?.nickname} creatorImage={userResponse?.profileImageUrl} />
     </Link>
