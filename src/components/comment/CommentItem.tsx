@@ -3,14 +3,14 @@
 import { useGetChildrenCommentsByGameResourceInfinite } from "@/api/orval/client/game-resource-comments-controller/game-resource-comments-controller"
 import { GameResourceParentCommentResponse } from "@/api/orval/model/gameResourceParentCommentResponse"
 import ResourceCommentAndReplyForm from "@/components/comment/ResourceCommentAndReplyForm"
+import { COLORS } from "@/styles/theme/colors"
 import { convertUtcToKoreaDayTime } from "@/utils/dayjsWithExtends"
-import { ChevronDownIcon, ChevronUpIcon, MessageSquare, ThumbsUp } from "lucide-react"
+import { ChevronDownIcon, ChevronUpIcon, MessageSquare } from "lucide-react"
 import Image from "next/image"
 import { useParams } from "next/navigation"
 import { useState } from "react"
 import CommentSocialAction from "./CommentSocialAction"
 import ReplyItem from "./ReplyItem"
-import { COLORS } from "@/styles/theme/colors"
 
 // * GameResourceParentCommentResponse 로 설정한이유
 // * 댓글 중 가장 큰 범위의 타입을 가지고있음 (겹치지않는 부분들은 optional type)
@@ -75,10 +75,10 @@ export default function CommentItem({ propResourceId, ...props }: Params) {
       </article>
       <p className="ms-[48px] text-label-regular text-label-normal md:text-body2-regular">{props?.comment}</p>
       <div className="ms-[48px] flex items-center gap-[12px] text-label-alternative">
-        <button className="flex items-center gap-[4px]" onClick={() => alert("좋아요")}>
+        {/* <button className="flex items-center gap-[4px]" onClick={() => alert("좋아요")}>
           <ThumbsUp size={20} color={COLORS.NEUTRAL_600} />
           <p className="text-caption1-regular md:text-label-regular">{props?.like}</p>
-        </button>
+        </button> */}
         <button className="flex items-center gap-[4px]" onClick={() => setIsOpenReply((prev) => !prev)}>
           <MessageSquare size={20} color={COLORS.NEUTRAL_600} />
           <p className="text-caption1-regular md:text-label-regular">대댓글 {props?.children || 0}</p>

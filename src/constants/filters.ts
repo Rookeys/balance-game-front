@@ -16,7 +16,7 @@ export const resourceListFilters = [
 
 export const commentListFilters = [
   { value: GetParentCommentsByGameResourceSortType.RECENT, label: "최신순" },
-  { value: GetParentCommentsByGameResourceSortType.OLD, label: "등록순" },
-  { value: GetParentCommentsByGameResourceSortType.LIKE_DESC, label: "좋아요순" }
+  { value: GetParentCommentsByGameResourceSortType.OLD, label: "등록순" }
+  // { value: GetParentCommentsByGameResourceSortType.LIKE_DESC, label: "좋아요순" }
   // { value: GetParentCommentsByGameResourceSortType.LIKE_ASC, label: "좋아요 낮은순" }
 ]

@@ -2,9 +2,7 @@
 
 import { GameResourceChildrenCommentResponse } from "@/api/orval/model/gameResourceChildrenCommentResponse"
 import CommentSocialAction from "@/components/comment/CommentSocialAction"
-import { COLORS } from "@/styles/theme/colors"
 import { convertUtcToKoreaDayTime } from "@/utils/dayjsWithExtends"
-import { ThumbsUp } from "lucide-react"
 import Image from "next/image"
 
 export default function ReplyItem(props: GameResourceChildrenCommentResponse) {
@@ -39,10 +37,10 @@ export default function ReplyItem(props: GameResourceChildrenCommentResponse) {
       </article>
       <p className="ms-[48px] text-label-regular text-label-normal md:text-body2-regular">{props?.comment}</p>
       <div className="ms-[48px] flex items-center gap-[12px]">
-        <button className="flex items-center gap-[4px]" onClick={() => alert("좋아요")}>
+        {/* <button className="flex items-center gap-[4px]" onClick={() => alert("좋아요")}>
           <ThumbsUp size={20} color={COLORS.NEUTRAL_600} />
           <p className="text-caption1-regular text-label-alternative md:text-label-regular">{props?.like}</p>
-        </button>
+        </button> */}
       </div>
     </section>
   )
