@@ -40,7 +40,10 @@ export default function SocialActionSection({ id, title, categories, isMine }: P
   }
 
   const moreItems: MoreItem[] = isMine
-    ? [{ label: "공유하기", onClick: handleShare }]
+    ? [
+        { label: "공유하기", onClick: handleShare },
+        { label: "삭제하기", onClick: () => setIsOpenDeleteModal(true) }
+      ]
     : [
         { label: "공유하기", onClick: handleShare },
         {
