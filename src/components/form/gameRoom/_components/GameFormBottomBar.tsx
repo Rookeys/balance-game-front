@@ -1,9 +1,11 @@
+"use client"
 import BottomBarWrapper from "@/components/BottomBarWrapper"
 import { Button } from "@/components/Button"
 import ProgressBar from "@/components/ProgressBar"
+import { offset } from "@floating-ui/dom"
+import { usePathname } from "next/navigation"
 import { Dispatch, SetStateAction } from "react"
 import GameCreateTooltip from "./GameCreateTooltip"
-import { offset } from "@floating-ui/dom"
 
 interface Params {
   step: 1 | 2
@@ -13,6 +15,10 @@ interface Params {
 }
 
 export default function GameFormBottomBar({ step, setStep, percent = 0, disabled }: Params) {
+  const pathname = usePathname()
+
+  const isNewPage = pathname.includes("/new")
+
   return (
     <BottomBarWrapper className="h-[124px]">
       <div className="flex items-center gap-[12px]">
@@ -32,7 +38,7 @@ export default function GameFormBottomBar({ step, setStep, percent = 0, disabled
       >
         {step === 1 ? "다음" : "월드컵 생성"}
       </Button>
-      <GameCreateTooltip id="game-create-bottom-bar-button" place="top" middlewares={[offset(68)]} />
+      {isNewPage && <GameCreateTooltip id="game-create-bottom-bar-button" place="top" middlewares={[offset(68)]} />}
     </BottomBarWrapper>
   )
 }

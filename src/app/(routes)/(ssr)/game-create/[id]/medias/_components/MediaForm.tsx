@@ -11,7 +11,7 @@ import { YoutubeUploadForm } from "./YoutubeUploadForm"
 
 export default function MediaForm() {
   const { id } = useParams()
-  const { data: resourceNumbers } = useGetCountResourcesInGames(Number(id))
+  const { data: resourceNumbers, isLoading } = useGetCountResourcesInGames(Number(id))
   const router = useRouter()
 
   const tabItems: TabBarItem[] = [
@@ -59,7 +59,13 @@ export default function MediaForm() {
               </p>
             </article>
             <p className="rounded-[8px] border border-primary-normal bg-primary-alternative px-[16px] py-[12px] text-label-bold text-primary-on-primary md:text-body2-bold">
-              업로드한 콘텐츠 {resourceNumbers}개, {getMaxRound(resourceNumbers)}강까지 플레이 가능해요.
+              {!isLoading ? (
+                <>
+                  업로드한 콘텐츠 {resourceNumbers}개, {getMaxRound(resourceNumbers)}강까지 플레이 가능해요.
+                </>
+              ) : (
+                <>데이터를 불러오는 중입니다..</>
+              )}
             </p>
           </div>
           <ImageUploadForm />

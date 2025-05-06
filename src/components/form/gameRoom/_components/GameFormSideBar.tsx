@@ -32,6 +32,8 @@ export default function GameFormSideBar({ step, setStep, percent = 0, isStep1Com
 
   const isMediasPage = pathname.includes("medias")
 
+  const isNewPage = pathname.includes("/new")
+
   const isResourcesPage = pathname.includes("resources")
 
   const { data: resourceNumbers } = useGetCountResourcesInGames(Number(id), {
@@ -131,7 +133,9 @@ export default function GameFormSideBar({ step, setStep, percent = 0, isStep1Com
       >
         {step === 1 ? "다음" : "월드컵 생성"}
       </Button>
-      <GameCreateTooltip id="game-create-sidebar-button" classNameArrow="absolute !start-auto end-[8px]" />
+      {isNewPage && (
+        <GameCreateTooltip id="game-create-sidebar-button" classNameArrow="absolute !start-auto end-[8px]" />
+      )}
     </SideBarWrapper>
   )
 }
