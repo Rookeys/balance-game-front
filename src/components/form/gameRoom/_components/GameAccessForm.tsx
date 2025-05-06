@@ -44,7 +44,7 @@ export default function GameAccessForm() {
       </article>
       <article className="flex flex-col gap-[12px]">
         <div className="flex items-center gap-[4px]">
-          <InputLabel label="썸네일 공개" />
+          <InputLabel label="썸네일 블라인드" />
           <CircleHelp
             color={COLORS.NEUTRAL_600}
             size={20}

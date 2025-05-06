@@ -16,7 +16,7 @@ export default function Footer({ className }: Params) {
       <section className="flex flex-col justify-between gap-[40px] md:flex-row-reverse md:gap-0">
         <div className="flex flex-col gap-[8px] text-label-regular">
           <Link
-            className="md:hidden"
+            className="lg:hidden"
             href="https://kojaem.notion.site/1ebeadad956780d38264d49909eb9abf"
             aria-label="짱픽 서비스 소개 페이지로 이동"
             title="짱픽 서비스 소개"
@@ -24,7 +24,7 @@ export default function Footer({ className }: Params) {
             서비스 소개
           </Link>
           <Link
-            className="md:hidden"
+            className="lg:hidden"
             href="https://docs.google.com/forms/d/e/1FAIpQLSdx46EPWF42ElyDv9rMmgfIz5lOJfNmpP3OjcTgK6hCSfmqyQ/viewform"
             aria-label="짱픽 문의하기 폼으로 이동"
             title="문의하기"

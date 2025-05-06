@@ -5,6 +5,7 @@ import { useUpdateProfile } from "@/api/orval/client/user-profile-controller/use
 import { UserRequest } from "@/api/orval/model/userRequest"
 import { Button } from "@/components/Button"
 import InputText from "@/components/form/inputText/InputText"
+import { log } from "@/utils/log"
 import axios from "axios"
 import { Camera } from "lucide-react"
 import { useSession } from "next-auth/react"
@@ -12,7 +13,7 @@ import Image from "next/image"
 import { useState } from "react"
 import { FormProvider, useForm } from "react-hook-form"
 import ResignModal from "./ResignModal"
-import { useResign } from "@/api/orval/client/user-management-controller/user-management-controller"
+import { useRouter } from "next/navigation"
 
 export type EditProfileType = UserRequest & { newImage?: File[] | null }
 
@@ -25,7 +26,7 @@ export default function ProfileEditPageClient() {
 
   const { mutateAsync: RequestPresignedUrl } = useGetPreSignedUrl()
 
-  const { mutateAsync: requestResign } = useResign()
+  const router = useRouter()
 
   const formMethods = useForm<EditProfileType>({
     values: {
@@ -78,8 +79,17 @@ export default function ProfileEditPageClient() {
   const newImage = newImageData?.length && newImageData?.length > 0 ? newImageData[0] : ""
 
   const handleResign = async () => {
-    // #region 회원탈퇴 관련 로직
-    await requestResign()
+    try {
+      // #region 회원탈퇴 관련 로직
+      await axios.post(`${process.env.NEXT_PUBLIC_API_ROOT}/api/v1/users/resign`, undefined, {
+        headers: {
+          refreshToken: `Bearer ${session?.refresh_token}`
+        }
+      })
+      router.replace("/sign-out")
+    } catch (error) {
+      log(error)
+    }
     // #endregion 회원탈퇴 관련 로직
   }
 

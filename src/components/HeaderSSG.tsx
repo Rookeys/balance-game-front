@@ -62,7 +62,7 @@ export default function HeaderSSG() {
           <Logo />
         </Link>
         <Link
-          className="text-body2-bold"
+          className="hidden text-body2-bold lg:block"
           href="https://kojaem.notion.site/1ebeadad956780d38264d49909eb9abf"
           aria-label="짱픽 서비스 소개 페이지로 이동"
           title="짱픽 서비스 소개"
@@ -70,7 +70,7 @@ export default function HeaderSSG() {
           서비스 소개
         </Link>
         <Link
-          className="text-body2-bold"
+          className="hidden text-body2-bold lg:block"
           href="https://docs.google.com/forms/d/e/1FAIpQLSdx46EPWF42ElyDv9rMmgfIz5lOJfNmpP3OjcTgK6hCSfmqyQ/viewform"
           aria-label="짱픽 문의하기 폼으로 이동"
           title="문의하기"
