@@ -1,15 +1,14 @@
 "use client"
 import { GameListResponseCategoriesItem } from "@/api/orval/model/gameListResponseCategoriesItem"
+import CategoryLabel from "@/components/CategoryLabel"
 import GameReportModal from "@/components/GameReportModal"
 import MoreButton, { MoreItem } from "@/components/MoreButton"
 import { cn } from "@/utils/cn"
 import { requireLogin } from "@/utils/requireLogin"
 import { share, ShareAPIRequest } from "@/utils/share"
 import { useSession } from "next-auth/react"
-import { useRouter } from "next/navigation"
 import { useState } from "react"
 import GameDeleteModal from "./GameDeleteModal"
-import CategoryLabel from "@/components/CategoryLabel"
 
 interface Params {
   id?: number
@@ -23,8 +22,6 @@ export default function SocialActionSection({ id, title, categories, isMine }: P
 
   const [isOpenReportModal, setIsOpenReportModal] = useState<boolean>(false)
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState<boolean>(false)
-
-  const router = useRouter()
 
   const handleShare = async () => {
     const shareData: ShareAPIRequest = {
@@ -43,10 +40,7 @@ export default function SocialActionSection({ id, title, categories, isMine }: P
   }
 
   const moreItems: MoreItem[] = isMine
-    ? [
-        { label: "수정하기", onClick: () => router.push(`/game-create/${id}/edit`) },
-        { label: "삭제하기", onClick: () => setIsOpenDeleteModal(true) }
-      ]
+    ? [{ label: "공유하기", onClick: handleShare }]
     : [
         { label: "공유하기", onClick: handleShare },
         {

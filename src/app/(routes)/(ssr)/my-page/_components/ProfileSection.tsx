@@ -31,7 +31,8 @@ export default function ProfileSection() {
       </div>
       <div>
         <p className="text-body2-bold">{session?.user.nickname}</p>
-        <p className="text-label-regular text-label-alternative">{session?.user.email}</p>
+        <p className="text-label-regular text-label-alternative">zznpk@admin.com</p>
+        {/* <p className="text-label-regular text-label-alternative">{session?.user.email}</p> */}
       </div>
     </article>
   )

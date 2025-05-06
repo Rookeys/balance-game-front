@@ -47,12 +47,22 @@ export default function Header() {
         <Link href={"/"} className="flex-shrink-0">
           <Logo />
         </Link>
-        {/* <Link href={"/"} aria-label="About Our Service" className="hidden lg:block">
+        <Link
+          className="text-body2-bold"
+          href="https://kojaem.notion.site/1ebeadad956780d38264d49909eb9abf"
+          aria-label="짱픽 서비스 소개 페이지로 이동"
+          title="짱픽 서비스 소개"
+        >
           서비스 소개
         </Link>
-        <Link href={"/"} aria-label="Contact us" className="hidden lg:block">
+        <Link
+          className="text-body2-bold"
+          href="https://docs.google.com/forms/d/e/1FAIpQLSdx46EPWF42ElyDv9rMmgfIz5lOJfNmpP3OjcTgK6hCSfmqyQ/viewform"
+          aria-label="짱픽 문의하기 폼으로 이동"
+          title="문의하기"
+        >
           문의하기
-        </Link> */}
+        </Link>
       </section>
       <section className="flex items-center gap-[12px] md:gap-[20px]">
         {session && (

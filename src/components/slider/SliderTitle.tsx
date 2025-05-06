@@ -9,7 +9,7 @@ interface Params {
 
 export default function SliderTitle({ title, prevElId, nextElId, updateTime }: Params) {
   return (
-    <section className="flex h-[40px] items-center justify-between">
+    <section className="flex h-[62px] items-center justify-between">
       <article className="flex flex-col">
         <h2 className="font-sb-aggro-medium text-heading-4 text-label-normal md:text-heading-3">{title}</h2>
         {updateTime && <p className="text-label-regular text-label-alternative">{updateTime}전 업데이트</p>}

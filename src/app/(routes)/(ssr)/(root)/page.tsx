@@ -14,6 +14,8 @@ import SearchAndCategory from "./_components/SearchAndCategory"
 import SkeletonList from "./_components/SkeletonCardList"
 import SkeletonSimpleCardList from "./_components/SkeletonSimpleCardList"
 import WeeklyTrendingGames from "./_components/WeeklyTrendingGames"
+import { getServerSession } from "next-auth"
+import { authOptions } from "@/auth"
 
 export const metadata: Metadata = {
   robots: {
@@ -24,6 +26,10 @@ export const metadata: Metadata = {
 
 export default async function RootPage() {
   const queryClient = new QueryClient()
+
+  const session = await getServerSession(authOptions)
+
+  const accessToken = session?.access_token
 
   return (
     <section className="flex flex-col items-center gap-[40px]">
@@ -37,7 +43,10 @@ export default async function RootPage() {
               `${process.env.NEXT_PUBLIC_API_ROOT}/api/v1/games/list?${qs.stringify({ size: 10, sortType: GetMainGameListSortType.WEEK })}`,
               {
                 cache: "force-cache",
-                next: { revalidate: 300 }
+                next: { revalidate: 300 },
+                headers: {
+                  ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {})
+                }
               }
             )}
             queryKey={getGetMainGameListQueryKey({ size: 10, sortType: GetMainGameListSortType.WEEK })}
@@ -56,7 +65,10 @@ export default async function RootPage() {
               })}`,
               {
                 cache: "force-cache",
-                next: { revalidate: 10 }
+                next: { revalidate: 10 },
+                headers: {
+                  ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {})
+                }
               }
             )}
             queryKey={getGetMainGameListQueryKey({
@@ -78,7 +90,10 @@ export default async function RootPage() {
               })}`,
               {
                 cache: "force-cache",
-                next: { revalidate: 300 }
+                next: { revalidate: 300 },
+                headers: {
+                  ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {})
+                }
               }
             )}
             queryKey={getGetMainGameListQueryKey({
