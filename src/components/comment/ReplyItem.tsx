@@ -34,7 +34,7 @@ export default function ReplyItem(props: GameResourceChildrenCommentResponse) {
           </div>
         </article>
         <div className="flex-shrink-0 self-start">
-          <CommentSocialAction />
+          <CommentSocialAction id={props.commentId} isMine={props.existsMine} />
         </div>
       </article>
       <p className="ms-[48px] text-label-regular text-label-normal md:text-body2-regular">{props?.comment}</p>
