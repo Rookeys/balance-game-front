@@ -1,16 +1,22 @@
 import { GetMainGameListCategory } from "@/api/orval/model/getMainGameListCategory"
 import Filter from "@/components/Filter"
 import ScrollTopButton from "@/components/ScrollTopButton"
+import { categories } from "@/constants/categories"
+import { gameListFilters } from "@/constants/filters"
+import { Metadata } from "next"
 import { notFound } from "next/navigation"
 import CategoryGameList from "./_components/CategoryGameList"
 import Title from "./_components/Title"
-import { gameListFilters } from "@/constants/filters"
-import { Metadata } from "next"
 
-export const metadata: Metadata = {
-  robots: {
-    index: false,
-    follow: false
+export async function generateMetadata({ params }: { params: Promise<{ category: string }> }): Promise<Metadata> {
+  const { category } = await params
+  const match = categories.find((c) => c.id === category.toUpperCase())
+
+  if (!match) return { title: "카테고리 없음", robots: { index: false, follow: true } }
+
+  return {
+    title: `${match.label} 카테고리`,
+    robots: { index: false, follow: true }
   }
 }
 

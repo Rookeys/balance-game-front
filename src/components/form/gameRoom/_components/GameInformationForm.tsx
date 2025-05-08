@@ -1,6 +1,7 @@
 import { GameRequest } from "@/api/orval/model/gameRequest"
 import { GameRequestCategoriesItem } from "@/api/orval/model/gameRequestCategoriesItem"
 import { Button } from "@/components/Button"
+import { categories } from "@/constants/categories"
 import { cn } from "@/utils/cn"
 import { useFormContext } from "react-hook-form"
 import Textarea from "../../textarea/Textarea"
@@ -9,8 +10,6 @@ type CategoryType = (typeof GameRequestCategoriesItem)[keyof typeof GameRequestC
 
 export default function GameInformationForm() {
   const { watch, setValue } = useFormContext<GameRequest>()
-
-  const categories = Object.values(GameRequestCategoriesItem)
 
   const selectedCategories = watch("categories")
 
@@ -73,18 +72,18 @@ export default function GameInformationForm() {
         <div className="flex flex-wrap gap-[12px] rounded-[12px] border border-line-normal p-[16px]">
           {categories.map((category) => (
             <Button
-              key={category}
+              key={category.value}
               type="button"
               variant="custom"
               className={cn(
                 "rounded-[4px] px-[8px] py-[4px] text-label-medium",
-                selectedCategories?.includes(category)
+                selectedCategories?.includes(category.value as GameRequestCategoriesItem)
                   ? "bg-secondary-alternative text-secondary-on-primary"
                   : "bg-fill-normal"
               )}
-              onClick={() => handleCategoryChange(category as CategoryType)}
+              onClick={() => handleCategoryChange(category.value as CategoryType)}
             >
-              {category}
+              {category.label}
             </Button>
           ))}
         </div>

@@ -2,6 +2,7 @@ import { getGetGameStatusQueryKey } from "@/api/orval/client/main-page-controlle
 import GameDetailPageClient from "@/app/(routes)/(ssr)/game/[id]/_components/GameDetailPageClient"
 import { FetchPrefetchBoundary } from "@/lib/providers/FetchPrefetchBoundary"
 import { QueryClient } from "@tanstack/react-query"
+import { Metadata } from "next"
 import { notFound } from "next/navigation"
 
 interface Params {
@@ -10,6 +11,23 @@ interface Params {
 
 interface GameDetailPageProps {
   params: Promise<Params>
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const { id } = await params
+
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_ROOT}/api/v1/games/${id}`, {
+    cache: "force-cache",
+    next: { revalidate: 300 }
+  })
+
+  if (!res.ok) return {}
+
+  const data = await res.json()
+
+  return {
+    title: data.title ?? "게임 상세"
+  }
 }
 
 export const revalidate = 300

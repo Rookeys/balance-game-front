@@ -4,6 +4,7 @@ import CategoryLabel from "@/components/CategoryLabel"
 import GameReportModal from "@/components/GameReportModal"
 import MoreButton, { MoreItem } from "@/components/MoreButton"
 import { cn } from "@/utils/cn"
+import { getCategoryLabel } from "@/utils/getCategoryLabel"
 import { requireLogin } from "@/utils/requireLogin"
 import { share, ShareAPIRequest } from "@/utils/share"
 import { useSession } from "next-auth/react"
@@ -62,7 +63,7 @@ export default function SocialActionSection({ id, title, categories, isMine }: P
       {categories && categories?.length > 0 && (
         <article className="flex gap-[4px]">
           {categories.map((category, i) => (
-            <CategoryLabel key={`${category}-${i}`} text={category} />
+            <CategoryLabel key={`${category}-${i}`} text={getCategoryLabel(category)} />
           ))}
         </article>
       )}
