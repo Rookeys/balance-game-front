@@ -5,7 +5,12 @@ import CommentSocialAction from "@/components/comment/CommentSocialAction"
 import { convertUtcToKoreaDayTime } from "@/utils/dayjsWithExtends"
 import Image from "next/image"
 
-export default function ReplyItem(props: GameResourceChildrenCommentResponse) {
+interface Params extends GameResourceChildrenCommentResponse {
+  resourceId?: number
+  parentId?: number
+}
+
+export default function ReplyItem({ resourceId, parentId, ...props }: Params) {
   return (
     <section className="flex flex-col gap-[8px] md:gap-[12px]">
       <article className="flex items-center justify-between">
@@ -32,7 +37,12 @@ export default function ReplyItem(props: GameResourceChildrenCommentResponse) {
           </div>
         </article>
         <div className="flex-shrink-0 self-start">
-          <CommentSocialAction id={props.commentId} isMine={props.existsMine} />
+          <CommentSocialAction
+            commentId={props.commentId}
+            isMine={props.existsMine}
+            resourceId={resourceId}
+            parentId={parentId}
+          />
         </div>
       </article>
       <p className="ms-[48px] text-label-regular text-label-normal md:text-body2-regular">{props?.comment}</p>

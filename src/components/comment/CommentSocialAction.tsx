@@ -8,11 +8,13 @@ import CommentReportModal from "../CommentReportModal"
 import CommentDeleteModal from "./CommentDeleteModal"
 
 interface Params {
-  id?: number
+  commentId?: number
   isMine?: boolean
+  resourceId?: number
+  parentId?: number
 }
 
-export default function CommentSocialAction({ id, isMine }: Params) {
+export default function CommentSocialAction({ commentId, isMine, resourceId, parentId }: Params) {
   const { data: session } = useSession()
 
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState<boolean>(false)
@@ -32,8 +34,15 @@ export default function CommentSocialAction({ id, isMine }: Params) {
   return (
     <>
       <MoreButton items={moreItems} />
-      {isOpenDeleteModal && <CommentDeleteModal id={id as number} onClose={() => setIsOpenDeleteModal(false)} />}
-      {isOpenReportModal && <CommentReportModal id={id} onClose={() => setIsOpenReportModal(false)} />}
+      {isOpenDeleteModal && (
+        <CommentDeleteModal
+          commentId={commentId as number}
+          onClose={() => setIsOpenDeleteModal(false)}
+          resourceId={resourceId}
+          parentId={parentId}
+        />
+      )}
+      {isOpenReportModal && <CommentReportModal commentId={commentId} onClose={() => setIsOpenReportModal(false)} />}
     </>
   )
 }

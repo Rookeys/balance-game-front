@@ -89,7 +89,7 @@ export default function CommentSection({ playId }: Params) {
               onClick={(sort) => setSort(sort as GetParentCommentsByGameResourceSortType)}
             />
           </article>
-          <ResourceCommentAndReplyForm propResourceId={resourceId} />
+          <ResourceCommentAndReplyForm resourceId={resourceId} />
           {/* {(data?.pages ?? []).flatMap(
             (page) =>
               page.content?.map((comment) => (
@@ -97,7 +97,14 @@ export default function CommentSection({ playId }: Params) {
               )) ?? []
           )} */}
           {comments.length > 0 ? (
-            comments.map((comment) => <CommentItem key={comment.commentId} propResourceId={resourceId} {...comment} />)
+            comments.map((comment) => (
+              <CommentItem
+                {...comment}
+                key={comment.commentId}
+                commentId={comment.commentId}
+                propResourceId={resourceId}
+              />
+            ))
           ) : (
             <CommentNotFound />
           )}

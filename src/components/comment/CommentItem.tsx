@@ -70,7 +70,7 @@ export default function CommentItem({ propResourceId, ...props }: Params) {
           </div>
         </article>
         <div className="flex-shrink-0 self-start">
-          <CommentSocialAction id={props.commentId} isMine={props.existsMine} />
+          <CommentSocialAction commentId={props.commentId} isMine={props.existsMine} resourceId={resourceId} />
         </div>
       </article>
       <p className="ms-[48px] text-label-regular text-label-normal md:text-body2-regular">{props?.comment}</p>
@@ -94,10 +94,13 @@ export default function CommentItem({ propResourceId, ...props }: Params) {
             inputClassName="!min-h-[100px]"
             placeholder="해당 콘텐츠와 관련된 댓글을 작성해 주세요."
           /> */}
-          <ResourceCommentAndReplyForm parentId={props.commentId} propResourceId={propResourceId} />
+          <ResourceCommentAndReplyForm parentId={props.commentId} resourceId={resourceId} />
           {isLoading && <section className="h-[100vh] w-full bg-red-50" />}
           {(replyData?.pages ?? []).flatMap(
-            (page) => page.content?.map((reply) => <ReplyItem key={reply.commentId} {...reply} />) ?? []
+            (page) =>
+              page.content?.map((reply) => (
+                <ReplyItem key={reply.commentId} {...reply} resourceId={resourceId} parentId={props.commentId} />
+              )) ?? []
           )}
         </section>
       )}

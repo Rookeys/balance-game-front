@@ -14,7 +14,7 @@ import InputText from "./form/inputText/InputText"
 import ModalWrapper from "./modal/ModalWrapper"
 
 interface Params {
-  id?: number
+  commentId?: number
   onClose?: () => void
   overlayClose?: boolean
 }
@@ -28,7 +28,7 @@ const reportItems: { id: keyof ReportCommentType; label: string; value: string }
   { id: "etc", label: "기타", value: "ETC" }
 ]
 
-export default function CommentReportModal({ id, onClose, overlayClose }: Params) {
+export default function CommentReportModal({ commentId, onClose, overlayClose }: Params) {
   const { id: gameId } = useParams()
   const { mutateAsync: reportComment } = useSubmitGameCommentsReport()
 
@@ -38,8 +38,6 @@ export default function CommentReportModal({ id, onClose, overlayClose }: Params
   const isDetailPage = /^\/game\/[^/]+\/comment$/.test(pathname)
 
   const tab = searchParams.get("tab")
-
-  console.log("isDetailPage", isDetailPage)
 
   const isGameComment = isDetailPage || (pathname.includes("resources") && tab !== "resource")
 
@@ -68,7 +66,7 @@ export default function CommentReportModal({ id, onClose, overlayClose }: Params
       await reportComment({
         gameId: Number(gameId),
         data: {
-          targetId: Number(id),
+          targetId: Number(commentId),
           targetType: !isGameComment
             ? GameCommentReportRequestTargetType.RESOURCE_COMMENT
             : GameCommentReportRequestTargetType.RESULT_COMMENT,
