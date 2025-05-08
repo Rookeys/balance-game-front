@@ -38,10 +38,10 @@ export default function GameForm() {
   const formMethods = useForm<PostGameType>({
     values: {
       title: data?.title ?? "",
-      existsBlind: false,
+      existsBlind: data?.existsBlind ?? false,
       description: data?.description ?? "",
       categories: data?.categories ?? [],
-      existsNamePrivate: false,
+      existsNamePrivate: data?.existsNamePrivate ?? false,
       accessType: data?.accessType ?? GameRequestAccessType.PUBLIC
       // inviteCode: data?.inviteCode ?? ""
     },
