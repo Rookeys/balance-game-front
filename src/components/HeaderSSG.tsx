@@ -56,7 +56,7 @@ export default function HeaderSSG() {
   ]
 
   return (
-    <header className="flex h-[64px] items-center justify-between border-b border-gray-200 bg-white px-[12px] py-[8px] dark:bg-gray-700">
+    <header className="flex h-[64px] items-center justify-between border-b border-gray-200 bg-white px-[12px] py-[8px]">
       <section className="flex items-center gap-[40px]">
         <Link href={"/"} className="flex-shrink-0">
           <Logo />

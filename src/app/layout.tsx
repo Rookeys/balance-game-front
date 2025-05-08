@@ -59,7 +59,7 @@ export default async function RootLayout({
           "font-pretendard text-label-normal antialiased"
         )}
       >
-        <ThemeProvider>
+        <ThemeProvider defaultTheme="light">
           <div id="portal" />
           {children}
           <LoginConfirmModal />
