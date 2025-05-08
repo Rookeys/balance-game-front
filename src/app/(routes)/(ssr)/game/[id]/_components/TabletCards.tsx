@@ -20,8 +20,8 @@ export default function TabletCards() {
         />
       </div>
       <div className="flex items-center gap-[16px] md:gap-[24px]">
-        <LinkCard href={`/game/${id}/comment`} title="전체댓글" image="/images/Rookeys.png" alt="comment-image" />
-        <LinkCard href={`/game/${id}/ranking`} title="랭킹" image="/images/Rookeys.png" alt="ranking-image" />
+        <LinkCard href={`/game/${id}/comment`} title="전체댓글" image="/images/icons/chat.webp" alt="comment-image" />
+        <LinkCard href={`/game/${id}/ranking`} title="랭킹" image="/images/icons/trophy.webp" alt="ranking-image" />
       </div>
     </article>
   )

@@ -1,4 +1,5 @@
 import CategoryLabel from "@/components/CategoryLabel"
+import { getCategoryLabel } from "@/utils/getCategoryLabel"
 import Image from "next/image"
 
 interface BaseProps {
@@ -39,7 +40,9 @@ export default function InfoCard(props: Props) {
         <>
           <p className="text-body2-bold text-label-normal">{props.title}</p>
           <div className="flex items-center gap-[12px]">
-            {props.items?.map((item, index) => <CategoryLabel key={`${item}-${index}`} text={item} />)}
+            {props.items?.map((item, index) => (
+              <CategoryLabel key={`${item}-${index}`} text={getCategoryLabel(item)} />
+            ))}
           </div>
         </>
       )}

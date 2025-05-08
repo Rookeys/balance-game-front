@@ -15,7 +15,7 @@ export default function CategorySlider() {
             className="ms-[16px] !w-fit last:mr-[16px] md:ms-[24px] last:md:mr-[24px] lg:mr-[24px] lg:ms-0 last:lg:mr-0"
           >
             <CategoryBox
-              src={`/images/categories/category${index + 1}.webp`}
+              src={`/images/icons/categories/category${index + 1}.webp`}
               alt={`${category.label}-image`}
               href={`/category/${category.value.toLocaleLowerCase()}`}
               label={category.label}

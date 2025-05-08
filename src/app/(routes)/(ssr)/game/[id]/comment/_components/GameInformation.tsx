@@ -4,6 +4,7 @@ import { useGetGameStatus } from "@/api/orval/client/main-page-controller/main-p
 import CategoryLabel from "@/components/CategoryLabel"
 import MobilePlayNowButton from "@/components/MobilePlayNowButton"
 import ResourceItem from "@/components/ResourceItem"
+import { getCategoryLabel } from "@/utils/getCategoryLabel"
 import Image from "next/image"
 import { useParams } from "next/navigation"
 
@@ -24,7 +25,9 @@ export default function GameInformation() {
       </figure>
       <section className="flex w-full flex-col gap-[12px] md:gap-[24px] lg:gap-[40px]">
         <article className="flex items-center gap-[12px]">
-          {data?.categories?.map((category, i) => <CategoryLabel key={`${category}-${i}`} text={category} />)}
+          {data?.categories?.map((category, i) => (
+            <CategoryLabel key={`${category}-${i}`} text={getCategoryLabel(category)} />
+          ))}
         </article>
         <article className="flex flex-col gap-[12px]">
           <p className="font-sb-aggro-medium text-heading-5">{data?.title}</p>

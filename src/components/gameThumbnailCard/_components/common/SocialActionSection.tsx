@@ -5,8 +5,8 @@ import GameReportModal from "@/components/GameReportModal"
 import MoreButton, { MoreItem } from "@/components/MoreButton"
 import { cn } from "@/utils/cn"
 import { getCategoryLabel } from "@/utils/getCategoryLabel"
+import { handleGameShare } from "@/utils/handleShare"
 import { requireLogin } from "@/utils/requireLogin"
-import { share, ShareAPIRequest } from "@/utils/share"
 import { useSession } from "next-auth/react"
 import { useState } from "react"
 import GameDeleteModal from "./GameDeleteModal"
@@ -24,15 +24,6 @@ export default function SocialActionSection({ id, title, categories, isMine }: P
   const [isOpenReportModal, setIsOpenReportModal] = useState<boolean>(false)
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState<boolean>(false)
 
-  const handleShare = async () => {
-    const shareData: ShareAPIRequest = {
-      title: `짱픽에 초대합니다`,
-      text: `이상형 월드컵 ${title ?? ""}`,
-      url: `https://zznpk.com/game/${id}`
-    }
-    share(shareData)
-  }
-
   const handleReport = async () => {
     if (!requireLogin(session)) {
       return
@@ -42,11 +33,11 @@ export default function SocialActionSection({ id, title, categories, isMine }: P
 
   const moreItems: MoreItem[] = isMine
     ? [
-        { label: "공유하기", onClick: handleShare },
+        { label: "공유하기", onClick: () => handleGameShare({ title, id }) },
         { label: "삭제하기", onClick: () => setIsOpenDeleteModal(true) }
       ]
     : [
-        { label: "공유하기", onClick: handleShare },
+        { label: "공유하기", onClick: () => handleGameShare({ title, id }) },
         {
           label: "신고하기",
           onClick: handleReport

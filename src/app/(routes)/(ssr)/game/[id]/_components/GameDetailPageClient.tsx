@@ -55,12 +55,12 @@ export default function GameDetailPageClient() {
             <p className="text-body2-regular text-label-normal">{gameDetailData?.description}</p>
           </article>
           <DesktopCards />
-          <DesktopPlayButton onClick={() => setIsOpenPlayModal(true)} />
+          <DesktopPlayButton onClick={() => setIsOpenPlayModal(true)} id={Number(id)} title={gameDetailData?.title} />
         </section>
       </section>
       <TabletCards />
-      <TabletPlayButton onClick={() => setIsOpenPlayModal(true)} />
-      <GameDetailBottomBar onClick={() => setIsOpenPlayModal(true)} />
+      <TabletPlayButton onClick={() => setIsOpenPlayModal(true)} id={Number(id)} title={gameDetailData?.title} />
+      <GameDetailBottomBar onClick={() => setIsOpenPlayModal(true)} id={Number(id)} title={gameDetailData?.title} />
       {isOpenPlayModal && !isPendingGamePlayData && (
         <SelectRoundModal
           onClose={() => setIsOpenPlayModal(false)}
