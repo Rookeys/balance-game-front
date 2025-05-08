@@ -10,7 +10,8 @@ const isStorybook = process.env.STORYBOOK === "true"
 const convertedScreenSize = Object.fromEntries(Object.entries(SCREEN_SIZE).map(([key, value]) => [key, `${value}px`]))
 
 const config = {
-  darkMode: ["selector", "[data-theme='dark']"],
+  // darkMode: ["selector", "[data-theme='dark']"],
+  darkMode: false,
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
