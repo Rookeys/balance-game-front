@@ -5,10 +5,18 @@ import {
 import { COOKIE_KEY } from "@/constants/cookie"
 import { log } from "@/utils/log"
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query"
+import { Metadata } from "next"
 import { cookies } from "next/headers"
 import { notFound } from "next/navigation"
 import GamePlayPageClient from "./_components/GamePlayPageClient"
 import NewGamePageClient from "./_components/NewGamePageClient"
+
+export const metadata: Metadata = {
+  robots: {
+    index: false,
+    follow: false
+  }
+}
 
 interface Params {
   id: string
