@@ -8,6 +8,7 @@ import ModalWrapper from "./ModalWrapper"
 interface Params {
   title?: string
   description?: string
+  subDescription?: string
   onClick?: () => void
   onClose?: () => void
   okLabel?: string
@@ -19,6 +20,7 @@ interface Params {
 export default function ConfirmModal({
   title,
   description,
+  subDescription,
   onClick,
   onClose,
   okLabel = "확인",
@@ -40,6 +42,7 @@ export default function ConfirmModal({
         <article className="flex flex-col gap-[16px] pb-[40px] pt-[20px]">
           <h2 className="font-sb-aggro-medium text-heading-4 text-label-normal md:text-heading-3">{title}</h2>
           <p className="whitespace-pre-line text-body2-regular">{description}</p>
+          <p className="whitespace-pre-line text-caption1-regular text-label-alternative">{subDescription}</p>
         </article>
         <article className="flex items-center justify-between gap-[12px]">
           <Button
