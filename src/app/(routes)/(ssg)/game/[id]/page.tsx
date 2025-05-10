@@ -2,7 +2,7 @@ import { getGetGameStatusQueryKey } from "@/api/orval/client/main-page-controlle
 import GameDetailPageClient from "@/app/(routes)/(ssr)/game/[id]/_components/GameDetailPageClient"
 import { FetchPrefetchBoundary } from "@/lib/providers/FetchPrefetchBoundary"
 import { QueryClient } from "@tanstack/react-query"
-import { Metadata } from "next"
+import { Metadata, ResolvingMetadata } from "next"
 import { notFound } from "next/navigation"
 
 interface Params {
@@ -13,7 +13,10 @@ interface GameDetailPageProps {
   params: Promise<Params>
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+export async function generateMetadata(
+  { params }: { params: Promise<{ id: string }> },
+  parent: ResolvingMetadata
+): Promise<Metadata> {
   const { id } = await params
 
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_ROOT}/api/v1/games/${id}`, {
@@ -33,11 +36,13 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
     openGraph: {
       title,
       description,
-      url: `https://zznpk.com/game/${id}`
+      url: `https://zznpk.com/game/${id}`,
+      images: (await parent).openGraph?.images
     },
     twitter: {
       title,
-      description
+      description,
+      images: (await parent).openGraph?.images
     }
   }
 }

@@ -11,7 +11,6 @@ const convertedScreenSize = Object.fromEntries(Object.entries(SCREEN_SIZE).map((
 
 const config = {
   // darkMode: ["selector", "[data-theme='dark']"],
-  darkMode: false,
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
