@@ -1,8 +1,8 @@
 import { GetMainGameListCategory } from "@/api/orval/model/getMainGameListCategory"
 import Filter from "@/components/Filter"
 import ScrollTopButton from "@/components/ScrollTopButton"
-import { categories } from "@/constants/categories"
 import { gameListFilters } from "@/constants/filters"
+import { getCategoryLabel } from "@/utils/getCategoryLabel"
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
 import CategoryGameList from "./_components/CategoryGameList"
@@ -10,12 +10,14 @@ import Title from "./_components/Title"
 
 export async function generateMetadata({ params }: { params: Promise<{ category: string }> }): Promise<Metadata> {
   const { category } = await params
-  const match = categories.find((c) => c.id === category.toUpperCase())
 
-  if (!match) return { title: "카테고리 없음", robots: { index: false, follow: true } }
+  const label = getCategoryLabel(category)
+
+  if (!label) return { title: "카테고리 페이지", robots: { index: false, follow: true } }
 
   return {
-    title: `${match.label} 카테고리`,
+    title: `${label} 카테고리`,
+    description: `짱픽 이상형월드컵 ${label} 카테고리 페이지입니다. 카테고리에 맞는 이상형월드컵을 플레이해 보세요!`,
     robots: { index: false, follow: true }
   }
 }

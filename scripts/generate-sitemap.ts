@@ -18,6 +18,17 @@ async function generateSitemap() {
     lastmod: now
   })
 
+  // // 카테고리 페이지들 추가
+  // for (const category of categories) {
+  //   const path = `/category/${category.value.toLowerCase()}`
+  //   sitemap.write({
+  //     url: path,
+  //     changefreq: "weekly",
+  //     priority: 0.6,
+  //     lastmod: now
+  //   })
+  // }
+
   // Todo 백엔드 uuid 작업 완료 후 진행
   // 게임 리스트 가져오기
   // const res = await fetch("")

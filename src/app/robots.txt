@@ -1,5 +1,4 @@
 User-agent: *
-Disallow: /category
 Disallow: /my-page
 Disallow: /search
 Disallow: /sign-in
@@ -10,5 +9,6 @@ Disallow: /api
 
 Allow: /
 Allow: /game/
+Allow: /category/
 
 Sitemap: https://zznpk.com/sitemap.xml

@@ -25,8 +25,20 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
 
   const data = await res.json()
 
+  const title = data.title ?? "게임 상세"
+  const description = `이상형월드컵 ${data.title}의 상세페이지 입니다. 정보를 확인하고, 플레이해 보세요!`
   return {
-    title: data.title ?? "게임 상세"
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      url: `https://zznpk.com/game/${id}`
+    },
+    twitter: {
+      title,
+      description
+    }
   }
 }
 
