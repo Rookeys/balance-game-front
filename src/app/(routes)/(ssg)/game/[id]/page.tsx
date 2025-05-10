@@ -30,6 +30,7 @@ export async function generateMetadata(
 
   const title = data.title ?? "게임 상세"
   const description = `이상형월드컵 ${data.title}의 상세페이지 입니다. 정보를 확인하고, 플레이해 보세요!`
+
   return {
     title,
     description,
@@ -42,7 +43,7 @@ export async function generateMetadata(
     twitter: {
       title,
       description,
-      images: (await parent).openGraph?.images
+      images: (await parent).twitter?.images
     }
   }
 }
