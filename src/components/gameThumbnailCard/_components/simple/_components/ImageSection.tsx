@@ -34,7 +34,7 @@ export default function ImageSection({ src, tag, isBlind = false, totalPlayNums 
       />
       {/* 그라데이션 적용 */}
       <div className="absolute top-0 h-[52px] w-full bg-gradient-to-b from-[#1515174D] from-0% via-[#15151700] via-70% to-[#15151700] to-100% md:h-[88px]" />
-      <div className="absolute bottom-[8px] start-[12px] rounded-[4px] bg-dimmer-normal p-[4px] text-label-medium text-white">
+      <div className="absolute bottom-[8px] start-[12px] rounded-[4px] bg-dimmer-normal p-[4px] text-label-medium text-background">
         <div className="flex items-center gap-[4px]">
           <Play size={16} fill={COLORS.WHITE} />
           <p>{totalPlayNums}</p>
@@ -43,7 +43,7 @@ export default function ImageSection({ src, tag, isBlind = false, totalPlayNums 
       {tag && (
         <div
           className={cn(
-            "absolute start-[12px] top-[12px] rounded-[4px] px-[8px] py-[4px] text-white",
+            "absolute start-[12px] top-[12px] rounded-[4px] px-[8px] py-[4px] text-caption2-medium text-background md:text-label-medium",
             tag === "HOT" ? "bg-accent-normal" : "bg-secondary-normal"
           )}
         >
