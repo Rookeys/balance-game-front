@@ -68,6 +68,8 @@ export function ImageUploadForm() {
       ])
 
       reset()
+
+      toast.success("이미지 업로드를 성공했습니다.")
     } catch (error) {
       log("Upload failed", error)
       toast.error("오류가 발생했습니다. 다시 시도해주세요")

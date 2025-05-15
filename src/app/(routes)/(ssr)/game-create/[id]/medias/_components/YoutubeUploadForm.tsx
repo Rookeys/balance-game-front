@@ -28,7 +28,7 @@ const YoutubeModal = dynamic(() => import("@/components/modal/YoutubeModal"))
 
 export function YoutubeUploadForm() {
   const { id } = useParams()
-  const { mutateAsync } = useSaveLink()
+  const { mutateAsync: SaveYoutubeLink } = useSaveLink()
 
   const queryClient = useQueryClient()
 
@@ -49,7 +49,7 @@ export function YoutubeUploadForm() {
 
   const onSubmit = async (data: LinkRequest) => {
     try {
-      await mutateAsync({ gameId: Number(id), data })
+      await SaveYoutubeLink({ gameId: Number(id), data })
 
       await Promise.all([
         queryClient.invalidateQueries({ queryKey: getGetResourcesUsingPageQueryKey(Number(id)) }),
@@ -57,6 +57,7 @@ export function YoutubeUploadForm() {
       ])
 
       reset()
+      toast.success("유튜브 저장을 완료했습니다.")
     } catch (error) {
       log(error)
       toast.error("오류가 발생했습니다. 다시 시도해주세요")

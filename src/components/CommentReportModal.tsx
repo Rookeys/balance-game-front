@@ -3,12 +3,13 @@
 import { useSubmitGameCommentsReport } from "@/api/orval/client/game-report-controller/game-report-controller"
 import { GameCommentReportRequestTargetType } from "@/api/orval/model/gameCommentReportRequestTargetType"
 import { COLORS } from "@/styles/theme/colors"
-import { log } from "@/utils/log"
 import { reportCommentSchema, ReportCommentType } from "@/validations/reportSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
+import axios from "axios"
 import { Check, XIcon } from "lucide-react"
 import { useParams, usePathname, useSearchParams } from "next/navigation"
 import { FieldValues, useForm } from "react-hook-form"
+import { toast } from "sonner"
 import { Button } from "./Button"
 import InputText from "./form/inputText/InputText"
 import ModalWrapper from "./modal/ModalWrapper"
@@ -74,11 +75,22 @@ export default function CommentReportModal({ commentId, onClose, overlayClose }:
           etcReason: data.etcReason
         }
       })
+      toast.success("댓글을 신고하였습니다.")
       if (onClose) {
         onClose()
       }
-    } catch (error) {
-      log(error)
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        const errorCode = error.response?.data?.errorCode
+        if (errorCode === "400_9") {
+          toast.error("이미 신고한 댓글입니다.")
+        } else {
+          toast.error("오류가 발생했습니다.")
+        }
+      }
+      // else {
+      //   toast.error("알 수 없는 오류가 발생했습니다.")
+      // }
     }
   }
 

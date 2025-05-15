@@ -10,8 +10,10 @@ import {
   useDeleteResultComment
 } from "@/api/orval/client/game-result-comments-controller/game-result-comments-controller"
 import ConfirmModal from "@/components/modal/ConfirmModal"
+import { log } from "@/utils/log"
 import { useQueryClient } from "@tanstack/react-query"
 import { useParams, usePathname, useSearchParams } from "next/navigation"
+import { toast } from "sonner"
 
 interface Params {
   commentId: number
@@ -41,23 +43,29 @@ export default function CommentDeleteModal({ commentId, onClose, resourceId, par
   const queryClient = useQueryClient()
 
   const handleDelete = async () => {
-    if (isGameComment) {
-      await deleteGameComment({ gameId: Number(gameId), commentId: commentId as number })
-      await queryClient.invalidateQueries({ queryKey: getGetCommentsByGameResultQueryKey(Number(gameId)) })
-    } else {
-      if (!resourceId) return
-      await deleteResourceComment({ gameId: Number(gameId), commentId: commentId as number, resourceId: resourceId })
-      await queryClient.invalidateQueries({ queryKey: getGetCommentsByGameResultQueryKey(Number(gameId)) })
-      await Promise.all([
-        queryClient.invalidateQueries({
-          queryKey: getGetParentCommentsByGameResourceQueryKey(Number(gameId), resourceId)
-        }),
-        queryClient.invalidateQueries({
-          queryKey: getGetChildrenCommentsByGameResourceQueryKey(Number(gameId), resourceId, parentId as number)
-        })
-      ])
+    try {
+      if (isGameComment) {
+        await deleteGameComment({ gameId: Number(gameId), commentId: commentId as number })
+        await queryClient.invalidateQueries({ queryKey: getGetCommentsByGameResultQueryKey(Number(gameId)) })
+      } else {
+        if (!resourceId) return
+        await deleteResourceComment({ gameId: Number(gameId), commentId: commentId as number, resourceId: resourceId })
+        await queryClient.invalidateQueries({ queryKey: getGetCommentsByGameResultQueryKey(Number(gameId)) })
+        await Promise.all([
+          queryClient.invalidateQueries({
+            queryKey: getGetParentCommentsByGameResourceQueryKey(Number(gameId), resourceId)
+          }),
+          queryClient.invalidateQueries({
+            queryKey: getGetChildrenCommentsByGameResourceQueryKey(Number(gameId), resourceId, parentId as number)
+          })
+        ])
+      }
+      toast.success("댓글을 삭제했습니다.")
+      onClose()
+    } catch (error) {
+      log(error)
+      toast.error("오류가 발생했습니다.")
     }
-    onClose()
   }
 
   return (

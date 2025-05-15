@@ -3,7 +3,9 @@
 import { useDeleteGame } from "@/api/orval/client/game-room-controller/game-room-controller"
 import { getGetMyGameListQueryKey } from "@/api/orval/client/user-profile-controller/user-profile-controller"
 import ConfirmModal from "@/components/modal/ConfirmModal"
+import { log } from "@/utils/log"
 import { useQueryClient } from "@tanstack/react-query"
+import { toast } from "sonner"
 
 interface Params {
   id: number
@@ -16,9 +18,15 @@ export default function GameDeleteModal({ id, onClose }: Params) {
   const queryClient = useQueryClient()
 
   const handleDelete = async () => {
-    await deleteGame({ gameId: id })
-    queryClient.invalidateQueries({ queryKey: getGetMyGameListQueryKey() })
-    onClose()
+    try {
+      await deleteGame({ gameId: id })
+      queryClient.invalidateQueries({ queryKey: getGetMyGameListQueryKey() })
+      toast.success("게임을 삭제했습니다.")
+      onClose()
+    } catch (error) {
+      log(error)
+      toast.error("오류가 발생했습니다.")
+    }
   }
 
   return (

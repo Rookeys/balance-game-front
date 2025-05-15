@@ -3,11 +3,13 @@
 import { useContinuePlayRoom, useUpdatePlayRoom } from "@/api/orval/client/game-play-controller/game-play-controller"
 import { GamePlayRequest } from "@/api/orval/model/gamePlayRequest"
 import { removePlayIdCookie } from "@/lib/cookies/playIdCookie"
+import { log } from "@/utils/log"
 import { sleep } from "@/utils/sleep"
 import Image from "next/image"
 import { useParams, useRouter } from "next/navigation"
 import { useState } from "react"
 import SelectItemBox from "./SelectItemBox"
+import { toast } from "sonner"
 interface Params {
   playId: number
 }
@@ -20,7 +22,7 @@ export default function PlaySection({ playId }: Params) {
 
   const [selectedId, setSelectedId] = useState<number>()
 
-  const { mutateAsync } = useUpdatePlayRoom()
+  const { mutateAsync: playContinue } = useUpdatePlayRoom()
 
   const returnPutGamePlayRequest = (selectedId: number): GamePlayRequest => {
     const winResourceId =
@@ -40,26 +42,31 @@ export default function PlaySection({ playId }: Params) {
   }
 
   const handleSelectItem = async (selectedResourceId?: number) => {
-    if (selectedId || !selectedResourceId) return
-    setSelectedId(selectedResourceId)
-    await sleep(1000)
+    try {
+      if (selectedId || !selectedResourceId) return
+      setSelectedId(selectedResourceId)
+      await sleep(1000)
 
-    await mutateAsync({
-      gameId: Number(id),
-      playId: playId,
-      data: returnPutGamePlayRequest(Number(selectedResourceId))
-    })
+      await playContinue({
+        gameId: Number(id),
+        playId: playId,
+        data: returnPutGamePlayRequest(Number(selectedResourceId))
+      })
 
-    if (gamePlayData?.totalRoundNums === 2 && gamePlayData.currentRoundNums === 1) {
-      // 결승전 선택 후 처리
-      await removePlayIdCookie()
-      if (selectedResourceId) {
-        router.replace(`/game/${id}/resources/${selectedResourceId}?played=true`)
-        return
+      if (gamePlayData?.totalRoundNums === 2 && gamePlayData.currentRoundNums === 1) {
+        // 결승전 선택 후 처리
+        await removePlayIdCookie()
+        if (selectedResourceId) {
+          router.replace(`/game/${id}/resources/${selectedResourceId}?played=true`)
+          return
+        }
       }
+      // 게임 계속 진행
+      window.location.reload()
+    } catch (error) {
+      log(error)
+      toast.error("게임 진행 중 오류가 발생했습니다.")
     }
-    // 게임 계속 진행
-    window.location.reload()
   }
 
   return (

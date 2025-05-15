@@ -12,7 +12,9 @@ import CustomCheckIcon from "@/icons/CustomCheckIcon"
 import { useSelectedResourceIdStore } from "@/store/selectedResourceId"
 import { COLORS } from "@/styles/theme/colors"
 import { calculateWinRate } from "@/utils/calculateWinRate"
+import { cn } from "@/utils/cn"
 import { getYoutubeThumbnail } from "@/utils/getYoutubeThumbnail"
+import { log } from "@/utils/log"
 import { useQueryClient } from "@tanstack/react-query"
 import { Square } from "lucide-react"
 import Image from "next/image"
@@ -21,7 +23,7 @@ import { Dispatch, SetStateAction } from "react"
 import ImageEditModal from "./ImageEditModal"
 import ResourceDeleteModal from "./ResourceDeleteModal"
 import YoutubeEditModal from "./YoutubeEditModal"
-import { cn } from "@/utils/cn"
+import { toast } from "sonner"
 
 interface Params {
   resource: GameResourceResponse
@@ -51,14 +53,20 @@ export default function ResourceTableContents({
   const { mutateAsync: deleteResource, isPending: isDeleting } = useDeleteResource()
 
   const handleDelete = async () => {
-    await deleteResource({ gameId: Number(id), resourceId: Number(resource.resourceId) })
+    try {
+      await deleteResource({ gameId: Number(id), resourceId: Number(resource.resourceId) })
 
-    await Promise.all([
-      queryClient.invalidateQueries({ queryKey: getGetResourcesUsingPageQueryKey(Number(id)) }),
-      queryClient.invalidateQueries({ queryKey: getGetCountResourcesInGamesQueryKey(Number(id)) })
-    ])
+      await Promise.all([
+        queryClient.invalidateQueries({ queryKey: getGetResourcesUsingPageQueryKey(Number(id)) }),
+        queryClient.invalidateQueries({ queryKey: getGetCountResourcesInGamesQueryKey(Number(id)) })
+      ])
 
-    setIsOpenDeleteModal(false)
+      toast.success("콘텐츠 삭제를 완료했습니다.")
+      setIsOpenDeleteModal(false)
+    } catch (error) {
+      log(error)
+      toast.error("오류가 발생했습니다.")
+    }
   }
 
   const moreItems: MoreItem[] = [

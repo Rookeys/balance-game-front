@@ -10,10 +10,11 @@ import axios from "axios"
 import { Camera } from "lucide-react"
 import { useSession } from "next-auth/react"
 import Image from "next/image"
+import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { FormProvider, useForm } from "react-hook-form"
 import ResignModal from "./ResignModal"
-import { useRouter } from "next/navigation"
+import { toast } from "sonner"
 
 export type EditProfileType = UserRequest & { newImage?: File[] | null }
 
@@ -42,37 +43,43 @@ export default function ProfileEditPageClient() {
   } = formMethods
 
   const onSubmit = async (data: EditProfileType) => {
-    // #region 프로필 수정 관련 로직
-    let newImageURL = null
-    if (data.newImage && data.newImage.length > 0) {
-      const presignedUrl = (await RequestPresignedUrl({ data: { prefix: "image", length: 1 } }))[0] // 해당 폼에서는 무조건 1임
+    try {
+      // #region 프로필 수정 관련 로직
+      let newImageURL = null
+      if (data.newImage && data.newImage.length > 0) {
+        const presignedUrl = (await RequestPresignedUrl({ data: { prefix: "image", length: 1 } }))[0] // 해당 폼에서는 무조건 1임
 
-      await axios.put(presignedUrl, data.newImage[0], {
-        headers: {
-          "Content-Type": data.newImage[0].type
-        }
+        await axios.put(presignedUrl, data.newImage[0], {
+          headers: {
+            "Content-Type": data.newImage[0].type
+          }
+        })
+        newImageURL = new URL(presignedUrl).origin + new URL(presignedUrl).pathname
+      }
+
+      const imageURL = newImageURL ? newImageURL : session?.user.image
+
+      const putProfileRequest = {
+        ...data,
+        url: imageURL
+      } satisfies UserRequest
+
+      await editProfile({
+        data: putProfileRequest
       })
-      newImageURL = new URL(presignedUrl).origin + new URL(presignedUrl).pathname
+
+      await update({
+        nickname: data.nickname,
+        image: imageURL
+      })
+
+      setValue("newImage", [], { shouldValidate: true })
+      // #endregion 프로필 수정 관련 로직
+      toast.success("프로필이 수정되었습니다.")
+    } catch (error) {
+      log(error)
+      toast.error("오류가 발생했습니다.")
     }
-
-    const imageURL = newImageURL ? newImageURL : session?.user.image
-
-    const putProfileRequest = {
-      ...data,
-      url: imageURL
-    } satisfies UserRequest
-
-    await editProfile({
-      data: putProfileRequest
-    })
-
-    await update({
-      nickname: data.nickname,
-      image: imageURL
-    })
-
-    setValue("newImage", [], { shouldValidate: true })
-    // #endregion 프로필 수정 관련 로직
   }
 
   const newImageData = watch("newImage")

@@ -11,6 +11,8 @@ import { FieldValues, useForm } from "react-hook-form"
 import { Button } from "./Button"
 import InputText from "./form/inputText/InputText"
 import ModalWrapper from "./modal/ModalWrapper"
+import axios from "axios"
+import { toast } from "sonner"
 
 interface Params {
   id?: string
@@ -52,11 +54,20 @@ export default function GameReportModal({ id, onClose, overlayClose }: Params) {
         gameId: Number(id),
         data: { targetType: GameReportRequestTargetType.GAME, reasons: selectedValues, etcReason: data.etcReason }
       })
+      toast.success("게임을 신고하였습니다.")
       if (onClose) {
         onClose()
       }
     } catch (error) {
       log(error)
+      if (axios.isAxiosError(error)) {
+        const errorCode = error.response?.data?.errorCode
+        if (errorCode === "400_9") {
+          toast.error("이미 신고한 댓글입니다.")
+        } else {
+          toast.error("오류가 발생했습니다.")
+        }
+      }
     }
   }
 

@@ -18,6 +18,7 @@ import CustomCheckIcon from "@/icons/CustomCheckIcon"
 import { useSelectedResourceIdStore } from "@/store/selectedResourceId"
 import { COLORS } from "@/styles/theme/colors"
 import { getMaxRound } from "@/utils/getMaxRound"
+import { log } from "@/utils/log"
 import { useQueryClient } from "@tanstack/react-query"
 import { Search, Square } from "lucide-react"
 import { useParams, useRouter, useSearchParams } from "next/navigation"
@@ -53,16 +54,21 @@ export default function ResourceFormContainer() {
   }
 
   const handleSelectedDelete = async () => {
-    await deleteSelectedAll({ gameId: Number(id), data: { list: selectedResourceIds } })
-    // await queryClient.invalidateQueries({ queryKey: getGetResourcesUsingPageQueryKey(Number(id)) })
+    try {
+      await deleteSelectedAll({ gameId: Number(id), data: { list: selectedResourceIds } })
+      // await queryClient.invalidateQueries({ queryKey: getGetResourcesUsingPageQueryKey(Number(id)) })
 
-    await Promise.all([
-      queryClient.invalidateQueries({ queryKey: getGetResourcesUsingPageQueryKey(Number(id)) }),
-      queryClient.invalidateQueries({ queryKey: getGetCountResourcesInGamesQueryKey(Number(id)) })
-    ])
-
-    clearSelectedResourceIds()
-    setIsOpenDeleteModal(false)
+      await Promise.all([
+        queryClient.invalidateQueries({ queryKey: getGetResourcesUsingPageQueryKey(Number(id)) }),
+        queryClient.invalidateQueries({ queryKey: getGetCountResourcesInGamesQueryKey(Number(id)) })
+      ])
+      clearSelectedResourceIds()
+      toast.success("삭제가 완료되었습니다.")
+      setIsOpenDeleteModal(false)
+    } catch (error) {
+      log(error)
+      toast.error("오류가 발생했습니다.")
+    }
   }
 
   const tabItems: TabBarItem[] = [
