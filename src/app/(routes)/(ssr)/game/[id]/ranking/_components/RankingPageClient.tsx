@@ -73,7 +73,7 @@ export default function RankingPageClient() {
             <p className="mx-auto w-full rounded-[12px] text-center font-sb-aggro-medium text-heading-5 text-background">
               {gameDetail?.title}
             </p>
-            <section className="flex items-center justify-center gap-[12px] lg:gap-[24px]">
+            <section className="flex justify-center gap-[12px] lg:gap-[24px]">
               {second && (
                 <RankingResourceCard
                   rank={2}

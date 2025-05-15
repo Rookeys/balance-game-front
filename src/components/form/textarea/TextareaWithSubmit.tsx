@@ -42,7 +42,7 @@ const TextareaWithSubmit: React.FC<Params> = ({
       <TextareaAutosize
         id={id}
         className={cn(
-          "w-full resize-none rounded-[12px] border-[2px] px-[12px] py-[12px] pe-[80px] text-body2-regular text-label-neutral outline-none focus:border-primary-normal",
+          "w-full resize-none rounded-[12px] border-[1px] px-[12px] py-[12px] pe-[80px] text-body2-regular text-label-neutral outline-none focus:border-primary-normal",
           inputClassName
         )}
         value={value}
