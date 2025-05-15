@@ -2,6 +2,7 @@
 import { useCreatePlayRoom } from "@/api/orval/client/game-play-controller/game-play-controller"
 import { GamePlayRoundRequest } from "@/api/orval/model/gamePlayRoundRequest"
 import { Button } from "@/components/Button"
+import { Spinner } from "@/components/Spinner"
 import { useAsyncRoutePush } from "@/hooks/useAsyncRoutePush"
 import { setPlayIdCookie } from "@/lib/cookies/playIdCookie"
 import { cn } from "@/utils/cn"
@@ -38,7 +39,7 @@ export default function RoundForm({ totalItem }: Params) {
       await setPlayIdCookie(res.playId as number, id as string)
       await asyncPush(`/game/${id}/play`)
     } catch {
-      toast.error("오류가 발생했습니다.")
+      toast.error("게임 실행 중 오류가 발생했습니다.")
     }
   }
 
@@ -67,6 +68,7 @@ export default function RoundForm({ totalItem }: Params) {
           시작
         </Button>
       </article>
+      {isSubmitting && <Spinner />}
     </form>
   )
 }
