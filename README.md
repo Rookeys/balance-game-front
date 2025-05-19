@@ -1,6 +1,6 @@
 # 캐싱전략 내용
 
-SSG 를 사용 시 useSession 훅에서 데이터를 가져올 수 없으므로 세션 데이터가 필요한 컴포넌트인 Header 컴포넌트를
+SSG 를 사용 시 useSession 훅에서 데이터를 가져올 수 없으므로 세션 데이터가 필요한 컴포넌트인 Header 컴포넌트를<br />
 Header 와 HeaderSSG 컴포넌트로 분리하여 각각 useSession, getSession 으로 분리하고 layout.tsx 에 각각 적용하였음.
 
 SSR 사용 케이스 : orval 에서 사용한 server 기반 react-query prefetch 를 사용<br />
@@ -43,8 +43,8 @@ fetch-cache 사용 케이스 : 페이지에 대한 HTML 이 아닌 각 API 에 �
 
 ## 메인페이지 (fetch-cache)
 
-주간 인기 월드컵 5분
-최근 등록된 이상형 월드컵 10초
+주간 인기 월드컵 5분<br />
+최근 등록된 이상형 월드컵 10초<br />
 월간 인기 월드컵 5분
 
 검색결과: CSR
@@ -55,17 +55,17 @@ SSG 5분
 
 ## 월드컵 랭킹 페이지
 
-월드컵 디테일 데이터(타이틀) - 5분
-3등까지의 랭킹: 5분 (fetch-cache)
-랭킹: CSR - ISR 5분이랑 고민중
+월드컵 디테일 데이터(타이틀) - 5분<br />
+3등까지의 랭킹: 5분 (fetch-cache)<br />
+랭킹: CSR or ISR 5분 (고민 중)
 
 ## 댓글 페이지
 
-디테일 정보: 5분 (fetch-cache)
-3등까지의 랭킹: 5분 (fetch-cache)
+디테일 정보: 5분 (fetch-cache)<br />
+3등까지의 랭킹: 5분 (fetch-cache)<br />
 댓글: CSR
 
-리소스 페이지 (우승 페이지)
-리소스 정보 (fetch-cache)
-3등까지의 랭킹: 5분 (fetch-cache)
+## 리소스 페이지 (우승 페이지)
+리소스 정보 (fetch-cache)<br />
+3등까지의 랭킹: 5분 (fetch-cache)<br />
 댓글: CSR
