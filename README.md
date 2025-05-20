@@ -1,71 +1,82 @@
-# 캐싱전략 내용
+# 짱픽
 
-SSG 를 사용 시 useSession 훅에서 데이터를 가져올 수 없으므로 세션 데이터가 필요한 컴포넌트인 Header 컴포넌트를
-Header 와 HeaderSSG 컴포넌트로 분리하여 각각 useSession, getSession 으로 분리하고 layout.tsx 에 각각 적용하였음.
+![zznpk_feature_graphic](https://github.com/user-attachments/assets/afeeea9a-1a4d-4972-b06a-b2f799249db8)
 
-SSR 사용 케이스 : orval 에서 사용한 server 기반 react-query prefetch 를 사용<br />
-SSG, ISR 사용 케이스 : NextJS 의 HTML 캐싱전략을 사용하고, 갱신 필요 시 revalidate 값 설정이나 on-demand revalidation 사용
+## 팀원
 
-fetch-cache 사용 케이스 : 페이지에 대한 HTML 이 아닌 각 API 에 대한 캐싱을 사용하는 경우 fetchBoundary 사용
+|                              Frontend                              |                               BackEnd                               |                                Design                                |
+| :----------------------------------------------------------------: | :-----------------------------------------------------------------: | :------------------------------------------------------------------: |
+| <img src="https://github.com/kojaem.png" width="150" height="150"> | <img src="https://github.com/cheomuk.png" width="150" height="150"> | <img src="https://github.com/jinjuwoo.png" width="150" height="150"> |
+|                [고재민](https://github.com/kojaem)                 |                [박현호](https://github.com/cheomuk)                 |                [우진주](https://github.com/jinjuwoo)                 |
 
-> - orval prefetch 가 필요한가에 대한 고민 중.
+## 소개
 
-```TS
-// fetch-cache 가 필요한 경우 예시
-<FetchPrefetchBoundary
-  prefetchActions={fetch(
-    `${process.env.NEXT_PUBLIC_API_ROOT}/api/v1/games/list?${qs.stringify({
-      size: 10,
-      sortType: GetMainGameListSortType.MONTH
-    })}`,
-    {
-      cache: "force-cache",
-      next: { revalidate: 60 }
-    }
-  )}
-  queryKey={getGetMainGameListQueryKey({
-    size: 10,
-    sortType: GetMainGameListSortType.MONTH
-  })}
-  queryClient={queryClient}
-  onError={notFound}
->
-```
+### 이상형 월드컵 플랫폼 짱픽!
 
-```TS
-// fetch-cache 필요하지 않은 경우 예시
-<PrefetchBoundary
-  prefetchActions={prefetchGetGameStatus(queryClient, Number(id))}
-  queryClient={queryClient}
-  onError={notFound}
->
-```
+나만의 이상형 월드컵 만들기 & 플레이!
 
-## 메인페이지 (fetch-cache)
+세상에 단 하나뿐인 나만의 이상형 월드컵을 만들고, 친구들과 공유해보세요.<br /><br />
+다른 사람이 만든 재미있는 월드컵도 자유롭게 플레이할 수 있는<br /><br />
+월드컵 플랫폼, 짱픽! 당신의 선택이 짱이 되는 순간입니다! ✨<br /><br />
 
-주간 인기 월드컵 5분
-최근 등록된 이상형 월드컵 10초
-월간 인기 월드컵 5분
+🔹 짱픽 주요 기능
 
-검색결과: CSR
+🛠️ 나만의 월드컵 만들기<br /><br />
+주제, 이미지, 라운드 수까지! 원하는 대로 자유롭게 커스터마이징할 수 있어요.<br /><br />
+(예: 아이돌 이상형, 음식 월드컵, 캐릭터 월드컵 등)<br /><br />
 
-## 월드컵 상세 페이지 (POST, PUT, DELETE 요청 시 on-demand revalidate)
+🎮 다른 사람이 만든 월드컵 플레이
 
-SSG 5분
+수많은 유저들이 만든 다양한 월드컵이 준비되어 있어요.<br /><br />
+재미있고 개성 넘치는 월드컵을 클릭 한 번으로 바로 즐겨보세요!<br /><br />
 
-## 월드컵 랭킹 페이지
+🔗 공유 & 결과 비교
 
-월드컵 디테일 데이터(타이틀) - 5분
-3등까지의 랭킹: 5분 (fetch-cache)
-랭킹: CSR - ISR 5분이랑 고민중
+내가 만든 월드컵을 친구들과 쉽게 공유하고, 결과도 비교해보세요.<br /><br />
+누구의 선택이 더 짱일까요?<br /><br />
 
-## 댓글 페이지
+📊 인기 월드컵 랭킹
 
-디테일 정보: 5분 (fetch-cache)
-3등까지의 랭킹: 5분 (fetch-cache)
-댓글: CSR
+가장 많이 플레이된 인기 월드컵을 실시간으로 확인할 수 있어요.<br /><br />
 
-리소스 페이지 (우승 페이지)
-리소스 정보 (fetch-cache)
-3등까지의 랭킹: 5분 (fetch-cache)
-댓글: CSR
+🔄 지속적인 업데이트
+
+짱픽은 더 편리하고 재미있게 즐길 수 있도록 계속 발전하고 있어요.<br /><br />
+새로운 기능과 다양한 옵션들이 꾸준히 추가될 예정입니다.<br /><br />
+여러분의 소중한 피드백도 언제든지 환영합니다 💬<br /><br />
+
+🚀 지금 바로 짱픽에서 당신만의 이상형을 찾아보세요!
+
+## 기술 Stack
+
+### Frontend
+
+| NextJS | TypeScript | TailwindCSS | Orval | React Query | zustand | framer-motion | Vercel | React Native (Expo) |
+| ------ | ---------- | ----------- | ----- | ----------- | ------- | ------------- | ------ | ------------------- |
+
+### Backend
+
+| SpringBoot | AWS |
+| ---------- | --- |
+
+## 배포 주소
+
+### [웹 배포 주소](https://zznpk.com/)
+
+### [플레이스토어](https://play.google.com/store/apps/details?id=com.rookeys.balancegame&hl=ko)
+
+### [Figma](https://www.figma.com/design/K7KQT0CDKhgNoqZ9eYpmuy/%EC%A7%B1%ED%94%BD?node-id=0-1&p=f)
+
+<details>
+
+<summary><span  style='font-size : 24px;font-weight:bold'>문서</span></summary>
+
+<div  markdown="1">
+
+### [캐싱 전략](/docs/cache.md)
+
+### [컨벤션](/docs/convention.md)
+
+</div>
+
+</details>
