@@ -14,7 +14,7 @@ export default function Footer({ className }: Params) {
       )}
     >
       <section className="flex flex-col justify-between gap-[40px] md:flex-row-reverse md:gap-0">
-        <div className="flex flex-col gap-[8px] text-label-regular">
+        <div className="flex flex-col gap-[16px] text-caption1-regular md:text-label-regular">
           <Link
             className="lg:hidden"
             href="https://kojaem.notion.site/1ebeadad956780d38264d49909eb9abf"

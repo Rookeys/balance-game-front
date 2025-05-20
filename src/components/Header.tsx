@@ -42,7 +42,7 @@ export default function Header() {
   ]
 
   return (
-    <header className="flex h-[64px] items-center justify-between border-b border-gray-200 bg-white px-[12px] py-[8px]">
+    <header className="mx-[16px] flex h-[64px] items-center justify-between bg-white py-[8px] md:mx-[24px] lg:mx-[120px]">
       <section className="flex items-center gap-[40px]">
         <Link href={"/"} className="flex-shrink-0">
           <Logo />
@@ -67,7 +67,7 @@ export default function Header() {
       <section className="flex items-center gap-[12px] md:gap-[20px]">
         {session && (
           <>
-            <Button asChild className="hidden rounded-[8px] md:inline-flex">
+            <Button asChild className="hidden rounded-[8px] text-label-bold md:inline-flex">
               <Link href={"/game-create/new"} aria-label="game-create">
                 월드컵 만들기
               </Link>
@@ -84,7 +84,7 @@ export default function Header() {
             items={moreItems}
             ButtonUI={
               <Image
-                className="transition-color-custom h-[40px] w-[40px] rounded-full object-cover"
+                className="transition-color-custom h-[40px] w-[40px] rounded-full border border-line-normal object-cover"
                 src={session?.user.image || "/images/Rookeys.png"}
                 alt="profile-image"
                 width={40}

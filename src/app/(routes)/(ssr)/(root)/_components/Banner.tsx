@@ -42,7 +42,7 @@ export default function Banner() {
         <div className="relative mx-auto max-w-[1200px]">
           <div
             id="banner-slider-pagination"
-            className="absolute bottom-[40px] end-[16px] z-[1] h-[32px] min-w-[60px] whitespace-nowrap rounded-full bg-blue-100 px-[12px] py-[4px] text-center md:end-[24px] lg:end-0"
+            className="absolute bottom-[40px] end-[16px] z-[1] flex h-[32px] min-w-[60px] items-center justify-center gap-[4px] whitespace-nowrap rounded-full bg-blue-100 px-[12px] py-[4px] text-center text-label-bold md:end-[24px] md:px-[16px] md:text-body2-bold lg:end-0"
           />
         </div>
       </Swiper>

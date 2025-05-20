@@ -56,7 +56,7 @@ export default function HeaderSSG() {
   ]
 
   return (
-    <header className="flex h-[64px] items-center justify-between border-b border-gray-200 bg-white px-[12px] py-[8px]">
+    <header className="mx-[16px] flex h-[64px] items-center justify-between bg-white py-[8px] md:mx-[24px] lg:mx-[120px]">
       <section className="flex items-center gap-[40px]">
         <Link href={"/"} className="flex-shrink-0">
           <Logo />
@@ -106,7 +106,7 @@ export default function HeaderSSG() {
                 items={moreItems}
                 ButtonUI={
                   <Image
-                    className="h-[40px] w-[40px] rounded-full object-cover"
+                    className="transition-color-custom h-[40px] w-[40px] rounded-full border border-line-normal object-cover"
                     src={session?.user.image || "/images/Rookeys.png"}
                     alt="profile-image"
                     width={40}
