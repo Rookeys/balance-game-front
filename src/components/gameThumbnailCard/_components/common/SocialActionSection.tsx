@@ -10,6 +10,7 @@ import { requireLogin } from "@/utils/requireLogin"
 import { useSession } from "next-auth/react"
 import { useState } from "react"
 import GameDeleteModal from "./GameDeleteModal"
+import { usePathname } from "next/navigation"
 
 interface Params {
   id?: number
@@ -20,6 +21,10 @@ interface Params {
 
 export default function SocialActionSection({ id, title, categories, isMine }: Params) {
   const { data: session } = useSession()
+
+  const pathname = usePathname()
+
+  const isMyPage = pathname === "/my-page"
 
   const [isOpenReportModal, setIsOpenReportModal] = useState<boolean>(false)
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState<boolean>(false)
@@ -32,10 +37,12 @@ export default function SocialActionSection({ id, title, categories, isMine }: P
   }
 
   const moreItems: MoreItem[] = isMine
-    ? [
-        { label: "공유하기", onClick: () => handleGameShare({ title, id }) },
-        { label: "삭제하기", onClick: () => setIsOpenDeleteModal(true) }
-      ]
+    ? isMyPage
+      ? [
+          { label: "공유하기", onClick: () => handleGameShare({ title, id }) },
+          { label: "삭제하기", onClick: () => setIsOpenDeleteModal(true) }
+        ]
+      : [{ label: "공유하기", onClick: () => handleGameShare({ title, id }) }]
     : [
         { label: "공유하기", onClick: () => handleGameShare({ title, id }) },
         {
