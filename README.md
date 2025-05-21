@@ -1,6 +1,6 @@
 # 짱픽
 
-![zznpk_feature_graphic](https://github.com/user-attachments/assets/afeeea9a-1a4d-4972-b06a-b2f799249db8)
+![zznpk_Thumbnail](https://github.com/user-attachments/assets/7a15aa45-2a58-44df-957a-8a493042fca0)
 
 ## 팀원
 
