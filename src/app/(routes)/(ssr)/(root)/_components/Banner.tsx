@@ -5,12 +5,13 @@ import Image from "next/image"
 import "swiper/css"
 import { Pagination } from "swiper/modules"
 import { Swiper, SwiperSlide } from "swiper/react"
+import { LinkWrapper } from "./LinkWrapper"
 
 export default function Banner() {
   return (
     <div className="h-full w-full">
       <Swiper
-        className="relative h-[400px] w-full bg-gray-300"
+        className="relative h-[400px] w-full"
         modules={[Pagination]}
         loop
         pagination={{
@@ -23,16 +24,21 @@ export default function Banner() {
           }
         }}
       >
-        {banner.map(({ src, mdSrc, title, description }, index) => (
+        {banner.map(({ src, mdSrc, title, description, link }, index) => (
           <SwiperSlide className="w-full lg:px-0" key={index}>
-            <div className="relative mx-auto flex h-full w-full max-w-[1200px] overflow-hidden bg-primary-normal px-[16px] py-[24px] md:px-[24px] md:py-[40px] lg:rounded-[20px]">
+            <LinkWrapper
+              href={link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative mx-auto flex h-full w-full max-w-[1200px] overflow-hidden bg-primary-normal px-[16px] py-[24px] md:px-[24px] md:py-[40px] lg:rounded-[20px]"
+            >
               <Image src={src} alt={`${title}-sm`} className="object-cover md:hidden" fill />
               <Image src={mdSrc} alt={`${title}-md`} className="hidden object-cover md:block" fill />
               <section className="z-[1] flex flex-col justify-end gap-[8px] pe-[80px]">
                 <p className="text-label-medium text-fill-normal md:text-body2-medium">{title}</p>
                 <p className="font-sb-aggro-medium text-heading-4 text-background md:text-heading-1">{description}</p>
               </section>
-            </div>
+            </LinkWrapper>
           </SwiperSlide>
         ))}
         <div className="relative mx-auto max-w-[1200px]">

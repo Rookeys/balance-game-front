@@ -3,6 +3,7 @@ export type BannerItem = {
   mdSrc: string
   title: string
   description: string
+  link?: string
 }
 
 export const banner: BannerItem[] = [
@@ -16,6 +17,7 @@ export const banner: BannerItem[] = [
     src: "/images/banner/download_banner_sm.webp",
     mdSrc: "/images/banner/download_banner_lg.webp",
     title: "안드로이드 앱 다운로드",
-    description: "플레이스토어에서 앱을 다운로드 하세요"
+    description: "플레이스토어에서 앱을 다운로드 하세요",
+    link: "https://play.google.com/store/apps/details?id=com.rookeys.balancegame"
   }
 ]
