@@ -13,7 +13,14 @@ interface Params extends InputHTMLAttributes<HTMLInputElement> {
   inputClassName?: string
 }
 
-export default function SearchInput({ onSearch, Icon, iconProps, className, inputClassName, ...props }: Params) {
+export default function SearchInput({
+  onSearch,
+  Icon,
+  iconProps,
+  className,
+  inputClassName = "h-[40px] md:h-[48px]",
+  ...props
+}: Params) {
   const inputRef = useRef<HTMLInputElement>(null)
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
