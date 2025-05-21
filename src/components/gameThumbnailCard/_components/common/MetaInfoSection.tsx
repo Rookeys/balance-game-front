@@ -23,7 +23,7 @@ export default function MetaInfoSection({ creatorNickname, creatorImage }: Param
             setErrorFallbackURL("/images/Rookeys.png")
           }}
         />
-        <p className="line-clamp-1 text-label-regular text-label-neutral">{creatorNickname}</p>
+        <p className="line-clamp-1 text-caption2-regular text-label-neutral md:text-label-regular">{creatorNickname}</p>
       </div>
       {/* 높이 390 -> 366 */}
       {/* <div className="flex items-center">

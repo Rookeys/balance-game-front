@@ -34,7 +34,7 @@ export default async function RootPage() {
   return (
     <section className="flex flex-col items-center gap-[40px]">
       <Banner />
-      <section className="flex w-full flex-col items-center gap-[60px] px-[16px] md:px-[24px] lg:px-[120px]">
+      <section className="flex w-full flex-col items-center gap-[40px] px-[16px] md:gap-[60px] md:px-[24px] lg:px-[120px]">
         <SearchAndCategory />
         <h1 className="sr-only">짱픽 - 이상형 월드컵 커뮤니티</h1>
         <Suspense fallback={<SkeletonList title="주간 인기 월드컵 TOP 10" updateTime={"5분"} />}>

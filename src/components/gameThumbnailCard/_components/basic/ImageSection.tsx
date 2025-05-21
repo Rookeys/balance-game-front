@@ -18,7 +18,7 @@ export default function ImageSection({ src, index, isBlind = false, totalPlayNum
   const [blur, setBlur] = useState<boolean>(isBlind)
   const { noBlind } = useContext(CookieContext)
   return (
-    <article className="relative h-[218px] overflow-hidden rounded-[12px] bg-gray-100 md:h-[308px]">
+    <article className="relative h-[218px] overflow-hidden rounded-[12px] md:h-[308px]">
       <Image
         src={src ?? "/"}
         className={cn(
@@ -34,13 +34,13 @@ export default function ImageSection({ src, index, isBlind = false, totalPlayNum
       />
       {/* 그라데이션 적용 */}
       <div className="absolute top-0 h-[52px] w-full bg-gradient-to-b from-[#1515174D] from-0% via-[#15151700] via-70% to-[#15151700] to-100% md:h-[88px]" />
-      <div className="absolute bottom-[8px] start-[12px] rounded-[4px] bg-dimmer-normal p-[4px] text-label-medium text-white">
+      <div className="absolute bottom-[8px] start-[12px] rounded-[4px] bg-dimmer-normal p-[4px] text-caption2-medium text-white md:text-label-medium">
         <div className="flex items-center gap-[4px]">
           <Play size={16} fill={COLORS.WHITE} />
           <p>{totalPlayNums}</p>
         </div>
       </div>
-      <div className="absolute start-0 top-0 rounded-br-[12px] rounded-tl-[12px] bg-primary-normal px-[16px] py-[8px] text-body2-bold text-white">
+      <div className="absolute start-0 top-0 rounded-br-[12px] rounded-tl-[12px] bg-primary-normal px-[16px] py-[8px] text-label-bold text-white md:text-body2-bold">
         {index + 1}
       </div>
       {!noBlind && isBlind && (

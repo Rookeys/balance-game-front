@@ -30,7 +30,7 @@ export default function GameThumbnailSimpleCard({ tag, fixedSize = true, linkEdi
   return (
     <Link
       href={linkEditPage ? `/game-create/${roomId}/edit` : `/game/${roomId}`}
-      className={cn("group flex w-full flex-col gap-[8px]", fixedSize && "w-[182px] md:w-[282px]")}
+      className={cn("group flex w-full flex-col gap-[8px]", fixedSize && "w-[162px] md:w-[282px]")}
     >
       <ImageSection
         src={

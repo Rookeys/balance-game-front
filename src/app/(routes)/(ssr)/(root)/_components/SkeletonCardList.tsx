@@ -19,7 +19,7 @@ export default function SkeletonList({ title, updateTime }: Params) {
             key={index}
             className="ms-[16px] !w-fit last:mr-[16px] md:ms-[24px] last:md:mr-[24px] lg:mr-[24px] lg:ms-0 last:lg:mr-0"
           >
-            <CardSkeleton key={index} className="w-[272px] md:w-[384px]" imageClassName="h-[218px] md:h-[308px]" />
+            <CardSkeleton key={index} className="w-[182px] md:w-[384px]" imageClassName="h-[218px] md:h-[308px]" />
           </SwiperSlide>
         ))}
       </GameSliderWrapper>
