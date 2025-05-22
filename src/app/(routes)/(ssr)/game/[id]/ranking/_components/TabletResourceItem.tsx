@@ -22,7 +22,10 @@ export default function TabletResourceItem({ index, ...props }: Params) {
         </p>
         <figure className="relative my-auto h-[100px] w-[120px] overflow-hidden rounded-[8px] border">
           <Image
-            src={getThumbnailUrlByType({ type: props.type, url: props.content }) ?? "/images/Rookeys.png"}
+            src={
+              getThumbnailUrlByType({ type: props.type, url: props.content }) ??
+              "/images/character/pixy_incomplete.webp"
+            }
             fill
             alt="thumbnail"
             className="rounded-[8px] object-contain"

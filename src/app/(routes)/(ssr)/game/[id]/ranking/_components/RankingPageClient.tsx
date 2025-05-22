@@ -80,7 +80,7 @@ export default function RankingPageClient() {
                   name={second.title}
                   winRate={calculateWinRate(second.winningNums, second.totalPlayNums)}
                   wins={second.winningNums}
-                  iconSrc={"/images/icons/crown-2.webp"}
+                  iconSrc={"/images/icons/crown_2.webp"}
                   src={getThumbnailUrlByType({ type: second.type, url: second.content })}
                   className={`max-w-[180px]`}
                 />
@@ -91,7 +91,7 @@ export default function RankingPageClient() {
                   name={first.title}
                   winRate={calculateWinRate(first.winningNums, first.totalPlayNums)}
                   wins={first.winningNums}
-                  iconSrc={"/images/icons/crown-1.webp"}
+                  iconSrc={"/images/icons/crown_1.webp"}
                   src={getThumbnailUrlByType({ type: first.type, url: first.content })}
                   className={`max-w-[180px]`}
                 />
@@ -102,7 +102,7 @@ export default function RankingPageClient() {
                   name={third.title}
                   winRate={calculateWinRate(third.winningNums, third.totalPlayNums)}
                   wins={third.winningNums}
-                  iconSrc={"/images/icons/crown-3.webp"}
+                  iconSrc={"/images/icons/crown_3.webp"}
                   src={getThumbnailUrlByType({ type: third.type, url: third.content })}
                   className={`max-w-[180px]`}
                 />

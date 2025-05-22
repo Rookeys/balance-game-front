@@ -15,7 +15,7 @@ export default function DesktopCards() {
         <InfoCard
           type="creator"
           title="제작자"
-          creatorProfile={data?.userResponse?.profileImageUrl ?? "/images/Rookeys.png"}
+          creatorProfile={data?.userResponse?.profileImageUrl ?? "/images/character/pixy_profile.webp"}
           creatorName={data?.userResponse?.nickname ?? "익명"}
         />
       </div>

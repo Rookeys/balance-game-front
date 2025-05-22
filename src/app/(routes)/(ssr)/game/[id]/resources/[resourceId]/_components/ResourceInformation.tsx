@@ -32,7 +32,7 @@ export default function ResourceInformation() {
       </figure>
       <section className="flex w-full gap-[16px] md:flex-col md:gap-[24px] lg:gap-[40px]">
         <figure className="relative h-[80px] w-[80px] flex-shrink-0 lg:h-[100px] lg:w-[100px]">
-          <Image src={"/images/Rookeys.png"} fill alt="" />
+          <Image src={"/images/icons/medal.webp"} fill alt="" />
         </figure>
         <article className="flex w-full flex-col gap-[12px]">
           <p className="font-sb-aggro-medium text-heading-4 md:text-heading-3">{resourceData?.title}</p>

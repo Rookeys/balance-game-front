@@ -26,7 +26,7 @@ export default function SelectRoundModal({ onClose, overlayClose = false, classN
           <XIcon size={24} color={COLORS.NEUTRAL_700} className="cursor-pointer" onClick={onClose} />
         </article>
         <article className="mt-[20px] flex flex-col gap-[24px]">
-          <Image src={"/images/icons/select-round.webp"} alt="" width={100} height={100} className="mx-auto" />
+          <Image src={"/images/icons/select_round.gif"} alt="" width={100} height={100} className="mx-auto" />
           <p className="font-sb-aggro-medium text-heading-4 text-label-normal md:text-heading-3">
             라운드 선택하고 시작하기
           </p>

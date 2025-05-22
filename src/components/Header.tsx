@@ -52,6 +52,8 @@ export default function Header() {
           href="https://kojaem.notion.site/1ebeadad956780d38264d49909eb9abf"
           aria-label="짱픽 서비스 소개 페이지로 이동"
           title="짱픽 서비스 소개"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           서비스 소개
         </Link>
@@ -60,6 +62,8 @@ export default function Header() {
           href="https://docs.google.com/forms/d/e/1FAIpQLSdx46EPWF42ElyDv9rMmgfIz5lOJfNmpP3OjcTgK6hCSfmqyQ/viewform"
           aria-label="짱픽 문의하기 폼으로 이동"
           title="문의하기"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           문의하기
         </Link>
@@ -85,7 +89,7 @@ export default function Header() {
             ButtonUI={
               <Image
                 className="transition-color-custom h-[40px] w-[40px] rounded-full border border-line-normal object-cover"
-                src={session?.user.image || "/images/Rookeys.png"}
+                src={session?.user.image || "/images/character/pixy_profile.webp"}
                 alt="profile-image"
                 width={40}
                 height={40}

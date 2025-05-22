@@ -48,7 +48,7 @@ export default function CommentItem({ propResourceId, ...props }: Params) {
       <article className="flex items-center justify-between">
         <article className="flex items-center gap-[8px]">
           <Image
-            src={props.profileImageUrl ?? "/images/Rookeys.png"}
+            src={props.profileImageUrl ?? "/images/character/pixy_profile.webp"}
             width={40}
             height={40}
             className="rounded-full"

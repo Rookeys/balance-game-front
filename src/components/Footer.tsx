@@ -71,7 +71,7 @@ export default function Footer({ className }: Params) {
             rel="noopener noreferrer"
           >
             <Image
-              src="/images/google-play-badge.png"
+              src="/images/google_play_badge.png"
               alt="google-play"
               width={140}
               height={40}

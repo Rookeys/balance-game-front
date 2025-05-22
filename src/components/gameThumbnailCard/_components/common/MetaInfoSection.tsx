@@ -20,7 +20,7 @@ export default function MetaInfoSection({ creatorNickname, creatorImage }: Param
           // placeholder="blur"
           // blurDataURL="data:image/jepg;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mO88B8AAqUB0Y/H4mkAAAAASUVORK5CYII="
           onError={() => {
-            setErrorFallbackURL("/images/Rookeys.png")
+            setErrorFallbackURL("/images/character/pixy_profile.webp")
           }}
         />
         <p className="line-clamp-1 text-caption2-regular text-label-neutral md:text-label-regular">{creatorNickname}</p>

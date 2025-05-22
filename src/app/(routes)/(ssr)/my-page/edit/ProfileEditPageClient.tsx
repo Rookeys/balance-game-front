@@ -102,16 +102,10 @@ export default function ProfileEditPageClient() {
 
   return (
     <>
-      {/* <figure className="relative h-[60px] w-[60px] flex-shrink-0 md:h-[80px] md:w-[80px]">
-        <Image src={session?.user.image || "/images/Rookeys.png"} alt="" fill className="rounded-full" />
-        <div className="absolute bottom-0 end-0 rounded-full border bg-white p-[6px]">
-          <Camera size={16} />
-        </div>
-      </figure> */}
       <label className="relative h-[60px] w-[60px] flex-shrink-0 cursor-pointer md:h-[80px] md:w-[80px]">
         {/* <Image src={URL.createObjectURL(watch("newImage")[0])} alt="" fill className="rounded-full object-cover" /> */}
         <Image
-          src={newImage ? URL.createObjectURL(newImage) : session?.user.image || "/images/Rookeys.png"}
+          src={newImage ? URL.createObjectURL(newImage) : session?.user.image || "/images/character/pixy_profile.webp"}
           alt="user-profile"
           fill
           className="rounded-full object-cover"
