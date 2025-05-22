@@ -3,7 +3,7 @@
 import { banner } from "@/constants/banner"
 import Image from "next/image"
 import "swiper/css"
-import { Pagination } from "swiper/modules"
+import { Autoplay, Pagination } from "swiper/modules"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { LinkWrapper } from "./LinkWrapper"
 
@@ -12,7 +12,10 @@ export default function Banner() {
     <div className="h-full w-full">
       <Swiper
         className="relative h-[400px] w-full"
-        modules={[Pagination]}
+        modules={[Pagination, Autoplay]}
+        autoplay={{
+          delay: 3000
+        }}
         loop
         pagination={{
           type: "fraction",
@@ -36,7 +39,9 @@ export default function Banner() {
               <Image src={mdSrc} alt={`${title}-md`} className="hidden object-cover md:block" fill />
               <section className="z-[1] flex flex-col justify-end gap-[8px] pe-[80px]">
                 <p className="text-label-medium text-fill-normal md:text-body2-medium">{title}</p>
-                <p className="font-sb-aggro-medium text-heading-4 text-background md:text-heading-1">{description}</p>
+                <p className="whitespace-pre-line font-sb-aggro-medium text-heading-4 text-background md:text-heading-1">
+                  {description}
+                </p>
               </section>
             </LinkWrapper>
           </SwiperSlide>
