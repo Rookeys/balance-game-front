@@ -7,7 +7,7 @@ export default function PlayOtherGame() {
   const router = useRouter()
   return (
     <>
-      <Image src={"/images/icons/trophy_3d.webp"} width={80} height={80} alt="" />
+      <Image src={"/images/icons/trophy_3d.webp"} width={80} height={80} alt="trophy-icon" />
       <p className="text-center font-sb-aggro-medium text-heading-5">다른 월드컵도 플레이해 보세요!</p>
       <Button
         onClick={() => router.push("/")}

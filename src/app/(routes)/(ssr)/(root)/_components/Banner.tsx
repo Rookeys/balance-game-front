@@ -14,7 +14,7 @@ export default function Banner() {
         className="relative h-[400px] w-full"
         modules={[Pagination, Autoplay]}
         autoplay={{
-          delay: 3000
+          delay: 5000
         }}
         loop
         pagination={{

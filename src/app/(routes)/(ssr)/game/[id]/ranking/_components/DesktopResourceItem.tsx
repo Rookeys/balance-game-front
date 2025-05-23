@@ -24,7 +24,7 @@ export default function DesktopResourceItem({ index, ...props }: Params) {
         <figure className="relative my-auto h-[64px] w-[80px] overflow-hidden rounded-[8px] border">
           <Image
             src={getThumbnailUrlByType({ type: props.type, url: props.content })}
-            alt=""
+            alt="resource-image"
             fill
             className="rounded-[8px] object-contain"
           />

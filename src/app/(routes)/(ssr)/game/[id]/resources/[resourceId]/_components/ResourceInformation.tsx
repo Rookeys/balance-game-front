@@ -5,6 +5,7 @@ import { Button } from "@/components/Button"
 import ProgressBar from "@/components/ProgressBar"
 import ResourceItem from "@/components/ResourceItem"
 import { calculateWinRate } from "@/utils/calculateWinRate"
+import { handleGameShare } from "@/utils/handleShare"
 import { Share } from "lucide-react"
 import Image from "next/image"
 import { useParams, useRouter, useSearchParams } from "next/navigation"
@@ -32,7 +33,7 @@ export default function ResourceInformation() {
       </figure>
       <section className="flex w-full gap-[16px] md:flex-col md:gap-[24px] lg:gap-[40px]">
         <figure className="relative h-[80px] w-[80px] flex-shrink-0 lg:h-[100px] lg:w-[100px]">
-          <Image src={"/images/icons/medal.webp"} fill alt="" />
+          <Image src={"/images/icons/medal.webp"} fill alt="medal" />
         </figure>
         <article className="flex w-full flex-col gap-[12px]">
           <p className="font-sb-aggro-medium text-heading-4 md:text-heading-3">{resourceData?.title}</p>
@@ -50,7 +51,10 @@ export default function ResourceInformation() {
           </div>
         </article>
         <article className="hidden gap-[12px] md:flex">
-          <button className="flex-shrink-0 rounded-[12px] border border-line-normal bg-background p-[12px]">
+          <button
+            className="flex-shrink-0 rounded-[12px] border border-line-normal bg-background p-[12px]"
+            onClick={() => handleGameShare({ title: resourceData?.title, id: id as string })}
+          >
             <Share />
           </button>
           <Button className="w-full" onClick={() => router.push(`/game/${id}`)}>

@@ -9,7 +9,7 @@ export default function ProfileSection() {
     <article className="flex flex-col gap-[12px]">
       <div className="flex items-start justify-between">
         <figure className="relative h-[60px] w-[60px] flex-shrink-0 overflow-hidden rounded-full md:h-[80px] md:w-[80px]">
-          <Image src={session?.user.image || "/images/character/pixy_profile.webp"} alt="" fill />
+          <Image src={session?.user.image || "/images/character/pixy_profile.webp"} alt="profile-image" fill />
         </figure>
         <Link
           className="inline-flex items-center justify-center rounded-[8px] bg-fill-normal px-[20px] py-[10px] text-label-bold"
