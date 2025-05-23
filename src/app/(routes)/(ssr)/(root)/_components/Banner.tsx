@@ -1,7 +1,7 @@
 "use client"
 
+import ResponsiveImage from "@/components/ResponsiveImage"
 import { banner } from "@/constants/banner"
-import Image from "next/image"
 import "swiper/css"
 import { Autoplay, Pagination } from "swiper/modules"
 import { Swiper, SwiperSlide } from "swiper/react"
@@ -35,8 +35,7 @@ export default function Banner() {
               rel="noopener noreferrer"
               className="relative mx-auto flex h-full w-full max-w-[1200px] overflow-hidden bg-primary-normal px-[16px] py-[24px] md:px-[24px] md:py-[40px] lg:rounded-[20px]"
             >
-              <Image src={src} alt={`${title}-sm`} className="object-cover md:hidden" fill />
-              <Image src={mdSrc} alt={`${title}-md`} className="hidden object-cover md:block" fill />
+              <ResponsiveImage smSrc={src} mdSrc={mdSrc} alt={title} fill />
               <section className="z-[1] flex flex-col justify-end gap-[8px] pe-[80px]">
                 <p className="text-label-medium text-fill-normal md:text-body2-medium">{title}</p>
                 <p className="whitespace-pre-line font-sb-aggro-medium text-heading-4 text-background md:text-heading-1">

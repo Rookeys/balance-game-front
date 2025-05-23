@@ -8,20 +8,19 @@ import { GameResourceResponseType } from "@/api/orval/model/gameResourceResponse
 import ProgressBar from "@/components/ProgressBar"
 import CustomCheckIcon from "@/icons/CustomCheckIcon"
 import { useSelectedResourceIdStore } from "@/store/selectedResourceId"
-import { COLORS } from "@/styles/theme/colors"
 import { calculateWinRate } from "@/utils/calculateWinRate"
 import { cn } from "@/utils/cn"
 import { getYoutubeThumbnail } from "@/utils/getYoutubeThumbnail"
 import { log } from "@/utils/log"
 import { useQueryClient } from "@tanstack/react-query"
-import { Square, SquarePen, Trash2 } from "lucide-react"
+import { SquarePen, Trash2 } from "lucide-react"
 import Image from "next/image"
 import { useParams } from "next/navigation"
 import { Dispatch, SetStateAction } from "react"
+import { toast } from "sonner"
 import ImageEditModal from "./ImageEditModal"
 import ResourceDeleteModal from "./ResourceDeleteModal"
 import YoutubeEditModal from "./YoutubeEditModal"
-import { toast } from "sonner"
 
 interface Params {
   resource: GameResourceResponse
@@ -71,14 +70,17 @@ export default function ResourceTableDesktopContents({
   return (
     <section className={cn("h-[96px]", tableBaseClassName)} key={resource.resourceId}>
       <button
+        type="button"
         className="col-span-1 flex items-center justify-center"
         onClick={() => toggleSelectedResourceId(resource.resourceId as number)}
       >
-        {isChecked ? (
-          <CustomCheckIcon className="rounded-[4px] bg-primary-normal p-[2px] text-white" size={16} />
-        ) : (
-          <Square color={COLORS.NEUTRAL_300} size={24} />
-        )}
+        <CustomCheckIcon
+          checked={isChecked}
+          checkedSrc={"/images/icons/system/checkbox_square_checked.webp"}
+          unCheckedSrc={"/images/icons/system/checkbox_square_default.webp"}
+          width={28}
+          height={28}
+        />
       </button>
       <div className="col-span-1 flex items-center justify-center">
         <p className="text-label-bold">{indexNum}</p>

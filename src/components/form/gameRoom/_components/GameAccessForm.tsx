@@ -25,6 +25,7 @@ export default function GameAccessForm() {
               <SelectButton
                 title="공개"
                 description="모두가 제작자를 볼 수 있어요"
+                src="/images/icons/system/lock.webp"
                 onClick={() => {
                   field.onChange(false)
                 }}
@@ -33,6 +34,7 @@ export default function GameAccessForm() {
               <SelectButton
                 title="비공개"
                 description="제작자는 나만 볼 수 있어요"
+                src="/images/icons/system/unlock.webp"
                 onClick={() => {
                   field.onChange(true)
                 }}
@@ -61,6 +63,7 @@ export default function GameAccessForm() {
               <SelectButton
                 title="사용"
                 description="썸네일에 블라인드가 적용돼요"
+                src="/images/icons/system/eye.webp"
                 onClick={() => {
                   field.onChange(true)
                 }}
@@ -69,6 +72,7 @@ export default function GameAccessForm() {
               <SelectButton
                 title="사용X"
                 description="썸네일에 블라인드가 적용되지 않아요"
+                src="/images/icons/system/eye.webp"
                 onClick={() => {
                   field.onChange(false)
                 }}
@@ -88,6 +92,7 @@ export default function GameAccessForm() {
               <SelectButton
                 title="공개"
                 description="모두가 플레이할 수 있어요"
+                src="/images/icons/system/lock.webp"
                 onClick={() => {
                   field.onChange(GameRequestAccessType.PUBLIC)
                 }}
@@ -126,6 +131,7 @@ export default function GameAccessForm() {
               <SelectButton
                 title="비공개"
                 description="나만 확인할 수 있어요"
+                src="/images/icons/system/unlock.webp"
                 onClick={() => {
                   field.onChange(GameRequestAccessType.PRIVATE)
                 }}

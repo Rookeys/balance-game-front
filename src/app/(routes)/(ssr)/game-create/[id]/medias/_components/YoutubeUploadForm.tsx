@@ -86,7 +86,9 @@ export function YoutubeUploadForm() {
             </div>
           ) : (
             <div className="flex h-full flex-col items-center justify-center gap-[8px] bg-fill-normal md:gap-[12px]">
-              <div className="h-[60px] w-[60px] bg-blue-500 md:h-[80px] md:w-[80px]" />
+              <div className="relative h-[60px] w-[60px] md:h-[80px] md:w-[80px]">
+                <Image src={"/images/icons/upload_video.webp"} alt="upload-video-icon" fill />
+              </div>
               <p className="text-body2-bold md:text-body1-bold">유튜브 링크를 추가해 주세요</p>
               <p className="text-label-medium text-label-neutral md:text-body2-medium">
                 아래 입력란에 유튜브 링크를 넣고 동영상을 추가해 보세요.

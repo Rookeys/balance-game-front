@@ -121,7 +121,7 @@ export default function GameResourcesPageClient() {
           <div className="flex items-center gap-[4px]">
             <CircleAlert className="fill-label-disable text-white" size={16} />
             <p className="text-caption1-regular text-label-alternative">
-              월드컵 우승 정보 업데이트는 약 5분가량 소요될 수 있어요.
+              월드컵 우승 정보 업데이트는 약 5분가량 소요될 수 있어요.
             </p>
           </div>
         </article>

@@ -10,20 +10,18 @@ import MoreButton, { MoreItem } from "@/components/MoreButton"
 import ProgressBar from "@/components/ProgressBar"
 import CustomCheckIcon from "@/icons/CustomCheckIcon"
 import { useSelectedResourceIdStore } from "@/store/selectedResourceId"
-import { COLORS } from "@/styles/theme/colors"
 import { calculateWinRate } from "@/utils/calculateWinRate"
 import { cn } from "@/utils/cn"
 import { getYoutubeThumbnail } from "@/utils/getYoutubeThumbnail"
 import { log } from "@/utils/log"
 import { useQueryClient } from "@tanstack/react-query"
-import { Square } from "lucide-react"
 import Image from "next/image"
 import { useParams } from "next/navigation"
 import { Dispatch, SetStateAction } from "react"
+import { toast } from "sonner"
 import ImageEditModal from "./ImageEditModal"
 import ResourceDeleteModal from "./ResourceDeleteModal"
 import YoutubeEditModal from "./YoutubeEditModal"
-import { toast } from "sonner"
 
 interface Params {
   resource: GameResourceResponse
@@ -94,17 +92,17 @@ export default function ResourceTableContents({
           className="rounded-[8px] object-cover"
         />
         <button
-          className={cn(
-            "absolute start-[4px] top-[4px] rounded-[4px] bg-dimmer-neutral",
-            isChecked ? "p-[5px]" : "p-[4px]"
-          )}
+          type="button"
+          className={cn("absolute start-[4px] top-[4px] rounded-[4px] bg-dimmer-neutral")}
           onClick={() => toggleSelectedResourceId(resource.resourceId as number)}
         >
-          {isChecked ? (
-            <CustomCheckIcon className="rounded-[4px] bg-primary-normal p-[2px] text-white" size={14} />
-          ) : (
-            <Square color={COLORS.NEUTRAL_300} size={20} />
-          )}
+          <CustomCheckIcon
+            checked={isChecked}
+            checkedSrc={"/images/icons/system/checkbox_square_checked.webp"}
+            unCheckedSrc={"/images/icons/system/checkbox_square_default.webp"}
+            width={28}
+            height={28}
+          />
         </button>
       </figure>
       <article className="flex w-full flex-col gap-[12px]">

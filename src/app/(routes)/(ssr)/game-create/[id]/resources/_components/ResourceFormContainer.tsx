@@ -20,7 +20,7 @@ import { COLORS } from "@/styles/theme/colors"
 import { getMaxRound } from "@/utils/getMaxRound"
 import { log } from "@/utils/log"
 import { useQueryClient } from "@tanstack/react-query"
-import { Search, Square } from "lucide-react"
+import { Search } from "lucide-react"
 import { useParams, useRouter, useSearchParams } from "next/navigation"
 import { useState } from "react"
 import { toast } from "sonner"
@@ -139,12 +139,14 @@ export default function ResourceFormContainer() {
                 />
                 <article className="flex items-center gap-[12px]">
                   <div className="flex items-center gap-[4px]">
-                    <button className="lg:hidden" onClick={() => handleSelectAllToggle(data?.content)}>
-                      {isAllSelected(data?.content ?? []) ? (
-                        <CustomCheckIcon className="rounded-[4px] bg-primary-normal p-[2px] text-white" size={16} />
-                      ) : (
-                        <Square color={COLORS.NEUTRAL_300} size={24} />
-                      )}
+                    <button type="button" className="lg:hidden" onClick={() => handleSelectAllToggle(data?.content)}>
+                      <CustomCheckIcon
+                        checked={isAllSelected(data?.content ?? [])}
+                        checkedSrc={"/images/icons/system/checkbox_square_checked.webp"}
+                        unCheckedSrc={"/images/icons/system/checkbox_square_default.webp"}
+                        width={28}
+                        height={28}
+                      />
                     </button>
                     <p className="text-label-regular">
                       {selectedResourceIds.length > 0
@@ -153,7 +155,8 @@ export default function ResourceFormContainer() {
                     </p>
                   </div>
                   <button
-                    className="h-full rounded-[4px] px-[12px] text-label-neutral"
+                    type="button"
+                    className="h-full rounded-[4px] px-[12px] text-caption1-medium text-label-neutral md:text-label-medium"
                     onClick={() => {
                       if (selectedResourceIds.length === 0) {
                         toast.warning("선택된 콘텐츠가 없어요")

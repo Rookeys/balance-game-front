@@ -8,6 +8,7 @@ import YoutubeThumbnailBoxWithHover from "@/components/YoutubeThumbnailBoxWithHo
 import { COLORS } from "@/styles/theme/colors"
 import { cn } from "@/utils/cn"
 import { CircleAlert, XIcon } from "lucide-react"
+import Image from "next/image"
 import { useFormContext } from "react-hook-form"
 
 interface Params {
@@ -48,7 +49,9 @@ export default function YoutubeEditModal({ onClose, onSave, overlayClose }: Para
               ) : (
                 <div className="relative h-full w-full overflow-hidden rounded-[12px]">
                   <div className="flex h-full flex-col items-center justify-center gap-[12px] bg-fill-normal">
-                    <div className="h-[60px] w-[60px] bg-red-300" />
+                    <div className="relative h-[60px] w-[60px]">
+                      <Image src={"/images/icons/upload_video.webp"} alt="upload-video-icon" fill />
+                    </div>
                     <p className="text-body2-bold md:text-body1-bold">유튜브 링크를 추가해 주세요</p>
                     <p className="text-label-medium text-label-neutral md:text-body2-medium">
                       아래 입력란에 유튜브 링크를 넣고 동영상을 추가해 보세요.

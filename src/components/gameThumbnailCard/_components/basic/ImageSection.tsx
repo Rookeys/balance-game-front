@@ -3,7 +3,7 @@ import { Button } from "@/components/Button"
 import { CookieContext } from "@/lib/providers/CookieProvider"
 import { COLORS } from "@/styles/theme/colors"
 import { cn } from "@/utils/cn"
-import { Eye, EyeClosed, Play } from "lucide-react"
+import { Eye, EyeClosed } from "lucide-react"
 import Image from "next/image"
 import { useContext, useState } from "react"
 
@@ -36,7 +36,7 @@ export default function ImageSection({ src, index, isBlind = false, totalPlayNum
       <div className="absolute top-0 h-[52px] w-full bg-gradient-to-b from-[#1515174D] from-0% via-[#15151700] via-70% to-[#15151700] to-100% md:h-[88px]" />
       <div className="absolute bottom-[8px] start-[12px] rounded-[4px] bg-dimmer-normal p-[4px] text-caption2-medium text-white md:text-label-medium">
         <div className="flex items-center gap-[4px]">
-          <Play size={16} fill={COLORS.WHITE} />
+          <Image src={"/images/icons/system/play.webp"} width={16} height={16} alt="play" />
           <p>{totalPlayNums}</p>
         </div>
       </div>

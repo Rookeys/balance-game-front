@@ -1,15 +1,16 @@
 "use client"
 import { cn } from "@/utils/cn"
-import { SquareDashed } from "lucide-react"
+import Image from "next/image"
 
 interface Params {
   title: string
   description: string
   selected?: boolean
+  src: string
   onClick: () => void
 }
 
-export default function SelectButton({ title, description, selected, onClick }: Params) {
+export default function SelectButton({ title, description, selected, src, onClick }: Params) {
   return (
     <button
       type="button"
@@ -20,7 +21,7 @@ export default function SelectButton({ title, description, selected, onClick }: 
       onClick={onClick}
     >
       <div className="flex items-center gap-[12px]">
-        <SquareDashed />
+        <Image src={src} alt={`${title}-icon`} width={24} height={24} />
         <div className="flex flex-col items-start gap-[8px]">
           <p className="text-label-bold md:text-body2-bold">{title}</p>
           <p className="text-caption1-regular md:text-label-regular">{description}</p>
