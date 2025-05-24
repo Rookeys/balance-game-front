@@ -25,9 +25,9 @@ const FileUploadDropZoneResource = ({
 }: Params) => {
   const dropzone = {
     accept: {
-      // "image/*": [".jpg", ".jpeg", ".png"]
       "image/jpeg": [".jpg", ".jpeg"],
-      "image/png": [".png"]
+      "image/png": [".png"],
+      "image/webp": [".webp"]
     },
     multiple,
     maxFiles,
