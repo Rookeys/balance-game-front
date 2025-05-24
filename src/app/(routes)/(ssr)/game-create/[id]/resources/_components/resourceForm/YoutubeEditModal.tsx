@@ -112,7 +112,7 @@ export default function YoutubeEditModal({ onClose, onSave, overlayClose }: Para
               className="w-full"
               value={watch("title")}
               onChange={(e) => setValue("title", e.target.value, { shouldValidate: true })}
-              maxLength={20}
+              maxLength={30}
               label="이름"
               labelClassName="!text-label-regular !font-pretendard text-label-neutral"
             />
