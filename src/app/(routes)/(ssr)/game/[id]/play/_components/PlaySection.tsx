@@ -72,8 +72,8 @@ export default function PlaySection({ playId }: Params) {
   return (
     <article className="relative mb-[24px] mt-[40px] flex items-center justify-center gap-[16px] md:gap-[24px]">
       <SelectItemBox {...gamePlayData?.leftResource} selectedId={selectedId} handleSelectItem={handleSelectItem} />
-      <figure className="pointer-events-none absolute start-[50%] top-[50%] z-[40] h-[44px] w-[44px] translate-x-[-50%] translate-y-[-50%] bg-white/50 md:h-[64px] md:w-[64px]">
-        <Image fill src={"/images/vs.png"} alt="vs icon" className="object-contain" />
+      <figure className="pointer-events-none absolute start-[50%] top-[50%] z-[40] h-[44px] w-[44px] translate-x-[-50%] translate-y-[-50%] md:h-[64px] md:w-[64px]">
+        <Image fill src={"/images/icons/vs.webp"} alt="vs icon" className="object-contain" />
       </figure>
       <SelectItemBox {...gamePlayData?.rightResource} selectedId={selectedId} handleSelectItem={handleSelectItem} />
     </article>
