@@ -3,7 +3,7 @@
 import { useGetResource } from "@/api/orval/client/game-resource-controller/game-resource-controller"
 import BottomBarWrapper from "@/components/BottomBarWrapper"
 import { Button } from "@/components/Button"
-import { handleGameShare } from "@/utils/handleShare"
+import { handleResourceShare } from "@/utils/handleShare"
 import { Share } from "lucide-react"
 import { useParams, useRouter, useSearchParams } from "next/navigation"
 
@@ -19,7 +19,9 @@ export default function GameResourceBottomBar() {
       <article className="flex items-center gap-[12px]">
         <button
           className="flex h-[48px] w-[48px] flex-shrink-0 items-center justify-center rounded-[12px] border border-line-normal bg-background"
-          onClick={() => handleGameShare({ title: resourceData?.title, id: id as string })}
+          onClick={() =>
+            handleResourceShare({ title: resourceData?.title, id: id as string, resourceId: resourceId as string })
+          }
         >
           <Share />
         </button>

@@ -18,7 +18,7 @@ export default function GameDetailBottomBar({ title, id, onClick }: Params) {
       <article className="flex items-center gap-[12px]">
         <button
           className="flex h-[48px] w-[48px] flex-shrink-0 items-center justify-center rounded-[12px] border border-line-normal bg-background"
-          onClick={() => handleGameShare({ title, id })}
+          onClick={() => handleGameShare({ title, id: id })}
         >
           <Share />
         </button>

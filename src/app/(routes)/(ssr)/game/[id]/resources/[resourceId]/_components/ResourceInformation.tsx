@@ -5,7 +5,7 @@ import { Button } from "@/components/Button"
 import ProgressBar from "@/components/ProgressBar"
 import ResourceItem from "@/components/ResourceItem"
 import { calculateWinRate } from "@/utils/calculateWinRate"
-import { handleGameShare } from "@/utils/handleShare"
+import { handleResourceShare } from "@/utils/handleShare"
 import { Share } from "lucide-react"
 import Image from "next/image"
 import { useParams, useRouter, useSearchParams } from "next/navigation"
@@ -53,7 +53,9 @@ export default function ResourceInformation() {
         <article className="hidden gap-[12px] md:flex">
           <button
             className="flex-shrink-0 rounded-[12px] border border-line-normal bg-background p-[12px]"
-            onClick={() => handleGameShare({ title: resourceData?.title, id: id as string })}
+            onClick={() =>
+              handleResourceShare({ title: resourceData?.title, id: id as string, resourceId: resourceId as string })
+            }
           >
             <Share />
           </button>
