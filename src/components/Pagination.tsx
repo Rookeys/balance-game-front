@@ -36,7 +36,6 @@ export function Pagination({ currentPage, totalPages, onPageChange, pageRangeDis
         >
           <ChevronLeft size={24} />
         </button>
-
         <div className="flex items-center justify-between gap-[8px]">
           {pages.map((page) => (
             <button

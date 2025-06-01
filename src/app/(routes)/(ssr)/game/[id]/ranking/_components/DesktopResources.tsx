@@ -44,7 +44,7 @@ export default function DesktopResources() {
       {/* Contents */}
       {resources?.content && resources.content.length > 0 ? (
         resources.content.map((resource, index) => (
-          <DesktopResourceItem key={resource.resourceId} index={index} {...resource} />
+          <DesktopResourceItem key={resource.resourceId} page={page} index={index} {...resource} />
         ))
       ) : (
         <ResourceNotFound keyword={keyword} />

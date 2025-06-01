@@ -9,16 +9,17 @@ import Link from "next/link"
 import { useParams } from "next/navigation"
 
 interface Params extends GameResultResponse {
+  page: number
   index: number
 }
 
-export default function TabletResourceItem({ index, ...props }: Params) {
+export default function TabletResourceItem({ page = 1, index, ...props }: Params) {
   const { id } = useParams()
   return (
     <Link href={`/game/${id}/resources/${props.resourceId}`} className="flex items-center gap-[12px] py-[16px]">
       <article className="flex h-full items-center">
         <p className="flex h-full items-center justify-center p-[8px] text-label-bold text-label-normal sm:p-[16px] md:w-[56px]">
-          {index + 1}
+          {(page - 1) * 10 + index + 1}
         </p>
         <figure className="relative my-auto h-[100px] w-[120px] overflow-hidden rounded-[8px] border">
           <Image

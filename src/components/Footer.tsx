@@ -69,6 +69,7 @@ export default function Footer({ className }: Params) {
             href="https://play.google.com/store/apps/details?id=com.rookeys.balancegame"
             target="_blank"
             rel="noopener noreferrer"
+            className="w-fit"
           >
             <Image
               src="/images/google_play_badge.png"
