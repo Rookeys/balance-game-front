@@ -12,7 +12,7 @@ export default function MetaInfoSection({ creatorNickname, creatorImage }: Param
     <article className="flex flex-col justify-between lg:flex-row">
       <div className="flex items-center gap-[4px]">
         <Image
-          src={(errorFallbackURL || creatorImage) ?? "/"}
+          src={errorFallbackURL || creatorImage || "/"}
           width={24}
           height={24}
           className="h-[24px] w-[24px] rounded-full"

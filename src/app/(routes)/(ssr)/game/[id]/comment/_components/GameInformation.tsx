@@ -34,7 +34,7 @@ export default function GameInformation() {
           <p className="text-body2-regular">{data?.description}</p>
           <div className="flex items-center gap-[4px]">
             <Image
-              src={data?.userResponse?.profileImageUrl ?? "/images/character/pixy_profile.webp"}
+              src={data?.userResponse?.profileImageUrl || "/images/character/pixy_profile.webp"}
               width={40}
               height={40}
               className="h-[40px] w-[40px] rounded-full"
