@@ -16,6 +16,7 @@ import SkeletonSimpleCardList from "./_components/SkeletonSimpleCardList"
 import WeeklyTrendingGames from "./_components/WeeklyTrendingGames"
 import { getServerSession } from "next-auth"
 import { authOptions } from "@/auth"
+import RandomPlayButton from "@/components/RandomPlayButton"
 
 export const metadata: Metadata = {
   robots: {
@@ -107,6 +108,7 @@ export default async function RootPage() {
           </FetchPrefetchBoundary>
         </Suspense>
         <GameCreateSuggestionCTA />
+        <RandomPlayButton />
       </section>
     </section>
   )

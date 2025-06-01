@@ -51,6 +51,12 @@ module.exports = {
               useQuery: true,
               useInfinite: false
             }
+          },
+          getRandomPlayRoomId: {
+            query: {
+              useQuery: true,
+              useInfinite: false
+            }
           }
         }
       },
