@@ -91,7 +91,7 @@ export default function HeaderSSG() {
           </>
         ) : (
           <>
-            {session && (
+            {session && !pathname.includes("game-create") && (
               <>
                 <Button asChild className="hidden rounded-[8px] md:inline-flex">
                   <Link href={"/game-create/new"} aria-label="game-create">
@@ -104,7 +104,7 @@ export default function HeaderSSG() {
               </>
             )}
             {/* <ThemeToggle /> */}
-            <BlindToggle />
+            {pathname === "/" && <BlindToggle />}
             {session ? (
               <MoreButton
                 items={moreItems}

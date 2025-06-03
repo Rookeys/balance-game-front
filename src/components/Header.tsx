@@ -69,7 +69,7 @@ export default function Header() {
         </Link>
       </section>
       <section className="flex items-center gap-[12px] md:gap-[20px]">
-        {session && (
+        {session && !pathname.includes("game-create") && (
           <>
             <Button asChild className="hidden rounded-[8px] text-label-bold md:inline-flex">
               <Link href={"/game-create/new"} aria-label="game-create">
@@ -82,7 +82,7 @@ export default function Header() {
           </>
         )}
         {/* <ThemeToggle /> */}
-        <BlindToggle />
+        {pathname === "/" && <BlindToggle />}
         {session ? (
           <MoreButton
             items={moreItems}
