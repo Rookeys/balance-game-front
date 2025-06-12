@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls", "delegate_permission/common.get_login_creds"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.rookeys.balancegame",
+      "sha256_cert_fingerprints": [
+        "38:EA:46:E7:2E:30:43:B3:12:92:2C:F5:7F:5E:3E:DF:1E:5D:3F:01:E6:94:1A:37:2A:F2:DF:E3:96:BC:70:1E"
+      ]
+    }
+  }
+]

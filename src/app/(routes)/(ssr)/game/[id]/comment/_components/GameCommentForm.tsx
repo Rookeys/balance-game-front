@@ -4,6 +4,7 @@ import {
 } from "@/api/orval/client/game-result-comments-controller/game-result-comments-controller"
 import { GameResultCommentRequest } from "@/api/orval/model/gameResultCommentRequest"
 import TextareaWithSubmit from "@/components/form/textarea/TextareaWithSubmit"
+import { log } from "@/utils/log"
 import { requireLogin } from "@/utils/requireLogin"
 import { gameCommentSchema } from "@/validations/commentSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -11,6 +12,7 @@ import { useQueryClient } from "@tanstack/react-query"
 import { useSession } from "next-auth/react"
 import { useParams } from "next/navigation"
 import { useForm } from "react-hook-form"
+import { toast } from "sonner"
 
 export default function GameCommentForm() {
   const { id } = useParams()
@@ -31,12 +33,18 @@ export default function GameCommentForm() {
     resolver: zodResolver(gameCommentSchema)
   })
 
-  const { mutateAsync } = useAddResultComment()
+  const { mutateAsync: AddGameComment } = useAddResultComment()
 
   const onSubmit = async (data: GameResultCommentRequest) => {
-    await mutateAsync({ gameId: Number(id), data })
-    reset()
-    await queryClient.invalidateQueries({ queryKey: getGetCommentsByGameResultQueryKey(Number(id)) })
+    try {
+      await AddGameComment({ gameId: Number(id), data })
+      reset()
+      await queryClient.invalidateQueries({ queryKey: getGetCommentsByGameResultQueryKey(Number(id)) })
+      toast.success("댓글이 작성되었습니다.")
+    } catch (error) {
+      log(error)
+      toast.error("댓글작성을 실패했습니다.")
+    }
   }
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

@@ -2,7 +2,11 @@ import { Metadata } from "next"
 import SignOutPageClient from "./_components/SignOutPageClient"
 
 export const metadata: Metadata = {
-  title: "로그아웃"
+  title: "로그아웃",
+  robots: {
+    index: false,
+    follow: false
+  }
 }
 
 export default function SignOutPage() {

@@ -21,7 +21,7 @@ export default function BlindToggle() {
         }
       }}
       variant="custom"
-      className="rounded-[1000px] border border-line-normal p-[8px] text-label-normal"
+      className="box-border h-[40px] w-[40px] rounded-[1000px] border border-line-normal p-[8px] text-label-normal"
     >
       {!noBlind ? <EyeClosed size={24} /> : <Eye size={24} />}
     </Button>

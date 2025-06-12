@@ -15,15 +15,13 @@ import { useForm } from "react-hook-form"
 
 interface Params {
   parentId?: number
-  propResourceId?: number
+  resourceId?: number
 }
 
-export default function ResourceCommentAndReplyForm({ parentId, propResourceId }: Params) {
+export default function ResourceCommentAndReplyForm({ parentId, resourceId }: Params) {
   const { data: session } = useSession()
 
-  const { id, resourceId: paramResourceId } = useParams()
-
-  const resourceId = propResourceId ?? Number(paramResourceId)
+  const { id } = useParams()
 
   const queryClient = useQueryClient()
 
@@ -43,20 +41,20 @@ export default function ResourceCommentAndReplyForm({ parentId, propResourceId }
   const { mutateAsync } = useAddResourceComment()
 
   const onSubmit = async (data: GameResourceCommentRequest) => {
-    await mutateAsync({ gameId: Number(id), resourceId: resourceId, data: { ...data, parentId } })
+    await mutateAsync({ gameId: Number(id), resourceId: resourceId as number, data: { ...data, parentId } })
     reset()
     if (parentId) {
       await Promise.all([
         queryClient.invalidateQueries({
-          queryKey: getGetChildrenCommentsByGameResourceQueryKey(Number(id), resourceId, Number(parentId))
+          queryKey: getGetChildrenCommentsByGameResourceQueryKey(Number(id), resourceId as number, Number(parentId))
         }),
         queryClient.invalidateQueries({
-          queryKey: getGetParentCommentsByGameResourceQueryKey(Number(id), resourceId)
+          queryKey: getGetParentCommentsByGameResourceQueryKey(Number(id), resourceId as number)
         })
       ])
     } else {
       await queryClient.invalidateQueries({
-        queryKey: getGetParentCommentsByGameResourceQueryKey(Number(id), resourceId)
+        queryKey: getGetParentCommentsByGameResourceQueryKey(Number(id), resourceId as number)
       })
     }
   }

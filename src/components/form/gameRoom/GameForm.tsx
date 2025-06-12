@@ -10,6 +10,7 @@ import StepTab, { StepTabItem } from "@/components/StepTab"
 import TabBar, { TabBarItem } from "@/components/TabBar"
 import { useAsyncRoutePush } from "@/hooks/useAsyncRoutePush"
 import { useNavigationStore } from "@/store/isGuardEnabled"
+import { log } from "@/utils/log"
 import { postGameSchema, PostGameType } from "@/validations/gameSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useQueryClient } from "@tanstack/react-query"
@@ -38,10 +39,10 @@ export default function GameForm() {
   const formMethods = useForm<PostGameType>({
     values: {
       title: data?.title ?? "",
-      existsBlind: false,
+      existsBlind: data?.existsBlind ?? false,
       description: data?.description ?? "",
       categories: data?.categories ?? [],
-      existsNamePrivate: false,
+      existsNamePrivate: data?.existsNamePrivate ?? false,
       accessType: data?.accessType ?? GameRequestAccessType.PUBLIC
       // inviteCode: data?.inviteCode ?? ""
     },
@@ -74,12 +75,15 @@ export default function GameForm() {
       if (id) {
         await UpdateGame({ gameId: Number(id), data })
         queryClient.invalidateQueries({ queryKey: getGetMyGameStatusQueryKey(Number(id)) })
+        toast.success("게임정보를 수정했습니다.")
         await asyncPush(`/game-create/${id}/medias`)
       } else {
         const res = await CreateGame({ data })
+        toast.success("게임을 생성했습니다")
         await asyncPush(`/game-create/${res}/medias`)
       }
-    } catch {
+    } catch (error) {
+      log(error)
       toast.error("오류가 발생했습니다. 다시 시도해주세요")
     }
   }

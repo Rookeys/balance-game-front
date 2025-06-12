@@ -2,21 +2,21 @@
 import Image from "next/image"
 
 interface Params {
-  size?: number
   "aria-label"?: string
   onClick?: () => void
 }
-export default function Logo({ size = 40, "aria-label": ariaLabel = "logo", onClick }: Params) {
+export default function Logo({ "aria-label": ariaLabel = "logo", onClick }: Params) {
   return (
-    <Image
-      priority
-      width={size}
-      height={size}
-      src={"/images/zznpk_logo_color.webp"}
-      alt="logo"
-      aria-label={ariaLabel}
-      onClick={onClick}
-      className="cursor-pointer"
-    />
+    <div className="relative h-[24px] w-[62px]">
+      <Image
+        priority
+        src={"/images/zznpk_logo_color.webp"}
+        alt="logo"
+        fill
+        aria-label={ariaLabel}
+        onClick={onClick}
+        className="cursor-pointer object-contain"
+      />
+    </div>
   )
 }

@@ -68,6 +68,8 @@ export function ImageUploadForm() {
       ])
 
       reset()
+
+      toast.success("이미지 업로드를 성공했습니다.")
     } catch (error) {
       log("Upload failed", error)
       toast.error("오류가 발생했습니다. 다시 시도해주세요")
@@ -79,12 +81,13 @@ export function ImageUploadForm() {
       <div className="flex flex-col gap-[8px]">
         <p className="font-sb-aggro-medium text-heading-6 md:text-heading-5">이미지 추가</p>
         <p className="text-label-regular">
-          JPEG, JPG, PNG를 지원하며 이미지당 4MB, 한 번에 최대 10장 업로드 할 수 있어요.
+          JPEG, JPG, PNG, WEBP를 지원하며 이미지당 4MB, 한 번에 최대 10장 업로드 할 수 있어요.
         </p>
       </div>
       <FileUploadDropZone
         value={watch("files") ?? []}
         onValueChange={(files) => setValue("files", files, { shouldValidate: true })}
+        disabled={isSubmitting}
       />
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-[4px]">

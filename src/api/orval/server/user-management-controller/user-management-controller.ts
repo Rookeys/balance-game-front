@@ -44,24 +44,3 @@ export const existsByNickname = (
 ) => {
   return customServerInstance<boolean>({ url: `/api/v1/users/exists`, method: "POST", params, signal }, options)
 }
-
-/**
- * 회원 탈퇴 요청을 취소합니다.
- * @summary 회원 탈퇴 취소 API
- */
-export const cancelResign = (
-  cancelResignBody: BodyType<string>,
-  options?: SecondParameter<typeof customServerInstance>,
-  signal?: AbortSignal
-) => {
-  return customServerInstance<boolean>(
-    {
-      url: `/api/v1/users/cancel/resign`,
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      data: cancelResignBody,
-      signal
-    },
-    options
-  )
-}

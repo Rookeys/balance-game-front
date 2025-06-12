@@ -5,8 +5,6 @@ import { Button } from "@/components/Button"
 import ProgressBar from "@/components/ProgressBar"
 import SideBarWrapper from "@/components/SideBarWrapper"
 import CustomCheckIcon from "@/icons/CustomCheckIcon"
-import { COLORS } from "@/styles/theme/colors"
-import { Circle } from "lucide-react"
 import { useParams, usePathname, useRouter } from "next/navigation"
 import { Dispatch, SetStateAction } from "react"
 import { toast } from "sonner"
@@ -31,6 +29,8 @@ export default function GameFormSideBar({ step, setStep, percent = 0, isStep1Com
   const pathname = usePathname()
 
   const isMediasPage = pathname.includes("medias")
+
+  const isNewPage = pathname.includes("/new")
 
   const isResourcesPage = pathname.includes("resources")
 
@@ -61,19 +61,11 @@ export default function GameFormSideBar({ step, setStep, percent = 0, isStep1Com
         <p className="py-[12px] font-sb-aggro-medium text-heading-5">기본설정</p>
         <button type="button" className="flex items-center justify-between py-[12px]" onClick={() => handleStep(1)}>
           <p className="text-body2-regular">월드컵 정보</p>
-          {step === 1 || isStep1Complete ? (
-            <CustomCheckIcon className="rounded-full bg-primary-normal p-[4px]" size={14} stroke={COLORS.WHITE} />
-          ) : (
-            <Circle stroke={COLORS.NEUTRAL_300} size={24} />
-          )}
+          <CustomCheckIcon checked={step === 1 || isStep1Complete} width={28} height={28} />
         </button>
         <button type="button" className="flex items-center justify-between py-[12px]" onClick={() => handleStep(2)}>
           <p className="text-body2-regular">공개 설정</p>
-          {step === 2 ? (
-            <CustomCheckIcon className="rounded-full bg-primary-normal p-[4px]" size={14} stroke={COLORS.WHITE} />
-          ) : (
-            <Circle stroke={COLORS.NEUTRAL_300} size={24} />
-          )}
+          <CustomCheckIcon checked={step === 2} width={28} height={28} />
         </button>
         <hr className="my-[12px]" />
         <p className="py-[12px] font-sb-aggro-medium text-heading-5">콘텐츠</p>
@@ -89,11 +81,11 @@ export default function GameFormSideBar({ step, setStep, percent = 0, isStep1Com
           }}
         >
           <p className="text-body2-regular">콘텐츠 업로드</p>
-          {isMediasPage || (resourceNumbers && resourceNumbers >= 2) ? (
-            <CustomCheckIcon className="rounded-full bg-primary-normal p-[4px]" size={14} stroke={COLORS.WHITE} />
-          ) : (
-            <Circle stroke={COLORS.NEUTRAL_300} size={24} />
-          )}
+          <CustomCheckIcon
+            checked={isMediasPage || (!!resourceNumbers && resourceNumbers >= 2)}
+            width={28}
+            height={28}
+          />
         </button>
         <button
           type="button"
@@ -110,11 +102,7 @@ export default function GameFormSideBar({ step, setStep, percent = 0, isStep1Com
             <p className="text-body2-regular">콘텐츠 편집</p>
             <span className="text-label-medium text-label-alternative">(선택)</span>
           </div>
-          {isResourcesPage ? (
-            <CustomCheckIcon className="rounded-full bg-primary-normal p-[4px]" size={14} stroke={COLORS.WHITE} />
-          ) : (
-            <Circle stroke={COLORS.NEUTRAL_300} size={24} />
-          )}
+          <CustomCheckIcon checked={isResourcesPage} width={28} height={28} />
         </button>
       </section>
       <Button
@@ -131,7 +119,9 @@ export default function GameFormSideBar({ step, setStep, percent = 0, isStep1Com
       >
         {step === 1 ? "다음" : "월드컵 생성"}
       </Button>
-      <GameCreateTooltip id="game-create-sidebar-button" classNameArrow="absolute !start-auto end-[8px]" />
+      {isNewPage && (
+        <GameCreateTooltip id="game-create-sidebar-button" classNameArrow="absolute !start-auto end-[8px]" />
+      )}
     </SideBarWrapper>
   )
 }

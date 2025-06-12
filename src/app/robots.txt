@@ -1,19 +1,14 @@
 User-agent: *
-Disallow: /category/*
-Disallow: /game/*/comment
-Disallow: /game/*/play
-Disallow: /game/*/ranking
-Disallow: /game/*/resources
-Disallow: /game-create
 Disallow: /my-page
 Disallow: /search
 Disallow: /sign-in
 Disallow: /sign-out
 Disallow: /index.php
-Disallow: /index.php/*
 Disallow: /vod
-Disallow: /vod/*
+Disallow: /api
 
 Allow: /
+Allow: /game/
+Allow: /category/
 
 Sitemap: https://zznpk.com/sitemap.xml

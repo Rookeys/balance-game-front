@@ -8,6 +8,7 @@ import YoutubeThumbnailBoxWithHover from "@/components/YoutubeThumbnailBoxWithHo
 import { COLORS } from "@/styles/theme/colors"
 import { cn } from "@/utils/cn"
 import { CircleAlert, XIcon } from "lucide-react"
+import Image from "next/image"
 import { useFormContext } from "react-hook-form"
 
 interface Params {
@@ -24,11 +25,7 @@ export default function YoutubeEditModal({ onClose, onSave, overlayClose }: Para
   } = useFormContext<GameResourceRequest>()
   return (
     <ModalWrapper overlayClose={overlayClose} onClose={onClose}>
-      <section
-        className={cn(
-          "dark:border-gray-70 dark:bg-night z-[999] w-full max-w-[500px] rounded-[16px] bg-white p-[16px] text-center dark:border"
-        )}
-      >
+      <section className={cn("z-[999] h-full w-full max-w-[500px] rounded-[16px] bg-background p-[16px] text-center")}>
         <article className="flex items-center justify-between">
           <div className="h-[24px] w-[24px]" />
           <p className="text-body2-bold">동영상 수정</p>
@@ -52,7 +49,9 @@ export default function YoutubeEditModal({ onClose, onSave, overlayClose }: Para
               ) : (
                 <div className="relative h-full w-full overflow-hidden rounded-[12px]">
                   <div className="flex h-full flex-col items-center justify-center gap-[12px] bg-fill-normal">
-                    <div className="h-[60px] w-[60px] bg-red-300" />
+                    <div className="relative h-[60px] w-[60px]">
+                      <Image src={"/images/icons/upload_video.webp"} alt="upload-video-icon" fill />
+                    </div>
                     <p className="text-body2-bold md:text-body1-bold">유튜브 링크를 추가해 주세요</p>
                     <p className="text-label-medium text-label-neutral md:text-body2-medium">
                       아래 입력란에 유튜브 링크를 넣고 동영상을 추가해 보세요.
@@ -113,7 +112,7 @@ export default function YoutubeEditModal({ onClose, onSave, overlayClose }: Para
               className="w-full"
               value={watch("title")}
               onChange={(e) => setValue("title", e.target.value, { shouldValidate: true })}
-              maxLength={20}
+              maxLength={30}
               label="이름"
               labelClassName="!text-label-regular !font-pretendard text-label-neutral"
             />

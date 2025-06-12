@@ -1,40 +1,54 @@
 "use client"
 
-import { Swiper, SwiperSlide } from "swiper/react"
+import ResponsiveImage from "@/components/ResponsiveImage"
+import { banner } from "@/constants/banner"
 import "swiper/css"
-import { Pagination } from "swiper/modules"
+import { Autoplay, Pagination } from "swiper/modules"
+import { Swiper, SwiperSlide } from "swiper/react"
+import { LinkWrapper } from "./LinkWrapper"
 
 export default function Banner() {
   return (
     <div className="h-full w-full">
       <Swiper
-        className="relative h-[400px] w-full bg-gray-300"
-        modules={[Pagination]}
+        className="relative h-[400px] w-full"
+        modules={[Pagination, Autoplay]}
+        autoplay={{
+          delay: 5000
+        }}
         loop
         pagination={{
           type: "fraction",
           el: `#banner-slider-pagination`,
           renderFraction: function (currentClass, totalClass) {
             return `<span class="${currentClass} text-white"></span> 
-              <span class="text-[#8C9196]">/</span> 
-              <span class="${totalClass} text-[#8C9196]"></span>`
+              <span class="text-label-disable">/</span> 
+              <span class="${totalClass} text-label-disable"></span>`
           }
         }}
       >
-        {Array.from({ length: 5 }, (_, index) => (
-          <SwiperSlide className="w-full px-[16px] md:px-[24px] lg:px-0" key={index}>
-            <section className="mx-auto flex h-full w-full max-w-[1200px] bg-primary-normal pb-[112px] pt-[88px]">
-              <article className="flex flex-col gap-[24px]">
-                <p className="font-sb-aggro-medium text-heading-3">짱픽 베타테스트에 오신것을 환영합니다!</p>
-                <p className="text-body2-bold">현재 계속 업데이트 중입니다 (5월 중순~말 출시 예정)</p>
-              </article>
-            </section>
+        {banner.map(({ src, mdSrc, title, description, link }, index) => (
+          <SwiperSlide className="w-full lg:px-0" key={index}>
+            <LinkWrapper
+              href={link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative mx-auto flex h-full w-full max-w-[1200px] overflow-hidden bg-primary-normal px-[16px] py-[24px] md:px-[24px] md:py-[40px] lg:rounded-[20px]"
+            >
+              <ResponsiveImage smSrc={src} mdSrc={mdSrc} alt={title} fill />
+              <section className="z-[1] flex flex-col justify-end gap-[8px] pe-[80px]">
+                <p className="text-label-medium text-fill-normal md:text-body2-medium">{title}</p>
+                <p className="whitespace-pre-line font-sb-aggro-medium text-heading-4 text-background md:text-heading-1">
+                  {description}
+                </p>
+              </section>
+            </LinkWrapper>
           </SwiperSlide>
         ))}
         <div className="relative mx-auto max-w-[1200px]">
           <div
             id="banner-slider-pagination"
-            className="absolute bottom-[40px] end-[16px] z-[1] h-[32px] min-w-[60px] whitespace-nowrap rounded-full bg-blue-100 px-[12px] py-[4px] text-center md:end-[24px] lg:end-0"
+            className="absolute bottom-[40px] end-[16px] z-[1] flex h-[32px] min-w-[60px] items-center justify-center gap-[4px] whitespace-nowrap rounded-full bg-dimmer-normal px-[12px] py-[4px] text-center text-label-bold md:end-[24px] md:px-[16px] md:text-body2-bold"
           />
         </div>
       </Swiper>

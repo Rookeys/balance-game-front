@@ -81,10 +81,11 @@ export default function ResourceForm({ resource, indexNum, tableBaseClassName }:
       await queryClient.invalidateQueries({ queryKey: getGetResourcesUsingPageQueryKey(Number(id)) })
       setValue("newImage", [], { shouldValidate: true })
 
+      toast.success("콘텐츠 수정이 완료되었습니다.")
       setIsOpenEditModal(false)
     } catch (error) {
       log(error)
-      toast("오류가 발생했습니다.")
+      toast.error("오류가 발생했습니다.")
     }
   }
 

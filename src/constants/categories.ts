@@ -1,30 +1,31 @@
-export const Categories = {
-  FUN: "FUN",
-  HORROR: "HORROR",
-  HOT: "HOT",
-  ACTION: "ACTION",
-  ADVENTURE: "ADVENTURE",
-  MYSTERY: "MYSTERY",
-  FANTASY: "FANTASY",
-  THRILLER: "THRILLER",
-  SF: "SF",
-  DRAMA: "DRAMA",
-  ROMANCE: "ROMANCE",
-  CRIME: "CRIME",
-  SURVIVAL: "SURVIVAL"
-} as const
+import { GameRequestCategoriesItem } from "@/api/orval/model/gameRequestCategoriesItem"
+
+// export const Categories = {
+//   DAILY: "DAILY",
+//   FOOD: "FOOD",
+//   LOVE: "LOVE",
+//   FUN: "FUN",
+//   DRAMA: "DRAMA",
+//   MOVIE: "MOVIE",
+//   SONG: "SONG",
+//   CELEBRITY: "CELEBRITY",
+//   ANIMAL: "ANIMAL",
+//   ANIMATION: "ANIMATION",
+//   HORROR: "HORROR",
+//   ETC: "ETC"
+// } as const
 
 export const categories: SelectOptionType[] = [
-  { id: Categories.FUN, value: Categories.FUN, label: "재미" },
-  { id: Categories.HORROR, value: Categories.HORROR, label: "공포" },
-  { id: Categories.HOT, value: Categories.HOT, label: "인기" },
-  { id: Categories.ACTION, value: Categories.ACTION, label: "액션" },
-  { id: Categories.ADVENTURE, value: Categories.ADVENTURE, label: "모험" },
-  { id: Categories.MYSTERY, value: Categories.MYSTERY, label: "미스터리" },
-  { id: Categories.FANTASY, value: Categories.FANTASY, label: "판타지" },
-  { id: Categories.THRILLER, value: Categories.THRILLER, label: "스릴러" },
-  { id: Categories.SF, value: Categories.SF, label: "SF" },
-  { id: Categories.DRAMA, value: Categories.DRAMA, label: "드라마" },
-  { id: Categories.ROMANCE, value: Categories.ROMANCE, label: "로맨스" },
-  { id: Categories.SURVIVAL, value: Categories.SURVIVAL, label: "서바이벌" }
+  { id: GameRequestCategoriesItem.DAILY, value: GameRequestCategoriesItem.DAILY, label: "일상" },
+  { id: GameRequestCategoriesItem.FOOD, value: GameRequestCategoriesItem.FOOD, label: "음식" },
+  { id: GameRequestCategoriesItem.LOVE, value: GameRequestCategoriesItem.LOVE, label: "사랑" },
+  { id: GameRequestCategoriesItem.FUN, value: GameRequestCategoriesItem.FUN, label: "재미" },
+  { id: GameRequestCategoriesItem.DRAMA, value: GameRequestCategoriesItem.DRAMA, label: "드라마" },
+  { id: GameRequestCategoriesItem.MOVIE, value: GameRequestCategoriesItem.MOVIE, label: "영화" },
+  { id: GameRequestCategoriesItem.SONG, value: GameRequestCategoriesItem.SONG, label: "음악" },
+  { id: GameRequestCategoriesItem.CELEBRITY, value: GameRequestCategoriesItem.CELEBRITY, label: "연예인" },
+  { id: GameRequestCategoriesItem.ANIMAL, value: GameRequestCategoriesItem.ANIMAL, label: "동물" },
+  { id: GameRequestCategoriesItem.ANIMATION, value: GameRequestCategoriesItem.ANIMATION, label: "애니" },
+  { id: GameRequestCategoriesItem.HORROR, value: GameRequestCategoriesItem.HORROR, label: "공포" },
+  { id: GameRequestCategoriesItem.ETC, value: GameRequestCategoriesItem.ETC, label: "기타" }
 ]

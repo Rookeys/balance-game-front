@@ -69,18 +69,18 @@ export default function RankingPageClient() {
       <section className="flex w-full flex-col gap-[28px] md:gap-[40px]">
         <article className="flex flex-col gap-[12px]">
           <p className="font-sb-aggro-medium text-heading-4 text-label-normal md:text-heading-3">월드컵 랭킹</p>
-          <article className="mx-[-16px] flex flex-col gap-[24px] bg-gray-900 px-[16px] py-[40px] md:mx-0 md:gap-[40px] md:rounded-[16px]">
+          <article className="mx-[-16px] flex flex-col gap-[24px] bg-[url('/images/ranking/ranking_bg_sm.webp')] bg-cover bg-center bg-no-repeat px-[16px] py-[40px] md:mx-0 md:gap-[40px] md:rounded-[16px] md:bg-[url('/images/ranking/ranking_bg_lg.webp')]">
             <p className="mx-auto w-full rounded-[12px] text-center font-sb-aggro-medium text-heading-5 text-background">
               {gameDetail?.title}
             </p>
-            <section className="flex items-center justify-center gap-[12px] lg:gap-[24px]">
+            <section className="flex justify-center gap-[12px] lg:gap-[24px]">
               {second && (
                 <RankingResourceCard
                   rank={2}
                   name={second.title}
                   winRate={calculateWinRate(second.winningNums, second.totalPlayNums)}
                   wins={second.winningNums}
-                  iconSrc={"/images/Rookeys.png"}
+                  iconSrc={"/images/icons/crown_2.webp"}
                   src={getThumbnailUrlByType({ type: second.type, url: second.content })}
                   className={`max-w-[180px]`}
                 />
@@ -91,7 +91,7 @@ export default function RankingPageClient() {
                   name={first.title}
                   winRate={calculateWinRate(first.winningNums, first.totalPlayNums)}
                   wins={first.winningNums}
-                  iconSrc={"/images/Rookeys.png"}
+                  iconSrc={"/images/icons/crown_1.webp"}
                   src={getThumbnailUrlByType({ type: first.type, url: first.content })}
                   className={`max-w-[180px]`}
                 />
@@ -102,7 +102,7 @@ export default function RankingPageClient() {
                   name={third.title}
                   winRate={calculateWinRate(third.winningNums, third.totalPlayNums)}
                   wins={third.winningNums}
-                  iconSrc={"/images/Rookeys.png"}
+                  iconSrc={"/images/icons/crown_3.webp"}
                   src={getThumbnailUrlByType({ type: third.type, url: third.content })}
                   className={`max-w-[180px]`}
                 />

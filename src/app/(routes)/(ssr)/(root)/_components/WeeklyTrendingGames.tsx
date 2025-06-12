@@ -26,14 +26,6 @@ export default function WeeklyTrendingGames() {
             <GameThumbnailCard index={index} {...game} />
           </SwiperSlide>
         ))}
-        {/* {Array.from({ length: 10 }, (_, index) => (
-          <SwiperSlide
-            key={index}
-            className="ms-[16px] !w-fit last:mr-[16px] md:ms-[24px] last:md:mr-[24px] lg:mr-[24px] lg:ms-0 last:lg:mr-0"
-          >
-            <GameThumbnailCard src={"/images/Rookeys.png"} index={index} />
-          </SwiperSlide>
-        ))} */}
       </GameSliderWrapper>
     </section>
   )

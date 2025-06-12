@@ -7,10 +7,8 @@ import ResourceNotFound from "@/components/ResourceNotFound"
 import useResizeHandler from "@/hooks/useResizeHandler"
 import CustomCheckIcon from "@/icons/CustomCheckIcon"
 import { useSelectedResourceIdStore } from "@/store/selectedResourceId"
-import { COLORS } from "@/styles/theme/colors"
 import { SCREEN_SIZE } from "@/styles/theme/screenSize"
 import { cn } from "@/utils/cn"
-import { Square } from "lucide-react"
 import { useRouter, useSearchParams } from "next/navigation"
 import ResourceForm from "./ResourceForm"
 
@@ -43,14 +41,17 @@ export default function ResourceFormWrapper() {
           )}
         >
           <button
+            type="button"
             className="col-span-1 flex items-center justify-center"
             onClick={() => handleSelectAllToggle(data?.content)}
           >
-            {isAllSelected(data?.content ?? []) ? (
-              <CustomCheckIcon className="rounded-[4px] bg-primary-normal p-[2px] text-white" size={16} />
-            ) : (
-              <Square color={COLORS.NEUTRAL_300} size={24} />
-            )}
+            <CustomCheckIcon
+              checked={isAllSelected(data?.content ?? [])}
+              checkedSrc={"/images/icons/system/checkbox_square_checked.webp"}
+              unCheckedSrc={"/images/icons/system/checkbox_square_default.webp"}
+              width={28}
+              height={28}
+            />
           </button>
           <div className="col-span-1 flex items-center justify-center">
             <p>No</p>

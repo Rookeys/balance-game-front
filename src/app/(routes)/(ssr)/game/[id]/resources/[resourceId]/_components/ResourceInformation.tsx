@@ -5,6 +5,7 @@ import { Button } from "@/components/Button"
 import ProgressBar from "@/components/ProgressBar"
 import ResourceItem from "@/components/ResourceItem"
 import { calculateWinRate } from "@/utils/calculateWinRate"
+import { handleResourceShare } from "@/utils/handleShare"
 import { Share } from "lucide-react"
 import Image from "next/image"
 import { useParams, useRouter, useSearchParams } from "next/navigation"
@@ -22,11 +23,17 @@ export default function ResourceInformation() {
   return (
     <section className="mx-[-16px] flex w-[100vw] flex-col gap-[16px] bg-fill-normal px-[16px] py-[40px] md:mx-0 md:w-full md:flex-row md:gap-[24px] md:rounded-[16px] md:px-[24px]">
       <figure className="relative aspect-[5/4] h-fit w-full p-[2px] border-animation">
-        <ResourceItem {...resourceData} ratio={5 / 4} noDelay />
+        <ResourceItem
+          {...resourceData}
+          start={resourceData?.startSec}
+          end={resourceData?.endSec}
+          ratio={5 / 4}
+          noDelay
+        />
       </figure>
       <section className="flex w-full gap-[16px] md:flex-col md:gap-[24px] lg:gap-[40px]">
         <figure className="relative h-[80px] w-[80px] flex-shrink-0 lg:h-[100px] lg:w-[100px]">
-          <Image src={"/images/Rookeys.png"} fill alt="" />
+          <Image src={"/images/icons/medal.webp"} fill alt="medal" />
         </figure>
         <article className="flex w-full flex-col gap-[12px]">
           <p className="font-sb-aggro-medium text-heading-4 md:text-heading-3">{resourceData?.title}</p>
@@ -44,7 +51,12 @@ export default function ResourceInformation() {
           </div>
         </article>
         <article className="hidden gap-[12px] md:flex">
-          <button className="flex-shrink-0 rounded-[12px] border border-line-normal bg-background p-[12px]">
+          <button
+            className="flex-shrink-0 rounded-[12px] border border-line-normal bg-background p-[12px]"
+            onClick={() =>
+              handleResourceShare({ title: resourceData?.title, id: id as string, resourceId: resourceId as string })
+            }
+          >
             <Share />
           </button>
           <Button className="w-full" onClick={() => router.push(`/game/${id}`)}>

@@ -8,16 +8,16 @@ import GameCommentForm from "@/app/(routes)/(ssr)/game/[id]/comment/_components/
 import CommentItem from "@/components/comment/CommentItem"
 import ReplyItem from "@/components/comment/ReplyItem"
 import Filter from "@/components/Filter"
+import MobilePlayNowButton from "@/components/MobilePlayNowButton"
 import TabBar, { TabBarItem } from "@/components/TabBar"
 import { commentListFilters } from "@/constants/filters"
+import { CircleAlert } from "lucide-react"
 import { useParams, useRouter, useSearchParams } from "next/navigation"
 import { useEffect } from "react"
 import { useInView } from "react-intersection-observer"
-import PlayOtherGameAndRankingSideBar from "./PlayOtherGameAndRankingSideBar"
 import ResourceCommentAndReplyForm from "../../../../../../../../components/comment/ResourceCommentAndReplyForm"
+import PlayOtherGameAndRankingSideBar from "./PlayOtherGameAndRankingSideBar"
 import ResourceInformation from "./ResourceInformation"
-import { CircleAlert } from "lucide-react"
-import MobilePlayNowButton from "@/components/MobilePlayNowButton"
 
 export default function GameResourcesPageClient() {
   const { id, resourceId } = useParams()
@@ -121,7 +121,7 @@ export default function GameResourcesPageClient() {
           <div className="flex items-center gap-[4px]">
             <CircleAlert className="fill-label-disable text-white" size={16} />
             <p className="text-caption1-regular text-label-alternative">
-              월드컵 우승 정보 업데이트는 약 5분가량 소요될 수 있어요.
+              월드컵 우승 정보 업데이트는 약 5분가량 소요될 수 있어요.
             </p>
           </div>
         </article>
@@ -134,13 +134,13 @@ export default function GameResourcesPageClient() {
               <p className="text-body2-bold">댓글 {commentData?.pages?.[0]?.totalElements ?? 0}</p>
               <Filter filters={commentListFilters} />
             </article>
-            {tab === "all" ? <GameCommentForm /> : <ResourceCommentAndReplyForm />}
+            {tab === "all" ? <GameCommentForm /> : <ResourceCommentAndReplyForm resourceId={Number(resourceId)} />}
             {/* * 추 후 게임방 댓글에도 reply 가 생길 예정이지만, 아직은 리소스 댓글에만 추가되어 있으므로 tab === "resource" 로직이 들어있음 */}
             {(commentData?.pages ?? []).flatMap(
               (page) =>
                 page.content?.map((comment) =>
                   tab === "resource" ? (
-                    <CommentItem key={comment.commentId} {...comment} />
+                    <CommentItem key={comment.commentId} {...comment} propResourceId={Number(resourceId)} />
                   ) : (
                     <ReplyItem key={comment.commentId} {...comment} />
                   )

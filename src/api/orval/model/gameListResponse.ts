@@ -11,6 +11,8 @@ export interface GameListResponse {
   description?: string
   /** 썸네일 블라인드 여부 */
   existsBlind?: boolean
+  /** 내 글 여부 */
+  existsMine?: boolean
   /** 카테고리 */
   categories?: GameListResponseCategoriesItem[]
   /** 총 플레이 횟수 */

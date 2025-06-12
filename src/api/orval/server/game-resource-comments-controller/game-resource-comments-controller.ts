@@ -49,7 +49,7 @@ export const updateResourceComment = (
  * 해당 댓글을 삭제할 수 있다.
  * @summary 게임 리소스 댓글 삭제 API
  */
-export const deleteResourceComment1 = (
+export const deleteResourceComment = (
   gameId: number,
   resourceId: number,
   commentId: number,

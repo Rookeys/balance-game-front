@@ -1,58 +1,80 @@
 "use client"
 
+import { useSubmitGamesReport } from "@/api/orval/client/game-report-controller/game-report-controller"
+import { GameReportRequestTargetType } from "@/api/orval/model/gameReportRequestTargetType"
+import { COLORS } from "@/styles/theme/colors"
+import { log } from "@/utils/log"
+import { reportGameSchema, ReportGameType } from "@/validations/reportSchema"
+import { zodResolver } from "@hookform/resolvers/zod"
 import { Check, XIcon } from "lucide-react"
 import { FieldValues, useForm } from "react-hook-form"
 import { Button } from "./Button"
-import ModalWrapper from "./modal/ModalWrapper"
-import { sleep } from "@/utils/sleep"
-import { COLORS } from "@/styles/theme/colors"
 import InputText from "./form/inputText/InputText"
+import ModalWrapper from "./modal/ModalWrapper"
+import axios from "axios"
+import { toast } from "sonner"
 
 interface Params {
   id?: string
   onClose?: () => void
   overlayClose?: boolean
-  // onClick?: () => void
 }
 
-interface ReportFormData {
-  obscenity?: boolean
-  disgust?: boolean
-  copyright?: boolean
-  etc?: boolean
-}
-
-const reportItems: { id: keyof ReportFormData; label: string }[] = [
-  { id: "obscenity", label: "음란성 콘텐츠" },
-  { id: "disgust", label: "혐오감 유발 컨텐츠" },
-  { id: "copyright", label: "개인정보 또는 저작권 침해" },
-  { id: "etc", label: "기타" }
+const reportItems: { id: keyof ReportGameType; label: string; value: string }[] = [
+  { id: "sexual", label: "음란성 콘텐츠", value: "SEXUAL_CONTENT" },
+  { id: "hateful", label: "혐오감 유발 컨텐츠", value: "HATEFUL_CONTENT" },
+  { id: "copyright", label: "개인정보 또는 저작권 침해", value: "COPYRIGHT" },
+  { id: "etc", label: "기타", value: "ETC" }
 ]
 
 export default function GameReportModal({ id, onClose, overlayClose }: Params) {
+  const { mutateAsync: reportGame } = useSubmitGamesReport()
+
   const {
     handleSubmit,
     register,
     watch,
     formState: { isSubmitting }
-  } = useForm<ReportFormData>({
+  } = useForm<ReportGameType>({
     defaultValues: {
-      obscenity: false,
-      disgust: false,
+      sexual: false,
+      hateful: false,
       copyright: false,
-      etc: false
-    }
+      etc: false,
+      etcReason: ""
+    },
+    resolver: zodResolver(reportGameSchema)
   })
 
   const onSubmit = async (data: FieldValues) => {
-    await sleep(2000)
-    alert(`${id}신고 ${JSON.stringify(data)}`)
+    try {
+      const selectedValues = reportItems.filter((item) => data[item.id]).map((item) => item.value)
+
+      await reportGame({
+        gameId: Number(id),
+        data: { targetType: GameReportRequestTargetType.GAME, reasons: selectedValues, etcReason: data.etcReason }
+      })
+      toast.success("게임을 신고하였습니다.")
+      if (onClose) {
+        onClose()
+      }
+    } catch (error) {
+      log(error)
+      if (axios.isAxiosError(error)) {
+        const errorCode = error.response?.data?.errorCode
+        if (errorCode === "400_9") {
+          toast.error("이미 신고한 댓글입니다.")
+        } else {
+          toast.error("오류가 발생했습니다.")
+        }
+      }
+    }
   }
 
   return (
     <ModalWrapper onClose={onClose} overlayClose={overlayClose}>
       <section
-        className="z-[999] w-full max-w-[500px] rounded-[16px] bg-[#FFFFFF] px-[16px] pt-[16px]"
+        className="z-[999] h-full w-full max-w-[500px] rounded-[16px] bg-background px-[16px] pt-[16px]"
         onClick={(e) => e.stopPropagation()}
       >
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -74,7 +96,7 @@ export default function GameReportModal({ id, onClose, overlayClose }: Params) {
                       id={data.id}
                       type="checkbox"
                       className="h-[20px] w-[20px] appearance-none rounded-[4px] border-[1px] border-line-normal checked:bg-primary-normal"
-                      {...register(data.id as keyof ReportFormData)}
+                      {...register(data.id as keyof ReportGameType)}
                     />
                     {watch(data.id) && (
                       <div className="pointer-events-none absolute start-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]">
@@ -87,7 +109,14 @@ export default function GameReportModal({ id, onClose, overlayClose }: Params) {
                   </label>
                 </div>
               ))}
-              {watch("etc") && <InputText className="w-full" id="etcReason" placeholder="상세 내용을 작성해 주세요." />}
+              {watch("etc") && (
+                <InputText
+                  className="w-full"
+                  id="etcReason"
+                  placeholder="상세 내용을 작성해 주세요."
+                  {...register("etcReason")}
+                />
+              )}
             </article>
             <p className="text-label-regular text-label-alternative">
               운영 방침에 따라 신고 사유에 해당하는지 검토 후 처리 예정입니다.

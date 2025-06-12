@@ -2,6 +2,7 @@
 import { useCreatePlayRoom } from "@/api/orval/client/game-play-controller/game-play-controller"
 import { GamePlayRoundRequest } from "@/api/orval/model/gamePlayRoundRequest"
 import { Button } from "@/components/Button"
+import { Spinner } from "@/components/Spinner"
 import { useAsyncRoutePush } from "@/hooks/useAsyncRoutePush"
 import { setPlayIdCookie } from "@/lib/cookies/playIdCookie"
 import { cn } from "@/utils/cn"
@@ -38,7 +39,7 @@ export default function RoundForm({ totalItem }: Params) {
       await setPlayIdCookie(res.playId as number, id as string)
       await asyncPush(`/game/${id}/play`)
     } catch {
-      toast.error("오류가 발생했습니다.")
+      toast.error("게임 실행 중 오류가 발생했습니다.")
     }
   }
 
@@ -57,16 +58,17 @@ export default function RoundForm({ totalItem }: Params) {
         )}
       />
       {/* <Dropdown options={generateRounds(totalItem)} onChange={(e) => console.log("e", e)} /> */}
-      <article className={cn("mt-[16px] flex", watch("roundNumber") ? "justify-between" : "justify-end")}>
+      <article className={cn("mt-[16px] flex gap-[12px]", watch("roundNumber") ? "justify-between" : "justify-end")}>
         {watch("roundNumber") && (
-          <p className="text-label-regular text-label-alternative">
+          <p className="text-start text-label-regular text-label-alternative">
             총 {totalItem}개의 콘텐츠 중 랜덤 콘텐츠 {watch("roundNumber")}개가 대결할 거예요.
           </p>
         )}
-        <Button className="px-[28px] py-[12px]" disabled={isSubmitting} type="submit">
+        <Button className="flex-shrink-0 px-[28px] py-[12px]" disabled={isSubmitting} type="submit">
           시작
         </Button>
       </article>
+      {isSubmitting && <Spinner />}
     </form>
   )
 }

@@ -7,9 +7,9 @@ import type { Metadata } from "next"
 import { ThemeProvider } from "next-themes"
 import { PretendardVariable, SBAggroMedium } from "./fonts"
 
-const title = "짱픽 - 이상형 월드컵 커뮤니티"
+const title = "짜릿한 선택! 짱픽 - 이상형 월드컵"
 const description =
-  "짱픽은 이상형 월드컵을 직접 만들고 공유할 수 있는 커뮤니티 플랫폼입니다. 나만의 월드컵 게임을 제작하고 친구들과 함께 즐겨보세요."
+  "짱픽은 나만의 이상형 월드컵을 만들고, 유저들과 공유하며 함께 즐길 수 있는 플랫폼입니다. 다양한 게임을 제작하고 즐기세요!"
 const images = [
   {
     url: "/images/zznpk_og_image.png",
@@ -30,8 +30,8 @@ export const metadata: Metadata = {
       default: title,
       template: "짱픽 | %s"
     },
-    type: "website",
     description,
+    type: "website",
     images,
     url: "https://zznpk.com"
   },
@@ -51,6 +51,7 @@ export default async function RootLayout({
       <head>
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="canonical" href="https://zznpk.com" />
       </head>
       <body
         className={cn(
@@ -59,7 +60,7 @@ export default async function RootLayout({
           "font-pretendard text-label-normal antialiased"
         )}
       >
-        <ThemeProvider>
+        <ThemeProvider defaultTheme="light">
           <div id="portal" />
           {children}
           <LoginConfirmModal />

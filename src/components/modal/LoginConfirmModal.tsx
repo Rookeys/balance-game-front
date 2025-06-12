@@ -19,6 +19,7 @@ export default function LoginConfirmModal() {
         router.push(`/sign-in?redirectUrl=${encodeURIComponent(window.location.href)}`)
       }}
       onClose={hide}
+      okLabel="로그인 하기"
     />
   )
 }

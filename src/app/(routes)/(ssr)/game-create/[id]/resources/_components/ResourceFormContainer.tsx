@@ -12,13 +12,15 @@ import Filter from "@/components/Filter"
 import GameFormSideBar from "@/components/form/gameRoom/_components/GameFormSideBar"
 import SearchInput from "@/components/SearchInput"
 import StepTab, { StepTabItem } from "@/components/StepTab"
+import TabBar, { TabBarItem } from "@/components/TabBar"
 import { resourceListFilters } from "@/constants/filters"
 import CustomCheckIcon from "@/icons/CustomCheckIcon"
 import { useSelectedResourceIdStore } from "@/store/selectedResourceId"
 import { COLORS } from "@/styles/theme/colors"
 import { getMaxRound } from "@/utils/getMaxRound"
+import { log } from "@/utils/log"
 import { useQueryClient } from "@tanstack/react-query"
-import { Search, Square } from "lucide-react"
+import { Search } from "lucide-react"
 import { useParams, useRouter, useSearchParams } from "next/navigation"
 import { useState } from "react"
 import { toast } from "sonner"
@@ -52,17 +54,37 @@ export default function ResourceFormContainer() {
   }
 
   const handleSelectedDelete = async () => {
-    await deleteSelectedAll({ gameId: Number(id), data: { list: selectedResourceIds } })
-    // await queryClient.invalidateQueries({ queryKey: getGetResourcesUsingPageQueryKey(Number(id)) })
+    try {
+      await deleteSelectedAll({ gameId: Number(id), data: { list: selectedResourceIds } })
+      // await queryClient.invalidateQueries({ queryKey: getGetResourcesUsingPageQueryKey(Number(id)) })
 
-    await Promise.all([
-      queryClient.invalidateQueries({ queryKey: getGetResourcesUsingPageQueryKey(Number(id)) }),
-      queryClient.invalidateQueries({ queryKey: getGetCountResourcesInGamesQueryKey(Number(id)) })
-    ])
-
-    clearSelectedResourceIds()
-    setIsOpenDeleteModal(false)
+      await Promise.all([
+        queryClient.invalidateQueries({ queryKey: getGetResourcesUsingPageQueryKey(Number(id)) }),
+        queryClient.invalidateQueries({ queryKey: getGetCountResourcesInGamesQueryKey(Number(id)) })
+      ])
+      clearSelectedResourceIds()
+      toast.success("삭제가 완료되었습니다.")
+      setIsOpenDeleteModal(false)
+    } catch (error) {
+      log(error)
+      toast.error("오류가 발생했습니다.")
+    }
   }
+
+  const tabItems: TabBarItem[] = [
+    {
+      label: "기본 설정",
+      value: "기본 설정",
+      onClick: () => {
+        router.push(`/game-create/${id}/edit`)
+      }
+    },
+    {
+      label: "콘텐츠",
+      value: "콘텐츠",
+      onClick: () => {}
+    }
+  ]
 
   const stepItems: StepTabItem[] = [
     {
@@ -82,11 +104,10 @@ export default function ResourceFormContainer() {
   return (
     <>
       {/* <GameFormMobileTab step={2} setStep={() => {}} /> */}
-      <section className="flex w-full max-w-[1200px] justify-center gap-[24px] px-[16px] lg:px-0">
-        <section className="flex w-full flex-col gap-[40px]">
-          <section className="flex w-full flex-col md:gap-[40px]">
-            <StepTab items={stepItems} currentValue={2} />
-          </section>
+      <TabBar items={tabItems} currentValue={"콘텐츠"} className="md:hidden" />
+      <section className="flex w-full max-w-[1200px] flex-col justify-center px-[16px] md:flex-row md:gap-[24px] lg:px-0">
+        <StepTab items={stepItems} currentValue={2} />
+        <section className="flex w-full flex-col gap-[28px] md:gap-[40px]">
           {/* <MediaTab /> */}
           <div className="flex flex-col gap-[20px]">
             <article className="flex flex-col gap-[8px]">
@@ -118,12 +139,14 @@ export default function ResourceFormContainer() {
                 />
                 <article className="flex items-center gap-[12px]">
                   <div className="flex items-center gap-[4px]">
-                    <button className="lg:hidden" onClick={() => handleSelectAllToggle(data?.content)}>
-                      {isAllSelected(data?.content ?? []) ? (
-                        <CustomCheckIcon className="rounded-[4px] bg-primary-normal p-[2px] text-white" size={16} />
-                      ) : (
-                        <Square color={COLORS.NEUTRAL_300} size={24} />
-                      )}
+                    <button type="button" className="lg:hidden" onClick={() => handleSelectAllToggle(data?.content)}>
+                      <CustomCheckIcon
+                        checked={isAllSelected(data?.content ?? [])}
+                        checkedSrc={"/images/icons/system/checkbox_square_checked.webp"}
+                        unCheckedSrc={"/images/icons/system/checkbox_square_default.webp"}
+                        width={28}
+                        height={28}
+                      />
                     </button>
                     <p className="text-label-regular">
                       {selectedResourceIds.length > 0
@@ -132,7 +155,8 @@ export default function ResourceFormContainer() {
                     </p>
                   </div>
                   <button
-                    className="h-full rounded-[4px] px-[12px] text-label-neutral"
+                    type="button"
+                    className="h-full rounded-[4px] px-[12px] text-caption1-medium text-label-neutral md:text-label-medium"
                     onClick={() => {
                       if (selectedResourceIds.length === 0) {
                         toast.warning("선택된 콘텐츠가 없어요")

@@ -15,7 +15,7 @@ interface Params {
 export default function RankingResourceCard({ rank, name, winRate, wins, src, iconSrc, className }: Params) {
   return (
     <article
-      className={cn(`flex w-full flex-col items-center gap-[8px]`, rank === 1 && "pb-[24px] md:pb-[40px]", className)}
+      className={cn(`flex w-full flex-col items-center gap-[8px]`, rank !== 1 && "pt-[24px] md:pt-[40px]", className)}
     >
       <figure className="relative h-[28px] w-[28px] md:h-[40px] md:w-[40px]">
         <Image src={iconSrc ?? "/"} alt="/" fill />
@@ -27,8 +27,8 @@ export default function RankingResourceCard({ rank, name, winRate, wins, src, ic
             <Image src={src ?? "/"} alt="/" fill className="object-cover" />
           </figure>
         </div>
-        <div className="h-[60px] px-[4px] pb-[8px] pt-[4px] md:h-[56px] md:px-[8px] md:pt-[8px]">
-          <p className="line-clamp-3 break-words text-center text-caption1-bold md:line-clamp-2 md:text-label-bold">
+        <div className="px-[4px] pb-[8px] pt-[4px] md:px-[8px] md:pt-[8px]">
+          <p className="line-clamp-3 break-words text-start text-caption1-bold md:line-clamp-2 md:text-label-bold">
             {rank}등 {name}
           </p>
         </div>

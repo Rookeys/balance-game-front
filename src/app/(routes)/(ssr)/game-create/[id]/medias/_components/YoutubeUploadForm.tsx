@@ -28,7 +28,7 @@ const YoutubeModal = dynamic(() => import("@/components/modal/YoutubeModal"))
 
 export function YoutubeUploadForm() {
   const { id } = useParams()
-  const { mutateAsync } = useSaveLink()
+  const { mutateAsync: SaveYoutubeLink } = useSaveLink()
 
   const queryClient = useQueryClient()
 
@@ -49,7 +49,7 @@ export function YoutubeUploadForm() {
 
   const onSubmit = async (data: LinkRequest) => {
     try {
-      await mutateAsync({ gameId: Number(id), data })
+      await SaveYoutubeLink({ gameId: Number(id), data })
 
       await Promise.all([
         queryClient.invalidateQueries({ queryKey: getGetResourcesUsingPageQueryKey(Number(id)) }),
@@ -57,6 +57,7 @@ export function YoutubeUploadForm() {
       ])
 
       reset()
+      toast.success("유튜브 저장을 완료했습니다.")
     } catch (error) {
       log(error)
       toast.error("오류가 발생했습니다. 다시 시도해주세요")
@@ -71,22 +72,23 @@ export function YoutubeUploadForm() {
         <p className="font-sb-aggro-medium text-heading-6 md:text-heading-5">유튜브 동영상 추가</p>
         <div className="relative h-[192px] overflow-hidden rounded-[12px] bg-black md:h-[265px] lg:h-[502px]">
           {watch("url") ? (
-            <>
+            <div onClick={() => setIsOpen(true)}>
               <ButtonYoutubePlay />
               <Image
                 src={getYoutubeThumbnail(watch("url"))}
                 alt="Video Thumbnail"
                 fill
-                onClick={() => setIsOpen(true)}
                 unoptimized
                 // loader={({ src }) => src}
                 // sizes="(max-width: 640px) 90vw, 300px"
                 className="mx-auto object-contain"
               />
-            </>
+            </div>
           ) : (
             <div className="flex h-full flex-col items-center justify-center gap-[8px] bg-fill-normal md:gap-[12px]">
-              <div className="h-[60px] w-[60px] bg-blue-500 md:h-[80px] md:w-[80px]" />
+              <div className="relative h-[60px] w-[60px] md:h-[80px] md:w-[80px]">
+                <Image src={"/images/icons/upload_video.webp"} alt="upload-video-icon" fill />
+              </div>
               <p className="text-body2-bold md:text-body1-bold">유튜브 링크를 추가해 주세요</p>
               <p className="text-label-medium text-label-neutral md:text-body2-medium">
                 아래 입력란에 유튜브 링크를 넣고 동영상을 추가해 보세요.

@@ -42,22 +42,36 @@ export default function Header() {
   ]
 
   return (
-    <header className="flex h-[64px] items-center justify-between border-b border-gray-200 bg-white px-[12px] py-[8px] dark:bg-gray-700">
+    <header className="mx-[16px] flex h-[64px] items-center justify-between bg-white py-[8px] md:mx-[24px] lg:mx-[120px]">
       <section className="flex items-center gap-[40px]">
         <Link href={"/"} className="flex-shrink-0">
           <Logo />
         </Link>
-        {/* <Link href={"/"} aria-label="About Our Service" className="hidden lg:block">
+        <Link
+          className="hidden text-body2-bold lg:block"
+          href="https://kojaem.notion.site/1ebeadad956780d38264d49909eb9abf"
+          aria-label="짱픽 서비스 소개 페이지로 이동"
+          title="짱픽 서비스 소개"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           서비스 소개
         </Link>
-        <Link href={"/"} aria-label="Contact us" className="hidden lg:block">
+        <Link
+          className="hidden text-body2-bold lg:block"
+          href="https://docs.google.com/forms/d/e/1FAIpQLSdx46EPWF42ElyDv9rMmgfIz5lOJfNmpP3OjcTgK6hCSfmqyQ/viewform"
+          aria-label="짱픽 문의하기 폼으로 이동"
+          title="문의하기"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           문의하기
-        </Link> */}
+        </Link>
       </section>
       <section className="flex items-center gap-[12px] md:gap-[20px]">
-        {session && (
+        {session && !pathname.includes("game-create") && (
           <>
-            <Button asChild className="hidden rounded-[8px] md:inline-flex">
+            <Button asChild className="hidden rounded-[8px] text-label-bold md:inline-flex">
               <Link href={"/game-create/new"} aria-label="game-create">
                 월드컵 만들기
               </Link>
@@ -68,14 +82,14 @@ export default function Header() {
           </>
         )}
         {/* <ThemeToggle /> */}
-        <BlindToggle />
+        {pathname === "/" && <BlindToggle />}
         {session ? (
           <MoreButton
             items={moreItems}
             ButtonUI={
               <Image
-                className="transition-color-custom h-[40px] w-[40px] rounded-full object-cover"
-                src={session?.user.image || "/images/Rookeys.png"}
+                className="transition-color-custom h-[40px] w-[40px] rounded-full border border-line-normal object-cover"
+                src={session?.user.image || "/images/character/pixy_profile.webp"}
                 alt="profile-image"
                 width={40}
                 height={40}

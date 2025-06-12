@@ -1,14 +1,18 @@
-import { cn } from "@/utils/cn"
-import { Check, LucideProps } from "lucide-react"
+import Image, { ImageProps } from "next/image"
 
-interface CustomCheckIconProps extends LucideProps {
-  className?: string
+interface Params extends Omit<ImageProps, "src" | "alt"> {
+  checked?: boolean
+  checkedSrc?: ImageProps["src"]
+  unCheckedSrc?: ImageProps["src"]
+  alt?: string
 }
 
-export default function CustomCheckIcon({ className, ...iconProps }: CustomCheckIconProps) {
-  return (
-    <div className={cn("flex items-center justify-center", className)}>
-      <Check {...iconProps} />
-    </div>
-  )
+export default function CustomCheckIcon({
+  checked,
+  checkedSrc = "/images/icons/system/checkbox_round_checked.webp",
+  unCheckedSrc = "/images/icons/system/checkbox_round_default.webp",
+  alt = "check-icon",
+  ...props
+}: Params) {
+  return <Image src={checked ? checkedSrc : unCheckedSrc} alt={alt} {...props} />
 }

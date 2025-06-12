@@ -29,12 +29,7 @@ export default function InfoModal({
 }: Params) {
   return (
     <ModalWrapper onClose={onClose} overlayClose={overlayClose}>
-      <section
-        className={cn(
-          "dark:border-gray-70 dark:bg-night z-[999] w-full max-w-[500px] rounded-[16px] bg-white p-[16px] dark:border",
-          className
-        )}
-      >
+      <section className={cn("z-[999] h-full w-full max-w-[500px] rounded-[16px] bg-background p-[16px]", className)}>
         <article className="flex items-center justify-end">
           <XIcon size={24} color={COLORS.NEUTRAL_700} className="cursor-pointer" onClick={onClose} />
         </article>

@@ -3,8 +3,8 @@
 import { useGetGameStatus } from "@/api/orval/client/main-page-controller/main-page-controller"
 import { cn } from "@/utils/cn"
 import { offset } from "@floating-ui/dom"
-import { UsersRound } from "lucide-react"
 import { motion } from "motion/react"
+import Image from "next/image"
 import { useParams } from "next/navigation"
 import { ITooltip, Tooltip } from "react-tooltip"
 
@@ -31,7 +31,7 @@ export default function GamePlayTooltip(props: ITooltip) {
         classNameArrow={cn("absolute !start-auto end-[8px]", props.classNameArrow)}
       >
         <section className="flex items-center gap-[8px]">
-          <UsersRound />
+          <Image src="/images/icons/system/user_group.webp" width={24} height={24} alt="user-group-image" />
           <p className="text-label-regular text-background">{gameDetailData?.totalPlayNums}명이 참여했어요!</p>
         </section>
       </Tooltip>

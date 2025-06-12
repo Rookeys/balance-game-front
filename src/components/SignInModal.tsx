@@ -14,7 +14,7 @@ export default function SignInModal({ onClose, overlayClose }: Params) {
   return (
     <ModalWrapper onClose={onClose} overlayClose={overlayClose}>
       <section
-        className="z-[999] w-full max-w-[400px] rounded-[16px] bg-[#FFFFFF] px-[16px] pt-[16px]"
+        className="z-[999] h-full w-full max-w-[400px] rounded-[16px] bg-background px-[16px] pt-[16px]"
         onClick={(e) => e.stopPropagation()}
       >
         <section className="flex items-center justify-end">

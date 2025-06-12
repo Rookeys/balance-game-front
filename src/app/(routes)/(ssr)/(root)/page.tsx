@@ -14,6 +14,9 @@ import SearchAndCategory from "./_components/SearchAndCategory"
 import SkeletonList from "./_components/SkeletonCardList"
 import SkeletonSimpleCardList from "./_components/SkeletonSimpleCardList"
 import WeeklyTrendingGames from "./_components/WeeklyTrendingGames"
+import { getServerSession } from "next-auth"
+import { authOptions } from "@/auth"
+import RandomPlayButton from "@/components/RandomPlayButton"
 
 export const metadata: Metadata = {
   robots: {
@@ -25,10 +28,14 @@ export const metadata: Metadata = {
 export default async function RootPage() {
   const queryClient = new QueryClient()
 
+  const session = await getServerSession(authOptions)
+
+  const accessToken = session?.access_token
+
   return (
     <section className="flex flex-col items-center gap-[40px]">
       <Banner />
-      <section className="flex w-full flex-col items-center gap-[60px] px-[16px] md:px-[24px] lg:px-[120px]">
+      <section className="flex w-full flex-col items-center gap-[40px] px-[16px] md:gap-[60px] md:px-[24px] lg:px-[120px]">
         <SearchAndCategory />
         <h1 className="sr-only">짱픽 - 이상형 월드컵 커뮤니티</h1>
         <Suspense fallback={<SkeletonList title="주간 인기 월드컵 TOP 10" updateTime={"5분"} />}>
@@ -37,7 +44,10 @@ export default async function RootPage() {
               `${process.env.NEXT_PUBLIC_API_ROOT}/api/v1/games/list?${qs.stringify({ size: 10, sortType: GetMainGameListSortType.WEEK })}`,
               {
                 cache: "force-cache",
-                next: { revalidate: 300 }
+                next: { revalidate: 300 },
+                headers: {
+                  ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {})
+                }
               }
             )}
             queryKey={getGetMainGameListQueryKey({ size: 10, sortType: GetMainGameListSortType.WEEK })}
@@ -56,7 +66,10 @@ export default async function RootPage() {
               })}`,
               {
                 cache: "force-cache",
-                next: { revalidate: 10 }
+                next: { revalidate: 10 },
+                headers: {
+                  ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {})
+                }
               }
             )}
             queryKey={getGetMainGameListQueryKey({
@@ -78,7 +91,10 @@ export default async function RootPage() {
               })}`,
               {
                 cache: "force-cache",
-                next: { revalidate: 300 }
+                next: { revalidate: 300 },
+                headers: {
+                  ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {})
+                }
               }
             )}
             queryKey={getGetMainGameListQueryKey({
@@ -92,6 +108,7 @@ export default async function RootPage() {
           </FetchPrefetchBoundary>
         </Suspense>
         <GameCreateSuggestionCTA />
+        <RandomPlayButton />
       </section>
     </section>
   )

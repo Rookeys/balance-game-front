@@ -10,18 +10,18 @@ import MoreButton, { MoreItem } from "@/components/MoreButton"
 import ProgressBar from "@/components/ProgressBar"
 import CustomCheckIcon from "@/icons/CustomCheckIcon"
 import { useSelectedResourceIdStore } from "@/store/selectedResourceId"
-import { COLORS } from "@/styles/theme/colors"
 import { calculateWinRate } from "@/utils/calculateWinRate"
+import { cn } from "@/utils/cn"
 import { getYoutubeThumbnail } from "@/utils/getYoutubeThumbnail"
+import { log } from "@/utils/log"
 import { useQueryClient } from "@tanstack/react-query"
-import { Square } from "lucide-react"
 import Image from "next/image"
 import { useParams } from "next/navigation"
 import { Dispatch, SetStateAction } from "react"
+import { toast } from "sonner"
 import ImageEditModal from "./ImageEditModal"
 import ResourceDeleteModal from "./ResourceDeleteModal"
 import YoutubeEditModal from "./YoutubeEditModal"
-import { cn } from "@/utils/cn"
 
 interface Params {
   resource: GameResourceResponse
@@ -51,14 +51,20 @@ export default function ResourceTableContents({
   const { mutateAsync: deleteResource, isPending: isDeleting } = useDeleteResource()
 
   const handleDelete = async () => {
-    await deleteResource({ gameId: Number(id), resourceId: Number(resource.resourceId) })
+    try {
+      await deleteResource({ gameId: Number(id), resourceId: Number(resource.resourceId) })
 
-    await Promise.all([
-      queryClient.invalidateQueries({ queryKey: getGetResourcesUsingPageQueryKey(Number(id)) }),
-      queryClient.invalidateQueries({ queryKey: getGetCountResourcesInGamesQueryKey(Number(id)) })
-    ])
+      await Promise.all([
+        queryClient.invalidateQueries({ queryKey: getGetResourcesUsingPageQueryKey(Number(id)) }),
+        queryClient.invalidateQueries({ queryKey: getGetCountResourcesInGamesQueryKey(Number(id)) })
+      ])
 
-    setIsOpenDeleteModal(false)
+      toast.success("콘텐츠 삭제를 완료했습니다.")
+      setIsOpenDeleteModal(false)
+    } catch (error) {
+      log(error)
+      toast.error("오류가 발생했습니다.")
+    }
   }
 
   const moreItems: MoreItem[] = [
@@ -86,17 +92,17 @@ export default function ResourceTableContents({
           className="rounded-[8px] object-cover"
         />
         <button
-          className={cn(
-            "absolute start-[4px] top-[4px] rounded-[4px] bg-dimmer-neutral",
-            isChecked ? "p-[5px]" : "p-[4px]"
-          )}
+          type="button"
+          className={cn("absolute start-[4px] top-[4px] rounded-[4px] bg-dimmer-neutral")}
           onClick={() => toggleSelectedResourceId(resource.resourceId as number)}
         >
-          {isChecked ? (
-            <CustomCheckIcon className="rounded-[4px] bg-primary-normal p-[2px] text-white" size={14} />
-          ) : (
-            <Square color={COLORS.NEUTRAL_300} size={20} />
-          )}
+          <CustomCheckIcon
+            checked={isChecked}
+            checkedSrc={"/images/icons/system/checkbox_square_checked.webp"}
+            unCheckedSrc={"/images/icons/system/checkbox_square_default.webp"}
+            width={28}
+            height={28}
+          />
         </button>
       </figure>
       <article className="flex w-full flex-col gap-[12px]">

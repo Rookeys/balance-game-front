@@ -24,7 +24,7 @@ export default function TabletResources() {
     <section className="flex flex-col">
       {resources?.content && resources.content.length > 0 ? (
         resources.content.map((resource, index) => (
-          <TabletResourceItem key={resource.resourceId} {...resource} index={index} />
+          <TabletResourceItem key={resource.resourceId} {...resource} page={page} index={index} />
         ))
       ) : (
         <ResourceNotFound keyword={keyword} />

@@ -53,7 +53,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
         <ul
           className={cn(
             "absolute z-10 mt-[4px] w-full divide-y-[1px] overflow-auto rounded-[4px] border border-gray-300 bg-white py-[8px] shadow-md",
-            "max-h-[264px]"
+            "max-h-[200px]"
           )}
         >
           {options?.map((option) => (

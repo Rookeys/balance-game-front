@@ -18,6 +18,7 @@ interface Params {
   rounded?: boolean
   multiple?: boolean
   maxFiles?: number
+  disabled?: boolean
 }
 
 const FileUploadDropZone = ({
@@ -28,13 +29,14 @@ const FileUploadDropZone = ({
   isFileName = false,
   rounded = true,
   multiple = true,
-  maxFiles = 20
+  maxFiles = 20,
+  disabled
 }: Params) => {
   const dropzone = {
     accept: {
-      // "image/*": [".jpg", ".jpeg", ".png"]
       "image/jpeg": [".jpg", ".jpeg"],
-      "image/png": [".png"]
+      "image/png": [".png"],
+      "image/webp": [".webp"]
     },
     multiple,
     maxFiles,
@@ -45,7 +47,7 @@ const FileUploadDropZone = ({
     <FileUploader value={value} onValueChange={onValueChange} dropzoneOptions={dropzone}>
       <FileInput className="border-2 border-dashed border-line-normal bg-background" rounded={rounded}>
         <div className="flex w-full flex-col items-center justify-center py-[16px]">
-          <FileUploaderInformation />
+          <FileUploaderInformation disabled={disabled} />
         </div>
       </FileInput>
       {isThumbnail && value && value.length > 0 && (

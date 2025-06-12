@@ -45,7 +45,7 @@ export const updateResultComment = (
  * 해당 댓글을 삭제할 수 있다.
  * @summary 게임 결과 댓글 삭제 API
  */
-export const deleteResourceComment = (
+export const deleteResultComment = (
   gameId: number,
   commentId: number,
   options?: SecondParameter<typeof customServerInstance>

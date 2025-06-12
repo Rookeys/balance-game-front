@@ -17,4 +17,6 @@ export interface GameResourceChildrenCommentResponse {
   existsLiked?: boolean
   /** 작성자 본인 확인 */
   existsWriter?: boolean
+  /** 댓글 작성자 본인 확인 */
+  existsMine?: boolean
 }

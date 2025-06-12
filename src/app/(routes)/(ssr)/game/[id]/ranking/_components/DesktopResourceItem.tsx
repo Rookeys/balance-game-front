@@ -10,21 +10,22 @@ import Link from "next/link"
 import { useParams } from "next/navigation"
 
 interface Params extends GameResultResponse {
+  page?: number
   index: number
 }
 
-export default function DesktopResourceItem({ index, ...props }: Params) {
+export default function DesktopResourceItem({ page = 1, index, ...props }: Params) {
   const { id } = useParams()
   return (
     <Link href={`/game/${id}/resources/${props.resourceId}`} className={cn("flex h-[96px] overflow-hidden")}>
       <div className="flex w-[64px] flex-shrink-0 items-center justify-center text-label-bold text-label-normal">
-        <p>{index + 1}</p>
+        <p>{(page - 1) * 10 + index + 1}</p>
       </div>
       <div className="center flex w-[112px] flex-shrink-0 items-center px-[16px]">
         <figure className="relative my-auto h-[64px] w-[80px] overflow-hidden rounded-[8px] border">
           <Image
             src={getThumbnailUrlByType({ type: props.type, url: props.content })}
-            alt=""
+            alt="resource-image"
             fill
             className="rounded-[8px] object-contain"
           />

@@ -14,6 +14,7 @@ import type {
   CustomPageImplGameListResponse,
   GameResponse,
   GetMyGameListParams,
+  UserReportRequest,
   UserRequest,
   UserResponse
 } from "../../model"
@@ -126,6 +127,27 @@ export const updateProfile = (
 ) => {
   return customServerInstance<string>(
     { url: `/api/v1/users/profile`, method: "PUT", headers: { "Content-Type": "application/json" }, data: userRequest },
+    options
+  )
+}
+
+/**
+ * 정책에 맞지 않는 유저를 신고함.
+ * @summary 유저 신고 API
+ */
+export const submitUserReport = (
+  userReportRequest: BodyType<UserReportRequest>,
+  options?: SecondParameter<typeof customServerInstance>,
+  signal?: AbortSignal
+) => {
+  return customServerInstance<boolean>(
+    {
+      url: `/api/v1/users/report`,
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      data: userReportRequest,
+      signal
+    },
     options
   )
 }

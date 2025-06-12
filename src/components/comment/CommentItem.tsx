@@ -3,14 +3,14 @@
 import { useGetChildrenCommentsByGameResourceInfinite } from "@/api/orval/client/game-resource-comments-controller/game-resource-comments-controller"
 import { GameResourceParentCommentResponse } from "@/api/orval/model/gameResourceParentCommentResponse"
 import ResourceCommentAndReplyForm from "@/components/comment/ResourceCommentAndReplyForm"
+import { COLORS } from "@/styles/theme/colors"
 import { convertUtcToKoreaDayTime } from "@/utils/dayjsWithExtends"
-import { ChevronDownIcon, ChevronUpIcon, MessageSquare, ThumbsUp } from "lucide-react"
+import { ChevronDownIcon, ChevronUpIcon, MessageSquare } from "lucide-react"
 import Image from "next/image"
 import { useParams } from "next/navigation"
 import { useState } from "react"
 import CommentSocialAction from "./CommentSocialAction"
 import ReplyItem from "./ReplyItem"
-import { COLORS } from "@/styles/theme/colors"
 
 // * GameResourceParentCommentResponse 로 설정한이유
 // * 댓글 중 가장 큰 범위의 타입을 가지고있음 (겹치지않는 부분들은 optional type)
@@ -48,7 +48,7 @@ export default function CommentItem({ propResourceId, ...props }: Params) {
       <article className="flex items-center justify-between">
         <article className="flex items-center gap-[8px]">
           <Image
-            src={props.profileImageUrl ?? "/images/Rookeys.png"}
+            src={props.profileImageUrl || "/images/character/pixy_profile.webp"}
             width={40}
             height={40}
             className="rounded-full"
@@ -70,15 +70,15 @@ export default function CommentItem({ propResourceId, ...props }: Params) {
           </div>
         </article>
         <div className="flex-shrink-0 self-start">
-          <CommentSocialAction />
+          <CommentSocialAction commentId={props.commentId} isMine={props.existsMine} resourceId={resourceId} />
         </div>
       </article>
       <p className="ms-[48px] text-label-regular text-label-normal md:text-body2-regular">{props?.comment}</p>
       <div className="ms-[48px] flex items-center gap-[12px] text-label-alternative">
-        <button className="flex items-center gap-[4px]" onClick={() => alert("좋아요")}>
+        {/* <button className="flex items-center gap-[4px]" onClick={() => alert("좋아요")}>
           <ThumbsUp size={20} color={COLORS.NEUTRAL_600} />
           <p className="text-caption1-regular md:text-label-regular">{props?.like}</p>
-        </button>
+        </button> */}
         <button className="flex items-center gap-[4px]" onClick={() => setIsOpenReply((prev) => !prev)}>
           <MessageSquare size={20} color={COLORS.NEUTRAL_600} />
           <p className="text-caption1-regular md:text-label-regular">대댓글 {props?.children || 0}</p>
@@ -94,10 +94,13 @@ export default function CommentItem({ propResourceId, ...props }: Params) {
             inputClassName="!min-h-[100px]"
             placeholder="해당 콘텐츠와 관련된 댓글을 작성해 주세요."
           /> */}
-          <ResourceCommentAndReplyForm parentId={props.commentId} propResourceId={propResourceId} />
+          <ResourceCommentAndReplyForm parentId={props.commentId} resourceId={resourceId} />
           {isLoading && <section className="h-[100vh] w-full bg-red-50" />}
           {(replyData?.pages ?? []).flatMap(
-            (page) => page.content?.map((reply) => <ReplyItem key={reply.commentId} {...reply} />) ?? []
+            (page) =>
+              page.content?.map((reply) => (
+                <ReplyItem key={reply.commentId} {...reply} resourceId={resourceId} parentId={props.commentId} />
+              )) ?? []
           )}
         </section>
       )}

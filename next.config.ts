@@ -18,6 +18,15 @@ const nextConfig: NextConfig = {
         hostname: "k.kakaocdn.net"
       }
     ]
+  },
+  async redirects() {
+    return [
+      {
+        source: "/$",
+        destination: "/",
+        permanent: true
+      }
+    ]
   }
 }
 

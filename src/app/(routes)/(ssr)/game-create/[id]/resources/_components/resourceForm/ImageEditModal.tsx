@@ -26,9 +26,7 @@ export default function ImageEditModal({ onClose, onSave, overlayClose }: Params
 
   return (
     <ModalWrapper overlayClose={overlayClose} onClose={onClose}>
-      <section
-        className={cn("z-[999] w-full max-w-[500px] rounded-[16px] bg-white p-[16px] text-center dark:border-gray-700")}
-      >
+      <section className={cn("z-[999] h-full w-full max-w-[500px] rounded-[16px] bg-background p-[16px] text-center")}>
         <article className="flex items-center justify-between">
           <div className="h-[24px] w-[24px]" />
           <p className="text-body2-bold">이미지 수정</p>
@@ -54,7 +52,7 @@ export default function ImageEditModal({ onClose, onSave, overlayClose }: Params
             <div className="flex items-start gap-[4px]">
               <CircleAlert className="flex-shrink-0 fill-label-alternative text-white" size={16} />
               <p className="text-caption1-regular text-label-alternative md:text-label-regular">
-                JPEG, JPG, PNG 형식을 지원하며 이미지 당 최대 4MB까지 업로드할 수 있어요.
+                JPEG, JPG, PNG, WEBP 형식을 지원하며 이미지 당 최대 4MB까지 업로드할 수 있어요.
               </p>
             </div>
           </div>
@@ -62,7 +60,7 @@ export default function ImageEditModal({ onClose, onSave, overlayClose }: Params
             id="title"
             value={watch("title")}
             onChange={(e) => setValue("title", e.target.value, { shouldValidate: true })}
-            maxLength={20}
+            maxLength={30}
             label="이름"
             labelClassName="!text-label-regular !font-pretendard text-label-neutral"
           />
