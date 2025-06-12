@@ -11,6 +11,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      AUTH_SECRET: ${{ secrets.AUTH_SECRET }}
+      NEXT_PUBLIC_API_ROOT: ${{ secrets.NEXT_PUBLIC_API_ROOT }}
+      KAKAO_CLIENT_ID: ${{ secrets.KAKAO_CLIENT_ID }}
+      KAKAO_CLIENT_SECRET: ${{ secrets.KAKAO_CLIENT_SECRET }}
+      NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY: ${{ secrets.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY }}
+      REVALIDATE_SECRET: ${{ secrets.REVALIDATE_SECRET }}
+      DEMO_LOGIN_SECRET: ${{ secrets.DEMO_LOGIN_SECRET }}
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -20,8 +29,11 @@ jobs:
         with:
           node-version: ${{ inputs.NODE_VERSION }}
 
+      - name: Install pnpm
+        run: npm install -g pnpm
+
       - name: Install dependencies
-        run: npm install
+        run: pnpm install
 
       - name: Run build
-        run: npm run build
+        run: pnpm run build

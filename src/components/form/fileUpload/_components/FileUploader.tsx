@@ -22,9 +22,9 @@ export const FileUploader = ({
   const [isLimit, setIsLimit] = useState(false)
   const {
     accept = {
-      // "image/*": [".jpg", ".jpeg", ".png"]
       "image/jpeg": [".jpg", ".jpeg"],
-      "image/png": [".png"]
+      "image/png": [".png"],
+      "image/webp": [".webp"]
     },
     maxFiles = 1,
     maxSize = 4 * 1024 * 1024,

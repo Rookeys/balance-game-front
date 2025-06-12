@@ -331,3 +331,116 @@ export const createPlayRoom = (
     options
   )
 }
+
+/**
+ * 랜덤 ID 를 반환.
+ * @summary 플레이룸 랜덤 ID 반환 API
+ */
+export const getRandomPlayRoomId = (options?: SecondParameter<typeof customServerInstance>, signal?: AbortSignal) => {
+  return customServerInstance<number>({ url: `/api/v1/games/random/play`, method: "GET", signal }, options)
+}
+
+export const getGetRandomPlayRoomIdQueryKey = () => {
+  return [`/api/v1/games/random/play`] as const
+}
+
+export const getGetRandomPlayRoomIdQueryOptions = <
+  TData = Awaited<ReturnType<typeof getRandomPlayRoomId>>,
+  TError = ErrorType<unknown>
+>(options?: {
+  query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getRandomPlayRoomId>>, TError, TData>>
+  request?: SecondParameter<typeof customServerInstance>
+}) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {}
+
+  const queryKey = queryOptions?.queryKey ?? getGetRandomPlayRoomIdQueryKey()
+
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getRandomPlayRoomId>>> = ({ signal }) =>
+    getRandomPlayRoomId(requestOptions, signal)
+
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof getRandomPlayRoomId>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetRandomPlayRoomIdQueryResult = NonNullable<Awaited<ReturnType<typeof getRandomPlayRoomId>>>
+export type GetRandomPlayRoomIdQueryError = ErrorType<unknown>
+
+export function useGetRandomPlayRoomId<
+  TData = Awaited<ReturnType<typeof getRandomPlayRoomId>>,
+  TError = ErrorType<unknown>
+>(options: {
+  query: Partial<UseQueryOptions<Awaited<ReturnType<typeof getRandomPlayRoomId>>, TError, TData>> &
+    Pick<
+      DefinedInitialDataOptions<
+        Awaited<ReturnType<typeof getRandomPlayRoomId>>,
+        TError,
+        Awaited<ReturnType<typeof getRandomPlayRoomId>>
+      >,
+      "initialData"
+    >
+  request?: SecondParameter<typeof customServerInstance>
+}): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetRandomPlayRoomId<
+  TData = Awaited<ReturnType<typeof getRandomPlayRoomId>>,
+  TError = ErrorType<unknown>
+>(options?: {
+  query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getRandomPlayRoomId>>, TError, TData>> &
+    Pick<
+      UndefinedInitialDataOptions<
+        Awaited<ReturnType<typeof getRandomPlayRoomId>>,
+        TError,
+        Awaited<ReturnType<typeof getRandomPlayRoomId>>
+      >,
+      "initialData"
+    >
+  request?: SecondParameter<typeof customServerInstance>
+}): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetRandomPlayRoomId<
+  TData = Awaited<ReturnType<typeof getRandomPlayRoomId>>,
+  TError = ErrorType<unknown>
+>(options?: {
+  query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getRandomPlayRoomId>>, TError, TData>>
+  request?: SecondParameter<typeof customServerInstance>
+}): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary 플레이룸 랜덤 ID 반환 API
+ */
+
+export function useGetRandomPlayRoomId<
+  TData = Awaited<ReturnType<typeof getRandomPlayRoomId>>,
+  TError = ErrorType<unknown>
+>(options?: {
+  query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getRandomPlayRoomId>>, TError, TData>>
+  request?: SecondParameter<typeof customServerInstance>
+}): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+  const queryOptions = getGetRandomPlayRoomIdQueryOptions(options)
+
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+
+  query.queryKey = queryOptions.queryKey
+
+  return query
+}
+
+/**
+ * @summary 플레이룸 랜덤 ID 반환 API
+ */
+export const prefetchGetRandomPlayRoomId = async <
+  TData = Awaited<ReturnType<typeof getRandomPlayRoomId>>,
+  TError = ErrorType<unknown>
+>(
+  queryClient: QueryClient,
+  options?: {
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getRandomPlayRoomId>>, TError, TData>>
+    request?: SecondParameter<typeof customServerInstance>
+  }
+): Promise<QueryClient> => {
+  const queryOptions = getGetRandomPlayRoomIdQueryOptions(options)
+
+  await queryClient.prefetchQuery(queryOptions)
+
+  return queryClient
+}

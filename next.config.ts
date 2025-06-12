@@ -3,15 +3,8 @@ import type { NextConfig } from "next"
 const nextConfig: NextConfig = {
   reactStrictMode: false,
   images: {
+    unoptimized: true,
     remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "avatars.githubusercontent.com"
-      },
-      {
-        protocol: "https",
-        hostname: "i.ytimg.com"
-      },
       {
         protocol: "http",
         hostname: "img1.kakaocdn.net"
@@ -19,6 +12,19 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "balance-game.s3.ap-northeast-2.amazonaws.com"
+      },
+      {
+        protocol: "http",
+        hostname: "k.kakaocdn.net"
+      }
+    ]
+  },
+  async redirects() {
+    return [
+      {
+        source: "/$",
+        destination: "/",
+        permanent: true
       }
     ]
   }

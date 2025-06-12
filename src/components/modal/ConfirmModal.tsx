@@ -1,33 +1,65 @@
 "use client"
 import { Button } from "@/components/Button"
+import { COLORS } from "@/styles/theme/colors"
+import { cn } from "@/utils/cn"
+import { XIcon } from "lucide-react"
 import ModalWrapper from "./ModalWrapper"
 
 interface Params {
   title?: string
   description?: string
-  onClose?: () => void
+  subDescription?: string
   onClick?: () => void
+  onClose?: () => void
+  okLabel?: string
+  disabled?: boolean
   overlayClose?: boolean
+  className?: string
 }
 
-export default function ConfirmModal({ title, description, onClick, onClose, overlayClose = false }: Params) {
+export default function ConfirmModal({
+  title,
+  description,
+  subDescription,
+  onClick,
+  onClose,
+  okLabel = "확인",
+  disabled,
+  overlayClose = false,
+  className
+}: Params) {
   return (
     <ModalWrapper onClose={onClose} overlayClose={overlayClose}>
-      <section className="z-[999] mx-[16px] w-full max-w-[400px] rounded-sm bg-light p-6 dark:border dark:border-gray-70 dark:bg-night">
-        <h2 className="text-md font-semibold">{title}</h2>
-        <p className="mt-[12px]">{description}</p>
-        <article className="mt-[16px] flex justify-end gap-2">
+      <section
+        className={cn(
+          "z-[999] h-full w-full max-w-[380px] rounded-[16px] bg-background p-[16px] text-center",
+          className
+        )}
+      >
+        <article className="flex items-center justify-end">
+          <XIcon size={24} color={COLORS.NEUTRAL_700} className="cursor-pointer" onClick={onClose} />
+        </article>
+        <article className="flex flex-col gap-[16px] pb-[40px] pt-[20px]">
+          <h2 className="font-sb-aggro-medium text-heading-4 text-label-normal md:text-heading-3">{title}</h2>
+          <p className="whitespace-pre-line text-body2-regular">{description}</p>
+          <p className="whitespace-pre-line text-caption1-regular text-label-alternative">{subDescription}</p>
+        </article>
+        <article className="flex items-center justify-between gap-[12px]">
           <Button
-            className="rounded rounded-xsm bg-dark-20 px-4 py-2 text-sm text-white hover:bg-dark-30"
+            variant="custom"
+            type="button"
+            className="w-full rounded-[12px] bg-fill-normal px-[28px] py-[12px] text-body2-bold text-label-normal"
             onClick={onClose}
           >
             취소
           </Button>
           <Button
-            className="rounded rounded-xsm bg-blue-40 px-4 py-2 text-sm text-white hover:bg-blue-50"
+            type="button"
+            className="w-full rounded-[12px] px-[28px] py-[12px] text-body2-bold"
             onClick={onClick}
+            disabled={disabled}
           >
-            확인
+            {okLabel}
           </Button>
         </article>
       </section>

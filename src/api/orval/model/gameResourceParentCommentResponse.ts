@@ -5,6 +5,8 @@ export interface GameResourceParentCommentResponse {
   comment?: string
   /** 작성자 닉네임 */
   nickname?: string
+  /** 작성자 프로필 사진 */
+  profileImageUrl?: string
   /** 대댓글 개수 */
   children?: number
   /** 작성 시간 */
@@ -13,6 +15,11 @@ export interface GameResourceParentCommentResponse {
   updatedDateTime?: string
   /** 좋아요 총합 */
   like?: number
+  /** 좋아요 클릭 유무 */
+  existsLiked?: boolean
+  /** 작성자 본인 확인 */
+  existsWriter?: boolean
+  /** 댓글 작성자 본인 확인 */
+  existsMine?: boolean
   deleted?: boolean
-  liked?: boolean
 }

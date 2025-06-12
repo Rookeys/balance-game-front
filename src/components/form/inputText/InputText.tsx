@@ -2,14 +2,16 @@
 
 import { InputErrorMessage, InputLabel } from "@/components/form/_components"
 import { cn } from "@/utils/cn"
-import { InputHTMLAttributes } from "react"
+import { InputHTMLAttributes, ReactNode } from "react"
 
 interface Params extends InputHTMLAttributes<HTMLInputElement> {
   id: string
   label?: string
   errorMessage?: string
   ariaLabel?: string
+  inputClassName?: string
   labelClassName?: string
+  SubDescription?: ReactNode
 }
 
 const InputText: React.FC<Params> = ({
@@ -21,7 +23,10 @@ const InputText: React.FC<Params> = ({
   errorMessage,
   ariaLabel,
   className,
+  inputClassName,
   labelClassName,
+  maxLength,
+  SubDescription,
   ...rest
 }) => {
   return (
@@ -29,14 +34,33 @@ const InputText: React.FC<Params> = ({
       {label && <InputLabel id={id} label={label} required={required} className={labelClassName} />}
       <input
         id={id}
-        className="w-full rounded-xsm border-[2px] px-2 py-1 dark:border-gray dark:bg-dark-30"
+        className={cn(
+          "w-full rounded-[12px] border px-[16px] py-[16px] outline-none placeholder:text-label-neutral focus:border-primary-normal",
+          inputClassName
+        )}
         value={value}
-        onChange={onChange}
+        onChange={(e) => {
+          if (onChange) {
+            if (!!maxLength) {
+              if (e.target.value.length <= maxLength) {
+                onChange(e)
+              }
+            } else {
+              onChange(e)
+            }
+          }
+        }}
         required={required}
         aria-invalid={!!errorMessage}
         aria-label={ariaLabel}
         {...rest}
       />
+      {SubDescription && SubDescription}
+      {!SubDescription && maxLength && (
+        <p className="self-end text-label-regular text-label-alternative">
+          {value?.toString().length ?? 0}/{maxLength}
+        </p>
+      )}
       {!!errorMessage && <InputErrorMessage id={id} errorMessage={errorMessage} />}
     </section>
   )

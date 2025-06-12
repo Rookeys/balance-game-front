@@ -118,64 +118,6 @@ export const useResign = <TError = ErrorType<unknown>, TContext = unknown>(optio
   return useMutation(mutationOptions)
 }
 /**
- * 회원 탈퇴 요청을 취소합니다.
- * @summary 회원 탈퇴 취소 API
- */
-export const cancelResign = (
-  cancelResignBody: BodyType<string>,
-  options?: SecondParameter<typeof customClientInstance>,
-  signal?: AbortSignal
-) => {
-  return customClientInstance<boolean>(
-    {
-      url: `/api/v1/users/cancel/resign`,
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      data: cancelResignBody,
-      signal
-    },
-    options
-  )
-}
-
-export const getCancelResignMutationOptions = <TError = ErrorType<unknown>, TContext = unknown>(options?: {
-  mutation?: UseMutationOptions<Awaited<ReturnType<typeof cancelResign>>, TError, { data: BodyType<string> }, TContext>
-  request?: SecondParameter<typeof customClientInstance>
-}): UseMutationOptions<Awaited<ReturnType<typeof cancelResign>>, TError, { data: BodyType<string> }, TContext> => {
-  const mutationKey = ["cancelResign"]
-  const { mutation: mutationOptions, request: requestOptions } = options
-    ? options.mutation && "mutationKey" in options.mutation && options.mutation.mutationKey
-      ? options
-      : { ...options, mutation: { ...options.mutation, mutationKey } }
-    : { mutation: { mutationKey }, request: undefined }
-
-  const mutationFn: MutationFunction<Awaited<ReturnType<typeof cancelResign>>, { data: BodyType<string> }> = (
-    props
-  ) => {
-    const { data } = props ?? {}
-
-    return cancelResign(data, requestOptions)
-  }
-
-  return { mutationFn, ...mutationOptions }
-}
-
-export type CancelResignMutationResult = NonNullable<Awaited<ReturnType<typeof cancelResign>>>
-export type CancelResignMutationBody = BodyType<string>
-export type CancelResignMutationError = ErrorType<unknown>
-
-/**
- * @summary 회원 탈퇴 취소 API
- */
-export const useCancelResign = <TError = ErrorType<unknown>, TContext = unknown>(options?: {
-  mutation?: UseMutationOptions<Awaited<ReturnType<typeof cancelResign>>, TError, { data: BodyType<string> }, TContext>
-  request?: SecondParameter<typeof customClientInstance>
-}): UseMutationResult<Awaited<ReturnType<typeof cancelResign>>, TError, { data: BodyType<string> }, TContext> => {
-  const mutationOptions = getCancelResignMutationOptions(options)
-
-  return useMutation(mutationOptions)
-}
-/**
  * 이름이 중복되었다면 True, 아니면 False 를 반환합니다.
  * @summary 중복 이름 확인 API
  */
@@ -184,7 +126,7 @@ export const existsByNickname = (
   options?: SecondParameter<typeof customClientInstance>,
   signal?: AbortSignal
 ) => {
-  return customClientInstance<boolean>({ url: `/api/v1/users/exists`, method: "GET", params, signal }, options)
+  return customClientInstance<boolean>({ url: `/api/v1/users/exists`, method: "POST", params, signal }, options)
 }
 
 export const getExistsByNicknameQueryKey = (params: ExistsByNicknameParams) => {

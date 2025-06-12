@@ -1,4 +1,4 @@
-import type { GameListResponseCategory } from "./gameListResponseCategory"
+import type { GameListResponseCategoriesItem } from "./gameListResponseCategoriesItem"
 import type { UserMainResponse } from "./userMainResponse"
 import type { GameListSelectionResponse } from "./gameListSelectionResponse"
 
@@ -9,8 +9,12 @@ export interface GameListResponse {
   title?: string
   /** 설명 */
   description?: string
+  /** 썸네일 블라인드 여부 */
+  existsBlind?: boolean
+  /** 내 글 여부 */
+  existsMine?: boolean
   /** 카테고리 */
-  category?: GameListResponseCategory
+  categories?: GameListResponseCategoriesItem[]
   /** 총 플레이 횟수 */
   totalPlayNums?: number
   /** HOT 태그를 위한 플레이 횟수 */

@@ -1,45 +1,75 @@
 "use client"
-import { Button } from "@/components/Button"
-import { share, ShareAPIRequest } from "@/utils/share"
-import { EllipsisVertical } from "lucide-react"
+import { GameListResponseCategoriesItem } from "@/api/orval/model/gameListResponseCategoriesItem"
+import CategoryLabel from "@/components/CategoryLabel"
+import GameReportModal from "@/components/GameReportModal"
+import MoreButton, { MoreItem } from "@/components/MoreButton"
+import { cn } from "@/utils/cn"
+import { getCategoryLabel } from "@/utils/getCategoryLabel"
+import { handleGameShare } from "@/utils/handleShare"
+import { requireLogin } from "@/utils/requireLogin"
+import { useSession } from "next-auth/react"
 import { useState } from "react"
+import GameDeleteModal from "./GameDeleteModal"
+import { usePathname } from "next/navigation"
 
 interface Params {
   id?: number
   title?: string
-  category?: string
+  categories?: GameListResponseCategoriesItem[]
+  isMine?: boolean
 }
 
-export default function SocialActionSection({ id, title, category }: Params) {
-  const [isOpen, setIsOpen] = useState<boolean>(false)
+export default function SocialActionSection({ id, title, categories, isMine }: Params) {
+  const { data: session } = useSession()
 
-  const handleShare = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault()
-    const shareData: ShareAPIRequest = {
-      title: `피케이드에 초대합니다`,
-      text: `${title ?? ""}플레이`,
-      url: `https://github.com/kojaem/${id}`
+  const pathname = usePathname()
+
+  const isMyPage = pathname === "/my-page"
+
+  const [isOpenReportModal, setIsOpenReportModal] = useState<boolean>(false)
+  const [isOpenDeleteModal, setIsOpenDeleteModal] = useState<boolean>(false)
+
+  const handleReport = async () => {
+    if (!requireLogin(session)) {
+      return
     }
-    share(shareData)
+    setIsOpenReportModal(true)
   }
 
+  const moreItems: MoreItem[] = isMine
+    ? isMyPage
+      ? [
+          { label: "공유하기", onClick: () => handleGameShare({ title, id }) },
+          { label: "삭제하기", onClick: () => setIsOpenDeleteModal(true) }
+        ]
+      : [{ label: "공유하기", onClick: () => handleGameShare({ title, id }) }]
+    : [
+        { label: "공유하기", onClick: () => handleGameShare({ title, id }) },
+        {
+          label: "신고하기",
+          onClick: handleReport
+        }
+      ]
+
   return (
-    <article className="relative flex h-[32px] items-center justify-between">
-      {category ? <p className="rounded-[4px] bg-gray-30 px-[8px] py-[4px]">{category}</p> : <p></p>}
-      <EllipsisVertical
-        size={24}
-        onClick={(e) => {
-          e.preventDefault()
-          setIsOpen((prev) => !prev)
-        }}
-      />
-      {isOpen && (
-        <section className="absolute end-0 top-[32px] rounded-[8px] border bg-white">
-          <Button variant="custom" className="px-[24px] py-[20px]" onClick={handleShare}>
-            <p>공유하기</p>
-          </Button>
-        </section>
+    <article
+      className={cn(
+        "relative flex h-[32px] items-center justify-between",
+        categories && categories.length > 0 ? "justify-between" : "justify-end"
       )}
+    >
+      {categories && categories?.length > 0 && (
+        <article className="flex gap-[4px]">
+          {categories.map((category, i) => (
+            <CategoryLabel key={`${category}-${i}`} text={getCategoryLabel(category)} />
+          ))}
+        </article>
+      )}
+      <div onClick={(e) => e.preventDefault()}>
+        <MoreButton items={moreItems} />
+        {isOpenReportModal && <GameReportModal id={id?.toString()} onClose={() => setIsOpenReportModal(false)} />}
+        {isOpenDeleteModal && <GameDeleteModal id={Number(id)} onClose={() => setIsOpenDeleteModal(false)} />}
+      </div>
     </article>
   )
 }

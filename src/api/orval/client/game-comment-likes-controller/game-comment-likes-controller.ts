@@ -11,6 +11,7 @@ type SecondParameter<T extends (...args: any) => any> = Parameters<T>[1]
  * @summary 댓글 좋아요 처리 API
  */
 export const toggleLike = (
+  gameId: number,
   commentId: number,
   gameCommentLikeRequest: BodyType<GameCommentLikeRequest>,
   options?: SecondParameter<typeof customClientInstance>,
@@ -18,7 +19,7 @@ export const toggleLike = (
 ) => {
   return customClientInstance<boolean>(
     {
-      url: `/api/v1/games/comments/${encodeURIComponent(String(commentId))}/likes`,
+      url: `/api/v1/games/${encodeURIComponent(String(gameId))}/comments/${encodeURIComponent(String(commentId))}/likes`,
       method: "POST",
       headers: { "Content-Type": "application/json" },
       data: gameCommentLikeRequest,
@@ -32,14 +33,14 @@ export const getToggleLikeMutationOptions = <TError = ErrorType<boolean>, TConte
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof toggleLike>>,
     TError,
-    { commentId: number; data: BodyType<GameCommentLikeRequest> },
+    { gameId: number; commentId: number; data: BodyType<GameCommentLikeRequest> },
     TContext
   >
   request?: SecondParameter<typeof customClientInstance>
 }): UseMutationOptions<
   Awaited<ReturnType<typeof toggleLike>>,
   TError,
-  { commentId: number; data: BodyType<GameCommentLikeRequest> },
+  { gameId: number; commentId: number; data: BodyType<GameCommentLikeRequest> },
   TContext
 > => {
   const mutationKey = ["toggleLike"]
@@ -51,11 +52,11 @@ export const getToggleLikeMutationOptions = <TError = ErrorType<boolean>, TConte
 
   const mutationFn: MutationFunction<
     Awaited<ReturnType<typeof toggleLike>>,
-    { commentId: number; data: BodyType<GameCommentLikeRequest> }
+    { gameId: number; commentId: number; data: BodyType<GameCommentLikeRequest> }
   > = (props) => {
-    const { commentId, data } = props ?? {}
+    const { gameId, commentId, data } = props ?? {}
 
-    return toggleLike(commentId, data, requestOptions)
+    return toggleLike(gameId, commentId, data, requestOptions)
   }
 
   return { mutationFn, ...mutationOptions }
@@ -72,14 +73,14 @@ export const useToggleLike = <TError = ErrorType<boolean>, TContext = unknown>(o
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof toggleLike>>,
     TError,
-    { commentId: number; data: BodyType<GameCommentLikeRequest> },
+    { gameId: number; commentId: number; data: BodyType<GameCommentLikeRequest> },
     TContext
   >
   request?: SecondParameter<typeof customClientInstance>
 }): UseMutationResult<
   Awaited<ReturnType<typeof toggleLike>>,
   TError,
-  { commentId: number; data: BodyType<GameCommentLikeRequest> },
+  { gameId: number; commentId: number; data: BodyType<GameCommentLikeRequest> },
   TContext
 > => {
   const mutationOptions = getToggleLikeMutationOptions(options)

@@ -19,7 +19,11 @@ const AuthProvider = ({ session, children }: Props) => {
     }
   }, [session, setSession])
 
-  return <SessionProvider session={session}>{children}</SessionProvider>
+  return (
+    <SessionProvider session={session} refetchOnWindowFocus={false}>
+      {children}
+    </SessionProvider>
+  )
 }
 
 export default AuthProvider

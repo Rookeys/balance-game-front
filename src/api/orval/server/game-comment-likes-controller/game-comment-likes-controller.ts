@@ -9,6 +9,7 @@ type SecondParameter<T extends (...args: any) => any> = Parameters<T>[1]
  * @summary 댓글 좋아요 처리 API
  */
 export const toggleLike = (
+  gameId: number,
   commentId: number,
   gameCommentLikeRequest: BodyType<GameCommentLikeRequest>,
   options?: SecondParameter<typeof customServerInstance>,
@@ -16,7 +17,7 @@ export const toggleLike = (
 ) => {
   return customServerInstance<boolean>(
     {
-      url: `/api/v1/games/comments/${encodeURIComponent(String(commentId))}/likes`,
+      url: `/api/v1/games/${encodeURIComponent(String(gameId))}/comments/${encodeURIComponent(String(commentId))}/likes`,
       method: "POST",
       headers: { "Content-Type": "application/json" },
       data: gameCommentLikeRequest,

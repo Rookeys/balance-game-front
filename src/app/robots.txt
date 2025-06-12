@@ -1,0 +1,14 @@
+User-agent: *
+Disallow: /my-page
+Disallow: /search
+Disallow: /sign-in
+Disallow: /sign-out
+Disallow: /index.php
+Disallow: /vod
+Disallow: /api
+
+Allow: /
+Allow: /game/
+Allow: /category/
+
+Sitemap: https://zznpk.com/sitemap.xml

@@ -4,5 +4,5 @@ import { Toaster } from "sonner"
 
 export default function ToasterWithTheme() {
   const { theme } = useTheme()
-  return <Toaster richColors theme={theme === "dark" ? "dark" : "light"} />
+  return <Toaster richColors theme={theme === "dark" ? "dark" : "light"} duration={2500} />
 }

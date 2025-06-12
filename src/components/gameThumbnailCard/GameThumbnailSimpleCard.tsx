@@ -11,13 +11,27 @@ import TitleSection from "./_components/common/TitleSection"
 interface Params extends GameListResponse {
   tag?: string
   fixedSize?: boolean
+  linkEditPage?: boolean
 }
 
-export default function GameThumbnailSimpleCard({ tag, fixedSize = true, ...props }: Params) {
-  const { roomId, leftSelection, title, description, category, userResponse, totalPlayNums } = props
+export default function GameThumbnailSimpleCard({ tag, fixedSize = true, linkEditPage = false, ...props }: Params) {
+  const {
+    roomId,
+    leftSelection,
+    title,
+    description,
+    categories,
+    userResponse,
+    totalPlayNums,
+    existsBlind,
+    existsMine
+  } = props
 
   return (
-    <Link href={`/game/${roomId}`} className={cn("flex flex-col gap-[8px]", fixedSize && "w-[182px] md:w-[282px]")}>
+    <Link
+      href={linkEditPage ? `/game-create/${roomId}/edit` : `/game/${roomId}`}
+      className={cn("group flex w-full flex-col gap-[8px]", fixedSize && "w-[162px] md:w-[282px]")}
+    >
       <ImageSection
         src={
           leftSelection?.type === GameListSelectionResponseType.LINK
@@ -25,14 +39,12 @@ export default function GameThumbnailSimpleCard({ tag, fixedSize = true, ...prop
             : leftSelection?.content
         }
         tag={tag}
-      />
-      <SocialActionSection id={roomId} title={title} category={category} />
-      <TitleSection title={title} description={description} />
-      <MetaInfoSection
-        creatorNickname={userResponse?.nickname}
-        creatorImage={userResponse?.profileImageUrl}
+        isBlind={existsBlind}
         totalPlayNums={totalPlayNums}
       />
+      <SocialActionSection id={roomId} title={title} categories={categories} isMine={linkEditPage || existsMine} />
+      <TitleSection title={title} description={description} />
+      <MetaInfoSection creatorNickname={userResponse?.nickname} creatorImage={userResponse?.profileImageUrl} />
     </Link>
   )
 }

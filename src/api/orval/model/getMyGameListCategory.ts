@@ -3,16 +3,15 @@ export type GetMyGameListCategory = (typeof GetMyGameListCategory)[keyof typeof 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const GetMyGameListCategory = {
   FUN: "FUN",
-  HORROR: "HORROR",
-  HOT: "HOT",
-  ACTION: "ACTION",
-  ADVENTURE: "ADVENTURE",
-  MYSTERY: "MYSTERY",
-  FANTASY: "FANTASY",
-  THRILLER: "THRILLER",
-  SF: "SF",
+  DAILY: "DAILY",
+  FOOD: "FOOD",
+  LOVE: "LOVE",
   DRAMA: "DRAMA",
-  ROMANCE: "ROMANCE",
-  CRIME: "CRIME",
-  SURVIVAL: "SURVIVAL"
+  SONG: "SONG",
+  CELEBRITY: "CELEBRITY",
+  ANIMAL: "ANIMAL",
+  ANIMATION: "ANIMATION",
+  HORROR: "HORROR",
+  MOVIE: "MOVIE",
+  ETC: "ETC"
 } as const

@@ -1,6 +1,6 @@
 "use client"
 import { Button } from "@/components/Button"
-import { ChevronUp } from "lucide-react"
+import { ArrowUp } from "lucide-react"
 
 export default function ScrollTopButton() {
   const moveTop = () => {
@@ -12,10 +12,11 @@ export default function ScrollTopButton() {
   return (
     <Button
       variant="custom"
-      className="fixed bottom-[10%] end-[24px] rounded-full bg-black p-[16px] text-white"
+      className="fixed bottom-[24px] end-[24px] z-[20] rounded-full border bg-white p-[16px] text-black shadow-emphasize"
       onClick={moveTop}
     >
-      <ChevronUp size={24} />
+      {/* <ChevronUp size={24} /> */}
+      <ArrowUp size={24} />
     </Button>
   )
 }

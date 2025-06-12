@@ -7,16 +7,16 @@ import { Navigation } from "swiper/modules"
 import { Swiper } from "swiper/react"
 
 interface Params {
-  prevElId: string
-  nextElId: string
+  prevElId?: string
+  nextElId?: string
   children: ReactNode
 }
 
 export default function GameSliderWrapper({ prevElId, nextElId, children }: Params) {
   return (
-    <div className="mx-[-16px] md:mx-[-24px] lg:mx-0">
+    <div className="mx-[-16px] h-full md:mx-[-24px] lg:mx-0">
       <Swiper
-        className="w-full"
+        className="h-full w-full"
         modules={[Navigation]}
         slidesPerView={"auto"}
         // pagination={{

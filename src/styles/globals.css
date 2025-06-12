@@ -8,18 +8,26 @@
 
 [data-theme="dark"],
 [data-theme="dark"] body {
-  color: #ffffff;
-  background: #202830;
+  /* color: #ffffff; */
+  /* background: #202830; */
   /* background: #151B23; */
 }
 
 body {
   background: var(--background);
-  font-family: var(--font-moneygraphy-rounded), sans-serif;
+  /* font-family: var(--font-moneygraphy-rounded), sans-serif; */
+  font-family:
+    var(--font-pretendard),
+    var(--font-sb-aggro-medium) sans-serif;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+  .transition-color-custom {
+    transition-property: color, background-color, border-color;
+    transition-duration: 0.3s;
+    transition-timing-function: ease;
   }
 }

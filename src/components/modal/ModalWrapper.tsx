@@ -1,8 +1,10 @@
+import { cn } from "@/utils/cn"
 import { ModalPortal } from "@/utils/modalPortal"
 
 interface Params {
   onClose?: () => void
   overlayClose?: boolean
+  className?: string
   children: React.ReactNode
 }
 
@@ -17,17 +19,24 @@ interface Params {
  * ```
  */
 
-export default function ModalWrapper({ onClose, overlayClose, children }: Params) {
+export default function ModalWrapper({ onClose, overlayClose, className, children }: Params) {
   return (
     <ModalPortal>
       <div className="fixed inset-0 z-[50] flex items-center justify-center">
-        {children}
         <div
-          className="fixed h-full w-full bg-dark/50"
+          className="fixed inset-0 bg-black/50"
           onClick={() => {
             if (overlayClose && !!onClose) onClose()
           }}
         />
+        <div
+          className={cn(
+            "z-[51] mx-[16px] flex max-h-[calc(100vh-32px)] w-full justify-center overflow-y-auto",
+            className
+          )}
+        >
+          {children}
+        </div>
       </div>
     </ModalPortal>
   )

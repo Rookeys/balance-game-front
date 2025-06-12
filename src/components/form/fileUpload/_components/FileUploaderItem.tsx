@@ -18,7 +18,7 @@ export const FileUploaderItem = ({
       <Button
         type="button"
         variant="custom"
-        className={cn("absolute right-1 top-1 rounded-xsm bg-red-40 p-1")}
+        className={cn("absolute end-[4px] top-[4px] rounded-[8px] bg-red-400 p-[4px]")}
         onClick={() => removeFileFromSet(index)}
       >
         <span className="sr-only">{index}번째 아이템 삭제</span>
