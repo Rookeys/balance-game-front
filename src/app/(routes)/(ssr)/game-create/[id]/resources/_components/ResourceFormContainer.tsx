@@ -26,6 +26,7 @@ import { useState } from "react"
 import { toast } from "sonner"
 import ResourceDeleteModal from "./resourceForm/ResourceDeleteModal"
 import ResourceFormWrapper from "./resourceForm/ResourceFormWrapper"
+import GameFormBottomBar from "@/components/form/gameRoom/_components/GameFormBottomBar"
 
 export default function ResourceFormContainer() {
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState<boolean>(false)
@@ -184,6 +185,7 @@ export default function ResourceFormContainer() {
         </section>
         <GameFormSideBar step={2} isStep1Complete percent={resourceNumbers && resourceNumbers >= 2 ? 100 : 66} />
       </section>
+      <GameFormBottomBar step={2} setStep={() => {}} percent={resourceNumbers && resourceNumbers >= 2 ? 100 : 66} />
       {isOpenDeleteModal && (
         <ResourceDeleteModal
           onClick={handleSelectedDelete}

@@ -73,7 +73,7 @@ export default function MediaForm() {
         </section>
         <GameFormSideBar step={2} isStep1Complete percent={resourceNumbers && resourceNumbers >= 2 ? 100 : 66} />
       </section>
-      <GameFormBottomBar step={2} setStep={() => {}} />
+      <GameFormBottomBar step={2} setStep={() => {}} percent={resourceNumbers && resourceNumbers >= 2 ? 100 : 66} />
     </>
   )
 }
