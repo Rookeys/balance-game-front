@@ -32,10 +32,10 @@ export default function RandomPlayButton() {
   }
 
   return (
-    <>
+    <article className="fixed bottom-[24px] end-[24px] z-[20]">
       <Button
         variant="custom"
-        className="fixed bottom-[24px] end-[24px] z-[20] rounded-full border bg-white p-[8px] text-black shadow-emphasize"
+        className="rounded-full border bg-white p-[8px] text-black shadow-emphasize"
         onClick={handleClick}
         disabled={isLoading}
         data-tooltip-id="random-play-button"
@@ -54,6 +54,6 @@ export default function RandomPlayButton() {
           <p className="text-label-regular text-background">랜덤 월드컵 한 판 어때요?</p>
         </section>
       </Tooltip>
-    </>
+    </article>
   )
 }
