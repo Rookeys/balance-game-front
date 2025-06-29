@@ -43,6 +43,7 @@ export default function Banner() {
                 </p>
               </section>
             </LinkWrapper>
+            <div className="absolute bottom-0 h-[152px] w-full bg-gradient-to-t from-[#151517B3] from-0% via-[#15151780] via-50% to-transparent to-100% md:hidden md:h-[152px]" />
           </SwiperSlide>
         ))}
         <div className="relative mx-auto max-w-[1200px]">
