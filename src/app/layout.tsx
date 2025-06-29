@@ -6,6 +6,7 @@ import { cn } from "@/utils/cn"
 import type { Metadata } from "next"
 import { ThemeProvider } from "next-themes"
 import { PretendardVariable, SBAggroMedium } from "./fonts"
+import { GoogleAnalytics } from "@next/third-parties/google"
 
 const title = "짜릿한 선택! 짱픽 - 이상형 월드컵"
 const description =
@@ -60,6 +61,7 @@ export default async function RootLayout({
           "font-pretendard text-label-normal antialiased"
         )}
       >
+        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
         <ThemeProvider defaultTheme="light">
           <div id="portal" />
           {children}
