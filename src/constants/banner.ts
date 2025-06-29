@@ -12,7 +12,7 @@ export const banner: BannerItem[] = [
     mdSrc: "/images/banner/banner_making_lg.webp",
     title: "정식 런칭 기념 이벤트",
     description: "이상형 월드컵 만들고\n스타벅스 기프티콘 받자!",
-    link: "https://www.instagram.com/zzn_pk/#"
+    link: "https://www.instagram.com/p/DLfwnIhzLAJ/?img_index=1"
   },
   {
     src: "/images/banner/play_banner_sm.webp",
