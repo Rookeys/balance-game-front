@@ -1,10 +1,12 @@
 "use client"
 
 import { useGetCountResourcesInGames } from "@/api/orval/client/game-resource-controller/game-resource-controller"
+import { getGetMyGameListQueryKey } from "@/api/orval/client/user-profile-controller/user-profile-controller"
 import { Button } from "@/components/Button"
 import ProgressBar from "@/components/ProgressBar"
 import SideBarWrapper from "@/components/SideBarWrapper"
 import CustomCheckIcon from "@/icons/CustomCheckIcon"
+import { useQueryClient } from "@tanstack/react-query"
 import { useParams, usePathname, useRouter } from "next/navigation"
 import { Dispatch, SetStateAction } from "react"
 import { toast } from "sonner"
@@ -24,6 +26,8 @@ export default function GameFormSideBar({ step, setStep, percent = 0, isStep1Com
   // } = useFormContext()
   const router = useRouter()
 
+  const queryClient = useQueryClient()
+
   const { id } = useParams()
 
   const pathname = usePathname()
@@ -36,7 +40,7 @@ export default function GameFormSideBar({ step, setStep, percent = 0, isStep1Com
 
   const { data: resourceNumbers } = useGetCountResourcesInGames(Number(id), {
     query: {
-      enabled: isMediasPage || isResourcesPage
+      enabled: isMediasPage || isResourcesPage || !isNewPage
     }
   })
 
@@ -65,7 +69,7 @@ export default function GameFormSideBar({ step, setStep, percent = 0, isStep1Com
         </button>
         <button type="button" className="flex items-center justify-between py-[12px]" onClick={() => handleStep(2)}>
           <p className="text-body2-regular">공개 설정</p>
-          <CustomCheckIcon checked={step === 2} width={28} height={28} />
+          <CustomCheckIcon checked={!isNewPage || step === 2} width={28} height={28} />
         </button>
         <hr className="my-[12px]" />
         <p className="py-[12px] font-sb-aggro-medium text-heading-5">콘텐츠</p>
@@ -109,15 +113,19 @@ export default function GameFormSideBar({ step, setStep, percent = 0, isStep1Com
         data-tooltip-id={"game-create-sidebar-button"}
         key={`${step}-button`}
         className="rounded-[12px]"
-        type={step === 1 ? "button" : "submit"}
+        type={isMediasPage || step === 1 ? "button" : "submit"}
         disabled={disabled}
-        onClick={() => {
+        onClick={async () => {
+          if (isMediasPage || isResourcesPage) {
+            await queryClient.invalidateQueries({ queryKey: getGetMyGameListQueryKey() })
+            router.push(`/my-page`)
+          }
           if (step === 1) {
             handleStep(2)
           }
         }}
       >
-        {step === 1 ? "다음" : "월드컵 생성"}
+        {isMediasPage || isResourcesPage ? "만든 월드컵 보러가기" : step === 1 ? "다음" : "월드컵 생성"}
       </Button>
       {isNewPage && (
         <GameCreateTooltip id="game-create-sidebar-button" classNameArrow="absolute !start-auto end-[8px]" />

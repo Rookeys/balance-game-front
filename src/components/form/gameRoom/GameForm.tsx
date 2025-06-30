@@ -15,12 +15,13 @@ import { postGameSchema, PostGameType } from "@/validations/gameSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useQueryClient } from "@tanstack/react-query"
 import dynamic from "next/dynamic"
-import { useParams, useRouter } from "next/navigation"
+import { useParams, usePathname, useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import { FieldErrors, FormProvider, useForm } from "react-hook-form"
 import { toast } from "sonner"
 import GameFormBottomBar from "./_components/GameFormBottomBar"
 import GameFormSideBar from "./_components/GameFormSideBar"
+import { useGetCountResourcesInGames } from "@/api/orval/client/game-resource-controller/game-resource-controller"
 
 const GameInformationForm = dynamic(() => import("./_components/GameInformationForm"))
 const GameAccessForm = dynamic(() => import("./_components/GameAccessForm"))
@@ -35,6 +36,20 @@ export default function GameForm() {
   const queryClient = useQueryClient()
 
   const { data } = useGetMyGameStatus(Number(id), { query: { enabled: !!id } })
+
+  const pathname = usePathname()
+
+  const isMediasPage = pathname.includes("medias")
+
+  const isNewPage = pathname.includes("/new")
+
+  const isResourcesPage = pathname.includes("resources")
+
+  const { data: resourceNumbers } = useGetCountResourcesInGames(Number(id), {
+    query: {
+      enabled: isMediasPage || isResourcesPage || !isNewPage
+    }
+  })
 
   const formMethods = useForm<PostGameType>({
     values: {
@@ -147,11 +162,16 @@ export default function GameForm() {
         <GameFormSideBar
           step={step}
           setStep={setStep}
-          percent={isStep1Complete ? 33 : 0}
+          percent={isNewPage ? (isStep1Complete ? 33 : 0) : resourceNumbers && resourceNumbers >= 2 ? 100 : 66}
           isStep1Complete={isStep1Complete}
           disabled={isSubmitting}
         />
-        <GameFormBottomBar step={step} setStep={setStep} percent={isStep1Complete ? 33 : 0} disabled={isSubmitting} />
+        <GameFormBottomBar
+          step={step}
+          setStep={setStep}
+          percent={isNewPage ? (isStep1Complete ? 33 : 0) : resourceNumbers && resourceNumbers >= 2 ? 100 : 66}
+          disabled={isSubmitting}
+        />
       </form>
     </FormProvider>
   )
