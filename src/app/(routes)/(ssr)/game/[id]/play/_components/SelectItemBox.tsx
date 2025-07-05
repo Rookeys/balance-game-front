@@ -60,7 +60,7 @@ export default function SelectItemBox({ selectedId, handleSelectItem, ...props }
               <p className="break-words text-white">{props.title}</p>
             </article>
           )} */}
-          <article className="px-[16px] py-[12px]">
+          <article className="cursor-pointer px-[16px] py-[12px]">
             <p className="line-clamp-2 break-all text-center font-sb-aggro-medium text-heading-6 text-label-normal md:text-heading-5">
               {props.title || "\u00A0"}
             </p>
