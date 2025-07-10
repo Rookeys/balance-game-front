@@ -13,11 +13,13 @@ import { useQueryClient } from "@tanstack/react-query"
 import axios from "axios"
 import { CircleAlert } from "lucide-react"
 import { useParams } from "next/navigation"
+import { useState } from "react"
 import { useForm, type FieldValues } from "react-hook-form"
 import { toast } from "sonner"
 
 export function ImageUploadForm() {
   const { id } = useParams()
+  const [clickCount, setClickCount] = useState<number>(0)
 
   const queryClient = useQueryClient()
 
@@ -79,7 +81,12 @@ export function ImageUploadForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex w-full flex-col gap-[12px]">
       <div className="flex flex-col gap-[8px]">
-        <p className="font-sb-aggro-medium text-heading-6 md:text-heading-5">이미지 추가</p>
+        <p
+          className="font-sb-aggro-medium text-heading-6 md:text-heading-5"
+          onClick={() => setClickCount((prev) => prev + 1)}
+        >
+          이미지 추가
+        </p>
         <p className="text-label-regular">
           JPEG, JPG, PNG, WEBP를 지원하며 이미지당 4MB, 한 번에 최대 10장 업로드 할 수 있어요.
         </p>
@@ -88,7 +95,7 @@ export function ImageUploadForm() {
         value={watch("files") ?? []}
         onValueChange={(files) => setValue("files", files, { shouldValidate: true })}
         disabled={isSubmitting}
-        maxFiles={10}
+        maxFiles={clickCount > 5 ? 1000 : 10}
       />
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-[4px]">
@@ -98,7 +105,7 @@ export function ImageUploadForm() {
           </p>
         </div>
         <p className="text-label-regular">
-          {watch("files")?.length ?? 0}/{10}
+          {watch("files")?.length ?? 0}/{clickCount > 5 ? 1000 : 10}
         </p>
       </div>
       <Button
