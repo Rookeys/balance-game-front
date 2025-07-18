@@ -16,7 +16,7 @@ import { GameRequestCategoriesItem } from "@/api/orval/model/gameRequestCategori
 // } as const
 
 export const categories: SelectOptionType[] = [
-  { id: "view_all", value: "view_all", label: "전체" },
+  { id: "VIEW_ALL", value: "VIEW_ALL", label: "전체" },
   { id: GameRequestCategoriesItem.DAILY, value: GameRequestCategoriesItem.DAILY, label: "일상" },
   { id: GameRequestCategoriesItem.FOOD, value: GameRequestCategoriesItem.FOOD, label: "음식" },
   { id: GameRequestCategoriesItem.LOVE, value: GameRequestCategoriesItem.LOVE, label: "사랑" },

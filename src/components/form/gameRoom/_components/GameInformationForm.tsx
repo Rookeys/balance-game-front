@@ -5,6 +5,7 @@ import { categories } from "@/constants/categories"
 import { cn } from "@/utils/cn"
 import { useFormContext } from "react-hook-form"
 import Textarea from "@/components/form/textarea/Textarea"
+import { GetMainGameListCategoryWithViewAll } from "@/types/categoryType"
 
 type CategoryType = (typeof GameRequestCategoriesItem)[keyof typeof GameRequestCategoriesItem]
 
@@ -71,7 +72,7 @@ export default function GameInformationForm() {
         </div>
         <div className="flex flex-wrap gap-[12px] rounded-[12px] border border-line-normal p-[16px]">
           {categories
-            .filter((data) => data.value !== "view_all")
+            .filter((data) => data.value !== GetMainGameListCategoryWithViewAll.VIEW_ALL)
             .map((category) => (
               <Button
                 key={category.id}
