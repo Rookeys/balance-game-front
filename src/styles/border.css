@@ -1,0 +1,44 @@
+/*
+* border-animation 을 사용하는 경우 필요 시 relative 를 적용해야함!
+* ResourceInformation.tsx 등 absolute 컨텐츠에 적용해야하는 경우가 있어서 .border-animation 에 relative 를 추가하진 않았음.
+*/
+.border-animation {
+  height: inherit;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.border-animation::before {
+  content: "";
+  position: absolute;
+  height: inherit;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit; /* 부모와 동일하게 */
+  padding: 2px; /* border 두께 */
+  background: linear-gradient(90deg, #00bdde 0%, #ffffff 25%, #6541f2 50%, #ffffff 75%, #00bdde 100%);
+  background-size: 300% 300%;
+  animation: border-move 3s linear infinite;
+  /* border만 보이게 마스킹 처리 (webkit, 표준 모두 적용) */
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none; /* 클릭 막지 않게 */
+}
+
+@keyframes border-move {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
