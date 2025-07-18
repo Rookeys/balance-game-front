@@ -18,7 +18,7 @@ export default function ImageSection({ src, index, isBlind = false, totalPlayNum
   const [blur, setBlur] = useState<boolean>(isBlind)
   const { noBlind } = useContext(CookieContext)
   return (
-    <article className="relative h-[218px] overflow-hidden rounded-[12px] md:h-[308px]">
+    <article className="relative h-[146px] overflow-hidden rounded-[12px] md:h-[308px]">
       <Image
         src={src ?? "/"}
         className={cn(
