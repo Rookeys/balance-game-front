@@ -45,7 +45,7 @@ export default function SelectItemBox({ selectedId, handleSelectItem, ...props }
               fill
               wrapperClassName={cn("rounded-[16px]")}
               // className="border-animation p-[2px]"
-              // onClick={() => handleSelectItem(props.resourceId)}
+              onClick={() => handleSelectItem(props.resourceId)}
             />
           </figure>
           <SelectResourceButton
