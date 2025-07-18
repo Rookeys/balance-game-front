@@ -8,12 +8,7 @@ interface Params extends ImageProps {
 }
 
 const ImageRatio = ({ ratio, wrapperClassName, ...props }: Params) => (
-  <div
-    className={cn(
-      "RatioContainer flex h-full items-center justify-center overflow-hidden rounded-[16px]",
-      wrapperClassName
-    )}
-  >
+  <div className={cn("RatioContainer flex h-full items-center justify-center overflow-hidden", wrapperClassName)}>
     <AspectRatio.Root ratio={ratio}>
       <Image
         {...props}

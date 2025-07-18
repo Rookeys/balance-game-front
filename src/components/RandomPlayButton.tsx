@@ -8,9 +8,11 @@ import { offset } from "@floating-ui/dom"
 import Image from "next/image"
 import { useState } from "react"
 import { Tooltip } from "react-tooltip"
+import { motion } from "motion/react"
 
 export default function RandomPlayButton() {
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [isOpen, setIsOpen] = useState<boolean>(true)
   const { refetch: trigger } = useGetRandomPlayRoomId({
     query: {
       enabled: false // 자동 요청 방지
@@ -35,25 +37,36 @@ export default function RandomPlayButton() {
     <article className="fixed bottom-[24px] end-[24px] z-[20]">
       <Button
         variant="custom"
-        className="rounded-full border bg-white p-[8px] text-black shadow-emphasize"
+        className="rounded-full border bg-label-strong p-[8px] text-black shadow-emphasize"
         onClick={handleClick}
         disabled={isLoading}
         data-tooltip-id="random-play-button"
       >
         <Image src="/images/icons/random.webp" alt="random" width={40} height={40} />
       </Button>
-      <Tooltip
-        id="random-play-button"
-        className={cn("z-[20] !rounded-[8px] !bg-label-strong !px-[12px] !py-[8px]")}
-        isOpen={true}
-        defaultIsOpen
-        place="top-end"
-        middlewares={[offset(10)]}
+      <motion.div
+        animate={{ y: [0, 4, 0] }}
+        transition={{
+          duration: 2,
+          repeat: Infinity,
+          repeatType: "loop",
+          ease: "easeInOut"
+        }}
       >
-        <section className="flex items-center gap-[8px]">
-          <p className="text-label-regular text-background">랜덤 월드컵 한 판 어때요?</p>
-        </section>
-      </Tooltip>
+        <Tooltip
+          id="random-play-button"
+          className={cn("!pointer-events-auto z-[20] !rounded-[8px] !bg-label-strong !px-[12px] !py-[8px]")}
+          isOpen={isOpen}
+          place="top-end"
+          middlewares={[offset(10)]}
+        >
+          <section className="flex items-center gap-[8px]">
+            <p className="text-label-regular text-background" onClick={() => setIsOpen(false)}>
+              랜덤 월드컵 한 판 어때요?
+            </p>
+          </section>
+        </Tooltip>
+      </motion.div>
     </article>
   )
 }

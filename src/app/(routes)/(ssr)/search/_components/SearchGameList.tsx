@@ -6,6 +6,7 @@ import GameThumbnailSimpleCard from "@/components/gameThumbnailCard/GameThumbnai
 import { useSearchParams } from "next/navigation"
 import { useEffect } from "react"
 import { useInView } from "react-intersection-observer"
+import CardSkeleton from "@/app/(routes)/(ssr)/(root)/_components/CardSkeleton"
 
 export default function SearchGameList() {
   const searchParams = useSearchParams()
@@ -48,7 +49,14 @@ export default function SearchGameList() {
       {!isFetchingNextPage && (
         <div ref={ref} className="pointer-events-none absolute bottom-[200px] h-[4px] w-full opacity-0" />
       )}
-      <section>{isFetchingNextPage && <p>Loading...</p>}</section>
+      {isFetchingNextPage &&
+        Array.from({ length: 4 }).map((_, index) => (
+          <CardSkeleton
+            key={`skeleton-${index}`}
+            className="w-[162px] md:w-[282px]"
+            imageClassName="h-[146px] md:h-[226px]"
+          />
+        ))}
     </section>
   )
 }

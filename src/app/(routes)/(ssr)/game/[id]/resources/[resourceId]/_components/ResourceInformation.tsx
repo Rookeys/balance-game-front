@@ -9,6 +9,7 @@ import { handleResourceShare } from "@/utils/handleShare"
 import { Share } from "lucide-react"
 import Image from "next/image"
 import { useParams, useRouter, useSearchParams } from "next/navigation"
+import "@/styles/border.css"
 
 export default function ResourceInformation() {
   const { id, resourceId } = useParams()
@@ -22,11 +23,12 @@ export default function ResourceInformation() {
 
   return (
     <section className="mx-[-16px] flex w-[100vw] flex-col gap-[16px] bg-fill-normal px-[16px] py-[40px] md:mx-0 md:w-full md:flex-row md:gap-[24px] md:rounded-[16px] md:px-[24px]">
-      <figure className="relative aspect-[5/4] h-fit w-full p-[2px] border-animation">
+      <figure className="border-animation relative aspect-[5/4] h-fit w-full p-[2px]">
         <ResourceItem
           {...resourceData}
           start={resourceData?.startSec}
           end={resourceData?.endSec}
+          wrapperClassName="rounded-[16px]"
           ratio={5 / 4}
           noDelay
         />

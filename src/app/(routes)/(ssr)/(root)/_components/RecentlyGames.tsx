@@ -12,14 +12,14 @@ export default function RecentlyGames() {
   const { data } = useGetMainGameList({ size: 10, sortType: GetMainGameListSortType.RECENT })
 
   const checkTag = (game: GameListResponse) => {
-    if (game?.weekPlayNums && game?.weekPlayNums >= 5) {
+    if (game?.weekPlayNums && game?.weekPlayNums >= 10) {
       return "HOT"
     }
 
     if (game.createdAt) {
       const createdAt = new Date(game.createdAt)
       const now = new Date()
-      const oneDayInMs = 24 * 60 * 60 * 1000 // 하루(24시간)
+      const oneDayInMs = 24 * 60 * 60 * 1000 * 7 // 하루(24시간) * 7
 
       if (now.getTime() - createdAt.getTime() < oneDayInMs) {
         return "NEW"

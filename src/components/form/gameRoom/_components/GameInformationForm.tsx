@@ -4,7 +4,7 @@ import { Button } from "@/components/Button"
 import { categories } from "@/constants/categories"
 import { cn } from "@/utils/cn"
 import { useFormContext } from "react-hook-form"
-import Textarea from "../../textarea/Textarea"
+import Textarea from "@/components/form/textarea/Textarea"
 
 type CategoryType = (typeof GameRequestCategoriesItem)[keyof typeof GameRequestCategoriesItem]
 
@@ -70,22 +70,24 @@ export default function GameInformationForm() {
           </p>
         </div>
         <div className="flex flex-wrap gap-[12px] rounded-[12px] border border-line-normal p-[16px]">
-          {categories.map((category) => (
-            <Button
-              key={category.value}
-              type="button"
-              variant="custom"
-              className={cn(
-                "rounded-[4px] px-[8px] py-[4px] text-label-medium",
-                selectedCategories?.includes(category.value as GameRequestCategoriesItem)
-                  ? "bg-secondary-alternative text-secondary-on-primary"
-                  : "bg-fill-normal"
-              )}
-              onClick={() => handleCategoryChange(category.value as CategoryType)}
-            >
-              {category.label}
-            </Button>
-          ))}
+          {categories
+            .filter((data) => data.value !== "view_all")
+            .map((category) => (
+              <Button
+                key={category.id}
+                type="button"
+                variant="custom"
+                className={cn(
+                  "rounded-[4px] px-[8px] py-[4px] text-label-medium",
+                  selectedCategories?.includes(category.value as GameRequestCategoriesItem)
+                    ? "bg-secondary-alternative text-secondary-on-primary"
+                    : "bg-fill-normal"
+                )}
+                onClick={() => handleCategoryChange(category.value as CategoryType)}
+              >
+                {category.label}
+              </Button>
+            ))}
         </div>
       </article>
     </section>

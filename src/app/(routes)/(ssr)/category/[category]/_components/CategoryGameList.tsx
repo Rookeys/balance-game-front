@@ -1,12 +1,13 @@
 "use client"
 import { useGetMainGameListInfinite } from "@/api/orval/client/main-page-controller/main-page-controller"
-import { GetMainGameListCategory } from "@/api/orval/model/getMainGameListCategory"
 import { GetMainGameListSortType } from "@/api/orval/model/getMainGameListSortType"
 import GameNotFound from "@/components/GameNotFound"
 import GameThumbnailSimpleCard from "@/components/gameThumbnailCard/GameThumbnailSimpleCard"
+import { GetMainGameListCategoryWithViewAll } from "@/types/categoryType"
 import { useParams, useSearchParams } from "next/navigation"
 import { useEffect } from "react"
 import { useInView } from "react-intersection-observer"
+import CardSkeleton from "@/app/(routes)/(ssr)/(root)/_components/CardSkeleton"
 
 export default function CategoryGameList() {
   const { category } = useParams()
@@ -14,10 +15,13 @@ export default function CategoryGameList() {
 
   const sort = searchParams.get("sort") ?? GetMainGameListSortType.RECENT
 
-  const formattedCategory = category?.toString()?.toUpperCase() as GetMainGameListCategory | undefined
+  const formattedCategory = category?.toString()?.toUpperCase() as GetMainGameListCategoryWithViewAll | undefined
 
   const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } = useGetMainGameListInfinite(
-    { category: formattedCategory, sortType: sort as GetMainGameListSortType },
+    {
+      category: formattedCategory === GetMainGameListCategoryWithViewAll.VIEW_ALL ? undefined : formattedCategory,
+      sortType: sort as GetMainGameListSortType
+    },
     {
       query: {
         initialPageParam: undefined,
@@ -57,7 +61,14 @@ export default function CategoryGameList() {
       {!isFetchingNextPage && (
         <div ref={ref} className="pointer-events-none absolute bottom-[200px] h-[4px] w-full opacity-0" />
       )}
-      <section>{isFetchingNextPage && <p>Loading...</p>}</section>
+      {isFetchingNextPage &&
+        Array.from({ length: 4 }).map((_, index) => (
+          <CardSkeleton
+            key={`skeleton-${index}`}
+            className="w-[162px] md:w-[282px]"
+            imageClassName="h-[146px] md:h-[226px]"
+          />
+        ))}
     </section>
   )
 }

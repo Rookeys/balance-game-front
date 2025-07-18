@@ -11,11 +11,11 @@ export default function CategorySlider() {
       <Swiper className="w-full" slidesPerView={"auto"}>
         {categories.map((category, index) => (
           <SwiperSlide
-            key={`${category}-${index}`}
+            key={`${category.id}-${index}`}
             className="ms-[16px] !w-fit last:mr-[16px] md:ms-[24px] last:md:mr-[24px] lg:mr-[28px] lg:ms-0 last:lg:mr-0"
           >
             <CategoryBox
-              src={`/images/icons/categories/${category.value.toLowerCase()}.webp`}
+              src={`/images/icons/categories/${category.id.toLowerCase()}.webp`}
               alt={`${category.label}-image`}
               href={`/category/${category.value.toLocaleLowerCase()}`}
               label={category.label}
