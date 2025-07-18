@@ -10,13 +10,15 @@ interface Params {
   end?: number
   ready?: boolean
   onReady?: () => void
+  wrapperClassName?: string
 }
 
-const YoutubeRatio = ({ ratio, url, start, end, ready, onReady }: Params) => (
+const YoutubeRatio = ({ ratio, url, start, end, ready, onReady, wrapperClassName }: Params) => (
   <div
     className={cn(
       "RatioContainer absolute inset-0 h-full w-full bg-gray-100 transition-opacity duration-300",
-      ready ? "opacity-100" : "pointer-events-none opacity-0"
+      ready ? "opacity-100" : "pointer-events-none opacity-0",
+      wrapperClassName
     )}
   >
     <AspectRatio.Root ratio={ratio}>

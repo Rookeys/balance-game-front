@@ -34,7 +34,7 @@ export default function YoutubeThumbnailBoxWithHover({
   return (
     <figure
       className={cn(
-        "relative h-full min-h-[120px] w-full overflow-hidden rounded-[16px] bg-fill-normal",
+        "relative h-full min-h-[120px] w-full overflow-hidden rounded-[12px] bg-fill-normal",
         wrapperClassName
       )}
       onMouseEnter={() => setHover(true)}
@@ -64,7 +64,15 @@ export default function YoutubeThumbnailBoxWithHover({
       </>
 
       {hover && (
-        <YoutubeRatio url={url} ratio={ratio} start={start} end={end} ready={ready} onReady={() => setReady(true)} />
+        <YoutubeRatio
+          url={url}
+          ratio={ratio}
+          start={start}
+          end={end}
+          ready={ready}
+          onReady={() => setReady(true)}
+          wrapperClassName={wrapperClassName}
+        />
       )}
     </figure>
   )
