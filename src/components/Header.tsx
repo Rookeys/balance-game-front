@@ -6,7 +6,6 @@ import Image from "next/image"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 import { useState } from "react"
-import BlindToggle from "./BlindToggle"
 import { Button } from "./Button"
 import Logo from "./Logo"
 import MoreButton, { MoreItem } from "./MoreButton"
@@ -82,7 +81,7 @@ export default function Header() {
           </>
         )}
         {/* <ThemeToggle /> */}
-        {pathname === "/" && <BlindToggle />}
+        {/* {pathname === "/" && <BlindToggle />} */}
         {session ? (
           <MoreButton
             items={moreItems}
