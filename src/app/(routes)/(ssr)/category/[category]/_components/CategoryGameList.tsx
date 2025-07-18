@@ -1,9 +1,9 @@
 "use client"
 import { useGetMainGameListInfinite } from "@/api/orval/client/main-page-controller/main-page-controller"
-import { GetMainGameListCategory } from "@/api/orval/model/getMainGameListCategory"
 import { GetMainGameListSortType } from "@/api/orval/model/getMainGameListSortType"
 import GameNotFound from "@/components/GameNotFound"
 import GameThumbnailSimpleCard from "@/components/gameThumbnailCard/GameThumbnailSimpleCard"
+import { GetMainGameListCategoryWithViewAll } from "@/types/categoryType"
 import { useParams, useSearchParams } from "next/navigation"
 import { useEffect } from "react"
 import { useInView } from "react-intersection-observer"
@@ -14,10 +14,13 @@ export default function CategoryGameList() {
 
   const sort = searchParams.get("sort") ?? GetMainGameListSortType.RECENT
 
-  const formattedCategory = category?.toString()?.toUpperCase() as GetMainGameListCategory | undefined
+  const formattedCategory = category?.toString()?.toUpperCase() as GetMainGameListCategoryWithViewAll | undefined
 
   const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } = useGetMainGameListInfinite(
-    { category: formattedCategory, sortType: sort as GetMainGameListSortType },
+    {
+      category: formattedCategory === GetMainGameListCategoryWithViewAll.VIEW_ALL ? undefined : formattedCategory,
+      sortType: sort as GetMainGameListSortType
+    },
     {
       query: {
         initialPageParam: undefined,

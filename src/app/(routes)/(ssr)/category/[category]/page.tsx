@@ -1,7 +1,7 @@
-import { GetMainGameListCategory } from "@/api/orval/model/getMainGameListCategory"
 import Filter from "@/components/Filter"
 import ScrollTopButton from "@/components/ScrollTopButton"
 import { gameListFilters } from "@/constants/filters"
+import { GetMainGameListCategoryWithViewAll } from "@/types/categoryType"
 import { getCategoryLabel } from "@/utils/getCategoryLabel"
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
@@ -33,7 +33,7 @@ interface CategoryGameProps {
 export default async function CategoryGame({ params }: CategoryGameProps) {
   const { category } = await params
 
-  if (!(Object.values(GetMainGameListCategory) as string[]).includes(category.toUpperCase())) {
+  if (!Object.values(GetMainGameListCategoryWithViewAll).includes(category.toUpperCase() as any)) {
     notFound()
   }
 
