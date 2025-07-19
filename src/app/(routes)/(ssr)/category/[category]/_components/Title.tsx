@@ -15,7 +15,7 @@ export default function Title() {
 
   const formattedCategory = category?.toString()?.toUpperCase() as GetMainGameListCategoryWithViewAll | undefined
 
-  const { isLoading } = useGetMainGameListInfinite(
+  const { data, isLoading } = useGetMainGameListInfinite(
     {
       category: formattedCategory === GetMainGameListCategoryWithViewAll.VIEW_ALL ? undefined : formattedCategory,
       sortType: sort as GetMainGameListSortType
@@ -42,8 +42,7 @@ export default function Title() {
   return (
     <p className="flex items-center font-sb-aggro-medium text-heading-4 md:text-heading-3">
       {getCategoryLabel(formattedCategory)} 월드컵&nbsp;
-      {/* // * totalElements 오류 수정 후 주석해제 필요 */}
-      {/* <span className="text-primary-hover">{data?.pages[0].totalElements ?? 0}</span>개 */}
+      <span className="text-primary-hover">{data?.pages[0].totalElements ?? 0}</span>개
     </p>
   )
 }
