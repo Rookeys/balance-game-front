@@ -1,3 +1,4 @@
+export * from "./autoLinkRequest"
 export * from "./continuePlayRoomParams"
 export * from "./customBasedPageImplGameResourceResponse"
 export * from "./customBasedPageImplGameResultResponse"
