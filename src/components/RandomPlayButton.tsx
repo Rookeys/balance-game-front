@@ -37,7 +37,7 @@ export default function RandomPlayButton() {
     <article className="fixed bottom-[24px] end-[24px] z-[20]">
       <Button
         variant="custom"
-        className="rounded-full border bg-label-strong p-[8px] text-black shadow-emphasize"
+        className="rounded-full bg-label-strong p-[8px] text-black shadow-emphasize"
         onClick={handleClick}
         disabled={isLoading}
         data-tooltip-id="random-play-button"
