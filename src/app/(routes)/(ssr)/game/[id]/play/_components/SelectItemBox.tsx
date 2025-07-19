@@ -41,9 +41,8 @@ export default function SelectItemBox({ selectedId, handleSelectItem, ...props }
             <ImageRatio
               src={props.content ?? "/"}
               alt={`${props.title}-thumbnail`}
-              ratio={5 / 4}
               fill
-              wrapperClassName={cn("rounded-[16px]")}
+              wrapperClassName={cn("rounded-[16px] aspect-[5/4]")}
               // className="border-animation p-[2px]"
               onClick={() => handleSelectItem(props.resourceId)}
             />
@@ -75,9 +74,9 @@ export default function SelectItemBox({ selectedId, handleSelectItem, ...props }
         <figure className={cn(selected && "border-animation relative p-[2px]")}>
           <ResourceItem
             {...props}
-            ratio={5 / 4}
             start={props.startSec}
             end={props.endSec}
+            wrapperClassName="aspect-[5/4]"
             // wrapperClassName={cn("p-[2px]", selected && "border-animation")}
             noDelay
           />

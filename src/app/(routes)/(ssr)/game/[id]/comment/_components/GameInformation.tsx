@@ -17,7 +17,6 @@ export default function GameInformation() {
       <figure className="relative aspect-[5/4] h-fit w-full flex-shrink-0 md:max-w-[50%] lg:max-w-[40%]">
         <ResourceItem
           {...data?.leftSelection}
-          ratio={5 / 4}
           start={data?.leftSelection?.startSec}
           end={data?.leftSelection?.endSec}
           noDelay

@@ -29,7 +29,6 @@ export default function ResourceInformation() {
           start={resourceData?.startSec}
           end={resourceData?.endSec}
           wrapperClassName="rounded-[16px]"
-          ratio={5 / 4}
           noDelay
         />
       </figure>

@@ -36,7 +36,7 @@ export default function ImageEditModal({ onClose, onSave, overlayClose }: Params
           <div className="flex flex-col gap-[12px]">
             {watch("content") ? (
               <div className="relative aspect-[5/4] w-full">
-                <Image src={watch("content") || "/"} fill alt="thumbnail" />
+                <Image src={watch("content") || "/"} fill alt="thumbnail" className="object-contain" />
               </div>
             ) : (
               <FileUploadDropZoneResource

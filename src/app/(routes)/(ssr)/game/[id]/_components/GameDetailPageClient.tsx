@@ -31,7 +31,6 @@ export default function GameDetailPageClient() {
         <div className="relative aspect-[5/4] h-fit w-full md:max-w-[50%]">
           <ResourceItem
             {...gameDetailData?.leftSelection}
-            ratio={5 / 4}
             noDelay
             start={gameDetailData?.leftSelection?.startSec}
             end={gameDetailData?.leftSelection?.endSec}

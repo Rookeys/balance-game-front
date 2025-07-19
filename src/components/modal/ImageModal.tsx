@@ -13,7 +13,6 @@ export default function ImageModal({ url, onClose }: Params) {
       <figure className="2xsm:w-[300px] relative z-[100] h-full w-[80vw] bg-background md:w-[600px]">
         <ImageRatio
           className="object-cover"
-          ratio={1}
           src={url ?? "/"}
           alt={`thumbnail`}
           fill

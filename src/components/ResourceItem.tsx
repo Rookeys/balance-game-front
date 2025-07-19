@@ -19,20 +19,11 @@ export default function ResourceItem({
   content = "",
   start,
   end,
-  ratio,
   noDelay,
   wrapperClassName
 }: Params) {
   if (type === GameResourceResponseType.IMAGE) {
-    return (
-      <ImageRatio
-        src={content}
-        alt={`${title}-thumbnail`}
-        ratio={ratio ?? 5 / 4}
-        fill
-        wrapperClassName={wrapperClassName}
-      />
-    )
+    return <ImageRatio src={content} alt={`${title}-thumbnail`} fill wrapperClassName={wrapperClassName} />
   }
   if (type === GameResourceResponseType.LINK) {
     // return <YoutubeRatio url={content} ratio={4 / 3} />
@@ -41,7 +32,6 @@ export default function ResourceItem({
         url={content}
         start={start}
         end={end}
-        ratio={ratio ?? 16 / 9}
         noDelay={noDelay}
         wrapperClassName={wrapperClassName}
       />

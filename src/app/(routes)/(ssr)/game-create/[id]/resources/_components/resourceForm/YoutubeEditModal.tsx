@@ -42,7 +42,6 @@ export default function YoutubeEditModal({ onClose, onSave, overlayClose }: Para
                   url={watch("content") ?? ""}
                   start={watch("startSec")}
                   end={watch("endSec")}
-                  ratio={16 / 9}
                   // noDelay={noDelay}
                   // wrapperClassName={wrapperClassName}
                 />

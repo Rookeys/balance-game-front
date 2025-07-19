@@ -10,8 +10,8 @@ export default function SelectResourceButton({ onClick, title, selected }: Param
   return (
     <button
       className={cn(
-        "cursor-pointer rounded-[12px] border-[2px] bg-primary-alternative px-[16px] py-[12px]",
-        selected ? "border-animation relative" : "border-primary-normal"
+        "cursor-pointer rounded-[12px] bg-primary-alternative px-[16px] py-[12px]",
+        selected ? "border-animation relative border-[1px]" : "border-[2px] border-primary-normal"
       )}
       onClick={onClick}
     >

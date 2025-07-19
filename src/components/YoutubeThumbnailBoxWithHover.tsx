@@ -14,14 +14,7 @@ interface Params {
   noDelay?: boolean
   wrapperClassName?: string
 }
-export default function YoutubeThumbnailBoxWithHover({
-  url,
-  start,
-  end,
-  ratio,
-  noDelay = false,
-  wrapperClassName
-}: Params) {
+export default function YoutubeThumbnailBoxWithHover({ url, start, end, noDelay = false, wrapperClassName }: Params) {
   const [hover, setHover] = useState<boolean>(false)
   const [ready, setReady] = useState<boolean>(false)
 
@@ -49,7 +42,6 @@ export default function YoutubeThumbnailBoxWithHover({
       <>
         <ImageRatio
           src={getYoutubeThumbnail(url)}
-          ratio={ratio}
           alt="Video Thumbnail"
           className="cursor-pointer object-cover"
           wrapperClassName={wrapperClassName}
@@ -66,7 +58,6 @@ export default function YoutubeThumbnailBoxWithHover({
       {hover && (
         <YoutubeRatio
           url={url}
-          ratio={ratio}
           start={start}
           end={end}
           ready={ready}

@@ -1,10 +1,8 @@
 import { cn } from "@/utils/cn"
 import { getYouTubeId } from "@/utils/getYouTubeId"
-import * as AspectRatio from "@radix-ui/react-aspect-ratio"
 import YouTube from "react-youtube"
 
 interface Params {
-  ratio?: number
   url?: string
   start?: number
   end?: number
@@ -13,7 +11,7 @@ interface Params {
   wrapperClassName?: string
 }
 
-const YoutubeRatio = ({ ratio, url, start, end, ready, onReady, wrapperClassName }: Params) => (
+const YoutubeRatio = ({ url, start, end, ready, onReady, wrapperClassName }: Params) => (
   <div
     className={cn(
       "RatioContainer absolute inset-0 h-full w-full bg-gray-100 transition-opacity duration-300",
@@ -21,16 +19,14 @@ const YoutubeRatio = ({ ratio, url, start, end, ready, onReady, wrapperClassName
       wrapperClassName
     )}
   >
-    <AspectRatio.Root ratio={ratio}>
-      <YouTube
-        videoId={getYouTubeId(url)}
-        opts={{ playerVars: { start, end } }}
-        // opts={{ playerVars: { start, end, loop: 1, playlist: getYouTubeId(url) } }}
-        className="h-full w-full"
-        iframeClassName="w-full h-full"
-        onReady={onReady}
-      />
-    </AspectRatio.Root>
+    <YouTube
+      videoId={getYouTubeId(url)}
+      opts={{ playerVars: { start, end } }}
+      // opts={{ playerVars: { start, end, loop: 1, playlist: getYouTubeId(url) } }}
+      className="h-full w-full"
+      iframeClassName="w-full h-full"
+      onReady={onReady}
+    />
   </div>
 )
 
