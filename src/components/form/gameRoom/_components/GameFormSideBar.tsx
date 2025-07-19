@@ -24,6 +24,7 @@ export default function GameFormSideBar({ step, setStep, percent = 0, isStep1Com
   // const {
   //   formState: { isSubmitting }
   // } = useFormContext()
+
   const router = useRouter()
 
   const queryClient = useQueryClient()
@@ -110,7 +111,7 @@ export default function GameFormSideBar({ step, setStep, percent = 0, isStep1Com
         </button>
       </section>
       <Button
-        data-tooltip-id={"game-create-sidebar-button"}
+        data-tooltip-id={`game-create-sidebar-button-${step}`}
         key={`${step}-button`}
         className="rounded-[12px]"
         type={isMediasPage || step === 1 ? "button" : "submit"}
@@ -128,7 +129,7 @@ export default function GameFormSideBar({ step, setStep, percent = 0, isStep1Com
         {isMediasPage || isResourcesPage ? "만든 월드컵 보러가기" : step === 1 ? "다음" : "월드컵 생성"}
       </Button>
       {isNewPage && (
-        <GameCreateTooltip id="game-create-sidebar-button" classNameArrow="absolute !start-auto end-[8px]" />
+        <GameCreateTooltip id={`game-create-sidebar-button-${step}`} classNameArrow="absolute !start-auto end-[8px]" />
       )}
     </SideBarWrapper>
   )

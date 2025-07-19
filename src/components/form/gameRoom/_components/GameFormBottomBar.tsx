@@ -36,7 +36,7 @@ export default function GameFormBottomBar({ step, setStep, percent = 0, disabled
         <p className="rounded-[100px] bg-gray-100 px-[12px] py-[4px]">{percent}%</p>
       </div>
       <Button
-        data-tooltip-id={"game-create-bottom-bar-button"}
+        data-tooltip-id={`game-create-bottom-bar-button-${step}`}
         key={`${step}-button`}
         type={isMediasPage || step === 1 ? "button" : "submit"}
         disabled={disabled}
@@ -52,7 +52,9 @@ export default function GameFormBottomBar({ step, setStep, percent = 0, disabled
       >
         {isMediasPage || isResourcesPage ? "만든 월드컵 보러가기" : step === 1 ? "다음" : "월드컵 생성"}
       </Button>
-      {isNewPage && <GameCreateTooltip id="game-create-bottom-bar-button" place="top" middlewares={[offset(68)]} />}
+      {isNewPage && (
+        <GameCreateTooltip id={`game-create-bottom-bar-button-${step}`} place="top" middlewares={[offset(68)]} />
+      )}
     </BottomBarWrapper>
   )
 }
