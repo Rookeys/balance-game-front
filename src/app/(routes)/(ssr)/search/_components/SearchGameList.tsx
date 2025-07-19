@@ -51,11 +51,7 @@ export default function SearchGameList() {
       )}
       {isFetchingNextPage &&
         Array.from({ length: 4 }).map((_, index) => (
-          <CardSkeleton
-            key={`skeleton-${index}`}
-            className="w-[162px] md:w-[282px]"
-            imageClassName="h-[146px] md:h-[226px]"
-          />
+          <CardSkeleton key={`skeleton-${index}`} imageClassName="h-[146px] md:h-[226px]" />
         ))}
     </section>
   )
