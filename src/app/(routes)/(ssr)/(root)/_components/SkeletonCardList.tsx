@@ -1,8 +1,8 @@
 "use client"
+import CardSkeleton from "@/components/CardSkeleton"
 import GameSliderWrapper from "@/components/slider/GameSliderWrapper"
 import SliderTitle from "@/components/slider/SliderTitle"
 import { SwiperSlide } from "swiper/react"
-import CardSkeleton from "./CardSkeleton"
 
 interface Params {
   title: string

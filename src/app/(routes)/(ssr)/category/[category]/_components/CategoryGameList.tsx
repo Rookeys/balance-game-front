@@ -7,7 +7,7 @@ import { GetMainGameListCategoryWithViewAll } from "@/types/categoryType"
 import { useParams, useSearchParams } from "next/navigation"
 import { useEffect } from "react"
 import { useInView } from "react-intersection-observer"
-import CardSkeleton from "@/app/(routes)/(ssr)/(root)/_components/CardSkeleton"
+import CardSkeleton from "@/components/CardSkeleton"
 
 export default function CategoryGameList() {
   const { category } = useParams()

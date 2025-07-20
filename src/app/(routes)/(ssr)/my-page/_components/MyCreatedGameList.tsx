@@ -4,6 +4,7 @@ import GameThumbnailSimpleCard from "@/components/gameThumbnailCard/GameThumbnai
 import { useEffect } from "react"
 import { useInView } from "react-intersection-observer"
 import MyGameNotFound from "./MyGameNotFound"
+import CardSkeleton from "@/components/CardSkeleton"
 
 export default function MyCreatedGameList() {
   const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } = useGetMyGameListInfinite(undefined, {
@@ -53,6 +54,10 @@ export default function MyCreatedGameList() {
         {!isFetchingNextPage && (
           <div ref={ref} className="pointer-events-none absolute bottom-[200px] h-[4px] w-full opacity-0" />
         )}
+        {isFetchingNextPage &&
+          Array.from({ length: 4 }).map((_, index) => (
+            <CardSkeleton key={`skeleton-${index}`} imageClassName="h-[146px] md:h-[226px]" />
+          ))}
       </article>
     </section>
   )

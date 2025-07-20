@@ -6,7 +6,7 @@ import GameThumbnailSimpleCard from "@/components/gameThumbnailCard/GameThumbnai
 import { useSearchParams } from "next/navigation"
 import { useEffect } from "react"
 import { useInView } from "react-intersection-observer"
-import CardSkeleton from "@/app/(routes)/(ssr)/(root)/_components/CardSkeleton"
+import CardSkeleton from "@/components/CardSkeleton"
 
 export default function SearchGameList() {
   const searchParams = useSearchParams()
