@@ -1,6 +1,5 @@
 # 짱픽
-
-![zznpk_Thumbnail](https://github.com/user-attachments/assets/7a15aa45-2a58-44df-957a-8a493042fca0)
+<img width="1200" height="900" alt="zznpk_Thumbnail" src="https://github.com/user-attachments/assets/ac3d8777-f5a8-4ccd-b655-1692f818758d" />
 
 ## 팀원
 
@@ -80,3 +79,14 @@
 </div>
 
 </details>
+
+
+## Disquiet
+
+
+
+[<img width="280" height="141" alt="DISQUIET" src="https://github.com/user-attachments/assets/6763a6d0-2708-450f-a53a-82d7cff6c66f" />](https://disquiet.io/product/%EC%A7%B1%ED%94%BD)
+
+
+
+
