@@ -10,7 +10,7 @@ import { GoogleAnalytics } from "@next/third-parties/google"
 
 const title = "짜릿한 선택! 짱픽 - 이상형 월드컵"
 const description =
-  "짱픽은 나만의 이상형 월드컵을 만들고, 유저들과 공유하며 함께 즐길 수 있는 플랫폼입니다. 다양한 게임을 제작하고 즐기세요!"
+  "짱픽은 나만의 이상형 월드컵을 만들고 공유하는 플랫폼입니다. 다양한 주제로 월드컵 게임을 즐겨보세요!"
 const images = [
   {
     url: "/images/zznpk_og_image.png",
@@ -20,6 +20,22 @@ const images = [
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://zznpk.com"),
+  keywords: [
+    "짱픽",
+    "zznpk",
+    "이상형 월드컵",
+    "아이돌 이상형 월드컵",
+    "연예인 이상형 월드컵",
+    "캐릭터 월드컵",
+    "음식 이상형 월드컵",
+    "이상형 월드컵 만들기",
+    "밸런스게임",
+    "심심할 때 할만한 게임",
+    "친구랑 할 게임",
+    "이상형 테스트",
+    "재밌는 웹게임",
+    "인기 월드컵 게임"
+  ],
   title: {
     default: title,
     template: "짱픽 | %s"
@@ -37,7 +53,9 @@ export const metadata: Metadata = {
     url: "https://zznpk.com"
   },
   twitter: {
+    card: "summary_large_image",
     title,
+    description,
     images
   }
 }
