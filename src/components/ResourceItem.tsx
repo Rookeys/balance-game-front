@@ -10,6 +10,7 @@ interface Params {
   end?: number
   ratio?: number
   noDelay?: boolean
+  priority?: boolean
   wrapperClassName?: string
 }
 
@@ -20,10 +21,19 @@ export default function ResourceItem({
   start,
   end,
   noDelay,
+  priority,
   wrapperClassName
 }: Params) {
   if (type === GameResourceResponseType.IMAGE) {
-    return <ImageRatio src={content} alt={`${title}-thumbnail`} fill wrapperClassName={wrapperClassName} />
+    return (
+      <ImageRatio
+        src={content}
+        alt={`${title}-thumbnail`}
+        fill
+        wrapperClassName={wrapperClassName}
+        priority={priority}
+      />
+    )
   }
   if (type === GameResourceResponseType.LINK) {
     // return <YoutubeRatio url={content} ratio={4 / 3} />

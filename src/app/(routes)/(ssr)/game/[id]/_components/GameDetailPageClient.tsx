@@ -34,6 +34,7 @@ export default function GameDetailPageClient() {
             noDelay
             start={gameDetailData?.leftSelection?.startSec}
             end={gameDetailData?.leftSelection?.endSec}
+            priority
           />
         </div>
         <section className="flex w-full flex-col gap-[28px] md:max-w-[50%] md:gap-[40px]">
