@@ -57,7 +57,7 @@ export default async function RootPage() {
             <WeeklyTrendingGames />
           </FetchPrefetchBoundary>
         </Suspense>
-        <Suspense fallback={<SkeletonSimpleCardList title="최근 등록된 이상형 월드컵" updateTime="10초" />}>
+        <Suspense fallback={<SkeletonSimpleCardList title="최근 등록된 월드컵" updateTime="10초" />}>
           <FetchPrefetchBoundary
             prefetchActions={fetch(
               `${process.env.NEXT_PUBLIC_API_ROOT}/api/v1/games/list?${qs.stringify({
