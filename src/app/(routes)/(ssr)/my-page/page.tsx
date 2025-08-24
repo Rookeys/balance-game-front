@@ -1,4 +1,4 @@
-import MyCreatedGameList from "./_components/MyCreatedGameList"
+import MyPageListSection from "./_components/MyPageTab"
 import ProfileSection from "./_components/ProfileSection"
 
 export default function MyPage() {
@@ -8,7 +8,7 @@ export default function MyPage() {
         <article className="rounded-[12px] border border-line-normal bg-background px-[16px] py-[20px]">
           <ProfileSection />
         </article>
-        <MyCreatedGameList />
+        <MyPageListSection />
       </section>
     </section>
   )

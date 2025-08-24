@@ -19,6 +19,8 @@ export interface GameListResponse {
   totalPlayNums?: number
   /** HOT 태그를 위한 플레이 횟수 */
   weekPlayNums?: number
+  /** 월간 플레이 횟수 */
+  monthPlayNums?: number
   /** 제작일 */
   createdAt?: string
   userResponse?: UserMainResponse

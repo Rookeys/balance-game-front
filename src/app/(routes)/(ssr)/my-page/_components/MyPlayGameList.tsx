@@ -1,13 +1,13 @@
 "use client"
-import { useGetMyGameListInfinite } from "@/api/orval/client/user-profile-controller/user-profile-controller"
+import { useGetRecentPlaysInfinite } from "@/api/orval/client/user-profile-controller/user-profile-controller"
+import CardSkeleton from "@/components/CardSkeleton"
 import GameThumbnailSimpleCard from "@/components/gameThumbnailCard/GameThumbnailSimpleCard"
 import { useEffect } from "react"
 import { useInView } from "react-intersection-observer"
-import MyGameNotFound from "./MyGameNotFound"
-import CardSkeleton from "@/components/CardSkeleton"
+import MyPlayGameNotFound from "./MyPlayGameNotFound"
 
-export default function MyCreatedGameList() {
-  const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } = useGetMyGameListInfinite(undefined, {
+export default function MyPlayGameList() {
+  const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } = useGetRecentPlaysInfinite(undefined, {
     query: {
       initialPageParam: undefined,
       getNextPageParam: (lastPage) => {
@@ -33,16 +33,16 @@ export default function MyCreatedGameList() {
     return (
       <section className="flex flex-col gap-[12px]">
         <p className="font-sb-aggro-medium text-heading-4 md:text-heading-3">
-          내가 만든 월드컵 <span className="text-primary-hover">0</span>개
+          내가 플레이한 월드컵 <span className="text-primary-hover">0</span>개
         </p>
-        <MyGameNotFound />
+        <MyPlayGameNotFound />
       </section>
     )
 
   return (
     <section className="flex flex-col gap-[12px]">
       <p className="font-sb-aggro-medium text-heading-4 md:text-heading-3">
-        내가 만든 월드컵 <span className="text-primary-hover">{data?.pages[0].totalElements ?? 0}</span>개
+        내가 플레이한 월드컵 <span className="text-primary-hover">{data?.pages[0].totalElements ?? 0}</span>개
       </p>
       <article className="relative grid w-full grid-cols-2 gap-x-[16px] gap-y-[16px] md:grid-cols-4 md:gap-x-[24px] md:gap-y-[40px]">
         {(data?.pages ?? []).flatMap(

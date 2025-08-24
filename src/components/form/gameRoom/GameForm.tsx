@@ -1,5 +1,5 @@
 "use client"
-import { useSaveGame, useUpdateGameStatus } from "@/api/orval/client/game-room-controller/game-room-controller"
+import { useSaveGame1, useUpdateGameStatus } from "@/api/orval/client/game-room-controller/game-room-controller"
 import {
   getGetMyGameStatusQueryKey,
   useGetMyGameStatus
@@ -80,7 +80,7 @@ export default function GameForm() {
 
   const asyncPush = useAsyncRoutePush()
 
-  const { mutateAsync: CreateGame } = useSaveGame()
+  const { mutateAsync: CreateGame } = useSaveGame1()
   const { mutateAsync: UpdateGame } = useUpdateGameStatus()
 
   const onSubmit = async (data: PostGameType) => {

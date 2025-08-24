@@ -10,6 +10,8 @@ import { useParams, useRouter } from "next/navigation"
 import { useState } from "react"
 import SelectItemBox from "./SelectItemBox"
 import { toast } from "sonner"
+import { useSaveGame } from "@/api/orval/client/user-profile-controller/user-profile-controller"
+import { useSession } from "next-auth/react"
 interface Params {
   playId: number
 }
@@ -17,12 +19,15 @@ export default function PlaySection({ playId }: Params) {
   const { id } = useParams()
 
   const router = useRouter()
+  const { data: session } = useSession()
 
   const { data: gamePlayData } = useContinuePlayRoom(Number(id), playId)
 
   const [selectedId, setSelectedId] = useState<number>()
 
   const { mutateAsync: playContinue } = useUpdatePlayRoom()
+
+  const { mutateAsync: saveMyPlayGame } = useSaveGame()
 
   const returnPutGamePlayRequest = (selectedId: number): GamePlayRequest => {
     const winResourceId =
@@ -55,6 +60,10 @@ export default function PlaySection({ playId }: Params) {
 
       if (gamePlayData?.totalRoundNums === 2 && gamePlayData.currentRoundNums === 1) {
         // 결승전 선택 후 처리
+        if (session) {
+          await saveMyPlayGame({ gameId: Number(id) })
+        }
+
         await removePlayIdCookie()
         if (selectedResourceId) {
           router.replace(`/game/${id}/resources/${selectedResourceId}?played=true`)

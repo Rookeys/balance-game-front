@@ -7,8 +7,8 @@ export interface CustomPageImplGameResourceResponse {
   pageable?: PageableObject
   hasPrev?: boolean
   hasNext?: boolean
-  last?: boolean
   totalElements?: number
+  last?: boolean
   totalPages?: number
   first?: boolean
   size?: number

@@ -14,6 +14,7 @@ import type {
   CustomPageImplGameListResponse,
   GameResponse,
   GetMyGameListParams,
+  GetRecentPlaysParams,
   UserReportRequest,
   UserRequest,
   UserResponse
@@ -153,130 +154,6 @@ export const submitUserReport = (
 }
 
 /**
- * 내가 만든 게임들을 무한 스크롤 형식으로 확인 가능.
- * @summary 내가 만든 게임 리스트 확인 API
- */
-export const getMyGameList = (
-  params?: GetMyGameListParams,
-  options?: SecondParameter<typeof customServerInstance>,
-  signal?: AbortSignal
-) => {
-  return customServerInstance<CustomPageImplGameListResponse>(
-    { url: `/api/v1/users/games`, method: "GET", params, signal },
-    options
-  )
-}
-
-export const getGetMyGameListQueryKey = (params?: GetMyGameListParams) => {
-  return [`/api/v1/users/games`, ...(params ? [params] : [])] as const
-}
-
-export const getGetMyGameListQueryOptions = <
-  TData = Awaited<ReturnType<typeof getMyGameList>>,
-  TError = ErrorType<unknown>
->(
-  params?: GetMyGameListParams,
-  options?: {
-    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getMyGameList>>, TError, TData>>
-    request?: SecondParameter<typeof customServerInstance>
-  }
-) => {
-  const { query: queryOptions, request: requestOptions } = options ?? {}
-
-  const queryKey = queryOptions?.queryKey ?? getGetMyGameListQueryKey(params)
-
-  const queryFn: QueryFunction<Awaited<ReturnType<typeof getMyGameList>>> = ({ signal }) =>
-    getMyGameList(params, requestOptions, signal)
-
-  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
-    Awaited<ReturnType<typeof getMyGameList>>,
-    TError,
-    TData
-  > & { queryKey: DataTag<QueryKey, TData, TError> }
-}
-
-export type GetMyGameListQueryResult = NonNullable<Awaited<ReturnType<typeof getMyGameList>>>
-export type GetMyGameListQueryError = ErrorType<unknown>
-
-export function useGetMyGameList<TData = Awaited<ReturnType<typeof getMyGameList>>, TError = ErrorType<unknown>>(
-  params: undefined | GetMyGameListParams,
-  options: {
-    query: Partial<UseQueryOptions<Awaited<ReturnType<typeof getMyGameList>>, TError, TData>> &
-      Pick<
-        DefinedInitialDataOptions<
-          Awaited<ReturnType<typeof getMyGameList>>,
-          TError,
-          Awaited<ReturnType<typeof getMyGameList>>
-        >,
-        "initialData"
-      >
-    request?: SecondParameter<typeof customServerInstance>
-  }
-): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetMyGameList<TData = Awaited<ReturnType<typeof getMyGameList>>, TError = ErrorType<unknown>>(
-  params?: GetMyGameListParams,
-  options?: {
-    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getMyGameList>>, TError, TData>> &
-      Pick<
-        UndefinedInitialDataOptions<
-          Awaited<ReturnType<typeof getMyGameList>>,
-          TError,
-          Awaited<ReturnType<typeof getMyGameList>>
-        >,
-        "initialData"
-      >
-    request?: SecondParameter<typeof customServerInstance>
-  }
-): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetMyGameList<TData = Awaited<ReturnType<typeof getMyGameList>>, TError = ErrorType<unknown>>(
-  params?: GetMyGameListParams,
-  options?: {
-    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getMyGameList>>, TError, TData>>
-    request?: SecondParameter<typeof customServerInstance>
-  }
-): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-/**
- * @summary 내가 만든 게임 리스트 확인 API
- */
-
-export function useGetMyGameList<TData = Awaited<ReturnType<typeof getMyGameList>>, TError = ErrorType<unknown>>(
-  params?: GetMyGameListParams,
-  options?: {
-    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getMyGameList>>, TError, TData>>
-    request?: SecondParameter<typeof customServerInstance>
-  }
-): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
-  const queryOptions = getGetMyGameListQueryOptions(params, options)
-
-  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-
-  query.queryKey = queryOptions.queryKey
-
-  return query
-}
-
-/**
- * @summary 내가 만든 게임 리스트 확인 API
- */
-export const prefetchGetMyGameList = async <
-  TData = Awaited<ReturnType<typeof getMyGameList>>,
-  TError = ErrorType<unknown>
->(
-  queryClient: QueryClient,
-  params?: GetMyGameListParams,
-  options?: {
-    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getMyGameList>>, TError, TData>>
-    request?: SecondParameter<typeof customServerInstance>
-  }
-): Promise<QueryClient> => {
-  const queryOptions = getGetMyGameListQueryOptions(params, options)
-
-  await queryClient.prefetchQuery(queryOptions)
-
-  return queryClient
-}
-
-/**
  * 내 게임방의 설정을 확인함.
  * @summary 내가 만든 게임방 정보 확인 API
  */
@@ -406,6 +283,269 @@ export const prefetchGetMyGameStatus = async <
   }
 ): Promise<QueryClient> => {
   const queryOptions = getGetMyGameStatusQueryOptions(gameId, options)
+
+  await queryClient.prefetchQuery(queryOptions)
+
+  return queryClient
+}
+
+/**
+ * 최근 플레이한 게임을 기록함.
+ * @summary 최근 플레이 등록 API
+ */
+export const saveGame = (
+  gameId: number,
+  options?: SecondParameter<typeof customServerInstance>,
+  signal?: AbortSignal
+) => {
+  return customServerInstance<number>(
+    { url: `/api/v1/users/games/${encodeURIComponent(String(gameId))}`, method: "POST", signal },
+    options
+  )
+}
+
+/**
+ * 내가 만든 게임들을 무한 스크롤 형식으로 확인 가능.
+ * @summary 내가 만든 게임 리스트 확인 API
+ */
+export const getMyGameList = (
+  params?: GetMyGameListParams,
+  options?: SecondParameter<typeof customServerInstance>,
+  signal?: AbortSignal
+) => {
+  return customServerInstance<CustomPageImplGameListResponse>(
+    { url: `/api/v1/users/games`, method: "GET", params, signal },
+    options
+  )
+}
+
+export const getGetMyGameListQueryKey = (params?: GetMyGameListParams) => {
+  return [`/api/v1/users/games`, ...(params ? [params] : [])] as const
+}
+
+export const getGetMyGameListQueryOptions = <
+  TData = Awaited<ReturnType<typeof getMyGameList>>,
+  TError = ErrorType<unknown>
+>(
+  params?: GetMyGameListParams,
+  options?: {
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getMyGameList>>, TError, TData>>
+    request?: SecondParameter<typeof customServerInstance>
+  }
+) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {}
+
+  const queryKey = queryOptions?.queryKey ?? getGetMyGameListQueryKey(params)
+
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getMyGameList>>> = ({ signal }) =>
+    getMyGameList(params, requestOptions, signal)
+
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof getMyGameList>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetMyGameListQueryResult = NonNullable<Awaited<ReturnType<typeof getMyGameList>>>
+export type GetMyGameListQueryError = ErrorType<unknown>
+
+export function useGetMyGameList<TData = Awaited<ReturnType<typeof getMyGameList>>, TError = ErrorType<unknown>>(
+  params: undefined | GetMyGameListParams,
+  options: {
+    query: Partial<UseQueryOptions<Awaited<ReturnType<typeof getMyGameList>>, TError, TData>> &
+      Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getMyGameList>>,
+          TError,
+          Awaited<ReturnType<typeof getMyGameList>>
+        >,
+        "initialData"
+      >
+    request?: SecondParameter<typeof customServerInstance>
+  }
+): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetMyGameList<TData = Awaited<ReturnType<typeof getMyGameList>>, TError = ErrorType<unknown>>(
+  params?: GetMyGameListParams,
+  options?: {
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getMyGameList>>, TError, TData>> &
+      Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getMyGameList>>,
+          TError,
+          Awaited<ReturnType<typeof getMyGameList>>
+        >,
+        "initialData"
+      >
+    request?: SecondParameter<typeof customServerInstance>
+  }
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetMyGameList<TData = Awaited<ReturnType<typeof getMyGameList>>, TError = ErrorType<unknown>>(
+  params?: GetMyGameListParams,
+  options?: {
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getMyGameList>>, TError, TData>>
+    request?: SecondParameter<typeof customServerInstance>
+  }
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary 내가 만든 게임 리스트 확인 API
+ */
+
+export function useGetMyGameList<TData = Awaited<ReturnType<typeof getMyGameList>>, TError = ErrorType<unknown>>(
+  params?: GetMyGameListParams,
+  options?: {
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getMyGameList>>, TError, TData>>
+    request?: SecondParameter<typeof customServerInstance>
+  }
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+  const queryOptions = getGetMyGameListQueryOptions(params, options)
+
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+
+  query.queryKey = queryOptions.queryKey
+
+  return query
+}
+
+/**
+ * @summary 내가 만든 게임 리스트 확인 API
+ */
+export const prefetchGetMyGameList = async <
+  TData = Awaited<ReturnType<typeof getMyGameList>>,
+  TError = ErrorType<unknown>
+>(
+  queryClient: QueryClient,
+  params?: GetMyGameListParams,
+  options?: {
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getMyGameList>>, TError, TData>>
+    request?: SecondParameter<typeof customServerInstance>
+  }
+): Promise<QueryClient> => {
+  const queryOptions = getGetMyGameListQueryOptions(params, options)
+
+  await queryClient.prefetchQuery(queryOptions)
+
+  return queryClient
+}
+
+/**
+ * 내가 플레이한 게임 목록을 출력함.
+ * @summary 최근 플레이 목록 확인 API
+ */
+export const getRecentPlays = (
+  params?: GetRecentPlaysParams,
+  options?: SecondParameter<typeof customServerInstance>,
+  signal?: AbortSignal
+) => {
+  return customServerInstance<CustomPageImplGameListResponse>(
+    { url: `/api/v1/users/games/recent`, method: "GET", params, signal },
+    options
+  )
+}
+
+export const getGetRecentPlaysQueryKey = (params?: GetRecentPlaysParams) => {
+  return [`/api/v1/users/games/recent`, ...(params ? [params] : [])] as const
+}
+
+export const getGetRecentPlaysQueryOptions = <
+  TData = Awaited<ReturnType<typeof getRecentPlays>>,
+  TError = ErrorType<unknown>
+>(
+  params?: GetRecentPlaysParams,
+  options?: {
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getRecentPlays>>, TError, TData>>
+    request?: SecondParameter<typeof customServerInstance>
+  }
+) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {}
+
+  const queryKey = queryOptions?.queryKey ?? getGetRecentPlaysQueryKey(params)
+
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getRecentPlays>>> = ({ signal }) =>
+    getRecentPlays(params, requestOptions, signal)
+
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof getRecentPlays>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetRecentPlaysQueryResult = NonNullable<Awaited<ReturnType<typeof getRecentPlays>>>
+export type GetRecentPlaysQueryError = ErrorType<unknown>
+
+export function useGetRecentPlays<TData = Awaited<ReturnType<typeof getRecentPlays>>, TError = ErrorType<unknown>>(
+  params: undefined | GetRecentPlaysParams,
+  options: {
+    query: Partial<UseQueryOptions<Awaited<ReturnType<typeof getRecentPlays>>, TError, TData>> &
+      Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getRecentPlays>>,
+          TError,
+          Awaited<ReturnType<typeof getRecentPlays>>
+        >,
+        "initialData"
+      >
+    request?: SecondParameter<typeof customServerInstance>
+  }
+): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetRecentPlays<TData = Awaited<ReturnType<typeof getRecentPlays>>, TError = ErrorType<unknown>>(
+  params?: GetRecentPlaysParams,
+  options?: {
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getRecentPlays>>, TError, TData>> &
+      Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getRecentPlays>>,
+          TError,
+          Awaited<ReturnType<typeof getRecentPlays>>
+        >,
+        "initialData"
+      >
+    request?: SecondParameter<typeof customServerInstance>
+  }
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetRecentPlays<TData = Awaited<ReturnType<typeof getRecentPlays>>, TError = ErrorType<unknown>>(
+  params?: GetRecentPlaysParams,
+  options?: {
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getRecentPlays>>, TError, TData>>
+    request?: SecondParameter<typeof customServerInstance>
+  }
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary 최근 플레이 목록 확인 API
+ */
+
+export function useGetRecentPlays<TData = Awaited<ReturnType<typeof getRecentPlays>>, TError = ErrorType<unknown>>(
+  params?: GetRecentPlaysParams,
+  options?: {
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getRecentPlays>>, TError, TData>>
+    request?: SecondParameter<typeof customServerInstance>
+  }
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+  const queryOptions = getGetRecentPlaysQueryOptions(params, options)
+
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+
+  query.queryKey = queryOptions.queryKey
+
+  return query
+}
+
+/**
+ * @summary 최근 플레이 목록 확인 API
+ */
+export const prefetchGetRecentPlays = async <
+  TData = Awaited<ReturnType<typeof getRecentPlays>>,
+  TError = ErrorType<unknown>
+>(
+  queryClient: QueryClient,
+  params?: GetRecentPlaysParams,
+  options?: {
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getRecentPlays>>, TError, TData>>
+    request?: SecondParameter<typeof customServerInstance>
+  }
+): Promise<QueryClient> => {
+  const queryOptions = getGetRecentPlaysQueryOptions(params, options)
 
   await queryClient.prefetchQuery(queryOptions)
 
