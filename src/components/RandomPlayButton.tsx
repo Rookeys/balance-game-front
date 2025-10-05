@@ -49,8 +49,9 @@ export default function RandomPlayButton() {
         transition={{
           duration: 2,
           repeat: Infinity,
-          repeatType: "loop",
-          ease: "easeInOut"
+          repeatType: "reverse",
+          ease: "linear",
+          repeatDelay: 0
         }}
       >
         <Tooltip
