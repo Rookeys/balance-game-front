@@ -30,7 +30,7 @@ export default function GameThumbnailSimpleCard({ tag, fixedSize = true, linkEdi
 
   const searchParams = useSearchParams()
 
-  const type = searchParams.get("tab") === "play" ? "played-game" : "created-game"
+  const type = (searchParams.get("tab") ?? "play") === "play" ? "played-game" : "created-game"
 
   return (
     <Link

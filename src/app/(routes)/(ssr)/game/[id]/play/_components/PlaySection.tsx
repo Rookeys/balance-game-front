@@ -1,17 +1,21 @@
 "use client"
 
 import { useContinuePlayRoom, useUpdatePlayRoom } from "@/api/orval/client/game-play-controller/game-play-controller"
+import {
+  getGetRecentPlaysQueryKey,
+  useSaveRecentPlays
+} from "@/api/orval/client/user-profile-controller/user-profile-controller"
 import { GamePlayRequest } from "@/api/orval/model/gamePlayRequest"
 import { removePlayIdCookie } from "@/lib/cookies/playIdCookie"
 import { log } from "@/utils/log"
 import { sleep } from "@/utils/sleep"
+import { useQueryClient } from "@tanstack/react-query"
+import { useSession } from "next-auth/react"
 import Image from "next/image"
 import { useParams, useRouter } from "next/navigation"
 import { useState } from "react"
-import SelectItemBox from "./SelectItemBox"
 import { toast } from "sonner"
-import { useSaveRecentPlays } from "@/api/orval/client/user-profile-controller/user-profile-controller"
-import { useSession } from "next-auth/react"
+import SelectItemBox from "./SelectItemBox"
 interface Params {
   playId: number
 }
@@ -19,6 +23,9 @@ export default function PlaySection({ playId }: Params) {
   const { id } = useParams()
 
   const router = useRouter()
+
+  const queryClient = useQueryClient()
+
   const { data: session } = useSession()
 
   const { data: gamePlayData } = useContinuePlayRoom(Number(id), playId)
@@ -62,6 +69,7 @@ export default function PlaySection({ playId }: Params) {
         // 결승전 선택 후 처리
         if (session) {
           await saveMyPlayGame({ gameId: Number(id), resourceId: selectedResourceId })
+          await queryClient.invalidateQueries({ queryKey: getGetRecentPlaysQueryKey() })
         }
 
         await removePlayIdCookie()

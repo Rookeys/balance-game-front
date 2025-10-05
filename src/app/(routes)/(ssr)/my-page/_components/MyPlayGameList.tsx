@@ -1,7 +1,7 @@
 "use client"
 import { useGetRecentPlaysInfinite } from "@/api/orval/client/user-profile-controller/user-profile-controller"
 import CardSkeleton from "@/components/CardSkeleton"
-import GameThumbnailSimpleCard from "@/components/gameThumbnailCard/GameThumbnailSimpleCard"
+import RecentPlayThumbnailCard from "@/components/gameThumbnailCard/RecentPlayThumbnailCard"
 import { useEffect } from "react"
 import { useInView } from "react-intersection-observer"
 import MyPlayGameNotFound from "./MyPlayGameNotFound"
@@ -47,9 +47,7 @@ export default function MyPlayGameList() {
       <article className="relative grid w-full grid-cols-2 gap-x-[16px] gap-y-[16px] md:grid-cols-4 md:gap-x-[24px] md:gap-y-[40px]">
         {(data?.pages ?? []).flatMap(
           (page) =>
-            page.content?.map((game) => (
-              <GameThumbnailSimpleCard key={game.roomId} fixedSize={false} {...game} linkEditPage />
-            )) ?? []
+            page.content?.map((game) => <RecentPlayThumbnailCard key={game.roomId} fixedSize={false} {...game} />) ?? []
         )}
         {!isFetchingNextPage && (
           <div ref={ref} className="pointer-events-none absolute bottom-[200px] h-[4px] w-full opacity-0" />
