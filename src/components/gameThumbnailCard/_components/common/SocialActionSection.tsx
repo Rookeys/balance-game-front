@@ -17,14 +17,17 @@ interface Params {
   title?: string
   categories?: GameListResponseCategoriesItem[]
   isMine?: boolean
+  type?: "played-game" | "created-game"
 }
 
-export default function SocialActionSection({ id, title, categories, isMine }: Params) {
+export default function SocialActionSection({ id, title, categories, isMine, type = "played-game" }: Params) {
   const { data: session } = useSession()
 
   const pathname = usePathname()
 
   const isMyPage = pathname === "/my-page"
+  // const isPlayedGame = type === "played-game"
+  // const isCreateGame = type === "created-game"
 
   const [isOpenReportModal, setIsOpenReportModal] = useState<boolean>(false)
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState<boolean>(false)
@@ -68,7 +71,9 @@ export default function SocialActionSection({ id, title, categories, isMine }: P
       <div onClick={(e) => e.preventDefault()}>
         <MoreButton items={moreItems} />
         {isOpenReportModal && <GameReportModal id={id?.toString()} onClose={() => setIsOpenReportModal(false)} />}
-        {isOpenDeleteModal && <GameDeleteModal id={Number(id)} onClose={() => setIsOpenDeleteModal(false)} />}
+        {isOpenDeleteModal && (
+          <GameDeleteModal id={Number(id)} onClose={() => setIsOpenDeleteModal(false)} type={type} />
+        )}
       </div>
     </article>
   )

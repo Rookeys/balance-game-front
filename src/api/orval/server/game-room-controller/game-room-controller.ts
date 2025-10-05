@@ -39,7 +39,7 @@ export const deleteGame = (gameId: number, options?: SecondParameter<typeof cust
  * 게임방의 기본적인 설정들을 받아 생성함.
  * @summary 게임방 생성 API
  */
-export const saveGame1 = (
+export const saveGame = (
   gameRequest: BodyType<GameRequest>,
   options?: SecondParameter<typeof customServerInstance>,
   signal?: AbortSignal

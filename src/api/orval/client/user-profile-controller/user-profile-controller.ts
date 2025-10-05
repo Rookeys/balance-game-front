@@ -20,6 +20,7 @@ import type {
 } from "@tanstack/react-query"
 import type {
   CustomPageImplGameListResponse,
+  CustomPageImplRecentPlayListResponse,
   GameResponse,
   GetMyGameListParams,
   GetRecentPlaysParams,
@@ -401,347 +402,80 @@ export const useSubmitUserReport = <TError = ErrorType<boolean>, TContext = unkn
   return useMutation(mutationOptions)
 }
 /**
- * 내 게임방의 설정을 확인함.
- * @summary 내가 만든 게임방 정보 확인 API
- */
-export const getMyGameStatus = (
-  gameId: number,
-  options?: SecondParameter<typeof customClientInstance>,
-  signal?: AbortSignal
-) => {
-  return customClientInstance<GameResponse>(
-    { url: `/api/v1/users/games/${encodeURIComponent(String(gameId))}`, method: "GET", signal },
-    options
-  )
-}
-
-export const getGetMyGameStatusQueryKey = (gameId: number) => {
-  return [`/api/v1/users/games/${gameId}`] as const
-}
-
-export const getGetMyGameStatusInfiniteQueryOptions = <
-  TData = InfiniteData<Awaited<ReturnType<typeof getMyGameStatus>>>,
-  TError = ErrorType<GameResponse>
->(
-  gameId: number,
-  options?: {
-    query?: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getMyGameStatus>>, TError, TData>>
-    request?: SecondParameter<typeof customClientInstance>
-  }
-) => {
-  const { query: queryOptions, request: requestOptions } = options ?? {}
-
-  const queryKey = queryOptions?.queryKey ?? getGetMyGameStatusQueryKey(gameId)
-
-  const queryFn: QueryFunction<Awaited<ReturnType<typeof getMyGameStatus>>> = ({ signal }) =>
-    getMyGameStatus(gameId, requestOptions, signal)
-
-  return { queryKey, queryFn, enabled: !!gameId, ...queryOptions } as UseInfiniteQueryOptions<
-    Awaited<ReturnType<typeof getMyGameStatus>>,
-    TError,
-    TData
-  > & { queryKey: DataTag<QueryKey, TData, TError> }
-}
-
-export type GetMyGameStatusInfiniteQueryResult = NonNullable<Awaited<ReturnType<typeof getMyGameStatus>>>
-export type GetMyGameStatusInfiniteQueryError = ErrorType<GameResponse>
-
-export function useGetMyGameStatusInfinite<
-  TData = InfiniteData<Awaited<ReturnType<typeof getMyGameStatus>>>,
-  TError = ErrorType<GameResponse>
->(
-  gameId: number,
-  options: {
-    query: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getMyGameStatus>>, TError, TData>> &
-      Pick<
-        DefinedInitialDataOptions<
-          Awaited<ReturnType<typeof getMyGameStatus>>,
-          TError,
-          Awaited<ReturnType<typeof getMyGameStatus>>
-        >,
-        "initialData"
-      >
-    request?: SecondParameter<typeof customClientInstance>
-  }
-): DefinedUseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetMyGameStatusInfinite<
-  TData = InfiniteData<Awaited<ReturnType<typeof getMyGameStatus>>>,
-  TError = ErrorType<GameResponse>
->(
-  gameId: number,
-  options?: {
-    query?: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getMyGameStatus>>, TError, TData>> &
-      Pick<
-        UndefinedInitialDataOptions<
-          Awaited<ReturnType<typeof getMyGameStatus>>,
-          TError,
-          Awaited<ReturnType<typeof getMyGameStatus>>
-        >,
-        "initialData"
-      >
-    request?: SecondParameter<typeof customClientInstance>
-  }
-): UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetMyGameStatusInfinite<
-  TData = InfiniteData<Awaited<ReturnType<typeof getMyGameStatus>>>,
-  TError = ErrorType<GameResponse>
->(
-  gameId: number,
-  options?: {
-    query?: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getMyGameStatus>>, TError, TData>>
-    request?: SecondParameter<typeof customClientInstance>
-  }
-): UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-/**
- * @summary 내가 만든 게임방 정보 확인 API
- */
-
-export function useGetMyGameStatusInfinite<
-  TData = InfiniteData<Awaited<ReturnType<typeof getMyGameStatus>>>,
-  TError = ErrorType<GameResponse>
->(
-  gameId: number,
-  options?: {
-    query?: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getMyGameStatus>>, TError, TData>>
-    request?: SecondParameter<typeof customClientInstance>
-  }
-): UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
-  const queryOptions = getGetMyGameStatusInfiniteQueryOptions(gameId, options)
-
-  const query = useInfiniteQuery(queryOptions) as UseInfiniteQueryResult<TData, TError> & {
-    queryKey: DataTag<QueryKey, TData, TError>
-  }
-
-  query.queryKey = queryOptions.queryKey
-
-  return query
-}
-
-export const getGetMyGameStatusQueryOptions = <
-  TData = Awaited<ReturnType<typeof getMyGameStatus>>,
-  TError = ErrorType<GameResponse>
->(
-  gameId: number,
-  options?: {
-    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getMyGameStatus>>, TError, TData>>
-    request?: SecondParameter<typeof customClientInstance>
-  }
-) => {
-  const { query: queryOptions, request: requestOptions } = options ?? {}
-
-  const queryKey = queryOptions?.queryKey ?? getGetMyGameStatusQueryKey(gameId)
-
-  const queryFn: QueryFunction<Awaited<ReturnType<typeof getMyGameStatus>>> = ({ signal }) =>
-    getMyGameStatus(gameId, requestOptions, signal)
-
-  return { queryKey, queryFn, enabled: !!gameId, ...queryOptions } as UseQueryOptions<
-    Awaited<ReturnType<typeof getMyGameStatus>>,
-    TError,
-    TData
-  > & { queryKey: DataTag<QueryKey, TData, TError> }
-}
-
-export type GetMyGameStatusQueryResult = NonNullable<Awaited<ReturnType<typeof getMyGameStatus>>>
-export type GetMyGameStatusQueryError = ErrorType<GameResponse>
-
-export function useGetMyGameStatus<
-  TData = Awaited<ReturnType<typeof getMyGameStatus>>,
-  TError = ErrorType<GameResponse>
->(
-  gameId: number,
-  options: {
-    query: Partial<UseQueryOptions<Awaited<ReturnType<typeof getMyGameStatus>>, TError, TData>> &
-      Pick<
-        DefinedInitialDataOptions<
-          Awaited<ReturnType<typeof getMyGameStatus>>,
-          TError,
-          Awaited<ReturnType<typeof getMyGameStatus>>
-        >,
-        "initialData"
-      >
-    request?: SecondParameter<typeof customClientInstance>
-  }
-): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetMyGameStatus<
-  TData = Awaited<ReturnType<typeof getMyGameStatus>>,
-  TError = ErrorType<GameResponse>
->(
-  gameId: number,
-  options?: {
-    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getMyGameStatus>>, TError, TData>> &
-      Pick<
-        UndefinedInitialDataOptions<
-          Awaited<ReturnType<typeof getMyGameStatus>>,
-          TError,
-          Awaited<ReturnType<typeof getMyGameStatus>>
-        >,
-        "initialData"
-      >
-    request?: SecondParameter<typeof customClientInstance>
-  }
-): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetMyGameStatus<
-  TData = Awaited<ReturnType<typeof getMyGameStatus>>,
-  TError = ErrorType<GameResponse>
->(
-  gameId: number,
-  options?: {
-    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getMyGameStatus>>, TError, TData>>
-    request?: SecondParameter<typeof customClientInstance>
-  }
-): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-/**
- * @summary 내가 만든 게임방 정보 확인 API
- */
-
-export function useGetMyGameStatus<
-  TData = Awaited<ReturnType<typeof getMyGameStatus>>,
-  TError = ErrorType<GameResponse>
->(
-  gameId: number,
-  options?: {
-    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getMyGameStatus>>, TError, TData>>
-    request?: SecondParameter<typeof customClientInstance>
-  }
-): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
-  const queryOptions = getGetMyGameStatusQueryOptions(gameId, options)
-
-  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-
-  query.queryKey = queryOptions.queryKey
-
-  return query
-}
-
-export const getGetMyGameStatusSuspenseQueryOptions = <
-  TData = Awaited<ReturnType<typeof getMyGameStatus>>,
-  TError = ErrorType<GameResponse>
->(
-  gameId: number,
-  options?: {
-    query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getMyGameStatus>>, TError, TData>>
-    request?: SecondParameter<typeof customClientInstance>
-  }
-) => {
-  const { query: queryOptions, request: requestOptions } = options ?? {}
-
-  const queryKey = queryOptions?.queryKey ?? getGetMyGameStatusQueryKey(gameId)
-
-  const queryFn: QueryFunction<Awaited<ReturnType<typeof getMyGameStatus>>> = ({ signal }) =>
-    getMyGameStatus(gameId, requestOptions, signal)
-
-  return { queryKey, queryFn, ...queryOptions } as UseSuspenseQueryOptions<
-    Awaited<ReturnType<typeof getMyGameStatus>>,
-    TError,
-    TData
-  > & { queryKey: DataTag<QueryKey, TData, TError> }
-}
-
-export type GetMyGameStatusSuspenseQueryResult = NonNullable<Awaited<ReturnType<typeof getMyGameStatus>>>
-export type GetMyGameStatusSuspenseQueryError = ErrorType<GameResponse>
-
-export function useGetMyGameStatusSuspense<
-  TData = Awaited<ReturnType<typeof getMyGameStatus>>,
-  TError = ErrorType<GameResponse>
->(
-  gameId: number,
-  options: {
-    query: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getMyGameStatus>>, TError, TData>>
-    request?: SecondParameter<typeof customClientInstance>
-  }
-): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetMyGameStatusSuspense<
-  TData = Awaited<ReturnType<typeof getMyGameStatus>>,
-  TError = ErrorType<GameResponse>
->(
-  gameId: number,
-  options?: {
-    query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getMyGameStatus>>, TError, TData>>
-    request?: SecondParameter<typeof customClientInstance>
-  }
-): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetMyGameStatusSuspense<
-  TData = Awaited<ReturnType<typeof getMyGameStatus>>,
-  TError = ErrorType<GameResponse>
->(
-  gameId: number,
-  options?: {
-    query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getMyGameStatus>>, TError, TData>>
-    request?: SecondParameter<typeof customClientInstance>
-  }
-): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-/**
- * @summary 내가 만든 게임방 정보 확인 API
- */
-
-export function useGetMyGameStatusSuspense<
-  TData = Awaited<ReturnType<typeof getMyGameStatus>>,
-  TError = ErrorType<GameResponse>
->(
-  gameId: number,
-  options?: {
-    query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getMyGameStatus>>, TError, TData>>
-    request?: SecondParameter<typeof customClientInstance>
-  }
-): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
-  const queryOptions = getGetMyGameStatusSuspenseQueryOptions(gameId, options)
-
-  const query = useSuspenseQuery(queryOptions) as UseSuspenseQueryResult<TData, TError> & {
-    queryKey: DataTag<QueryKey, TData, TError>
-  }
-
-  query.queryKey = queryOptions.queryKey
-
-  return query
-}
-
-/**
  * 최근 플레이한 게임을 기록함.
  * @summary 최근 플레이 등록 API
  */
-export const saveGame = (
+export const saveRecentPlays = (
   gameId: number,
+  resourceId: number,
   options?: SecondParameter<typeof customClientInstance>,
   signal?: AbortSignal
 ) => {
   return customClientInstance<number>(
-    { url: `/api/v1/users/games/${encodeURIComponent(String(gameId))}`, method: "POST", signal },
+    {
+      url: `/api/v1/users/games/${encodeURIComponent(String(gameId))}/resource/${encodeURIComponent(String(resourceId))}`,
+      method: "POST",
+      signal
+    },
     options
   )
 }
 
-export const getSaveGameMutationOptions = <TError = ErrorType<number>, TContext = unknown>(options?: {
-  mutation?: UseMutationOptions<Awaited<ReturnType<typeof saveGame>>, TError, { gameId: number }, TContext>
+export const getSaveRecentPlaysMutationOptions = <TError = ErrorType<number>, TContext = unknown>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof saveRecentPlays>>,
+    TError,
+    { gameId: number; resourceId: number },
+    TContext
+  >
   request?: SecondParameter<typeof customClientInstance>
-}): UseMutationOptions<Awaited<ReturnType<typeof saveGame>>, TError, { gameId: number }, TContext> => {
-  const mutationKey = ["saveGame"]
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof saveRecentPlays>>,
+  TError,
+  { gameId: number; resourceId: number },
+  TContext
+> => {
+  const mutationKey = ["saveRecentPlays"]
   const { mutation: mutationOptions, request: requestOptions } = options
     ? options.mutation && "mutationKey" in options.mutation && options.mutation.mutationKey
       ? options
       : { ...options, mutation: { ...options.mutation, mutationKey } }
     : { mutation: { mutationKey }, request: undefined }
 
-  const mutationFn: MutationFunction<Awaited<ReturnType<typeof saveGame>>, { gameId: number }> = (props) => {
-    const { gameId } = props ?? {}
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof saveRecentPlays>>,
+    { gameId: number; resourceId: number }
+  > = (props) => {
+    const { gameId, resourceId } = props ?? {}
 
-    return saveGame(gameId, requestOptions)
+    return saveRecentPlays(gameId, resourceId, requestOptions)
   }
 
   return { mutationFn, ...mutationOptions }
 }
 
-export type SaveGameMutationResult = NonNullable<Awaited<ReturnType<typeof saveGame>>>
+export type SaveRecentPlaysMutationResult = NonNullable<Awaited<ReturnType<typeof saveRecentPlays>>>
 
-export type SaveGameMutationError = ErrorType<number>
+export type SaveRecentPlaysMutationError = ErrorType<number>
 
 /**
  * @summary 최근 플레이 등록 API
  */
-export const useSaveGame = <TError = ErrorType<number>, TContext = unknown>(options?: {
-  mutation?: UseMutationOptions<Awaited<ReturnType<typeof saveGame>>, TError, { gameId: number }, TContext>
+export const useSaveRecentPlays = <TError = ErrorType<number>, TContext = unknown>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof saveRecentPlays>>,
+    TError,
+    { gameId: number; resourceId: number },
+    TContext
+  >
   request?: SecondParameter<typeof customClientInstance>
-}): UseMutationResult<Awaited<ReturnType<typeof saveGame>>, TError, { gameId: number }, TContext> => {
-  const mutationOptions = getSaveGameMutationOptions(options)
+}): UseMutationResult<
+  Awaited<ReturnType<typeof saveRecentPlays>>,
+  TError,
+  { gameId: number; resourceId: number },
+  TContext
+> => {
+  const mutationOptions = getSaveRecentPlaysMutationOptions(options)
 
   return useMutation(mutationOptions)
 }
@@ -1083,6 +817,301 @@ export function useGetMyGameListSuspense<
 }
 
 /**
+ * 내 게임방의 설정을 확인함.
+ * @summary 내가 만든 게임방 정보 확인 API
+ */
+export const getMyGameStatus = (
+  gameId: number,
+  options?: SecondParameter<typeof customClientInstance>,
+  signal?: AbortSignal
+) => {
+  return customClientInstance<GameResponse>(
+    { url: `/api/v1/users/games/${encodeURIComponent(String(gameId))}`, method: "GET", signal },
+    options
+  )
+}
+
+export const getGetMyGameStatusQueryKey = (gameId: number) => {
+  return [`/api/v1/users/games/${gameId}`] as const
+}
+
+export const getGetMyGameStatusInfiniteQueryOptions = <
+  TData = InfiniteData<Awaited<ReturnType<typeof getMyGameStatus>>>,
+  TError = ErrorType<GameResponse>
+>(
+  gameId: number,
+  options?: {
+    query?: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getMyGameStatus>>, TError, TData>>
+    request?: SecondParameter<typeof customClientInstance>
+  }
+) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {}
+
+  const queryKey = queryOptions?.queryKey ?? getGetMyGameStatusQueryKey(gameId)
+
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getMyGameStatus>>> = ({ signal }) =>
+    getMyGameStatus(gameId, requestOptions, signal)
+
+  return { queryKey, queryFn, enabled: !!gameId, ...queryOptions } as UseInfiniteQueryOptions<
+    Awaited<ReturnType<typeof getMyGameStatus>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetMyGameStatusInfiniteQueryResult = NonNullable<Awaited<ReturnType<typeof getMyGameStatus>>>
+export type GetMyGameStatusInfiniteQueryError = ErrorType<GameResponse>
+
+export function useGetMyGameStatusInfinite<
+  TData = InfiniteData<Awaited<ReturnType<typeof getMyGameStatus>>>,
+  TError = ErrorType<GameResponse>
+>(
+  gameId: number,
+  options: {
+    query: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getMyGameStatus>>, TError, TData>> &
+      Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getMyGameStatus>>,
+          TError,
+          Awaited<ReturnType<typeof getMyGameStatus>>
+        >,
+        "initialData"
+      >
+    request?: SecondParameter<typeof customClientInstance>
+  }
+): DefinedUseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetMyGameStatusInfinite<
+  TData = InfiniteData<Awaited<ReturnType<typeof getMyGameStatus>>>,
+  TError = ErrorType<GameResponse>
+>(
+  gameId: number,
+  options?: {
+    query?: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getMyGameStatus>>, TError, TData>> &
+      Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getMyGameStatus>>,
+          TError,
+          Awaited<ReturnType<typeof getMyGameStatus>>
+        >,
+        "initialData"
+      >
+    request?: SecondParameter<typeof customClientInstance>
+  }
+): UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetMyGameStatusInfinite<
+  TData = InfiniteData<Awaited<ReturnType<typeof getMyGameStatus>>>,
+  TError = ErrorType<GameResponse>
+>(
+  gameId: number,
+  options?: {
+    query?: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getMyGameStatus>>, TError, TData>>
+    request?: SecondParameter<typeof customClientInstance>
+  }
+): UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary 내가 만든 게임방 정보 확인 API
+ */
+
+export function useGetMyGameStatusInfinite<
+  TData = InfiniteData<Awaited<ReturnType<typeof getMyGameStatus>>>,
+  TError = ErrorType<GameResponse>
+>(
+  gameId: number,
+  options?: {
+    query?: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getMyGameStatus>>, TError, TData>>
+    request?: SecondParameter<typeof customClientInstance>
+  }
+): UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+  const queryOptions = getGetMyGameStatusInfiniteQueryOptions(gameId, options)
+
+  const query = useInfiniteQuery(queryOptions) as UseInfiniteQueryResult<TData, TError> & {
+    queryKey: DataTag<QueryKey, TData, TError>
+  }
+
+  query.queryKey = queryOptions.queryKey
+
+  return query
+}
+
+export const getGetMyGameStatusQueryOptions = <
+  TData = Awaited<ReturnType<typeof getMyGameStatus>>,
+  TError = ErrorType<GameResponse>
+>(
+  gameId: number,
+  options?: {
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getMyGameStatus>>, TError, TData>>
+    request?: SecondParameter<typeof customClientInstance>
+  }
+) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {}
+
+  const queryKey = queryOptions?.queryKey ?? getGetMyGameStatusQueryKey(gameId)
+
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getMyGameStatus>>> = ({ signal }) =>
+    getMyGameStatus(gameId, requestOptions, signal)
+
+  return { queryKey, queryFn, enabled: !!gameId, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof getMyGameStatus>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetMyGameStatusQueryResult = NonNullable<Awaited<ReturnType<typeof getMyGameStatus>>>
+export type GetMyGameStatusQueryError = ErrorType<GameResponse>
+
+export function useGetMyGameStatus<
+  TData = Awaited<ReturnType<typeof getMyGameStatus>>,
+  TError = ErrorType<GameResponse>
+>(
+  gameId: number,
+  options: {
+    query: Partial<UseQueryOptions<Awaited<ReturnType<typeof getMyGameStatus>>, TError, TData>> &
+      Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getMyGameStatus>>,
+          TError,
+          Awaited<ReturnType<typeof getMyGameStatus>>
+        >,
+        "initialData"
+      >
+    request?: SecondParameter<typeof customClientInstance>
+  }
+): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetMyGameStatus<
+  TData = Awaited<ReturnType<typeof getMyGameStatus>>,
+  TError = ErrorType<GameResponse>
+>(
+  gameId: number,
+  options?: {
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getMyGameStatus>>, TError, TData>> &
+      Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getMyGameStatus>>,
+          TError,
+          Awaited<ReturnType<typeof getMyGameStatus>>
+        >,
+        "initialData"
+      >
+    request?: SecondParameter<typeof customClientInstance>
+  }
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetMyGameStatus<
+  TData = Awaited<ReturnType<typeof getMyGameStatus>>,
+  TError = ErrorType<GameResponse>
+>(
+  gameId: number,
+  options?: {
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getMyGameStatus>>, TError, TData>>
+    request?: SecondParameter<typeof customClientInstance>
+  }
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary 내가 만든 게임방 정보 확인 API
+ */
+
+export function useGetMyGameStatus<
+  TData = Awaited<ReturnType<typeof getMyGameStatus>>,
+  TError = ErrorType<GameResponse>
+>(
+  gameId: number,
+  options?: {
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getMyGameStatus>>, TError, TData>>
+    request?: SecondParameter<typeof customClientInstance>
+  }
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+  const queryOptions = getGetMyGameStatusQueryOptions(gameId, options)
+
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+
+  query.queryKey = queryOptions.queryKey
+
+  return query
+}
+
+export const getGetMyGameStatusSuspenseQueryOptions = <
+  TData = Awaited<ReturnType<typeof getMyGameStatus>>,
+  TError = ErrorType<GameResponse>
+>(
+  gameId: number,
+  options?: {
+    query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getMyGameStatus>>, TError, TData>>
+    request?: SecondParameter<typeof customClientInstance>
+  }
+) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {}
+
+  const queryKey = queryOptions?.queryKey ?? getGetMyGameStatusQueryKey(gameId)
+
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getMyGameStatus>>> = ({ signal }) =>
+    getMyGameStatus(gameId, requestOptions, signal)
+
+  return { queryKey, queryFn, ...queryOptions } as UseSuspenseQueryOptions<
+    Awaited<ReturnType<typeof getMyGameStatus>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetMyGameStatusSuspenseQueryResult = NonNullable<Awaited<ReturnType<typeof getMyGameStatus>>>
+export type GetMyGameStatusSuspenseQueryError = ErrorType<GameResponse>
+
+export function useGetMyGameStatusSuspense<
+  TData = Awaited<ReturnType<typeof getMyGameStatus>>,
+  TError = ErrorType<GameResponse>
+>(
+  gameId: number,
+  options: {
+    query: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getMyGameStatus>>, TError, TData>>
+    request?: SecondParameter<typeof customClientInstance>
+  }
+): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetMyGameStatusSuspense<
+  TData = Awaited<ReturnType<typeof getMyGameStatus>>,
+  TError = ErrorType<GameResponse>
+>(
+  gameId: number,
+  options?: {
+    query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getMyGameStatus>>, TError, TData>>
+    request?: SecondParameter<typeof customClientInstance>
+  }
+): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetMyGameStatusSuspense<
+  TData = Awaited<ReturnType<typeof getMyGameStatus>>,
+  TError = ErrorType<GameResponse>
+>(
+  gameId: number,
+  options?: {
+    query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getMyGameStatus>>, TError, TData>>
+    request?: SecondParameter<typeof customClientInstance>
+  }
+): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary 내가 만든 게임방 정보 확인 API
+ */
+
+export function useGetMyGameStatusSuspense<
+  TData = Awaited<ReturnType<typeof getMyGameStatus>>,
+  TError = ErrorType<GameResponse>
+>(
+  gameId: number,
+  options?: {
+    query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getMyGameStatus>>, TError, TData>>
+    request?: SecondParameter<typeof customClientInstance>
+  }
+): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+  const queryOptions = getGetMyGameStatusSuspenseQueryOptions(gameId, options)
+
+  const query = useSuspenseQuery(queryOptions) as UseSuspenseQueryResult<TData, TError> & {
+    queryKey: DataTag<QueryKey, TData, TError>
+  }
+
+  query.queryKey = queryOptions.queryKey
+
+  return query
+}
+
+/**
  * 내가 플레이한 게임 목록을 출력함.
  * @summary 최근 플레이 목록 확인 API
  */
@@ -1091,7 +1120,7 @@ export const getRecentPlays = (
   options?: SecondParameter<typeof customClientInstance>,
   signal?: AbortSignal
 ) => {
-  return customClientInstance<CustomPageImplGameListResponse>(
+  return customClientInstance<CustomPageImplRecentPlayListResponse>(
     { url: `/api/v1/users/games/recent`, method: "GET", params, signal },
     options
   )
@@ -1417,4 +1446,51 @@ export function useGetRecentPlaysSuspense<
   query.queryKey = queryOptions.queryKey
 
   return query
+}
+
+/**
+ * 최근 플레이 목록을 삭제함.
+ * @summary 최근 플레이 목록 삭제 API
+ */
+export const deleteRecentPlay = (roomId: number, options?: SecondParameter<typeof customClientInstance>) => {
+  return customClientInstance<boolean>(
+    { url: `/api/v1/users/games/recent/${encodeURIComponent(String(roomId))}`, method: "DELETE" },
+    options
+  )
+}
+
+export const getDeleteRecentPlayMutationOptions = <TError = ErrorType<unknown>, TContext = unknown>(options?: {
+  mutation?: UseMutationOptions<Awaited<ReturnType<typeof deleteRecentPlay>>, TError, { roomId: number }, TContext>
+  request?: SecondParameter<typeof customClientInstance>
+}): UseMutationOptions<Awaited<ReturnType<typeof deleteRecentPlay>>, TError, { roomId: number }, TContext> => {
+  const mutationKey = ["deleteRecentPlay"]
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation && "mutationKey" in options.mutation && options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined }
+
+  const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteRecentPlay>>, { roomId: number }> = (props) => {
+    const { roomId } = props ?? {}
+
+    return deleteRecentPlay(roomId, requestOptions)
+  }
+
+  return { mutationFn, ...mutationOptions }
+}
+
+export type DeleteRecentPlayMutationResult = NonNullable<Awaited<ReturnType<typeof deleteRecentPlay>>>
+
+export type DeleteRecentPlayMutationError = ErrorType<unknown>
+
+/**
+ * @summary 최근 플레이 목록 삭제 API
+ */
+export const useDeleteRecentPlay = <TError = ErrorType<unknown>, TContext = unknown>(options?: {
+  mutation?: UseMutationOptions<Awaited<ReturnType<typeof deleteRecentPlay>>, TError, { roomId: number }, TContext>
+  request?: SecondParameter<typeof customClientInstance>
+}): UseMutationResult<Awaited<ReturnType<typeof deleteRecentPlay>>, TError, { roomId: number }, TContext> => {
+  const mutationOptions = getDeleteRecentPlayMutationOptions(options)
+
+  return useMutation(mutationOptions)
 }

@@ -7,6 +7,7 @@ import { GameListSelectionResponseType } from "@/api/orval/model/gameListSelecti
 import SocialActionSection from "./_components/common/SocialActionSection"
 import Link from "next/link"
 import TitleSection from "./_components/common/TitleSection"
+import { useSearchParams } from "next/navigation"
 
 interface Params extends GameListResponse {
   tag?: string
@@ -27,6 +28,10 @@ export default function GameThumbnailSimpleCard({ tag, fixedSize = true, linkEdi
     existsMine
   } = props
 
+  const searchParams = useSearchParams()
+
+  const type = searchParams.get("tab") === "play" ? "played-game" : "created-game"
+
   return (
     <Link
       href={linkEditPage ? `/game-create/${roomId}/edit` : `/game/${roomId}`}
@@ -42,7 +47,13 @@ export default function GameThumbnailSimpleCard({ tag, fixedSize = true, linkEdi
         isBlind={existsBlind}
         totalPlayNums={totalPlayNums}
       />
-      <SocialActionSection id={roomId} title={title} categories={categories} isMine={linkEditPage || existsMine} />
+      <SocialActionSection
+        id={roomId}
+        title={title}
+        categories={categories}
+        isMine={linkEditPage || existsMine}
+        type={type}
+      />
       <TitleSection title={title} description={description} />
       <MetaInfoSection creatorNickname={userResponse?.nickname} creatorImage={userResponse?.profileImageUrl} />
     </Link>

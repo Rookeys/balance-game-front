@@ -134,7 +134,7 @@ export const useDeleteGame = <TError = ErrorType<boolean>, TContext = unknown>(o
  * 게임방의 기본적인 설정들을 받아 생성함.
  * @summary 게임방 생성 API
  */
-export const saveGame1 = (
+export const saveGame = (
   gameRequest: BodyType<GameRequest>,
   options?: SecondParameter<typeof customClientInstance>,
   signal?: AbortSignal
@@ -151,50 +151,40 @@ export const saveGame1 = (
   )
 }
 
-export const getSaveGame1MutationOptions = <TError = ErrorType<number>, TContext = unknown>(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<typeof saveGame1>>,
-    TError,
-    { data: BodyType<GameRequest> },
-    TContext
-  >
+export const getSaveGameMutationOptions = <TError = ErrorType<number>, TContext = unknown>(options?: {
+  mutation?: UseMutationOptions<Awaited<ReturnType<typeof saveGame>>, TError, { data: BodyType<GameRequest> }, TContext>
   request?: SecondParameter<typeof customClientInstance>
-}): UseMutationOptions<Awaited<ReturnType<typeof saveGame1>>, TError, { data: BodyType<GameRequest> }, TContext> => {
-  const mutationKey = ["saveGame1"]
+}): UseMutationOptions<Awaited<ReturnType<typeof saveGame>>, TError, { data: BodyType<GameRequest> }, TContext> => {
+  const mutationKey = ["saveGame"]
   const { mutation: mutationOptions, request: requestOptions } = options
     ? options.mutation && "mutationKey" in options.mutation && options.mutation.mutationKey
       ? options
       : { ...options, mutation: { ...options.mutation, mutationKey } }
     : { mutation: { mutationKey }, request: undefined }
 
-  const mutationFn: MutationFunction<Awaited<ReturnType<typeof saveGame1>>, { data: BodyType<GameRequest> }> = (
+  const mutationFn: MutationFunction<Awaited<ReturnType<typeof saveGame>>, { data: BodyType<GameRequest> }> = (
     props
   ) => {
     const { data } = props ?? {}
 
-    return saveGame1(data, requestOptions)
+    return saveGame(data, requestOptions)
   }
 
   return { mutationFn, ...mutationOptions }
 }
 
-export type SaveGame1MutationResult = NonNullable<Awaited<ReturnType<typeof saveGame1>>>
-export type SaveGame1MutationBody = BodyType<GameRequest>
-export type SaveGame1MutationError = ErrorType<number>
+export type SaveGameMutationResult = NonNullable<Awaited<ReturnType<typeof saveGame>>>
+export type SaveGameMutationBody = BodyType<GameRequest>
+export type SaveGameMutationError = ErrorType<number>
 
 /**
  * @summary 게임방 생성 API
  */
-export const useSaveGame1 = <TError = ErrorType<number>, TContext = unknown>(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<typeof saveGame1>>,
-    TError,
-    { data: BodyType<GameRequest> },
-    TContext
-  >
+export const useSaveGame = <TError = ErrorType<number>, TContext = unknown>(options?: {
+  mutation?: UseMutationOptions<Awaited<ReturnType<typeof saveGame>>, TError, { data: BodyType<GameRequest> }, TContext>
   request?: SecondParameter<typeof customClientInstance>
-}): UseMutationResult<Awaited<ReturnType<typeof saveGame1>>, TError, { data: BodyType<GameRequest> }, TContext> => {
-  const mutationOptions = getSaveGame1MutationOptions(options)
+}): UseMutationResult<Awaited<ReturnType<typeof saveGame>>, TError, { data: BodyType<GameRequest> }, TContext> => {
+  const mutationOptions = getSaveGameMutationOptions(options)
 
   return useMutation(mutationOptions)
 }
