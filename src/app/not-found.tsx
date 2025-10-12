@@ -16,9 +16,9 @@ export default function ErrorPage() {
           <Image src={"/images/character/pixy_error.webp"} alt="error-image" width={80} height={80} />
           <p className="font-sb-aggro-medium text-heading-5 md:text-heading-4">이런, 오류가 발생했군요</p>
           <p className="text-center text-label-regular text-label-neutral md:text-body2-regular">
-            잠시 후 다시 시도해 주세요.
+            페이지를 찾을 수 없거나 서버가 원활하지 않습니다.
             <br />
-            잘못된 페이지 또는 서버가 원활하지 않습니다.
+            짱픽 홈으로 돌아가 볼까요?
           </p>
         </article>
         <Button
