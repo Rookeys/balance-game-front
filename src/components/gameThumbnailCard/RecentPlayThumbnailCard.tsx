@@ -26,7 +26,7 @@ export default function RecentPlayThumbnailCard({ fixedSize = true, ...props }: 
       className={cn("group flex w-full flex-col gap-[8px]", fixedSize && "w-[162px] md:w-[282px]")}
     >
       <ImageSection
-        src={thumbnailType === "Link" ? getYoutubeThumbnail(thumbnailLinkUrl) : thumbnailImageUrl}
+        src={thumbnailType === "LINK" ? getYoutubeThumbnail(thumbnailLinkUrl) : thumbnailImageUrl}
         isBlind={existsBlind}
         totalPlayNums={undefined}
       />
