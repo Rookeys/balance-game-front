@@ -1,5 +1,5 @@
 import { getGetGameStatusQueryKey } from "@/api/orval/client/main-page-controller/main-page-controller"
-import GameDetailPageClient from "@/app/(routes)/(ssr)/game/[id]/_components/GameDetailPageClient"
+import GameDetailPageClient from "@/app/(routes)/(no-ssg)/game/[id]/_components/GameDetailPageClient"
 import { FetchPrefetchBoundary } from "@/lib/providers/FetchPrefetchBoundary"
 import { QueryClient } from "@tanstack/react-query"
 import { Metadata, ResolvingMetadata } from "next"

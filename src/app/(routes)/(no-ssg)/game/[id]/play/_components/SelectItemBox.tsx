@@ -6,7 +6,7 @@ import { cn } from "@/utils/cn"
 import { motion } from "motion/react"
 import dynamic from "next/dynamic"
 import "@/styles/border.css"
-import SelectResourceButton from "@/app/(routes)/(ssr)/game/[id]/play/_components/SelectResourceButton"
+import SelectResourceButton from "@/app/(routes)/(no-ssg)/game/[id]/play/_components/SelectResourceButton"
 
 const ImageRatio = dynamic(() => import("@/components/ImageRatio"))
 

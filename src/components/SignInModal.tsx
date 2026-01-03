@@ -1,6 +1,6 @@
 "use client"
 
-import SignInPageClient from "@/app/(routes)/(ssr)/sign-in/_components/SignInPageClient"
+import SignInPageClient from "@/app/(routes)/(no-ssg)/sign-in/_components/SignInPageClient"
 import ModalWrapper from "@/components/modal/ModalWrapper"
 import { COLORS } from "@/styles/theme/colors"
 import { XIcon } from "lucide-react"

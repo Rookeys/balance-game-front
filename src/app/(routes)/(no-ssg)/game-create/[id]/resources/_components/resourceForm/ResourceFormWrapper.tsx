@@ -1,7 +1,7 @@
 "use client"
 
-import { useGetResourceList } from "@/app/(routes)/(ssr)/game-create/[id]/resources/hooks/useGetResourceList"
-import { handleSelectAllToggle } from "@/app/(routes)/(ssr)/game-create/[id]/resources/utils/selectAllResource"
+import { useGetResourceList } from "@/app/(routes)/(no-ssg)/game-create/[id]/resources/hooks/useGetResourceList"
+import { handleSelectAllToggle } from "@/app/(routes)/(no-ssg)/game-create/[id]/resources/utils/selectAllResource"
 import { Pagination } from "@/components/Pagination"
 import ResourceNotFound from "@/components/ResourceNotFound"
 import useResizeHandler from "@/hooks/useResizeHandler"

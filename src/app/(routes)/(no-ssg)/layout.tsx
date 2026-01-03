@@ -8,7 +8,7 @@ import { parseBoolean } from "@/utils/parseBoolean"
 import { getServerSession } from "next-auth"
 import { cookies } from "next/headers"
 
-export default async function SSRLayout({
+export default async function NoSSGLayout({
   children
 }: Readonly<{
   children: React.ReactNode
