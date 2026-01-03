@@ -16,46 +16,81 @@ module.exports = {
         },
         query: {
           useQuery: true,
-          useInfinite: true,
           useInfiniteQueryParam: "cursorId",
           useSuspenseQuery: true
           // useSuspenseInfiniteQuery: true
         },
         operations: {
-          existsByNickname: {
+          getMainGameList: {
             query: {
               useQuery: true,
-              useInfinite: false
+              useInfinite: true
             }
           },
-          continuePlayRoom: {
+          getCommentsByGameResult: {
             query: {
               useQuery: true,
-              useInfinite: false
+              useInfinite: true
             }
           },
-          getCategoryNums: {
+          getResourcesUsingCursorId: {
             query: {
               useQuery: true,
-              useInfinite: false
+              useInfinite: true
             }
           },
-          getResourcesUsingPage: {
+          getProfileByEmail: {
             query: {
               useQuery: true,
-              useInfinite: false
+              useInfinite: true
             }
           },
-          getResultRankingUsingPage: {
+          getFollowings: {
             query: {
               useQuery: true,
-              useInfinite: false
+              useInfinite: true
             }
           },
-          getRandomPlayRoomId: {
+          getFollowers: {
             query: {
               useQuery: true,
-              useInfinite: false
+              useInfinite: true
+            }
+          },
+          getResultRanking: {
+            query: {
+              useQuery: true,
+              useInfinite: true
+            }
+          },
+          getParentCommentsByGameResource: {
+            query: {
+              useQuery: true,
+              useInfinite: true
+            }
+          },
+          getChildrenCommentsByGameResource: {
+            query: {
+              useQuery: true,
+              useInfinite: true
+            }
+          },
+          getRecentPlays: {
+            query: {
+              useQuery: true,
+              useInfinite: true
+            }
+          },
+          getMyGameList: {
+            query: {
+              useQuery: true,
+              useInfinite: true
+            }
+          },
+          getUserGameListByEmail: {
+            query: {
+              useQuery: true,
+              useInfinite: true
             }
           }
         }
