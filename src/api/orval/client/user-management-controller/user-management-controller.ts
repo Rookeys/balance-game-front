@@ -1,17 +1,5 @@
-import { useMutation, useQuery } from "@tanstack/react-query"
-import type {
-  DataTag,
-  DefinedInitialDataOptions,
-  DefinedUseQueryResult,
-  MutationFunction,
-  QueryFunction,
-  QueryKey,
-  UndefinedInitialDataOptions,
-  UseMutationOptions,
-  UseMutationResult,
-  UseQueryOptions,
-  UseQueryResult
-} from "@tanstack/react-query"
+import { useMutation } from "@tanstack/react-query"
+import type { MutationFunction, UseMutationOptions, UseMutationResult } from "@tanstack/react-query"
 import type { ExistsByNicknameParams, LoginResponse, SignUpRequest } from "../../model"
 import { customClientInstance } from "../../../clientInstance"
 import type { ErrorType, BodyType } from "../../../clientInstance"
@@ -129,90 +117,61 @@ export const existsByNickname = (
   return customClientInstance<boolean>({ url: `/api/v1/users/exists`, method: "POST", params, signal }, options)
 }
 
-export const getExistsByNicknameQueryKey = (params: ExistsByNicknameParams) => {
-  return [`/api/v1/users/exists`, ...(params ? [params] : [])] as const
-}
-
-export const getExistsByNicknameQueryOptions = <
-  TData = Awaited<ReturnType<typeof existsByNickname>>,
-  TError = ErrorType<unknown>
->(
-  params: ExistsByNicknameParams,
-  options?: {
-    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof existsByNickname>>, TError, TData>>
-    request?: SecondParameter<typeof customClientInstance>
-  }
-) => {
-  const { query: queryOptions, request: requestOptions } = options ?? {}
-
-  const queryKey = queryOptions?.queryKey ?? getExistsByNicknameQueryKey(params)
-
-  const queryFn: QueryFunction<Awaited<ReturnType<typeof existsByNickname>>> = ({ signal }) =>
-    existsByNickname(params, requestOptions, signal)
-
-  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+export const getExistsByNicknameMutationOptions = <TError = ErrorType<unknown>, TContext = unknown>(options?: {
+  mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof existsByNickname>>,
     TError,
-    TData
-  > & { queryKey: DataTag<QueryKey, TData, TError> }
+    { params: ExistsByNicknameParams },
+    TContext
+  >
+  request?: SecondParameter<typeof customClientInstance>
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof existsByNickname>>,
+  TError,
+  { params: ExistsByNicknameParams },
+  TContext
+> => {
+  const mutationKey = ["existsByNickname"]
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation && "mutationKey" in options.mutation && options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined }
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof existsByNickname>>,
+    { params: ExistsByNicknameParams }
+  > = (props) => {
+    const { params } = props ?? {}
+
+    return existsByNickname(params, requestOptions)
+  }
+
+  return { mutationFn, ...mutationOptions }
 }
 
-export type ExistsByNicknameQueryResult = NonNullable<Awaited<ReturnType<typeof existsByNickname>>>
-export type ExistsByNicknameQueryError = ErrorType<unknown>
+export type ExistsByNicknameMutationResult = NonNullable<Awaited<ReturnType<typeof existsByNickname>>>
 
-export function useExistsByNickname<TData = Awaited<ReturnType<typeof existsByNickname>>, TError = ErrorType<unknown>>(
-  params: ExistsByNicknameParams,
-  options: {
-    query: Partial<UseQueryOptions<Awaited<ReturnType<typeof existsByNickname>>, TError, TData>> &
-      Pick<
-        DefinedInitialDataOptions<
-          Awaited<ReturnType<typeof existsByNickname>>,
-          TError,
-          Awaited<ReturnType<typeof existsByNickname>>
-        >,
-        "initialData"
-      >
-    request?: SecondParameter<typeof customClientInstance>
-  }
-): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useExistsByNickname<TData = Awaited<ReturnType<typeof existsByNickname>>, TError = ErrorType<unknown>>(
-  params: ExistsByNicknameParams,
-  options?: {
-    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof existsByNickname>>, TError, TData>> &
-      Pick<
-        UndefinedInitialDataOptions<
-          Awaited<ReturnType<typeof existsByNickname>>,
-          TError,
-          Awaited<ReturnType<typeof existsByNickname>>
-        >,
-        "initialData"
-      >
-    request?: SecondParameter<typeof customClientInstance>
-  }
-): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useExistsByNickname<TData = Awaited<ReturnType<typeof existsByNickname>>, TError = ErrorType<unknown>>(
-  params: ExistsByNicknameParams,
-  options?: {
-    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof existsByNickname>>, TError, TData>>
-    request?: SecondParameter<typeof customClientInstance>
-  }
-): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export type ExistsByNicknameMutationError = ErrorType<unknown>
+
 /**
  * @summary 중복 이름 확인 API
  */
+export const useExistsByNickname = <TError = ErrorType<unknown>, TContext = unknown>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof existsByNickname>>,
+    TError,
+    { params: ExistsByNicknameParams },
+    TContext
+  >
+  request?: SecondParameter<typeof customClientInstance>
+}): UseMutationResult<
+  Awaited<ReturnType<typeof existsByNickname>>,
+  TError,
+  { params: ExistsByNicknameParams },
+  TContext
+> => {
+  const mutationOptions = getExistsByNicknameMutationOptions(options)
 
-export function useExistsByNickname<TData = Awaited<ReturnType<typeof existsByNickname>>, TError = ErrorType<unknown>>(
-  params: ExistsByNicknameParams,
-  options?: {
-    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof existsByNickname>>, TError, TData>>
-    request?: SecondParameter<typeof customClientInstance>
-  }
-): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
-  const queryOptions = getExistsByNicknameQueryOptions(params, options)
-
-  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-
-  query.queryKey = queryOptions.queryKey
-
-  return query
+  return useMutation(mutationOptions)
 }

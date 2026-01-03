@@ -17,5 +17,6 @@ export const GameListResponseCategoriesItem = {
   ANIMATION: "ANIMATION",
   HORROR: "HORROR",
   MOVIE: "MOVIE",
-  ETC: "ETC"
+  ETC: "ETC",
+  FOLLOWING: "FOLLOWING"
 } as const

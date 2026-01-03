@@ -1,4 +1,4 @@
-export interface UserResponse {
+export interface FollowUserResponse {
   /** 닉네임 */
   nickname?: string
   /** 이메일 */
@@ -7,4 +7,6 @@ export interface UserResponse {
   fileUrl?: string
   /** 팔로우 여부 */
   isFollowing?: boolean
+  /** 팔로우 버튼 표시 여부 */
+  showFollowButton?: boolean
 }

@@ -6,4 +6,6 @@ export interface UserMainResponse {
   nickname?: string
   /** 프로필 사진 URL */
   profileImageUrl?: string
+  /** 팔로우 여부 */
+  isFollowing?: boolean
 }

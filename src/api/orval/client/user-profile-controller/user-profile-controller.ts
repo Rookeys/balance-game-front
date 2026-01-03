@@ -23,7 +23,9 @@ import type {
   CustomPageImplRecentPlayListResponse,
   GameResponse,
   GetMyGameListParams,
+  GetProfileByEmailParams,
   GetRecentPlaysParams,
+  GetUserGameListByEmailParams,
   UserReportRequest,
   UserRequest,
   UserResponse
@@ -43,85 +45,6 @@ export const getProfile = (options?: SecondParameter<typeof customClientInstance
 
 export const getGetProfileQueryKey = () => {
   return [`/api/v1/users/profile`] as const
-}
-
-export const getGetProfileInfiniteQueryOptions = <
-  TData = InfiniteData<Awaited<ReturnType<typeof getProfile>>>,
-  TError = ErrorType<unknown>
->(options?: {
-  query?: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getProfile>>, TError, TData>>
-  request?: SecondParameter<typeof customClientInstance>
-}) => {
-  const { query: queryOptions, request: requestOptions } = options ?? {}
-
-  const queryKey = queryOptions?.queryKey ?? getGetProfileQueryKey()
-
-  const queryFn: QueryFunction<Awaited<ReturnType<typeof getProfile>>> = ({ signal }) =>
-    getProfile(requestOptions, signal)
-
-  return { queryKey, queryFn, ...queryOptions } as UseInfiniteQueryOptions<
-    Awaited<ReturnType<typeof getProfile>>,
-    TError,
-    TData
-  > & { queryKey: DataTag<QueryKey, TData, TError> }
-}
-
-export type GetProfileInfiniteQueryResult = NonNullable<Awaited<ReturnType<typeof getProfile>>>
-export type GetProfileInfiniteQueryError = ErrorType<unknown>
-
-export function useGetProfileInfinite<
-  TData = InfiniteData<Awaited<ReturnType<typeof getProfile>>>,
-  TError = ErrorType<unknown>
->(options: {
-  query: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getProfile>>, TError, TData>> &
-    Pick<
-      DefinedInitialDataOptions<Awaited<ReturnType<typeof getProfile>>, TError, Awaited<ReturnType<typeof getProfile>>>,
-      "initialData"
-    >
-  request?: SecondParameter<typeof customClientInstance>
-}): DefinedUseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetProfileInfinite<
-  TData = InfiniteData<Awaited<ReturnType<typeof getProfile>>>,
-  TError = ErrorType<unknown>
->(options?: {
-  query?: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getProfile>>, TError, TData>> &
-    Pick<
-      UndefinedInitialDataOptions<
-        Awaited<ReturnType<typeof getProfile>>,
-        TError,
-        Awaited<ReturnType<typeof getProfile>>
-      >,
-      "initialData"
-    >
-  request?: SecondParameter<typeof customClientInstance>
-}): UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetProfileInfinite<
-  TData = InfiniteData<Awaited<ReturnType<typeof getProfile>>>,
-  TError = ErrorType<unknown>
->(options?: {
-  query?: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getProfile>>, TError, TData>>
-  request?: SecondParameter<typeof customClientInstance>
-}): UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-/**
- * @summary 프로필 정보 출력 API
- */
-
-export function useGetProfileInfinite<
-  TData = InfiniteData<Awaited<ReturnType<typeof getProfile>>>,
-  TError = ErrorType<unknown>
->(options?: {
-  query?: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getProfile>>, TError, TData>>
-  request?: SecondParameter<typeof customClientInstance>
-}): UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
-  const queryOptions = getGetProfileInfiniteQueryOptions(options)
-
-  const query = useInfiniteQuery(queryOptions) as UseInfiniteQueryResult<TData, TError> & {
-    queryKey: DataTag<QueryKey, TData, TError>
-  }
-
-  query.queryKey = queryOptions.queryKey
-
-  return query
 }
 
 export const getGetProfileQueryOptions = <
@@ -480,6 +403,219 @@ export const useSaveRecentPlays = <TError = ErrorType<number>, TContext = unknow
   return useMutation(mutationOptions)
 }
 /**
+ * 이메일로 다른 사용자의 프로필 정보를 조회합니다.
+ * @summary 다른 사용자 프로필 조회 API
+ */
+export const getProfileByEmail = (
+  params: GetProfileByEmailParams,
+  options?: SecondParameter<typeof customClientInstance>,
+  signal?: AbortSignal
+) => {
+  return customClientInstance<UserResponse>(
+    { url: `/api/v1/users/profile/user`, method: "GET", params, signal },
+    options
+  )
+}
+
+export const getGetProfileByEmailQueryKey = (params: GetProfileByEmailParams) => {
+  return [`/api/v1/users/profile/user`, ...(params ? [params] : [])] as const
+}
+
+export const getGetProfileByEmailInfiniteQueryOptions = <
+  TData = InfiniteData<Awaited<ReturnType<typeof getProfileByEmail>>>,
+  TError = ErrorType<UserResponse>
+>(
+  params: GetProfileByEmailParams,
+  options?: {
+    query?: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getProfileByEmail>>, TError, TData>>
+    request?: SecondParameter<typeof customClientInstance>
+  }
+) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {}
+
+  const queryKey = queryOptions?.queryKey ?? getGetProfileByEmailQueryKey(params)
+
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getProfileByEmail>>> = ({ signal }) =>
+    getProfileByEmail(params, requestOptions, signal)
+
+  return { queryKey, queryFn, ...queryOptions } as UseInfiniteQueryOptions<
+    Awaited<ReturnType<typeof getProfileByEmail>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetProfileByEmailInfiniteQueryResult = NonNullable<Awaited<ReturnType<typeof getProfileByEmail>>>
+export type GetProfileByEmailInfiniteQueryError = ErrorType<UserResponse>
+
+export function useGetProfileByEmailInfinite<
+  TData = InfiniteData<Awaited<ReturnType<typeof getProfileByEmail>>>,
+  TError = ErrorType<UserResponse>
+>(
+  params: GetProfileByEmailParams,
+  options: {
+    query: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getProfileByEmail>>, TError, TData>> &
+      Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getProfileByEmail>>,
+          TError,
+          Awaited<ReturnType<typeof getProfileByEmail>>
+        >,
+        "initialData"
+      >
+    request?: SecondParameter<typeof customClientInstance>
+  }
+): DefinedUseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetProfileByEmailInfinite<
+  TData = InfiniteData<Awaited<ReturnType<typeof getProfileByEmail>>>,
+  TError = ErrorType<UserResponse>
+>(
+  params: GetProfileByEmailParams,
+  options?: {
+    query?: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getProfileByEmail>>, TError, TData>> &
+      Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getProfileByEmail>>,
+          TError,
+          Awaited<ReturnType<typeof getProfileByEmail>>
+        >,
+        "initialData"
+      >
+    request?: SecondParameter<typeof customClientInstance>
+  }
+): UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetProfileByEmailInfinite<
+  TData = InfiniteData<Awaited<ReturnType<typeof getProfileByEmail>>>,
+  TError = ErrorType<UserResponse>
+>(
+  params: GetProfileByEmailParams,
+  options?: {
+    query?: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getProfileByEmail>>, TError, TData>>
+    request?: SecondParameter<typeof customClientInstance>
+  }
+): UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary 다른 사용자 프로필 조회 API
+ */
+
+export function useGetProfileByEmailInfinite<
+  TData = InfiniteData<Awaited<ReturnType<typeof getProfileByEmail>>>,
+  TError = ErrorType<UserResponse>
+>(
+  params: GetProfileByEmailParams,
+  options?: {
+    query?: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getProfileByEmail>>, TError, TData>>
+    request?: SecondParameter<typeof customClientInstance>
+  }
+): UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+  const queryOptions = getGetProfileByEmailInfiniteQueryOptions(params, options)
+
+  const query = useInfiniteQuery(queryOptions) as UseInfiniteQueryResult<TData, TError> & {
+    queryKey: DataTag<QueryKey, TData, TError>
+  }
+
+  query.queryKey = queryOptions.queryKey
+
+  return query
+}
+
+export const getGetProfileByEmailQueryOptions = <
+  TData = Awaited<ReturnType<typeof getProfileByEmail>>,
+  TError = ErrorType<UserResponse>
+>(
+  params: GetProfileByEmailParams,
+  options?: {
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getProfileByEmail>>, TError, TData>>
+    request?: SecondParameter<typeof customClientInstance>
+  }
+) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {}
+
+  const queryKey = queryOptions?.queryKey ?? getGetProfileByEmailQueryKey(params)
+
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getProfileByEmail>>> = ({ signal }) =>
+    getProfileByEmail(params, requestOptions, signal)
+
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof getProfileByEmail>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetProfileByEmailQueryResult = NonNullable<Awaited<ReturnType<typeof getProfileByEmail>>>
+export type GetProfileByEmailQueryError = ErrorType<UserResponse>
+
+export function useGetProfileByEmail<
+  TData = Awaited<ReturnType<typeof getProfileByEmail>>,
+  TError = ErrorType<UserResponse>
+>(
+  params: GetProfileByEmailParams,
+  options: {
+    query: Partial<UseQueryOptions<Awaited<ReturnType<typeof getProfileByEmail>>, TError, TData>> &
+      Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getProfileByEmail>>,
+          TError,
+          Awaited<ReturnType<typeof getProfileByEmail>>
+        >,
+        "initialData"
+      >
+    request?: SecondParameter<typeof customClientInstance>
+  }
+): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetProfileByEmail<
+  TData = Awaited<ReturnType<typeof getProfileByEmail>>,
+  TError = ErrorType<UserResponse>
+>(
+  params: GetProfileByEmailParams,
+  options?: {
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getProfileByEmail>>, TError, TData>> &
+      Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getProfileByEmail>>,
+          TError,
+          Awaited<ReturnType<typeof getProfileByEmail>>
+        >,
+        "initialData"
+      >
+    request?: SecondParameter<typeof customClientInstance>
+  }
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetProfileByEmail<
+  TData = Awaited<ReturnType<typeof getProfileByEmail>>,
+  TError = ErrorType<UserResponse>
+>(
+  params: GetProfileByEmailParams,
+  options?: {
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getProfileByEmail>>, TError, TData>>
+    request?: SecondParameter<typeof customClientInstance>
+  }
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary 다른 사용자 프로필 조회 API
+ */
+
+export function useGetProfileByEmail<
+  TData = Awaited<ReturnType<typeof getProfileByEmail>>,
+  TError = ErrorType<UserResponse>
+>(
+  params: GetProfileByEmailParams,
+  options?: {
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getProfileByEmail>>, TError, TData>>
+    request?: SecondParameter<typeof customClientInstance>
+  }
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+  const queryOptions = getGetProfileByEmailQueryOptions(params, options)
+
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+
+  query.queryKey = queryOptions.queryKey
+
+  return query
+}
+
+/**
  * 내가 만든 게임들을 무한 스크롤 형식으로 확인 가능.
  * @summary 내가 만든 게임 리스트 확인 API
  */
@@ -499,21 +635,12 @@ export const getGetMyGameListQueryKey = (params?: GetMyGameListParams) => {
 }
 
 export const getGetMyGameListInfiniteQueryOptions = <
-  TData = InfiniteData<Awaited<ReturnType<typeof getMyGameList>>, GetMyGameListParams["cursorId"]>,
+  TData = InfiniteData<Awaited<ReturnType<typeof getMyGameList>>>,
   TError = ErrorType<unknown>
 >(
   params?: GetMyGameListParams,
   options?: {
-    query?: Partial<
-      UseInfiniteQueryOptions<
-        Awaited<ReturnType<typeof getMyGameList>>,
-        TError,
-        TData,
-        Awaited<ReturnType<typeof getMyGameList>>,
-        QueryKey,
-        GetMyGameListParams["cursorId"]
-      >
-    >
+    query?: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getMyGameList>>, TError, TData>>
     request?: SecondParameter<typeof customClientInstance>
   }
 ) => {
@@ -521,20 +648,13 @@ export const getGetMyGameListInfiniteQueryOptions = <
 
   const queryKey = queryOptions?.queryKey ?? getGetMyGameListQueryKey(params)
 
-  const queryFn: QueryFunction<
-    Awaited<ReturnType<typeof getMyGameList>>,
-    QueryKey,
-    GetMyGameListParams["cursorId"]
-  > = ({ signal, pageParam }) =>
-    getMyGameList({ ...params, cursorId: pageParam || params?.["cursorId"] }, requestOptions, signal)
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getMyGameList>>> = ({ signal }) =>
+    getMyGameList(params, requestOptions, signal)
 
   return { queryKey, queryFn, ...queryOptions } as UseInfiniteQueryOptions<
     Awaited<ReturnType<typeof getMyGameList>>,
     TError,
-    TData,
-    Awaited<ReturnType<typeof getMyGameList>>,
-    QueryKey,
-    GetMyGameListParams["cursorId"]
+    TData
   > & { queryKey: DataTag<QueryKey, TData, TError> }
 }
 
@@ -542,27 +662,17 @@ export type GetMyGameListInfiniteQueryResult = NonNullable<Awaited<ReturnType<ty
 export type GetMyGameListInfiniteQueryError = ErrorType<unknown>
 
 export function useGetMyGameListInfinite<
-  TData = InfiniteData<Awaited<ReturnType<typeof getMyGameList>>, GetMyGameListParams["cursorId"]>,
+  TData = InfiniteData<Awaited<ReturnType<typeof getMyGameList>>>,
   TError = ErrorType<unknown>
 >(
   params: undefined | GetMyGameListParams,
   options: {
-    query: Partial<
-      UseInfiniteQueryOptions<
-        Awaited<ReturnType<typeof getMyGameList>>,
-        TError,
-        TData,
-        Awaited<ReturnType<typeof getMyGameList>>,
-        QueryKey,
-        GetMyGameListParams["cursorId"]
-      >
-    > &
+    query: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getMyGameList>>, TError, TData>> &
       Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getMyGameList>>,
           TError,
-          Awaited<ReturnType<typeof getMyGameList>>,
-          QueryKey
+          Awaited<ReturnType<typeof getMyGameList>>
         >,
         "initialData"
       >
@@ -570,27 +680,17 @@ export function useGetMyGameListInfinite<
   }
 ): DefinedUseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 export function useGetMyGameListInfinite<
-  TData = InfiniteData<Awaited<ReturnType<typeof getMyGameList>>, GetMyGameListParams["cursorId"]>,
+  TData = InfiniteData<Awaited<ReturnType<typeof getMyGameList>>>,
   TError = ErrorType<unknown>
 >(
   params?: GetMyGameListParams,
   options?: {
-    query?: Partial<
-      UseInfiniteQueryOptions<
-        Awaited<ReturnType<typeof getMyGameList>>,
-        TError,
-        TData,
-        Awaited<ReturnType<typeof getMyGameList>>,
-        QueryKey,
-        GetMyGameListParams["cursorId"]
-      >
-    > &
+    query?: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getMyGameList>>, TError, TData>> &
       Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getMyGameList>>,
           TError,
-          Awaited<ReturnType<typeof getMyGameList>>,
-          QueryKey
+          Awaited<ReturnType<typeof getMyGameList>>
         >,
         "initialData"
       >
@@ -598,21 +698,12 @@ export function useGetMyGameListInfinite<
   }
 ): UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 export function useGetMyGameListInfinite<
-  TData = InfiniteData<Awaited<ReturnType<typeof getMyGameList>>, GetMyGameListParams["cursorId"]>,
+  TData = InfiniteData<Awaited<ReturnType<typeof getMyGameList>>>,
   TError = ErrorType<unknown>
 >(
   params?: GetMyGameListParams,
   options?: {
-    query?: Partial<
-      UseInfiniteQueryOptions<
-        Awaited<ReturnType<typeof getMyGameList>>,
-        TError,
-        TData,
-        Awaited<ReturnType<typeof getMyGameList>>,
-        QueryKey,
-        GetMyGameListParams["cursorId"]
-      >
-    >
+    query?: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getMyGameList>>, TError, TData>>
     request?: SecondParameter<typeof customClientInstance>
   }
 ): UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -621,21 +712,12 @@ export function useGetMyGameListInfinite<
  */
 
 export function useGetMyGameListInfinite<
-  TData = InfiniteData<Awaited<ReturnType<typeof getMyGameList>>, GetMyGameListParams["cursorId"]>,
+  TData = InfiniteData<Awaited<ReturnType<typeof getMyGameList>>>,
   TError = ErrorType<unknown>
 >(
   params?: GetMyGameListParams,
   options?: {
-    query?: Partial<
-      UseInfiniteQueryOptions<
-        Awaited<ReturnType<typeof getMyGameList>>,
-        TError,
-        TData,
-        Awaited<ReturnType<typeof getMyGameList>>,
-        QueryKey,
-        GetMyGameListParams["cursorId"]
-      >
-    >
+    query?: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getMyGameList>>, TError, TData>>
     request?: SecondParameter<typeof customClientInstance>
   }
 ): UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
@@ -734,88 +816,6 @@ export function useGetMyGameList<TData = Awaited<ReturnType<typeof getMyGameList
   return query
 }
 
-export const getGetMyGameListSuspenseQueryOptions = <
-  TData = Awaited<ReturnType<typeof getMyGameList>>,
-  TError = ErrorType<unknown>
->(
-  params?: GetMyGameListParams,
-  options?: {
-    query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getMyGameList>>, TError, TData>>
-    request?: SecondParameter<typeof customClientInstance>
-  }
-) => {
-  const { query: queryOptions, request: requestOptions } = options ?? {}
-
-  const queryKey = queryOptions?.queryKey ?? getGetMyGameListQueryKey(params)
-
-  const queryFn: QueryFunction<Awaited<ReturnType<typeof getMyGameList>>> = ({ signal }) =>
-    getMyGameList(params, requestOptions, signal)
-
-  return { queryKey, queryFn, ...queryOptions } as UseSuspenseQueryOptions<
-    Awaited<ReturnType<typeof getMyGameList>>,
-    TError,
-    TData
-  > & { queryKey: DataTag<QueryKey, TData, TError> }
-}
-
-export type GetMyGameListSuspenseQueryResult = NonNullable<Awaited<ReturnType<typeof getMyGameList>>>
-export type GetMyGameListSuspenseQueryError = ErrorType<unknown>
-
-export function useGetMyGameListSuspense<
-  TData = Awaited<ReturnType<typeof getMyGameList>>,
-  TError = ErrorType<unknown>
->(
-  params: undefined | GetMyGameListParams,
-  options: {
-    query: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getMyGameList>>, TError, TData>>
-    request?: SecondParameter<typeof customClientInstance>
-  }
-): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetMyGameListSuspense<
-  TData = Awaited<ReturnType<typeof getMyGameList>>,
-  TError = ErrorType<unknown>
->(
-  params?: GetMyGameListParams,
-  options?: {
-    query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getMyGameList>>, TError, TData>>
-    request?: SecondParameter<typeof customClientInstance>
-  }
-): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetMyGameListSuspense<
-  TData = Awaited<ReturnType<typeof getMyGameList>>,
-  TError = ErrorType<unknown>
->(
-  params?: GetMyGameListParams,
-  options?: {
-    query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getMyGameList>>, TError, TData>>
-    request?: SecondParameter<typeof customClientInstance>
-  }
-): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-/**
- * @summary 내가 만든 게임 리스트 확인 API
- */
-
-export function useGetMyGameListSuspense<
-  TData = Awaited<ReturnType<typeof getMyGameList>>,
-  TError = ErrorType<unknown>
->(
-  params?: GetMyGameListParams,
-  options?: {
-    query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getMyGameList>>, TError, TData>>
-    request?: SecondParameter<typeof customClientInstance>
-  }
-): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
-  const queryOptions = getGetMyGameListSuspenseQueryOptions(params, options)
-
-  const query = useSuspenseQuery(queryOptions) as UseSuspenseQueryResult<TData, TError> & {
-    queryKey: DataTag<QueryKey, TData, TError>
-  }
-
-  query.queryKey = queryOptions.queryKey
-
-  return query
-}
-
 /**
  * 내 게임방의 설정을 확인함.
  * @summary 내가 만든 게임방 정보 확인 API
@@ -833,104 +833,6 @@ export const getMyGameStatus = (
 
 export const getGetMyGameStatusQueryKey = (gameId: number) => {
   return [`/api/v1/users/games/${gameId}`] as const
-}
-
-export const getGetMyGameStatusInfiniteQueryOptions = <
-  TData = InfiniteData<Awaited<ReturnType<typeof getMyGameStatus>>>,
-  TError = ErrorType<GameResponse>
->(
-  gameId: number,
-  options?: {
-    query?: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getMyGameStatus>>, TError, TData>>
-    request?: SecondParameter<typeof customClientInstance>
-  }
-) => {
-  const { query: queryOptions, request: requestOptions } = options ?? {}
-
-  const queryKey = queryOptions?.queryKey ?? getGetMyGameStatusQueryKey(gameId)
-
-  const queryFn: QueryFunction<Awaited<ReturnType<typeof getMyGameStatus>>> = ({ signal }) =>
-    getMyGameStatus(gameId, requestOptions, signal)
-
-  return { queryKey, queryFn, enabled: !!gameId, ...queryOptions } as UseInfiniteQueryOptions<
-    Awaited<ReturnType<typeof getMyGameStatus>>,
-    TError,
-    TData
-  > & { queryKey: DataTag<QueryKey, TData, TError> }
-}
-
-export type GetMyGameStatusInfiniteQueryResult = NonNullable<Awaited<ReturnType<typeof getMyGameStatus>>>
-export type GetMyGameStatusInfiniteQueryError = ErrorType<GameResponse>
-
-export function useGetMyGameStatusInfinite<
-  TData = InfiniteData<Awaited<ReturnType<typeof getMyGameStatus>>>,
-  TError = ErrorType<GameResponse>
->(
-  gameId: number,
-  options: {
-    query: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getMyGameStatus>>, TError, TData>> &
-      Pick<
-        DefinedInitialDataOptions<
-          Awaited<ReturnType<typeof getMyGameStatus>>,
-          TError,
-          Awaited<ReturnType<typeof getMyGameStatus>>
-        >,
-        "initialData"
-      >
-    request?: SecondParameter<typeof customClientInstance>
-  }
-): DefinedUseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetMyGameStatusInfinite<
-  TData = InfiniteData<Awaited<ReturnType<typeof getMyGameStatus>>>,
-  TError = ErrorType<GameResponse>
->(
-  gameId: number,
-  options?: {
-    query?: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getMyGameStatus>>, TError, TData>> &
-      Pick<
-        UndefinedInitialDataOptions<
-          Awaited<ReturnType<typeof getMyGameStatus>>,
-          TError,
-          Awaited<ReturnType<typeof getMyGameStatus>>
-        >,
-        "initialData"
-      >
-    request?: SecondParameter<typeof customClientInstance>
-  }
-): UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetMyGameStatusInfinite<
-  TData = InfiniteData<Awaited<ReturnType<typeof getMyGameStatus>>>,
-  TError = ErrorType<GameResponse>
->(
-  gameId: number,
-  options?: {
-    query?: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getMyGameStatus>>, TError, TData>>
-    request?: SecondParameter<typeof customClientInstance>
-  }
-): UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-/**
- * @summary 내가 만든 게임방 정보 확인 API
- */
-
-export function useGetMyGameStatusInfinite<
-  TData = InfiniteData<Awaited<ReturnType<typeof getMyGameStatus>>>,
-  TError = ErrorType<GameResponse>
->(
-  gameId: number,
-  options?: {
-    query?: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getMyGameStatus>>, TError, TData>>
-    request?: SecondParameter<typeof customClientInstance>
-  }
-): UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
-  const queryOptions = getGetMyGameStatusInfiniteQueryOptions(gameId, options)
-
-  const query = useInfiniteQuery(queryOptions) as UseInfiniteQueryResult<TData, TError> & {
-    queryKey: DataTag<QueryKey, TData, TError>
-  }
-
-  query.queryKey = queryOptions.queryKey
-
-  return query
 }
 
 export const getGetMyGameStatusQueryOptions = <
@@ -1112,6 +1014,219 @@ export function useGetMyGameStatusSuspense<
 }
 
 /**
+ * 이메일로 특정 사용자가 만든 게임들을 무한 스크롤 형식으로 확인 가능.
+ * @summary 특정 사용자가 만든 게임 리스트 확인 API
+ */
+export const getUserGameListByEmail = (
+  params: GetUserGameListByEmailParams,
+  options?: SecondParameter<typeof customClientInstance>,
+  signal?: AbortSignal
+) => {
+  return customClientInstance<CustomPageImplGameListResponse>(
+    { url: `/api/v1/users/games/user`, method: "GET", params, signal },
+    options
+  )
+}
+
+export const getGetUserGameListByEmailQueryKey = (params: GetUserGameListByEmailParams) => {
+  return [`/api/v1/users/games/user`, ...(params ? [params] : [])] as const
+}
+
+export const getGetUserGameListByEmailInfiniteQueryOptions = <
+  TData = InfiniteData<Awaited<ReturnType<typeof getUserGameListByEmail>>>,
+  TError = ErrorType<CustomPageImplGameListResponse>
+>(
+  params: GetUserGameListByEmailParams,
+  options?: {
+    query?: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getUserGameListByEmail>>, TError, TData>>
+    request?: SecondParameter<typeof customClientInstance>
+  }
+) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {}
+
+  const queryKey = queryOptions?.queryKey ?? getGetUserGameListByEmailQueryKey(params)
+
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getUserGameListByEmail>>> = ({ signal }) =>
+    getUserGameListByEmail(params, requestOptions, signal)
+
+  return { queryKey, queryFn, ...queryOptions } as UseInfiniteQueryOptions<
+    Awaited<ReturnType<typeof getUserGameListByEmail>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetUserGameListByEmailInfiniteQueryResult = NonNullable<Awaited<ReturnType<typeof getUserGameListByEmail>>>
+export type GetUserGameListByEmailInfiniteQueryError = ErrorType<CustomPageImplGameListResponse>
+
+export function useGetUserGameListByEmailInfinite<
+  TData = InfiniteData<Awaited<ReturnType<typeof getUserGameListByEmail>>>,
+  TError = ErrorType<CustomPageImplGameListResponse>
+>(
+  params: GetUserGameListByEmailParams,
+  options: {
+    query: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getUserGameListByEmail>>, TError, TData>> &
+      Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getUserGameListByEmail>>,
+          TError,
+          Awaited<ReturnType<typeof getUserGameListByEmail>>
+        >,
+        "initialData"
+      >
+    request?: SecondParameter<typeof customClientInstance>
+  }
+): DefinedUseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetUserGameListByEmailInfinite<
+  TData = InfiniteData<Awaited<ReturnType<typeof getUserGameListByEmail>>>,
+  TError = ErrorType<CustomPageImplGameListResponse>
+>(
+  params: GetUserGameListByEmailParams,
+  options?: {
+    query?: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getUserGameListByEmail>>, TError, TData>> &
+      Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getUserGameListByEmail>>,
+          TError,
+          Awaited<ReturnType<typeof getUserGameListByEmail>>
+        >,
+        "initialData"
+      >
+    request?: SecondParameter<typeof customClientInstance>
+  }
+): UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetUserGameListByEmailInfinite<
+  TData = InfiniteData<Awaited<ReturnType<typeof getUserGameListByEmail>>>,
+  TError = ErrorType<CustomPageImplGameListResponse>
+>(
+  params: GetUserGameListByEmailParams,
+  options?: {
+    query?: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getUserGameListByEmail>>, TError, TData>>
+    request?: SecondParameter<typeof customClientInstance>
+  }
+): UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary 특정 사용자가 만든 게임 리스트 확인 API
+ */
+
+export function useGetUserGameListByEmailInfinite<
+  TData = InfiniteData<Awaited<ReturnType<typeof getUserGameListByEmail>>>,
+  TError = ErrorType<CustomPageImplGameListResponse>
+>(
+  params: GetUserGameListByEmailParams,
+  options?: {
+    query?: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getUserGameListByEmail>>, TError, TData>>
+    request?: SecondParameter<typeof customClientInstance>
+  }
+): UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+  const queryOptions = getGetUserGameListByEmailInfiniteQueryOptions(params, options)
+
+  const query = useInfiniteQuery(queryOptions) as UseInfiniteQueryResult<TData, TError> & {
+    queryKey: DataTag<QueryKey, TData, TError>
+  }
+
+  query.queryKey = queryOptions.queryKey
+
+  return query
+}
+
+export const getGetUserGameListByEmailQueryOptions = <
+  TData = Awaited<ReturnType<typeof getUserGameListByEmail>>,
+  TError = ErrorType<CustomPageImplGameListResponse>
+>(
+  params: GetUserGameListByEmailParams,
+  options?: {
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getUserGameListByEmail>>, TError, TData>>
+    request?: SecondParameter<typeof customClientInstance>
+  }
+) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {}
+
+  const queryKey = queryOptions?.queryKey ?? getGetUserGameListByEmailQueryKey(params)
+
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getUserGameListByEmail>>> = ({ signal }) =>
+    getUserGameListByEmail(params, requestOptions, signal)
+
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof getUserGameListByEmail>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetUserGameListByEmailQueryResult = NonNullable<Awaited<ReturnType<typeof getUserGameListByEmail>>>
+export type GetUserGameListByEmailQueryError = ErrorType<CustomPageImplGameListResponse>
+
+export function useGetUserGameListByEmail<
+  TData = Awaited<ReturnType<typeof getUserGameListByEmail>>,
+  TError = ErrorType<CustomPageImplGameListResponse>
+>(
+  params: GetUserGameListByEmailParams,
+  options: {
+    query: Partial<UseQueryOptions<Awaited<ReturnType<typeof getUserGameListByEmail>>, TError, TData>> &
+      Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getUserGameListByEmail>>,
+          TError,
+          Awaited<ReturnType<typeof getUserGameListByEmail>>
+        >,
+        "initialData"
+      >
+    request?: SecondParameter<typeof customClientInstance>
+  }
+): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetUserGameListByEmail<
+  TData = Awaited<ReturnType<typeof getUserGameListByEmail>>,
+  TError = ErrorType<CustomPageImplGameListResponse>
+>(
+  params: GetUserGameListByEmailParams,
+  options?: {
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getUserGameListByEmail>>, TError, TData>> &
+      Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getUserGameListByEmail>>,
+          TError,
+          Awaited<ReturnType<typeof getUserGameListByEmail>>
+        >,
+        "initialData"
+      >
+    request?: SecondParameter<typeof customClientInstance>
+  }
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetUserGameListByEmail<
+  TData = Awaited<ReturnType<typeof getUserGameListByEmail>>,
+  TError = ErrorType<CustomPageImplGameListResponse>
+>(
+  params: GetUserGameListByEmailParams,
+  options?: {
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getUserGameListByEmail>>, TError, TData>>
+    request?: SecondParameter<typeof customClientInstance>
+  }
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary 특정 사용자가 만든 게임 리스트 확인 API
+ */
+
+export function useGetUserGameListByEmail<
+  TData = Awaited<ReturnType<typeof getUserGameListByEmail>>,
+  TError = ErrorType<CustomPageImplGameListResponse>
+>(
+  params: GetUserGameListByEmailParams,
+  options?: {
+    query?: Partial<UseQueryOptions<Awaited<ReturnType<typeof getUserGameListByEmail>>, TError, TData>>
+    request?: SecondParameter<typeof customClientInstance>
+  }
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+  const queryOptions = getGetUserGameListByEmailQueryOptions(params, options)
+
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+
+  query.queryKey = queryOptions.queryKey
+
+  return query
+}
+
+/**
  * 내가 플레이한 게임 목록을 출력함.
  * @summary 최근 플레이 목록 확인 API
  */
@@ -1131,21 +1246,12 @@ export const getGetRecentPlaysQueryKey = (params?: GetRecentPlaysParams) => {
 }
 
 export const getGetRecentPlaysInfiniteQueryOptions = <
-  TData = InfiniteData<Awaited<ReturnType<typeof getRecentPlays>>, GetRecentPlaysParams["cursorId"]>,
+  TData = InfiniteData<Awaited<ReturnType<typeof getRecentPlays>>>,
   TError = ErrorType<unknown>
 >(
   params?: GetRecentPlaysParams,
   options?: {
-    query?: Partial<
-      UseInfiniteQueryOptions<
-        Awaited<ReturnType<typeof getRecentPlays>>,
-        TError,
-        TData,
-        Awaited<ReturnType<typeof getRecentPlays>>,
-        QueryKey,
-        GetRecentPlaysParams["cursorId"]
-      >
-    >
+    query?: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getRecentPlays>>, TError, TData>>
     request?: SecondParameter<typeof customClientInstance>
   }
 ) => {
@@ -1153,20 +1259,13 @@ export const getGetRecentPlaysInfiniteQueryOptions = <
 
   const queryKey = queryOptions?.queryKey ?? getGetRecentPlaysQueryKey(params)
 
-  const queryFn: QueryFunction<
-    Awaited<ReturnType<typeof getRecentPlays>>,
-    QueryKey,
-    GetRecentPlaysParams["cursorId"]
-  > = ({ signal, pageParam }) =>
-    getRecentPlays({ ...params, cursorId: pageParam || params?.["cursorId"] }, requestOptions, signal)
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getRecentPlays>>> = ({ signal }) =>
+    getRecentPlays(params, requestOptions, signal)
 
   return { queryKey, queryFn, ...queryOptions } as UseInfiniteQueryOptions<
     Awaited<ReturnType<typeof getRecentPlays>>,
     TError,
-    TData,
-    Awaited<ReturnType<typeof getRecentPlays>>,
-    QueryKey,
-    GetRecentPlaysParams["cursorId"]
+    TData
   > & { queryKey: DataTag<QueryKey, TData, TError> }
 }
 
@@ -1174,27 +1273,17 @@ export type GetRecentPlaysInfiniteQueryResult = NonNullable<Awaited<ReturnType<t
 export type GetRecentPlaysInfiniteQueryError = ErrorType<unknown>
 
 export function useGetRecentPlaysInfinite<
-  TData = InfiniteData<Awaited<ReturnType<typeof getRecentPlays>>, GetRecentPlaysParams["cursorId"]>,
+  TData = InfiniteData<Awaited<ReturnType<typeof getRecentPlays>>>,
   TError = ErrorType<unknown>
 >(
   params: undefined | GetRecentPlaysParams,
   options: {
-    query: Partial<
-      UseInfiniteQueryOptions<
-        Awaited<ReturnType<typeof getRecentPlays>>,
-        TError,
-        TData,
-        Awaited<ReturnType<typeof getRecentPlays>>,
-        QueryKey,
-        GetRecentPlaysParams["cursorId"]
-      >
-    > &
+    query: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getRecentPlays>>, TError, TData>> &
       Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getRecentPlays>>,
           TError,
-          Awaited<ReturnType<typeof getRecentPlays>>,
-          QueryKey
+          Awaited<ReturnType<typeof getRecentPlays>>
         >,
         "initialData"
       >
@@ -1202,27 +1291,17 @@ export function useGetRecentPlaysInfinite<
   }
 ): DefinedUseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 export function useGetRecentPlaysInfinite<
-  TData = InfiniteData<Awaited<ReturnType<typeof getRecentPlays>>, GetRecentPlaysParams["cursorId"]>,
+  TData = InfiniteData<Awaited<ReturnType<typeof getRecentPlays>>>,
   TError = ErrorType<unknown>
 >(
   params?: GetRecentPlaysParams,
   options?: {
-    query?: Partial<
-      UseInfiniteQueryOptions<
-        Awaited<ReturnType<typeof getRecentPlays>>,
-        TError,
-        TData,
-        Awaited<ReturnType<typeof getRecentPlays>>,
-        QueryKey,
-        GetRecentPlaysParams["cursorId"]
-      >
-    > &
+    query?: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getRecentPlays>>, TError, TData>> &
       Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getRecentPlays>>,
           TError,
-          Awaited<ReturnType<typeof getRecentPlays>>,
-          QueryKey
+          Awaited<ReturnType<typeof getRecentPlays>>
         >,
         "initialData"
       >
@@ -1230,21 +1309,12 @@ export function useGetRecentPlaysInfinite<
   }
 ): UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 export function useGetRecentPlaysInfinite<
-  TData = InfiniteData<Awaited<ReturnType<typeof getRecentPlays>>, GetRecentPlaysParams["cursorId"]>,
+  TData = InfiniteData<Awaited<ReturnType<typeof getRecentPlays>>>,
   TError = ErrorType<unknown>
 >(
   params?: GetRecentPlaysParams,
   options?: {
-    query?: Partial<
-      UseInfiniteQueryOptions<
-        Awaited<ReturnType<typeof getRecentPlays>>,
-        TError,
-        TData,
-        Awaited<ReturnType<typeof getRecentPlays>>,
-        QueryKey,
-        GetRecentPlaysParams["cursorId"]
-      >
-    >
+    query?: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getRecentPlays>>, TError, TData>>
     request?: SecondParameter<typeof customClientInstance>
   }
 ): UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -1253,21 +1323,12 @@ export function useGetRecentPlaysInfinite<
  */
 
 export function useGetRecentPlaysInfinite<
-  TData = InfiniteData<Awaited<ReturnType<typeof getRecentPlays>>, GetRecentPlaysParams["cursorId"]>,
+  TData = InfiniteData<Awaited<ReturnType<typeof getRecentPlays>>>,
   TError = ErrorType<unknown>
 >(
   params?: GetRecentPlaysParams,
   options?: {
-    query?: Partial<
-      UseInfiniteQueryOptions<
-        Awaited<ReturnType<typeof getRecentPlays>>,
-        TError,
-        TData,
-        Awaited<ReturnType<typeof getRecentPlays>>,
-        QueryKey,
-        GetRecentPlaysParams["cursorId"]
-      >
-    >
+    query?: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getRecentPlays>>, TError, TData>>
     request?: SecondParameter<typeof customClientInstance>
   }
 ): UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
@@ -1360,88 +1421,6 @@ export function useGetRecentPlays<TData = Awaited<ReturnType<typeof getRecentPla
   const queryOptions = getGetRecentPlaysQueryOptions(params, options)
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-
-  query.queryKey = queryOptions.queryKey
-
-  return query
-}
-
-export const getGetRecentPlaysSuspenseQueryOptions = <
-  TData = Awaited<ReturnType<typeof getRecentPlays>>,
-  TError = ErrorType<unknown>
->(
-  params?: GetRecentPlaysParams,
-  options?: {
-    query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getRecentPlays>>, TError, TData>>
-    request?: SecondParameter<typeof customClientInstance>
-  }
-) => {
-  const { query: queryOptions, request: requestOptions } = options ?? {}
-
-  const queryKey = queryOptions?.queryKey ?? getGetRecentPlaysQueryKey(params)
-
-  const queryFn: QueryFunction<Awaited<ReturnType<typeof getRecentPlays>>> = ({ signal }) =>
-    getRecentPlays(params, requestOptions, signal)
-
-  return { queryKey, queryFn, ...queryOptions } as UseSuspenseQueryOptions<
-    Awaited<ReturnType<typeof getRecentPlays>>,
-    TError,
-    TData
-  > & { queryKey: DataTag<QueryKey, TData, TError> }
-}
-
-export type GetRecentPlaysSuspenseQueryResult = NonNullable<Awaited<ReturnType<typeof getRecentPlays>>>
-export type GetRecentPlaysSuspenseQueryError = ErrorType<unknown>
-
-export function useGetRecentPlaysSuspense<
-  TData = Awaited<ReturnType<typeof getRecentPlays>>,
-  TError = ErrorType<unknown>
->(
-  params: undefined | GetRecentPlaysParams,
-  options: {
-    query: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getRecentPlays>>, TError, TData>>
-    request?: SecondParameter<typeof customClientInstance>
-  }
-): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetRecentPlaysSuspense<
-  TData = Awaited<ReturnType<typeof getRecentPlays>>,
-  TError = ErrorType<unknown>
->(
-  params?: GetRecentPlaysParams,
-  options?: {
-    query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getRecentPlays>>, TError, TData>>
-    request?: SecondParameter<typeof customClientInstance>
-  }
-): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetRecentPlaysSuspense<
-  TData = Awaited<ReturnType<typeof getRecentPlays>>,
-  TError = ErrorType<unknown>
->(
-  params?: GetRecentPlaysParams,
-  options?: {
-    query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getRecentPlays>>, TError, TData>>
-    request?: SecondParameter<typeof customClientInstance>
-  }
-): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-/**
- * @summary 최근 플레이 목록 확인 API
- */
-
-export function useGetRecentPlaysSuspense<
-  TData = Awaited<ReturnType<typeof getRecentPlays>>,
-  TError = ErrorType<unknown>
->(
-  params?: GetRecentPlaysParams,
-  options?: {
-    query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getRecentPlays>>, TError, TData>>
-    request?: SecondParameter<typeof customClientInstance>
-  }
-): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
-  const queryOptions = getGetRecentPlaysSuspenseQueryOptions(params, options)
-
-  const query = useSuspenseQuery(queryOptions) as UseSuspenseQueryResult<TData, TError> & {
-    queryKey: DataTag<QueryKey, TData, TError>
-  }
 
   query.queryKey = queryOptions.queryKey
 

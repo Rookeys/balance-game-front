@@ -1,4 +1,4 @@
-import { useInfiniteQuery, useMutation, useQuery, useSuspenseQuery } from "@tanstack/react-query"
+import { useInfiniteQuery, useMutation, useQuery } from "@tanstack/react-query"
 import type {
   DataTag,
   DefinedInitialDataOptions,
@@ -14,9 +14,7 @@ import type {
   UseMutationOptions,
   UseMutationResult,
   UseQueryOptions,
-  UseQueryResult,
-  UseSuspenseQueryOptions,
-  UseSuspenseQueryResult
+  UseQueryResult
 } from "@tanstack/react-query"
 import type {
   CustomPageImplGameResultCommentResponse,
@@ -204,22 +202,13 @@ export const getGetCommentsByGameResultQueryKey = (gameId: number, params?: GetC
 }
 
 export const getGetCommentsByGameResultInfiniteQueryOptions = <
-  TData = InfiniteData<Awaited<ReturnType<typeof getCommentsByGameResult>>, GetCommentsByGameResultParams["cursorId"]>,
+  TData = InfiniteData<Awaited<ReturnType<typeof getCommentsByGameResult>>>,
   TError = ErrorType<unknown>
 >(
   gameId: number,
   params?: GetCommentsByGameResultParams,
   options?: {
-    query?: Partial<
-      UseInfiniteQueryOptions<
-        Awaited<ReturnType<typeof getCommentsByGameResult>>,
-        TError,
-        TData,
-        Awaited<ReturnType<typeof getCommentsByGameResult>>,
-        QueryKey,
-        GetCommentsByGameResultParams["cursorId"]
-      >
-    >
+    query?: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getCommentsByGameResult>>, TError, TData>>
     request?: SecondParameter<typeof customClientInstance>
   }
 ) => {
@@ -227,20 +216,13 @@ export const getGetCommentsByGameResultInfiniteQueryOptions = <
 
   const queryKey = queryOptions?.queryKey ?? getGetCommentsByGameResultQueryKey(gameId, params)
 
-  const queryFn: QueryFunction<
-    Awaited<ReturnType<typeof getCommentsByGameResult>>,
-    QueryKey,
-    GetCommentsByGameResultParams["cursorId"]
-  > = ({ signal, pageParam }) =>
-    getCommentsByGameResult(gameId, { ...params, cursorId: pageParam || params?.["cursorId"] }, requestOptions, signal)
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getCommentsByGameResult>>> = ({ signal }) =>
+    getCommentsByGameResult(gameId, params, requestOptions, signal)
 
   return { queryKey, queryFn, enabled: !!gameId, ...queryOptions } as UseInfiniteQueryOptions<
     Awaited<ReturnType<typeof getCommentsByGameResult>>,
     TError,
-    TData,
-    Awaited<ReturnType<typeof getCommentsByGameResult>>,
-    QueryKey,
-    GetCommentsByGameResultParams["cursorId"]
+    TData
   > & { queryKey: DataTag<QueryKey, TData, TError> }
 }
 
@@ -250,28 +232,18 @@ export type GetCommentsByGameResultInfiniteQueryResult = NonNullable<
 export type GetCommentsByGameResultInfiniteQueryError = ErrorType<unknown>
 
 export function useGetCommentsByGameResultInfinite<
-  TData = InfiniteData<Awaited<ReturnType<typeof getCommentsByGameResult>>, GetCommentsByGameResultParams["cursorId"]>,
+  TData = InfiniteData<Awaited<ReturnType<typeof getCommentsByGameResult>>>,
   TError = ErrorType<unknown>
 >(
   gameId: number,
   params: undefined | GetCommentsByGameResultParams,
   options: {
-    query: Partial<
-      UseInfiniteQueryOptions<
-        Awaited<ReturnType<typeof getCommentsByGameResult>>,
-        TError,
-        TData,
-        Awaited<ReturnType<typeof getCommentsByGameResult>>,
-        QueryKey,
-        GetCommentsByGameResultParams["cursorId"]
-      >
-    > &
+    query: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getCommentsByGameResult>>, TError, TData>> &
       Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getCommentsByGameResult>>,
           TError,
-          Awaited<ReturnType<typeof getCommentsByGameResult>>,
-          QueryKey
+          Awaited<ReturnType<typeof getCommentsByGameResult>>
         >,
         "initialData"
       >
@@ -279,28 +251,18 @@ export function useGetCommentsByGameResultInfinite<
   }
 ): DefinedUseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 export function useGetCommentsByGameResultInfinite<
-  TData = InfiniteData<Awaited<ReturnType<typeof getCommentsByGameResult>>, GetCommentsByGameResultParams["cursorId"]>,
+  TData = InfiniteData<Awaited<ReturnType<typeof getCommentsByGameResult>>>,
   TError = ErrorType<unknown>
 >(
   gameId: number,
   params?: GetCommentsByGameResultParams,
   options?: {
-    query?: Partial<
-      UseInfiniteQueryOptions<
-        Awaited<ReturnType<typeof getCommentsByGameResult>>,
-        TError,
-        TData,
-        Awaited<ReturnType<typeof getCommentsByGameResult>>,
-        QueryKey,
-        GetCommentsByGameResultParams["cursorId"]
-      >
-    > &
+    query?: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getCommentsByGameResult>>, TError, TData>> &
       Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getCommentsByGameResult>>,
           TError,
-          Awaited<ReturnType<typeof getCommentsByGameResult>>,
-          QueryKey
+          Awaited<ReturnType<typeof getCommentsByGameResult>>
         >,
         "initialData"
       >
@@ -308,22 +270,13 @@ export function useGetCommentsByGameResultInfinite<
   }
 ): UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 export function useGetCommentsByGameResultInfinite<
-  TData = InfiniteData<Awaited<ReturnType<typeof getCommentsByGameResult>>, GetCommentsByGameResultParams["cursorId"]>,
+  TData = InfiniteData<Awaited<ReturnType<typeof getCommentsByGameResult>>>,
   TError = ErrorType<unknown>
 >(
   gameId: number,
   params?: GetCommentsByGameResultParams,
   options?: {
-    query?: Partial<
-      UseInfiniteQueryOptions<
-        Awaited<ReturnType<typeof getCommentsByGameResult>>,
-        TError,
-        TData,
-        Awaited<ReturnType<typeof getCommentsByGameResult>>,
-        QueryKey,
-        GetCommentsByGameResultParams["cursorId"]
-      >
-    >
+    query?: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getCommentsByGameResult>>, TError, TData>>
     request?: SecondParameter<typeof customClientInstance>
   }
 ): UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -332,22 +285,13 @@ export function useGetCommentsByGameResultInfinite<
  */
 
 export function useGetCommentsByGameResultInfinite<
-  TData = InfiniteData<Awaited<ReturnType<typeof getCommentsByGameResult>>, GetCommentsByGameResultParams["cursorId"]>,
+  TData = InfiniteData<Awaited<ReturnType<typeof getCommentsByGameResult>>>,
   TError = ErrorType<unknown>
 >(
   gameId: number,
   params?: GetCommentsByGameResultParams,
   options?: {
-    query?: Partial<
-      UseInfiniteQueryOptions<
-        Awaited<ReturnType<typeof getCommentsByGameResult>>,
-        TError,
-        TData,
-        Awaited<ReturnType<typeof getCommentsByGameResult>>,
-        QueryKey,
-        GetCommentsByGameResultParams["cursorId"]
-      >
-    >
+    query?: Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof getCommentsByGameResult>>, TError, TData>>
     request?: SecondParameter<typeof customClientInstance>
   }
 ): UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
@@ -457,95 +401,6 @@ export function useGetCommentsByGameResult<
   const queryOptions = getGetCommentsByGameResultQueryOptions(gameId, params, options)
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-
-  query.queryKey = queryOptions.queryKey
-
-  return query
-}
-
-export const getGetCommentsByGameResultSuspenseQueryOptions = <
-  TData = Awaited<ReturnType<typeof getCommentsByGameResult>>,
-  TError = ErrorType<unknown>
->(
-  gameId: number,
-  params?: GetCommentsByGameResultParams,
-  options?: {
-    query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getCommentsByGameResult>>, TError, TData>>
-    request?: SecondParameter<typeof customClientInstance>
-  }
-) => {
-  const { query: queryOptions, request: requestOptions } = options ?? {}
-
-  const queryKey = queryOptions?.queryKey ?? getGetCommentsByGameResultQueryKey(gameId, params)
-
-  const queryFn: QueryFunction<Awaited<ReturnType<typeof getCommentsByGameResult>>> = ({ signal }) =>
-    getCommentsByGameResult(gameId, params, requestOptions, signal)
-
-  return { queryKey, queryFn, ...queryOptions } as UseSuspenseQueryOptions<
-    Awaited<ReturnType<typeof getCommentsByGameResult>>,
-    TError,
-    TData
-  > & { queryKey: DataTag<QueryKey, TData, TError> }
-}
-
-export type GetCommentsByGameResultSuspenseQueryResult = NonNullable<
-  Awaited<ReturnType<typeof getCommentsByGameResult>>
->
-export type GetCommentsByGameResultSuspenseQueryError = ErrorType<unknown>
-
-export function useGetCommentsByGameResultSuspense<
-  TData = Awaited<ReturnType<typeof getCommentsByGameResult>>,
-  TError = ErrorType<unknown>
->(
-  gameId: number,
-  params: undefined | GetCommentsByGameResultParams,
-  options: {
-    query: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getCommentsByGameResult>>, TError, TData>>
-    request?: SecondParameter<typeof customClientInstance>
-  }
-): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetCommentsByGameResultSuspense<
-  TData = Awaited<ReturnType<typeof getCommentsByGameResult>>,
-  TError = ErrorType<unknown>
->(
-  gameId: number,
-  params?: GetCommentsByGameResultParams,
-  options?: {
-    query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getCommentsByGameResult>>, TError, TData>>
-    request?: SecondParameter<typeof customClientInstance>
-  }
-): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetCommentsByGameResultSuspense<
-  TData = Awaited<ReturnType<typeof getCommentsByGameResult>>,
-  TError = ErrorType<unknown>
->(
-  gameId: number,
-  params?: GetCommentsByGameResultParams,
-  options?: {
-    query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getCommentsByGameResult>>, TError, TData>>
-    request?: SecondParameter<typeof customClientInstance>
-  }
-): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-/**
- * @summary 게임 결과 댓글 리스트 발급 API
- */
-
-export function useGetCommentsByGameResultSuspense<
-  TData = Awaited<ReturnType<typeof getCommentsByGameResult>>,
-  TError = ErrorType<unknown>
->(
-  gameId: number,
-  params?: GetCommentsByGameResultParams,
-  options?: {
-    query?: Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getCommentsByGameResult>>, TError, TData>>
-    request?: SecondParameter<typeof customClientInstance>
-  }
-): UseSuspenseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
-  const queryOptions = getGetCommentsByGameResultSuspenseQueryOptions(gameId, params, options)
-
-  const query = useSuspenseQuery(queryOptions) as UseSuspenseQueryResult<TData, TError> & {
-    queryKey: DataTag<QueryKey, TData, TError>
-  }
 
   query.queryKey = queryOptions.queryKey
 
