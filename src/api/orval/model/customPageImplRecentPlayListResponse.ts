@@ -1,9 +1,9 @@
-import type { GameResultCommentResponse } from "./gameResultCommentResponse"
+import type { RecentPlayListResponse } from "./recentPlayListResponse"
 import type { PageableObject } from "./pageableObject"
 import type { SortObject } from "./sortObject"
 
-export interface CustomPageImplGameResultCommentResponse {
-  content?: GameResultCommentResponse[]
+export interface CustomPageImplRecentPlayListResponse {
+  content?: RecentPlayListResponse[]
   pageable?: PageableObject
   hasPrev?: boolean
   hasNext?: boolean

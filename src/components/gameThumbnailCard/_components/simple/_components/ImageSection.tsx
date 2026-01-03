@@ -34,12 +34,14 @@ export default function ImageSection({ src, tag, isBlind = false, totalPlayNums 
       />
       {/* 그라데이션 적용 */}
       <div className="absolute top-0 h-[52px] w-full bg-gradient-to-b from-[#1515174D] from-0% via-[#15151700] via-70% to-[#15151700] to-100% md:h-[88px]" />
-      <div className="absolute bottom-[8px] start-[12px] rounded-[4px] bg-dimmer-normal p-[4px] text-caption2-medium text-background md:text-label-medium">
-        <div className="flex items-center gap-[4px]">
-          <Image src={"/images/icons/system/play.webp"} width={16} height={16} alt="play" />
-          <p>{totalPlayNums}</p>
+      {totalPlayNums && (
+        <div className="absolute bottom-[8px] start-[12px] rounded-[4px] bg-dimmer-normal p-[4px] text-caption2-medium text-background md:text-label-medium">
+          <div className="flex items-center gap-[4px]">
+            <Image src={"/images/icons/system/play.webp"} width={16} height={16} alt="play" />
+            <p>{totalPlayNums}</p>
+          </div>
         </div>
-      </div>
+      )}
       {tag && (
         <div
           className={cn(

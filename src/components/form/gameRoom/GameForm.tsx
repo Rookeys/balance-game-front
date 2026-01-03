@@ -1,6 +1,8 @@
 "use client"
+import { useGetCountResourcesInGames } from "@/api/orval/client/game-resource-controller/game-resource-controller"
 import { useSaveGame, useUpdateGameStatus } from "@/api/orval/client/game-room-controller/game-room-controller"
 import {
+  getGetMyGameListQueryKey,
   getGetMyGameStatusQueryKey,
   useGetMyGameStatus
 } from "@/api/orval/client/user-profile-controller/user-profile-controller"
@@ -21,7 +23,6 @@ import { FieldErrors, FormProvider, useForm } from "react-hook-form"
 import { toast } from "sonner"
 import GameFormBottomBar from "./_components/GameFormBottomBar"
 import GameFormSideBar from "./_components/GameFormSideBar"
-import { useGetCountResourcesInGames } from "@/api/orval/client/game-resource-controller/game-resource-controller"
 
 const GameInformationForm = dynamic(() => import("./_components/GameInformationForm"))
 const GameAccessForm = dynamic(() => import("./_components/GameAccessForm"))
@@ -95,6 +96,7 @@ export default function GameForm() {
       } else {
         const res = await CreateGame({ data })
         toast.success("게임을 생성했습니다")
+        queryClient.invalidateQueries({ queryKey: getGetMyGameListQueryKey() })
         await asyncPush(`/game-create/${res}/medias`)
       }
     } catch (error) {
