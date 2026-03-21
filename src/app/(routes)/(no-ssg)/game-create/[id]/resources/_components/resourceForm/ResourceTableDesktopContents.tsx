@@ -115,12 +115,12 @@ export default function ResourceTableDesktopContents({
         <p className="line-clamp-2 text-body2-bold">{resource.title || "\u00A0"}</p>
       </div>
       <div className="col-span-5 flex items-center px-[16px]">
-        <div className="flex w-full flex-col">
+        <div className="flex w-full flex-col gap-[4px]">
           <ProgressBar
             percent={Number(calculateWinRate(resource.winningNums, resource.totalPlayNums))}
             needIndicator={false}
           />
-          <div className="flex items-center justify-between text-caption1-medium text-label-neutral">
+          <div className="text-label-neutra flex items-center justify-between text-caption1-medium">
             <p>{calculateWinRate(resource.winningNums, resource.totalPlayNums)}%</p>
             <p>{resource.winningNums}번 우승</p>
           </div>

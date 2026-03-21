@@ -144,7 +144,7 @@ export default function CommentReportModal({ commentId, onClose, overlayClose }:
             <p className="text-label-regular text-label-alternative">
               운영 방침에 따라 신고 사유에 해당하는지 검토 후 처리 예정입니다.
             </p>
-            <Button className="mt-[16px]" type="submit" disabled={isSubmitting}>
+            <Button className="mt-[16px] py-[12px]" type="submit" disabled={isSubmitting}>
               신고하기
             </Button>
           </section>
