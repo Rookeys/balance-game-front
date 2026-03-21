@@ -113,7 +113,7 @@ export default function GameFormSideBar({ step, setStep, percent = 0, isStep1Com
       <Button
         data-tooltip-id={`game-create-sidebar-button-${step}`}
         key={`${step}-button`}
-        className="rounded-[12px]"
+        className="rounded-[12px] py-[12px]"
         type={isMediasPage || step === 1 ? "button" : "submit"}
         disabled={disabled}
         onClick={async () => {

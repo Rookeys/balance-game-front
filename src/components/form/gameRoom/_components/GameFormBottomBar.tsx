@@ -39,7 +39,7 @@ export default function GameFormBottomBar({ step, setStep, percent = 0, disabled
         data-tooltip-id={`game-create-bottom-bar-button-${step}`}
         key={`${step}-button`}
         type={isMediasPage || step === 1 ? "button" : "submit"}
-        className="h-full"
+        className="h-full py-[12px]"
         disabled={disabled}
         onClick={async () => {
           if (isMediasPage || isResourcesPage) {
