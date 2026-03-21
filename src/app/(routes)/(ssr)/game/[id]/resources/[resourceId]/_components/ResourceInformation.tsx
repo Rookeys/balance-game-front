@@ -38,7 +38,7 @@ export default function ResourceInformation() {
         </figure>
         <article className="flex w-full flex-col gap-[12px]">
           <p className="font-sb-aggro-medium text-heading-4 md:text-heading-3">{resourceData?.title}</p>
-          <div className="flex w-full flex-col">
+          <div className="flex w-full flex-col gap-[4px]">
             <ProgressBar
               percent={Number(calculateWinRate(resourceData?.winningNums, resourceData?.totalPlayNums))}
               needIndicator={false}

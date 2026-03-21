@@ -23,7 +23,7 @@ export default function ReplyItem({ resourceId, parentId, ...props }: Params) {
               alt="프로필 이미지"
             />
           </figure>
-          <div>
+          <div className="flex flex-col gap-[4px]">
             <div className="flex items-center gap-[8px]">
               <p className="text-label-medium text-label-neutral">{props.nickname}</p>
               {props.existsWriter && (

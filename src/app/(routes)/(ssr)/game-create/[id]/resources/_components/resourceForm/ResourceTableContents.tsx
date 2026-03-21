@@ -115,7 +115,7 @@ export default function ResourceTableContents({
           {resource.type === GameResourceResponseType.IMAGE ? "이미지" : "동영상"}
         </p>
         <p className="line-clamp-1 text-label-bold md:text-body2-bold">{resource.title || "\u00A0"}</p>
-        <div className="flex flex-col">
+        <div className="flex w-full flex-col gap-[4px]">
           <ProgressBar
             percent={Number(calculateWinRate(resource.winningNums, resource.totalPlayNums))}
             needIndicator={false}
