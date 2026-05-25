@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query"
 import type { MutationFunction, UseMutationOptions, UseMutationResult } from "@tanstack/react-query"
-import type { PresignedUrlRequest, PresignedUrlsRequest } from "../../model"
+import type { PresignedUrlRequest, PresignedUrlResponse, PresignedUrlsRequest } from "../../model"
 import { customClientInstance } from "../../../clientInstance"
 import type { ErrorType, BodyType } from "../../../clientInstance"
 
@@ -15,7 +15,7 @@ export const getPreSignedUrlForUser = (
   options?: SecondParameter<typeof customClientInstance>,
   signal?: AbortSignal
 ) => {
-  return customClientInstance<string>(
+  return customClientInstance<PresignedUrlResponse>(
     {
       url: `/api/v1/media/single`,
       method: "POST",
@@ -27,7 +27,10 @@ export const getPreSignedUrlForUser = (
   )
 }
 
-export const getGetPreSignedUrlForUserMutationOptions = <TError = ErrorType<string>, TContext = unknown>(options?: {
+export const getGetPreSignedUrlForUserMutationOptions = <
+  TError = ErrorType<PresignedUrlResponse>,
+  TContext = unknown
+>(options?: {
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof getPreSignedUrlForUser>>,
     TError,
@@ -62,12 +65,12 @@ export const getGetPreSignedUrlForUserMutationOptions = <TError = ErrorType<stri
 
 export type GetPreSignedUrlForUserMutationResult = NonNullable<Awaited<ReturnType<typeof getPreSignedUrlForUser>>>
 export type GetPreSignedUrlForUserMutationBody = BodyType<PresignedUrlRequest>
-export type GetPreSignedUrlForUserMutationError = ErrorType<string>
+export type GetPreSignedUrlForUserMutationError = ErrorType<PresignedUrlResponse>
 
 /**
  * @summary 단일 업로드 API (User Profile)
  */
-export const useGetPreSignedUrlForUser = <TError = ErrorType<string>, TContext = unknown>(options?: {
+export const useGetPreSignedUrlForUser = <TError = ErrorType<PresignedUrlResponse>, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof getPreSignedUrlForUser>>,
     TError,
@@ -94,7 +97,7 @@ export const getPreSignedUrl = (
   options?: SecondParameter<typeof customClientInstance>,
   signal?: AbortSignal
 ) => {
-  return customClientInstance<string[]>(
+  return customClientInstance<PresignedUrlResponse[]>(
     {
       url: `/api/v1/media/multiple`,
       method: "POST",
@@ -106,7 +109,10 @@ export const getPreSignedUrl = (
   )
 }
 
-export const getGetPreSignedUrlMutationOptions = <TError = ErrorType<string[]>, TContext = unknown>(options?: {
+export const getGetPreSignedUrlMutationOptions = <
+  TError = ErrorType<PresignedUrlResponse[]>,
+  TContext = unknown
+>(options?: {
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof getPreSignedUrl>>,
     TError,
@@ -141,12 +147,12 @@ export const getGetPreSignedUrlMutationOptions = <TError = ErrorType<string[]>, 
 
 export type GetPreSignedUrlMutationResult = NonNullable<Awaited<ReturnType<typeof getPreSignedUrl>>>
 export type GetPreSignedUrlMutationBody = BodyType<PresignedUrlsRequest>
-export type GetPreSignedUrlMutationError = ErrorType<string[]>
+export type GetPreSignedUrlMutationError = ErrorType<PresignedUrlResponse[]>
 
 /**
  * @summary 다중 업로드 API
  */
-export const useGetPreSignedUrl = <TError = ErrorType<string[]>, TContext = unknown>(options?: {
+export const useGetPreSignedUrl = <TError = ErrorType<PresignedUrlResponse[]>, TContext = unknown>(options?: {
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof getPreSignedUrl>>,
     TError,

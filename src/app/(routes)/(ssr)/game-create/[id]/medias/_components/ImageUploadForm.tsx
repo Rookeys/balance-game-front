@@ -50,7 +50,7 @@ export function ImageUploadForm() {
           //   return Promise.reject(new Error(`랜덤 오류 발생: ${presignedUrl}`))
           // }
 
-          axios.put(presignedUrl, data.files[i], {
+          axios.put(presignedUrl?.uploadUrl ?? "", data.files[i], {
             headers: {
               "Content-Type": data.files[i].type
             }
@@ -60,7 +60,7 @@ export function ImageUploadForm() {
 
       const imageUrls = presignedUrls.filter((_, i) => res[i].status === "fulfilled")
 
-      const baseUrls = imageUrls.map((url) => new URL(url).origin + new URL(url).pathname)
+      const baseUrls = imageUrls.map((url) => new URL(url?.fileUrl ?? "").origin + new URL(url?.fileUrl ?? "").pathname)
 
       await SaveImageResources({ gameId: Number(id), data: { urls: baseUrls } })
 

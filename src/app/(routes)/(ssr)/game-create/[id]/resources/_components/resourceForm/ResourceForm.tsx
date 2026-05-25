@@ -56,12 +56,12 @@ export default function ResourceForm({ resource, indexNum, tableBaseClassName }:
       if (data.newImage && data.newImage.length > 0) {
         const presignedUrl = (await requestPresignedUrl({ data: { prefix: "image", length: 1 } }))[0] // 해당 폼에서는 무조건 1임
 
-        await axios.put(presignedUrl, data.newImage[0], {
+        await axios.put(presignedUrl?.uploadUrl ?? "", data.newImage[0], {
           headers: {
             "Content-Type": data.newImage[0].type
           }
         })
-        imageURL = new URL(presignedUrl).origin + new URL(presignedUrl).pathname
+        imageURL = new URL(presignedUrl?.fileUrl ?? "").origin + new URL(presignedUrl?.fileUrl ?? "").pathname
       }
 
       if (!imageURL && !data.content) {

@@ -1,7 +1,8 @@
-export type GetMyGameListCategory = (typeof GetMyGameListCategory)[keyof typeof GetMyGameListCategory]
+export type GetUserGameListByEmailCategory =
+  (typeof GetUserGameListByEmailCategory)[keyof typeof GetUserGameListByEmailCategory]
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
-export const GetMyGameListCategory = {
+export const GetUserGameListByEmailCategory = {
   FUN: "FUN",
   DAILY: "DAILY",
   FOOD: "FOOD",

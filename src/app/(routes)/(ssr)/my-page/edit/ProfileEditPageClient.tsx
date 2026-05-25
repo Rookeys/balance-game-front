@@ -49,12 +49,12 @@ export default function ProfileEditPageClient() {
       if (data.newImage && data.newImage.length > 0) {
         const presignedUrl = (await RequestPresignedUrl({ data: { prefix: "image", length: 1 } }))[0] // 해당 폼에서는 무조건 1임
 
-        await axios.put(presignedUrl, data.newImage[0], {
+        await axios.put(presignedUrl?.uploadUrl ?? "", data.newImage[0], {
           headers: {
             "Content-Type": data.newImage[0].type
           }
         })
-        newImageURL = new URL(presignedUrl).origin + new URL(presignedUrl).pathname
+        newImageURL = new URL(presignedUrl?.fileUrl ?? "").origin + new URL(presignedUrl?.fileUrl ?? "").pathname
       }
 
       const imageURL = newImageURL ? newImageURL : session?.user.image

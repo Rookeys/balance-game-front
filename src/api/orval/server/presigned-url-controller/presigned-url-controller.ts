@@ -1,4 +1,4 @@
-import type { PresignedUrlRequest, PresignedUrlsRequest } from "../../model"
+import type { PresignedUrlRequest, PresignedUrlResponse, PresignedUrlsRequest } from "../../model"
 import { customServerInstance } from "../../../serverInstance"
 import type { BodyType } from "../../../serverInstance"
 
@@ -13,7 +13,7 @@ export const getPreSignedUrlForUser = (
   options?: SecondParameter<typeof customServerInstance>,
   signal?: AbortSignal
 ) => {
-  return customServerInstance<string>(
+  return customServerInstance<PresignedUrlResponse>(
     {
       url: `/api/v1/media/single`,
       method: "POST",
@@ -34,7 +34,7 @@ export const getPreSignedUrl = (
   options?: SecondParameter<typeof customServerInstance>,
   signal?: AbortSignal
 ) => {
-  return customServerInstance<string[]>(
+  return customServerInstance<PresignedUrlResponse[]>(
     {
       url: `/api/v1/media/multiple`,
       method: "POST",

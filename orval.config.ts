@@ -57,6 +57,24 @@ module.exports = {
               useQuery: true,
               useInfinite: false
             }
+          },
+          getFollowCounts: {
+            query: {
+              useQuery: true,
+              useInfinite: false
+            }
+          },
+          isFollowing: {
+            query: {
+              useQuery: true,
+              useInfinite: false
+            }
+          },
+          getProfileByEmail: {
+            query: {
+              useQuery: true,
+              useInfinite: false
+            }
           }
         }
       },
@@ -64,7 +82,7 @@ module.exports = {
       urlEncodeParameters: true
     },
     input: {
-      target: "https://api.balancegame.site/v3/api-docs/all"
+      target: "https://api.zznpk.com/v3/api-docs/all"
     }
   },
   server: {
@@ -92,7 +110,7 @@ module.exports = {
       urlEncodeParameters: true
     },
     input: {
-      target: "https://api.balancegame.site/v3/api-docs/all"
+      target: "https://api.zznpk.com/v3/api-docs/all"
     }
   }
 }

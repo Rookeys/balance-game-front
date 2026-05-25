@@ -5,4 +5,6 @@ export interface UserResponse {
   email?: string
   /** 프로필 사진 URL */
   fileUrl?: string
+  /** 팔로우 여부 */
+  isFollowing?: boolean
 }
