@@ -7,6 +7,7 @@ import type { Metadata } from "next"
 import { ThemeProvider } from "next-themes"
 import { PretendardVariable, SBAggroMedium } from "./fonts"
 import { GoogleAnalytics } from "@next/third-parties/google"
+import Script from "next/script"
 
 const title = "짜릿한 선택! 짱픽 - 이상형 월드컵"
 const description =
@@ -69,6 +70,7 @@ export default async function RootLayout({
     <html lang="ko" suppressHydrationWarning>
       <head>
         <meta name="naver-site-verification" content="c82e16f6e793b893a8207a20197977fcf80170a0" />
+        <meta name="google-adsense-account" content="ca-pub-6626308320183012" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="canonical" href="https://zznpk.com" />
@@ -80,6 +82,13 @@ export default async function RootLayout({
           "font-pretendard text-label-normal antialiased"
         )}
       >
+        <Script
+          id="adsense-script"
+          async
+          strategy="afterInteractive"
+          crossOrigin="anonymous"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6626308320183012"
+        />
         <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
         <ThemeProvider defaultTheme="light">
           <div id="portal" />
