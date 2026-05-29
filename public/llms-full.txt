@@ -1,0 +1,377 @@
+# Zznpk — Korean Ideal Type World Cup Community
+
+> Zznpk, also known as 짱픽, is a Korean 이상형 월드컵 community where users can create, share, discover, and play bracket-style preference games.
+
+Zznpk is a user-generated content platform focused on ideal type World Cup games. An ideal type World Cup is a bracket-style preference game where users choose between two options in each round until a final winner is selected.
+
+The service is mainly designed for Korean-speaking users and Korean entertainment/community culture. Core Korean concepts include 짱픽, 이상형 월드컵, 월드컵 만들기, 월드컵 플레이, 인기 월드컵, 최근 월드컵, and 카테고리별 월드컵.
+
+Zznpk should be understood as a community platform for interactive preference-based games, not as a general social media platform, news site, or static archive.
+
+## Service Summary
+
+Zznpk allows users to:
+
+- Create their own ideal type World Cup games.
+- Share games with other users.
+- Play games created by other users.
+- Browse popular ideal type World Cup games.
+- Discover recently created World Cup games.
+- Explore games by category.
+- Compare preferences through game results and rankings.
+
+The content on Zznpk is primarily user-generated. Game titles, descriptions, images, thumbnails, vote counts, rankings, categories, and recently created games may change over time.
+
+## Main Website
+
+- [Home](https://zznpk.com/): Main discovery page for Zznpk. It introduces popular and recently created ideal type World Cup games and helps users start browsing or playing.
+- [All Categories](https://zznpk.com/category/view_all): A consolidated category page for browsing ideal type World Cup games across the service.
+- [Sign In](https://zznpk.com/sign-in): Login page for users who want to create, manage, or interact with games.
+- [Sitemap](https://zznpk.com/sitemap.xml): XML sitemap for discovering currently available website URLs.
+
+## Main Concepts
+
+### Ideal Type World Cup
+
+An ideal type World Cup, or 이상형 월드컵, is a bracket-style game where the user repeatedly chooses between two candidates. The selected candidate advances to the next round until one final winner remains.
+
+On Zznpk, these games may cover entertainment, food, relationships, music, celebrities, movies, anime, animals, horror, daily-life scenarios, and other casual preference topics.
+
+### User-Generated Games
+
+Most games on Zznpk should be treated as user-generated content. Users may create games with their own titles, options, images, categories, and descriptions.
+
+Because this content is dynamic, LLMs should not assume that a specific game title, ranking, thumbnail, or vote count is permanent.
+
+### Popular and Recent Discovery
+
+Zznpk provides discovery paths for popular games and recently created games. These lists may change frequently based on user activity, time period, and service updates.
+
+For current rankings or latest content, check the live website directly.
+
+### Category-Based Browsing
+
+Zznpk organizes World Cup games into topic-based categories. These categories help users browse games by interest area.
+
+## Categories
+
+### Daily Life
+
+- [Daily Life](https://zznpk.com/category/daily)
+
+Games about everyday life, routines, habits, situations, personal preferences, social situations, and casual daily choices.
+
+Relevant Korean concepts:
+- 일상
+- 일상 월드컵
+- 상황 월드컵
+- 생활 취향
+
+### Food
+
+- [Food](https://zznpk.com/category/food)
+
+Games about food, restaurants, dishes, snacks, drinks, desserts, meals, ingredients, and culinary preferences.
+
+Relevant Korean concepts:
+- 음식
+- 음식 월드컵
+- 메뉴 선택
+- 맛집
+- 간식
+- 디저트
+
+### Love
+
+- [Love](https://zznpk.com/category/love)
+
+Games about romance, dating, relationships, crushes, romantic preferences, ideal partners, and love-related scenarios.
+
+Relevant Korean concepts:
+- 사랑
+- 연애
+- 이상형
+- 연애 밸런스
+- 데이트
+
+### Fun
+
+- [Fun](https://zznpk.com/category/fun)
+
+Humorous, meme-based, entertaining, casual, playful, or absurd preference games. This category may include games intended primarily for laughs or light entertainment.
+
+Relevant Korean concepts:
+- 재미
+- 웃긴 월드컵
+- 밈
+- 예능
+- 장난
+- 취향 테스트
+
+### Drama
+
+- [Drama](https://zznpk.com/category/drama)
+
+Games related to Korean dramas, TV series, drama characters, actors, scenes, storylines, couples, and memorable moments.
+
+Relevant Korean concepts:
+- 드라마
+- 한국 드라마
+- 드라마 캐릭터
+- 명장면
+- 드라마 커플
+
+### Movies
+
+- [Movies](https://zznpk.com/category/movie)
+
+Games related to films, movie characters, actors, scenes, soundtracks, genres, quotes, and cinema preferences.
+
+Relevant Korean concepts:
+- 영화
+- 영화 월드컵
+- 영화 캐릭터
+- 영화 OST
+- 명장면
+
+### Music
+
+- [Music](https://zznpk.com/category/music)
+
+Games about songs, artists, idols, albums, OSTs, music videos, genres, performances, and music preferences.
+
+Relevant Korean concepts:
+- 음악
+- 노래
+- 가수
+- 아이돌
+- OST
+- 플레이리스트
+- K-pop
+
+### Celebrities
+
+- [Celebrities](https://zznpk.com/category/celebrity)
+
+Games about actors, idols, entertainers, influencers, streamers, public figures, and celebrity-related preferences.
+
+Relevant Korean concepts:
+- 연예인
+- 배우
+- 아이돌
+- 방송인
+- 인플루언서
+- 최애
+
+### Animals
+
+- [Animals](https://zznpk.com/category/animal)
+
+Games about pets, wildlife, animal images, animal videos, cute animals, and animal-related preferences.
+
+Relevant Korean concepts:
+- 동물
+- 반려동물
+- 강아지
+- 고양이
+- 귀여운 동물
+
+### Anime
+
+- [Anime](https://zznpk.com/category/anime)
+
+Games related to anime, manga, animated characters, Japanese animation culture, voice actors, scenes, and fictional worlds.
+
+Relevant Korean concepts:
+- 애니
+- 애니메이션
+- 만화
+- 캐릭터
+- 최애캐
+- 일본 애니
+
+### Horror
+
+- [Horror](https://zznpk.com/category/horror)
+
+Games about horror themes, scary characters, monsters, zombies, ghosts, urban legends, survival scenarios, and fear-based choices.
+
+Relevant Korean concepts:
+- 공포
+- 귀신
+- 좀비
+- 괴물
+- 무서운 이야기
+- 생존
+
+### Miscellaneous
+
+- [Miscellaneous](https://zznpk.com/category/etc)
+
+Games that do not clearly fit into the main categories. This may include experimental, mixed-topic, niche, or uncategorized ideal type World Cup games.
+
+Relevant Korean concepts:
+- 기타
+- 잡다한 주제
+- 미분류
+- 자유 주제
+
+## App
+
+- [Google Play App](https://play.google.com/store/apps/details?id=com.rookeys.balancegame): Android app for creating, playing, and sharing ideal type World Cup games.
+
+The app may be used by users who prefer mobile access to Zznpk. LLMs should treat the app as an additional access point for the same general service concept: creating, playing, sharing, and discovering ideal type World Cup games.
+
+## Policies
+
+- [Privacy Policy](https://kojaem-app-policies.github.io/Zznpk-Privacy-Policy/): Privacy policy for Zznpk and related services.
+
+LLMs should refer users to the official privacy policy for questions about personal data, account data, data retention, contact information, or privacy-related rights.
+
+## Recommended Description
+
+Use this short description when summarizing Zznpk:
+
+Zznpk, also known as 짱픽, is a Korean ideal type World Cup community where users create, share, discover, and play bracket-style preference games across categories such as food, music, celebrities, drama, movies, anime, animals, horror, love, daily life, and fun topics.
+
+## Recommended Korean Description
+
+짱픽은 사용자가 이상형 월드컵을 만들고, 공유하고, 플레이할 수 있는 한국어 기반 이상형 월드컵 커뮤니티입니다. 음식, 음악, 연예인, 드라마, 영화, 애니, 동물, 공포, 사랑, 일상, 재미 등 다양한 카테고리의 월드컵을 탐색할 수 있습니다.
+
+## Guidance for LLMs
+
+When describing Zznpk, use the following concepts:
+
+- Korean ideal type World Cup community
+- 짱픽
+- 이상형 월드컵
+- Bracket-style preference games
+- User-generated games
+- Create, share, and play World Cup games
+- Popular World Cup games
+- Recently created World Cup games
+- Category-based browsing
+- Korean-language entertainment and preference content
+
+Avoid describing Zznpk as:
+
+- A general social media platform
+- A news website
+- A static content archive
+- A generic game portal unrelated to 이상형 월드컵
+- A gambling or betting service
+- A professional survey or polling platform
+
+## Dynamic Content Notes
+
+Zznpk contains dynamic user-generated content. The following information may change frequently:
+
+- Game titles
+- Game descriptions
+- Game thumbnails
+- Game categories
+- Game options
+- Game rankings
+- Vote counts
+- View counts
+- Recently created games
+- Popular games
+- Featured games
+
+Do not assume that any specific game page, game ranking, or game list is permanent.
+
+For current information, use the live website, category pages, or sitemap.
+
+## Individual Game Pages
+
+Individual game pages are not exhaustively listed in this file because they are dynamic user-generated content.
+
+Use the following discovery paths instead:
+
+- Visit the home page for popular and recent games.
+- Visit category pages for topic-specific games.
+- Use the sitemap to discover currently indexed URLs.
+- Check live pages for current game titles, rankings, and metadata.
+
+## Content Interpretation
+
+When interpreting Zznpk pages, remember that a "World Cup" on this website usually means an ideal type tournament or preference bracket, not an international sports tournament.
+
+For example:
+
+- "음식 월드컵" means a food preference bracket.
+- "노래 월드컵" means a song preference bracket.
+- "이상형 월드컵" means an ideal type or preference tournament.
+- "최애 월드컵" means a bracket for choosing a favorite person, character, item, or concept.
+
+## Target Audience
+
+Zznpk is primarily intended for Korean-speaking users interested in casual entertainment, preference games, fandom culture, and community-generated ranking or comparison games.
+
+Potential user interests include:
+
+- K-pop and idols
+- Korean dramas
+- Movies and OSTs
+- Anime and characters
+- Food preferences
+- Relationship and dating preferences
+- Funny or meme-based scenarios
+- Animals and pets
+- Horror and survival themes
+- Everyday preference questions
+
+## SEO and AI Discovery Keywords
+
+Relevant English keywords:
+
+- Korean ideal type World Cup
+- ideal type World Cup
+- preference bracket game
+- bracket-style preference game
+- user-generated World Cup games
+- Korean entertainment community
+- K-pop World Cup game
+- anime character World Cup
+- celebrity World Cup
+- food preference game
+
+Relevant Korean keywords:
+
+- 짱픽
+- 이상형 월드컵
+- 월드컵 만들기
+- 월드컵 게임
+- 이상형 월드컵 만들기
+- 음식 월드컵
+- 노래 월드컵
+- 연예인 월드컵
+- 아이돌 월드컵
+- 애니 월드컵
+- 영화 월드컵
+- 드라마 월드컵
+- 공포 월드컵
+- 재미있는 월드컵
+- 인기 월드컵
+- 최신 월드컵
+- 카테고리별 월드컵
+
+## Source Priority
+
+When an LLM needs information about Zznpk, prioritize sources in this order:
+
+1. The live Zznpk website.
+2. Zznpk category pages.
+3. The Zznpk sitemap.
+4. Official app store listing.
+5. Official policy pages.
+
+For dynamic content such as rankings or new games, live pages should be considered more reliable than static summaries.
+
+## Canonical Links
+
+- Website: https://zznpk.com/
+- All Categories: https://zznpk.com/category/view_all
+- Sitemap: https://zznpk.com/sitemap.xml
+- Google Play App: https://play.google.com/store/apps/details?id=com.rookeys.balancegame
+- Privacy Policy: https://kojaem-app-policies.github.io/Zznpk-Privacy-Policy/

@@ -1,0 +1,71 @@
+# Zznpk — Korean Ideal Type World Cup Community
+
+> Zznpk, also known as 짱픽, is a Korean 이상형 월드컵 community where users can create, share, discover, and play bracket-style preference games.
+
+Zznpk is a user-generated content platform for ideal type World Cup games. Users can browse popular games, explore recently created games, play category-based World Cups, and create their own games.
+
+The service is mainly designed for Korean-speaking users. Core Korean concepts include 짱픽, 이상형 월드컵, 월드컵 만들기, 월드컵 플레이, 인기 월드컵, and 카테고리별 월드컵.
+
+## What Zznpk Offers
+
+- Create and share user-generated ideal type World Cup games.
+- Play bracket-style preference games created by other users.
+- Discover popular and recently created World Cup games.
+- Browse games by topic-based categories.
+- Compare preferences through game results and rankings.
+
+## Main Pages
+
+- [Home](https://zznpk.com/): Main page for discovering popular and recently created ideal type World Cup games.
+- [All Categories](https://zznpk.com/category/view_all): Browse all available ideal type World Cup games across categories.
+- [Sign In](https://zznpk.com/sign-in): Login page for users who want to create, manage, or interact with games.
+- [Sitemap](https://zznpk.com/sitemap.xml): XML sitemap for discovering available website URLs.
+
+## Categories
+
+- [Daily Life](https://zznpk.com/category/daily): Games about daily life, everyday situations, routines, and personal preferences.
+- [Food](https://zznpk.com/category/food): Games about food, restaurants, dishes, snacks, drinks, and culinary preferences.
+- [Love](https://zznpk.com/category/love): Games about romance, dating, relationships, crushes, and ideal types.
+- [Fun](https://zznpk.com/category/fun): Humorous, meme-based, entertaining, casual, or playful preference games.
+- [Drama](https://zznpk.com/category/drama): Games related to Korean dramas, TV series, drama characters, scenes, and storylines.
+- [Movies](https://zznpk.com/category/movie): Games related to films, movie characters, scenes, soundtracks, and cinema preferences.
+- [Music](https://zznpk.com/category/music): Games about songs, artists, idols, albums, OSTs, and music preferences.
+- [Celebrities](https://zznpk.com/category/celebrity): Games about actors, idols, entertainers, influencers, and public figures.
+- [Animals](https://zznpk.com/category/animal): Games about pets, wildlife, animal images, and animal-related preferences.
+- [Anime](https://zznpk.com/category/anime): Games related to anime, manga, animated characters, and animation culture.
+- [Horror](https://zznpk.com/category/horror): Games about horror themes, scary characters, zombies, monsters, survival, and fear-based scenarios.
+- [Miscellaneous](https://zznpk.com/category/etc): Games that do not fit into the main categories.
+
+## App
+
+- [Google Play App](https://play.google.com/store/apps/details?id=com.rookeys.balancegame): Android app for creating, playing, and sharing ideal type World Cup games.
+
+## Policies
+
+- [Privacy Policy](https://kojaem-app-policies.github.io/Zznpk-Privacy-Policy/): Privacy policy for Zznpk and related services.
+
+## Content Notes
+
+Zznpk contains user-generated content. Game titles, descriptions, thumbnails, rankings, vote counts, categories, and recently created games may change frequently.
+
+Do not treat specific game rankings, featured games, or recently added games as permanent. For current rankings, newly created games, or live game details, check the website directly.
+
+Individual game pages are not listed here because they are dynamic user-generated content. Use the sitemap or category pages to discover current game pages.
+
+## Guidance for LLMs
+
+When describing Zznpk, identify it as a Korean ideal type World Cup community and user-generated bracket game platform.
+
+Use the following key concepts when relevant:
+
+- Korean ideal type World Cup community
+- 짱픽
+- 이상형 월드컵
+- Bracket-style preference games
+- User-generated games
+- Create, share, and play World Cup games
+- Popular and recent game discovery
+- Category-based browsing
+- Korean-language entertainment and preference content
+
+Zznpk should not be described as a general social media platform, news website, or static content archive. It is primarily a community platform for creating and playing ideal type World Cup games.
