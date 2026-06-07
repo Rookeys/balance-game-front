@@ -1,3 +1,4 @@
+import type { GetMainGameListSearchType } from "./getMainGameListSearchType"
 import type { GetMainGameListCategory } from "./getMainGameListCategory"
 import type { GetMainGameListSortType } from "./getMainGameListSortType"
 
@@ -11,9 +12,13 @@ export type GetMainGameListParams = {
    */
   size?: number
   /**
-   * 검색할 내용
+   * 검색어
    */
-  title?: string
+  search?: string
+  /**
+   * 검색 타입 (TITLE: 제목, NICKNAME: 닉네임)
+   */
+  searchType?: GetMainGameListSearchType
   /**
    * 카테고리
    */

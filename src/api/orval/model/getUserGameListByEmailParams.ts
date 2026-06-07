@@ -1,3 +1,4 @@
+import type { GetUserGameListByEmailSearchType } from "./getUserGameListByEmailSearchType"
 import type { GetUserGameListByEmailCategory } from "./getUserGameListByEmailCategory"
 import type { GetUserGameListByEmailSortType } from "./getUserGameListByEmailSortType"
 
@@ -15,9 +16,13 @@ export type GetUserGameListByEmailParams = {
    */
   size?: number
   /**
-   * 검색할 내용
+   * 검색어
    */
-  title?: string
+  search?: string
+  /**
+   * 검색 타입 (TITLE: 제목, NICKNAME: 닉네임)
+   */
+  searchType?: GetUserGameListByEmailSearchType
   /**
    * 카테고리
    */

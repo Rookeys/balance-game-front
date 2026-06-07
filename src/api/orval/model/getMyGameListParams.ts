@@ -1,3 +1,4 @@
+import type { GetMyGameListSearchType } from "./getMyGameListSearchType"
 import type { GetMyGameListCategory } from "./getMyGameListCategory"
 import type { GetMyGameListSortType } from "./getMyGameListSortType"
 
@@ -11,9 +12,13 @@ export type GetMyGameListParams = {
    */
   size?: number
   /**
-   * 검색할 내용
+   * 검색어
    */
-  title?: string
+  search?: string
+  /**
+   * 검색 타입 (TITLE: 제목, NICKNAME: 닉네임)
+   */
+  searchType?: GetMyGameListSearchType
   /**
    * 카테고리
    */

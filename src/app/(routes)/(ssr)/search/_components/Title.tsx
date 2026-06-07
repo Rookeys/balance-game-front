@@ -11,7 +11,7 @@ export default function Title() {
   const sort = searchParams.get("sort") ?? GetMainGameListSortType.RECENT
 
   const { data } = useGetMainGameListInfinite(
-    { title: keyword as string, sortType: sort as GetMainGameListSortType },
+    { search: keyword as string, sortType: sort as GetMainGameListSortType },
     {
       query: {
         initialPageParam: undefined,

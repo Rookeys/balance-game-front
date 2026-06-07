@@ -6,7 +6,7 @@ import { useSessionStore } from "@/store/session"
 
 export const clientInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_ROOT,
-  timeout: 10000,
+  timeout: 20000,
   headers: {
     "Content-Type": "application/json"
   }
