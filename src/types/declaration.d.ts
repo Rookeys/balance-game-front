@@ -6,4 +6,5 @@ declare namespace NodeJS {
 
 interface Window {
   gtag: any
+  clarity: (...args: unknown[]) => void
 }
