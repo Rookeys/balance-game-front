@@ -22,12 +22,12 @@ jobs:
         id: push_directory
         uses: cpina/github-action-push-to-another-repository@main
         env:
-          API_TOKEN_GITHUB: ${{ secrets.GH_TOKEN }}
+          API_TOKEN_GITHUB: ${{ secrets.GH_TOKEN_TEMP }}
         with:
           source-directory: "output"
-          destination-github-username: KoJaem
-          destination-repository-name: balance-game-front-deploy
-          user-email: ${{ secrets.KOJAEM_EMAIL }}
+          destination-github-username: GoJaem
+          destination-repository-name: balance-game-front-temp-deploy
+          user-email: ${{ secrets.KOJAEM_EMAIL_TEMP }}
           # commit-message: "${{ github.event.commits[0].message || 'Manual commit from GitHub Actions' }}"
           commit-message: "Deploy from Github Actions"
           target-branch: main
