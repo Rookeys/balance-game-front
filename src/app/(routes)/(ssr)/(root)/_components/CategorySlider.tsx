@@ -7,7 +7,7 @@ import { categories } from "@/constants/categories"
 
 export default function CategorySlider() {
   return (
-    <div className="mx-[-16px] md:mx-[-24px] lg:mx-0">
+    <div className="mx-[-16px] self-center md:mx-[-24px] lg:mx-0">
       <Swiper className="w-full" slidesPerView={"auto"}>
         {categories.map((category, index) => (
           <SwiperSlide
