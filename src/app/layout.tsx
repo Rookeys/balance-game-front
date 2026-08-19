@@ -1,3 +1,4 @@
+import AdsenseScript from "@/components/AdsenseScript"
 import LoginConfirmModal from "@/components/modal/LoginConfirmModal"
 import ToasterWithTheme from "@/components/ToasterWithTheme"
 import "@/styles/globals.css"
@@ -82,13 +83,7 @@ export default async function RootLayout({
           "font-pretendard text-label-normal antialiased"
         )}
       >
-        <Script
-          id="adsense-script"
-          async
-          strategy="afterInteractive"
-          crossOrigin="anonymous"
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6626308320183012"
-        />
+        <AdsenseScript />
         <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
         <Script id="microsoft-clarity" strategy="afterInteractive">
           {`(function(c,l,a,r,i,t,y){

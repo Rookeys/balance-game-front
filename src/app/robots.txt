@@ -3,6 +3,7 @@ Disallow: /my-page
 Disallow: /search
 Disallow: /sign-in
 Disallow: /sign-out
+Disallow: /game-create
 Disallow: /index.php
 Disallow: /vod
 Disallow: /api
