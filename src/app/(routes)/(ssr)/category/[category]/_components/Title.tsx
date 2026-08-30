@@ -2,12 +2,17 @@
 
 import { useGetMainGameListInfinite } from "@/api/orval/client/main-page-controller/main-page-controller"
 import { GetMainGameListSortType } from "@/api/orval/model/getMainGameListSortType"
+import { CustomPageImplGameListResponse } from "@/api/orval/model/customPageImplGameListResponse"
 import Skeleton from "@/components/Skeleton"
 import { GetMainGameListCategoryWithViewAll } from "@/types/categoryType"
 import { getCategoryLabel } from "@/utils/getCategoryLabel"
 import { useParams, useSearchParams } from "next/navigation"
 
-export default function Title() {
+interface Props {
+  initialGames?: CustomPageImplGameListResponse
+}
+
+export default function Title({ initialGames }: Props) {
   const { category } = useParams()
   const searchParams = useSearchParams()
 
@@ -26,7 +31,10 @@ export default function Title() {
         getNextPageParam: (lastPage) => {
           const lastItem = lastPage.content?.[lastPage.content.length - 1]
           return lastPage.hasNext ? lastItem?.roomId : undefined
-        }
+        },
+        ...(initialGames && sort === GetMainGameListSortType.RECENT
+          ? { initialData: () => ({ pages: [initialGames], pageParams: [undefined] }) }
+          : {})
       }
     }
   )
