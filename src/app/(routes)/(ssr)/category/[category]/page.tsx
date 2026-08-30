@@ -1,10 +1,14 @@
+import { getGetMainGameListQueryKey } from "@/api/orval/client/main-page-controller/main-page-controller"
+import { GetMainGameListSortType } from "@/api/orval/model/getMainGameListSortType"
 import Filter from "@/components/Filter"
 import ScrollTopButton from "@/components/ScrollTopButton"
 import { gameListFilters } from "@/constants/filters"
 import { GetMainGameListCategoryWithViewAll } from "@/types/categoryType"
 import { getCategoryLabel } from "@/utils/getCategoryLabel"
+import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query"
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
+import qs from "qs"
 import CategoryGameList from "./_components/CategoryGameList"
 import Title from "./_components/Title"
 
@@ -32,9 +36,35 @@ interface CategoryGameProps {
 
 export default async function CategoryGame({ params }: CategoryGameProps) {
   const { category } = await params
+  const formattedCategory = category.toUpperCase()
 
-  if (!Object.values(GetMainGameListCategoryWithViewAll).includes(category.toUpperCase() as any)) {
+  if (!Object.values(GetMainGameListCategoryWithViewAll).includes(formattedCategory as any)) {
     notFound()
+  }
+
+  const queryParams = {
+    category:
+      formattedCategory === GetMainGameListCategoryWithViewAll.VIEW_ALL ? undefined : (formattedCategory as any),
+    sortType: GetMainGameListSortType.RECENT
+  }
+
+  const queryClient = new QueryClient()
+
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_ROOT}/api/v1/games/list?${qs.stringify(queryParams)}`, {
+      cache: "force-cache",
+      next: { revalidate: 60 }
+    })
+
+    if (res.ok) {
+      const data = await res.json()
+      queryClient.setQueryData(getGetMainGameListQueryKey(queryParams), {
+        pages: [data],
+        pageParams: [undefined]
+      })
+    }
+  } catch {
+    // 프리페치 실패 시 클라이언트에서 다시 조회
   }
 
   return (
@@ -44,7 +74,9 @@ export default async function CategoryGame({ params }: CategoryGameProps) {
           <Title />
           <Filter filters={gameListFilters} />
         </article>
-        <CategoryGameList />
+        <HydrationBoundary state={dehydrate(queryClient)}>
+          <CategoryGameList />
+        </HydrationBoundary>
         <ScrollTopButton />
       </section>
     </section>
