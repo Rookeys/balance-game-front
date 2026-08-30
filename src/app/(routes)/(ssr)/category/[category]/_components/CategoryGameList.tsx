@@ -1,6 +1,7 @@
 "use client"
 import { useGetMainGameListInfinite } from "@/api/orval/client/main-page-controller/main-page-controller"
 import { GetMainGameListSortType } from "@/api/orval/model/getMainGameListSortType"
+import { CustomPageImplGameListResponse } from "@/api/orval/model/customPageImplGameListResponse"
 import GameNotFound from "@/components/GameNotFound"
 import GameThumbnailSimpleCard from "@/components/gameThumbnailCard/GameThumbnailSimpleCard"
 import { GetMainGameListCategoryWithViewAll } from "@/types/categoryType"
@@ -9,7 +10,11 @@ import { useEffect } from "react"
 import { useInView } from "react-intersection-observer"
 import CardSkeleton from "@/components/CardSkeleton"
 
-export default function CategoryGameList() {
+interface Props {
+  initialGames?: CustomPageImplGameListResponse
+}
+
+export default function CategoryGameList({ initialGames }: Props) {
   const { category } = useParams()
   const searchParams = useSearchParams()
 
@@ -28,7 +33,10 @@ export default function CategoryGameList() {
         getNextPageParam: (lastPage) => {
           const lastItem = lastPage.content?.[lastPage.content.length - 1]
           return lastPage.hasNext ? lastItem?.roomId : undefined
-        }
+        },
+        ...(initialGames && sort === GetMainGameListSortType.RECENT
+          ? { initialData: () => ({ pages: [initialGames], pageParams: [undefined] }) }
+          : {})
       }
     }
   )
